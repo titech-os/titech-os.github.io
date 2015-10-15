@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>addrs</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/20.html#L24'>addrs</a>              24 file.h           uint addrs[NDIRECT+1];</span>
+<span class='curline'><a href='../S/22.html#L212'>addrs</a>             212 fs.c             memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/22.html#L289'>addrs</a>             289 fs.c               memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/22.html#L363'>addrs</a>             363 fs.c               if((addr = ip-&gt;addrs[bn]) == 0)</span>
+<span class='curline'><a href='../S/22.html#L364'>addrs</a>             364 fs.c                 ip-&gt;addrs[bn] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/22.html#L371'>addrs</a>             371 fs.c               if((addr = ip-&gt;addrs[NDIRECT]) == 0)</span>
+<span class='curline'><a href='../S/22.html#L372'>addrs</a>             372 fs.c                 ip-&gt;addrs[NDIRECT] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/22.html#L399'>addrs</a>             399 fs.c               if(ip-&gt;addrs[i]){</span>
+<span class='curline'><a href='../S/22.html#L400'>addrs</a>             400 fs.c                 bfree(ip-&gt;dev, ip-&gt;addrs[i]);</span>
+<span class='curline'><a href='../S/22.html#L401'>addrs</a>             401 fs.c                 ip-&gt;addrs[i] = 0;</span>
+<span class='curline'><a href='../S/22.html#L405'>addrs</a>             405 fs.c             if(ip-&gt;addrs[NDIRECT]){</span>
+<span class='curline'><a href='../S/22.html#L406'>addrs</a>             406 fs.c               bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/22.html#L413'>addrs</a>             413 fs.c               bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/22.html#L414'>addrs</a>             414 fs.c               ip-&gt;addrs[NDIRECT] = 0;</span>
+<span class='curline'><a href='../S/23.html#L34'>addrs</a>              34 fs.h             uint addrs[NDIRECT+1];   // Data block addresses</span>
+<span class='curline'><a href='../S/45.html#L272'>addrs</a>             272 mkfs.c               if(xint(din.addrs[fbn]) == 0){</span>
+<span class='curline'><a href='../S/45.html#L273'>addrs</a>             273 mkfs.c                 din.addrs[fbn] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/45.html#L275'>addrs</a>             275 mkfs.c               x = xint(din.addrs[fbn]);</span>
+<span class='curline'><a href='../S/45.html#L277'>addrs</a>             277 mkfs.c               if(xint(din.addrs[NDIRECT]) == 0){</span>
+<span class='curline'><a href='../S/45.html#L278'>addrs</a>             278 mkfs.c                 din.addrs[NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/45.html#L280'>addrs</a>             280 mkfs.c               rsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/45.html#L283'>addrs</a>             283 mkfs.c                 wsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+</pre>
+</body>
+</html>

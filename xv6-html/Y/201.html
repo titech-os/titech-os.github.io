@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>lk</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/56.html#L352'>lk</a>                352 proc.c         sleep(void *chan, struct spinlock *lk)</span>
+<span class='curline'><a href='../S/56.html#L357'>lk</a>                357 proc.c           if(lk == 0)</span>
+<span class='curline'><a href='../S/56.html#L366'>lk</a>                366 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock0</span>
+<span class='curline'><a href='../S/56.html#L368'>lk</a>                368 proc.c             release(lk);</span>
+<span class='curline'><a href='../S/56.html#L380'>lk</a>                380 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock2</span>
+<span class='curline'><a href='../S/56.html#L382'>lk</a>                382 proc.c             acquire(lk);</span>
+<span class='curline'><a href='../S/68.html#L13'>lk</a>                 13 spinlock.c     initlock(struct spinlock *lk, char *name)</span>
+<span class='curline'><a href='../S/68.html#L15'>lk</a>                 15 spinlock.c       lk-&gt;name = name;</span>
+<span class='curline'><a href='../S/68.html#L16'>lk</a>                 16 spinlock.c       lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/68.html#L17'>lk</a>                 17 spinlock.c       lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/68.html#L25'>lk</a>                 25 spinlock.c     acquire(struct spinlock *lk)</span>
+<span class='curline'><a href='../S/68.html#L28'>lk</a>                 28 spinlock.c       if(holding(lk))</span>
+<span class='curline'><a href='../S/68.html#L34'>lk</a>                 34 spinlock.c       while(xchg(&amp;lk-&gt;locked, 1) != 0)</span>
+<span class='curline'><a href='../S/68.html#L38'>lk</a>                 38 spinlock.c       lk-&gt;cpu = cpu;</span>
+<span class='curline'><a href='../S/68.html#L39'>lk</a>                 39 spinlock.c       getcallerpcs(&amp;lk, lk-&gt;pcs);</span>
+<span class='curline'><a href='../S/68.html#L44'>lk</a>                 44 spinlock.c     release(struct spinlock *lk)</span>
+<span class='curline'><a href='../S/68.html#L46'>lk</a>                 46 spinlock.c       if(!holding(lk))</span>
+<span class='curline'><a href='../S/68.html#L49'>lk</a>                 49 spinlock.c       lk-&gt;pcs[0] = 0;</span>
+<span class='curline'><a href='../S/68.html#L50'>lk</a>                 50 spinlock.c       lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/68.html#L61'>lk</a>                 61 spinlock.c       xchg(&amp;lk-&gt;locked, 0);</span>
+</pre>
+</body>
+</html>

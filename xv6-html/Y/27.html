@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>b</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/2.html#L42'>b</a>                  42 bio.c            struct buf *b;</span>
+<span class='curline'><a href='../S/2.html#L50'>b</a>                  50 bio.c            for(b = bcache.buf; b &lt; bcache.buf+NBUF; b++){</span>
+<span class='curline'><a href='../S/2.html#L51'>b</a>                  51 bio.c              b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/2.html#L52'>b</a>                  52 bio.c              b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/2.html#L53'>b</a>                  53 bio.c              b-&gt;dev = -1;</span>
+<span class='curline'><a href='../S/2.html#L54'>b</a>                  54 bio.c              bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/2.html#L55'>b</a>                  55 bio.c              bcache.head.next = b;</span>
+<span class='curline'><a href='../S/2.html#L65'>b</a>                  65 bio.c            struct buf *b;</span>
+<span class='curline'><a href='../S/2.html#L71'>b</a>                  71 bio.c            for(b = bcache.head.next; b != &amp;bcache.head; b = b-&gt;next){</span>
+<span class='curline'><a href='../S/2.html#L72'>b</a>                  72 bio.c              if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
+<span class='curline'><a href='../S/2.html#L73'>b</a>                  73 bio.c                if(!(b-&gt;flags &amp; B_BUSY)){</span>
+<span class='curline'><a href='../S/2.html#L74'>b</a>                  74 bio.c                  b-&gt;flags |= B_BUSY;</span>
+<span class='curline'><a href='../S/2.html#L76'>b</a>                  76 bio.c                  return b;</span>
+<span class='curline'><a href='../S/2.html#L78'>b</a>                  78 bio.c                sleep(b, &amp;bcache.lock);</span>
+<span class='curline'><a href='../S/2.html#L86'>b</a>                  86 bio.c            for(b = bcache.head.prev; b != &amp;bcache.head; b = b-&gt;prev){</span>
+<span class='curline'><a href='../S/2.html#L87'>b</a>                  87 bio.c              if((b-&gt;flags &amp; B_BUSY) == 0 &amp;&amp; (b-&gt;flags &amp; B_DIRTY) == 0){</span>
+<span class='curline'><a href='../S/2.html#L88'>b</a>                  88 bio.c                b-&gt;dev = dev;</span>
+<span class='curline'><a href='../S/2.html#L89'>b</a>                  89 bio.c                b-&gt;blockno = blockno;</span>
+<span class='curline'><a href='../S/2.html#L90'>b</a>                  90 bio.c                b-&gt;flags = B_BUSY;</span>
+<span class='curline'><a href='../S/2.html#L92'>b</a>                  92 bio.c                return b;</span>
+<span class='curline'><a href='../S/2.html#L102'>b</a>                 102 bio.c            struct buf *b;</span>
+<span class='curline'><a href='../S/2.html#L104'>b</a>                 104 bio.c            b = bget(dev, blockno);</span>
+<span class='curline'><a href='../S/2.html#L105'>b</a>                 105 bio.c            if(!(b-&gt;flags &amp; B_VALID)) {</span>
+<span class='curline'><a href='../S/2.html#L106'>b</a>                 106 bio.c              iderw(b);</span>
+<span class='curline'><a href='../S/2.html#L108'>b</a>                 108 bio.c            return b;</span>
+<span class='curline'><a href='../S/2.html#L113'>b</a>                 113 bio.c          bwrite(struct buf *b)</span>
+<span class='curline'><a href='../S/2.html#L115'>b</a>                 115 bio.c            if((b-&gt;flags &amp; B_BUSY) == 0)</span>
+<span class='curline'><a href='../S/2.html#L117'>b</a>                 117 bio.c            b-&gt;flags |= B_DIRTY;</span>
+<span class='curline'><a href='../S/2.html#L118'>b</a>                 118 bio.c            iderw(b);</span>
+<span class='curline'><a href='../S/2.html#L124'>b</a>                 124 bio.c          brelse(struct buf *b)</span>
+<span class='curline'><a href='../S/2.html#L126'>b</a>                 126 bio.c            if((b-&gt;flags &amp; B_BUSY) == 0)</span>
+<span class='curline'><a href='../S/2.html#L131'>b</a>                 131 bio.c            b-&gt;next-&gt;prev = b-&gt;prev;</span>
+<span class='curline'><a href='../S/2.html#L132'>b</a>                 132 bio.c            b-&gt;prev-&gt;next = b-&gt;next;</span>
+<span class='curline'><a href='../S/2.html#L133'>b</a>                 133 bio.c            b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/2.html#L134'>b</a>                 134 bio.c            b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/2.html#L135'>b</a>                 135 bio.c            bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/2.html#L136'>b</a>                 136 bio.c            bcache.head.next = b;</span>
+<span class='curline'><a href='../S/2.html#L138'>b</a>                 138 bio.c            b-&gt;flags &amp;= ~B_BUSY;</span>
+<span class='curline'><a href='../S/2.html#L139'>b</a>                 139 bio.c            wakeup(b);</span>
+<span class='curline'><a href='../S/22.html#L23'>b</a>                  23 fs.c           #define min(a, b) ((a) &lt; (b) ? (a) : (b))</span>
+<span class='curline'><a href='../S/22.html#L56'>b</a>                  56 fs.c             int b, bi, m;</span>
+<span class='curline'><a href='../S/22.html#L60'>b</a>                  60 fs.c             for(b = 0; b &lt; sb.size; b += BPB){</span>
+<span class='curline'><a href='../S/22.html#L61'>b</a>                  61 fs.c               bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/22.html#L62'>b</a>                  62 fs.c               for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
+<span class='curline'><a href='../S/22.html#L68'>b</a>                  68 fs.c                   bzero(dev, b + bi);</span>
+<span class='curline'><a href='../S/22.html#L69'>b</a>                  69 fs.c                   return b + bi;</span>
+<span class='curline'><a href='../S/22.html#L79'>b</a>                  79 fs.c           bfree(int dev, uint b)</span>
+<span class='curline'><a href='../S/22.html#L85'>b</a>                  85 fs.c             bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/22.html#L86'>b</a>                  86 fs.c             bi = b % BPB;</span>
+<span class='curline'><a href='../S/23.html#L47'>b</a>                  47 fs.h           #define BBLOCK(b, sb) (b/BPB + sb.bmapstart)</span>
+<span class='curline'><a href='../S/26.html#L72'>b</a>                  72 ide.c          idestart(struct buf *b)</span>
+<span class='curline'><a href='../S/26.html#L74'>b</a>                  74 ide.c            if(b == 0)</span>
+<span class='curline'><a href='../S/26.html#L76'>b</a>                  76 ide.c            if(b-&gt;blockno &gt;= FSSIZE)</span>
+<span class='curline'><a href='../S/26.html#L79'>b</a>                  79 ide.c            int sector = b-&gt;blockno * sector_per_block;</span>
+<span class='curline'><a href='../S/26.html#L89'>b</a>                  89 ide.c            outb(0x1f6, 0xe0 | ((b-&gt;dev&amp;1)&lt;&lt;4) | ((sector&gt;&gt;24)&amp;0x0f));</span>
+<span class='curline'><a href='../S/26.html#L90'>b</a>                  90 ide.c            if(b-&gt;flags &amp; B_DIRTY){</span>
+<span class='curline'><a href='../S/26.html#L92'>b</a>                  92 ide.c              outsl(0x1f0, b-&gt;data, BSIZE/4);</span>
+<span class='curline'><a href='../S/26.html#L102'>b</a>                 102 ide.c            struct buf *b;</span>
+<span class='curline'><a href='../S/26.html#L106'>b</a>                 106 ide.c            if((b = idequeue) == 0){</span>
+<span class='curline'><a href='../S/26.html#L111'>b</a>                 111 ide.c            idequeue = b-&gt;qnext;</span>
+<span class='curline'><a href='../S/26.html#L114'>b</a>                 114 ide.c            if(!(b-&gt;flags &amp; B_DIRTY) &amp;&amp; idewait(1) &gt;= 0)</span>
+<span class='curline'><a href='../S/26.html#L115'>b</a>                 115 ide.c              insl(0x1f0, b-&gt;data, BSIZE/4);</span>
+<span class='curline'><a href='../S/26.html#L118'>b</a>                 118 ide.c            b-&gt;flags |= B_VALID;</span>
+<span class='curline'><a href='../S/26.html#L119'>b</a>                 119 ide.c            b-&gt;flags &amp;= ~B_DIRTY;</span>
+<span class='curline'><a href='../S/26.html#L120'>b</a>                 120 ide.c            wakeup(b);</span>
+<span class='curline'><a href='../S/26.html#L134'>b</a>                 134 ide.c          iderw(struct buf *b)</span>
+<span class='curline'><a href='../S/26.html#L138'>b</a>                 138 ide.c            if(!(b-&gt;flags &amp; B_BUSY))</span>
+<span class='curline'><a href='../S/26.html#L140'>b</a>                 140 ide.c            if((b-&gt;flags &amp; (B_VALID|B_DIRTY)) == B_VALID)</span>
+<span class='curline'><a href='../S/26.html#L142'>b</a>                 142 ide.c            if(b-&gt;dev != 0 &amp;&amp; !havedisk1)</span>
+<span class='curline'><a href='../S/26.html#L148'>b</a>                 148 ide.c            b-&gt;qnext = 0;</span>
+<span class='curline'><a href='../S/26.html#L151'>b</a>                 151 ide.c            *pp = b;</span>
+<span class='curline'><a href='../S/26.html#L154'>b</a>                 154 ide.c            if(idequeue == b)</span>
+<span class='curline'><a href='../S/26.html#L155'>b</a>                 155 ide.c              idestart(b);</span>
+<span class='curline'><a href='../S/26.html#L158'>b</a>                 158 ide.c            while((b-&gt;flags &amp; (B_VALID|B_DIRTY)) != B_VALID){</span>
+<span class='curline'><a href='../S/26.html#L159'>b</a>                 159 ide.c              sleep(b, &amp;idelock);</span>
+<span class='curline'><a href='../S/38.html#L211'>b</a>                 211 log.c          log_write(struct buf *b)</span>
+<span class='curline'><a href='../S/38.html#L222'>b</a>                 222 log.c              if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
+<span class='curline'><a href='../S/38.html#L225'>b</a>                 225 log.c            log.lh.block[i] = b-&gt;blockno;</span>
+<span class='curline'><a href='../S/38.html#L228'>b</a>                 228 log.c            b-&gt;flags |= B_DIRTY; // prevent eviction</span>
+<span class='curline'><a href='../S/42.html#L38'>b</a>                  38 memide.c       iderw(struct buf *b)</span>
+<span class='curline'><a href='../S/42.html#L42'>b</a>                  42 memide.c         if(!(b-&gt;flags &amp; B_BUSY))</span>
+<span class='curline'><a href='../S/42.html#L44'>b</a>                  44 memide.c         if((b-&gt;flags &amp; (B_VALID|B_DIRTY)) == B_VALID)</span>
+<span class='curline'><a href='../S/42.html#L46'>b</a>                  46 memide.c         if(b-&gt;dev != 1)</span>
+<span class='curline'><a href='../S/42.html#L48'>b</a>                  48 memide.c         if(b-&gt;blockno &gt;= disksize)</span>
+<span class='curline'><a href='../S/42.html#L51'>b</a>                  51 memide.c         p = memdisk + b-&gt;blockno*BSIZE;</span>
+<span class='curline'><a href='../S/42.html#L53'>b</a>                  53 memide.c         if(b-&gt;flags &amp; B_DIRTY){</span>
+<span class='curline'><a href='../S/42.html#L54'>b</a>                  54 memide.c           b-&gt;flags &amp;= ~B_DIRTY;</span>
+<span class='curline'><a href='../S/42.html#L55'>b</a>                  55 memide.c           memmove(p, b-&gt;data, BSIZE);</span>
+<span class='curline'><a href='../S/42.html#L57'>b</a>                  57 memide.c           memmove(b-&gt;data, p, BSIZE);</span>
+<span class='curline'><a href='../S/42.html#L58'>b</a>                  58 memide.c         b-&gt;flags |= B_VALID;</span>
+<span class='curline'><a href='../S/45.html#L15'>b</a>                  15 mkfs.c         #define static_assert(a, b) do { switch (0) case 0: case (a): ; } while (0)</span>
+<span class='curline'><a href='../S/45.html#L253'>b</a>                 253 mkfs.c         #define min(a, b) ((a) &lt; (b) ? (a) : (b))</span>
+<span class='curline'><a href='../S/92.html#L1418'>b</a>                1418 usertests.c      char *a, *b, *c, *lastaddr, *oldbrk, *p, scratch;</span>
+<span class='curline'><a href='../S/92.html#L1428'>b</a>                1428 usertests.c        b = sbrk(1);</span>
+<span class='curline'><a href='../S/92.html#L1429'>b</a>                1429 usertests.c        if(b != a){</span>
+<span class='curline'><a href='../S/92.html#L1430'>b</a>                1430 usertests.c          printf(stdout, "sbrk test failed %d %x %x\n", i, a, b);</span>
+<span class='curline'><a href='../S/92.html#L1433'>b</a>                1433 usertests.c        *b = 1;</span>
+<span class='curline'><a href='../S/92.html#L1434'>b</a>                1434 usertests.c        a = b + 1;</span>
+</pre>
+</body>
+</html>

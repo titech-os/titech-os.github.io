@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>dev</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/2.html#L53'>dev</a>                53 bio.c              b-&gt;dev = -1;</span>
+<span class='curline'><a href='../S/2.html#L63'>dev</a>                63 bio.c          bget(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/2.html#L72'>dev</a>                72 bio.c              if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
+<span class='curline'><a href='../S/2.html#L88'>dev</a>                88 bio.c                b-&gt;dev = dev;</span>
+<span class='curline'><a href='../S/2.html#L100'>dev</a>               100 bio.c          bread(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/2.html#L104'>dev</a>               104 bio.c            b = bget(dev, blockno);</span>
+<span class='curline'><a href='../S/5.html#L3'>dev</a>                 3 buf.h            uint dev;</span>
+<span class='curline'><a href='../S/11.html#L37'>dev</a>                37 defs.h         void            readsb(int dev, struct superblock *sb);</span>
+<span class='curline'><a href='../S/11.html#L42'>dev</a>                42 defs.h         void            iinit(int dev);</span>
+<span class='curline'><a href='../S/11.html#L84'>dev</a>                84 defs.h         void            initlog(int dev);</span>
+<span class='curline'><a href='../S/20.html#L14'>dev</a>                14 file.h           uint dev;           // Device number</span>
+<span class='curline'><a href='../S/22.html#L29'>dev</a>                29 fs.c           readsb(int dev, struct superblock *sb)</span>
+<span class='curline'><a href='../S/22.html#L33'>dev</a>                33 fs.c             bp = bread(dev, 1);</span>
+<span class='curline'><a href='../S/22.html#L40'>dev</a>                40 fs.c           bzero(int dev, int bno)</span>
+<span class='curline'><a href='../S/22.html#L44'>dev</a>                44 fs.c             bp = bread(dev, bno);</span>
+<span class='curline'><a href='../S/22.html#L54'>dev</a>                54 fs.c           balloc(uint dev)</span>
+<span class='curline'><a href='../S/22.html#L61'>dev</a>                61 fs.c               bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/22.html#L68'>dev</a>                68 fs.c                   bzero(dev, b + bi);</span>
+<span class='curline'><a href='../S/22.html#L79'>dev</a>                79 fs.c           bfree(int dev, uint b)</span>
+<span class='curline'><a href='../S/22.html#L84'>dev</a>                84 fs.c             readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/22.html#L85'>dev</a>                85 fs.c             bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/22.html#L163'>dev</a>               163 fs.c           iinit(int dev)</span>
+<span class='curline'><a href='../S/22.html#L166'>dev</a>               166 fs.c             readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/22.html#L171'>dev</a>               171 fs.c           static struct inode* iget(uint dev, uint inum);</span>
+<span class='curline'><a href='../S/22.html#L177'>dev</a>               177 fs.c           ialloc(uint dev, short type)</span>
+<span class='curline'><a href='../S/22.html#L184'>dev</a>               184 fs.c               bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/22.html#L191'>dev</a>               191 fs.c                 return iget(dev, inum);</span>
+<span class='curline'><a href='../S/22.html#L205'>dev</a>               205 fs.c             bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/22.html#L221'>dev</a>               221 fs.c           iget(uint dev, uint inum)</span>
+<span class='curline'><a href='../S/22.html#L230'>dev</a>               230 fs.c               if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum){</span>
+<span class='curline'><a href='../S/22.html#L244'>dev</a>               244 fs.c             ip-&gt;dev = dev;</span>
+<span class='curline'><a href='../S/22.html#L282'>dev</a>               282 fs.c               bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/22.html#L364'>dev</a>               364 fs.c                 ip-&gt;addrs[bn] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/22.html#L372'>dev</a>               372 fs.c                 ip-&gt;addrs[NDIRECT] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/22.html#L373'>dev</a>               373 fs.c               bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/22.html#L376'>dev</a>               376 fs.c                 a[bn] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/22.html#L400'>dev</a>               400 fs.c                 bfree(ip-&gt;dev, ip-&gt;addrs[i]);</span>
+<span class='curline'><a href='../S/22.html#L406'>dev</a>               406 fs.c               bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/22.html#L410'>dev</a>               410 fs.c                   bfree(ip-&gt;dev, a[j]);</span>
+<span class='curline'><a href='../S/22.html#L413'>dev</a>               413 fs.c               bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/22.html#L425'>dev</a>               425 fs.c             st-&gt;dev = ip-&gt;dev;</span>
+<span class='curline'><a href='../S/22.html#L452'>dev</a>               452 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/22.html#L480'>dev</a>               480 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/22.html#L524'>dev</a>               524 fs.c                 return iget(dp-&gt;dev, inum);</span>
+<span class='curline'><a href='../S/26.html#L89'>dev</a>                89 ide.c            outb(0x1f6, 0xe0 | ((b-&gt;dev&amp;1)&lt;&lt;4) | ((sector&gt;&gt;24)&amp;0x0f));</span>
+<span class='curline'><a href='../S/26.html#L142'>dev</a>               142 ide.c            if(b-&gt;dev != 0 &amp;&amp; !havedisk1)</span>
+<span class='curline'><a href='../S/38.html#L44'>dev</a>                44 log.c            int dev;</span>
+<span class='curline'><a href='../S/38.html#L53'>dev</a>                53 log.c          initlog(int dev)</span>
+<span class='curline'><a href='../S/38.html#L60'>dev</a>                60 log.c            readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/38.html#L63'>dev</a>                63 log.c            log.dev = dev;</span>
+<span class='curline'><a href='../S/38.html#L74'>dev</a>                74 log.c              struct buf *lbuf = bread(log.dev, log.start+tail+1); // read log block</span>
+<span class='curline'><a href='../S/38.html#L75'>dev</a>                75 log.c              struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/38.html#L87'>dev</a>                87 log.c            struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/38.html#L103'>dev</a>               103 log.c            struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/38.html#L180'>dev</a>               180 log.c              struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
+<span class='curline'><a href='../S/38.html#L181'>dev</a>               181 log.c              struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/42.html#L46'>dev</a>                46 memide.c         if(b-&gt;dev != 1)</span>
+<span class='curline'><a href='../S/71.html#L7'>dev</a>                 7 stat.h           int dev;     // File system's disk device</span>
+<span class='curline'><a href='../S/78.html#L144'>dev</a>               144 sysfile.c        if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
+<span class='curline'><a href='../S/78.html#L258'>dev</a>               258 sysfile.c        if((ip = ialloc(dp-&gt;dev, type)) == 0)</span>
+</pre>
+</body>
+</html>

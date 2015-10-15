@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ustack</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/17.html#L15'>ustack</a>             15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
+<span class='curline'><a href='../S/17.html#L71'>ustack</a>             71 exec.c             ustack[3+argc] = sp;</span>
+<span class='curline'><a href='../S/17.html#L73'>ustack</a>             73 exec.c           ustack[3+argc] = 0;</span>
+<span class='curline'><a href='../S/17.html#L75'>ustack</a>             75 exec.c           ustack[0] = 0xffffffff;  // fake return PC</span>
+<span class='curline'><a href='../S/17.html#L76'>ustack</a>             76 exec.c           ustack[1] = argc;</span>
+<span class='curline'><a href='../S/17.html#L77'>ustack</a>             77 exec.c           ustack[2] = sp - (argc+1)*4;  // argv pointer</span>
+<span class='curline'><a href='../S/17.html#L80'>ustack</a>             80 exec.c           if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)</span>
+</pre>
+</body>
+</html>

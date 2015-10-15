@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pos</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/8.html#L132'>pos</a>               132 console.c        int pos;</span>
+<span class='curline'><a href='../S/8.html#L136'>pos</a>               136 console.c        pos = inb(CRTPORT+1) &lt;&lt; 8;</span>
+<span class='curline'><a href='../S/8.html#L138'>pos</a>               138 console.c        pos |= inb(CRTPORT+1);</span>
+<span class='curline'><a href='../S/8.html#L141'>pos</a>               141 console.c          pos += 80 - pos%80;</span>
+<span class='curline'><a href='../S/8.html#L143'>pos</a>               143 console.c          if(pos &gt; 0) --pos;</span>
+<span class='curline'><a href='../S/8.html#L145'>pos</a>               145 console.c          crt[pos++] = (c&amp;0xff) | 0x0700;  // black on white</span>
+<span class='curline'><a href='../S/8.html#L147'>pos</a>               147 console.c        if((pos/80) &gt;= 24){  // Scroll up.</span>
+<span class='curline'><a href='../S/8.html#L149'>pos</a>               149 console.c          pos -= 80;</span>
+<span class='curline'><a href='../S/8.html#L150'>pos</a>               150 console.c          memset(crt+pos, 0, sizeof(crt[0])*(24*80 - pos));</span>
+<span class='curline'><a href='../S/8.html#L154'>pos</a>               154 console.c        outb(CRTPORT+1, pos&gt;&gt;8);</span>
+<span class='curline'><a href='../S/8.html#L156'>pos</a>               156 console.c        outb(CRTPORT+1, pos);</span>
+<span class='curline'><a href='../S/8.html#L157'>pos</a>               157 console.c        crt[pos] = ' ' | 0x0700;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>lock</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/2.html#L31'>lock</a>               31 bio.c            struct spinlock lock;</span>
+<span class='curline'><a href='../S/2.html#L44'>lock</a>               44 bio.c            initlock(&amp;bcache.lock, "bcache");</span>
+<span class='curline'><a href='../S/2.html#L67'>lock</a>               67 bio.c            acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/2.html#L75'>lock</a>               75 bio.c                  release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/2.html#L78'>lock</a>               78 bio.c                sleep(b, &amp;bcache.lock);</span>
+<span class='curline'><a href='../S/2.html#L91'>lock</a>               91 bio.c                release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/2.html#L129'>lock</a>              129 bio.c            acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/2.html#L141'>lock</a>              141 bio.c            release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/8.html#L22'>lock</a>               22 console.c        struct spinlock lock;</span>
+<span class='curline'><a href='../S/8.html#L62'>lock</a>               62 console.c          acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/8.html#L102'>lock</a>              102 console.c          release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/8.html#L178'>lock</a>              178 console.c        struct spinlock lock;</span>
+<span class='curline'><a href='../S/8.html#L192'>lock</a>              192 console.c        acquire(&amp;input.lock);</span>
+<span class='curline'><a href='../S/8.html#L224'>lock</a>              224 console.c        release(&amp;input.lock);</span>
+<span class='curline'><a href='../S/8.html#L235'>lock</a>              235 console.c        acquire(&amp;input.lock);</span>
+<span class='curline'><a href='../S/8.html#L239'>lock</a>              239 console.c              release(&amp;input.lock);</span>
+<span class='curline'><a href='../S/8.html#L243'>lock</a>              243 console.c            sleep(&amp;input.r, &amp;input.lock);</span>
+<span class='curline'><a href='../S/8.html#L259'>lock</a>              259 console.c        release(&amp;input.lock);</span>
+<span class='curline'><a href='../S/8.html#L271'>lock</a>              271 console.c        acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/8.html#L274'>lock</a>              274 console.c        release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/8.html#L283'>lock</a>              283 console.c        initlock(&amp;cons.lock, "console");</span>
+<span class='curline'><a href='../S/8.html#L284'>lock</a>              284 console.c        initlock(&amp;input.lock, "input");</span>
+<span class='curline'><a href='../S/19.html#L14'>lock</a>               14 file.c           struct spinlock lock;</span>
+<span class='curline'><a href='../S/19.html#L21'>lock</a>               21 file.c           initlock(&amp;ftable.lock, "ftable");</span>
+<span class='curline'><a href='../S/19.html#L30'>lock</a>               30 file.c           acquire(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/19.html#L34'>lock</a>               34 file.c               release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/19.html#L38'>lock</a>               38 file.c           release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/19.html#L46'>lock</a>               46 file.c           acquire(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/19.html#L50'>lock</a>               50 file.c           release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/19.html#L60'>lock</a>               60 file.c           acquire(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/19.html#L64'>lock</a>               64 file.c             release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/19.html#L70'>lock</a>               70 file.c           release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/22.html#L158'>lock</a>              158 fs.c             struct spinlock lock;</span>
+<span class='curline'><a href='../S/22.html#L165'>lock</a>              165 fs.c             initlock(&amp;icache.lock, "icache");</span>
+<span class='curline'><a href='../S/22.html#L225'>lock</a>              225 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L232'>lock</a>              232 fs.c                 release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L248'>lock</a>              248 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L258'>lock</a>              258 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L260'>lock</a>              260 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L275'>lock</a>              275 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L277'>lock</a>              277 fs.c               sleep(ip, &amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L279'>lock</a>              279 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L304'>lock</a>              304 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L307'>lock</a>              307 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L320'>lock</a>              320 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L326'>lock</a>              326 fs.c               release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L330'>lock</a>              330 fs.c               acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L335'>lock</a>              335 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/30.html#L20'>lock</a>               20 kalloc.c         struct spinlock lock;</span>
+<span class='curline'><a href='../S/30.html#L33'>lock</a>               33 kalloc.c         initlock(&amp;kmem.lock, "kmem");</span>
+<span class='curline'><a href='../S/30.html#L71'>lock</a>               71 kalloc.c           acquire(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/30.html#L76'>lock</a>               76 kalloc.c           release(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/30.html#L88'>lock</a>               88 kalloc.c           acquire(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/30.html#L93'>lock</a>               93 kalloc.c           release(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/38.html#L39'>lock</a>               39 log.c            struct spinlock lock;</span>
+<span class='curline'><a href='../S/38.html#L59'>lock</a>               59 log.c            initlock(&amp;log.lock, "log");</span>
+<span class='curline'><a href='../S/38.html#L127'>lock</a>              127 log.c            acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L130'>lock</a>              130 log.c                sleep(&amp;log, &amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L133'>lock</a>              133 log.c                sleep(&amp;log, &amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L136'>lock</a>              136 log.c                release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L149'>lock</a>              149 log.c            acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L160'>lock</a>              160 log.c            release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L166'>lock</a>              166 log.c              acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L169'>lock</a>              169 log.c              release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L220'>lock</a>              220 log.c            acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/38.html#L229'>lock</a>              229 log.c            release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/52.html#L13'>lock</a>               13 pipe.c           struct spinlock lock;</span>
+<span class='curline'><a href='../S/52.html#L36'>lock</a>               36 pipe.c           initlock(&amp;p-&gt;lock, "pipe");</span>
+<span class='curline'><a href='../S/52.html#L61'>lock</a>               61 pipe.c           acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L70'>lock</a>               70 pipe.c             release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L73'>lock</a>               73 pipe.c             release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L82'>lock</a>               82 pipe.c           acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L86'>lock</a>               86 pipe.c                 release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L90'>lock</a>               90 pipe.c               sleep(&amp;p-&gt;nwrite, &amp;p-&gt;lock);  //DOC: pipewrite-sleep</span>
+<span class='curline'><a href='../S/52.html#L95'>lock</a>               95 pipe.c           release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L104'>lock</a>              104 pipe.c           acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L107'>lock</a>              107 pipe.c               release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/52.html#L110'>lock</a>              110 pipe.c             sleep(&amp;p-&gt;nread, &amp;p-&gt;lock); //DOC: piperead-sleep</span>
+<span class='curline'><a href='../S/52.html#L118'>lock</a>              118 pipe.c           release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/56.html#L11'>lock</a>               11 proc.c           struct spinlock lock;</span>
+<span class='curline'><a href='../S/56.html#L26'>lock</a>               26 proc.c           initlock(&amp;ptable.lock, "ptable");</span>
+<span class='curline'><a href='../S/56.html#L40'>lock</a>               40 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L44'>lock</a>               44 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L50'>lock</a>               50 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L162'>lock</a>              162 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L164'>lock</a>              164 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L194'>lock</a>              194 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L222'>lock</a>              222 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L241'>lock</a>              241 proc.c                 release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L248'>lock</a>              248 proc.c               release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L253'>lock</a>              253 proc.c             sleep(proc, &amp;ptable.lock);  //DOC: wait-sleep</span>
+<span class='curline'><a href='../S/56.html#L275'>lock</a>              275 proc.c             acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L293'>lock</a>              293 proc.c             release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L305'>lock</a>              305 proc.c           if(!holding(&amp;ptable.lock))</span>
+<span class='curline'><a href='../S/56.html#L322'>lock</a>              322 proc.c           acquire(&amp;ptable.lock);  //DOC: yieldlock</span>
+<span class='curline'><a href='../S/56.html#L325'>lock</a>              325 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L335'>lock</a>              335 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L366'>lock</a>              366 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock0</span>
+<span class='curline'><a href='../S/56.html#L367'>lock</a>              367 proc.c             acquire(&amp;ptable.lock);  //DOC: sleeplock1</span>
+<span class='curline'><a href='../S/56.html#L380'>lock</a>              380 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock2</span>
+<span class='curline'><a href='../S/56.html#L381'>lock</a>              381 proc.c             release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L403'>lock</a>              403 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L405'>lock</a>              405 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L416'>lock</a>              416 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L423'>lock</a>              423 proc.c               release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/56.html#L427'>lock</a>              427 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/68.html#L86'>lock</a>               86 spinlock.c     holding(struct spinlock *lock)</span>
+<span class='curline'><a href='../S/68.html#L88'>lock</a>               88 spinlock.c       return lock-&gt;locked &amp;&amp; lock-&gt;cpu == cpu;</span>
+</pre>
+</body>
+</html>

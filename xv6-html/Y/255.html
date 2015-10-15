@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>nwrite</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/52.html#L16'>nwrite</a>             16 pipe.c           uint nwrite;    // number of bytes written</span>
+<span class='curline'><a href='../S/52.html#L34'>nwrite</a>             34 pipe.c           p-&gt;nwrite = 0;</span>
+<span class='curline'><a href='../S/52.html#L67'>nwrite</a>             67 pipe.c             wakeup(&amp;p-&gt;nwrite);</span>
+<span class='curline'><a href='../S/52.html#L84'>nwrite</a>             84 pipe.c             while(p-&gt;nwrite == p-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/52.html#L90'>nwrite</a>             90 pipe.c               sleep(&amp;p-&gt;nwrite, &amp;p-&gt;lock);  //DOC: pipewrite-sleep</span>
+<span class='curline'><a href='../S/52.html#L92'>nwrite</a>             92 pipe.c             p-&gt;data[p-&gt;nwrite++ % PIPESIZE] = addr[i];</span>
+<span class='curline'><a href='../S/52.html#L105'>nwrite</a>            105 pipe.c           while(p-&gt;nread == p-&gt;nwrite &amp;&amp; p-&gt;writeopen){  //DOC: pipe-empty</span>
+<span class='curline'><a href='../S/52.html#L113'>nwrite</a>            113 pipe.c             if(p-&gt;nread == p-&gt;nwrite)</span>
+<span class='curline'><a href='../S/52.html#L117'>nwrite</a>            117 pipe.c           wakeup(&amp;p-&gt;nwrite);  //DOC: piperead-wakeup</span>
+</pre>
+</body>
+</html>

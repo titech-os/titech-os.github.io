@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>NDIRECT</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/20.html#L24'>NDIRECT</a>            24 file.h           uint addrs[NDIRECT+1];</span>
+<span class='curline'><a href='../S/22.html#L362'>NDIRECT</a>           362 fs.c             if(bn &lt; NDIRECT){</span>
+<span class='curline'><a href='../S/22.html#L367'>NDIRECT</a>           367 fs.c             bn -= NDIRECT;</span>
+<span class='curline'><a href='../S/22.html#L371'>NDIRECT</a>           371 fs.c               if((addr = ip-&gt;addrs[NDIRECT]) == 0)</span>
+<span class='curline'><a href='../S/22.html#L372'>NDIRECT</a>           372 fs.c                 ip-&gt;addrs[NDIRECT] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/22.html#L398'>NDIRECT</a>           398 fs.c             for(i = 0; i &lt; NDIRECT; i++){</span>
+<span class='curline'><a href='../S/22.html#L405'>NDIRECT</a>           405 fs.c             if(ip-&gt;addrs[NDIRECT]){</span>
+<span class='curline'><a href='../S/22.html#L406'>NDIRECT</a>           406 fs.c               bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/22.html#L413'>NDIRECT</a>           413 fs.c               bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/22.html#L414'>NDIRECT</a>           414 fs.c               ip-&gt;addrs[NDIRECT] = 0;</span>
+<span class='curline'><a href='../S/23.html#L25'>NDIRECT</a>            25 fs.h           #define MAXFILE (NDIRECT + NINDIRECT)</span>
+<span class='curline'><a href='../S/23.html#L34'>NDIRECT</a>            34 fs.h             uint addrs[NDIRECT+1];   // Data block addresses</span>
+<span class='curline'><a href='../S/45.html#L271'>NDIRECT</a>           271 mkfs.c             if(fbn &lt; NDIRECT){</span>
+<span class='curline'><a href='../S/45.html#L277'>NDIRECT</a>           277 mkfs.c               if(xint(din.addrs[NDIRECT]) == 0){</span>
+<span class='curline'><a href='../S/45.html#L278'>NDIRECT</a>           278 mkfs.c                 din.addrs[NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/45.html#L280'>NDIRECT</a>           280 mkfs.c               rsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/45.html#L281'>NDIRECT</a>           281 mkfs.c               if(indirect[fbn - NDIRECT] == 0){</span>
+<span class='curline'><a href='../S/45.html#L282'>NDIRECT</a>           282 mkfs.c                 indirect[fbn - NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/45.html#L283'>NDIRECT</a>           283 mkfs.c                 wsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/45.html#L285'>NDIRECT</a>           285 mkfs.c               x = xint(indirect[fbn-NDIRECT]);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>BSIZE</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/5.html#L8'>BSIZE</a>               8 buf.h            uchar data[BSIZE];</span>
+<span class='curline'><a href='../S/22.html#L45'>BSIZE</a>              45 fs.c             memset(bp-&gt;data, 0, BSIZE);</span>
+<span class='curline'><a href='../S/22.html#L452'>BSIZE</a>             452 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/22.html#L453'>BSIZE</a>             453 fs.c               m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/22.html#L454'>BSIZE</a>             454 fs.c               memmove(dst, bp-&gt;data + off%BSIZE, m);</span>
+<span class='curline'><a href='../S/22.html#L476'>BSIZE</a>             476 fs.c             if(off + n &gt; MAXFILE*BSIZE)</span>
+<span class='curline'><a href='../S/22.html#L480'>BSIZE</a>             480 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/22.html#L481'>BSIZE</a>             481 fs.c               m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/22.html#L482'>BSIZE</a>             482 fs.c               memmove(bp-&gt;data + off%BSIZE, src, m);</span>
+<span class='curline'><a href='../S/23.html#L24'>BSIZE</a>              24 fs.h           #define NINDIRECT (BSIZE / sizeof(uint))</span>
+<span class='curline'><a href='../S/23.html#L38'>BSIZE</a>              38 fs.h           #define IPB           (BSIZE / sizeof(struct dinode))</span>
+<span class='curline'><a href='../S/23.html#L44'>BSIZE</a>              44 fs.h           #define BPB           (BSIZE*8)</span>
+<span class='curline'><a href='../S/26.html#L78'>BSIZE</a>              78 ide.c            int sector_per_block =  BSIZE/SECTOR_SIZE;</span>
+<span class='curline'><a href='../S/26.html#L92'>BSIZE</a>              92 ide.c              outsl(0x1f0, b-&gt;data, BSIZE/4);</span>
+<span class='curline'><a href='../S/26.html#L115'>BSIZE</a>             115 ide.c              insl(0x1f0, b-&gt;data, BSIZE/4);</span>
+<span class='curline'><a href='../S/38.html#L55'>BSIZE</a>              55 log.c            if (sizeof(struct logheader) &gt;= BSIZE)</span>
+<span class='curline'><a href='../S/38.html#L76'>BSIZE</a>              76 log.c              memmove(dbuf-&gt;data, lbuf-&gt;data, BSIZE);  // copy block to dst</span>
+<span class='curline'><a href='../S/38.html#L182'>BSIZE</a>             182 log.c              memmove(to-&gt;data, from-&gt;data, BSIZE);</span>
+<span class='curline'><a href='../S/42.html#L24'>BSIZE</a>              24 memide.c         disksize = (uint)_binary_fs_img_size/BSIZE;</span>
+<span class='curline'><a href='../S/42.html#L51'>BSIZE</a>              51 memide.c         p = memdisk + b-&gt;blockno*BSIZE;</span>
+<span class='curline'><a href='../S/42.html#L55'>BSIZE</a>              55 memide.c           memmove(p, b-&gt;data, BSIZE);</span>
+<span class='curline'><a href='../S/42.html#L57'>BSIZE</a>              57 memide.c           memmove(b-&gt;data, p, BSIZE);</span>
+<span class='curline'><a href='../S/45.html#L23'>BSIZE</a>              23 mkfs.c         int nbitmap = FSSIZE/(BSIZE*8) + 1;</span>
+<span class='curline'><a href='../S/45.html#L31'>BSIZE</a>              31 mkfs.c         char zeroes[BSIZE];</span>
+<span class='curline'><a href='../S/45.html#L73'>BSIZE</a>              73 mkfs.c           char buf[BSIZE];</span>
+<span class='curline'><a href='../S/45.html#L84'>BSIZE</a>              84 mkfs.c           assert((BSIZE % sizeof(struct dinode)) == 0);</span>
+<span class='curline'><a href='../S/45.html#L85'>BSIZE</a>              85 mkfs.c           assert((BSIZE % sizeof(struct dirent)) == 0);</span>
+<span class='curline'><a href='../S/45.html#L161'>BSIZE</a>             161 mkfs.c           off = ((off/BSIZE) + 1) * BSIZE;</span>
+<span class='curline'><a href='../S/45.html#L173'>BSIZE</a>             173 mkfs.c           if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE){</span>
+<span class='curline'><a href='../S/45.html#L177'>BSIZE</a>             177 mkfs.c           if(write(fsfd, buf, BSIZE) != BSIZE){</span>
+<span class='curline'><a href='../S/45.html#L186'>BSIZE</a>             186 mkfs.c           char buf[BSIZE];</span>
+<span class='curline'><a href='../S/45.html#L200'>BSIZE</a>             200 mkfs.c           char buf[BSIZE];</span>
+<span class='curline'><a href='../S/45.html#L213'>BSIZE</a>             213 mkfs.c           if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE){</span>
+<span class='curline'><a href='../S/45.html#L217'>BSIZE</a>             217 mkfs.c           if(read(fsfd, buf, BSIZE) != BSIZE){</span>
+<span class='curline'><a href='../S/45.html#L240'>BSIZE</a>             240 mkfs.c           uchar buf[BSIZE];</span>
+<span class='curline'><a href='../S/45.html#L244'>BSIZE</a>             244 mkfs.c           assert(used &lt; BSIZE*8);</span>
+<span class='curline'><a href='../S/45.html#L245'>BSIZE</a>             245 mkfs.c           bzero(buf, BSIZE);</span>
+<span class='curline'><a href='../S/45.html#L261'>BSIZE</a>             261 mkfs.c           char buf[BSIZE];</span>
+<span class='curline'><a href='../S/45.html#L269'>BSIZE</a>             269 mkfs.c             fbn = off / BSIZE;</span>
+<span class='curline'><a href='../S/45.html#L287'>BSIZE</a>             287 mkfs.c             n1 = min(n, (fbn + 1) * BSIZE - off);</span>
+<span class='curline'><a href='../S/45.html#L289'>BSIZE</a>             289 mkfs.c             bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>dip</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/22.html#L181'>dip</a>               181 fs.c             struct dinode *dip;</span>
+<span class='curline'><a href='../S/22.html#L185'>dip</a>               185 fs.c               dip = (struct dinode*)bp-&gt;data + inum%IPB;</span>
+<span class='curline'><a href='../S/22.html#L186'>dip</a>               186 fs.c               if(dip-&gt;type == 0){  // a free inode</span>
+<span class='curline'><a href='../S/22.html#L187'>dip</a>               187 fs.c                 memset(dip, 0, sizeof(*dip));</span>
+<span class='curline'><a href='../S/22.html#L188'>dip</a>               188 fs.c                 dip-&gt;type = type;</span>
+<span class='curline'><a href='../S/22.html#L203'>dip</a>               203 fs.c             struct dinode *dip;</span>
+<span class='curline'><a href='../S/22.html#L206'>dip</a>               206 fs.c             dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/22.html#L207'>dip</a>               207 fs.c             dip-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/22.html#L208'>dip</a>               208 fs.c             dip-&gt;major = ip-&gt;major;</span>
+<span class='curline'><a href='../S/22.html#L209'>dip</a>               209 fs.c             dip-&gt;minor = ip-&gt;minor;</span>
+<span class='curline'><a href='../S/22.html#L210'>dip</a>               210 fs.c             dip-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/22.html#L211'>dip</a>               211 fs.c             dip-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/22.html#L212'>dip</a>               212 fs.c             memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/22.html#L270'>dip</a>               270 fs.c             struct dinode *dip;</span>
+<span class='curline'><a href='../S/22.html#L283'>dip</a>               283 fs.c               dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/22.html#L284'>dip</a>               284 fs.c               ip-&gt;type = dip-&gt;type;</span>
+<span class='curline'><a href='../S/22.html#L285'>dip</a>               285 fs.c               ip-&gt;major = dip-&gt;major;</span>
+<span class='curline'><a href='../S/22.html#L286'>dip</a>               286 fs.c               ip-&gt;minor = dip-&gt;minor;</span>
+<span class='curline'><a href='../S/22.html#L287'>dip</a>               287 fs.c               ip-&gt;nlink = dip-&gt;nlink;</span>
+<span class='curline'><a href='../S/22.html#L288'>dip</a>               288 fs.c               ip-&gt;size = dip-&gt;size;</span>
+<span class='curline'><a href='../S/22.html#L289'>dip</a>               289 fs.c               memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/45.html#L188'>dip</a>               188 mkfs.c           struct dinode *dip;</span>
+<span class='curline'><a href='../S/45.html#L192'>dip</a>               192 mkfs.c           dip = ((struct dinode*)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/45.html#L193'>dip</a>               193 mkfs.c           *dip = *ip;</span>
+<span class='curline'><a href='../S/45.html#L202'>dip</a>               202 mkfs.c           struct dinode *dip;</span>
+<span class='curline'><a href='../S/45.html#L206'>dip</a>               206 mkfs.c           dip = ((struct dinode*)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/45.html#L207'>dip</a>               207 mkfs.c           *ip = *dip;</span>
+</pre>
+</body>
+</html>

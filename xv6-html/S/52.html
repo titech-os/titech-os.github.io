@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pipe.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/pipe.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L22'>[^]</a><a href='#L100'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L22' title='Defined at 22.'>pipealloc</a></li>
+<li><a href='#L59' title='Defined at 59.'>pipeclose</a></li>
+<li><a href='#L78' title='Defined at 78.'>pipewrite</a></li>
+<li><a href='#L100' title='Defined at 100.'>piperead</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='87.html'>types.h</a>"
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='11.html'>defs.h</a>"
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='50.html'>param.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='46.html'>mmu.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='57.html'>proc.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='23.html'>fs.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='20.html'>file.h</a>"
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='69.html'>spinlock.h</a>"
+<a id='L9' name='L9'></a>   9 
+<a id='L10' name='L10'></a>  10 <em class='sharp'>#define</em> <a href='../R/140.html' title='Multiple referred from 4 places.'>PIPESIZE</a> 512
+<a id='L11' name='L11'></a>  11 
+<a id='L12' name='L12'></a>  12 <strong class='reserved'>struct</strong> <a href='../R/422.html' title='Multiple referred from 20 places.'>pipe</a> <em class='brace'>{</em>
+<a id='L13' name='L13'></a>  13   <strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a> <a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>;
+<a id='L14' name='L14'></a>  14   <strong class='reserved'>char</strong> <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>[<a href='../S/52.html#L10' title='Defined at 10 in pipe.c.'>PIPESIZE</a>];
+<a id='L15' name='L15'></a>  15   <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a>;     <em class='comment'>// number of bytes read</em>
+<a id='L16' name='L16'></a>  16   <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a>;    <em class='comment'>// number of bytes written</em>
+<a id='L17' name='L17'></a>  17   <strong class='reserved'>int</strong> <a href='../Y/338.html' title='Multiple used in 5 places.'>readopen</a>;   <em class='comment'>// read fd is still open</em>
+<a id='L18' name='L18'></a>  18   <strong class='reserved'>int</strong> <a href='../Y/446.html' title='Multiple used in 5 places.'>writeopen</a>;  <em class='comment'>// write fd is still open</em>
+<a id='L19' name='L19'></a>  19 <em class='brace'>}</em>;
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <strong class='reserved'>int</strong>
+<a id='L22' name='L22'></a>  22 <a href='../R/424.html' title='Multiple referred from 2 places.'>pipealloc</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a> **<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a>, <strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a> **<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a>)
+<a id='L23' name='L23'></a>  23 <em class='brace'>{</em>
+<a id='L24' name='L24'></a>  24   <strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L25' name='L25'></a>  25 
+<a id='L26' name='L26'></a>  26   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = 0;
+<a id='L27' name='L27'></a>  27   *<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a> = *<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a> = 0;
+<a id='L28' name='L28'></a>  28   <strong class='reserved'>if</strong>((*<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a> = <a href='../S/19.html#L26' title='Defined at 26 in file.c.'>filealloc</a>()) == 0 || (*<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a> = <a href='../S/19.html#L26' title='Defined at 26 in file.c.'>filealloc</a>()) == 0)
+<a id='L29' name='L29'></a>  29     <strong class='reserved'>goto</strong> <a href='../Y/28.html' title='Multiple used in 25 places.'>bad</a>;
+<a id='L30' name='L30'></a>  30   <strong class='reserved'>if</strong>((<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = (<strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a>*)<a href='../S/30.html#L83' title='Defined at 83 in kalloc.c.'>kalloc</a>()) == 0)
+<a id='L31' name='L31'></a>  31     <strong class='reserved'>goto</strong> <a href='../Y/28.html' title='Multiple used in 25 places.'>bad</a>;
+<a id='L32' name='L32'></a>  32   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/338.html' title='Multiple used in 5 places.'>readopen</a> = 1;
+<a id='L33' name='L33'></a>  33   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/446.html' title='Multiple used in 5 places.'>writeopen</a> = 1;
+<a id='L34' name='L34'></a>  34   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a> = 0;
+<a id='L35' name='L35'></a>  35   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a> = 0;
+<a id='L36' name='L36'></a>  36   <a href='../S/68.html#L13' title='Defined at 13 in spinlock.c.'>initlock</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>, "pipe");
+<a id='L37' name='L37'></a>  37   (*<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a>)-&gt;<a href='../Y/411.html' title='Multiple used in 70 places.'>type</a> = <a href='../S/20.html#L2' title='Defined at 2 in file.h.'>FD_PIPE</a>;
+<a id='L38' name='L38'></a>  38   (*<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a>)-&gt;<a href='../Y/337.html' title='Multiple used in 5 places.'>readable</a> = 1;
+<a id='L39' name='L39'></a>  39   (*<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a>)-&gt;<a href='../Y/444.html' title='Multiple used in 8 places.'>writable</a> = 0;
+<a id='L40' name='L40'></a>  40   (*<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a>)-&gt;<a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L41' name='L41'></a>  41   (*<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a>)-&gt;<a href='../Y/411.html' title='Multiple used in 70 places.'>type</a> = <a href='../S/20.html#L2' title='Defined at 2 in file.h.'>FD_PIPE</a>;
+<a id='L42' name='L42'></a>  42   (*<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a>)-&gt;<a href='../Y/337.html' title='Multiple used in 5 places.'>readable</a> = 0;
+<a id='L43' name='L43'></a>  43   (*<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a>)-&gt;<a href='../Y/444.html' title='Multiple used in 8 places.'>writable</a> = 1;
+<a id='L44' name='L44'></a>  44   (*<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a>)-&gt;<a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L45' name='L45'></a>  45   <strong class='reserved'>return</strong> 0;
+<a id='L46' name='L46'></a>  46 
+<a id='L47' name='L47'></a>  47 <em class='comment'>//PAGEBREAK: 20</em>
+<a id='L48' name='L48'></a>  48  <a href='../Y/28.html' title='Multiple used in 25 places.'>bad</a>:
+<a id='L49' name='L49'></a>  49   <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>)
+<a id='L50' name='L50'></a>  50     <a href='../S/30.html#L60' title='Defined at 60 in kalloc.c.'>kfree</a>((<strong class='reserved'>char</strong>*)<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>);
+<a id='L51' name='L51'></a>  51   <strong class='reserved'>if</strong>(*<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a>)
+<a id='L52' name='L52'></a>  52     <a href='../S/19.html#L56' title='Defined at 56 in file.c.'>fileclose</a>(*<a href='../Y/116.html' title='Multiple used in 9 places.'>f0</a>);
+<a id='L53' name='L53'></a>  53   <strong class='reserved'>if</strong>(*<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a>)
+<a id='L54' name='L54'></a>  54     <a href='../S/19.html#L56' title='Defined at 56 in file.c.'>fileclose</a>(*<a href='../Y/117.html' title='Multiple used in 9 places.'>f1</a>);
+<a id='L55' name='L55'></a>  55   <strong class='reserved'>return</strong> -1;
+<a id='L56' name='L56'></a>  56 <em class='brace'>}</em>
+<a id='L57' name='L57'></a>  57 
+<a id='L58' name='L58'></a>  58 <strong class='reserved'>void</strong>
+<a id='L59' name='L59'></a>  59 <a href='../R/425.html' title='Multiple referred from 2 places.'>pipeclose</a>(<strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>, <strong class='reserved'>int</strong> <a href='../Y/444.html' title='Multiple used in 8 places.'>writable</a>)
+<a id='L60' name='L60'></a>  60 <em class='brace'>{</em>
+<a id='L61' name='L61'></a>  61   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L62' name='L62'></a>  62   <strong class='reserved'>if</strong>(<a href='../Y/444.html' title='Multiple used in 8 places.'>writable</a>)<em class='brace'>{</em>
+<a id='L63' name='L63'></a>  63     <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/446.html' title='Multiple used in 5 places.'>writeopen</a> = 0;
+<a id='L64' name='L64'></a>  64     <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a>);
+<a id='L65' name='L65'></a>  65   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L66' name='L66'></a>  66     <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/338.html' title='Multiple used in 5 places.'>readopen</a> = 0;
+<a id='L67' name='L67'></a>  67     <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a>);
+<a id='L68' name='L68'></a>  68   <em class='brace'>}</em>
+<a id='L69' name='L69'></a>  69   <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/338.html' title='Multiple used in 5 places.'>readopen</a> == 0 &amp;&amp; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/446.html' title='Multiple used in 5 places.'>writeopen</a> == 0)<em class='brace'>{</em>
+<a id='L70' name='L70'></a>  70     <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L71' name='L71'></a>  71     <a href='../S/30.html#L60' title='Defined at 60 in kalloc.c.'>kfree</a>((<strong class='reserved'>char</strong>*)<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>);
+<a id='L72' name='L72'></a>  72   <em class='brace'>}</em> <strong class='reserved'>else</strong>
+<a id='L73' name='L73'></a>  73     <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L74' name='L74'></a>  74 <em class='brace'>}</em>
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <em class='comment'>//PAGEBREAK: 40</em>
+<a id='L77' name='L77'></a>  77 <strong class='reserved'>int</strong>
+<a id='L78' name='L78'></a>  78 <a href='../R/428.html' title='Multiple referred from 2 places.'>pipewrite</a>(<strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>, <strong class='reserved'>char</strong> *<a href='../Y/13.html' title='Multiple used in 59 places.'>addr</a>, <strong class='reserved'>int</strong> <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>)
+<a id='L79' name='L79'></a>  79 <em class='brace'>{</em>
+<a id='L80' name='L80'></a>  80   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
+<a id='L81' name='L81'></a>  81 
+<a id='L82' name='L82'></a>  82   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L83' name='L83'></a>  83   <strong class='reserved'>for</strong>(<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> &lt; <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++)<em class='brace'>{</em>
+<a id='L84' name='L84'></a>  84     <strong class='reserved'>while</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a> == <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a> + <a href='../S/52.html#L10' title='Defined at 10 in pipe.c.'>PIPESIZE</a>)<em class='brace'>{</em>  <em class='comment'>//DOC: pipewrite-full</em>
+<a id='L85' name='L85'></a>  85       <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/338.html' title='Multiple used in 5 places.'>readopen</a> == 0 || <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/181.html' title='Multiple used in 13 places.'>killed</a>)<em class='brace'>{</em>
+<a id='L86' name='L86'></a>  86         <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L87' name='L87'></a>  87         <strong class='reserved'>return</strong> -1;
+<a id='L88' name='L88'></a>  88       <em class='brace'>}</em>
+<a id='L89' name='L89'></a>  89       <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a>);
+<a id='L90' name='L90'></a>  90       <a href='../S/56.html#L352' title='Defined at 352 in proc.c.'>sleep</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a>, &amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);  <em class='comment'>//DOC: pipewrite-sleep</em>
+<a id='L91' name='L91'></a>  91     <em class='brace'>}</em>
+<a id='L92' name='L92'></a>  92     <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>[<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a>++ % <a href='../S/52.html#L10' title='Defined at 10 in pipe.c.'>PIPESIZE</a>] = <a href='../Y/13.html' title='Multiple used in 59 places.'>addr</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>];
+<a id='L93' name='L93'></a>  93   <em class='brace'>}</em>
+<a id='L94' name='L94'></a>  94   <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a>);  <em class='comment'>//DOC: pipewrite-wakeup1</em>
+<a id='L95' name='L95'></a>  95   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L96' name='L96'></a>  96   <strong class='reserved'>return</strong> <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>;
+<a id='L97' name='L97'></a>  97 <em class='brace'>}</em>
+<a id='L98' name='L98'></a>  98 
+<a id='L99' name='L99'></a>  99 <strong class='reserved'>int</strong>
+<a id='L100' name='L100'></a> 100 <a href='../R/427.html' title='Multiple referred from 2 places.'>piperead</a>(<strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>, <strong class='reserved'>char</strong> *<a href='../Y/13.html' title='Multiple used in 59 places.'>addr</a>, <strong class='reserved'>int</strong> <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>)
+<a id='L101' name='L101'></a> 101 <em class='brace'>{</em>
+<a id='L102' name='L102'></a> 102   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
+<a id='L103' name='L103'></a> 103 
+<a id='L104' name='L104'></a> 104   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L105' name='L105'></a> 105   <strong class='reserved'>while</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a> == <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a> &amp;&amp; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/446.html' title='Multiple used in 5 places.'>writeopen</a>)<em class='brace'>{</em>  <em class='comment'>//DOC: pipe-empty</em>
+<a id='L106' name='L106'></a> 106     <strong class='reserved'>if</strong>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/181.html' title='Multiple used in 13 places.'>killed</a>)<em class='brace'>{</em>
+<a id='L107' name='L107'></a> 107       <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L108' name='L108'></a> 108       <strong class='reserved'>return</strong> -1;
+<a id='L109' name='L109'></a> 109     <em class='brace'>}</em>
+<a id='L110' name='L110'></a> 110     <a href='../S/56.html#L352' title='Defined at 352 in proc.c.'>sleep</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a>, &amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>); <em class='comment'>//DOC: piperead-sleep</em>
+<a id='L111' name='L111'></a> 111   <em class='brace'>}</em>
+<a id='L112' name='L112'></a> 112   <strong class='reserved'>for</strong>(<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> &lt; <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++)<em class='brace'>{</em>  <em class='comment'>//DOC: piperead-copy</em>
+<a id='L113' name='L113'></a> 113     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a> == <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a>)
+<a id='L114' name='L114'></a> 114       <strong class='reserved'>break</strong>;
+<a id='L115' name='L115'></a> 115     <a href='../Y/13.html' title='Multiple used in 59 places.'>addr</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>] = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>[<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/251.html' title='Multiple used in 10 places.'>nread</a>++ % <a href='../S/52.html#L10' title='Defined at 10 in pipe.c.'>PIPESIZE</a>];
+<a id='L116' name='L116'></a> 116   <em class='brace'>}</em>
+<a id='L117' name='L117'></a> 117   <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/255.html' title='Multiple used in 9 places.'>nwrite</a>);  <em class='comment'>//DOC: piperead-wakeup</em>
+<a id='L118' name='L118'></a> 118   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L119' name='L119'></a> 119   <strong class='reserved'>return</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
+<a id='L120' name='L120'></a> 120 <em class='brace'>}</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L22'>[^]</a><a href='#L100'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

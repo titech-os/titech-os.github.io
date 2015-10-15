@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>defs.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/defs.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/9.html' title='Multiple included from 24 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>;
+<a id='L2' name='L2'></a>   2 <strong class='reserved'>struct</strong> <a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>;
+<a id='L3' name='L3'></a>   3 <strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>;
+<a id='L4' name='L4'></a>   4 <strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>;
+<a id='L5' name='L5'></a>   5 <strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a>;
+<a id='L6' name='L6'></a>   6 <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>;
+<a id='L7' name='L7'></a>   7 <strong class='reserved'>struct</strong> <a href='../S/10.html#L1' title='Defined at 1 in date.h.'>rtcdate</a>;
+<a id='L8' name='L8'></a>   8 <strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a>;
+<a id='L9' name='L9'></a>   9 <strong class='reserved'>struct</strong> <a href='../D/560.html' title='Multiple defined in 3 places.'>stat</a>;
+<a id='L10' name='L10'></a>  10 <strong class='reserved'>struct</strong> <a href='../S/23.html#L13' title='Defined at 13 in fs.h.'>superblock</a>;
+<a id='L11' name='L11'></a>  11 
+<a id='L12' name='L12'></a>  12 <em class='comment'>// bio.c</em>
+<a id='L13' name='L13'></a>  13 <strong class='reserved'>void</strong>            <a href='../S/2.html#L40' title='Defined at 40 in bio.c.'>binit</a>(<strong class='reserved'>void</strong>);
+<a id='L14' name='L14'></a>  14 <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>*     <a href='../S/2.html#L100' title='Defined at 100 in bio.c.'>bread</a>(<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L15' name='L15'></a>  15 <strong class='reserved'>void</strong>            <a href='../S/2.html#L124' title='Defined at 124 in bio.c.'>brelse</a>(<strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>*);
+<a id='L16' name='L16'></a>  16 <strong class='reserved'>void</strong>            <a href='../S/2.html#L113' title='Defined at 113 in bio.c.'>bwrite</a>(<strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>*);
+<a id='L17' name='L17'></a>  17 
+<a id='L18' name='L18'></a>  18 <em class='comment'>// console.c</em>
+<a id='L19' name='L19'></a>  19 <strong class='reserved'>void</strong>            <a href='../S/8.html#L281' title='Defined at 281 in console.c.'>consoleinit</a>(<strong class='reserved'>void</strong>);
+<a id='L20' name='L20'></a>  20 <strong class='reserved'>void</strong>            <a href='../S/8.html#L54' title='Defined at 54 in console.c.'>cprintf</a>(<strong class='reserved'>char</strong>*, ...);
+<a id='L21' name='L21'></a>  21 <strong class='reserved'>void</strong>            <a href='../S/8.html#L188' title='Defined at 188 in console.c.'>consoleintr</a>(<strong class='reserved'>int</strong>(*)(<strong class='reserved'>void</strong>));
+<a id='L22' name='L22'></a>  22 <strong class='reserved'>void</strong>            <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>(<strong class='reserved'>char</strong>*) <strong class='reserved'>__attribute__</strong>((<a href='../Y/248.html' title='Multiple used in 4 places.'>noreturn</a>));
+<a id='L23' name='L23'></a>  23 
+<a id='L24' name='L24'></a>  24 <em class='comment'>// exec.c</em>
+<a id='L25' name='L25'></a>  25 <strong class='reserved'>int</strong>             <a href='../S/17.html#L11' title='Defined at 11 in exec.c.'>exec</a>(<strong class='reserved'>char</strong>*, <strong class='reserved'>char</strong>**);
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <em class='comment'>// file.c</em>
+<a id='L28' name='L28'></a>  28 <strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>*    <a href='../S/19.html#L26' title='Defined at 26 in file.c.'>filealloc</a>(<strong class='reserved'>void</strong>);
+<a id='L29' name='L29'></a>  29 <strong class='reserved'>void</strong>            <a href='../S/19.html#L56' title='Defined at 56 in file.c.'>fileclose</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>*);
+<a id='L30' name='L30'></a>  30 <strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>*    <a href='../S/19.html#L44' title='Defined at 44 in file.c.'>filedup</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>*);
+<a id='L31' name='L31'></a>  31 <strong class='reserved'>void</strong>            <a href='../S/19.html#L19' title='Defined at 19 in file.c.'>fileinit</a>(<strong class='reserved'>void</strong>);
+<a id='L32' name='L32'></a>  32 <strong class='reserved'>int</strong>             <a href='../S/19.html#L96' title='Defined at 96 in file.c.'>fileread</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>*, <strong class='reserved'>char</strong>*, <strong class='reserved'>int</strong> <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>);
+<a id='L33' name='L33'></a>  33 <strong class='reserved'>int</strong>             <a href='../S/19.html#L83' title='Defined at 83 in file.c.'>filestat</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>*, <strong class='reserved'>struct</strong> <a href='../D/560.html' title='Multiple defined in 3 places.'>stat</a>*);
+<a id='L34' name='L34'></a>  34 <strong class='reserved'>int</strong>             <a href='../S/19.html#L117' title='Defined at 117 in file.c.'>filewrite</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>*, <strong class='reserved'>char</strong>*, <strong class='reserved'>int</strong> <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>);
+<a id='L35' name='L35'></a>  35 
+<a id='L36' name='L36'></a>  36 <em class='comment'>// fs.c</em>
+<a id='L37' name='L37'></a>  37 <strong class='reserved'>void</strong>            <a href='../S/22.html#L29' title='Defined at 29 in fs.c.'>readsb</a>(<strong class='reserved'>int</strong> <a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, <strong class='reserved'>struct</strong> <a href='../S/23.html#L13' title='Defined at 13 in fs.h.'>superblock</a> *<a href='../Y/352.html' title='Multiple used in 38 places.'>sb</a>);
+<a id='L38' name='L38'></a>  38 <strong class='reserved'>int</strong>             <a href='../S/22.html#L533' title='Defined at 533 in fs.c.'>dirlink</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*, <strong class='reserved'>char</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L39' name='L39'></a>  39 <strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*   <a href='../S/22.html#L506' title='Defined at 506 in fs.c.'>dirlookup</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*, <strong class='reserved'>char</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>*);
+<a id='L40' name='L40'></a>  40 <strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*   <a href='../D/405.html' title='Multiple defined in 2 places.'>ialloc</a>(<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <strong class='reserved'>short</strong>);
+<a id='L41' name='L41'></a>  41 <strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*   <a href='../S/22.html#L256' title='Defined at 256 in fs.c.'>idup</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*);
+<a id='L42' name='L42'></a>  42 <strong class='reserved'>void</strong>            <a href='../S/22.html#L163' title='Defined at 163 in fs.c.'>iinit</a>(<strong class='reserved'>int</strong> <a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>);
+<a id='L43' name='L43'></a>  43 <strong class='reserved'>void</strong>            <a href='../S/22.html#L267' title='Defined at 267 in fs.c.'>ilock</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*);
+<a id='L44' name='L44'></a>  44 <strong class='reserved'>void</strong>            <a href='../S/22.html#L318' title='Defined at 318 in fs.c.'>iput</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*);
+<a id='L45' name='L45'></a>  45 <strong class='reserved'>void</strong>            <a href='../S/22.html#L299' title='Defined at 299 in fs.c.'>iunlock</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*);
+<a id='L46' name='L46'></a>  46 <strong class='reserved'>void</strong>            <a href='../S/22.html#L340' title='Defined at 340 in fs.c.'>iunlockput</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*);
+<a id='L47' name='L47'></a>  47 <strong class='reserved'>void</strong>            <a href='../S/22.html#L200' title='Defined at 200 in fs.c.'>iupdate</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*);
+<a id='L48' name='L48'></a>  48 <strong class='reserved'>int</strong>             <a href='../S/22.html#L498' title='Defined at 498 in fs.c.'>namecmp</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*);
+<a id='L49' name='L49'></a>  49 <strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*   <a href='../S/22.html#L641' title='Defined at 641 in fs.c.'>namei</a>(<strong class='reserved'>char</strong>*);
+<a id='L50' name='L50'></a>  50 <strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*   <a href='../S/22.html#L648' title='Defined at 648 in fs.c.'>nameiparent</a>(<strong class='reserved'>char</strong>*, <strong class='reserved'>char</strong>*);
+<a id='L51' name='L51'></a>  51 <strong class='reserved'>int</strong>             <a href='../S/22.html#L435' title='Defined at 435 in fs.c.'>readi</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*, <strong class='reserved'>char</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L52' name='L52'></a>  52 <strong class='reserved'>void</strong>            <a href='../S/22.html#L423' title='Defined at 423 in fs.c.'>stati</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*, <strong class='reserved'>struct</strong> <a href='../D/560.html' title='Multiple defined in 3 places.'>stat</a>*);
+<a id='L53' name='L53'></a>  53 <strong class='reserved'>int</strong>             <a href='../S/22.html#L463' title='Defined at 463 in fs.c.'>writei</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*, <strong class='reserved'>char</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55 <em class='comment'>// ide.c</em>
+<a id='L56' name='L56'></a>  56 <strong class='reserved'>void</strong>            <a href='../D/407.html' title='Multiple defined in 2 places.'>ideinit</a>(<strong class='reserved'>void</strong>);
+<a id='L57' name='L57'></a>  57 <strong class='reserved'>void</strong>            <a href='../D/408.html' title='Multiple defined in 2 places.'>ideintr</a>(<strong class='reserved'>void</strong>);
+<a id='L58' name='L58'></a>  58 <strong class='reserved'>void</strong>            <a href='../D/409.html' title='Multiple defined in 2 places.'>iderw</a>(<strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>*);
+<a id='L59' name='L59'></a>  59 
+<a id='L60' name='L60'></a>  60 <em class='comment'>// ioapic.c</em>
+<a id='L61' name='L61'></a>  61 <strong class='reserved'>void</strong>            <a href='../S/29.html#L71' title='Defined at 71 in ioapic.c.'>ioapicenable</a>(<strong class='reserved'>int</strong> <a href='../Y/175.html' title='Multiple used in 6 places.'>irq</a>, <strong class='reserved'>int</strong> <a href='../S/57.html#L5' title='Defined at 5 in proc.h.'>cpu</a>);
+<a id='L62' name='L62'></a>  62 <strong class='reserved'>extern</strong> <a href='../S/87.html#L3' title='Defined at 3 in types.h.'>uchar</a>    <a href='../Y/172.html' title='Multiple used in 5 places.'>ioapicid</a>;
+<a id='L63' name='L63'></a>  63 <strong class='reserved'>void</strong>            <a href='../S/29.html#L49' title='Defined at 49 in ioapic.c.'>ioapicinit</a>(<strong class='reserved'>void</strong>);
+<a id='L64' name='L64'></a>  64 
+<a id='L65' name='L65'></a>  65 <em class='comment'>// kalloc.c</em>
+<a id='L66' name='L66'></a>  66 <strong class='reserved'>char</strong>*           <a href='../S/30.html#L83' title='Defined at 83 in kalloc.c.'>kalloc</a>(<strong class='reserved'>void</strong>);
+<a id='L67' name='L67'></a>  67 <strong class='reserved'>void</strong>            <a href='../S/30.html#L60' title='Defined at 60 in kalloc.c.'>kfree</a>(<strong class='reserved'>char</strong>*);
+<a id='L68' name='L68'></a>  68 <strong class='reserved'>void</strong>            <a href='../S/30.html#L31' title='Defined at 31 in kalloc.c.'>kinit1</a>(<strong class='reserved'>void</strong>*, <strong class='reserved'>void</strong>*);
+<a id='L69' name='L69'></a>  69 <strong class='reserved'>void</strong>            <a href='../S/30.html#L39' title='Defined at 39 in kalloc.c.'>kinit2</a>(<strong class='reserved'>void</strong>*, <strong class='reserved'>void</strong>*);
+<a id='L70' name='L70'></a>  70 
+<a id='L71' name='L71'></a>  71 <em class='comment'>// kbd.c</em>
+<a id='L72' name='L72'></a>  72 <strong class='reserved'>void</strong>            <a href='../S/31.html#L47' title='Defined at 47 in kbd.c.'>kbdintr</a>(<strong class='reserved'>void</strong>);
+<a id='L73' name='L73'></a>  73 
+<a id='L74' name='L74'></a>  74 <em class='comment'>// lapic.c</em>
+<a id='L75' name='L75'></a>  75 <strong class='reserved'>void</strong>            <a href='../S/35.html#L204' title='Defined at 204 in lapic.c.'>cmostime</a>(<strong class='reserved'>struct</strong> <a href='../S/10.html#L1' title='Defined at 1 in date.h.'>rtcdate</a> *<a href='../Y/332.html' title='Multiple used in 44 places.'>r</a>);
+<a id='L76' name='L76'></a>  76 <strong class='reserved'>int</strong>             <a href='../S/35.html#L100' title='Defined at 100 in lapic.c.'>cpunum</a>(<strong class='reserved'>void</strong>);
+<a id='L77' name='L77'></a>  77 <strong class='reserved'>extern</strong> <strong class='reserved'>volatile</strong> <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>*    <a href='../Y/186.html' title='Multiple used in 12 places.'>lapic</a>;
+<a id='L78' name='L78'></a>  78 <strong class='reserved'>void</strong>            <a href='../S/35.html#L121' title='Defined at 121 in lapic.c.'>lapiceoi</a>(<strong class='reserved'>void</strong>);
+<a id='L79' name='L79'></a>  79 <strong class='reserved'>void</strong>            <a href='../S/35.html#L54' title='Defined at 54 in lapic.c.'>lapicinit</a>(<strong class='reserved'>void</strong>);
+<a id='L80' name='L80'></a>  80 <strong class='reserved'>void</strong>            <a href='../S/35.html#L140' title='Defined at 140 in lapic.c.'>lapicstartap</a>(<a href='../S/87.html#L3' title='Defined at 3 in types.h.'>uchar</a>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L81' name='L81'></a>  81 <strong class='reserved'>void</strong>            <a href='../S/35.html#L130' title='Defined at 130 in lapic.c.'>microdelay</a>(<strong class='reserved'>int</strong>);
+<a id='L82' name='L82'></a>  82 
+<a id='L83' name='L83'></a>  83 <em class='comment'>// log.c</em>
+<a id='L84' name='L84'></a>  84 <strong class='reserved'>void</strong>            <a href='../S/38.html#L53' title='Defined at 53 in log.c.'>initlog</a>(<strong class='reserved'>int</strong> <a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>);
+<a id='L85' name='L85'></a>  85 <strong class='reserved'>void</strong>            <a href='../S/38.html#L211' title='Defined at 211 in log.c.'>log_write</a>(<strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>*);
+<a id='L86' name='L86'></a>  86 <strong class='reserved'>void</strong>            <a href='../S/38.html#L125' title='Defined at 125 in log.c.'>begin_op</a>();
+<a id='L87' name='L87'></a>  87 <strong class='reserved'>void</strong>            <a href='../S/38.html#L145' title='Defined at 145 in log.c.'>end_op</a>();
+<a id='L88' name='L88'></a>  88 
+<a id='L89' name='L89'></a>  89 <em class='comment'>// mp.c</em>
+<a id='L90' name='L90'></a>  90 <strong class='reserved'>extern</strong> <strong class='reserved'>int</strong>      <a href='../Y/177.html' title='Multiple used in 9 places.'>ismp</a>;
+<a id='L91' name='L91'></a>  91 <strong class='reserved'>int</strong>             <a href='../S/47.html#L21' title='Defined at 21 in mp.c.'>mpbcpu</a>(<strong class='reserved'>void</strong>);
+<a id='L92' name='L92'></a>  92 <strong class='reserved'>void</strong>            <a href='../S/47.html#L100' title='Defined at 100 in mp.c.'>mpinit</a>(<strong class='reserved'>void</strong>);
+<a id='L93' name='L93'></a>  93 <strong class='reserved'>void</strong>            mpstartthem(<strong class='reserved'>void</strong>);
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95 <em class='comment'>// picirq.c</em>
+<a id='L96' name='L96'></a>  96 <strong class='reserved'>void</strong>            <a href='../S/51.html#L26' title='Defined at 26 in picirq.c.'>picenable</a>(<strong class='reserved'>int</strong>);
+<a id='L97' name='L97'></a>  97 <strong class='reserved'>void</strong>            <a href='../S/51.html#L33' title='Defined at 33 in picirq.c.'>picinit</a>(<strong class='reserved'>void</strong>);
+<a id='L98' name='L98'></a>  98 
+<a id='L99' name='L99'></a>  99 <em class='comment'>// pipe.c</em>
+<a id='L100' name='L100'></a> 100 <strong class='reserved'>int</strong>             <a href='../S/52.html#L22' title='Defined at 22 in pipe.c.'>pipealloc</a>(<strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>**, <strong class='reserved'>struct</strong> <a href='../S/20.html#L1' title='Defined at 1 in file.h.'>file</a>**);
+<a id='L101' name='L101'></a> 101 <strong class='reserved'>void</strong>            <a href='../S/52.html#L59' title='Defined at 59 in pipe.c.'>pipeclose</a>(<strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a>*, <strong class='reserved'>int</strong>);
+<a id='L102' name='L102'></a> 102 <strong class='reserved'>int</strong>             <a href='../S/52.html#L100' title='Defined at 100 in pipe.c.'>piperead</a>(<strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a>*, <strong class='reserved'>char</strong>*, <strong class='reserved'>int</strong>);
+<a id='L103' name='L103'></a> 103 <strong class='reserved'>int</strong>             <a href='../S/52.html#L78' title='Defined at 78 in pipe.c.'>pipewrite</a>(<strong class='reserved'>struct</strong> <a href='../S/52.html#L12' title='Defined at 12 in pipe.c.'>pipe</a>*, <strong class='reserved'>char</strong>*, <strong class='reserved'>int</strong>);
+<a id='L104' name='L104'></a> 104 
+<a id='L105' name='L105'></a> 105 <em class='comment'>//PAGEBREAK: 16</em>
+<a id='L106' name='L106'></a> 106 <em class='comment'>// proc.c</em>
+<a id='L107' name='L107'></a> 107 <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>*    copyproc(<strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>*);
+<a id='L108' name='L108'></a> 108 <strong class='reserved'>void</strong>            <a href='../S/56.html#L173' title='Defined at 173 in proc.c.'>exit</a>(<strong class='reserved'>void</strong>);
+<a id='L109' name='L109'></a> 109 <strong class='reserved'>int</strong>             <a href='../S/56.html#L129' title='Defined at 129 in proc.c.'>fork</a>(<strong class='reserved'>void</strong>);
+<a id='L110' name='L110'></a> 110 <strong class='reserved'>int</strong>             <a href='../S/56.html#L108' title='Defined at 108 in proc.c.'>growproc</a>(<strong class='reserved'>int</strong>);
+<a id='L111' name='L111'></a> 111 <strong class='reserved'>int</strong>             <a href='../S/56.html#L412' title='Defined at 412 in proc.c.'>kill</a>(<strong class='reserved'>int</strong>);
+<a id='L112' name='L112'></a> 112 <strong class='reserved'>void</strong>            <a href='../S/56.html#L24' title='Defined at 24 in proc.c.'>pinit</a>(<strong class='reserved'>void</strong>);
+<a id='L113' name='L113'></a> 113 <strong class='reserved'>void</strong>            <a href='../S/56.html#L436' title='Defined at 436 in proc.c.'>procdump</a>(<strong class='reserved'>void</strong>);
+<a id='L114' name='L114'></a> 114 <strong class='reserved'>void</strong>            <a href='../S/56.html#L266' title='Defined at 266 in proc.c.'>scheduler</a>(<strong class='reserved'>void</strong>) <strong class='reserved'>__attribute__</strong>((<a href='../Y/248.html' title='Multiple used in 4 places.'>noreturn</a>));
+<a id='L115' name='L115'></a> 115 <strong class='reserved'>void</strong>            <a href='../S/56.html#L301' title='Defined at 301 in proc.c.'>sched</a>(<strong class='reserved'>void</strong>);
+<a id='L116' name='L116'></a> 116 <strong class='reserved'>void</strong>            <a href='../S/56.html#L352' title='Defined at 352 in proc.c.'>sleep</a>(<strong class='reserved'>void</strong>*, <strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a>*);
+<a id='L117' name='L117'></a> 117 <strong class='reserved'>void</strong>            <a href='../S/56.html#L79' title='Defined at 79 in proc.c.'>userinit</a>(<strong class='reserved'>void</strong>);
+<a id='L118' name='L118'></a> 118 <strong class='reserved'>int</strong>             <a href='../S/56.html#L217' title='Defined at 217 in proc.c.'>wait</a>(<strong class='reserved'>void</strong>);
+<a id='L119' name='L119'></a> 119 <strong class='reserved'>void</strong>            <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(<strong class='reserved'>void</strong>*);
+<a id='L120' name='L120'></a> 120 <strong class='reserved'>void</strong>            <a href='../S/56.html#L320' title='Defined at 320 in proc.c.'>yield</a>(<strong class='reserved'>void</strong>);
+<a id='L121' name='L121'></a> 121 
+<a id='L122' name='L122'></a> 122 <em class='comment'>// swtch.S</em>
+<a id='L123' name='L123'></a> 123 <strong class='reserved'>void</strong>            <a href='../Y/388.html' title='Multiple used in 3 places.'>swtch</a>(<strong class='reserved'>struct</strong> <a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>**, <strong class='reserved'>struct</strong> <a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>*);
+<a id='L124' name='L124'></a> 124 
+<a id='L125' name='L125'></a> 125 <em class='comment'>// spinlock.c</em>
+<a id='L126' name='L126'></a> 126 <strong class='reserved'>void</strong>            <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(<strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a>*);
+<a id='L127' name='L127'></a> 127 <strong class='reserved'>void</strong>            <a href='../S/68.html#L68' title='Defined at 68 in spinlock.c.'>getcallerpcs</a>(<strong class='reserved'>void</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>*);
+<a id='L128' name='L128'></a> 128 <strong class='reserved'>int</strong>             <a href='../S/68.html#L86' title='Defined at 86 in spinlock.c.'>holding</a>(<strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a>*);
+<a id='L129' name='L129'></a> 129 <strong class='reserved'>void</strong>            <a href='../S/68.html#L13' title='Defined at 13 in spinlock.c.'>initlock</a>(<strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a>*, <strong class='reserved'>char</strong>*);
+<a id='L130' name='L130'></a> 130 <strong class='reserved'>void</strong>            <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(<strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a>*);
+<a id='L131' name='L131'></a> 131 <strong class='reserved'>void</strong>            <a href='../S/68.html#L97' title='Defined at 97 in spinlock.c.'>pushcli</a>(<strong class='reserved'>void</strong>);
+<a id='L132' name='L132'></a> 132 <strong class='reserved'>void</strong>            <a href='../S/68.html#L108' title='Defined at 108 in spinlock.c.'>popcli</a>(<strong class='reserved'>void</strong>);
+<a id='L133' name='L133'></a> 133 
+<a id='L134' name='L134'></a> 134 <em class='comment'>// string.c</em>
+<a id='L135' name='L135'></a> 135 <strong class='reserved'>int</strong>             <a href='../S/73.html#L16' title='Defined at 16 in string.c.'>memcmp</a>(<strong class='reserved'>const</strong> <strong class='reserved'>void</strong>*, <strong class='reserved'>const</strong> <strong class='reserved'>void</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L136' name='L136'></a> 136 <strong class='reserved'>void</strong>*           <a href='../D/473.html' title='Multiple defined in 2 places.'>memmove</a>(<strong class='reserved'>void</strong>*, <strong class='reserved'>const</strong> <strong class='reserved'>void</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L137' name='L137'></a> 137 <strong class='reserved'>void</strong>*           <a href='../D/474.html' title='Multiple defined in 2 places.'>memset</a>(<strong class='reserved'>void</strong>*, <strong class='reserved'>int</strong>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L138' name='L138'></a> 138 <strong class='reserved'>char</strong>*           <a href='../S/73.html#L83' title='Defined at 83 in string.c.'>safestrcpy</a>(<strong class='reserved'>char</strong>*, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*, <strong class='reserved'>int</strong>);
+<a id='L139' name='L139'></a> 139 <strong class='reserved'>int</strong>             <a href='../D/569.html' title='Multiple defined in 2 places.'>strlen</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*);
+<a id='L140' name='L140'></a> 140 <strong class='reserved'>int</strong>             <a href='../S/73.html#L59' title='Defined at 59 in string.c.'>strncmp</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L141' name='L141'></a> 141 <strong class='reserved'>char</strong>*           <a href='../S/73.html#L69' title='Defined at 69 in string.c.'>strncpy</a>(<strong class='reserved'>char</strong>*, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*, <strong class='reserved'>int</strong>);
+<a id='L142' name='L142'></a> 142 
+<a id='L143' name='L143'></a> 143 <em class='comment'>// syscall.c</em>
+<a id='L144' name='L144'></a> 144 <strong class='reserved'>int</strong>             <a href='../S/76.html#L46' title='Defined at 46 in syscall.c.'>argint</a>(<strong class='reserved'>int</strong>, <strong class='reserved'>int</strong>*);
+<a id='L145' name='L145'></a> 145 <strong class='reserved'>int</strong>             <a href='../S/76.html#L55' title='Defined at 55 in syscall.c.'>argptr</a>(<strong class='reserved'>int</strong>, <strong class='reserved'>char</strong>**, <strong class='reserved'>int</strong>);
+<a id='L146' name='L146'></a> 146 <strong class='reserved'>int</strong>             <a href='../S/76.html#L72' title='Defined at 72 in syscall.c.'>argstr</a>(<strong class='reserved'>int</strong>, <strong class='reserved'>char</strong>**);
+<a id='L147' name='L147'></a> 147 <strong class='reserved'>int</strong>             <a href='../S/76.html#L18' title='Defined at 18 in syscall.c.'>fetchint</a>(<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <strong class='reserved'>int</strong>*);
+<a id='L148' name='L148'></a> 148 <strong class='reserved'>int</strong>             <a href='../S/76.html#L30' title='Defined at 30 in syscall.c.'>fetchstr</a>(<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <strong class='reserved'>char</strong>**);
+<a id='L149' name='L149'></a> 149 <strong class='reserved'>void</strong>            <a href='../S/76.html#L127' title='Defined at 127 in syscall.c.'>syscall</a>(<strong class='reserved'>void</strong>);
+<a id='L150' name='L150'></a> 150 
+<a id='L151' name='L151'></a> 151 <em class='comment'>// timer.c</em>
+<a id='L152' name='L152'></a> 152 <strong class='reserved'>void</strong>            <a href='../S/80.html#L25' title='Defined at 25 in timer.c.'>timerinit</a>(<strong class='reserved'>void</strong>);
+<a id='L153' name='L153'></a> 153 
+<a id='L154' name='L154'></a> 154 <em class='comment'>// trap.c</em>
+<a id='L155' name='L155'></a> 155 <strong class='reserved'>void</strong>            <a href='../S/83.html#L30' title='Defined at 30 in trap.c.'>idtinit</a>(<strong class='reserved'>void</strong>);
+<a id='L156' name='L156'></a> 156 <strong class='reserved'>extern</strong> <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>     <a href='../Y/399.html' title='Multiple used in 8 places.'>ticks</a>;
+<a id='L157' name='L157'></a> 157 <strong class='reserved'>void</strong>            <a href='../S/83.html#L18' title='Defined at 18 in trap.c.'>tvinit</a>(<strong class='reserved'>void</strong>);
+<a id='L158' name='L158'></a> 158 <strong class='reserved'>extern</strong> <strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a> <a href='../Y/401.html' title='Multiple used in 11 places.'>tickslock</a>;
+<a id='L159' name='L159'></a> 159 
+<a id='L160' name='L160'></a> 160 <em class='comment'>// uart.c</em>
+<a id='L161' name='L161'></a> 161 <strong class='reserved'>void</strong>            <a href='../S/88.html#L19' title='Defined at 19 in uart.c.'>uartinit</a>(<strong class='reserved'>void</strong>);
+<a id='L162' name='L162'></a> 162 <strong class='reserved'>void</strong>            <a href='../S/88.html#L74' title='Defined at 74 in uart.c.'>uartintr</a>(<strong class='reserved'>void</strong>);
+<a id='L163' name='L163'></a> 163 <strong class='reserved'>void</strong>            <a href='../S/88.html#L52' title='Defined at 52 in uart.c.'>uartputc</a>(<strong class='reserved'>int</strong>);
+<a id='L164' name='L164'></a> 164 
+<a id='L165' name='L165'></a> 165 <em class='comment'>// vm.c</em>
+<a id='L166' name='L166'></a> 166 <strong class='reserved'>void</strong>            <a href='../S/95.html#L17' title='Defined at 17 in vm.c.'>seginit</a>(<strong class='reserved'>void</strong>);
+<a id='L167' name='L167'></a> 167 <strong class='reserved'>void</strong>            <a href='../S/95.html#L149' title='Defined at 149 in vm.c.'>kvmalloc</a>(<strong class='reserved'>void</strong>);
+<a id='L168' name='L168'></a> 168 <strong class='reserved'>void</strong>            vmenable(<strong class='reserved'>void</strong>);
+<a id='L169' name='L169'></a> 169 <a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*          <a href='../S/95.html#L129' title='Defined at 129 in vm.c.'>setupkvm</a>(<strong class='reserved'>void</strong>);
+<a id='L170' name='L170'></a> 170 <strong class='reserved'>char</strong>*           <a href='../S/95.html#L342' title='Defined at 342 in vm.c.'>uva2ka</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*, <strong class='reserved'>char</strong>*);
+<a id='L171' name='L171'></a> 171 <strong class='reserved'>int</strong>             <a href='../S/95.html#L221' title='Defined at 221 in vm.c.'>allocuvm</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L172' name='L172'></a> 172 <strong class='reserved'>int</strong>             <a href='../S/95.html#L250' title='Defined at 250 in vm.c.'>deallocuvm</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L173' name='L173'></a> 173 <strong class='reserved'>void</strong>            <a href='../S/95.html#L278' title='Defined at 278 in vm.c.'>freevm</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*);
+<a id='L174' name='L174'></a> 174 <strong class='reserved'>void</strong>            <a href='../S/95.html#L182' title='Defined at 182 in vm.c.'>inituvm</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*, <strong class='reserved'>char</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L175' name='L175'></a> 175 <strong class='reserved'>int</strong>             <a href='../S/95.html#L197' title='Defined at 197 in vm.c.'>loaduvm</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*, <strong class='reserved'>char</strong>*, <strong class='reserved'>struct</strong> <a href='../S/20.html#L13' title='Defined at 13 in file.h.'>inode</a>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L176' name='L176'></a> 176 <a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*          <a href='../S/95.html#L310' title='Defined at 310 in vm.c.'>copyuvm</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L177' name='L177'></a> 177 <strong class='reserved'>void</strong>            <a href='../S/95.html#L165' title='Defined at 165 in vm.c.'>switchuvm</a>(<strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>*);
+<a id='L178' name='L178'></a> 178 <strong class='reserved'>void</strong>            <a href='../S/95.html#L158' title='Defined at 158 in vm.c.'>switchkvm</a>(<strong class='reserved'>void</strong>);
+<a id='L179' name='L179'></a> 179 <strong class='reserved'>int</strong>             <a href='../S/95.html#L358' title='Defined at 358 in vm.c.'>copyout</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>, <strong class='reserved'>void</strong>*, <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>);
+<a id='L180' name='L180'></a> 180 <strong class='reserved'>void</strong>            <a href='../S/95.html#L297' title='Defined at 297 in vm.c.'>clearpteu</a>(<a href='../S/87.html#L4' title='Defined at 4 in types.h.'>pde_t</a> *<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a>, <strong class='reserved'>char</strong> *<a href='../Y/422.html' title='Multiple used in 5 places.'>uva</a>);
+<a id='L181' name='L181'></a> 181 
+<a id='L182' name='L182'></a> 182 <em class='comment'>// number of elements in fixed-size array</em>
+<a id='L183' name='L183'></a> 183 <em class='sharp'>#define</em> <a href='../R/114.html' title='Multiple referred from 4 places.'>NELEM</a>(<a href='../Y/448.html' title='Multiple used in 35 places.'>x</a>) (<strong class='reserved'>sizeof</strong>(<a href='../Y/448.html' title='Multiple used in 35 places.'>x</a>)/<strong class='reserved'>sizeof</strong>((<a href='../Y/448.html' title='Multiple used in 35 places.'>x</a>)[0]))
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

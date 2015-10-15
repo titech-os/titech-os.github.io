@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kbd.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/kbd.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L7'>[^]</a><a href='#L47'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L7' title='Defined at 7.'>kbdgetc</a></li>
+<li><a href='#L47' title='Defined at 47.'>kbdintr</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='87.html'>types.h</a>"
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='97.html'>x86.h</a>"
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='11.html'>defs.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='32.html'>kbd.h</a>"
+<a id='L5' name='L5'></a>   5 
+<a id='L6' name='L6'></a>   6 <strong class='reserved'>int</strong>
+<a id='L7' name='L7'></a>   7 <a href='../S/31.html#L49' title='Referred from 49 in kbd.c.'>kbdgetc</a>(<strong class='reserved'>void</strong>)
+<a id='L8' name='L8'></a>   8 <em class='brace'>{</em>
+<a id='L9' name='L9'></a>   9   <strong class='reserved'>static</strong> <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a>;
+<a id='L10' name='L10'></a>  10   <strong class='reserved'>static</strong> <a href='../S/87.html#L3' title='Defined at 3 in types.h.'>uchar</a> *<a href='../Y/50.html' title='Multiple used in 2 places.'>charcode</a>[4] = <em class='brace'>{</em>
+<a id='L11' name='L11'></a>  11     <a href='../Y/249.html' title='Multiple used in 2 places.'>normalmap</a>, <a href='../Y/365.html' title='Multiple used in 2 places.'>shiftmap</a>, <a href='../Y/66.html' title='Multiple used in 2 places.'>ctlmap</a>, <a href='../Y/66.html' title='Multiple used in 2 places.'>ctlmap</a>
+<a id='L12' name='L12'></a>  12   <em class='brace'>}</em>;
+<a id='L13' name='L13'></a>  13   <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/379.html' title='Multiple used in 22 places.'>st</a>, <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>, <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a>;
+<a id='L14' name='L14'></a>  14 
+<a id='L15' name='L15'></a>  15   <a href='../Y/379.html' title='Multiple used in 22 places.'>st</a> = <a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/32.html#L3' title='Defined at 3 in kbd.h.'>KBSTATP</a>);
+<a id='L16' name='L16'></a>  16   <strong class='reserved'>if</strong>((<a href='../Y/379.html' title='Multiple used in 22 places.'>st</a> &amp; <a href='../S/32.html#L4' title='Defined at 4 in kbd.h.'>KBS_DIB</a>) == 0)
+<a id='L17' name='L17'></a>  17     <strong class='reserved'>return</strong> -1;
+<a id='L18' name='L18'></a>  18   <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a> = <a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/32.html#L5' title='Defined at 5 in kbd.h.'>KBDATAP</a>);
+<a id='L19' name='L19'></a>  19 
+<a id='L20' name='L20'></a>  20   <strong class='reserved'>if</strong>(<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a> == 0xE0)<em class='brace'>{</em>
+<a id='L21' name='L21'></a>  21     <a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> |= <a href='../S/32.html#L17' title='Defined at 17 in kbd.h.'>E0ESC</a>;
+<a id='L22' name='L22'></a>  22     <strong class='reserved'>return</strong> 0;
+<a id='L23' name='L23'></a>  23   <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a> &amp; 0x80)<em class='brace'>{</em>
+<a id='L24' name='L24'></a>  24     <em class='comment'>// Key released</em>
+<a id='L25' name='L25'></a>  25     <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a> = (<a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> &amp; <a href='../S/32.html#L17' title='Defined at 17 in kbd.h.'>E0ESC</a> ? <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a> : <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a> &amp; 0x7F);
+<a id='L26' name='L26'></a>  26     <a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> &amp;= ~(<a href='../Y/364.html' title='Multiple used in 3 places.'>shiftcode</a>[<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>] | <a href='../S/32.html#L17' title='Defined at 17 in kbd.h.'>E0ESC</a>);
+<a id='L27' name='L27'></a>  27     <strong class='reserved'>return</strong> 0;
+<a id='L28' name='L28'></a>  28   <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> &amp; <a href='../S/32.html#L17' title='Defined at 17 in kbd.h.'>E0ESC</a>)<em class='brace'>{</em>
+<a id='L29' name='L29'></a>  29     <em class='comment'>// Last character was an E0 escape; or with 0x80</em>
+<a id='L30' name='L30'></a>  30     <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a> |= 0x80;
+<a id='L31' name='L31'></a>  31     <a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> &amp;= ~<a href='../S/32.html#L17' title='Defined at 17 in kbd.h.'>E0ESC</a>;
+<a id='L32' name='L32'></a>  32   <em class='brace'>}</em>
+<a id='L33' name='L33'></a>  33 
+<a id='L34' name='L34'></a>  34   <a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> |= <a href='../Y/364.html' title='Multiple used in 3 places.'>shiftcode</a>[<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>];
+<a id='L35' name='L35'></a>  35   <a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> ^= <a href='../Y/403.html' title='Multiple used in 2 places.'>togglecode</a>[<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>];
+<a id='L36' name='L36'></a>  36   <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a> = <a href='../Y/50.html' title='Multiple used in 2 places.'>charcode</a>[<a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> &amp; (<a href='../S/32.html#L10' title='Defined at 10 in kbd.h.'>CTL</a> | <a href='../S/32.html#L9' title='Defined at 9 in kbd.h.'>SHIFT</a>)][<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>];
+<a id='L37' name='L37'></a>  37   <strong class='reserved'>if</strong>(<a href='../Y/363.html' title='Multiple used in 10 places.'>shift</a> &amp; <a href='../S/32.html#L13' title='Defined at 13 in kbd.h.'>CAPSLOCK</a>)<em class='brace'>{</em>
+<a id='L38' name='L38'></a>  38     <strong class='reserved'>if</strong>('a' &lt;= <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a> &amp;&amp; <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a> &lt;= 'z')
+<a id='L39' name='L39'></a>  39       <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a> += 'A' - 'a';
+<a id='L40' name='L40'></a>  40     <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>('A' &lt;= <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a> &amp;&amp; <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a> &lt;= 'Z')
+<a id='L41' name='L41'></a>  41       <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a> += 'a' - 'A';
+<a id='L42' name='L42'></a>  42   <em class='brace'>}</em>
+<a id='L43' name='L43'></a>  43   <strong class='reserved'>return</strong> <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a>;
+<a id='L44' name='L44'></a>  44 <em class='brace'>}</em>
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46 <strong class='reserved'>void</strong>
+<a id='L47' name='L47'></a>  47 <a href='../R/351.html' title='Multiple referred from 2 places.'>kbdintr</a>(<strong class='reserved'>void</strong>)
+<a id='L48' name='L48'></a>  48 <em class='brace'>{</em>
+<a id='L49' name='L49'></a>  49   <a href='../S/8.html#L188' title='Defined at 188 in console.c.'>consoleintr</a>(<a href='../S/31.html#L7' title='Defined at 7 in kbd.c.'>kbdgetc</a>);
+<a id='L50' name='L50'></a>  50 <em class='brace'>}</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L7'>[^]</a><a href='#L47'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

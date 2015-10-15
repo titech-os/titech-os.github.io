@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>newsz</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/95.html#L221'>newsz</a>             221 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/95.html#L226'>newsz</a>             226 vm.c             if(newsz &gt;= KERNBASE)</span>
+<span class='curline'><a href='../S/95.html#L228'>newsz</a>             228 vm.c             if(newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/95.html#L232'>newsz</a>             232 vm.c             for(; a &lt; newsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/95.html#L236'>newsz</a>             236 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/95.html#L242'>newsz</a>             242 vm.c             return newsz;</span>
+<span class='curline'><a href='../S/95.html#L250'>newsz</a>             250 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/95.html#L255'>newsz</a>             255 vm.c             if(newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/95.html#L258'>newsz</a>             258 vm.c             a = PGROUNDUP(newsz);</span>
+<span class='curline'><a href='../S/95.html#L272'>newsz</a>             272 vm.c             return newsz;</span>
+</pre>
+</body>
+</html>

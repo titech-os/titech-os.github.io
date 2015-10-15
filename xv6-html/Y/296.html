@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pde</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/95.html#L48'>pde</a>                48 vm.c             pde_t *pde;</span>
+<span class='curline'><a href='../S/95.html#L51'>pde</a>                51 vm.c             pde = &amp;pgdir[PDX(va)];</span>
+<span class='curline'><a href='../S/95.html#L52'>pde</a>                52 vm.c             if(*pde &amp; PTE_P){</span>
+<span class='curline'><a href='../S/95.html#L53'>pde</a>                53 vm.c               pgtab = (pte_t*)p2v(PTE_ADDR(*pde));</span>
+<span class='curline'><a href='../S/95.html#L62'>pde</a>                62 vm.c               *pde = v2p(pgtab) | PTE_P | PTE_W | PTE_U;</span>
+</pre>
+</body>
+</html>

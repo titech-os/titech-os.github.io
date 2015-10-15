@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>bi</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/22.html#L56'>bi</a>                 56 fs.c             int b, bi, m;</span>
+<span class='curline'><a href='../S/22.html#L62'>bi</a>                 62 fs.c               for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
+<span class='curline'><a href='../S/22.html#L63'>bi</a>                 63 fs.c                 m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/22.html#L64'>bi</a>                 64 fs.c                 if((bp-&gt;data[bi/8] &amp; m) == 0){  // Is block free?</span>
+<span class='curline'><a href='../S/22.html#L65'>bi</a>                 65 fs.c                   bp-&gt;data[bi/8] |= m;  // Mark block in use.</span>
+<span class='curline'><a href='../S/22.html#L68'>bi</a>                 68 fs.c                   bzero(dev, b + bi);</span>
+<span class='curline'><a href='../S/22.html#L69'>bi</a>                 69 fs.c                   return b + bi;</span>
+<span class='curline'><a href='../S/22.html#L82'>bi</a>                 82 fs.c             int bi, m;</span>
+<span class='curline'><a href='../S/22.html#L86'>bi</a>                 86 fs.c             bi = b % BPB;</span>
+<span class='curline'><a href='../S/22.html#L87'>bi</a>                 87 fs.c             m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/22.html#L88'>bi</a>                 88 fs.c             if((bp-&gt;data[bi/8] &amp; m) == 0)</span>
+<span class='curline'><a href='../S/22.html#L90'>bi</a>                 90 fs.c             bp-&gt;data[bi/8] &amp;= ~m;</span>
+</pre>
+</body>
+</html>

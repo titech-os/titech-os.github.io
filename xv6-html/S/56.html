@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>proc.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/proc.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L24'>[^]</a><a href='#L436'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L24' title='Defined at 24.'>pinit</a></li>
+<li><a href='#L35' title='Defined at 35.'>allocproc</a></li>
+<li><a href='#L79' title='Defined at 79.'>userinit</a></li>
+<li><a href='#L108' title='Defined at 108.'>growproc</a></li>
+<li><a href='#L129' title='Defined at 129.'>fork</a></li>
+<li><a href='#L173' title='Defined at 173.'>exit</a></li>
+<li><a href='#L217' title='Defined at 217.'>wait</a></li>
+<li><a href='#L266' title='Defined at 266.'>scheduler</a></li>
+<li><a href='#L301' title='Defined at 301.'>sched</a></li>
+<li><a href='#L320' title='Defined at 320.'>yield</a></li>
+<li><a href='#L331' title='Defined at 331.'>forkret</a></li>
+<li><a href='#L352' title='Defined at 352.'>sleep</a></li>
+<li><a href='#L390' title='Defined at 390.'>wakeup1</a></li>
+<li><a href='#L401' title='Defined at 401.'>wakeup</a></li>
+<li><a href='#L412' title='Defined at 412.'>kill</a></li>
+<li><a href='#L436' title='Defined at 436.'>procdump</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='87.html'>types.h</a>"
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='11.html'>defs.h</a>"
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='50.html'>param.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='43.html'>memlayout.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='46.html'>mmu.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='97.html'>x86.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='57.html'>proc.h</a>"
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='69.html'>spinlock.h</a>"
+<a id='L9' name='L9'></a>   9 
+<a id='L10' name='L10'></a>  10 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L11' name='L11'></a>  11   <strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a> <a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>;
+<a id='L12' name='L12'></a>  12   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>];
+<a id='L13' name='L13'></a>  13 <em class='brace'>}</em> <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>;
+<a id='L14' name='L14'></a>  14 
+<a id='L15' name='L15'></a>  15 <strong class='reserved'>static</strong> <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/165.html' title='Multiple used in 5 places.'>initproc</a>;
+<a id='L16' name='L16'></a>  16 
+<a id='L17' name='L17'></a>  17 <strong class='reserved'>int</strong> <a href='../Y/241.html' title='Multiple used in 2 places.'>nextpid</a> = 1;
+<a id='L18' name='L18'></a>  18 <strong class='reserved'>extern</strong> <strong class='reserved'>void</strong> <a href='../S/56.html#L331' title='Defined at 331 in proc.c.'>forkret</a>(<strong class='reserved'>void</strong>);
+<a id='L19' name='L19'></a>  19 <strong class='reserved'>extern</strong> <strong class='reserved'>void</strong> <a href='../Y/409.html' title='Multiple used in 2 places.'>trapret</a>(<strong class='reserved'>void</strong>);
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/56.html#L390' title='Defined at 390 in proc.c.'>wakeup1</a>(<strong class='reserved'>void</strong> *<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a>);
+<a id='L22' name='L22'></a>  22 
+<a id='L23' name='L23'></a>  23 <strong class='reserved'>void</strong>
+<a id='L24' name='L24'></a>  24 <a href='../R/421.html' title='Multiple referred from 2 places.'>pinit</a>(<strong class='reserved'>void</strong>)
+<a id='L25' name='L25'></a>  25 <em class='brace'>{</em>
+<a id='L26' name='L26'></a>  26   <a href='../S/68.html#L13' title='Defined at 13 in spinlock.c.'>initlock</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>, "ptable");
+<a id='L27' name='L27'></a>  27 <em class='brace'>}</em>
+<a id='L28' name='L28'></a>  28 
+<a id='L29' name='L29'></a>  29 <em class='comment'>//PAGEBREAK: 32</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'>// Look in the process table for an UNUSED proc.</em>
+<a id='L31' name='L31'></a>  31 <em class='comment'>// If found, change state to EMBRYO and initialize</em>
+<a id='L32' name='L32'></a>  32 <em class='comment'>// state required to run in the kernel.</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'>// Otherwise return 0.</em>
+<a id='L34' name='L34'></a>  34 <strong class='reserved'>static</strong> <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>*
+<a id='L35' name='L35'></a>  35 <a href='../R/223.html' title='Multiple referred from 2 places.'>allocproc</a>(<strong class='reserved'>void</strong>)
+<a id='L36' name='L36'></a>  36 <em class='brace'>{</em>
+<a id='L37' name='L37'></a>  37   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L38' name='L38'></a>  38   <strong class='reserved'>char</strong> *<a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a>;
+<a id='L39' name='L39'></a>  39 
+<a id='L40' name='L40'></a>  40   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L41' name='L41'></a>  41   <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> &lt; &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>]; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)
+<a id='L42' name='L42'></a>  42     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>UNUSED</a>)
+<a id='L43' name='L43'></a>  43       <strong class='reserved'>goto</strong> <a href='../Y/130.html' title='Multiple used in 2 places.'>found</a>;
+<a id='L44' name='L44'></a>  44   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L45' name='L45'></a>  45   <strong class='reserved'>return</strong> 0;
+<a id='L46' name='L46'></a>  46 
+<a id='L47' name='L47'></a>  47 <a href='../Y/130.html' title='Multiple used in 2 places.'>found</a>:
+<a id='L48' name='L48'></a>  48   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>EMBRYO</a>;
+<a id='L49' name='L49'></a>  49   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a> = <a href='../Y/241.html' title='Multiple used in 2 places.'>nextpid</a>++;
+<a id='L50' name='L50'></a>  50   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L51' name='L51'></a>  51 
+<a id='L52' name='L52'></a>  52   <em class='comment'>// Allocate kernel stack.</em>
+<a id='L53' name='L53'></a>  53   <strong class='reserved'>if</strong>((<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/184.html' title='Multiple used in 8 places.'>kstack</a> = <a href='../S/30.html#L83' title='Defined at 83 in kalloc.c.'>kalloc</a>()) == 0)<em class='brace'>{</em>
+<a id='L54' name='L54'></a>  54     <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>UNUSED</a>;
+<a id='L55' name='L55'></a>  55     <strong class='reserved'>return</strong> 0;
+<a id='L56' name='L56'></a>  56   <em class='brace'>}</em>
+<a id='L57' name='L57'></a>  57   <a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/184.html' title='Multiple used in 8 places.'>kstack</a> + <a href='../S/50.html#L2' title='Defined at 2 in param.h.'>KSTACKSIZE</a>;
+<a id='L58' name='L58'></a>  58   
+<a id='L59' name='L59'></a>  59   <em class='comment'>// Leave room for trap frame.</em>
+<a id='L60' name='L60'></a>  60   <a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a> -= <strong class='reserved'>sizeof</strong> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>;
+<a id='L61' name='L61'></a>  61   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a> = (<strong class='reserved'>struct</strong> <a href='../S/97.html#L150' title='Defined at 150 in x86.h.'>trapframe</a>*)<a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a>;
+<a id='L62' name='L62'></a>  62   
+<a id='L63' name='L63'></a>  63   <em class='comment'>// Set up new context to start executing at forkret,</em>
+<a id='L64' name='L64'></a>  64   <em class='comment'>// which returns to trapret.</em>
+<a id='L65' name='L65'></a>  65   <a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a> -= 4;
+<a id='L66' name='L66'></a>  66   *(<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>*)<a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a> = (<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>)<a href='../Y/409.html' title='Multiple used in 2 places.'>trapret</a>;
+<a id='L67' name='L67'></a>  67 
+<a id='L68' name='L68'></a>  68   <a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a> -= <strong class='reserved'>sizeof</strong> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>;
+<a id='L69' name='L69'></a>  69   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a> = (<strong class='reserved'>struct</strong> <a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>*)<a href='../Y/372.html' title='Multiple used in 17 places.'>sp</a>;
+<a id='L70' name='L70'></a>  70   <a href='../D/474.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>, 0, <strong class='reserved'>sizeof</strong> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>);
+<a id='L71' name='L71'></a>  71   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>-&gt;<a href='../Y/98.html' title='Multiple used in 9 places.'>eip</a> = (<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>)<a href='../S/56.html#L331' title='Defined at 331 in proc.c.'>forkret</a>;
+<a id='L72' name='L72'></a>  72 
+<a id='L73' name='L73'></a>  73   <strong class='reserved'>return</strong> <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L74' name='L74'></a>  74 <em class='brace'>}</em>
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <em class='comment'>//PAGEBREAK: 32</em>
+<a id='L77' name='L77'></a>  77 <em class='comment'>// Set up first user process.</em>
+<a id='L78' name='L78'></a>  78 <strong class='reserved'>void</strong>
+<a id='L79' name='L79'></a>  79 <a href='../R/518.html' title='Multiple referred from 2 places.'>userinit</a>(<strong class='reserved'>void</strong>)
+<a id='L80' name='L80'></a>  80 <em class='brace'>{</em>
+<a id='L81' name='L81'></a>  81   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L82' name='L82'></a>  82   <strong class='reserved'>extern</strong> <strong class='reserved'>char</strong> <a href='../Y/11.html' title='Multiple used in 2 places.'>_binary_initcode_start</a>[], <a href='../Y/10.html' title='Multiple used in 2 places.'>_binary_initcode_size</a>[];
+<a id='L83' name='L83'></a>  83   
+<a id='L84' name='L84'></a>  84   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../S/56.html#L35' title='Defined at 35 in proc.c.'>allocproc</a>();
+<a id='L85' name='L85'></a>  85   <a href='../Y/165.html' title='Multiple used in 5 places.'>initproc</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L86' name='L86'></a>  86   <strong class='reserved'>if</strong>((<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a> = <a href='../S/95.html#L129' title='Defined at 129 in vm.c.'>setupkvm</a>()) == 0)
+<a id='L87' name='L87'></a>  87     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("userinit: out of memory?");
+<a id='L88' name='L88'></a>  88   <a href='../S/95.html#L182' title='Defined at 182 in vm.c.'>inituvm</a>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a>, <a href='../Y/11.html' title='Multiple used in 2 places.'>_binary_initcode_start</a>, (<strong class='reserved'>int</strong>)<a href='../Y/10.html' title='Multiple used in 2 places.'>_binary_initcode_size</a>);
+<a id='L89' name='L89'></a>  89   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> = <a href='../S/46.html#L123' title='Defined at 123 in mmu.h.'>PGSIZE</a>;
+<a id='L90' name='L90'></a>  90   <a href='../D/474.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>, 0, <strong class='reserved'>sizeof</strong>(*<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>));
+<a id='L91' name='L91'></a>  91   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/65.html' title='Multiple used in 9 places.'>cs</a> = (<a href='../S/46.html#L45' title='Defined at 45 in mmu.h.'>SEG_UCODE</a> &lt;&lt; 3) | <a href='../S/46.html#L79' title='Defined at 79 in mmu.h.'>DPL_USER</a>;
+<a id='L92' name='L92'></a>  92   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/82.html' title='Multiple used in 5 places.'>ds</a> = (<a href='../S/46.html#L46' title='Defined at 46 in mmu.h.'>SEG_UDATA</a> &lt;&lt; 3) | <a href='../S/46.html#L79' title='Defined at 79 in mmu.h.'>DPL_USER</a>;
+<a id='L93' name='L93'></a>  93   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/109.html' title='Multiple used in 44 places.'>es</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/82.html' title='Multiple used in 5 places.'>ds</a>;
+<a id='L94' name='L94'></a>  94   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/375.html' title='Multiple used in 3 places.'>ss</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/82.html' title='Multiple used in 5 places.'>ds</a>;
+<a id='L95' name='L95'></a>  95   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/96.html' title='Multiple used in 9 places.'>eflags</a> = <a href='../S/46.html#L11' title='Defined at 11 in mmu.h.'>FL_IF</a>;
+<a id='L96' name='L96'></a>  96   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/111.html' title='Multiple used in 5 places.'>esp</a> = <a href='../S/46.html#L123' title='Defined at 123 in mmu.h.'>PGSIZE</a>;
+<a id='L97' name='L97'></a>  97   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/98.html' title='Multiple used in 9 places.'>eip</a> = 0;  <em class='comment'>// beginning of initcode.S</em>
+<a id='L98' name='L98'></a>  98 
+<a id='L99' name='L99'></a>  99   <a href='../S/73.html#L83' title='Defined at 83 in string.c.'>safestrcpy</a>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/227.html' title='Multiple used in 104 places.'>name</a>, "initcode", <strong class='reserved'>sizeof</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/227.html' title='Multiple used in 104 places.'>name</a>));
+<a id='L100' name='L100'></a> 100   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/67.html' title='Multiple used in 8 places.'>cwd</a> = <a href='../S/22.html#L641' title='Defined at 641 in fs.c.'>namei</a>("/");
+<a id='L101' name='L101'></a> 101 
+<a id='L102' name='L102'></a> 102   <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNABLE</a>;
+<a id='L103' name='L103'></a> 103 <em class='brace'>}</em>
+<a id='L104' name='L104'></a> 104 
+<a id='L105' name='L105'></a> 105 <em class='comment'>// Grow current process's memory by n bytes.</em>
+<a id='L106' name='L106'></a> 106 <em class='comment'>// Return 0 on success, -1 on failure.</em>
+<a id='L107' name='L107'></a> 107 <strong class='reserved'>int</strong>
+<a id='L108' name='L108'></a> 108 <a href='../R/314.html' title='Multiple referred from 2 places.'>growproc</a>(<strong class='reserved'>int</strong> <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>)
+<a id='L109' name='L109'></a> 109 <em class='brace'>{</em>
+<a id='L110' name='L110'></a> 110   <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a>;
+<a id='L111' name='L111'></a> 111   
+<a id='L112' name='L112'></a> 112   <a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> = <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a>;
+<a id='L113' name='L113'></a> 113   <strong class='reserved'>if</strong>(<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> &gt; 0)<em class='brace'>{</em>
+<a id='L114' name='L114'></a> 114     <strong class='reserved'>if</strong>((<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> = <a href='../S/95.html#L221' title='Defined at 221 in vm.c.'>allocuvm</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a>, <a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a>, <a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> + <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>)) == 0)
+<a id='L115' name='L115'></a> 115       <strong class='reserved'>return</strong> -1;
+<a id='L116' name='L116'></a> 116   <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> &lt; 0)<em class='brace'>{</em>
+<a id='L117' name='L117'></a> 117     <strong class='reserved'>if</strong>((<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> = <a href='../S/95.html#L250' title='Defined at 250 in vm.c.'>deallocuvm</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a>, <a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a>, <a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> + <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>)) == 0)
+<a id='L118' name='L118'></a> 118       <strong class='reserved'>return</strong> -1;
+<a id='L119' name='L119'></a> 119   <em class='brace'>}</em>
+<a id='L120' name='L120'></a> 120   <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> = <a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a>;
+<a id='L121' name='L121'></a> 121   <a href='../S/95.html#L165' title='Defined at 165 in vm.c.'>switchuvm</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>);
+<a id='L122' name='L122'></a> 122   <strong class='reserved'>return</strong> 0;
+<a id='L123' name='L123'></a> 123 <em class='brace'>}</em>
+<a id='L124' name='L124'></a> 124 
+<a id='L125' name='L125'></a> 125 <em class='comment'>// Create a new process copying p as the parent.</em>
+<a id='L126' name='L126'></a> 126 <em class='comment'>// Sets up stack to return as if from system call.</em>
+<a id='L127' name='L127'></a> 127 <em class='comment'>// Caller must set state of returned proc to RUNNABLE.</em>
+<a id='L128' name='L128'></a> 128 <strong class='reserved'>int</strong>
+<a id='L129' name='L129'></a> 129 <a href='../R/299.html' title='Multiple referred from 28 places.'>fork</a>(<strong class='reserved'>void</strong>)
+<a id='L130' name='L130'></a> 130 <em class='brace'>{</em>
+<a id='L131' name='L131'></a> 131   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>, <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>;
+<a id='L132' name='L132'></a> 132   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>;
+<a id='L133' name='L133'></a> 133 
+<a id='L134' name='L134'></a> 134   <em class='comment'>// Allocate process.</em>
+<a id='L135' name='L135'></a> 135   <strong class='reserved'>if</strong>((<a href='../Y/250.html' title='Multiple used in 20 places.'>np</a> = <a href='../S/56.html#L35' title='Defined at 35 in proc.c.'>allocproc</a>()) == 0)
+<a id='L136' name='L136'></a> 136     <strong class='reserved'>return</strong> -1;
+<a id='L137' name='L137'></a> 137 
+<a id='L138' name='L138'></a> 138   <em class='comment'>// Copy process state from p.</em>
+<a id='L139' name='L139'></a> 139   <strong class='reserved'>if</strong>((<a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a> = <a href='../S/95.html#L310' title='Defined at 310 in vm.c.'>copyuvm</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a>, <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a>)) == 0)<em class='brace'>{</em>
+<a id='L140' name='L140'></a> 140     <a href='../S/30.html#L60' title='Defined at 60 in kalloc.c.'>kfree</a>(<a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/184.html' title='Multiple used in 8 places.'>kstack</a>);
+<a id='L141' name='L141'></a> 141     <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/184.html' title='Multiple used in 8 places.'>kstack</a> = 0;
+<a id='L142' name='L142'></a> 142     <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>UNUSED</a>;
+<a id='L143' name='L143'></a> 143     <strong class='reserved'>return</strong> -1;
+<a id='L144' name='L144'></a> 144   <em class='brace'>}</em>
+<a id='L145' name='L145'></a> 145   <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a> = <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/391.html' title='Multiple used in 37 places.'>sz</a>;
+<a id='L146' name='L146'></a> 146   <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/289.html' title='Multiple used in 7 places.'>parent</a> = <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>;
+<a id='L147' name='L147'></a> 147   *<a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a> = *<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>;
+<a id='L148' name='L148'></a> 148 
+<a id='L149' name='L149'></a> 149   <em class='comment'>// Clear %eax so that fork returns 0 in the child.</em>
+<a id='L150' name='L150'></a> 150   <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/398.html' title='Multiple used in 30 places.'>tf</a>-&gt;<a href='../Y/87.html' title='Multiple used in 6 places.'>eax</a> = 0;
+<a id='L151' name='L151'></a> 151 
+<a id='L152' name='L152'></a> 152   <strong class='reserved'>for</strong>(<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> &lt; <a href='../S/50.html#L4' title='Defined at 4 in param.h.'>NOFILE</a>; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++)
+<a id='L153' name='L153'></a> 153     <strong class='reserved'>if</strong>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/264.html' title='Multiple used in 11 places.'>ofile</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>])
+<a id='L154' name='L154'></a> 154       <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/264.html' title='Multiple used in 11 places.'>ofile</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>] = <a href='../S/19.html#L44' title='Defined at 44 in file.c.'>filedup</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/264.html' title='Multiple used in 11 places.'>ofile</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>]);
+<a id='L155' name='L155'></a> 155   <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/67.html' title='Multiple used in 8 places.'>cwd</a> = <a href='../S/22.html#L256' title='Defined at 256 in fs.c.'>idup</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/67.html' title='Multiple used in 8 places.'>cwd</a>);
+<a id='L156' name='L156'></a> 156 
+<a id='L157' name='L157'></a> 157   <a href='../S/73.html#L83' title='Defined at 83 in string.c.'>safestrcpy</a>(<a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/227.html' title='Multiple used in 104 places.'>name</a>, <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/227.html' title='Multiple used in 104 places.'>name</a>, <strong class='reserved'>sizeof</strong>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/227.html' title='Multiple used in 104 places.'>name</a>));
+<a id='L158' name='L158'></a> 158  
+<a id='L159' name='L159'></a> 159   <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a> = <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>;
+<a id='L160' name='L160'></a> 160 
+<a id='L161' name='L161'></a> 161   <em class='comment'>// lock to force the compiler to emit the np-&gt;state write last.</em>
+<a id='L162' name='L162'></a> 162   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L163' name='L163'></a> 163   <a href='../Y/250.html' title='Multiple used in 20 places.'>np</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNABLE</a>;
+<a id='L164' name='L164'></a> 164   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L165' name='L165'></a> 165   
+<a id='L166' name='L166'></a> 166   <strong class='reserved'>return</strong> <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>;
+<a id='L167' name='L167'></a> 167 <em class='brace'>}</em>
+<a id='L168' name='L168'></a> 168 
+<a id='L169' name='L169'></a> 169 <em class='comment'>// Exit the current process.  Does not return.</em>
+<a id='L170' name='L170'></a> 170 <em class='comment'>// An exited process remains in the zombie state</em>
+<a id='L171' name='L171'></a> 171 <em class='comment'>// until its parent calls wait() to find out it exited.</em>
+<a id='L172' name='L172'></a> 172 <strong class='reserved'>void</strong>
+<a id='L173' name='L173'></a> 173 <a href='../R/282.html' title='Multiple referred from 234 places.'>exit</a>(<strong class='reserved'>void</strong>)
+<a id='L174' name='L174'></a> 174 <em class='brace'>{</em>
+<a id='L175' name='L175'></a> 175   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L176' name='L176'></a> 176   <strong class='reserved'>int</strong> <a href='../Y/120.html' title='Multiple used in 244 places.'>fd</a>;
+<a id='L177' name='L177'></a> 177 
+<a id='L178' name='L178'></a> 178   <strong class='reserved'>if</strong>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> == <a href='../Y/165.html' title='Multiple used in 5 places.'>initproc</a>)
+<a id='L179' name='L179'></a> 179     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("init exiting");
+<a id='L180' name='L180'></a> 180 
+<a id='L181' name='L181'></a> 181   <em class='comment'>// Close all open files.</em>
+<a id='L182' name='L182'></a> 182   <strong class='reserved'>for</strong>(<a href='../Y/120.html' title='Multiple used in 244 places.'>fd</a> = 0; <a href='../Y/120.html' title='Multiple used in 244 places.'>fd</a> &lt; <a href='../S/50.html#L4' title='Defined at 4 in param.h.'>NOFILE</a>; <a href='../Y/120.html' title='Multiple used in 244 places.'>fd</a>++)<em class='brace'>{</em>
+<a id='L183' name='L183'></a> 183     <strong class='reserved'>if</strong>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/264.html' title='Multiple used in 11 places.'>ofile</a>[<a href='../Y/120.html' title='Multiple used in 244 places.'>fd</a>])<em class='brace'>{</em>
+<a id='L184' name='L184'></a> 184       <a href='../S/19.html#L56' title='Defined at 56 in file.c.'>fileclose</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/264.html' title='Multiple used in 11 places.'>ofile</a>[<a href='../Y/120.html' title='Multiple used in 244 places.'>fd</a>]);
+<a id='L185' name='L185'></a> 185       <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/264.html' title='Multiple used in 11 places.'>ofile</a>[<a href='../Y/120.html' title='Multiple used in 244 places.'>fd</a>] = 0;
+<a id='L186' name='L186'></a> 186     <em class='brace'>}</em>
+<a id='L187' name='L187'></a> 187   <em class='brace'>}</em>
+<a id='L188' name='L188'></a> 188 
+<a id='L189' name='L189'></a> 189   <a href='../S/38.html#L125' title='Defined at 125 in log.c.'>begin_op</a>();
+<a id='L190' name='L190'></a> 190   <a href='../S/22.html#L318' title='Defined at 318 in fs.c.'>iput</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/67.html' title='Multiple used in 8 places.'>cwd</a>);
+<a id='L191' name='L191'></a> 191   <a href='../S/38.html#L145' title='Defined at 145 in log.c.'>end_op</a>();
+<a id='L192' name='L192'></a> 192   <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/67.html' title='Multiple used in 8 places.'>cwd</a> = 0;
+<a id='L193' name='L193'></a> 193 
+<a id='L194' name='L194'></a> 194   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L195' name='L195'></a> 195 
+<a id='L196' name='L196'></a> 196   <em class='comment'>// Parent might be sleeping in wait().</em>
+<a id='L197' name='L197'></a> 197   <a href='../S/56.html#L390' title='Defined at 390 in proc.c.'>wakeup1</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/289.html' title='Multiple used in 7 places.'>parent</a>);
+<a id='L198' name='L198'></a> 198 
+<a id='L199' name='L199'></a> 199   <em class='comment'>// Pass abandoned children to init.</em>
+<a id='L200' name='L200'></a> 200   <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> &lt; &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>]; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)<em class='brace'>{</em>
+<a id='L201' name='L201'></a> 201     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/289.html' title='Multiple used in 7 places.'>parent</a> == <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>)<em class='brace'>{</em>
+<a id='L202' name='L202'></a> 202       <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/289.html' title='Multiple used in 7 places.'>parent</a> = <a href='../Y/165.html' title='Multiple used in 5 places.'>initproc</a>;
+<a id='L203' name='L203'></a> 203       <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>ZOMBIE</a>)
+<a id='L204' name='L204'></a> 204         <a href='../S/56.html#L390' title='Defined at 390 in proc.c.'>wakeup1</a>(<a href='../Y/165.html' title='Multiple used in 5 places.'>initproc</a>);
+<a id='L205' name='L205'></a> 205     <em class='brace'>}</em>
+<a id='L206' name='L206'></a> 206   <em class='brace'>}</em>
+<a id='L207' name='L207'></a> 207 
+<a id='L208' name='L208'></a> 208   <em class='comment'>// Jump into the scheduler, never to return.</em>
+<a id='L209' name='L209'></a> 209   <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>ZOMBIE</a>;
+<a id='L210' name='L210'></a> 210   <a href='../S/56.html#L301' title='Defined at 301 in proc.c.'>sched</a>();
+<a id='L211' name='L211'></a> 211   <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("zombie exit");
+<a id='L212' name='L212'></a> 212 <em class='brace'>}</em>
+<a id='L213' name='L213'></a> 213 
+<a id='L214' name='L214'></a> 214 <em class='comment'>// Wait for a child process to exit and return its pid.</em>
+<a id='L215' name='L215'></a> 215 <em class='comment'>// Return -1 if this process has no children.</em>
+<a id='L216' name='L216'></a> 216 <strong class='reserved'>int</strong>
+<a id='L217' name='L217'></a> 217 <a href='../R/524.html' title='Multiple referred from 32 places.'>wait</a>(<strong class='reserved'>void</strong>)
+<a id='L218' name='L218'></a> 218 <em class='brace'>{</em>
+<a id='L219' name='L219'></a> 219   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L220' name='L220'></a> 220   <strong class='reserved'>int</strong> <a href='../Y/149.html' title='Multiple used in 4 places.'>havekids</a>, <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>;
+<a id='L221' name='L221'></a> 221 
+<a id='L222' name='L222'></a> 222   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L223' name='L223'></a> 223   <strong class='reserved'>for</strong>(;;)<em class='brace'>{</em>
+<a id='L224' name='L224'></a> 224     <em class='comment'>// Scan through table looking for zombie children.</em>
+<a id='L225' name='L225'></a> 225     <a href='../Y/149.html' title='Multiple used in 4 places.'>havekids</a> = 0;
+<a id='L226' name='L226'></a> 226     <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> &lt; &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>]; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)<em class='brace'>{</em>
+<a id='L227' name='L227'></a> 227       <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/289.html' title='Multiple used in 7 places.'>parent</a> != <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>)
+<a id='L228' name='L228'></a> 228         <strong class='reserved'>continue</strong>;
+<a id='L229' name='L229'></a> 229       <a href='../Y/149.html' title='Multiple used in 4 places.'>havekids</a> = 1;
+<a id='L230' name='L230'></a> 230       <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>ZOMBIE</a>)<em class='brace'>{</em>
+<a id='L231' name='L231'></a> 231         <em class='comment'>// Found one.</em>
+<a id='L232' name='L232'></a> 232         <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>;
+<a id='L233' name='L233'></a> 233         <a href='../S/30.html#L60' title='Defined at 60 in kalloc.c.'>kfree</a>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/184.html' title='Multiple used in 8 places.'>kstack</a>);
+<a id='L234' name='L234'></a> 234         <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/184.html' title='Multiple used in 8 places.'>kstack</a> = 0;
+<a id='L235' name='L235'></a> 235         <a href='../S/95.html#L278' title='Defined at 278 in vm.c.'>freevm</a>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/302.html' title='Multiple used in 55 places.'>pgdir</a>);
+<a id='L236' name='L236'></a> 236         <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>UNUSED</a>;
+<a id='L237' name='L237'></a> 237         <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a> = 0;
+<a id='L238' name='L238'></a> 238         <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/289.html' title='Multiple used in 7 places.'>parent</a> = 0;
+<a id='L239' name='L239'></a> 239         <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/227.html' title='Multiple used in 104 places.'>name</a>[0] = 0;
+<a id='L240' name='L240'></a> 240         <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/181.html' title='Multiple used in 13 places.'>killed</a> = 0;
+<a id='L241' name='L241'></a> 241         <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L242' name='L242'></a> 242         <strong class='reserved'>return</strong> <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>;
+<a id='L243' name='L243'></a> 243       <em class='brace'>}</em>
+<a id='L244' name='L244'></a> 244     <em class='brace'>}</em>
+<a id='L245' name='L245'></a> 245 
+<a id='L246' name='L246'></a> 246     <em class='comment'>// No point waiting if we don't have any children.</em>
+<a id='L247' name='L247'></a> 247     <strong class='reserved'>if</strong>(!<a href='../Y/149.html' title='Multiple used in 4 places.'>havekids</a> || <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/181.html' title='Multiple used in 13 places.'>killed</a>)<em class='brace'>{</em>
+<a id='L248' name='L248'></a> 248       <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L249' name='L249'></a> 249       <strong class='reserved'>return</strong> -1;
+<a id='L250' name='L250'></a> 250     <em class='brace'>}</em>
+<a id='L251' name='L251'></a> 251 
+<a id='L252' name='L252'></a> 252     <em class='comment'>// Wait for children to exit.  (See wakeup1 call in proc_exit.)</em>
+<a id='L253' name='L253'></a> 253     <a href='../S/56.html#L352' title='Defined at 352 in proc.c.'>sleep</a>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>, &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);  <em class='comment'>//DOC: wait-sleep</em>
+<a id='L254' name='L254'></a> 254   <em class='brace'>}</em>
+<a id='L255' name='L255'></a> 255 <em class='brace'>}</em>
+<a id='L256' name='L256'></a> 256 
+<a id='L257' name='L257'></a> 257 <em class='comment'>//PAGEBREAK: 42</em>
+<a id='L258' name='L258'></a> 258 <em class='comment'>// Per-CPU process scheduler.</em>
+<a id='L259' name='L259'></a> 259 <em class='comment'>// Each CPU calls scheduler() after setting itself up.</em>
+<a id='L260' name='L260'></a> 260 <em class='comment'>// Scheduler never returns.  It loops, doing:</em>
+<a id='L261' name='L261'></a> 261 <em class='comment'>//  - choose a process to run</em>
+<a id='L262' name='L262'></a> 262 <em class='comment'>//  - swtch to start running that process</em>
+<a id='L263' name='L263'></a> 263 <em class='comment'>//  - eventually that process transfers control</em>
+<a id='L264' name='L264'></a> 264 <em class='comment'>//      via swtch back to the scheduler.</em>
+<a id='L265' name='L265'></a> 265 <strong class='reserved'>void</strong>
+<a id='L266' name='L266'></a> 266 <a href='../R/459.html' title='Multiple referred from 5 places.'>scheduler</a>(<strong class='reserved'>void</strong>)
+<a id='L267' name='L267'></a> 267 <em class='brace'>{</em>
+<a id='L268' name='L268'></a> 268   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L269' name='L269'></a> 269 
+<a id='L270' name='L270'></a> 270   <strong class='reserved'>for</strong>(;;)<em class='brace'>{</em>
+<a id='L271' name='L271'></a> 271     <em class='comment'>// Enable interrupts on this processor.</em>
+<a id='L272' name='L272'></a> 272     <a href='../S/97.html#L115' title='Defined at 115 in x86.h.'>sti</a>();
+<a id='L273' name='L273'></a> 273 
+<a id='L274' name='L274'></a> 274     <em class='comment'>// Loop over process table looking for process to run.</em>
+<a id='L275' name='L275'></a> 275     <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L276' name='L276'></a> 276     <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> &lt; &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>]; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)<em class='brace'>{</em>
+<a id='L277' name='L277'></a> 277       <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> != <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNABLE</a>)
+<a id='L278' name='L278'></a> 278         <strong class='reserved'>continue</strong>;
+<a id='L279' name='L279'></a> 279 
+<a id='L280' name='L280'></a> 280       <em class='comment'>// Switch to chosen process.  It is the process's job</em>
+<a id='L281' name='L281'></a> 281       <em class='comment'>// to release ptable.lock and then reacquire it</em>
+<a id='L282' name='L282'></a> 282       <em class='comment'>// before jumping back to us.</em>
+<a id='L283' name='L283'></a> 283       <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> = <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L284' name='L284'></a> 284       <a href='../S/95.html#L165' title='Defined at 165 in vm.c.'>switchuvm</a>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>);
+<a id='L285' name='L285'></a> 285       <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNING</a>;
+<a id='L286' name='L286'></a> 286       <a href='../Y/388.html' title='Multiple used in 3 places.'>swtch</a>(&amp;<a href='../S/57.html#L5' title='Defined at 5 in proc.h.'>cpu</a>-&gt;<a href='../S/56.html#L266' title='Defined at 266 in proc.c.'>scheduler</a>, <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>);
+<a id='L287' name='L287'></a> 287       <a href='../S/95.html#L158' title='Defined at 158 in vm.c.'>switchkvm</a>();
+<a id='L288' name='L288'></a> 288 
+<a id='L289' name='L289'></a> 289       <em class='comment'>// Process is done running for now.</em>
+<a id='L290' name='L290'></a> 290       <em class='comment'>// It should have changed its p-&gt;state before coming back.</em>
+<a id='L291' name='L291'></a> 291       <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> = 0;
+<a id='L292' name='L292'></a> 292     <em class='brace'>}</em>
+<a id='L293' name='L293'></a> 293     <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L294' name='L294'></a> 294 
+<a id='L295' name='L295'></a> 295   <em class='brace'>}</em>
+<a id='L296' name='L296'></a> 296 <em class='brace'>}</em>
+<a id='L297' name='L297'></a> 297 
+<a id='L298' name='L298'></a> 298 <em class='comment'>// Enter scheduler.  Must hold only ptable.lock</em>
+<a id='L299' name='L299'></a> 299 <em class='comment'>// and have changed proc-&gt;state.</em>
+<a id='L300' name='L300'></a> 300 <strong class='reserved'>void</strong>
+<a id='L301' name='L301'></a> 301 <a href='../R/458.html' title='Multiple referred from 4 places.'>sched</a>(<strong class='reserved'>void</strong>)
+<a id='L302' name='L302'></a> 302 <em class='brace'>{</em>
+<a id='L303' name='L303'></a> 303   <strong class='reserved'>int</strong> <a href='../Y/169.html' title='Multiple used in 6 places.'>intena</a>;
+<a id='L304' name='L304'></a> 304 
+<a id='L305' name='L305'></a> 305   <strong class='reserved'>if</strong>(!<a href='../S/68.html#L86' title='Defined at 86 in spinlock.c.'>holding</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>))
+<a id='L306' name='L306'></a> 306     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("sched ptable.lock");
+<a id='L307' name='L307'></a> 307   <strong class='reserved'>if</strong>(<a href='../S/57.html#L5' title='Defined at 5 in proc.h.'>cpu</a>-&gt;<a href='../Y/234.html' title='Multiple used in 5 places.'>ncli</a> != 1)
+<a id='L308' name='L308'></a> 308     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("sched locks");
+<a id='L309' name='L309'></a> 309   <strong class='reserved'>if</strong>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNING</a>)
+<a id='L310' name='L310'></a> 310     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("sched running");
+<a id='L311' name='L311'></a> 311   <strong class='reserved'>if</strong>(<a href='../S/97.html#L95' title='Defined at 95 in x86.h.'>readeflags</a>()&amp;<a href='../S/46.html#L11' title='Defined at 11 in mmu.h.'>FL_IF</a>)
+<a id='L312' name='L312'></a> 312     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("sched interruptible");
+<a id='L313' name='L313'></a> 313   <a href='../Y/169.html' title='Multiple used in 6 places.'>intena</a> = <a href='../S/57.html#L5' title='Defined at 5 in proc.h.'>cpu</a>-&gt;<a href='../Y/169.html' title='Multiple used in 6 places.'>intena</a>;
+<a id='L314' name='L314'></a> 314   <a href='../Y/388.html' title='Multiple used in 3 places.'>swtch</a>(&amp;<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>, <a href='../S/57.html#L5' title='Defined at 5 in proc.h.'>cpu</a>-&gt;<a href='../S/56.html#L266' title='Defined at 266 in proc.c.'>scheduler</a>);
+<a id='L315' name='L315'></a> 315   <a href='../S/57.html#L5' title='Defined at 5 in proc.h.'>cpu</a>-&gt;<a href='../Y/169.html' title='Multiple used in 6 places.'>intena</a> = <a href='../Y/169.html' title='Multiple used in 6 places.'>intena</a>;
+<a id='L316' name='L316'></a> 316 <em class='brace'>}</em>
+<a id='L317' name='L317'></a> 317 
+<a id='L318' name='L318'></a> 318 <em class='comment'>// Give up the CPU for one scheduling round.</em>
+<a id='L319' name='L319'></a> 319 <strong class='reserved'>void</strong>
+<a id='L320' name='L320'></a> 320 <a href='../R/540.html' title='Multiple referred from 2 places.'>yield</a>(<strong class='reserved'>void</strong>)
+<a id='L321' name='L321'></a> 321 <em class='brace'>{</em>
+<a id='L322' name='L322'></a> 322   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);  <em class='comment'>//DOC: yieldlock</em>
+<a id='L323' name='L323'></a> 323   <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNABLE</a>;
+<a id='L324' name='L324'></a> 324   <a href='../S/56.html#L301' title='Defined at 301 in proc.c.'>sched</a>();
+<a id='L325' name='L325'></a> 325   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L326' name='L326'></a> 326 <em class='brace'>}</em>
+<a id='L327' name='L327'></a> 327 
+<a id='L328' name='L328'></a> 328 <em class='comment'>// A fork child's very first scheduling by scheduler()</em>
+<a id='L329' name='L329'></a> 329 <em class='comment'>// will swtch here.  "Return" to user space.</em>
+<a id='L330' name='L330'></a> 330 <strong class='reserved'>void</strong>
+<a id='L331' name='L331'></a> 331 <a href='../R/301.html' title='Multiple referred from 2 places.'>forkret</a>(<strong class='reserved'>void</strong>)
+<a id='L332' name='L332'></a> 332 <em class='brace'>{</em>
+<a id='L333' name='L333'></a> 333   <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../Y/127.html' title='Multiple used in 3 places.'>first</a> = 1;
+<a id='L334' name='L334'></a> 334   <em class='comment'>// Still holding ptable.lock from scheduler.</em>
+<a id='L335' name='L335'></a> 335   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L336' name='L336'></a> 336 
+<a id='L337' name='L337'></a> 337   <strong class='reserved'>if</strong> (<a href='../Y/127.html' title='Multiple used in 3 places.'>first</a>) <em class='brace'>{</em>
+<a id='L338' name='L338'></a> 338     <em class='comment'>// Some initialization functions must be run in the context</em>
+<a id='L339' name='L339'></a> 339     <em class='comment'>// of a regular process (e.g., they call sleep), and thus cannot </em>
+<a id='L340' name='L340'></a> 340     <em class='comment'>// be run from main().</em>
+<a id='L341' name='L341'></a> 341     <a href='../Y/127.html' title='Multiple used in 3 places.'>first</a> = 0;
+<a id='L342' name='L342'></a> 342     <a href='../S/22.html#L163' title='Defined at 163 in fs.c.'>iinit</a>(<a href='../S/50.html#L8' title='Defined at 8 in param.h.'>ROOTDEV</a>);
+<a id='L343' name='L343'></a> 343     <a href='../S/38.html#L53' title='Defined at 53 in log.c.'>initlog</a>(<a href='../S/50.html#L8' title='Defined at 8 in param.h.'>ROOTDEV</a>);
+<a id='L344' name='L344'></a> 344   <em class='brace'>}</em>
+<a id='L345' name='L345'></a> 345   
+<a id='L346' name='L346'></a> 346   <em class='comment'>// Return to "caller", actually trapret (see allocproc).</em>
+<a id='L347' name='L347'></a> 347 <em class='brace'>}</em>
+<a id='L348' name='L348'></a> 348 
+<a id='L349' name='L349'></a> 349 <em class='comment'>// Atomically release lock and sleep on chan.</em>
+<a id='L350' name='L350'></a> 350 <em class='comment'>// Reacquires lock when awakened.</em>
+<a id='L351' name='L351'></a> 351 <strong class='reserved'>void</strong>
+<a id='L352' name='L352'></a> 352 <a href='../R/465.html' title='Multiple referred from 17 places.'>sleep</a>(<strong class='reserved'>void</strong> *<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a>, <strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a> *<a href='../Y/201.html' title='Multiple used in 20 places.'>lk</a>)
+<a id='L353' name='L353'></a> 353 <em class='brace'>{</em>
+<a id='L354' name='L354'></a> 354   <strong class='reserved'>if</strong>(<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> == 0)
+<a id='L355' name='L355'></a> 355     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("sleep");
+<a id='L356' name='L356'></a> 356 
+<a id='L357' name='L357'></a> 357   <strong class='reserved'>if</strong>(<a href='../Y/201.html' title='Multiple used in 20 places.'>lk</a> == 0)
+<a id='L358' name='L358'></a> 358     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("sleep without lk");
+<a id='L359' name='L359'></a> 359 
+<a id='L360' name='L360'></a> 360   <em class='comment'>// Must acquire ptable.lock in order to</em>
+<a id='L361' name='L361'></a> 361   <em class='comment'>// change p-&gt;state and then call sched.</em>
+<a id='L362' name='L362'></a> 362   <em class='comment'>// Once we hold ptable.lock, we can be</em>
+<a id='L363' name='L363'></a> 363   <em class='comment'>// guaranteed that we won't miss any wakeup</em>
+<a id='L364' name='L364'></a> 364   <em class='comment'>// (wakeup runs with ptable.lock locked),</em>
+<a id='L365' name='L365'></a> 365   <em class='comment'>// so it's okay to release lk.</em>
+<a id='L366' name='L366'></a> 366   <strong class='reserved'>if</strong>(<a href='../Y/201.html' title='Multiple used in 20 places.'>lk</a> != &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>)<em class='brace'>{</em>  <em class='comment'>//DOC: sleeplock0</em>
+<a id='L367' name='L367'></a> 367     <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);  <em class='comment'>//DOC: sleeplock1</em>
+<a id='L368' name='L368'></a> 368     <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(<a href='../Y/201.html' title='Multiple used in 20 places.'>lk</a>);
+<a id='L369' name='L369'></a> 369   <em class='brace'>}</em>
+<a id='L370' name='L370'></a> 370 
+<a id='L371' name='L371'></a> 371   <em class='comment'>// Go to sleep.</em>
+<a id='L372' name='L372'></a> 372   <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a> = <a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a>;
+<a id='L373' name='L373'></a> 373   <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>SLEEPING</a>;
+<a id='L374' name='L374'></a> 374   <a href='../S/56.html#L301' title='Defined at 301 in proc.c.'>sched</a>();
+<a id='L375' name='L375'></a> 375 
+<a id='L376' name='L376'></a> 376   <em class='comment'>// Tidy up.</em>
+<a id='L377' name='L377'></a> 377   <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>-&gt;<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a> = 0;
+<a id='L378' name='L378'></a> 378 
+<a id='L379' name='L379'></a> 379   <em class='comment'>// Reacquire original lock.</em>
+<a id='L380' name='L380'></a> 380   <strong class='reserved'>if</strong>(<a href='../Y/201.html' title='Multiple used in 20 places.'>lk</a> != &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>)<em class='brace'>{</em>  <em class='comment'>//DOC: sleeplock2</em>
+<a id='L381' name='L381'></a> 381     <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L382' name='L382'></a> 382     <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(<a href='../Y/201.html' title='Multiple used in 20 places.'>lk</a>);
+<a id='L383' name='L383'></a> 383   <em class='brace'>}</em>
+<a id='L384' name='L384'></a> 384 <em class='brace'>}</em>
+<a id='L385' name='L385'></a> 385 
+<a id='L386' name='L386'></a> 386 <em class='comment'>//PAGEBREAK!</em>
+<a id='L387' name='L387'></a> 387 <em class='comment'>// Wake up all processes sleeping on chan.</em>
+<a id='L388' name='L388'></a> 388 <em class='comment'>// The ptable lock must be held.</em>
+<a id='L389' name='L389'></a> 389 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L390' name='L390'></a> 390 <a href='../R/527.html' title='Multiple referred from 4 places.'>wakeup1</a>(<strong class='reserved'>void</strong> *<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a>)
+<a id='L391' name='L391'></a> 391 <em class='brace'>{</em>
+<a id='L392' name='L392'></a> 392   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L393' name='L393'></a> 393 
+<a id='L394' name='L394'></a> 394   <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> &lt; &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>]; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)
+<a id='L395' name='L395'></a> 395     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>SLEEPING</a> &amp;&amp; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a> == <a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a>)
+<a id='L396' name='L396'></a> 396       <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNABLE</a>;
+<a id='L397' name='L397'></a> 397 <em class='brace'>}</em>
+<a id='L398' name='L398'></a> 398 
+<a id='L399' name='L399'></a> 399 <em class='comment'>// Wake up all processes sleeping on chan.</em>
+<a id='L400' name='L400'></a> 400 <strong class='reserved'>void</strong>
+<a id='L401' name='L401'></a> 401 <a href='../R/526.html' title='Multiple referred from 14 places.'>wakeup</a>(<strong class='reserved'>void</strong> *<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a>)
+<a id='L402' name='L402'></a> 402 <em class='brace'>{</em>
+<a id='L403' name='L403'></a> 403   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L404' name='L404'></a> 404   <a href='../S/56.html#L390' title='Defined at 390 in proc.c.'>wakeup1</a>(<a href='../Y/49.html' title='Multiple used in 9 places.'>chan</a>);
+<a id='L405' name='L405'></a> 405   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L406' name='L406'></a> 406 <em class='brace'>}</em>
+<a id='L407' name='L407'></a> 407 
+<a id='L408' name='L408'></a> 408 <em class='comment'>// Kill the process with the given pid.</em>
+<a id='L409' name='L409'></a> 409 <em class='comment'>// Process won't exit until it returns</em>
+<a id='L410' name='L410'></a> 410 <em class='comment'>// to user space (see trap in trap.c).</em>
+<a id='L411' name='L411'></a> 411 <strong class='reserved'>int</strong>
+<a id='L412' name='L412'></a> 412 <a href='../R/353.html' title='Multiple referred from 11 places.'>kill</a>(<strong class='reserved'>int</strong> <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>)
+<a id='L413' name='L413'></a> 413 <em class='brace'>{</em>
+<a id='L414' name='L414'></a> 414   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L415' name='L415'></a> 415 
+<a id='L416' name='L416'></a> 416   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L417' name='L417'></a> 417   <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> &lt; &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>]; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)<em class='brace'>{</em>
+<a id='L418' name='L418'></a> 418     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a> == <a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>)<em class='brace'>{</em>
+<a id='L419' name='L419'></a> 419       <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/181.html' title='Multiple used in 13 places.'>killed</a> = 1;
+<a id='L420' name='L420'></a> 420       <em class='comment'>// Wake process from sleep if necessary.</em>
+<a id='L421' name='L421'></a> 421       <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>SLEEPING</a>)
+<a id='L422' name='L422'></a> 422         <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNABLE</a>;
+<a id='L423' name='L423'></a> 423       <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L424' name='L424'></a> 424       <strong class='reserved'>return</strong> 0;
+<a id='L425' name='L425'></a> 425     <em class='brace'>}</em>
+<a id='L426' name='L426'></a> 426   <em class='brace'>}</em>
+<a id='L427' name='L427'></a> 427   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
+<a id='L428' name='L428'></a> 428   <strong class='reserved'>return</strong> -1;
+<a id='L429' name='L429'></a> 429 <em class='brace'>}</em>
+<a id='L430' name='L430'></a> 430 
+<a id='L431' name='L431'></a> 431 <em class='comment'>//PAGEBREAK: 36</em>
+<a id='L432' name='L432'></a> 432 <em class='comment'>// Print a process listing to console.  For debugging.</em>
+<a id='L433' name='L433'></a> 433 <em class='comment'>// Runs when user types ^P on console.</em>
+<a id='L434' name='L434'></a> 434 <em class='comment'>// No lock to avoid wedging a stuck machine further.</em>
+<a id='L435' name='L435'></a> 435 <strong class='reserved'>void</strong>
+<a id='L436' name='L436'></a> 436 <a href='../R/434.html' title='Multiple referred from 2 places.'>procdump</a>(<strong class='reserved'>void</strong>)
+<a id='L437' name='L437'></a> 437 <em class='brace'>{</em>
+<a id='L438' name='L438'></a> 438   <strong class='reserved'>static</strong> <strong class='reserved'>char</strong> *<a href='../Y/384.html' title='Multiple used in 3 places.'>states</a>[] = <em class='brace'>{</em>
+<a id='L439' name='L439'></a> 439   [<a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>UNUSED</a>]    "unused",
+<a id='L440' name='L440'></a> 440   [<a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>EMBRYO</a>]    "embryo",
+<a id='L441' name='L441'></a> 441   [<a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>SLEEPING</a>]  "sleep ",
+<a id='L442' name='L442'></a> 442   [<a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNABLE</a>]  "runble",
+<a id='L443' name='L443'></a> 443   [<a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>RUNNING</a>]   "run   ",
+<a id='L444' name='L444'></a> 444   [<a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>ZOMBIE</a>]    "zombie"
+<a id='L445' name='L445'></a> 445   <em class='brace'>}</em>;
+<a id='L446' name='L446'></a> 446   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
+<a id='L447' name='L447'></a> 447   <strong class='reserved'>struct</strong> <a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
+<a id='L448' name='L448'></a> 448   <strong class='reserved'>char</strong> *<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a>;
+<a id='L449' name='L449'></a> 449   <a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/292.html' title='Multiple used in 4 places.'>pc</a>[10];
+<a id='L450' name='L450'></a> 450   
+<a id='L451' name='L451'></a> 451   <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> = <a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a> &lt; &amp;<a href='../Y/327.html' title='Multiple used in 34 places.'>ptable</a>.<a href='../S/57.html#L55' title='Defined at 55 in proc.h.'>proc</a>[<a href='../S/50.html#L1' title='Defined at 1 in param.h.'>NPROC</a>]; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)<em class='brace'>{</em>
+<a id='L452' name='L452'></a> 452     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>UNUSED</a>)
+<a id='L453' name='L453'></a> 453       <strong class='reserved'>continue</strong>;
+<a id='L454' name='L454'></a> 454     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> &gt;= 0 &amp;&amp; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> &lt; <a href='../S/11.html#L183' title='Defined at 183 in defs.h.'>NELEM</a>(<a href='../Y/384.html' title='Multiple used in 3 places.'>states</a>) &amp;&amp; <a href='../Y/384.html' title='Multiple used in 3 places.'>states</a>[<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a>])
+<a id='L455' name='L455'></a> 455       <a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = <a href='../Y/384.html' title='Multiple used in 3 places.'>states</a>[<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a>];
+<a id='L456' name='L456'></a> 456     <strong class='reserved'>else</strong>
+<a id='L457' name='L457'></a> 457       <a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> = "???";
+<a id='L458' name='L458'></a> 458     <a href='../S/8.html#L54' title='Defined at 54 in console.c.'>cprintf</a>("%d %s %s", <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/312.html' title='Multiple used in 95 places.'>pid</a>, <a href='../Y/383.html' title='Multiple used in 34 places.'>state</a>, <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/227.html' title='Multiple used in 104 places.'>name</a>);
+<a id='L459' name='L459'></a> 459     <strong class='reserved'>if</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../Y/383.html' title='Multiple used in 34 places.'>state</a> == <a href='../S/57.html#L52' title='Defined at 52 in proc.h.'>SLEEPING</a>)<em class='brace'>{</em>
+<a id='L460' name='L460'></a> 460       <a href='../S/68.html#L68' title='Defined at 68 in spinlock.c.'>getcallerpcs</a>((<a href='../S/87.html#L1' title='Defined at 1 in types.h.'>uint</a>*)<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>-&gt;<a href='../S/57.html#L44' title='Defined at 44 in proc.h.'>context</a>-&gt;<a href='../Y/88.html' title='Multiple used in 9 places.'>ebp</a>+2, <a href='../Y/292.html' title='Multiple used in 4 places.'>pc</a>);
+<a id='L461' name='L461'></a> 461       <strong class='reserved'>for</strong>(<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>=0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>&lt;10 &amp;&amp; <a href='../Y/292.html' title='Multiple used in 4 places.'>pc</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>] != 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++)
+<a id='L462' name='L462'></a> 462         <a href='../S/8.html#L54' title='Defined at 54 in console.c.'>cprintf</a>(" %p", <a href='../Y/292.html' title='Multiple used in 4 places.'>pc</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>]);
+<a id='L463' name='L463'></a> 463     <em class='brace'>}</em>
+<a id='L464' name='L464'></a> 464     <a href='../S/8.html#L54' title='Defined at 54 in console.c.'>cprintf</a>("\n");
+<a id='L465' name='L465'></a> 465   <em class='brace'>}</em>
+<a id='L466' name='L466'></a> 466 <em class='brace'>}</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L24'>[^]</a><a href='#L436'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

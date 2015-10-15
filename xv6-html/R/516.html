@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>uint</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.1' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/2.html#L63'>uint</a>               63 bio.c          bget(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/2.html#L100'>uint</a>              100 bio.c          bread(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/4.html#L15'>uint</a>               15 bootmain.c     void readseg(uchar*, uint, uint);</span>
+<span class='curline'><a href='../S/4.html#L60'>uint</a>               60 bootmain.c     readsect(void *dst, uint offset)</span>
+<span class='curline'><a href='../S/4.html#L79'>uint</a>               79 bootmain.c     readseg(uchar* pa, uint count, uint offset)</span>
+<span class='curline'><a href='../S/5.html#L3'>uint</a>                3 buf.h            uint dev;</span>
+<span class='curline'><a href='../S/5.html#L4'>uint</a>                4 buf.h            uint blockno;</span>
+<span class='curline'><a href='../S/8.html#L32'>uint</a>               32 console.c        uint x;</span>
+<span class='curline'><a href='../S/8.html#L57'>uint</a>               57 console.c        uint *argp;</span>
+<span class='curline'><a href='../S/8.html#L67'>uint</a>               67 console.c        argp = (uint*)(void*)(&amp;fmt + 1);</span>
+<span class='curline'><a href='../S/8.html#L109'>uint</a>              109 console.c        uint pcs[10];</span>
+<span class='curline'><a href='../S/8.html#L180'>uint</a>              180 console.c        uint r;  // Read index</span>
+<span class='curline'><a href='../S/8.html#L181'>uint</a>              181 console.c        uint w;  // Write index</span>
+<span class='curline'><a href='../S/8.html#L182'>uint</a>              182 console.c        uint e;  // Edit index</span>
+<span class='curline'><a href='../S/8.html#L230'>uint</a>              230 console.c        uint target;</span>
+<span class='curline'><a href='../S/10.html#L2'>uint</a>                2 date.h           uint second;</span>
+<span class='curline'><a href='../S/10.html#L3'>uint</a>                3 date.h           uint minute;</span>
+<span class='curline'><a href='../S/10.html#L4'>uint</a>                4 date.h           uint hour;</span>
+<span class='curline'><a href='../S/10.html#L5'>uint</a>                5 date.h           uint day;</span>
+<span class='curline'><a href='../S/10.html#L6'>uint</a>                6 date.h           uint month;</span>
+<span class='curline'><a href='../S/10.html#L7'>uint</a>                7 date.h           uint year;</span>
+<span class='curline'><a href='../S/11.html#L14'>uint</a>               14 defs.h         struct buf*     bread(uint, uint);</span>
+<span class='curline'><a href='../S/11.html#L38'>uint</a>               38 defs.h         int             dirlink(struct inode*, char*, uint);</span>
+<span class='curline'><a href='../S/11.html#L39'>uint</a>               39 defs.h         struct inode*   dirlookup(struct inode*, char*, uint*);</span>
+<span class='curline'><a href='../S/11.html#L40'>uint</a>               40 defs.h         struct inode*   ialloc(uint, short);</span>
+<span class='curline'><a href='../S/11.html#L51'>uint</a>               51 defs.h         int             readi(struct inode*, char*, uint, uint);</span>
+<span class='curline'><a href='../S/11.html#L53'>uint</a>               53 defs.h         int             writei(struct inode*, char*, uint, uint);</span>
+<span class='curline'><a href='../S/11.html#L77'>uint</a>               77 defs.h         extern volatile uint*    lapic;</span>
+<span class='curline'><a href='../S/11.html#L80'>uint</a>               80 defs.h         void            lapicstartap(uchar, uint);</span>
+<span class='curline'><a href='../S/11.html#L127'>uint</a>              127 defs.h         void            getcallerpcs(void*, uint*);</span>
+<span class='curline'><a href='../S/11.html#L135'>uint</a>              135 defs.h         int             memcmp(const void*, const void*, uint);</span>
+<span class='curline'><a href='../S/11.html#L136'>uint</a>              136 defs.h         void*           memmove(void*, const void*, uint);</span>
+<span class='curline'><a href='../S/11.html#L137'>uint</a>              137 defs.h         void*           memset(void*, int, uint);</span>
+<span class='curline'><a href='../S/11.html#L140'>uint</a>              140 defs.h         int             strncmp(const char*, const char*, uint);</span>
+<span class='curline'><a href='../S/11.html#L147'>uint</a>              147 defs.h         int             fetchint(uint, int*);</span>
+<span class='curline'><a href='../S/11.html#L148'>uint</a>              148 defs.h         int             fetchstr(uint, char**);</span>
+<span class='curline'><a href='../S/11.html#L156'>uint</a>              156 defs.h         extern uint     ticks;</span>
+<span class='curline'><a href='../S/11.html#L171'>uint</a>              171 defs.h         int             allocuvm(pde_t*, uint, uint);</span>
+<span class='curline'><a href='../S/11.html#L172'>uint</a>              172 defs.h         int             deallocuvm(pde_t*, uint, uint);</span>
+<span class='curline'><a href='../S/11.html#L174'>uint</a>              174 defs.h         void            inituvm(pde_t*, char*, uint);</span>
+<span class='curline'><a href='../S/11.html#L175'>uint</a>              175 defs.h         int             loaduvm(pde_t*, char*, struct inode*, uint, uint);</span>
+<span class='curline'><a href='../S/11.html#L176'>uint</a>              176 defs.h         pde_t*          copyuvm(pde_t*, uint);</span>
+<span class='curline'><a href='../S/11.html#L179'>uint</a>              179 defs.h         int             copyout(pde_t*, uint, void*, uint);</span>
+<span class='curline'><a href='../S/14.html#L7'>uint</a>                7 elf.h            uint magic;  // must equal ELF_MAGIC</span>
+<span class='curline'><a href='../S/14.html#L11'>uint</a>               11 elf.h            uint version;</span>
+<span class='curline'><a href='../S/14.html#L12'>uint</a>               12 elf.h            uint entry;</span>
+<span class='curline'><a href='../S/14.html#L13'>uint</a>               13 elf.h            uint phoff;</span>
+<span class='curline'><a href='../S/14.html#L14'>uint</a>               14 elf.h            uint shoff;</span>
+<span class='curline'><a href='../S/14.html#L15'>uint</a>               15 elf.h            uint flags;</span>
+<span class='curline'><a href='../S/14.html#L26'>uint</a>               26 elf.h            uint type;</span>
+<span class='curline'><a href='../S/14.html#L27'>uint</a>               27 elf.h            uint off;</span>
+<span class='curline'><a href='../S/14.html#L28'>uint</a>               28 elf.h            uint vaddr;</span>
+<span class='curline'><a href='../S/14.html#L29'>uint</a>               29 elf.h            uint paddr;</span>
+<span class='curline'><a href='../S/14.html#L30'>uint</a>               30 elf.h            uint filesz;</span>
+<span class='curline'><a href='../S/14.html#L31'>uint</a>               31 elf.h            uint memsz;</span>
+<span class='curline'><a href='../S/14.html#L32'>uint</a>               32 elf.h            uint flags;</span>
+<span class='curline'><a href='../S/14.html#L33'>uint</a>               33 elf.h            uint align;</span>
+<span class='curline'><a href='../S/17.html#L15'>uint</a>               15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
+<span class='curline'><a href='../S/20.html#L8'>uint</a>                8 file.h           uint off;</span>
+<span class='curline'><a href='../S/20.html#L14'>uint</a>               14 file.h           uint dev;           // Device number</span>
+<span class='curline'><a href='../S/20.html#L15'>uint</a>               15 file.h           uint inum;          // Inode number</span>
+<span class='curline'><a href='../S/20.html#L23'>uint</a>               23 file.h           uint size;</span>
+<span class='curline'><a href='../S/20.html#L24'>uint</a>               24 file.h           uint addrs[NDIRECT+1];</span>
+<span class='curline'><a href='../S/22.html#L53'>uint</a>               53 fs.c           static uint</span>
+<span class='curline'><a href='../S/22.html#L54'>uint</a>               54 fs.c           balloc(uint dev)</span>
+<span class='curline'><a href='../S/22.html#L79'>uint</a>               79 fs.c           bfree(int dev, uint b)</span>
+<span class='curline'><a href='../S/22.html#L171'>uint</a>              171 fs.c           static struct inode* iget(uint dev, uint inum);</span>
+<span class='curline'><a href='../S/22.html#L177'>uint</a>              177 fs.c           ialloc(uint dev, short type)</span>
+<span class='curline'><a href='../S/22.html#L221'>uint</a>              221 fs.c           iget(uint dev, uint inum)</span>
+<span class='curline'><a href='../S/22.html#L356'>uint</a>              356 fs.c           static uint</span>
+<span class='curline'><a href='../S/22.html#L357'>uint</a>              357 fs.c           bmap(struct inode *ip, uint bn)</span>
+<span class='curline'><a href='../S/22.html#L359'>uint</a>              359 fs.c             uint addr, *a;</span>
+<span class='curline'><a href='../S/22.html#L374'>uint</a>              374 fs.c               a = (uint*)bp-&gt;data;</span>
+<span class='curline'><a href='../S/22.html#L396'>uint</a>              396 fs.c             uint *a;</span>
+<span class='curline'><a href='../S/22.html#L407'>uint</a>              407 fs.c               a = (uint*)bp-&gt;data;</span>
+<span class='curline'><a href='../S/22.html#L435'>uint</a>              435 fs.c           readi(struct inode *ip, char *dst, uint off, uint n)</span>
+<span class='curline'><a href='../S/22.html#L437'>uint</a>              437 fs.c             uint tot, m;</span>
+<span class='curline'><a href='../S/22.html#L463'>uint</a>              463 fs.c           writei(struct inode *ip, char *src, uint off, uint n)</span>
+<span class='curline'><a href='../S/22.html#L465'>uint</a>              465 fs.c             uint tot, m;</span>
+<span class='curline'><a href='../S/22.html#L506'>uint</a>              506 fs.c           dirlookup(struct inode *dp, char *name, uint *poff)</span>
+<span class='curline'><a href='../S/22.html#L508'>uint</a>              508 fs.c             uint off, inum;</span>
+<span class='curline'><a href='../S/22.html#L533'>uint</a>              533 fs.c           dirlink(struct inode *dp, char *name, uint inum)</span>
+<span class='curline'><a href='../S/23.html#L14'>uint</a>               14 fs.h             uint size;         // Size of file system image (blocks)</span>
+<span class='curline'><a href='../S/23.html#L15'>uint</a>               15 fs.h             uint nblocks;      // Number of data blocks</span>
+<span class='curline'><a href='../S/23.html#L16'>uint</a>               16 fs.h             uint ninodes;      // Number of inodes.</span>
+<span class='curline'><a href='../S/23.html#L17'>uint</a>               17 fs.h             uint nlog;         // Number of log blocks</span>
+<span class='curline'><a href='../S/23.html#L18'>uint</a>               18 fs.h             uint logstart;     // Block number of first log block</span>
+<span class='curline'><a href='../S/23.html#L19'>uint</a>               19 fs.h             uint inodestart;   // Block number of first inode block</span>
+<span class='curline'><a href='../S/23.html#L20'>uint</a>               20 fs.h             uint bmapstart;    // Block number of first free map block</span>
+<span class='curline'><a href='../S/23.html#L24'>uint</a>               24 fs.h           #define NINDIRECT (BSIZE / sizeof(uint))</span>
+<span class='curline'><a href='../S/23.html#L33'>uint</a>               33 fs.h             uint size;            // Size of file (bytes)</span>
+<span class='curline'><a href='../S/23.html#L34'>uint</a>               34 fs.h             uint addrs[NDIRECT+1];   // Data block addresses</span>
+<span class='curline'><a href='../S/29.html#L29'>uint</a>               29 ioapic.c         uint reg;</span>
+<span class='curline'><a href='../S/29.html#L30'>uint</a>               30 ioapic.c         uint pad[3];</span>
+<span class='curline'><a href='../S/29.html#L31'>uint</a>               31 ioapic.c         uint data;</span>
+<span class='curline'><a href='../S/29.html#L34'>uint</a>               34 ioapic.c       static uint</span>
+<span class='curline'><a href='../S/29.html#L42'>uint</a>               42 ioapic.c       ioapicwrite(int reg, uint data)</span>
+<span class='curline'><a href='../S/30.html#L49'>uint</a>               49 kalloc.c         p = (char*)PGROUNDUP((uint)vstart);</span>
+<span class='curline'><a href='../S/30.html#L64'>uint</a>               64 kalloc.c         if((uint)v % PGSIZE || v &lt; end || v2p(v) &gt;= PHYSTOP)</span>
+<span class='curline'><a href='../S/31.html#L9'>uint</a>                9 kbd.c            static uint shift;</span>
+<span class='curline'><a href='../S/31.html#L13'>uint</a>               13 kbd.c            uint st, data, c;</span>
+<span class='curline'><a href='../S/35.html#L43'>uint</a>               43 lapic.c        volatile uint *lapic;  // Initialized in mp.c</span>
+<span class='curline'><a href='../S/35.html#L140'>uint</a>              140 lapic.c        lapicstartap(uchar apicid, uint addr)</span>
+<span class='curline'><a href='../S/35.html#L185'>uint</a>              185 lapic.c        static uint cmos_read(uint reg)</span>
+<span class='curline'><a href='../S/40.html#L79'>uint</a>               79 main.c           memmove(code, _binary_entryother_start, (uint)_binary_entryother_size);</span>
+<span class='curline'><a href='../S/42.html#L24'>uint</a>               24 memide.c         disksize = (uint)_binary_fs_img_size/BSIZE;</span>
+<span class='curline'><a href='../S/43.html#L13'>uint</a>               13 memlayout.h    static inline uint v2p(void *a) { return ((uint) (a))  - KERNBASE; }</span>
+<span class='curline'><a href='../S/43.html#L14'>uint</a>               14 memlayout.h    static inline void *p2v(uint a) { return (void *) ((a) + KERNBASE); }</span>
+<span class='curline'><a href='../S/43.html#L18'>uint</a>               18 memlayout.h    #define V2P(a) (((uint) (a)) - KERNBASE)</span>
+<span class='curline'><a href='../S/45.html#L32'>uint</a>               32 mkfs.c         uint freeinode = 1;</span>
+<span class='curline'><a href='../S/45.html#L33'>uint</a>               33 mkfs.c         uint freeblock;</span>
+<span class='curline'><a href='../S/45.html#L37'>uint</a>               37 mkfs.c         void wsect(uint, void*);</span>
+<span class='curline'><a href='../S/45.html#L38'>uint</a>               38 mkfs.c         void winode(uint, struct dinode*);</span>
+<span class='curline'><a href='../S/45.html#L39'>uint</a>               39 mkfs.c         void rinode(uint inum, struct dinode *ip);</span>
+<span class='curline'><a href='../S/45.html#L40'>uint</a>               40 mkfs.c         void rsect(uint sec, void *buf);</span>
+<span class='curline'><a href='../S/45.html#L41'>uint</a>               41 mkfs.c         uint ialloc(ushort type);</span>
+<span class='curline'><a href='../S/45.html#L42'>uint</a>               42 mkfs.c         void iappend(uint inum, void *p, int n);</span>
+<span class='curline'><a href='../S/45.html#L55'>uint</a>               55 mkfs.c         uint</span>
+<span class='curline'><a href='../S/45.html#L56'>uint</a>               56 mkfs.c         xint(uint x)</span>
+<span class='curline'><a href='../S/45.html#L58'>uint</a>               58 mkfs.c           uint y;</span>
+<span class='curline'><a href='../S/45.html#L71'>uint</a>               71 mkfs.c           uint rootino, inum, off;</span>
+<span class='curline'><a href='../S/45.html#L171'>uint</a>              171 mkfs.c         wsect(uint sec, void *buf)</span>
+<span class='curline'><a href='../S/45.html#L184'>uint</a>              184 mkfs.c         winode(uint inum, struct dinode *ip)</span>
+<span class='curline'><a href='../S/45.html#L187'>uint</a>              187 mkfs.c           uint bn;</span>
+<span class='curline'><a href='../S/45.html#L198'>uint</a>              198 mkfs.c         rinode(uint inum, struct dinode *ip)</span>
+<span class='curline'><a href='../S/45.html#L201'>uint</a>              201 mkfs.c           uint bn;</span>
+<span class='curline'><a href='../S/45.html#L211'>uint</a>              211 mkfs.c         rsect(uint sec, void *buf)</span>
+<span class='curline'><a href='../S/45.html#L223'>uint</a>              223 mkfs.c         uint</span>
+<span class='curline'><a href='../S/45.html#L226'>uint</a>              226 mkfs.c           uint inum = freeinode++;</span>
+<span class='curline'><a href='../S/45.html#L256'>uint</a>              256 mkfs.c         iappend(uint inum, void *xp, int n)</span>
+<span class='curline'><a href='../S/45.html#L259'>uint</a>              259 mkfs.c           uint fbn, off, n1;</span>
+<span class='curline'><a href='../S/45.html#L262'>uint</a>              262 mkfs.c           uint indirect[NINDIRECT];</span>
+<span class='curline'><a href='../S/45.html#L263'>uint</a>              263 mkfs.c           uint x;</span>
+<span class='curline'><a href='../S/46.html#L53'>uint</a>               53 mmu.h            uint lim_15_0 : 16;  // Low bits of segment limit</span>
+<span class='curline'><a href='../S/46.html#L54'>uint</a>               54 mmu.h            uint base_15_0 : 16; // Low bits of segment base address</span>
+<span class='curline'><a href='../S/46.html#L55'>uint</a>               55 mmu.h            uint base_23_16 : 8; // Middle bits of segment base address</span>
+<span class='curline'><a href='../S/46.html#L56'>uint</a>               56 mmu.h            uint type : 4;       // Segment type (see STS_ constants)</span>
+<span class='curline'><a href='../S/46.html#L57'>uint</a>               57 mmu.h            uint s : 1;          // 0 = system, 1 = application</span>
+<span class='curline'><a href='../S/46.html#L58'>uint</a>               58 mmu.h            uint dpl : 2;        // Descriptor Privilege Level</span>
+<span class='curline'><a href='../S/46.html#L59'>uint</a>               59 mmu.h            uint p : 1;          // Present</span>
+<span class='curline'><a href='../S/46.html#L60'>uint</a>               60 mmu.h            uint lim_19_16 : 4;  // High bits of segment limit</span>
+<span class='curline'><a href='../S/46.html#L61'>uint</a>               61 mmu.h            uint avl : 1;        // Unused (available for software use)</span>
+<span class='curline'><a href='../S/46.html#L62'>uint</a>               62 mmu.h            uint rsv1 : 1;       // Reserved</span>
+<span class='curline'><a href='../S/46.html#L63'>uint</a>               63 mmu.h            uint db : 1;         // 0 = 16-bit segment, 1 = 32-bit segment</span>
+<span class='curline'><a href='../S/46.html#L64'>uint</a>               64 mmu.h            uint g : 1;          // Granularity: limit scaled by 4K when set</span>
+<span class='curline'><a href='../S/46.html#L65'>uint</a>               65 mmu.h            uint base_31_24 : 8; // High bits of segment base address</span>
+<span class='curline'><a href='../S/46.html#L70'>uint</a>               70 mmu.h          { ((lim) &gt;&gt; 12) &amp; 0xffff, (uint)(base) &amp; 0xffff,      \</span>
+<span class='curline'><a href='../S/46.html#L71'>uint</a>               71 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
+<span class='curline'><a href='../S/46.html#L72'>uint</a>               72 mmu.h            (uint)(lim) &gt;&gt; 28, 0, 0, 1, 1, (uint)(base) &gt;&gt; 24 }</span>
+<span class='curline'><a href='../S/46.html#L74'>uint</a>               74 mmu.h          { (lim) &amp; 0xffff, (uint)(base) &amp; 0xffff,              \</span>
+<span class='curline'><a href='../S/46.html#L75'>uint</a>               75 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
+<span class='curline'><a href='../S/46.html#L76'>uint</a>               76 mmu.h            (uint)(lim) &gt;&gt; 16, 0, 0, 1, 0, (uint)(base) &gt;&gt; 24 }</span>
+<span class='curline'><a href='../S/46.html#L112'>uint</a>              112 mmu.h          #define PDX(va)         (((uint)(va) &gt;&gt; PDXSHIFT) &amp; 0x3FF)</span>
+<span class='curline'><a href='../S/46.html#L115'>uint</a>              115 mmu.h          #define PTX(va)         (((uint)(va) &gt;&gt; PTXSHIFT) &amp; 0x3FF)</span>
+<span class='curline'><a href='../S/46.html#L118'>uint</a>              118 mmu.h          #define PGADDR(d, t, o) ((uint)((d) &lt;&lt; PDXSHIFT | (t) &lt;&lt; PTXSHIFT | (o)))</span>
+<span class='curline'><a href='../S/46.html#L144'>uint</a>              144 mmu.h          #define PTE_ADDR(pte)   ((uint)(pte) &amp; ~0xFFF)</span>
+<span class='curline'><a href='../S/46.html#L145'>uint</a>              145 mmu.h          #define PTE_FLAGS(pte)  ((uint)(pte) &amp;  0xFFF)</span>
+<span class='curline'><a href='../S/46.html#L148'>uint</a>              148 mmu.h          typedef uint pte_t;</span>
+<span class='curline'><a href='../S/46.html#L152'>uint</a>              152 mmu.h            uint link;         // Old ts selector</span>
+<span class='curline'><a href='../S/46.html#L153'>uint</a>              153 mmu.h            uint esp0;         // Stack pointers and segment selectors</span>
+<span class='curline'><a href='../S/46.html#L156'>uint</a>              156 mmu.h            uint *esp1;</span>
+<span class='curline'><a href='../S/46.html#L159'>uint</a>              159 mmu.h            uint *esp2;</span>
+<span class='curline'><a href='../S/46.html#L163'>uint</a>              163 mmu.h            uint *eip;         // Saved state from last task switch</span>
+<span class='curline'><a href='../S/46.html#L164'>uint</a>              164 mmu.h            uint eflags;</span>
+<span class='curline'><a href='../S/46.html#L165'>uint</a>              165 mmu.h            uint eax;          // More saved state (registers)</span>
+<span class='curline'><a href='../S/46.html#L166'>uint</a>              166 mmu.h            uint ecx;</span>
+<span class='curline'><a href='../S/46.html#L167'>uint</a>              167 mmu.h            uint edx;</span>
+<span class='curline'><a href='../S/46.html#L168'>uint</a>              168 mmu.h            uint ebx;</span>
+<span class='curline'><a href='../S/46.html#L169'>uint</a>              169 mmu.h            uint *esp;</span>
+<span class='curline'><a href='../S/46.html#L170'>uint</a>              170 mmu.h            uint *ebp;</span>
+<span class='curline'><a href='../S/46.html#L171'>uint</a>              171 mmu.h            uint esi;</span>
+<span class='curline'><a href='../S/46.html#L172'>uint</a>              172 mmu.h            uint edi;</span>
+<span class='curline'><a href='../S/46.html#L194'>uint</a>              194 mmu.h            uint off_15_0 : 16;   // low 16 bits of offset in segment</span>
+<span class='curline'><a href='../S/46.html#L195'>uint</a>              195 mmu.h            uint cs : 16;         // code segment selector</span>
+<span class='curline'><a href='../S/46.html#L196'>uint</a>              196 mmu.h            uint args : 5;        // # args, 0 for interrupt/trap gates</span>
+<span class='curline'><a href='../S/46.html#L197'>uint</a>              197 mmu.h            uint rsv1 : 3;        // reserved(should be zero I guess)</span>
+<span class='curline'><a href='../S/46.html#L198'>uint</a>              198 mmu.h            uint type : 4;        // type(STS_{TG,IG32,TG32})</span>
+<span class='curline'><a href='../S/46.html#L199'>uint</a>              199 mmu.h            uint s : 1;           // must be 0 (system)</span>
+<span class='curline'><a href='../S/46.html#L200'>uint</a>              200 mmu.h            uint dpl : 2;         // descriptor(meaning new) privilege level</span>
+<span class='curline'><a href='../S/46.html#L201'>uint</a>              201 mmu.h            uint p : 1;           // Present</span>
+<span class='curline'><a href='../S/46.html#L202'>uint</a>              202 mmu.h            uint off_31_16 : 16;  // high bits of offset in segment</span>
+<span class='curline'><a href='../S/46.html#L215'>uint</a>              215 mmu.h            (gate).off_15_0 = (uint)(off) &amp; 0xffff;                \</span>
+<span class='curline'><a href='../S/46.html#L223'>uint</a>              223 mmu.h            (gate).off_31_16 = (uint)(off) &gt;&gt; 16;                  \</span>
+<span class='curline'><a href='../S/47.html#L39'>uint</a>               39 mp.c           mpsearch1(uint a, int len)</span>
+<span class='curline'><a href='../S/47.html#L60'>uint</a>               60 mp.c             uint p;</span>
+<span class='curline'><a href='../S/47.html#L88'>uint</a>               88 mp.c             conf = (struct mpconf*) p2v((uint) mp-&gt;physaddr);</span>
+<span class='curline'><a href='../S/47.html#L112'>uint</a>              112 mp.c             lapic = (uint*)conf-&gt;lapicaddr;</span>
+<span class='curline'><a href='../S/48.html#L20'>uint</a>               20 mp.h             uint *oemtable;               // OEM table pointer</span>
+<span class='curline'><a href='../S/48.html#L23'>uint</a>               23 mp.h             uint *lapicaddr;              // address of local APIC</span>
+<span class='curline'><a href='../S/48.html#L36'>uint</a>               36 mp.h             uint feature;                 // feature flags from CPUID instruction</span>
+<span class='curline'><a href='../S/48.html#L45'>uint</a>               45 mp.h             uint *addr;                  // I/O APIC address</span>
+<span class='curline'><a href='../S/52.html#L15'>uint</a>               15 pipe.c           uint nread;     // number of bytes read</span>
+<span class='curline'><a href='../S/52.html#L16'>uint</a>               16 pipe.c           uint nwrite;    // number of bytes written</span>
+<span class='curline'><a href='../S/54.html#L17'>uint</a>               17 printf.c         uint x;</span>
+<span class='curline'><a href='../S/54.html#L44'>uint</a>               44 printf.c         uint *ap;</span>
+<span class='curline'><a href='../S/54.html#L47'>uint</a>               47 printf.c         ap = (uint*)(void*)&amp;fmt + 1;</span>
+<span class='curline'><a href='../S/56.html#L66'>uint</a>               66 proc.c           *(uint*)sp = (uint)trapret;</span>
+<span class='curline'><a href='../S/56.html#L71'>uint</a>               71 proc.c           p-&gt;context-&gt;eip = (uint)forkret;</span>
+<span class='curline'><a href='../S/56.html#L110'>uint</a>              110 proc.c           uint sz;</span>
+<span class='curline'><a href='../S/56.html#L449'>uint</a>              449 proc.c           uint pc[10];</span>
+<span class='curline'><a href='../S/56.html#L460'>uint</a>              460 proc.c               getcallerpcs((uint*)p-&gt;context-&gt;ebp+2, pc);</span>
+<span class='curline'><a href='../S/57.html#L10'>uint</a>               10 proc.h           volatile uint started;       // Has the CPU started?</span>
+<span class='curline'><a href='../S/57.html#L45'>uint</a>               45 proc.h           uint edi;</span>
+<span class='curline'><a href='../S/57.html#L46'>uint</a>               46 proc.h           uint esi;</span>
+<span class='curline'><a href='../S/57.html#L47'>uint</a>               47 proc.h           uint ebx;</span>
+<span class='curline'><a href='../S/57.html#L48'>uint</a>               48 proc.h           uint ebp;</span>
+<span class='curline'><a href='../S/57.html#L49'>uint</a>               49 proc.h           uint eip;</span>
+<span class='curline'><a href='../S/57.html#L56'>uint</a>               56 proc.h           uint sz;                     // Size of process memory (bytes)</span>
+<span class='curline'><a href='../S/68.html#L68'>uint</a>               68 spinlock.c     getcallerpcs(void *v, uint pcs[])</span>
+<span class='curline'><a href='../S/68.html#L70'>uint</a>               70 spinlock.c       uint *ebp;</span>
+<span class='curline'><a href='../S/68.html#L73'>uint</a>               73 spinlock.c       ebp = (uint*)v - 2;</span>
+<span class='curline'><a href='../S/68.html#L75'>uint</a>               75 spinlock.c         if(ebp == 0 || ebp &lt; (uint*)KERNBASE || ebp == (uint*)0xffffffff)</span>
+<span class='curline'><a href='../S/68.html#L78'>uint</a>               78 spinlock.c         ebp = (uint*)ebp[0]; // saved %ebp</span>
+<span class='curline'><a href='../S/69.html#L3'>uint</a>                3 spinlock.h       uint locked;       // Is the lock held?</span>
+<span class='curline'><a href='../S/69.html#L8'>uint</a>                8 spinlock.h       uint pcs[10];      // The call stack (an array of program counters)</span>
+<span class='curline'><a href='../S/71.html#L8'>uint</a>                8 stat.h           uint ino;    // Inode number</span>
+<span class='curline'><a href='../S/71.html#L10'>uint</a>               10 stat.h           uint size;   // Size of file in bytes</span>
+<span class='curline'><a href='../S/73.html#L5'>uint</a>                5 string.c       memset(void *dst, int c, uint n)</span>
+<span class='curline'><a href='../S/73.html#L16'>uint</a>               16 string.c       memcmp(const void *v1, const void *v2, uint n)</span>
+<span class='curline'><a href='../S/73.html#L32'>uint</a>               32 string.c       memmove(void *dst, const void *src, uint n)</span>
+<span class='curline'><a href='../S/73.html#L53'>uint</a>               53 string.c       memcpy(void *dst, const void *src, uint n)</span>
+<span class='curline'><a href='../S/73.html#L59'>uint</a>               59 string.c       strncmp(const char *p, const char *q, uint n)</span>
+<span class='curline'><a href='../S/76.html#L18'>uint</a>               18 syscall.c      fetchint(uint addr, int *ip)</span>
+<span class='curline'><a href='../S/76.html#L30'>uint</a>               30 syscall.c      fetchstr(uint addr, char **pp)</span>
+<span class='curline'><a href='../S/76.html#L61'>uint</a>               61 syscall.c        if((uint)i &gt;= proc-&gt;sz || (uint)i+size &gt; proc-&gt;sz)</span>
+<span class='curline'><a href='../S/78.html#L187'>uint</a>              187 sysfile.c        uint off;</span>
+<span class='curline'><a href='../S/78.html#L241'>uint</a>              241 sysfile.c        uint off;</span>
+<span class='curline'><a href='../S/78.html#L399'>uint</a>              399 sysfile.c        uint uargv, uarg;</span>
+<span class='curline'><a href='../S/79.html#L63'>uint</a>               63 sysproc.c        uint ticks0;</span>
+<span class='curline'><a href='../S/79.html#L85'>uint</a>               85 sysproc.c        uint xticks;</span>
+<span class='curline'><a href='../S/83.html#L13'>uint</a>               13 trap.c         extern uint vectors[];  // in vectors.S: array of 256 entry pointers</span>
+<span class='curline'><a href='../S/83.html#L15'>uint</a>               15 trap.c         uint ticks;</span>
+<span class='curline'><a href='../S/87.html#L4'>uint</a>                4 types.h        typedef uint pde_t;</span>
+<span class='curline'><a href='../S/89.html#L26'>uint</a>               26 ulib.c         uint</span>
+<span class='curline'><a href='../S/89.html#L37'>uint</a>               37 ulib.c         memset(void *dst, int c, uint n)</span>
+<span class='curline'><a href='../S/90.html#L14'>uint</a>               14 umalloc.c          uint size;</span>
+<span class='curline'><a href='../S/90.html#L47'>uint</a>               47 umalloc.c      morecore(uint nu)</span>
+<span class='curline'><a href='../S/90.html#L64'>uint</a>               64 umalloc.c      malloc(uint nbytes)</span>
+<span class='curline'><a href='../S/90.html#L67'>uint</a>               67 umalloc.c        uint nunits;</span>
+<span class='curline'><a href='../S/91.html#L35'>uint</a>               35 user.h         uint strlen(char*);</span>
+<span class='curline'><a href='../S/91.html#L36'>uint</a>               36 user.h         void* memset(void*, int, uint);</span>
+<span class='curline'><a href='../S/91.html#L37'>uint</a>               37 user.h         void* malloc(uint);</span>
+<span class='curline'><a href='../S/92.html#L1419'>uint</a>             1419 usertests.c      uint amt;</span>
+<span class='curline'><a href='../S/92.html#L1454'>uint</a>             1454 usertests.c      amt = (BIG) - (uint)a;</span>
+<span class='curline'><a href='../S/92.html#L1521'>uint</a>             1521 usertests.c          sbrk(BIG - (uint)sbrk(0));</span>
+<span class='curline'><a href='../S/92.html#L1566'>uint</a>             1566 usertests.c      uint p;</span>
+<span class='curline'><a href='../S/92.html#L1571'>uint</a>             1571 usertests.c      for(p = 0; p &lt;= (uint)hi; p += 4096){</span>
+<span class='curline'><a href='../S/95.html#L71'>uint</a>               71 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
+<span class='curline'><a href='../S/95.html#L76'>uint</a>               76 vm.c             a = (char*)PGROUNDDOWN((uint)va);</span>
+<span class='curline'><a href='../S/95.html#L77'>uint</a>               77 vm.c             last = (char*)PGROUNDDOWN(((uint)va) + size - 1);</span>
+<span class='curline'><a href='../S/95.html#L117'>uint</a>              117 vm.c             uint phys_start;</span>
+<span class='curline'><a href='../S/95.html#L118'>uint</a>              118 vm.c             uint phys_end;</span>
+<span class='curline'><a href='../S/95.html#L141'>uint</a>              141 vm.c                           (uint)k-&gt;phys_start, k-&gt;perm) &lt; 0)</span>
+<span class='curline'><a href='../S/95.html#L171'>uint</a>              171 vm.c             cpu-&gt;ts.esp0 = (uint)proc-&gt;kstack + KSTACKSIZE;</span>
+<span class='curline'><a href='../S/95.html#L182'>uint</a>              182 vm.c           inituvm(pde_t *pgdir, char *init, uint sz)</span>
+<span class='curline'><a href='../S/95.html#L197'>uint</a>              197 vm.c           loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)</span>
+<span class='curline'><a href='../S/95.html#L199'>uint</a>              199 vm.c             uint i, pa, n;</span>
+<span class='curline'><a href='../S/95.html#L202'>uint</a>              202 vm.c             if((uint) addr % PGSIZE != 0)</span>
+<span class='curline'><a href='../S/95.html#L221'>uint</a>              221 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/95.html#L224'>uint</a>              224 vm.c             uint a;</span>
+<span class='curline'><a href='../S/95.html#L250'>uint</a>              250 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/95.html#L253'>uint</a>              253 vm.c             uint a, pa;</span>
+<span class='curline'><a href='../S/95.html#L280'>uint</a>              280 vm.c             uint i;</span>
+<span class='curline'><a href='../S/95.html#L310'>uint</a>              310 vm.c           copyuvm(pde_t *pgdir, uint sz)</span>
+<span class='curline'><a href='../S/95.html#L314'>uint</a>              314 vm.c             uint pa, i, flags;</span>
+<span class='curline'><a href='../S/95.html#L358'>uint</a>              358 vm.c           copyout(pde_t *pgdir, uint va, void *p, uint len)</span>
+<span class='curline'><a href='../S/95.html#L361'>uint</a>              361 vm.c             uint n, va0;</span>
+<span class='curline'><a href='../S/95.html#L365'>uint</a>              365 vm.c               va0 = (uint)PGROUNDDOWN(va);</span>
+<span class='curline'><a href='../S/97.html#L68'>uint</a>               68 x86.h            pd[1] = (uint)p;</span>
+<span class='curline'><a href='../S/97.html#L69'>uint</a>               69 x86.h            pd[2] = (uint)p &gt;&gt; 16;</span>
+<span class='curline'><a href='../S/97.html#L82'>uint</a>               82 x86.h            pd[1] = (uint)p;</span>
+<span class='curline'><a href='../S/97.html#L83'>uint</a>               83 x86.h            pd[2] = (uint)p &gt;&gt; 16;</span>
+<span class='curline'><a href='../S/97.html#L94'>uint</a>               94 x86.h          static inline uint</span>
+<span class='curline'><a href='../S/97.html#L97'>uint</a>               97 x86.h            uint eflags;</span>
+<span class='curline'><a href='../S/97.html#L120'>uint</a>              120 x86.h          static inline uint</span>
+<span class='curline'><a href='../S/97.html#L121'>uint</a>              121 x86.h          xchg(volatile uint *addr, uint newval)</span>
+<span class='curline'><a href='../S/97.html#L123'>uint</a>              123 x86.h            uint result;</span>
+<span class='curline'><a href='../S/97.html#L133'>uint</a>              133 x86.h          static inline uint</span>
+<span class='curline'><a href='../S/97.html#L136'>uint</a>              136 x86.h            uint val;</span>
+<span class='curline'><a href='../S/97.html#L142'>uint</a>              142 x86.h          lcr3(uint val) </span>
+<span class='curline'><a href='../S/97.html#L152'>uint</a>              152 x86.h            uint edi;</span>
+<span class='curline'><a href='../S/97.html#L153'>uint</a>              153 x86.h            uint esi;</span>
+<span class='curline'><a href='../S/97.html#L154'>uint</a>              154 x86.h            uint ebp;</span>
+<span class='curline'><a href='../S/97.html#L155'>uint</a>              155 x86.h            uint oesp;      // useless &amp; ignored</span>
+<span class='curline'><a href='../S/97.html#L156'>uint</a>              156 x86.h            uint ebx;</span>
+<span class='curline'><a href='../S/97.html#L157'>uint</a>              157 x86.h            uint edx;</span>
+<span class='curline'><a href='../S/97.html#L158'>uint</a>              158 x86.h            uint ecx;</span>
+<span class='curline'><a href='../S/97.html#L159'>uint</a>              159 x86.h            uint eax;</span>
+<span class='curline'><a href='../S/97.html#L170'>uint</a>              170 x86.h            uint trapno;</span>
+<span class='curline'><a href='../S/97.html#L173'>uint</a>              173 x86.h            uint err;</span>
+<span class='curline'><a href='../S/97.html#L174'>uint</a>              174 x86.h            uint eip;</span>
+<span class='curline'><a href='../S/97.html#L177'>uint</a>              177 x86.h            uint eflags;</span>
+<span class='curline'><a href='../S/97.html#L180'>uint</a>              180 x86.h            uint esp;</span>
+</pre>
+</body>
+</html>
