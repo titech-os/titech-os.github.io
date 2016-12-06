@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>printpcs</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/printpcs</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>#!/bin/sh
+<a id='L2' name='L2'></a>
+<a id='L3' name='L3'></a># Decode the symbols from a panic EIP list
+<a id='L4' name='L4'></a>
+<a id='L5' name='L5'></a># Find a working addr2line
+<a id='L6' name='L6'></a>for p in i386-jos-elf-addr2line addr2line; do
+<a id='L7' name='L7'></a>    if which $p 2&gt;&amp;1 &gt;/dev/null &amp;&amp; \
+<a id='L8' name='L8'></a>       $p -h 2&gt;&amp;1 | grep -q '\belf32-i386\b'; then
+<a id='L9' name='L9'></a>        break
+<a id='L10' name='L10'></a>    fi
+<a id='L11' name='L11'></a>done
+<a id='L12' name='L12'></a>
+<a id='L13' name='L13'></a># Enable as much pretty-printing as this addr2line can do
+<a id='L14' name='L14'></a>$p $($p -h | grep ' -[aipsf] ' | awk '{print $1}') -e kernel "$@"
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

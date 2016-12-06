@@ -1,16 +1,29 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pmp</title>
+<title>port</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L81'>pmp</a>                81 mp.c           mpconfig(struct mp **pmp)</span>
-<span class='curline'><a href='../S/47.html#L95'>pmp</a>                95 mp.c             *pmp = mp;</span>
+<span class='curline'><a href='../S/94.html#L1704'>port</a>             1704 usertests.c      ushort port = 0;</span>
+<span class='curline'><a href='../S/94.html#L1711'>port</a>             1711 usertests.c        port = RTC_ADDR;</span>
+<span class='curline'><a href='../S/94.html#L1714'>port</a>             1714 usertests.c        asm volatile("outb %0,%1"::"a"(val), "d" (port));</span>
+<span class='curline'><a href='../S/94.html#L1715'>port</a>             1715 usertests.c        port = RTC_DATA;</span>
+<span class='curline'><a href='../S/94.html#L1716'>port</a>             1716 usertests.c        asm volatile("inb %1,%0" : "=a" (val) : "d" (port));</span>
+<span class='curline'><a href='../S/99.html#L4'>port</a>                4 x86.h          inb(ushort port)</span>
+<span class='curline'><a href='../S/99.html#L8'>port</a>                8 x86.h            asm volatile("in %1,%0" : "=a" (data) : "d" (port));</span>
+<span class='curline'><a href='../S/99.html#L13'>port</a>               13 x86.h          insl(int port, void *addr, int cnt)</span>
+<span class='curline'><a href='../S/99.html#L17'>port</a>               17 x86.h                         "d" (port), "0" (addr), "1" (cnt) :</span>
+<span class='curline'><a href='../S/99.html#L22'>port</a>               22 x86.h          outb(ushort port, uchar data)</span>
+<span class='curline'><a href='../S/99.html#L24'>port</a>               24 x86.h            asm volatile("out %0,%1" : : "a" (data), "d" (port));</span>
+<span class='curline'><a href='../S/99.html#L28'>port</a>               28 x86.h          outw(ushort port, ushort data)</span>
+<span class='curline'><a href='../S/99.html#L30'>port</a>               30 x86.h            asm volatile("out %0,%1" : : "a" (data), "d" (port));</span>
+<span class='curline'><a href='../S/99.html#L34'>port</a>               34 x86.h          outsl(int port, const void *addr, int cnt)</span>
+<span class='curline'><a href='../S/99.html#L38'>port</a>               38 x86.h                         "d" (port), "0" (addr), "1" (cnt) :</span>
 </pre>
 </body>
 </html>

@@ -3,25 +3,25 @@
 <head>
 <title>va</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L112'>va</a>                112 mmu.h          #define PDX(va)         (((uint)(va) &gt;&gt; PDXSHIFT) &amp; 0x3FF)</span>
-<span class='curline'><a href='../S/46.html#L115'>va</a>                115 mmu.h          #define PTX(va)         (((uint)(va) &gt;&gt; PTXSHIFT) &amp; 0x3FF)</span>
-<span class='curline'><a href='../S/95.html#L46'>va</a>                 46 vm.c           walkpgdir(pde_t *pgdir, const void *va, int alloc)</span>
-<span class='curline'><a href='../S/95.html#L51'>va</a>                 51 vm.c             pde = &amp;pgdir[PDX(va)];</span>
-<span class='curline'><a href='../S/95.html#L64'>va</a>                 64 vm.c             return &amp;pgtab[PTX(va)];</span>
-<span class='curline'><a href='../S/95.html#L71'>va</a>                 71 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
-<span class='curline'><a href='../S/95.html#L76'>va</a>                 76 vm.c             a = (char*)PGROUNDDOWN((uint)va);</span>
-<span class='curline'><a href='../S/95.html#L77'>va</a>                 77 vm.c             last = (char*)PGROUNDDOWN(((uint)va) + size - 1);</span>
-<span class='curline'><a href='../S/95.html#L358'>va</a>                358 vm.c           copyout(pde_t *pgdir, uint va, void *p, uint len)</span>
-<span class='curline'><a href='../S/95.html#L365'>va</a>                365 vm.c               va0 = (uint)PGROUNDDOWN(va);</span>
-<span class='curline'><a href='../S/95.html#L369'>va</a>                369 vm.c               n = PGSIZE - (va - va0);</span>
-<span class='curline'><a href='../S/95.html#L372'>va</a>                372 vm.c               memmove(pa0 + (va - va0), buf, n);</span>
-<span class='curline'><a href='../S/95.html#L375'>va</a>                375 vm.c               va = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/46.html#L116'>va</a>                116 mmu.h          #define PDX(va)         (((uint)(va) &gt;&gt; PDXSHIFT) &amp; 0x3FF)</span>
+<span class='curline'><a href='../S/46.html#L119'>va</a>                119 mmu.h          #define PTX(va)         (((uint)(va) &gt;&gt; PTXSHIFT) &amp; 0x3FF)</span>
+<span class='curline'><a href='../S/97.html#L45'>va</a>                 45 vm.c           walkpgdir(pde_t *pgdir, const void *va, int alloc)</span>
+<span class='curline'><a href='../S/97.html#L50'>va</a>                 50 vm.c             pde = &amp;pgdir[PDX(va)];</span>
+<span class='curline'><a href='../S/97.html#L63'>va</a>                 63 vm.c             return &amp;pgtab[PTX(va)];</span>
+<span class='curline'><a href='../S/97.html#L70'>va</a>                 70 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
+<span class='curline'><a href='../S/97.html#L75'>va</a>                 75 vm.c             a = (char*)PGROUNDDOWN((uint)va);</span>
+<span class='curline'><a href='../S/97.html#L76'>va</a>                 76 vm.c             last = (char*)PGROUNDDOWN(((uint)va) + size - 1);</span>
+<span class='curline'><a href='../S/97.html#L365'>va</a>                365 vm.c           copyout(pde_t *pgdir, uint va, void *p, uint len)</span>
+<span class='curline'><a href='../S/97.html#L372'>va</a>                372 vm.c               va0 = (uint)PGROUNDDOWN(va);</span>
+<span class='curline'><a href='../S/97.html#L376'>va</a>                376 vm.c               n = PGSIZE - (va - va0);</span>
+<span class='curline'><a href='../S/97.html#L379'>va</a>                379 vm.c               memmove(pa0 + (va - va0), buf, n);</span>
+<span class='curline'><a href='../S/97.html#L382'>va</a>                382 vm.c               va = va0 + PGSIZE;</span>
 </pre>
 </body>
 </html>

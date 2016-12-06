@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>runoff</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/runoff</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>#!/bin/sh
+<a id='L2' name='L2'></a>
+<a id='L3' name='L3'></a>echo This script takes a minute to run.  Be patient. 1&gt;&amp;2
+<a id='L4' name='L4'></a>
+<a id='L5' name='L5'></a>LC_CTYPE=C export LC_CTYPE
+<a id='L6' name='L6'></a>
+<a id='L7' name='L7'></a># pad stdin to multiple of 120 lines
+<a id='L8' name='L8'></a>pad()
+<a id='L9' name='L9'></a>{
+<a id='L10' name='L10'></a>        awk '{print} END{for(; NR%120!=0; NR++) print ""}'
+<a id='L11' name='L11'></a>}
+<a id='L12' name='L12'></a>
+<a id='L13' name='L13'></a># create formatted (numbered) files
+<a id='L14' name='L14'></a>mkdir -p fmt
+<a id='L15' name='L15'></a>rm -f fmt/*
+<a id='L16' name='L16'></a>cp README fmt
+<a id='L17' name='L17'></a>files=`grep -v '^#' runoff.list | awk '{print $1}'`
+<a id='L18' name='L18'></a>n=99
+<a id='L19' name='L19'></a>for i in $files
+<a id='L20' name='L20'></a>do
+<a id='L21' name='L21'></a>        ./runoff1 -n $n $i &gt;fmt/$i
+<a id='L22' name='L22'></a>        nn=`tail -1 fmt/$i | sed 's/ .*//; s/^0*//'`
+<a id='L23' name='L23'></a>        if [ "x$nn" != x ]; then
+<a id='L24' name='L24'></a>                n=$nn
+<a id='L25' name='L25'></a>        fi
+<a id='L26' name='L26'></a>done
+<a id='L27' name='L27'></a>
+<a id='L28' name='L28'></a># create table of contents
+<a id='L29' name='L29'></a>cat toc.hdr &gt;fmt/toc
+<a id='L30' name='L30'></a>pr -e8 -t runoff.list | awk '
+<a id='L31' name='L31'></a>/^[a-z0-9]/ {
+<a id='L32' name='L32'></a>        s=$0
+<a id='L33' name='L33'></a>        f="fmt/"$1
+<a id='L34' name='L34'></a>        getline&lt;f
+<a id='L35' name='L35'></a>        close(f)
+<a id='L36' name='L36'></a>        n=$1
+<a id='L37' name='L37'></a>        printf("%02d %s\n", n/100, s);
+<a id='L38' name='L38'></a>        printf("TOC: %04d %s\n", n, s) &gt;"fmt/tocdata"
+<a id='L39' name='L39'></a>        next
+<a id='L40' name='L40'></a>}
+<a id='L41' name='L41'></a>{
+<a id='L42' name='L42'></a>        print
+<a id='L43' name='L43'></a>}' | pr -3 -t &gt;&gt;fmt/toc
+<a id='L44' name='L44'></a>cat toc.ftr &gt;&gt;fmt/toc
+<a id='L45' name='L45'></a>
+<a id='L46' name='L46'></a># check for bad alignments
+<a id='L47' name='L47'></a>perl -e '
+<a id='L48' name='L48'></a>        $leftwarn = 0;
+<a id='L49' name='L49'></a>        while(&lt;&gt;){
+<a id='L50' name='L50'></a>                chomp;
+<a id='L51' name='L51'></a>                s!#.*!!;
+<a id='L52' name='L52'></a>                s!\s+! !g;
+<a id='L53' name='L53'></a>                s! +$!!;
+<a id='L54' name='L54'></a>                next if /^$/;
+<a id='L55' name='L55'></a>                
+<a id='L56' name='L56'></a>                if(/TOC: (\d+) (.*)/){
+<a id='L57' name='L57'></a>                        $toc{$2} = $1;
+<a id='L58' name='L58'></a>                        next;
+<a id='L59' name='L59'></a>                }
+<a id='L60' name='L60'></a>                
+<a id='L61' name='L61'></a>                if(/sheet1: (left|right)$/){
+<a id='L62' name='L62'></a>                        print STDERR "assuming that sheet 1 is a $1 page.  double-check!\n";
+<a id='L63' name='L63'></a>                        $left = $1 eq "left" ? "13579" : "02468";
+<a id='L64' name='L64'></a>                        $right = $1 eq "left" ? "02468" : "13579";
+<a id='L65' name='L65'></a>                        next;
+<a id='L66' name='L66'></a>                }
+<a id='L67' name='L67'></a>                
+<a id='L68' name='L68'></a>                if(/even: (.*)/){
+<a id='L69' name='L69'></a>                        $file = $1;
+<a id='L70' name='L70'></a>                        if(!defined($toc{$file})){
+<a id='L71' name='L71'></a>                                print STDERR "Have no toc for $file\n";
+<a id='L72' name='L72'></a>                                next;
+<a id='L73' name='L73'></a>                        }
+<a id='L74' name='L74'></a>                        if($toc{$file} =~ /^\d\d[^0]/){
+<a id='L75' name='L75'></a>                                print STDERR "$file does not start on a fresh page.\n";
+<a id='L76' name='L76'></a>                        }
+<a id='L77' name='L77'></a>                        next;
+<a id='L78' name='L78'></a>                }
+<a id='L79' name='L79'></a>                
+<a id='L80' name='L80'></a>                if(/odd: (.*)/){
+<a id='L81' name='L81'></a>                        $file = $1;
+<a id='L82' name='L82'></a>                        if(!defined($toc{$file})){
+<a id='L83' name='L83'></a>                                print STDERR "Have no toc for $file\n";
+<a id='L84' name='L84'></a>                                next;
+<a id='L85' name='L85'></a>                        }
+<a id='L86' name='L86'></a>                        if($toc{$file} !~ /^\d\d5/){
+<a id='L87' name='L87'></a>                                print STDERR "$file does not start on a second half page.\n";
+<a id='L88' name='L88'></a>                        }
+<a id='L89' name='L89'></a>                        next;
+<a id='L90' name='L90'></a>                }
+<a id='L91' name='L91'></a>                
+<a id='L92' name='L92'></a>                if(/(left|right): (.*)/){
+<a id='L93' name='L93'></a>                        $what = $1;
+<a id='L94' name='L94'></a>                        $file = $2;
+<a id='L95' name='L95'></a>                        if(!defined($toc{$file})){
+<a id='L96' name='L96'></a>                                print STDERR "Have no toc for $file\n";
+<a id='L97' name='L97'></a>                                next;
+<a id='L98' name='L98'></a>                        }
+<a id='L99' name='L99'></a>                        if($what eq "left" &amp;&amp; !($toc{$file} =~ /^\d[$left][05]/)){
+<a id='L100' name='L100'></a>                                print STDERR "$file does not start on a left page [$toc{$file}]\n";
+<a id='L101' name='L101'></a>                        }
+<a id='L102' name='L102'></a>                        # why does this not work if I inline $x in the if?
+<a id='L103' name='L103'></a>                        $x = ($toc{$file} =~ /^\d[$right][05]/);
+<a id='L104' name='L104'></a>                        if($what eq "right" &amp;&amp; !$x){
+<a id='L105' name='L105'></a>                                print STDERR "$file does not start on a right page [$toc{$file}] [$x]\n";
+<a id='L106' name='L106'></a>                        }
+<a id='L107' name='L107'></a>                        next;
+<a id='L108' name='L108'></a>                }
+<a id='L109' name='L109'></a>                
+<a id='L110' name='L110'></a>                print STDERR "Unknown spec: $_\n";
+<a id='L111' name='L111'></a>        }
+<a id='L112' name='L112'></a>' fmt/tocdata runoff.spec
+<a id='L113' name='L113'></a>
+<a id='L114' name='L114'></a># make definition list
+<a id='L115' name='L115'></a>cd fmt
+<a id='L116' name='L116'></a>perl -e '
+<a id='L117' name='L117'></a>        while(&lt;&gt;) {
+<a id='L118' name='L118'></a>                chomp;
+<a id='L119' name='L119'></a>
+<a id='L120' name='L120'></a>                s!//.*!!;
+<a id='L121' name='L121'></a>                s!/\*([^*]|[*][^/])*\*/!!g;
+<a id='L122' name='L122'></a>                s!\s! !g;
+<a id='L123' name='L123'></a>                s! +$!!;
+<a id='L124' name='L124'></a>
+<a id='L125' name='L125'></a>                # look for declarations like char* x;
+<a id='L126' name='L126'></a>                if (/^[0-9]+ typedef .* u(int|short|long|char);/) {
+<a id='L127' name='L127'></a>                        next;
+<a id='L128' name='L128'></a>                }
+<a id='L129' name='L129'></a>                if (/^[0-9]+ extern/) {
+<a id='L130' name='L130'></a>                        next;
+<a id='L131' name='L131'></a>                }
+<a id='L132' name='L132'></a>                if (/^[0-9]+ struct [a-zA-Z0-9_]+;/) {
+<a id='L133' name='L133'></a>                        next;
+<a id='L134' name='L134'></a>                }
+<a id='L135' name='L135'></a>                if (/^([0-9]+) #define +([A-za-z0-9_]+) +?\(.*/) {
+<a id='L136' name='L136'></a>                        print "$1 $2\n"
+<a id='L137' name='L137'></a>                }
+<a id='L138' name='L138'></a>                elsif (/^([0-9]+) #define +([A-Za-z0-9_]+) +([^ ]+)/) {
+<a id='L139' name='L139'></a>                        print "$1 $2 $3\n";
+<a id='L140' name='L140'></a>                }
+<a id='L141' name='L141'></a>                elsif (/^([0-9]+) #define +([A-Za-z0-9_]+)/) {
+<a id='L142' name='L142'></a>                        print "$1 $2\n";
+<a id='L143' name='L143'></a>                }
+<a id='L144' name='L144'></a>                
+<a id='L145' name='L145'></a>                if(/^^([0-9]+) \.globl ([a-zA-Z0-9_]+)/){
+<a id='L146' name='L146'></a>                        $isglobl{$2} = 1;
+<a id='L147' name='L147'></a>                }
+<a id='L148' name='L148'></a>                if(/^^([0-9]+) ([a-zA-Z0-9_]+):$/ &amp;&amp; $isglobl{$2}){
+<a id='L149' name='L149'></a>                        print "$1 $2\n";
+<a id='L150' name='L150'></a>                }
+<a id='L151' name='L151'></a>                
+<a id='L152' name='L152'></a>                if (/\(/) {
+<a id='L153' name='L153'></a>                        next;
+<a id='L154' name='L154'></a>                }
+<a id='L155' name='L155'></a>
+<a id='L156' name='L156'></a>                if (/^([0-9]+) (((static|struct|extern|union|enum) +)*([A-Za-z0-9_]+))( .*)? +([A-Za-z_][A-Za-z0-9_]*)(,|;|=| =)/) {
+<a id='L157' name='L157'></a>                        print "$1 $7\n";
+<a id='L158' name='L158'></a>                }
+<a id='L159' name='L159'></a>                
+<a id='L160' name='L160'></a>                elsif(/^([0-9]+) (enum|struct|union) +([A-Za-z0-9_]+) +{/){ 
+<a id='L161' name='L161'></a>                        print "$1 $3\n";
+<a id='L162' name='L162'></a>                }
+<a id='L163' name='L163'></a>                # TODO: enum members
+<a id='L164' name='L164'></a>        }
+<a id='L165' name='L165'></a>' $files &gt;defs
+<a id='L166' name='L166'></a>
+<a id='L167' name='L167'></a>(for i in $files
+<a id='L168' name='L168'></a>do
+<a id='L169' name='L169'></a>        case "$i" in
+<a id='L170' name='L170'></a>        *.S)
+<a id='L171' name='L171'></a>                cat $i | sed 's;#.*;;; s;//.*;;;'
+<a id='L172' name='L172'></a>                ;;
+<a id='L173' name='L173'></a>        *)
+<a id='L174' name='L174'></a>                cat $i | sed 's;//.*;;; s;"([^"\\]|\\.)*";;;'
+<a id='L175' name='L175'></a>        esac
+<a id='L176' name='L176'></a>done
+<a id='L177' name='L177'></a>) &gt;alltext
+<a id='L178' name='L178'></a>
+<a id='L179' name='L179'></a>perl -n -e 'print if s/^([0-9]+ [a-zA-Z0-9_]+)\(.*$/\1/;' alltext |
+<a id='L180' name='L180'></a>        egrep -v ' (STUB|usage|main|if|for)$' &gt;&gt;defs
+<a id='L181' name='L181'></a>#perl -n -e 'print if s/^([0-9]+) STUB\(([a-zA-Z0-9_]+)\)$/\1 \2/;' alltext \
+<a id='L182' name='L182'></a>#       &gt;&gt;defs
+<a id='L183' name='L183'></a>(
+<a id='L184' name='L184'></a>&gt;s.defs
+<a id='L185' name='L185'></a>
+<a id='L186' name='L186'></a># make reference list
+<a id='L187' name='L187'></a>for i in `awk '{print $2}' defs | sort -f | uniq`
+<a id='L188' name='L188'></a>do
+<a id='L189' name='L189'></a>        defs=`egrep '^[0-9]+ '$i'( |$)' defs | awk '{print $1}'`
+<a id='L190' name='L190'></a>        echo $i $defs &gt;&gt;s.defs
+<a id='L191' name='L191'></a>        uses=`egrep -h '([^a-zA-Z_0-9])'$i'($|[^a-zA-Z_0-9])' alltext | awk '{print $1}'`
+<a id='L192' name='L192'></a>        if [ "x$defs" != "x$uses" ]; then
+<a id='L193' name='L193'></a>                echo $i $defs
+<a id='L194' name='L194'></a>                echo $uses |fmt -29 | sed 's/^/    /'
+<a id='L195' name='L195'></a>#       else
+<a id='L196' name='L196'></a>#               echo $i defined but not used &gt;&amp;2
+<a id='L197' name='L197'></a>        fi
+<a id='L198' name='L198'></a>done
+<a id='L199' name='L199'></a>) &gt;refs
+<a id='L200' name='L200'></a>
+<a id='L201' name='L201'></a># build defs list
+<a id='L202' name='L202'></a>awk '
+<a id='L203' name='L203'></a>{
+<a id='L204' name='L204'></a>        printf("%04d %s\n", $2, $1);
+<a id='L205' name='L205'></a>        for(i=3; i&lt;=NF; i++)
+<a id='L206' name='L206'></a>                printf("%04d    \" \n", $i);
+<a id='L207' name='L207'></a>}
+<a id='L208' name='L208'></a>' s.defs &gt; t.defs
+<a id='L209' name='L209'></a>
+<a id='L210' name='L210'></a># format the whole thing
+<a id='L211' name='L211'></a>(
+<a id='L212' name='L212'></a>        ../pr.pl README
+<a id='L213' name='L213'></a>        ../pr.pl -h "table of contents" toc
+<a id='L214' name='L214'></a>        # pr -t -2 t.defs | ../pr.pl -h "definitions" | pad
+<a id='L215' name='L215'></a>        pr -t -l50 -2 refs | ../pr.pl -h "cross-references" | pad
+<a id='L216' name='L216'></a>        # pr.pl -h "definitions" -2 t.defs | pad
+<a id='L217' name='L217'></a>        # pr.pl -h "cross-references" -2 refs | pad 
+<a id='L218' name='L218'></a>        for i in $files
+<a id='L219' name='L219'></a>        do
+<a id='L220' name='L220'></a>                ../pr.pl -h "xv6/$i" $i
+<a id='L221' name='L221'></a>        done
+<a id='L222' name='L222'></a>) | mpage -m50t50b -o -bLetter -T -t -2 -FCourier -L60 &gt;all.ps
+<a id='L223' name='L223'></a>grep Pages: all.ps
+<a id='L224' name='L224'></a>
+<a id='L225' name='L225'></a># if we have the nice font, use it
+<a id='L226' name='L226'></a>nicefont=LucidaSans-Typewriter83
+<a id='L227' name='L227'></a>if [ ! -f ../$nicefont ]
+<a id='L228' name='L228'></a>then
+<a id='L229' name='L229'></a>        if git cat-file blob font:$nicefont &gt; ../$nicefont~; then
+<a id='L230' name='L230'></a>                mv ../$nicefont~ ../$nicefont
+<a id='L231' name='L231'></a>        fi
+<a id='L232' name='L232'></a>fi
+<a id='L233' name='L233'></a>if [ -f ../$nicefont ]
+<a id='L234' name='L234'></a>then
+<a id='L235' name='L235'></a>        echo nicefont
+<a id='L236' name='L236'></a>        (sed 1q all.ps; cat ../$nicefont; sed "1d; s/Courier/$nicefont/" all.ps) &gt;allf.ps
+<a id='L237' name='L237'></a>else
+<a id='L238' name='L238'></a>        echo ugly font!
+<a id='L239' name='L239'></a>        cp all.ps allf.ps
+<a id='L240' name='L240'></a>fi
+<a id='L241' name='L241'></a>ps2pdf allf.ps ../xv6.pdf
+<a id='L242' name='L242'></a># cd ..
+<a id='L243' name='L243'></a># pdftops xv6.pdf xv6.ps
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

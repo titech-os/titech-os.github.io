@@ -1,32 +1,37 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>mp</title>
+<title>memmove</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L38'>mp</a>                 38 mp.c           static struct mp*</span>
-<span class='curline'><a href='../S/47.html#L45'>mp</a>                 45 mp.c             for(p = addr; p &lt; e; p += sizeof(struct mp))</span>
-<span class='curline'><a href='../S/47.html#L46'>mp</a>                 46 mp.c               if(memcmp(p, "_MP_", 4) == 0 &amp;&amp; sum(p, sizeof(struct mp)) == 0)</span>
-<span class='curline'><a href='../S/47.html#L47'>mp</a>                 47 mp.c                 return (struct mp*)p;</span>
-<span class='curline'><a href='../S/47.html#L56'>mp</a>                 56 mp.c           static struct mp*</span>
-<span class='curline'><a href='../S/47.html#L61'>mp</a>                 61 mp.c             struct mp *mp;</span>
-<span class='curline'><a href='../S/47.html#L65'>mp</a>                 65 mp.c               if((mp = mpsearch1(p, 1024)))</span>
-<span class='curline'><a href='../S/47.html#L66'>mp</a>                 66 mp.c                 return mp;</span>
-<span class='curline'><a href='../S/47.html#L69'>mp</a>                 69 mp.c               if((mp = mpsearch1(p-1024, 1024)))</span>
-<span class='curline'><a href='../S/47.html#L70'>mp</a>                 70 mp.c                 return mp;</span>
-<span class='curline'><a href='../S/47.html#L81'>mp</a>                 81 mp.c           mpconfig(struct mp **pmp)</span>
-<span class='curline'><a href='../S/47.html#L84'>mp</a>                 84 mp.c             struct mp *mp;</span>
-<span class='curline'><a href='../S/47.html#L86'>mp</a>                 86 mp.c             if((mp = mpsearch()) == 0 || mp-&gt;physaddr == 0)</span>
-<span class='curline'><a href='../S/47.html#L88'>mp</a>                 88 mp.c             conf = (struct mpconf*) p2v((uint) mp-&gt;physaddr);</span>
-<span class='curline'><a href='../S/47.html#L95'>mp</a>                 95 mp.c             *pmp = mp;</span>
-<span class='curline'><a href='../S/47.html#L103'>mp</a>                103 mp.c             struct mp *mp;</span>
-<span class='curline'><a href='../S/47.html#L109'>mp</a>                109 mp.c             if((conf = mpconfig(&amp;mp)) == 0)</span>
-<span class='curline'><a href='../S/47.html#L150'>mp</a>                150 mp.c             if(mp-&gt;imcrp){</span>
+<span class='curline'><a href='../S/8.html#L152'>memmove</a>           152 console.c          memmove(crt, crt+80, sizeof(crt[0])*23*80);</span>
+<span class='curline'><a href='../S/11.html#L140'>memmove</a>           140 defs.h         void*           memmove(void*, const void*, uint);</span>
+<span class='curline'><a href='../S/22.html#L37'>memmove</a>            37 fs.c             memmove(sb, bp-&gt;data, sizeof(*sb));</span>
+<span class='curline'><a href='../S/22.html#L221'>memmove</a>           221 fs.c             memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/22.html#L294'>memmove</a>           294 fs.c               memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/22.html#L459'>memmove</a>           459 fs.c               memmove(dst, bp-&gt;data + off%BSIZE, m);</span>
+<span class='curline'><a href='../S/22.html#L487'>memmove</a>           487 fs.c               memmove(bp-&gt;data + off%BSIZE, src, m);</span>
+<span class='curline'><a href='../S/22.html#L596'>memmove</a>           596 fs.c               memmove(name, s, DIRSIZ);</span>
+<span class='curline'><a href='../S/22.html#L598'>memmove</a>           598 fs.c               memmove(name, s, len);</span>
+<span class='curline'><a href='../S/25.html#L33'>memmove</a>            33 grep.c               memmove(buf, p, m);</span>
+<span class='curline'><a href='../S/38.html#L77'>memmove</a>            77 log.c              memmove(dbuf-&gt;data, lbuf-&gt;data, BSIZE);  // copy block to dst</span>
+<span class='curline'><a href='../S/38.html#L183'>memmove</a>           183 log.c              memmove(to-&gt;data, from-&gt;data, BSIZE);</span>
+<span class='curline'><a href='../S/39.html#L20'>memmove</a>            20 ls.c             memmove(buf, p, strlen(p));</span>
+<span class='curline'><a href='../S/39.html#L60'>memmove</a>            60 ls.c                 memmove(p, de.name, DIRSIZ);</span>
+<span class='curline'><a href='../S/40.html#L78'>memmove</a>            78 main.c           memmove(code, _binary_entryother_start, (uint)_binary_entryother_size);</span>
+<span class='curline'><a href='../S/42.html#L55'>memmove</a>            55 memide.c           memmove(p, b-&gt;data, BSIZE);</span>
+<span class='curline'><a href='../S/42.html#L57'>memmove</a>            57 memide.c           memmove(b-&gt;data, p, BSIZE);</span>
+<span class='curline'><a href='../S/45.html#L114'>memmove</a>           114 mkfs.c           memmove(buf, &amp;sb, sizeof(sb));</span>
+<span class='curline'><a href='../S/75.html#L55'>memmove</a>            55 string.c         return memmove(dst, src, n);</span>
+<span class='curline'><a href='../S/93.html#L30'>memmove</a>            30 user.h         void *memmove(void*, void*, int);</span>
+<span class='curline'><a href='../S/97.html#L193'>memmove</a>           193 vm.c             memmove(mem, init, sz);</span>
+<span class='curline'><a href='../S/97.html#L335'>memmove</a>           335 vm.c               memmove(mem, (char*)P2V(pa), PGSIZE);</span>
+<span class='curline'><a href='../S/97.html#L379'>memmove</a>           379 vm.c               memmove(pa0 + (va - va0), buf, n);</span>
 </pre>
 </body>
 </html>

@@ -1,17 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>randstate</title>
+<title>re</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/92.html#L1698'>randstate</a>        1698 usertests.c    unsigned long randstate = 1;</span>
-<span class='curline'><a href='../S/92.html#L1702'>randstate</a>        1702 usertests.c      randstate = randstate * 1664525 + 1013904223;</span>
-<span class='curline'><a href='../S/92.html#L1703'>randstate</a>        1703 usertests.c      return randstate;</span>
+<span class='curline'><a href='../S/25.html#L73'>re</a>                 73 grep.c         match(char *re, char *text)</span>
+<span class='curline'><a href='../S/25.html#L75'>re</a>                 75 grep.c           if(re[0] == '^')</span>
+<span class='curline'><a href='../S/25.html#L76'>re</a>                 76 grep.c             return matchhere(re+1, text);</span>
+<span class='curline'><a href='../S/25.html#L78'>re</a>                 78 grep.c             if(matchhere(re, text))</span>
+<span class='curline'><a href='../S/25.html#L85'>re</a>                 85 grep.c         int matchhere(char *re, char *text)</span>
+<span class='curline'><a href='../S/25.html#L87'>re</a>                 87 grep.c           if(re[0] == '\0')</span>
+<span class='curline'><a href='../S/25.html#L89'>re</a>                 89 grep.c           if(re[1] == '*')</span>
+<span class='curline'><a href='../S/25.html#L90'>re</a>                 90 grep.c             return matchstar(re[0], re+2, text);</span>
+<span class='curline'><a href='../S/25.html#L91'>re</a>                 91 grep.c           if(re[0] == '$' &amp;&amp; re[1] == '\0')</span>
+<span class='curline'><a href='../S/25.html#L93'>re</a>                 93 grep.c           if(*text!='\0' &amp;&amp; (re[0]=='.' || re[0]==*text))</span>
+<span class='curline'><a href='../S/25.html#L94'>re</a>                 94 grep.c             return matchhere(re+1, text+1);</span>
+<span class='curline'><a href='../S/25.html#L99'>re</a>                 99 grep.c         int matchstar(int c, char *re, char *text)</span>
+<span class='curline'><a href='../S/25.html#L102'>re</a>                102 grep.c             if(matchhere(re, text))</span>
 </pre>
 </body>
 </html>

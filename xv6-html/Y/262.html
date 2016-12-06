@@ -1,16 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>off_31_16</title>
+<title>ofile</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L202'>off_31_16</a>         202 mmu.h            uint off_31_16 : 16;  // high bits of offset in segment</span>
-<span class='curline'><a href='../S/46.html#L223'>off_31_16</a>         223 mmu.h            (gate).off_31_16 = (uint)(off) &gt;&gt; 16;                  \</span>
+<span class='curline'><a href='../S/56.html#L166'>ofile</a>             166 proc.c             if(proc-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/56.html#L167'>ofile</a>             167 proc.c               np-&gt;ofile[i] = filedup(proc-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/56.html#L197'>ofile</a>             197 proc.c             if(proc-&gt;ofile[fd]){</span>
+<span class='curline'><a href='../S/56.html#L198'>ofile</a>             198 proc.c               fileclose(proc-&gt;ofile[fd]);</span>
+<span class='curline'><a href='../S/56.html#L199'>ofile</a>             199 proc.c               proc-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/57.html#L63'>ofile</a>              63 proc.h           struct file *ofile[NOFILE];  // Open files</span>
+<span class='curline'><a href='../S/80.html#L29'>ofile</a>              29 sysfile.c        if(fd &lt; 0 || fd &gt;= NOFILE || (f=proc-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/80.html#L46'>ofile</a>              46 sysfile.c          if(proc-&gt;ofile[fd] == 0){</span>
+<span class='curline'><a href='../S/80.html#L47'>ofile</a>              47 sysfile.c            proc-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/80.html#L100'>ofile</a>             100 sysfile.c        proc-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/80.html#L435'>ofile</a>             435 sysfile.c            proc-&gt;ofile[fd0] = 0;</span>
 </pre>
 </body>
 </html>

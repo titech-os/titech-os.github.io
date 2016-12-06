@@ -3,42 +3,42 @@
 <head>
 <title>tf</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L93'>tf</a>                 93 exec.c           proc-&gt;tf-&gt;eip = elf.entry;  // main</span>
-<span class='curline'><a href='../S/17.html#L94'>tf</a>                 94 exec.c           proc-&gt;tf-&gt;esp = sp;</span>
-<span class='curline'><a href='../S/56.html#L60'>tf</a>                 60 proc.c           sp -= sizeof *p-&gt;tf;</span>
-<span class='curline'><a href='../S/56.html#L61'>tf</a>                 61 proc.c           p-&gt;tf = (struct trapframe*)sp;</span>
-<span class='curline'><a href='../S/56.html#L90'>tf</a>                 90 proc.c           memset(p-&gt;tf, 0, sizeof(*p-&gt;tf));</span>
-<span class='curline'><a href='../S/56.html#L91'>tf</a>                 91 proc.c           p-&gt;tf-&gt;cs = (SEG_UCODE &lt;&lt; 3) | DPL_USER;</span>
-<span class='curline'><a href='../S/56.html#L92'>tf</a>                 92 proc.c           p-&gt;tf-&gt;ds = (SEG_UDATA &lt;&lt; 3) | DPL_USER;</span>
-<span class='curline'><a href='../S/56.html#L93'>tf</a>                 93 proc.c           p-&gt;tf-&gt;es = p-&gt;tf-&gt;ds;</span>
-<span class='curline'><a href='../S/56.html#L94'>tf</a>                 94 proc.c           p-&gt;tf-&gt;ss = p-&gt;tf-&gt;ds;</span>
-<span class='curline'><a href='../S/56.html#L95'>tf</a>                 95 proc.c           p-&gt;tf-&gt;eflags = FL_IF;</span>
-<span class='curline'><a href='../S/56.html#L96'>tf</a>                 96 proc.c           p-&gt;tf-&gt;esp = PGSIZE;</span>
-<span class='curline'><a href='../S/56.html#L97'>tf</a>                 97 proc.c           p-&gt;tf-&gt;eip = 0;  // beginning of initcode.S</span>
-<span class='curline'><a href='../S/56.html#L147'>tf</a>                147 proc.c           *np-&gt;tf = *proc-&gt;tf;</span>
-<span class='curline'><a href='../S/56.html#L150'>tf</a>                150 proc.c           np-&gt;tf-&gt;eax = 0;</span>
-<span class='curline'><a href='../S/57.html#L62'>tf</a>                 62 proc.h           struct trapframe *tf;        // Trap frame for current syscall</span>
-<span class='curline'><a href='../S/76.html#L48'>tf</a>                 48 syscall.c        return fetchint(proc-&gt;tf-&gt;esp + 4 + 4*n, ip);</span>
-<span class='curline'><a href='../S/76.html#L131'>tf</a>                131 syscall.c        num = proc-&gt;tf-&gt;eax;</span>
-<span class='curline'><a href='../S/76.html#L133'>tf</a>                133 syscall.c          proc-&gt;tf-&gt;eax = syscalls[num]();</span>
-<span class='curline'><a href='../S/76.html#L137'>tf</a>                137 syscall.c          proc-&gt;tf-&gt;eax = -1;</span>
-<span class='curline'><a href='../S/83.html#L37'>tf</a>                 37 trap.c         trap(struct trapframe *tf)</span>
-<span class='curline'><a href='../S/83.html#L39'>tf</a>                 39 trap.c           if(tf-&gt;trapno == T_SYSCALL){</span>
-<span class='curline'><a href='../S/83.html#L42'>tf</a>                 42 trap.c             proc-&gt;tf = tf;</span>
-<span class='curline'><a href='../S/83.html#L49'>tf</a>                 49 trap.c           switch(tf-&gt;trapno){</span>
-<span class='curline'><a href='../S/83.html#L77'>tf</a>                 77 trap.c                     cpu-&gt;id, tf-&gt;cs, tf-&gt;eip);</span>
-<span class='curline'><a href='../S/83.html#L83'>tf</a>                 83 trap.c             if(proc == 0 || (tf-&gt;cs&amp;3) == 0){</span>
-<span class='curline'><a href='../S/83.html#L86'>tf</a>                 86 trap.c                       tf-&gt;trapno, cpu-&gt;id, tf-&gt;eip, rcr2());</span>
-<span class='curline'><a href='../S/83.html#L92'>tf</a>                 92 trap.c                     proc-&gt;pid, proc-&gt;name, tf-&gt;trapno, tf-&gt;err, cpu-&gt;id, tf-&gt;eip, </span>
-<span class='curline'><a href='../S/83.html#L100'>tf</a>                100 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
-<span class='curline'><a href='../S/83.html#L105'>tf</a>                105 trap.c           if(proc &amp;&amp; proc-&gt;state == RUNNING &amp;&amp; tf-&gt;trapno == T_IRQ0+IRQ_TIMER)</span>
-<span class='curline'><a href='../S/83.html#L109'>tf</a>                109 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
+<span class='curline'><a href='../S/17.html#L98'>tf</a>                 98 exec.c           proc-&gt;tf-&gt;eip = elf.entry;  // main</span>
+<span class='curline'><a href='../S/17.html#L99'>tf</a>                 99 exec.c           proc-&gt;tf-&gt;esp = sp;</span>
+<span class='curline'><a href='../S/56.html#L63'>tf</a>                 63 proc.c           sp -= sizeof *p-&gt;tf;</span>
+<span class='curline'><a href='../S/56.html#L64'>tf</a>                 64 proc.c           p-&gt;tf = (struct trapframe*)sp;</span>
+<span class='curline'><a href='../S/56.html#L94'>tf</a>                 94 proc.c           memset(p-&gt;tf, 0, sizeof(*p-&gt;tf));</span>
+<span class='curline'><a href='../S/56.html#L95'>tf</a>                 95 proc.c           p-&gt;tf-&gt;cs = (SEG_UCODE &lt;&lt; 3) | DPL_USER;</span>
+<span class='curline'><a href='../S/56.html#L96'>tf</a>                 96 proc.c           p-&gt;tf-&gt;ds = (SEG_UDATA &lt;&lt; 3) | DPL_USER;</span>
+<span class='curline'><a href='../S/56.html#L97'>tf</a>                 97 proc.c           p-&gt;tf-&gt;es = p-&gt;tf-&gt;ds;</span>
+<span class='curline'><a href='../S/56.html#L98'>tf</a>                 98 proc.c           p-&gt;tf-&gt;ss = p-&gt;tf-&gt;ds;</span>
+<span class='curline'><a href='../S/56.html#L99'>tf</a>                 99 proc.c           p-&gt;tf-&gt;eflags = FL_IF;</span>
+<span class='curline'><a href='../S/56.html#L100'>tf</a>                100 proc.c           p-&gt;tf-&gt;esp = PGSIZE;</span>
+<span class='curline'><a href='../S/56.html#L101'>tf</a>                101 proc.c           p-&gt;tf-&gt;eip = 0;  // beginning of initcode.S</span>
+<span class='curline'><a href='../S/56.html#L160'>tf</a>                160 proc.c           *np-&gt;tf = *proc-&gt;tf;</span>
+<span class='curline'><a href='../S/56.html#L163'>tf</a>                163 proc.c           np-&gt;tf-&gt;eax = 0;</span>
+<span class='curline'><a href='../S/57.html#L59'>tf</a>                 59 proc.h           struct trapframe *tf;        // Trap frame for current syscall</span>
+<span class='curline'><a href='../S/78.html#L48'>tf</a>                 48 syscall.c        return fetchint(proc-&gt;tf-&gt;esp + 4 + 4*n, ip);</span>
+<span class='curline'><a href='../S/78.html#L131'>tf</a>                131 syscall.c        num = proc-&gt;tf-&gt;eax;</span>
+<span class='curline'><a href='../S/78.html#L133'>tf</a>                133 syscall.c          proc-&gt;tf-&gt;eax = syscalls[num]();</span>
+<span class='curline'><a href='../S/78.html#L137'>tf</a>                137 syscall.c          proc-&gt;tf-&gt;eax = -1;</span>
+<span class='curline'><a href='../S/85.html#L37'>tf</a>                 37 trap.c         trap(struct trapframe *tf)</span>
+<span class='curline'><a href='../S/85.html#L39'>tf</a>                 39 trap.c           if(tf-&gt;trapno == T_SYSCALL){</span>
+<span class='curline'><a href='../S/85.html#L42'>tf</a>                 42 trap.c             proc-&gt;tf = tf;</span>
+<span class='curline'><a href='../S/85.html#L49'>tf</a>                 49 trap.c           switch(tf-&gt;trapno){</span>
+<span class='curline'><a href='../S/85.html#L77'>tf</a>                 77 trap.c                     cpunum(), tf-&gt;cs, tf-&gt;eip);</span>
+<span class='curline'><a href='../S/85.html#L83'>tf</a>                 83 trap.c             if(proc == 0 || (tf-&gt;cs&amp;3) == 0){</span>
+<span class='curline'><a href='../S/85.html#L86'>tf</a>                 86 trap.c                       tf-&gt;trapno, cpunum(), tf-&gt;eip, rcr2());</span>
+<span class='curline'><a href='../S/85.html#L92'>tf</a>                 92 trap.c                     proc-&gt;pid, proc-&gt;name, tf-&gt;trapno, tf-&gt;err, cpunum(), tf-&gt;eip,</span>
+<span class='curline'><a href='../S/85.html#L100'>tf</a>                100 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
+<span class='curline'><a href='../S/85.html#L105'>tf</a>                105 trap.c           if(proc &amp;&amp; proc-&gt;state == RUNNING &amp;&amp; tf-&gt;trapno == T_IRQ0+IRQ_TIMER)</span>
+<span class='curline'><a href='../S/85.html#L109'>tf</a>                109 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
 </pre>
 </body>
 </html>

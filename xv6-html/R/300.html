@@ -1,20 +1,43 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>fork1</title>
+<title>flags</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/64.html#L52'>fork1</a>              52 sh.c           int fork1(void);  // Fork but panics on failure.</span>
-<span class='curline'><a href='../S/64.html#L94'>fork1</a>              94 sh.c               if(fork1() == 0)</span>
-<span class='curline'><a href='../S/64.html#L104'>fork1</a>             104 sh.c               if(fork1() == 0){</span>
-<span class='curline'><a href='../S/64.html#L111'>fork1</a>             111 sh.c               if(fork1() == 0){</span>
-<span class='curline'><a href='../S/64.html#L126'>fork1</a>             126 sh.c               if(fork1() == 0)</span>
-<span class='curline'><a href='../S/64.html#L168'>fork1</a>             168 sh.c               if(fork1() == 0)</span>
+<span class='curline'><a href='../S/2.html#L82'>flags</a>              82 bio.c              if(b-&gt;refcnt == 0 &amp;&amp; (b-&gt;flags &amp; B_DIRTY) == 0) {</span>
+<span class='curline'><a href='../S/2.html#L85'>flags</a>              85 bio.c                b-&gt;flags = 0;</span>
+<span class='curline'><a href='../S/2.html#L102'>flags</a>             102 bio.c            if(!(b-&gt;flags &amp; B_VALID)) {</span>
+<span class='curline'><a href='../S/2.html#L114'>flags</a>             114 bio.c            b-&gt;flags |= B_DIRTY;</span>
+<span class='curline'><a href='../S/5.html#L2'>flags</a>               2 buf.h            int flags;</span>
+<span class='curline'><a href='../S/14.html#L15'>flags</a>              15 elf.h            uint flags;</span>
+<span class='curline'><a href='../S/14.html#L32'>flags</a>              32 elf.h            uint flags;</span>
+<span class='curline'><a href='../S/20.html#L18'>flags</a>              18 file.h           int flags;          // I_VALID</span>
+<span class='curline'><a href='../S/22.html#L256'>flags</a>             256 fs.c             ip-&gt;flags = 0;</span>
+<span class='curline'><a href='../S/22.html#L286'>flags</a>             286 fs.c             if(!(ip-&gt;flags &amp; I_VALID)){</span>
+<span class='curline'><a href='../S/22.html#L296'>flags</a>             296 fs.c               ip-&gt;flags |= I_VALID;</span>
+<span class='curline'><a href='../S/22.html#L323'>flags</a>             323 fs.c             if(ip-&gt;ref == 1 &amp;&amp; (ip-&gt;flags &amp; I_VALID) &amp;&amp; ip-&gt;nlink == 0){</span>
+<span class='curline'><a href='../S/22.html#L330'>flags</a>             330 fs.c               ip-&gt;flags = 0;</span>
+<span class='curline'><a href='../S/26.html#L95'>flags</a>              95 ide.c            if(b-&gt;flags &amp; B_DIRTY){</span>
+<span class='curline'><a href='../S/26.html#L119'>flags</a>             119 ide.c            if(!(b-&gt;flags &amp; B_DIRTY) &amp;&amp; idewait(1) &gt;= 0)</span>
+<span class='curline'><a href='../S/26.html#L123'>flags</a>             123 ide.c            b-&gt;flags |= B_VALID;</span>
+<span class='curline'><a href='../S/26.html#L124'>flags</a>             124 ide.c            b-&gt;flags &amp;= ~B_DIRTY;</span>
+<span class='curline'><a href='../S/26.html#L145'>flags</a>             145 ide.c            if((b-&gt;flags &amp; (B_VALID|B_DIRTY)) == B_VALID)</span>
+<span class='curline'><a href='../S/26.html#L163'>flags</a>             163 ide.c            while((b-&gt;flags &amp; (B_VALID|B_DIRTY)) != B_VALID){</span>
+<span class='curline'><a href='../S/38.html#L229'>flags</a>             229 log.c            b-&gt;flags |= B_DIRTY; // prevent eviction</span>
+<span class='curline'><a href='../S/42.html#L44'>flags</a>              44 memide.c         if((b-&gt;flags &amp; (B_VALID|B_DIRTY)) == B_VALID)</span>
+<span class='curline'><a href='../S/42.html#L53'>flags</a>              53 memide.c         if(b-&gt;flags &amp; B_DIRTY){</span>
+<span class='curline'><a href='../S/42.html#L54'>flags</a>              54 memide.c           b-&gt;flags &amp;= ~B_DIRTY;</span>
+<span class='curline'><a href='../S/42.html#L58'>flags</a>              58 memide.c         b-&gt;flags |= B_VALID;</span>
+<span class='curline'><a href='../S/48.html#L33'>flags</a>              33 mp.h             uchar flags;                  // CPU flags</span>
+<span class='curline'><a href='../S/48.html#L44'>flags</a>              44 mp.h             uchar flags;                  // I/O APIC flags</span>
+<span class='curline'><a href='../S/97.html#L321'>flags</a>             321 vm.c             uint pa, i, flags;</span>
+<span class='curline'><a href='../S/97.html#L332'>flags</a>             332 vm.c               flags = PTE_FLAGS(*pte);</span>
+<span class='curline'><a href='../S/97.html#L336'>flags</a>             336 vm.c               if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) &lt; 0)</span>
 </pre>
 </body>
 </html>

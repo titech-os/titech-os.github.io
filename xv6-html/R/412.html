@@ -1,16 +1,94 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>parseexec</title>
+<title>panic</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/64.html#L325'>parseexec</a>         325 sh.c           struct cmd *parseexec(char**, char*);</span>
-<span class='curline'><a href='../S/64.html#L367'>parseexec</a>         367 sh.c             cmd = parseexec(ps, es);</span>
+<span class='curline'><a href='../S/2.html#L92'>panic</a>              92 bio.c            panic("bget: no buffers");</span>
+<span class='curline'><a href='../S/2.html#L113'>panic</a>             113 bio.c              panic("bwrite");</span>
+<span class='curline'><a href='../S/2.html#L124'>panic</a>             124 bio.c              panic("brelse");</span>
+<span class='curline'><a href='../S/8.html#L66'>panic</a>              66 console.c          panic("null fmt");</span>
+<span class='curline'><a href='../S/8.html#L149'>panic</a>             149 console.c          panic("pos under/overflow");</span>
+<span class='curline'><a href='../S/11.html#L23'>panic</a>              23 defs.h         void            panic(char*) __attribute__((noreturn));</span>
+<span class='curline'><a href='../S/19.html#L49'>panic</a>              49 file.c             panic("filedup");</span>
+<span class='curline'><a href='../S/19.html#L63'>panic</a>              63 file.c             panic("fileclose");</span>
+<span class='curline'><a href='../S/19.html#L112'>panic</a>             112 file.c           panic("fileread");</span>
+<span class='curline'><a href='../S/19.html#L150'>panic</a>             150 file.c                 panic("short filewrite");</span>
+<span class='curline'><a href='../S/19.html#L155'>panic</a>             155 file.c           panic("filewrite");</span>
+<span class='curline'><a href='../S/22.html#L77'>panic</a>              77 fs.c             panic("balloc: out of blocks");</span>
+<span class='curline'><a href='../S/22.html#L92'>panic</a>              92 fs.c               panic("freeing free block");</span>
+<span class='curline'><a href='../S/22.html#L204'>panic</a>             204 fs.c             panic("ialloc: no inodes");</span>
+<span class='curline'><a href='../S/22.html#L250'>panic</a>             250 fs.c               panic("iget: no inodes");</span>
+<span class='curline'><a href='../S/22.html#L282'>panic</a>             282 fs.c               panic("ilock");</span>
+<span class='curline'><a href='../S/22.html#L298'>panic</a>             298 fs.c                 panic("ilock: no type");</span>
+<span class='curline'><a href='../S/22.html#L307'>panic</a>             307 fs.c               panic("iunlock");</span>
+<span class='curline'><a href='../S/22.html#L381'>panic</a>             381 fs.c             panic("bmap: out of range");</span>
+<span class='curline'><a href='../S/22.html#L517'>panic</a>             517 fs.c               panic("dirlookup not DIR");</span>
+<span class='curline'><a href='../S/22.html#L521'>panic</a>             521 fs.c                 panic("dirlink read");</span>
+<span class='curline'><a href='../S/22.html#L553'>panic</a>             553 fs.c                 panic("dirlink read");</span>
+<span class='curline'><a href='../S/22.html#L561'>panic</a>             561 fs.c               panic("dirlink");</span>
+<span class='curline'><a href='../S/26.html#L78'>panic</a>              78 ide.c              panic("idestart");</span>
+<span class='curline'><a href='../S/26.html#L80'>panic</a>              80 ide.c              panic("incorrect blockno");</span>
+<span class='curline'><a href='../S/26.html#L86'>panic</a>              86 ide.c            if (sector_per_block &gt; 7) panic("idestart");</span>
+<span class='curline'><a href='../S/26.html#L144'>panic</a>             144 ide.c              panic("iderw: buf not locked");</span>
+<span class='curline'><a href='../S/26.html#L146'>panic</a>             146 ide.c              panic("iderw: nothing to do");</span>
+<span class='curline'><a href='../S/26.html#L148'>panic</a>             148 ide.c              panic("iderw: ide disk 1 not present");</span>
+<span class='curline'><a href='../S/30.html#L65'>panic</a>              65 kalloc.c           panic("kfree");</span>
+<span class='curline'><a href='../S/35.html#L126'>panic</a>             126 lapic.c          panic("unknown apicid\n");</span>
+<span class='curline'><a href='../S/38.html#L57'>panic</a>              57 log.c              panic("initlog: too big logheader");</span>
+<span class='curline'><a href='../S/38.html#L153'>panic</a>             153 log.c              panic("log.committing");</span>
+<span class='curline'><a href='../S/38.html#L217'>panic</a>             217 log.c              panic("too big a transaction");</span>
+<span class='curline'><a href='../S/38.html#L219'>panic</a>             219 log.c              panic("log_write outside of trans");</span>
+<span class='curline'><a href='../S/42.html#L43'>panic</a>              43 memide.c           panic("iderw: buf not locked");</span>
+<span class='curline'><a href='../S/42.html#L45'>panic</a>              45 memide.c           panic("iderw: nothing to do");</span>
+<span class='curline'><a href='../S/42.html#L47'>panic</a>              47 memide.c           panic("iderw: request not for disk 1");</span>
+<span class='curline'><a href='../S/42.html#L49'>panic</a>              49 memide.c           panic("iderw: block out of range");</span>
+<span class='curline'><a href='../S/56.html#L91'>panic</a>              91 proc.c             panic("userinit: out of memory?");</span>
+<span class='curline'><a href='../S/56.html#L193'>panic</a>             193 proc.c             panic("init exiting");</span>
+<span class='curline'><a href='../S/56.html#L225'>panic</a>             225 proc.c           panic("zombie exit");</span>
+<span class='curline'><a href='../S/56.html#L325'>panic</a>             325 proc.c             panic("sched ptable.lock");</span>
+<span class='curline'><a href='../S/56.html#L327'>panic</a>             327 proc.c             panic("sched locks");</span>
+<span class='curline'><a href='../S/56.html#L329'>panic</a>             329 proc.c             panic("sched running");</span>
+<span class='curline'><a href='../S/56.html#L331'>panic</a>             331 proc.c             panic("sched interruptible");</span>
+<span class='curline'><a href='../S/56.html#L374'>panic</a>             374 proc.c             panic("sleep");</span>
+<span class='curline'><a href='../S/56.html#L377'>panic</a>             377 proc.c             panic("sleep without lk");</span>
+<span class='curline'><a href='../S/64.html#L53'>panic</a>              53 sh.c           void panic(char*);</span>
+<span class='curline'><a href='../S/64.html#L72'>panic</a>              72 sh.c               panic("runcmd");</span>
+<span class='curline'><a href='../S/64.html#L103'>panic</a>             103 sh.c                 panic("pipe");</span>
+<span class='curline'><a href='../S/64.html#L188'>panic</a>             188 sh.c               panic("fork");</span>
+<span class='curline'><a href='../S/64.html#L338'>panic</a>             338 sh.c               panic("syntax");</span>
+<span class='curline'><a href='../S/64.html#L383'>panic</a>             383 sh.c                 panic("missing file for redirection");</span>
+<span class='curline'><a href='../S/64.html#L405'>panic</a>             405 sh.c               panic("parseblock");</span>
+<span class='curline'><a href='../S/64.html#L409'>panic</a>             409 sh.c               panic("syntax - missing )");</span>
+<span class='curline'><a href='../S/64.html#L435'>panic</a>             435 sh.c                 panic("syntax");</span>
+<span class='curline'><a href='../S/64.html#L440'>panic</a>             440 sh.c                 panic("too many args");</span>
+<span class='curline'><a href='../S/70.html#L29'>panic</a>              29 spinlock.c         panic("acquire");</span>
+<span class='curline'><a href='../S/70.html#L50'>panic</a>              50 spinlock.c         panic("release");</span>
+<span class='curline'><a href='../S/70.html#L116'>panic</a>             116 spinlock.c         panic("popcli - interruptible");</span>
+<span class='curline'><a href='../S/70.html#L118'>panic</a>             118 spinlock.c         panic("popcli");</span>
+<span class='curline'><a href='../S/80.html#L175'>panic</a>             175 sysfile.c            panic("isdirempty: readi");</span>
+<span class='curline'><a href='../S/80.html#L211'>panic</a>             211 sysfile.c          panic("unlink: nlink &lt; 1");</span>
+<span class='curline'><a href='../S/80.html#L219'>panic</a>             219 sysfile.c          panic("unlink: writei");</span>
+<span class='curline'><a href='../S/80.html#L261'>panic</a>             261 sysfile.c          panic("create: ialloc");</span>
+<span class='curline'><a href='../S/80.html#L274'>panic</a>             274 sysfile.c            panic("create dots");</span>
+<span class='curline'><a href='../S/80.html#L278'>panic</a>             278 sysfile.c          panic("create: dirlink");</span>
+<span class='curline'><a href='../S/85.html#L87'>panic</a>              87 trap.c               panic("trap");</span>
+<span class='curline'><a href='../S/97.html#L81'>panic</a>              81 vm.c                 panic("remap");</span>
+<span class='curline'><a href='../S/97.html#L137'>panic</a>             137 vm.c               panic("PHYSTOP too high");</span>
+<span class='curline'><a href='../S/97.html#L176'>panic</a>             176 vm.c               panic("switchuvm: no pgdir");</span>
+<span class='curline'><a href='../S/97.html#L189'>panic</a>             189 vm.c               panic("inituvm: more than a page");</span>
+<span class='curline'><a href='../S/97.html#L205'>panic</a>             205 vm.c               panic("loaduvm: addr must be page aligned");</span>
+<span class='curline'><a href='../S/97.html#L208'>panic</a>             208 vm.c                 panic("loaduvm: address should exist");</span>
+<span class='curline'><a href='../S/97.html#L273'>panic</a>             273 vm.c                   panic("kfree");</span>
+<span class='curline'><a href='../S/97.html#L290'>panic</a>             290 vm.c               panic("freevm: no pgdir");</span>
+<span class='curline'><a href='../S/97.html#L310'>panic</a>             310 vm.c               panic("clearpteu");</span>
+<span class='curline'><a href='../S/97.html#L328'>panic</a>             328 vm.c                 panic("copyuvm: pte should exist");</span>
+<span class='curline'><a href='../S/97.html#L330'>panic</a>             330 vm.c                 panic("copyuvm: page not present");</span>
 </pre>
 </body>
 </html>

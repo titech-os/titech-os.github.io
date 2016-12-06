@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>COM1</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/90.html#L25'>COM1</a>               25 uart.c           outb(COM1+2, 0);</span>
+<span class='curline'><a href='../S/90.html#L28'>COM1</a>               28 uart.c           outb(COM1+3, 0x80);    // Unlock divisor</span>
+<span class='curline'><a href='../S/90.html#L29'>COM1</a>               29 uart.c           outb(COM1+0, 115200/9600);</span>
+<span class='curline'><a href='../S/90.html#L30'>COM1</a>               30 uart.c           outb(COM1+1, 0);</span>
+<span class='curline'><a href='../S/90.html#L31'>COM1</a>               31 uart.c           outb(COM1+3, 0x03);    // Lock divisor, 8 data bits.</span>
+<span class='curline'><a href='../S/90.html#L32'>COM1</a>               32 uart.c           outb(COM1+4, 0);</span>
+<span class='curline'><a href='../S/90.html#L33'>COM1</a>               33 uart.c           outb(COM1+1, 0x01);    // Enable receive interrupts.</span>
+<span class='curline'><a href='../S/90.html#L36'>COM1</a>               36 uart.c           if(inb(COM1+5) == 0xFF)</span>
+<span class='curline'><a href='../S/90.html#L42'>COM1</a>               42 uart.c           inb(COM1+2);</span>
+<span class='curline'><a href='../S/90.html#L43'>COM1</a>               43 uart.c           inb(COM1+0);</span>
+<span class='curline'><a href='../S/90.html#L59'>COM1</a>               59 uart.c           for(i = 0; i &lt; 128 &amp;&amp; !(inb(COM1+5) &amp; 0x20); i++)</span>
+<span class='curline'><a href='../S/90.html#L61'>COM1</a>               61 uart.c           outb(COM1+0, c);</span>
+<span class='curline'><a href='../S/90.html#L69'>COM1</a>               69 uart.c           if(!(inb(COM1+5) &amp; 0x01))</span>
+<span class='curline'><a href='../S/90.html#L71'>COM1</a>               71 uart.c           return inb(COM1+0);</span>
+</pre>
+</body>
+</html>

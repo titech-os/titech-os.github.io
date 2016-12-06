@@ -3,264 +3,265 @@
 <head>
 <title>log.c</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/log.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L53'>[^]</a><a href='#L211'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L54'>[^]</a><a href='#L212'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <h2 class='header'>DEFINITIONS</h2>
 This source file includes following definitions.
 <ol>
-<li><a href='#L53' title='Defined at 53.'>initlog</a></li>
-<li><a href='#L69' title='Defined at 69.'>install_trans</a></li>
-<li><a href='#L85' title='Defined at 85.'>read_head</a></li>
-<li><a href='#L101' title='Defined at 101.'>write_head</a></li>
-<li><a href='#L115' title='Defined at 115.'>recover_from_log</a></li>
-<li><a href='#L125' title='Defined at 125.'>begin_op</a></li>
-<li><a href='#L145' title='Defined at 145.'>end_op</a></li>
-<li><a href='#L175' title='Defined at 175.'>write_log</a></li>
-<li><a href='#L190' title='Defined at 190.'>commit</a></li>
-<li><a href='#L211' title='Defined at 211.'>log_write</a></li>
+<li><a href='#L54' title='Defined at 54.'>initlog</a></li>
+<li><a href='#L70' title='Defined at 70.'>install_trans</a></li>
+<li><a href='#L86' title='Defined at 86.'>read_head</a></li>
+<li><a href='#L102' title='Defined at 102.'>write_head</a></li>
+<li><a href='#L116' title='Defined at 116.'>recover_from_log</a></li>
+<li><a href='#L126' title='Defined at 126.'>begin_op</a></li>
+<li><a href='#L146' title='Defined at 146.'>end_op</a></li>
+<li><a href='#L176' title='Defined at 176.'>write_log</a></li>
+<li><a href='#L191' title='Defined at 191.'>commit</a></li>
+<li><a href='#L212' title='Defined at 212.'>log_write</a></li>
 </ol>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='87.html'>types.h</a>"
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='89.html'>types.h</a>"
 <a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='11.html'>defs.h</a>"
 <a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='50.html'>param.h</a>"
-<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='69.html'>spinlock.h</a>"
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='23.html'>fs.h</a>"
-<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='5.html'>buf.h</a>"
-<a id='L7' name='L7'></a>   7 
-<a id='L8' name='L8'></a>   8 <em class='comment'>// Simple logging that allows concurrent FS system calls.</em>
-<a id='L9' name='L9'></a>   9 <em class='comment'>//</em>
-<a id='L10' name='L10'></a>  10 <em class='comment'>// A log transaction contains the updates of multiple FS system</em>
-<a id='L11' name='L11'></a>  11 <em class='comment'>// calls. The logging system only commits when there are</em>
-<a id='L12' name='L12'></a>  12 <em class='comment'>// no FS system calls active. Thus there is never</em>
-<a id='L13' name='L13'></a>  13 <em class='comment'>// any reasoning required about whether a commit might</em>
-<a id='L14' name='L14'></a>  14 <em class='comment'>// write an uncommitted system call's updates to disk.</em>
-<a id='L15' name='L15'></a>  15 <em class='comment'>//</em>
-<a id='L16' name='L16'></a>  16 <em class='comment'>// A system call should call begin_op()/end_op() to mark</em>
-<a id='L17' name='L17'></a>  17 <em class='comment'>// its start and end. Usually begin_op() just increments</em>
-<a id='L18' name='L18'></a>  18 <em class='comment'>// the count of in-progress FS system calls and returns.</em>
-<a id='L19' name='L19'></a>  19 <em class='comment'>// But if it thinks the log is close to running out, it</em>
-<a id='L20' name='L20'></a>  20 <em class='comment'>// sleeps until the last outstanding end_op() commits.</em>
-<a id='L21' name='L21'></a>  21 <em class='comment'>//</em>
-<a id='L22' name='L22'></a>  22 <em class='comment'>// The log is a physical re-do log containing disk blocks.</em>
-<a id='L23' name='L23'></a>  23 <em class='comment'>// The on-disk log format:</em>
-<a id='L24' name='L24'></a>  24 <em class='comment'>//   header block, containing block #s for block A, B, C, ...</em>
-<a id='L25' name='L25'></a>  25 <em class='comment'>//   block A</em>
-<a id='L26' name='L26'></a>  26 <em class='comment'>//   block B</em>
-<a id='L27' name='L27'></a>  27 <em class='comment'>//   block C</em>
-<a id='L28' name='L28'></a>  28 <em class='comment'>//   ...</em>
-<a id='L29' name='L29'></a>  29 <em class='comment'>// Log appends are synchronous.</em>
-<a id='L30' name='L30'></a>  30 
-<a id='L31' name='L31'></a>  31 <em class='comment'>// Contents of the header block, used for both the on-disk header block</em>
-<a id='L32' name='L32'></a>  32 <em class='comment'>// and to keep track in memory of logged block# before commit.</em>
-<a id='L33' name='L33'></a>  33 <strong class='reserved'>struct</strong> <a href='../R/372.html' title='Multiple referred from 4 places.'>logheader</a> <em class='brace'>{</em>
-<a id='L34' name='L34'></a>  34   <strong class='reserved'>int</strong> <a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>;   
-<a id='L35' name='L35'></a>  35   <strong class='reserved'>int</strong> <a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../S/50.html#L11' title='Defined at 11 in param.h.'>LOGSIZE</a>];
-<a id='L36' name='L36'></a>  36 <em class='brace'>}</em>;
-<a id='L37' name='L37'></a>  37 
-<a id='L38' name='L38'></a>  38 <strong class='reserved'>struct</strong> <a href='../R/370.html' title='Multiple referred from 49 places.'>log</a> <em class='brace'>{</em>
-<a id='L39' name='L39'></a>  39   <strong class='reserved'>struct</strong> <a href='../S/69.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a> <a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>;
-<a id='L40' name='L40'></a>  40   <strong class='reserved'>int</strong> <a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>;
-<a id='L41' name='L41'></a>  41   <strong class='reserved'>int</strong> <a href='../Y/371.html' title='Multiple used in 51 places.'>size</a>;
-<a id='L42' name='L42'></a>  42   <strong class='reserved'>int</strong> <a href='../Y/272.html' title='Multiple used in 6 places.'>outstanding</a>; <em class='comment'>// how many FS sys calls are executing.</em>
-<a id='L43' name='L43'></a>  43   <strong class='reserved'>int</strong> <a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a>;  <em class='comment'>// in commit(), please wait.</em>
-<a id='L44' name='L44'></a>  44   <strong class='reserved'>int</strong> <a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>;
-<a id='L45' name='L45'></a>  45   <strong class='reserved'>struct</strong> <a href='../S/38.html#L33' title='Defined at 33 in log.c.'>logheader</a> <a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>;
-<a id='L46' name='L46'></a>  46 <em class='brace'>}</em>;
-<a id='L47' name='L47'></a>  47 <strong class='reserved'>struct</strong> <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a> <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>;
-<a id='L48' name='L48'></a>  48 
-<a id='L49' name='L49'></a>  49 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/38.html#L115' title='Defined at 115 in log.c.'>recover_from_log</a>(<strong class='reserved'>void</strong>);
-<a id='L50' name='L50'></a>  50 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/38.html#L190' title='Defined at 190 in log.c.'>commit</a>();
-<a id='L51' name='L51'></a>  51 
-<a id='L52' name='L52'></a>  52 <strong class='reserved'>void</strong>
-<a id='L53' name='L53'></a>  53 <a href='../R/331.html' title='Multiple referred from 2 places.'>initlog</a>(<strong class='reserved'>int</strong> <a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>)
-<a id='L54' name='L54'></a>  54 <em class='brace'>{</em>
-<a id='L55' name='L55'></a>  55   <strong class='reserved'>if</strong> (<strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/38.html#L33' title='Defined at 33 in log.c.'>logheader</a>) &gt;= <a href='../S/23.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>)
-<a id='L56' name='L56'></a>  56     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("initlog: too big logheader");
-<a id='L57' name='L57'></a>  57 
-<a id='L58' name='L58'></a>  58   <strong class='reserved'>struct</strong> <a href='../S/23.html#L13' title='Defined at 13 in fs.h.'>superblock</a> <a href='../Y/352.html' title='Multiple used in 38 places.'>sb</a>;
-<a id='L59' name='L59'></a>  59   <a href='../S/68.html#L13' title='Defined at 13 in spinlock.c.'>initlock</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>, "log");
-<a id='L60' name='L60'></a>  60   <a href='../S/22.html#L29' title='Defined at 29 in fs.c.'>readsb</a>(<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, &amp;<a href='../Y/352.html' title='Multiple used in 38 places.'>sb</a>);
-<a id='L61' name='L61'></a>  61   <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a> = <a href='../Y/352.html' title='Multiple used in 38 places.'>sb</a>.<a href='../Y/205.html' title='Multiple used in 4 places.'>logstart</a>;
-<a id='L62' name='L62'></a>  62   <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/371.html' title='Multiple used in 51 places.'>size</a> = <a href='../Y/352.html' title='Multiple used in 38 places.'>sb</a>.<a href='../Y/246.html' title='Multiple used in 9 places.'>nlog</a>;
-<a id='L63' name='L63'></a>  63   <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a> = <a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>;
-<a id='L64' name='L64'></a>  64   <a href='../S/38.html#L115' title='Defined at 115 in log.c.'>recover_from_log</a>();
-<a id='L65' name='L65'></a>  65 <em class='brace'>}</em>
-<a id='L66' name='L66'></a>  66 
-<a id='L67' name='L67'></a>  67 <em class='comment'>// Copy committed blocks from log to their home location</em>
-<a id='L68' name='L68'></a>  68 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> 
-<a id='L69' name='L69'></a>  69 <a href='../R/335.html' title='Multiple referred from 2 places.'>install_trans</a>(<strong class='reserved'>void</strong>)
-<a id='L70' name='L70'></a>  70 <em class='brace'>{</em>
-<a id='L71' name='L71'></a>  71   <strong class='reserved'>int</strong> <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>;
-<a id='L72' name='L72'></a>  72 
-<a id='L73' name='L73'></a>  73   <strong class='reserved'>for</strong> (<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
-<a id='L74' name='L74'></a>  74     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/190.html' title='Multiple used in 3 places.'>lbuf</a> = <a href='../S/2.html#L100' title='Defined at 100 in bio.c.'>bread</a>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>+<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// read log block</em>
-<a id='L75' name='L75'></a>  75     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/72.html' title='Multiple used in 4 places.'>dbuf</a> = <a href='../S/2.html#L100' title='Defined at 100 in bio.c.'>bread</a>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// read dst</em>
-<a id='L76' name='L76'></a>  76     <a href='../D/473.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/72.html' title='Multiple used in 4 places.'>dbuf</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>, <a href='../Y/190.html' title='Multiple used in 3 places.'>lbuf</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>, <a href='../S/23.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>);  <em class='comment'>// copy block to dst</em>
-<a id='L77' name='L77'></a>  77     <a href='../S/2.html#L113' title='Defined at 113 in bio.c.'>bwrite</a>(<a href='../Y/72.html' title='Multiple used in 4 places.'>dbuf</a>);  <em class='comment'>// write dst to disk</em>
-<a id='L78' name='L78'></a>  78     <a href='../S/2.html#L124' title='Defined at 124 in bio.c.'>brelse</a>(<a href='../Y/190.html' title='Multiple used in 3 places.'>lbuf</a>); 
-<a id='L79' name='L79'></a>  79     <a href='../S/2.html#L124' title='Defined at 124 in bio.c.'>brelse</a>(<a href='../Y/72.html' title='Multiple used in 4 places.'>dbuf</a>);
-<a id='L80' name='L80'></a>  80   <em class='brace'>}</em>
-<a id='L81' name='L81'></a>  81 <em class='brace'>}</em>
-<a id='L82' name='L82'></a>  82 
-<a id='L83' name='L83'></a>  83 <em class='comment'>// Read the log header from disk into the in-memory log header</em>
-<a id='L84' name='L84'></a>  84 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L85' name='L85'></a>  85 <a href='../S/38.html#L117' title='Referred from 117 in log.c.'>read_head</a>(<strong class='reserved'>void</strong>)
-<a id='L86' name='L86'></a>  86 <em class='brace'>{</em>
-<a id='L87' name='L87'></a>  87   <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> = <a href='../S/2.html#L100' title='Defined at 100 in bio.c.'>bread</a>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>);
-<a id='L88' name='L88'></a>  88   <strong class='reserved'>struct</strong> <a href='../S/38.html#L33' title='Defined at 33 in log.c.'>logheader</a> *<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a> = (<strong class='reserved'>struct</strong> <a href='../S/38.html#L33' title='Defined at 33 in log.c.'>logheader</a> *) (<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>);
-<a id='L89' name='L89'></a>  89   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
-<a id='L90' name='L90'></a>  90   <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> = <a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>;
-<a id='L91' name='L91'></a>  91   <strong class='reserved'>for</strong> (<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> &lt; <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++) <em class='brace'>{</em>
-<a id='L92' name='L92'></a>  92     <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>] = <a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>];
-<a id='L93' name='L93'></a>  93   <em class='brace'>}</em>
-<a id='L94' name='L94'></a>  94   <a href='../S/2.html#L124' title='Defined at 124 in bio.c.'>brelse</a>(<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>);
-<a id='L95' name='L95'></a>  95 <em class='brace'>}</em>
-<a id='L96' name='L96'></a>  96 
-<a id='L97' name='L97'></a>  97 <em class='comment'>// Write in-memory log header to disk.</em>
-<a id='L98' name='L98'></a>  98 <em class='comment'>// This is the true point at which the</em>
-<a id='L99' name='L99'></a>  99 <em class='comment'>// current transaction commits.</em>
-<a id='L100' name='L100'></a> 100 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L101' name='L101'></a> 101 <a href='../R/531.html' title='Multiple referred from 3 places.'>write_head</a>(<strong class='reserved'>void</strong>)
-<a id='L102' name='L102'></a> 102 <em class='brace'>{</em>
-<a id='L103' name='L103'></a> 103   <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> = <a href='../S/2.html#L100' title='Defined at 100 in bio.c.'>bread</a>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>);
-<a id='L104' name='L104'></a> 104   <strong class='reserved'>struct</strong> <a href='../S/38.html#L33' title='Defined at 33 in log.c.'>logheader</a> *<a href='../Y/150.html' title='Multiple used in 3 places.'>hb</a> = (<strong class='reserved'>struct</strong> <a href='../S/38.html#L33' title='Defined at 33 in log.c.'>logheader</a> *) (<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>);
-<a id='L105' name='L105'></a> 105   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
-<a id='L106' name='L106'></a> 106   <a href='../Y/150.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> = <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>;
-<a id='L107' name='L107'></a> 107   <strong class='reserved'>for</strong> (<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> &lt; <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++) <em class='brace'>{</em>
-<a id='L108' name='L108'></a> 108     <a href='../Y/150.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>] = <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>];
-<a id='L109' name='L109'></a> 109   <em class='brace'>}</em>
-<a id='L110' name='L110'></a> 110   <a href='../S/2.html#L113' title='Defined at 113 in bio.c.'>bwrite</a>(<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>);
-<a id='L111' name='L111'></a> 111   <a href='../S/2.html#L124' title='Defined at 124 in bio.c.'>brelse</a>(<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>);
-<a id='L112' name='L112'></a> 112 <em class='brace'>}</em>
-<a id='L113' name='L113'></a> 113 
-<a id='L114' name='L114'></a> 114 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L115' name='L115'></a> 115 <a href='../R/447.html' title='Multiple referred from 2 places.'>recover_from_log</a>(<strong class='reserved'>void</strong>)
-<a id='L116' name='L116'></a> 116 <em class='brace'>{</em>
-<a id='L117' name='L117'></a> 117   <a href='../S/38.html#L85' title='Defined at 85 in log.c.'>read_head</a>();      
-<a id='L118' name='L118'></a> 118   <a href='../S/38.html#L69' title='Defined at 69 in log.c.'>install_trans</a>(); <em class='comment'>// if committed, copy from log to disk</em>
-<a id='L119' name='L119'></a> 119   <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> = 0;
-<a id='L120' name='L120'></a> 120   <a href='../S/38.html#L101' title='Defined at 101 in log.c.'>write_head</a>(); <em class='comment'>// clear the log</em>
-<a id='L121' name='L121'></a> 121 <em class='brace'>}</em>
-<a id='L122' name='L122'></a> 122 
-<a id='L123' name='L123'></a> 123 <em class='comment'>// called at the start of each FS system call.</em>
-<a id='L124' name='L124'></a> 124 <strong class='reserved'>void</strong>
-<a id='L125' name='L125'></a> 125 <a href='../R/232.html' title='Multiple referred from 11 places.'>begin_op</a>(<strong class='reserved'>void</strong>)
-<a id='L126' name='L126'></a> 126 <em class='brace'>{</em>
-<a id='L127' name='L127'></a> 127   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L128' name='L128'></a> 128   <strong class='reserved'>while</strong>(1)<em class='brace'>{</em>
-<a id='L129' name='L129'></a> 129     <strong class='reserved'>if</strong>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a>)<em class='brace'>{</em>
-<a id='L130' name='L130'></a> 130       <a href='../S/56.html#L352' title='Defined at 352 in proc.c.'>sleep</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>, &amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L131' name='L131'></a> 131     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> + (<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/272.html' title='Multiple used in 6 places.'>outstanding</a>+1)*<a href='../S/50.html#L10' title='Defined at 10 in param.h.'>MAXOPBLOCKS</a> &gt; <a href='../S/50.html#L11' title='Defined at 11 in param.h.'>LOGSIZE</a>)<em class='brace'>{</em>
-<a id='L132' name='L132'></a> 132       <em class='comment'>// this op might exhaust log space; wait for commit.</em>
-<a id='L133' name='L133'></a> 133       <a href='../S/56.html#L352' title='Defined at 352 in proc.c.'>sleep</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>, &amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L134' name='L134'></a> 134     <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
-<a id='L135' name='L135'></a> 135       <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/272.html' title='Multiple used in 6 places.'>outstanding</a> += 1;
-<a id='L136' name='L136'></a> 136       <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L137' name='L137'></a> 137       <strong class='reserved'>break</strong>;
-<a id='L138' name='L138'></a> 138     <em class='brace'>}</em>
-<a id='L139' name='L139'></a> 139   <em class='brace'>}</em>
-<a id='L140' name='L140'></a> 140 <em class='brace'>}</em>
-<a id='L141' name='L141'></a> 141 
-<a id='L142' name='L142'></a> 142 <em class='comment'>// called at the end of each FS system call.</em>
-<a id='L143' name='L143'></a> 143 <em class='comment'>// commits if this was the last outstanding operation.</em>
-<a id='L144' name='L144'></a> 144 <strong class='reserved'>void</strong>
-<a id='L145' name='L145'></a> 145 <a href='../R/278.html' title='Multiple referred from 26 places.'>end_op</a>(<strong class='reserved'>void</strong>)
-<a id='L146' name='L146'></a> 146 <em class='brace'>{</em>
-<a id='L147' name='L147'></a> 147   <strong class='reserved'>int</strong> <a href='../Y/79.html' title='Multiple used in 3 places.'>do_commit</a> = 0;
-<a id='L148' name='L148'></a> 148 
-<a id='L149' name='L149'></a> 149   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L150' name='L150'></a> 150   <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/272.html' title='Multiple used in 6 places.'>outstanding</a> -= 1;
-<a id='L151' name='L151'></a> 151   <strong class='reserved'>if</strong>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a>)
-<a id='L152' name='L152'></a> 152     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("log.committing");
-<a id='L153' name='L153'></a> 153   <strong class='reserved'>if</strong>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/272.html' title='Multiple used in 6 places.'>outstanding</a> == 0)<em class='brace'>{</em>
-<a id='L154' name='L154'></a> 154     <a href='../Y/79.html' title='Multiple used in 3 places.'>do_commit</a> = 1;
-<a id='L155' name='L155'></a> 155     <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a> = 1;
-<a id='L156' name='L156'></a> 156   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
-<a id='L157' name='L157'></a> 157     <em class='comment'>// begin_op() may be waiting for log space.</em>
-<a id='L158' name='L158'></a> 158     <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>);
-<a id='L159' name='L159'></a> 159   <em class='brace'>}</em>
-<a id='L160' name='L160'></a> 160   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L161' name='L161'></a> 161 
-<a id='L162' name='L162'></a> 162   <strong class='reserved'>if</strong>(<a href='../Y/79.html' title='Multiple used in 3 places.'>do_commit</a>)<em class='brace'>{</em>
-<a id='L163' name='L163'></a> 163     <em class='comment'>// call commit w/o holding locks, since not allowed</em>
-<a id='L164' name='L164'></a> 164     <em class='comment'>// to sleep with locks.</em>
-<a id='L165' name='L165'></a> 165     <a href='../S/38.html#L190' title='Defined at 190 in log.c.'>commit</a>();
-<a id='L166' name='L166'></a> 166     <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L167' name='L167'></a> 167     <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a> = 0;
-<a id='L168' name='L168'></a> 168     <a href='../S/56.html#L401' title='Defined at 401 in proc.c.'>wakeup</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>);
-<a id='L169' name='L169'></a> 169     <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L170' name='L170'></a> 170   <em class='brace'>}</em>
-<a id='L171' name='L171'></a> 171 <em class='brace'>}</em>
-<a id='L172' name='L172'></a> 172 
-<a id='L173' name='L173'></a> 173 <em class='comment'>// Copy modified blocks from cache to log.</em>
-<a id='L174' name='L174'></a> 174 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> 
-<a id='L175' name='L175'></a> 175 <a href='../S/38.html#L193' title='Referred from 193 in log.c.'>write_log</a>(<strong class='reserved'>void</strong>)
-<a id='L176' name='L176'></a> 176 <em class='brace'>{</em>
-<a id='L177' name='L177'></a> 177   <strong class='reserved'>int</strong> <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>;
-<a id='L178' name='L178'></a> 178 
-<a id='L179' name='L179'></a> 179   <strong class='reserved'>for</strong> (<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
-<a id='L180' name='L180'></a> 180     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a> = <a href='../S/2.html#L100' title='Defined at 100 in bio.c.'>bread</a>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>+<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// log block</em>
-<a id='L181' name='L181'></a> 181     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/136.html' title='Multiple used in 3 places.'>from</a> = <a href='../S/2.html#L100' title='Defined at 100 in bio.c.'>bread</a>(<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/74.html' title='Multiple used in 60 places.'>dev</a>, <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// cache block</em>
-<a id='L182' name='L182'></a> 182     <a href='../D/473.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>, <a href='../Y/136.html' title='Multiple used in 3 places.'>from</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>, <a href='../S/23.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>);
-<a id='L183' name='L183'></a> 183     <a href='../S/2.html#L113' title='Defined at 113 in bio.c.'>bwrite</a>(<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a>);  <em class='comment'>// write the log</em>
-<a id='L184' name='L184'></a> 184     <a href='../S/2.html#L124' title='Defined at 124 in bio.c.'>brelse</a>(<a href='../Y/136.html' title='Multiple used in 3 places.'>from</a>); 
-<a id='L185' name='L185'></a> 185     <a href='../S/2.html#L124' title='Defined at 124 in bio.c.'>brelse</a>(<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a>);
-<a id='L186' name='L186'></a> 186   <em class='brace'>}</em>
-<a id='L187' name='L187'></a> 187 <em class='brace'>}</em>
-<a id='L188' name='L188'></a> 188 
-<a id='L189' name='L189'></a> 189 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L190' name='L190'></a> 190 <a href='../R/254.html' title='Multiple referred from 2 places.'>commit</a>()
-<a id='L191' name='L191'></a> 191 <em class='brace'>{</em>
-<a id='L192' name='L192'></a> 192   <strong class='reserved'>if</strong> (<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> &gt; 0) <em class='brace'>{</em>
-<a id='L193' name='L193'></a> 193     <a href='../S/38.html#L175' title='Defined at 175 in log.c.'>write_log</a>();     <em class='comment'>// Write modified blocks from cache to log</em>
-<a id='L194' name='L194'></a> 194     <a href='../S/38.html#L101' title='Defined at 101 in log.c.'>write_head</a>();    <em class='comment'>// Write header to disk -- the real commit</em>
-<a id='L195' name='L195'></a> 195     <a href='../S/38.html#L69' title='Defined at 69 in log.c.'>install_trans</a>(); <em class='comment'>// Now install writes to home locations</em>
-<a id='L196' name='L196'></a> 196     <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> = 0; 
-<a id='L197' name='L197'></a> 197     <a href='../S/38.html#L101' title='Defined at 101 in log.c.'>write_head</a>();    <em class='comment'>// Erase the transaction from the log</em>
-<a id='L198' name='L198'></a> 198   <em class='brace'>}</em>
-<a id='L199' name='L199'></a> 199 <em class='brace'>}</em>
-<a id='L200' name='L200'></a> 200 
-<a id='L201' name='L201'></a> 201 <em class='comment'>// Caller has modified b-&gt;data and is done with the buffer.</em>
-<a id='L202' name='L202'></a> 202 <em class='comment'>// Record the block number and pin in the cache with B_DIRTY.</em>
-<a id='L203' name='L203'></a> 203 <em class='comment'>// commit()/write_log() will do the disk write.</em>
-<a id='L204' name='L204'></a> 204 <em class='comment'>//</em>
-<a id='L205' name='L205'></a> 205 <em class='comment'>// log_write() replaces bwrite(); a typical use is:</em>
-<a id='L206' name='L206'></a> 206 <em class='comment'>//   bp = bread(...)</em>
-<a id='L207' name='L207'></a> 207 <em class='comment'>//   modify bp-&gt;data[]</em>
-<a id='L208' name='L208'></a> 208 <em class='comment'>//   log_write(bp)</em>
-<a id='L209' name='L209'></a> 209 <em class='comment'>//   brelse(bp)</em>
-<a id='L210' name='L210'></a> 210 <strong class='reserved'>void</strong>
-<a id='L211' name='L211'></a> 211 <a href='../R/371.html' title='Multiple referred from 8 places.'>log_write</a>(<strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/27.html' title='Multiple used in 98 places.'>b</a>)
-<a id='L212' name='L212'></a> 212 <em class='brace'>{</em>
-<a id='L213' name='L213'></a> 213   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
-<a id='L214' name='L214'></a> 214 
-<a id='L215' name='L215'></a> 215   <strong class='reserved'>if</strong> (<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> &gt;= <a href='../S/50.html#L11' title='Defined at 11 in param.h.'>LOGSIZE</a> || <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a> &gt;= <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/371.html' title='Multiple used in 51 places.'>size</a> - 1)
-<a id='L216' name='L216'></a> 216     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("too big a transaction");
-<a id='L217' name='L217'></a> 217   <strong class='reserved'>if</strong> (<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/272.html' title='Multiple used in 6 places.'>outstanding</a> &lt; 1)
-<a id='L218' name='L218'></a> 218     <a href='../D/500.html' title='Multiple defined in 2 places.'>panic</a>("log_write outside of trans");
-<a id='L219' name='L219'></a> 219 
-<a id='L220' name='L220'></a> 220   <a href='../S/68.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L221' name='L221'></a> 221   <strong class='reserved'>for</strong> (<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> &lt; <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++) <em class='brace'>{</em>
-<a id='L222' name='L222'></a> 222     <strong class='reserved'>if</strong> (<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>] == <a href='../Y/27.html' title='Multiple used in 98 places.'>b</a>-&gt;<a href='../Y/41.html' title='Multiple used in 12 places.'>blockno</a>)   <em class='comment'>// log absorbtion</em>
-<a id='L223' name='L223'></a> 223       <strong class='reserved'>break</strong>;
-<a id='L224' name='L224'></a> 224   <em class='brace'>}</em>
-<a id='L225' name='L225'></a> 225   <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>] = <a href='../Y/27.html' title='Multiple used in 98 places.'>b</a>-&gt;<a href='../Y/41.html' title='Multiple used in 12 places.'>blockno</a>;
-<a id='L226' name='L226'></a> 226   <strong class='reserved'>if</strong> (<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> == <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>)
-<a id='L227' name='L227'></a> 227     <a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/225.html' title='Multiple used in 181 places.'>n</a>++;
-<a id='L228' name='L228'></a> 228   <a href='../Y/27.html' title='Multiple used in 98 places.'>b</a>-&gt;<a href='../S/15.html#L28' title='Defined at 28 in entry.S.'>flags</a> |= <a href='../S/5.html#L12' title='Defined at 12 in buf.h.'>B_DIRTY</a>; <em class='comment'>// prevent eviction</em>
-<a id='L229' name='L229'></a> 229   <a href='../S/68.html#L44' title='Defined at 44 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L38' title='Defined at 38 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 108 places.'>lock</a>);
-<a id='L230' name='L230'></a> 230 <em class='brace'>}</em>
-<a id='L231' name='L231'></a> 231 
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='71.html'>spinlock.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='69.html'>sleeplock.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='23.html'>fs.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='5.html'>buf.h</a>"
+<a id='L8' name='L8'></a>   8 
+<a id='L9' name='L9'></a>   9 <em class='comment'>// Simple logging that allows concurrent FS system calls.</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>//</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>// A log transaction contains the updates of multiple FS system</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>// calls. The logging system only commits when there are</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>// no FS system calls active. Thus there is never</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>// any reasoning required about whether a commit might</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>// write an uncommitted system call's updates to disk.</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>//</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>// A system call should call begin_op()/end_op() to mark</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'>// its start and end. Usually begin_op() just increments</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'>// the count of in-progress FS system calls and returns.</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'>// But if it thinks the log is close to running out, it</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'>// sleeps until the last outstanding end_op() commits.</em>
+<a id='L22' name='L22'></a>  22 <em class='comment'>//</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'>// The log is a physical re-do log containing disk blocks.</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'>// The on-disk log format:</em>
+<a id='L25' name='L25'></a>  25 <em class='comment'>//   header block, containing block #s for block A, B, C, ...</em>
+<a id='L26' name='L26'></a>  26 <em class='comment'>//   block A</em>
+<a id='L27' name='L27'></a>  27 <em class='comment'>//   block B</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'>//   block C</em>
+<a id='L29' name='L29'></a>  29 <em class='comment'>//   ...</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'>// Log appends are synchronous.</em>
+<a id='L31' name='L31'></a>  31 
+<a id='L32' name='L32'></a>  32 <em class='comment'>// Contents of the header block, used for both the on-disk header block</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'>// and to keep track in memory of logged block# before commit.</em>
+<a id='L34' name='L34'></a>  34 <strong class='reserved'>struct</strong> <a href='../R/377.html' title='Multiple referred from 4 places.'>logheader</a> <em class='brace'>{</em>
+<a id='L35' name='L35'></a>  35   <strong class='reserved'>int</strong> <a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>;
+<a id='L36' name='L36'></a>  36   <strong class='reserved'>int</strong> <a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../S/50.html#L11' title='Defined at 11 in param.h.'>LOGSIZE</a>];
+<a id='L37' name='L37'></a>  37 <em class='brace'>}</em>;
+<a id='L38' name='L38'></a>  38 
+<a id='L39' name='L39'></a>  39 <strong class='reserved'>struct</strong> <a href='../R/375.html' title='Multiple referred from 49 places.'>log</a> <em class='brace'>{</em>
+<a id='L40' name='L40'></a>  40   <strong class='reserved'>struct</strong> <a href='../S/71.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a> <a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>;
+<a id='L41' name='L41'></a>  41   <strong class='reserved'>int</strong> <a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>;
+<a id='L42' name='L42'></a>  42   <strong class='reserved'>int</strong> <a href='../Y/371.html' title='Multiple used in 51 places.'>size</a>;
+<a id='L43' name='L43'></a>  43   <strong class='reserved'>int</strong> <a href='../Y/270.html' title='Multiple used in 6 places.'>outstanding</a>; <em class='comment'>// how many FS sys calls are executing.</em>
+<a id='L44' name='L44'></a>  44   <strong class='reserved'>int</strong> <a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a>;  <em class='comment'>// in commit(), please wait.</em>
+<a id='L45' name='L45'></a>  45   <strong class='reserved'>int</strong> <a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>;
+<a id='L46' name='L46'></a>  46   <strong class='reserved'>struct</strong> <a href='../S/38.html#L34' title='Defined at 34 in log.c.'>logheader</a> <a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>;
+<a id='L47' name='L47'></a>  47 <em class='brace'>}</em>;
+<a id='L48' name='L48'></a>  48 <strong class='reserved'>struct</strong> <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a> <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>;
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/38.html#L116' title='Defined at 116 in log.c.'>recover_from_log</a>(<strong class='reserved'>void</strong>);
+<a id='L51' name='L51'></a>  51 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/38.html#L191' title='Defined at 191 in log.c.'>commit</a>();
+<a id='L52' name='L52'></a>  52 
+<a id='L53' name='L53'></a>  53 <strong class='reserved'>void</strong>
+<a id='L54' name='L54'></a>  54 <a href='../R/335.html' title='Multiple referred from 2 places.'>initlog</a>(<strong class='reserved'>int</strong> <a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>)
+<a id='L55' name='L55'></a>  55 <em class='brace'>{</em>
+<a id='L56' name='L56'></a>  56   <strong class='reserved'>if</strong> (<strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/38.html#L34' title='Defined at 34 in log.c.'>logheader</a>) &gt;= <a href='../S/23.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>)
+<a id='L57' name='L57'></a>  57     <a href='../D/504.html' title='Multiple defined in 2 places.'>panic</a>("initlog: too big logheader");
+<a id='L58' name='L58'></a>  58 
+<a id='L59' name='L59'></a>  59   <strong class='reserved'>struct</strong> <a href='../S/23.html#L14' title='Defined at 14 in fs.h.'>superblock</a> <a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>;
+<a id='L60' name='L60'></a>  60   <a href='../S/70.html#L13' title='Defined at 13 in spinlock.c.'>initlock</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>, "log");
+<a id='L61' name='L61'></a>  61   <a href='../S/22.html#L32' title='Defined at 32 in fs.c.'>readsb</a>(<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>, &amp;<a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>);
+<a id='L62' name='L62'></a>  62   <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a> = <a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>.<a href='../Y/205.html' title='Multiple used in 4 places.'>logstart</a>;
+<a id='L63' name='L63'></a>  63   <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/371.html' title='Multiple used in 51 places.'>size</a> = <a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>.<a href='../Y/244.html' title='Multiple used in 9 places.'>nlog</a>;
+<a id='L64' name='L64'></a>  64   <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a> = <a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>;
+<a id='L65' name='L65'></a>  65   <a href='../S/38.html#L116' title='Defined at 116 in log.c.'>recover_from_log</a>();
+<a id='L66' name='L66'></a>  66 <em class='brace'>}</em>
+<a id='L67' name='L67'></a>  67 
+<a id='L68' name='L68'></a>  68 <em class='comment'>// Copy committed blocks from log to their home location</em>
+<a id='L69' name='L69'></a>  69 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L70' name='L70'></a>  70 <a href='../R/340.html' title='Multiple referred from 2 places.'>install_trans</a>(<strong class='reserved'>void</strong>)
+<a id='L71' name='L71'></a>  71 <em class='brace'>{</em>
+<a id='L72' name='L72'></a>  72   <strong class='reserved'>int</strong> <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>;
+<a id='L73' name='L73'></a>  73 
+<a id='L74' name='L74'></a>  74   <strong class='reserved'>for</strong> (<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
+<a id='L75' name='L75'></a>  75     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/190.html' title='Multiple used in 3 places.'>lbuf</a> = <a href='../S/2.html#L97' title='Defined at 97 in bio.c.'>bread</a>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>, <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>+<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// read log block</em>
+<a id='L76' name='L76'></a>  76     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/71.html' title='Multiple used in 4 places.'>dbuf</a> = <a href='../S/2.html#L97' title='Defined at 97 in bio.c.'>bread</a>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>, <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// read dst</em>
+<a id='L77' name='L77'></a>  77     <a href='../D/479.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/71.html' title='Multiple used in 4 places.'>dbuf</a>-&gt;<a href='../Y/68.html' title='Multiple used in 57 places.'>data</a>, <a href='../Y/190.html' title='Multiple used in 3 places.'>lbuf</a>-&gt;<a href='../Y/68.html' title='Multiple used in 57 places.'>data</a>, <a href='../S/23.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>);  <em class='comment'>// copy block to dst</em>
+<a id='L78' name='L78'></a>  78     <a href='../S/2.html#L110' title='Defined at 110 in bio.c.'>bwrite</a>(<a href='../Y/71.html' title='Multiple used in 4 places.'>dbuf</a>);  <em class='comment'>// write dst to disk</em>
+<a id='L79' name='L79'></a>  79     <a href='../S/2.html#L121' title='Defined at 121 in bio.c.'>brelse</a>(<a href='../Y/190.html' title='Multiple used in 3 places.'>lbuf</a>);
+<a id='L80' name='L80'></a>  80     <a href='../S/2.html#L121' title='Defined at 121 in bio.c.'>brelse</a>(<a href='../Y/71.html' title='Multiple used in 4 places.'>dbuf</a>);
+<a id='L81' name='L81'></a>  81   <em class='brace'>}</em>
+<a id='L82' name='L82'></a>  82 <em class='brace'>}</em>
+<a id='L83' name='L83'></a>  83 
+<a id='L84' name='L84'></a>  84 <em class='comment'>// Read the log header from disk into the in-memory log header</em>
+<a id='L85' name='L85'></a>  85 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L86' name='L86'></a>  86 <a href='../S/38.html#L118' title='Referred from 118 in log.c.'>read_head</a>(<strong class='reserved'>void</strong>)
+<a id='L87' name='L87'></a>  87 <em class='brace'>{</em>
+<a id='L88' name='L88'></a>  88   <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> = <a href='../S/2.html#L97' title='Defined at 97 in bio.c.'>bread</a>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>, <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>);
+<a id='L89' name='L89'></a>  89   <strong class='reserved'>struct</strong> <a href='../S/38.html#L34' title='Defined at 34 in log.c.'>logheader</a> *<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a> = (<strong class='reserved'>struct</strong> <a href='../S/38.html#L34' title='Defined at 34 in log.c.'>logheader</a> *) (<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>-&gt;<a href='../Y/68.html' title='Multiple used in 57 places.'>data</a>);
+<a id='L90' name='L90'></a>  90   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>;
+<a id='L91' name='L91'></a>  91   <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> = <a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>;
+<a id='L92' name='L92'></a>  92   <strong class='reserved'>for</strong> (<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a> &lt; <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L93' name='L93'></a>  93     <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>] = <a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>];
+<a id='L94' name='L94'></a>  94   <em class='brace'>}</em>
+<a id='L95' name='L95'></a>  95   <a href='../S/2.html#L121' title='Defined at 121 in bio.c.'>brelse</a>(<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>);
+<a id='L96' name='L96'></a>  96 <em class='brace'>}</em>
+<a id='L97' name='L97'></a>  97 
+<a id='L98' name='L98'></a>  98 <em class='comment'>// Write in-memory log header to disk.</em>
+<a id='L99' name='L99'></a>  99 <em class='comment'>// This is the true point at which the</em>
+<a id='L100' name='L100'></a> 100 <em class='comment'>// current transaction commits.</em>
+<a id='L101' name='L101'></a> 101 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L102' name='L102'></a> 102 <a href='../R/536.html' title='Multiple referred from 3 places.'>write_head</a>(<strong class='reserved'>void</strong>)
+<a id='L103' name='L103'></a> 103 <em class='brace'>{</em>
+<a id='L104' name='L104'></a> 104   <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> = <a href='../S/2.html#L97' title='Defined at 97 in bio.c.'>bread</a>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>, <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>);
+<a id='L105' name='L105'></a> 105   <strong class='reserved'>struct</strong> <a href='../S/38.html#L34' title='Defined at 34 in log.c.'>logheader</a> *<a href='../Y/150.html' title='Multiple used in 3 places.'>hb</a> = (<strong class='reserved'>struct</strong> <a href='../S/38.html#L34' title='Defined at 34 in log.c.'>logheader</a> *) (<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>-&gt;<a href='../Y/68.html' title='Multiple used in 57 places.'>data</a>);
+<a id='L106' name='L106'></a> 106   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>;
+<a id='L107' name='L107'></a> 107   <a href='../Y/150.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> = <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>;
+<a id='L108' name='L108'></a> 108   <strong class='reserved'>for</strong> (<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a> &lt; <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L109' name='L109'></a> 109     <a href='../Y/150.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>] = <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>];
+<a id='L110' name='L110'></a> 110   <em class='brace'>}</em>
+<a id='L111' name='L111'></a> 111   <a href='../S/2.html#L110' title='Defined at 110 in bio.c.'>bwrite</a>(<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>);
+<a id='L112' name='L112'></a> 112   <a href='../S/2.html#L121' title='Defined at 121 in bio.c.'>brelse</a>(<a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a>);
+<a id='L113' name='L113'></a> 113 <em class='brace'>}</em>
+<a id='L114' name='L114'></a> 114 
+<a id='L115' name='L115'></a> 115 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L116' name='L116'></a> 116 <a href='../R/450.html' title='Multiple referred from 2 places.'>recover_from_log</a>(<strong class='reserved'>void</strong>)
+<a id='L117' name='L117'></a> 117 <em class='brace'>{</em>
+<a id='L118' name='L118'></a> 118   <a href='../S/38.html#L86' title='Defined at 86 in log.c.'>read_head</a>();
+<a id='L119' name='L119'></a> 119   <a href='../S/38.html#L70' title='Defined at 70 in log.c.'>install_trans</a>(); <em class='comment'>// if committed, copy from log to disk</em>
+<a id='L120' name='L120'></a> 120   <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> = 0;
+<a id='L121' name='L121'></a> 121   <a href='../S/38.html#L102' title='Defined at 102 in log.c.'>write_head</a>(); <em class='comment'>// clear the log</em>
+<a id='L122' name='L122'></a> 122 <em class='brace'>}</em>
+<a id='L123' name='L123'></a> 123 
+<a id='L124' name='L124'></a> 124 <em class='comment'>// called at the start of each FS system call.</em>
+<a id='L125' name='L125'></a> 125 <strong class='reserved'>void</strong>
+<a id='L126' name='L126'></a> 126 <a href='../R/235.html' title='Multiple referred from 11 places.'>begin_op</a>(<strong class='reserved'>void</strong>)
+<a id='L127' name='L127'></a> 127 <em class='brace'>{</em>
+<a id='L128' name='L128'></a> 128   <a href='../S/70.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L129' name='L129'></a> 129   <strong class='reserved'>while</strong>(1)<em class='brace'>{</em>
+<a id='L130' name='L130'></a> 130     <strong class='reserved'>if</strong>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a>)<em class='brace'>{</em>
+<a id='L131' name='L131'></a> 131       <a href='../S/56.html#L371' title='Defined at 371 in proc.c.'>sleep</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>, &amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L132' name='L132'></a> 132     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> + (<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/270.html' title='Multiple used in 6 places.'>outstanding</a>+1)*<a href='../S/50.html#L10' title='Defined at 10 in param.h.'>MAXOPBLOCKS</a> &gt; <a href='../S/50.html#L11' title='Defined at 11 in param.h.'>LOGSIZE</a>)<em class='brace'>{</em>
+<a id='L133' name='L133'></a> 133       <em class='comment'>// this op might exhaust log space; wait for commit.</em>
+<a id='L134' name='L134'></a> 134       <a href='../S/56.html#L371' title='Defined at 371 in proc.c.'>sleep</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>, &amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L135' name='L135'></a> 135     <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L136' name='L136'></a> 136       <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/270.html' title='Multiple used in 6 places.'>outstanding</a> += 1;
+<a id='L137' name='L137'></a> 137       <a href='../S/70.html#L47' title='Defined at 47 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L138' name='L138'></a> 138       <strong class='reserved'>break</strong>;
+<a id='L139' name='L139'></a> 139     <em class='brace'>}</em>
+<a id='L140' name='L140'></a> 140   <em class='brace'>}</em>
+<a id='L141' name='L141'></a> 141 <em class='brace'>}</em>
+<a id='L142' name='L142'></a> 142 
+<a id='L143' name='L143'></a> 143 <em class='comment'>// called at the end of each FS system call.</em>
+<a id='L144' name='L144'></a> 144 <em class='comment'>// commits if this was the last outstanding operation.</em>
+<a id='L145' name='L145'></a> 145 <strong class='reserved'>void</strong>
+<a id='L146' name='L146'></a> 146 <a href='../R/281.html' title='Multiple referred from 26 places.'>end_op</a>(<strong class='reserved'>void</strong>)
+<a id='L147' name='L147'></a> 147 <em class='brace'>{</em>
+<a id='L148' name='L148'></a> 148   <strong class='reserved'>int</strong> <a href='../Y/78.html' title='Multiple used in 3 places.'>do_commit</a> = 0;
+<a id='L149' name='L149'></a> 149 
+<a id='L150' name='L150'></a> 150   <a href='../S/70.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L151' name='L151'></a> 151   <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/270.html' title='Multiple used in 6 places.'>outstanding</a> -= 1;
+<a id='L152' name='L152'></a> 152   <strong class='reserved'>if</strong>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a>)
+<a id='L153' name='L153'></a> 153     <a href='../D/504.html' title='Multiple defined in 2 places.'>panic</a>("log.committing");
+<a id='L154' name='L154'></a> 154   <strong class='reserved'>if</strong>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/270.html' title='Multiple used in 6 places.'>outstanding</a> == 0)<em class='brace'>{</em>
+<a id='L155' name='L155'></a> 155     <a href='../Y/78.html' title='Multiple used in 3 places.'>do_commit</a> = 1;
+<a id='L156' name='L156'></a> 156     <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a> = 1;
+<a id='L157' name='L157'></a> 157   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L158' name='L158'></a> 158     <em class='comment'>// begin_op() may be waiting for log space.</em>
+<a id='L159' name='L159'></a> 159     <a href='../S/56.html#L420' title='Defined at 420 in proc.c.'>wakeup</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>);
+<a id='L160' name='L160'></a> 160   <em class='brace'>}</em>
+<a id='L161' name='L161'></a> 161   <a href='../S/70.html#L47' title='Defined at 47 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L162' name='L162'></a> 162 
+<a id='L163' name='L163'></a> 163   <strong class='reserved'>if</strong>(<a href='../Y/78.html' title='Multiple used in 3 places.'>do_commit</a>)<em class='brace'>{</em>
+<a id='L164' name='L164'></a> 164     <em class='comment'>// call commit w/o holding locks, since not allowed</em>
+<a id='L165' name='L165'></a> 165     <em class='comment'>// to sleep with locks.</em>
+<a id='L166' name='L166'></a> 166     <a href='../S/38.html#L191' title='Defined at 191 in log.c.'>commit</a>();
+<a id='L167' name='L167'></a> 167     <a href='../S/70.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L168' name='L168'></a> 168     <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/57.html' title='Multiple used in 5 places.'>committing</a> = 0;
+<a id='L169' name='L169'></a> 169     <a href='../S/56.html#L420' title='Defined at 420 in proc.c.'>wakeup</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>);
+<a id='L170' name='L170'></a> 170     <a href='../S/70.html#L47' title='Defined at 47 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L171' name='L171'></a> 171   <em class='brace'>}</em>
+<a id='L172' name='L172'></a> 172 <em class='brace'>}</em>
+<a id='L173' name='L173'></a> 173 
+<a id='L174' name='L174'></a> 174 <em class='comment'>// Copy modified blocks from cache to log.</em>
+<a id='L175' name='L175'></a> 175 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L176' name='L176'></a> 176 <a href='../S/38.html#L194' title='Referred from 194 in log.c.'>write_log</a>(<strong class='reserved'>void</strong>)
+<a id='L177' name='L177'></a> 177 <em class='brace'>{</em>
+<a id='L178' name='L178'></a> 178   <strong class='reserved'>int</strong> <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>;
+<a id='L179' name='L179'></a> 179 
+<a id='L180' name='L180'></a> 180   <strong class='reserved'>for</strong> (<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
+<a id='L181' name='L181'></a> 181     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a> = <a href='../S/2.html#L97' title='Defined at 97 in bio.c.'>bread</a>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>, <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/381.html' title='Multiple used in 6 places.'>start</a>+<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// log block</em>
+<a id='L182' name='L182'></a> 182     <strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/136.html' title='Multiple used in 3 places.'>from</a> = <a href='../S/2.html#L97' title='Defined at 97 in bio.c.'>bread</a>(<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/73.html' title='Multiple used in 59 places.'>dev</a>, <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/395.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// cache block</em>
+<a id='L183' name='L183'></a> 183     <a href='../D/479.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a>-&gt;<a href='../Y/68.html' title='Multiple used in 57 places.'>data</a>, <a href='../Y/136.html' title='Multiple used in 3 places.'>from</a>-&gt;<a href='../Y/68.html' title='Multiple used in 57 places.'>data</a>, <a href='../S/23.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>);
+<a id='L184' name='L184'></a> 184     <a href='../S/2.html#L110' title='Defined at 110 in bio.c.'>bwrite</a>(<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a>);  <em class='comment'>// write the log</em>
+<a id='L185' name='L185'></a> 185     <a href='../S/2.html#L121' title='Defined at 121 in bio.c.'>brelse</a>(<a href='../Y/136.html' title='Multiple used in 3 places.'>from</a>);
+<a id='L186' name='L186'></a> 186     <a href='../S/2.html#L121' title='Defined at 121 in bio.c.'>brelse</a>(<a href='../Y/402.html' title='Multiple used in 4 places.'>to</a>);
+<a id='L187' name='L187'></a> 187   <em class='brace'>}</em>
+<a id='L188' name='L188'></a> 188 <em class='brace'>}</em>
+<a id='L189' name='L189'></a> 189 
+<a id='L190' name='L190'></a> 190 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L191' name='L191'></a> 191 <a href='../R/257.html' title='Multiple referred from 2 places.'>commit</a>()
+<a id='L192' name='L192'></a> 192 <em class='brace'>{</em>
+<a id='L193' name='L193'></a> 193   <strong class='reserved'>if</strong> (<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> &gt; 0) <em class='brace'>{</em>
+<a id='L194' name='L194'></a> 194     <a href='../S/38.html#L176' title='Defined at 176 in log.c.'>write_log</a>();     <em class='comment'>// Write modified blocks from cache to log</em>
+<a id='L195' name='L195'></a> 195     <a href='../S/38.html#L102' title='Defined at 102 in log.c.'>write_head</a>();    <em class='comment'>// Write header to disk -- the real commit</em>
+<a id='L196' name='L196'></a> 196     <a href='../S/38.html#L70' title='Defined at 70 in log.c.'>install_trans</a>(); <em class='comment'>// Now install writes to home locations</em>
+<a id='L197' name='L197'></a> 197     <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> = 0;
+<a id='L198' name='L198'></a> 198     <a href='../S/38.html#L102' title='Defined at 102 in log.c.'>write_head</a>();    <em class='comment'>// Erase the transaction from the log</em>
+<a id='L199' name='L199'></a> 199   <em class='brace'>}</em>
+<a id='L200' name='L200'></a> 200 <em class='brace'>}</em>
+<a id='L201' name='L201'></a> 201 
+<a id='L202' name='L202'></a> 202 <em class='comment'>// Caller has modified b-&gt;data and is done with the buffer.</em>
+<a id='L203' name='L203'></a> 203 <em class='comment'>// Record the block number and pin in the cache with B_DIRTY.</em>
+<a id='L204' name='L204'></a> 204 <em class='comment'>// commit()/write_log() will do the disk write.</em>
+<a id='L205' name='L205'></a> 205 <em class='comment'>//</em>
+<a id='L206' name='L206'></a> 206 <em class='comment'>// log_write() replaces bwrite(); a typical use is:</em>
+<a id='L207' name='L207'></a> 207 <em class='comment'>//   bp = bread(...)</em>
+<a id='L208' name='L208'></a> 208 <em class='comment'>//   modify bp-&gt;data[]</em>
+<a id='L209' name='L209'></a> 209 <em class='comment'>//   log_write(bp)</em>
+<a id='L210' name='L210'></a> 210 <em class='comment'>//   brelse(bp)</em>
+<a id='L211' name='L211'></a> 211 <strong class='reserved'>void</strong>
+<a id='L212' name='L212'></a> 212 <a href='../R/376.html' title='Multiple referred from 8 places.'>log_write</a>(<strong class='reserved'>struct</strong> <a href='../S/5.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/28.html' title='Multiple used in 100 places.'>b</a>)
+<a id='L213' name='L213'></a> 213 <em class='brace'>{</em>
+<a id='L214' name='L214'></a> 214   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>;
+<a id='L215' name='L215'></a> 215 
+<a id='L216' name='L216'></a> 216   <strong class='reserved'>if</strong> (<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> &gt;= <a href='../S/50.html#L11' title='Defined at 11 in param.h.'>LOGSIZE</a> || <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a> &gt;= <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/371.html' title='Multiple used in 51 places.'>size</a> - 1)
+<a id='L217' name='L217'></a> 217     <a href='../D/504.html' title='Multiple defined in 2 places.'>panic</a>("too big a transaction");
+<a id='L218' name='L218'></a> 218   <strong class='reserved'>if</strong> (<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/270.html' title='Multiple used in 6 places.'>outstanding</a> &lt; 1)
+<a id='L219' name='L219'></a> 219     <a href='../D/504.html' title='Multiple defined in 2 places.'>panic</a>("log_write outside of trans");
+<a id='L220' name='L220'></a> 220 
+<a id='L221' name='L221'></a> 221   <a href='../S/70.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L222' name='L222'></a> 222   <strong class='reserved'>for</strong> (<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a> &lt; <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>; <a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L223' name='L223'></a> 223     <strong class='reserved'>if</strong> (<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>] == <a href='../Y/28.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/41.html' title='Multiple used in 12 places.'>blockno</a>)   <em class='comment'>// log absorbtion</em>
+<a id='L224' name='L224'></a> 224       <strong class='reserved'>break</strong>;
+<a id='L225' name='L225'></a> 225   <em class='brace'>}</em>
+<a id='L226' name='L226'></a> 226   <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/40.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a>] = <a href='../Y/28.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/41.html' title='Multiple used in 12 places.'>blockno</a>;
+<a id='L227' name='L227'></a> 227   <strong class='reserved'>if</strong> (<a href='../Y/155.html' title='Multiple used in 269 places.'>i</a> == <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>)
+<a id='L228' name='L228'></a> 228     <a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/196.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/223.html' title='Multiple used in 181 places.'>n</a>++;
+<a id='L229' name='L229'></a> 229   <a href='../Y/28.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../S/15.html#L32' title='Defined at 32 in entry.S.'>flags</a> |= <a href='../S/5.html#L13' title='Defined at 13 in buf.h.'>B_DIRTY</a>; <em class='comment'>// prevent eviction</em>
+<a id='L230' name='L230'></a> 230   <a href='../S/70.html#L47' title='Defined at 47 in spinlock.c.'>release</a>(&amp;<a href='../S/38.html#L39' title='Defined at 39 in log.c.'>log</a>.<a href='../Y/202.html' title='Multiple used in 116 places.'>lock</a>);
+<a id='L231' name='L231'></a> 231 <em class='brace'>}</em>
+<a id='L232' name='L232'></a> 232 
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L53'>[^]</a><a href='#L211'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L54'>[^]</a><a href='#L212'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

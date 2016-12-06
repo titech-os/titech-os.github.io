@@ -1,28 +1,16 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>COM1</title>
+<title>CONSOLE</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/88.html#L24'>COM1</a>               24 uart.c           outb(COM1+2, 0);</span>
-<span class='curline'><a href='../S/88.html#L27'>COM1</a>               27 uart.c           outb(COM1+3, 0x80);    // Unlock divisor</span>
-<span class='curline'><a href='../S/88.html#L28'>COM1</a>               28 uart.c           outb(COM1+0, 115200/9600);</span>
-<span class='curline'><a href='../S/88.html#L29'>COM1</a>               29 uart.c           outb(COM1+1, 0);</span>
-<span class='curline'><a href='../S/88.html#L30'>COM1</a>               30 uart.c           outb(COM1+3, 0x03);    // Lock divisor, 8 data bits.</span>
-<span class='curline'><a href='../S/88.html#L31'>COM1</a>               31 uart.c           outb(COM1+4, 0);</span>
-<span class='curline'><a href='../S/88.html#L32'>COM1</a>               32 uart.c           outb(COM1+1, 0x01);    // Enable receive interrupts.</span>
-<span class='curline'><a href='../S/88.html#L35'>COM1</a>               35 uart.c           if(inb(COM1+5) == 0xFF)</span>
-<span class='curline'><a href='../S/88.html#L41'>COM1</a>               41 uart.c           inb(COM1+2);</span>
-<span class='curline'><a href='../S/88.html#L42'>COM1</a>               42 uart.c           inb(COM1+0);</span>
-<span class='curline'><a href='../S/88.html#L58'>COM1</a>               58 uart.c           for(i = 0; i &lt; 128 &amp;&amp; !(inb(COM1+5) &amp; 0x20); i++)</span>
-<span class='curline'><a href='../S/88.html#L60'>COM1</a>               60 uart.c           outb(COM1+0, c);</span>
-<span class='curline'><a href='../S/88.html#L68'>COM1</a>               68 uart.c           if(!(inb(COM1+5) &amp; 0x01))</span>
-<span class='curline'><a href='../S/88.html#L70'>COM1</a>               70 uart.c           return inb(COM1+0);</span>
+<span class='curline'><a href='../S/8.html#L292'>CONSOLE</a>           292 console.c        devsw[CONSOLE].write = consolewrite;</span>
+<span class='curline'><a href='../S/8.html#L293'>CONSOLE</a>           293 console.c        devsw[CONSOLE].read = consoleread;</span>
 </pre>
 </body>
 </html>

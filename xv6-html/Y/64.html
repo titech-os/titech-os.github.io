@@ -1,19 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>crt</title>
+<title>cs</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/8.html#L127'>crt</a>               127 console.c      static ushort *crt = (ushort*)P2V(0xb8000);  // CGA memory</span>
-<span class='curline'><a href='../S/8.html#L145'>crt</a>               145 console.c          crt[pos++] = (c&amp;0xff) | 0x0700;  // black on white</span>
-<span class='curline'><a href='../S/8.html#L148'>crt</a>               148 console.c          memmove(crt, crt+80, sizeof(crt[0])*23*80);</span>
-<span class='curline'><a href='../S/8.html#L150'>crt</a>               150 console.c          memset(crt+pos, 0, sizeof(crt[0])*(24*80 - pos));</span>
-<span class='curline'><a href='../S/8.html#L157'>crt</a>               157 console.c        crt[pos] = ' ' | 0x0700;</span>
+<span class='curline'><a href='../S/46.html#L179'>cs</a>                179 mmu.h            ushort cs;</span>
+<span class='curline'><a href='../S/46.html#L199'>cs</a>                199 mmu.h            uint cs : 16;         // code segment selector</span>
+<span class='curline'><a href='../S/46.html#L220'>cs</a>                220 mmu.h            (gate).cs = (sel);                                      \</span>
+<span class='curline'><a href='../S/56.html#L95'>cs</a>                 95 proc.c           p-&gt;tf-&gt;cs = (SEG_UCODE &lt;&lt; 3) | DPL_USER;</span>
+<span class='curline'><a href='../S/85.html#L77'>cs</a>                 77 trap.c                     cpunum(), tf-&gt;cs, tf-&gt;eip);</span>
+<span class='curline'><a href='../S/85.html#L83'>cs</a>                 83 trap.c             if(proc == 0 || (tf-&gt;cs&amp;3) == 0){</span>
+<span class='curline'><a href='../S/85.html#L100'>cs</a>                100 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
+<span class='curline'><a href='../S/85.html#L109'>cs</a>                109 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
+<span class='curline'><a href='../S/99.html#L175'>cs</a>                175 x86.h            ushort cs;</span>
 </pre>
 </body>
 </html>

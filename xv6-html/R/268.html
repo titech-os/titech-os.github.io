@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>cpu</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/8.html#L114'>cpu</a>               114 console.c        cprintf("cpu with apicid %d: panic: ", cpu-&gt;apicid);</span>
+<span class='curline'><a href='../S/11.html#L62'>cpu</a>                62 defs.h         void            ioapicenable(int irq, int cpu);</span>
+<span class='curline'><a href='../S/40.html#L59'>cpu</a>                59 main.c           xchg(&amp;cpu-&gt;started, 1); // tell startothers() we're up</span>
+<span class='curline'><a href='../S/40.html#L71'>cpu</a>                71 main.c           struct cpu *c;</span>
+<span class='curline'><a href='../S/47.html#L14'>cpu</a>                14 mp.c           struct cpu cpus[NCPU];</span>
+<span class='curline'><a href='../S/56.html#L300'>cpu</a>               300 proc.c               swtch(&amp;cpu-&gt;scheduler, p-&gt;context);</span>
+<span class='curline'><a href='../S/56.html#L326'>cpu</a>               326 proc.c           if(cpu-&gt;ncli != 1)</span>
+<span class='curline'><a href='../S/56.html#L332'>cpu</a>               332 proc.c           intena = cpu-&gt;intena;</span>
+<span class='curline'><a href='../S/56.html#L333'>cpu</a>               333 proc.c           swtch(&amp;proc-&gt;context, cpu-&gt;scheduler);</span>
+<span class='curline'><a href='../S/56.html#L334'>cpu</a>               334 proc.c           cpu-&gt;intena = intena;</span>
+<span class='curline'><a href='../S/57.html#L12'>cpu</a>                12 proc.h           struct cpu *cpu;</span>
+<span class='curline'><a href='../S/57.html#L16'>cpu</a>                16 proc.h         extern struct cpu cpus[NCPU];</span>
+<span class='curline'><a href='../S/57.html#L27'>cpu</a>                27 proc.h         extern struct cpu *cpu asm("%gs:0");       // &amp;cpus[cpunum()]</span>
+<span class='curline'><a href='../S/70.html#L17'>cpu</a>                17 spinlock.c       lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/70.html#L41'>cpu</a>                41 spinlock.c       lk-&gt;cpu = cpu;</span>
+<span class='curline'><a href='../S/70.html#L53'>cpu</a>                53 spinlock.c       lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/70.html#L92'>cpu</a>                92 spinlock.c       return lock-&gt;locked &amp;&amp; lock-&gt;cpu == cpu;</span>
+<span class='curline'><a href='../S/70.html#L107'>cpu</a>               107 spinlock.c       if(cpu-&gt;ncli == 0)</span>
+<span class='curline'><a href='../S/70.html#L108'>cpu</a>               108 spinlock.c         cpu-&gt;intena = eflags &amp; FL_IF;</span>
+<span class='curline'><a href='../S/70.html#L109'>cpu</a>               109 spinlock.c       cpu-&gt;ncli += 1;</span>
+<span class='curline'><a href='../S/70.html#L117'>cpu</a>               117 spinlock.c       if(--cpu-&gt;ncli &lt; 0)</span>
+<span class='curline'><a href='../S/70.html#L119'>cpu</a>               119 spinlock.c       if(cpu-&gt;ncli == 0 &amp;&amp; cpu-&gt;intena)</span>
+<span class='curline'><a href='../S/71.html#L7'>cpu</a>                 7 spinlock.h       struct cpu *cpu;   // The cpu holding the lock.</span>
+<span class='curline'><a href='../S/97.html#L18'>cpu</a>                18 vm.c             struct cpu *c;</span>
+<span class='curline'><a href='../S/97.html#L31'>cpu</a>                31 vm.c             c-&gt;gdt[SEG_KCPU] = SEG(STA_W, &amp;c-&gt;cpu, 8, 0);</span>
+<span class='curline'><a href='../S/97.html#L37'>cpu</a>                37 vm.c             cpu = c;</span>
+<span class='curline'><a href='../S/97.html#L167'>cpu</a>               167 vm.c             cpu-&gt;gdt[SEG_TSS] = SEG16(STS_T32A, &amp;cpu-&gt;ts, sizeof(cpu-&gt;ts)-1, 0);</span>
+<span class='curline'><a href='../S/97.html#L168'>cpu</a>               168 vm.c             cpu-&gt;gdt[SEG_TSS].s = 0;</span>
+<span class='curline'><a href='../S/97.html#L169'>cpu</a>               169 vm.c             cpu-&gt;ts.ss0 = SEG_KDATA &lt;&lt; 3;</span>
+<span class='curline'><a href='../S/97.html#L170'>cpu</a>               170 vm.c             cpu-&gt;ts.esp0 = (uint)proc-&gt;kstack + KSTACKSIZE;</span>
+<span class='curline'><a href='../S/97.html#L173'>cpu</a>               173 vm.c             cpu-&gt;ts.iomb = (ushort) 0xFFFF;</span>
+</pre>
+</body>
+</html>

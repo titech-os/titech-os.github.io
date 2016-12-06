@@ -1,22 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pfds</title>
+<title>pgtab</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/92.html#L362'>pfds</a>              362 usertests.c      int pfds[2];</span>
-<span class='curline'><a href='../S/92.html#L375'>pfds</a>              375 usertests.c      pipe(pfds);</span>
-<span class='curline'><a href='../S/92.html#L378'>pfds</a>              378 usertests.c        close(pfds[0]);</span>
-<span class='curline'><a href='../S/92.html#L379'>pfds</a>              379 usertests.c        if(write(pfds[1], "x", 1) != 1)</span>
-<span class='curline'><a href='../S/92.html#L381'>pfds</a>              381 usertests.c        close(pfds[1]);</span>
-<span class='curline'><a href='../S/92.html#L386'>pfds</a>              386 usertests.c      close(pfds[1]);</span>
-<span class='curline'><a href='../S/92.html#L387'>pfds</a>              387 usertests.c      if(read(pfds[0], buf, sizeof(buf)) != 1){</span>
-<span class='curline'><a href='../S/92.html#L391'>pfds</a>              391 usertests.c      close(pfds[0]);</span>
+<span class='curline'><a href='../S/97.html#L48'>pgtab</a>              48 vm.c             pte_t *pgtab;</span>
+<span class='curline'><a href='../S/97.html#L52'>pgtab</a>              52 vm.c               pgtab = (pte_t*)P2V(PTE_ADDR(*pde));</span>
+<span class='curline'><a href='../S/97.html#L54'>pgtab</a>              54 vm.c               if(!alloc || (pgtab = (pte_t*)kalloc()) == 0)</span>
+<span class='curline'><a href='../S/97.html#L57'>pgtab</a>              57 vm.c               memset(pgtab, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/97.html#L61'>pgtab</a>              61 vm.c               *pde = V2P(pgtab) | PTE_P | PTE_W | PTE_U;</span>
+<span class='curline'><a href='../S/97.html#L63'>pgtab</a>              63 vm.c             return &amp;pgtab[PTX(va)];</span>
 </pre>
 </body>
 </html>

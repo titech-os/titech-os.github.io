@@ -3,29 +3,25 @@
 <head>
 <title>icache</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L160'>icache</a>            160 fs.c           } icache;</span>
-<span class='curline'><a href='../S/22.html#L165'>icache</a>            165 fs.c             initlock(&amp;icache.lock, "icache");</span>
-<span class='curline'><a href='../S/22.html#L225'>icache</a>            225 fs.c             acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L229'>icache</a>            229 fs.c             for(ip = &amp;icache.inode[0]; ip &lt; &amp;icache.inode[NINODE]; ip++){</span>
-<span class='curline'><a href='../S/22.html#L232'>icache</a>            232 fs.c                 release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L248'>icache</a>            248 fs.c             release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L258'>icache</a>            258 fs.c             acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L260'>icache</a>            260 fs.c             release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L275'>icache</a>            275 fs.c             acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L277'>icache</a>            277 fs.c               sleep(ip, &amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L279'>icache</a>            279 fs.c             release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L304'>icache</a>            304 fs.c             acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L307'>icache</a>            307 fs.c             release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L320'>icache</a>            320 fs.c             acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L326'>icache</a>            326 fs.c               release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L330'>icache</a>            330 fs.c               acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/22.html#L335'>icache</a>            335 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L161'>icache</a>            161 fs.c           } icache;</span>
+<span class='curline'><a href='../S/22.html#L168'>icache</a>            168 fs.c             initlock(&amp;icache.lock, "icache");</span>
+<span class='curline'><a href='../S/22.html#L170'>icache</a>            170 fs.c               initsleeplock(&amp;icache.inode[i].lock, "inode");</span>
+<span class='curline'><a href='../S/22.html#L234'>icache</a>            234 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L238'>icache</a>            238 fs.c             for(ip = &amp;icache.inode[0]; ip &lt; &amp;icache.inode[NINODE]; ip++){</span>
+<span class='curline'><a href='../S/22.html#L241'>icache</a>            241 fs.c                 release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L257'>icache</a>            257 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L267'>icache</a>            267 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L269'>icache</a>            269 fs.c             release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L322'>icache</a>            322 fs.c             acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L325'>icache</a>            325 fs.c               release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L329'>icache</a>            329 fs.c               acquire(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/22.html#L333'>icache</a>            333 fs.c             release(&amp;icache.lock);</span>
 </pre>
 </body>
 </html>

@@ -1,17 +1,118 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>proghdr</title>
+<title>proc</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/4.html#L21'>proghdr</a>            21 bootmain.c       struct proghdr *ph, *eph;</span>
-<span class='curline'><a href='../S/4.html#L35'>proghdr</a>            35 bootmain.c       ph = (struct proghdr*)((uchar*)elf + elf-&gt;phoff);</span>
-<span class='curline'><a href='../S/17.html#L18'>proghdr</a>            18 exec.c           struct proghdr ph;</span>
+<span class='curline'><a href='../S/8.html#L245'>proc</a>              245 console.c            if(proc-&gt;killed){</span>
+<span class='curline'><a href='../S/11.html#L6'>proc</a>                6 defs.h         struct proc;</span>
+<span class='curline'><a href='../S/11.html#L180'>proc</a>              180 defs.h         void            switchuvm(struct proc*);</span>
+<span class='curline'><a href='../S/17.html#L92'>proc</a>               92 exec.c           safestrcpy(proc-&gt;name, last, sizeof(proc-&gt;name));</span>
+<span class='curline'><a href='../S/17.html#L95'>proc</a>               95 exec.c           oldpgdir = proc-&gt;pgdir;</span>
+<span class='curline'><a href='../S/17.html#L96'>proc</a>               96 exec.c           proc-&gt;pgdir = pgdir;</span>
+<span class='curline'><a href='../S/17.html#L97'>proc</a>               97 exec.c           proc-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/17.html#L98'>proc</a>               98 exec.c           proc-&gt;tf-&gt;eip = elf.entry;  // main</span>
+<span class='curline'><a href='../S/17.html#L99'>proc</a>               99 exec.c           proc-&gt;tf-&gt;esp = sp;</span>
+<span class='curline'><a href='../S/17.html#L100'>proc</a>              100 exec.c           switchuvm(proc);</span>
+<span class='curline'><a href='../S/22.html#L618'>proc</a>              618 fs.c               ip = idup(proc-&gt;cwd);</span>
+<span class='curline'><a href='../S/47.html#L98'>proc</a>               98 mp.c             struct mpproc *proc;</span>
+<span class='curline'><a href='../S/47.html#L108'>proc</a>              108 mp.c                 proc = (struct mpproc*)p;</span>
+<span class='curline'><a href='../S/47.html#L110'>proc</a>              110 mp.c                   cpus[ncpu].apicid = proc-&gt;apicid;  // apicid may differ from ncpu</span>
+<span class='curline'><a href='../S/52.html#L86'>proc</a>               86 pipe.c               if(p-&gt;readopen == 0 || proc-&gt;killed){</span>
+<span class='curline'><a href='../S/52.html#L107'>proc</a>              107 pipe.c             if(proc-&gt;killed){</span>
+<span class='curline'><a href='../S/56.html#L12'>proc</a>               12 proc.c           struct proc proc[NPROC];</span>
+<span class='curline'><a href='../S/56.html#L15'>proc</a>               15 proc.c         static struct proc *initproc;</span>
+<span class='curline'><a href='../S/56.html#L34'>proc</a>               34 proc.c         static struct proc*</span>
+<span class='curline'><a href='../S/56.html#L37'>proc</a>               37 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L42'>proc</a>               42 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span>
+<span class='curline'><a href='../S/56.html#L84'>proc</a>               84 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L124'>proc</a>              124 proc.c           sz = proc-&gt;sz;</span>
+<span class='curline'><a href='../S/56.html#L126'>proc</a>              126 proc.c             if((sz = allocuvm(proc-&gt;pgdir, sz, sz + n)) == 0)</span>
+<span class='curline'><a href='../S/56.html#L129'>proc</a>              129 proc.c             if((sz = deallocuvm(proc-&gt;pgdir, sz, sz + n)) == 0)</span>
+<span class='curline'><a href='../S/56.html#L132'>proc</a>              132 proc.c           proc-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/56.html#L133'>proc</a>              133 proc.c           switchuvm(proc);</span>
+<span class='curline'><a href='../S/56.html#L144'>proc</a>              144 proc.c           struct proc *np;</span>
+<span class='curline'><a href='../S/56.html#L152'>proc</a>              152 proc.c           if((np-&gt;pgdir = copyuvm(proc-&gt;pgdir, proc-&gt;sz)) == 0){</span>
+<span class='curline'><a href='../S/56.html#L158'>proc</a>              158 proc.c           np-&gt;sz = proc-&gt;sz;</span>
+<span class='curline'><a href='../S/56.html#L159'>proc</a>              159 proc.c           np-&gt;parent = proc;</span>
+<span class='curline'><a href='../S/56.html#L160'>proc</a>              160 proc.c           *np-&gt;tf = *proc-&gt;tf;</span>
+<span class='curline'><a href='../S/56.html#L166'>proc</a>              166 proc.c             if(proc-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/56.html#L167'>proc</a>              167 proc.c               np-&gt;ofile[i] = filedup(proc-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/56.html#L168'>proc</a>              168 proc.c           np-&gt;cwd = idup(proc-&gt;cwd);</span>
+<span class='curline'><a href='../S/56.html#L170'>proc</a>              170 proc.c           safestrcpy(np-&gt;name, proc-&gt;name, sizeof(proc-&gt;name));</span>
+<span class='curline'><a href='../S/56.html#L189'>proc</a>              189 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L192'>proc</a>              192 proc.c           if(proc == initproc)</span>
+<span class='curline'><a href='../S/56.html#L197'>proc</a>              197 proc.c             if(proc-&gt;ofile[fd]){</span>
+<span class='curline'><a href='../S/56.html#L198'>proc</a>              198 proc.c               fileclose(proc-&gt;ofile[fd]);</span>
+<span class='curline'><a href='../S/56.html#L199'>proc</a>              199 proc.c               proc-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/56.html#L204'>proc</a>              204 proc.c           iput(proc-&gt;cwd);</span>
+<span class='curline'><a href='../S/56.html#L206'>proc</a>              206 proc.c           proc-&gt;cwd = 0;</span>
+<span class='curline'><a href='../S/56.html#L211'>proc</a>              211 proc.c           wakeup1(proc-&gt;parent);</span>
+<span class='curline'><a href='../S/56.html#L214'>proc</a>              214 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/56.html#L215'>proc</a>              215 proc.c             if(p-&gt;parent == proc){</span>
+<span class='curline'><a href='../S/56.html#L223'>proc</a>              223 proc.c           proc-&gt;state = ZOMBIE;</span>
+<span class='curline'><a href='../S/56.html#L233'>proc</a>              233 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L240'>proc</a>              240 proc.c             for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/56.html#L241'>proc</a>              241 proc.c               if(p-&gt;parent != proc)</span>
+<span class='curline'><a href='../S/56.html#L261'>proc</a>              261 proc.c             if(!havekids || proc-&gt;killed){</span>
+<span class='curline'><a href='../S/56.html#L267'>proc</a>              267 proc.c             sleep(proc, &amp;ptable.lock);  //DOC: wait-sleep</span>
+<span class='curline'><a href='../S/56.html#L282'>proc</a>              282 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L290'>proc</a>              290 proc.c             for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/56.html#L297'>proc</a>              297 proc.c               proc = p;</span>
+<span class='curline'><a href='../S/56.html#L305'>proc</a>              305 proc.c               proc = 0;</span>
+<span class='curline'><a href='../S/56.html#L328'>proc</a>              328 proc.c           if(proc-&gt;state == RUNNING)</span>
+<span class='curline'><a href='../S/56.html#L333'>proc</a>              333 proc.c           swtch(&amp;proc-&gt;context, cpu-&gt;scheduler);</span>
+<span class='curline'><a href='../S/56.html#L342'>proc</a>              342 proc.c           proc-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/56.html#L373'>proc</a>              373 proc.c           if(proc == 0)</span>
+<span class='curline'><a href='../S/56.html#L391'>proc</a>              391 proc.c           proc-&gt;chan = chan;</span>
+<span class='curline'><a href='../S/56.html#L392'>proc</a>              392 proc.c           proc-&gt;state = SLEEPING;</span>
+<span class='curline'><a href='../S/56.html#L396'>proc</a>              396 proc.c           proc-&gt;chan = 0;</span>
+<span class='curline'><a href='../S/56.html#L411'>proc</a>              411 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L413'>proc</a>              413 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span>
+<span class='curline'><a href='../S/56.html#L433'>proc</a>              433 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L436'>proc</a>              436 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/56.html#L466'>proc</a>              466 proc.c           struct proc *p;</span>
+<span class='curline'><a href='../S/56.html#L470'>proc</a>              470 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/57.html#L13'>proc</a>               13 proc.h           struct proc *proc;           // The currently-running process.</span>
+<span class='curline'><a href='../S/57.html#L28'>proc</a>               28 proc.h         extern struct proc *proc asm("%gs:4");     // cpus[cpunum()].proc</span>
+<span class='curline'><a href='../S/57.html#L58'>proc</a>               58 proc.h           struct proc *parent;         // Parent process</span>
+<span class='curline'><a href='../S/68.html#L30'>proc</a>               30 sleeplock.c      lk-&gt;pid = proc-&gt;pid;</span>
+<span class='curline'><a href='../S/78.html#L20'>proc</a>               20 syscall.c        if(addr &gt;= proc-&gt;sz || addr+4 &gt; proc-&gt;sz)</span>
+<span class='curline'><a href='../S/78.html#L34'>proc</a>               34 syscall.c        if(addr &gt;= proc-&gt;sz)</span>
+<span class='curline'><a href='../S/78.html#L37'>proc</a>               37 syscall.c        ep = (char*)proc-&gt;sz;</span>
+<span class='curline'><a href='../S/78.html#L48'>proc</a>               48 syscall.c        return fetchint(proc-&gt;tf-&gt;esp + 4 + 4*n, ip);</span>
+<span class='curline'><a href='../S/78.html#L61'>proc</a>               61 syscall.c        if(size &lt; 0 || (uint)i &gt;= proc-&gt;sz || (uint)i+size &gt; proc-&gt;sz)</span>
+<span class='curline'><a href='../S/78.html#L131'>proc</a>              131 syscall.c        num = proc-&gt;tf-&gt;eax;</span>
+<span class='curline'><a href='../S/78.html#L133'>proc</a>              133 syscall.c          proc-&gt;tf-&gt;eax = syscalls[num]();</span>
+<span class='curline'><a href='../S/78.html#L136'>proc</a>              136 syscall.c                  proc-&gt;pid, proc-&gt;name, num);</span>
+<span class='curline'><a href='../S/78.html#L137'>proc</a>              137 syscall.c          proc-&gt;tf-&gt;eax = -1;</span>
+<span class='curline'><a href='../S/80.html#L29'>proc</a>               29 sysfile.c        if(fd &lt; 0 || fd &gt;= NOFILE || (f=proc-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/80.html#L46'>proc</a>               46 sysfile.c          if(proc-&gt;ofile[fd] == 0){</span>
+<span class='curline'><a href='../S/80.html#L47'>proc</a>               47 sysfile.c            proc-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/80.html#L100'>proc</a>              100 sysfile.c        proc-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/80.html#L389'>proc</a>              389 sysfile.c        iput(proc-&gt;cwd);</span>
+<span class='curline'><a href='../S/80.html#L391'>proc</a>              391 sysfile.c        proc-&gt;cwd = ip;</span>
+<span class='curline'><a href='../S/80.html#L435'>proc</a>              435 sysfile.c            proc-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/81.html#L42'>proc</a>               42 sysproc.c        return proc-&gt;pid;</span>
+<span class='curline'><a href='../S/81.html#L53'>proc</a>               53 sysproc.c        addr = proc-&gt;sz;</span>
+<span class='curline'><a href='../S/81.html#L70'>proc</a>               70 sysproc.c          if(proc-&gt;killed){</span>
+<span class='curline'><a href='../S/85.html#L40'>proc</a>               40 trap.c             if(proc-&gt;killed)</span>
+<span class='curline'><a href='../S/85.html#L42'>proc</a>               42 trap.c             proc-&gt;tf = tf;</span>
+<span class='curline'><a href='../S/85.html#L44'>proc</a>               44 trap.c             if(proc-&gt;killed)</span>
+<span class='curline'><a href='../S/85.html#L83'>proc</a>               83 trap.c             if(proc == 0 || (tf-&gt;cs&amp;3) == 0){</span>
+<span class='curline'><a href='../S/85.html#L92'>proc</a>               92 trap.c                     proc-&gt;pid, proc-&gt;name, tf-&gt;trapno, tf-&gt;err, cpunum(), tf-&gt;eip,</span>
+<span class='curline'><a href='../S/85.html#L94'>proc</a>               94 trap.c             proc-&gt;killed = 1;</span>
+<span class='curline'><a href='../S/85.html#L100'>proc</a>              100 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
+<span class='curline'><a href='../S/85.html#L105'>proc</a>              105 trap.c           if(proc &amp;&amp; proc-&gt;state == RUNNING &amp;&amp; tf-&gt;trapno == T_IRQ0+IRQ_TIMER)</span>
+<span class='curline'><a href='../S/85.html#L109'>proc</a>              109 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
+<span class='curline'><a href='../S/97.html#L38'>proc</a>               38 vm.c             proc = 0;</span>
+<span class='curline'><a href='../S/97.html#L164'>proc</a>              164 vm.c           switchuvm(struct proc *p)</span>
+<span class='curline'><a href='../S/97.html#L170'>proc</a>              170 vm.c             cpu-&gt;ts.esp0 = (uint)proc-&gt;kstack + KSTACKSIZE;</span>
 </pre>
 </body>
 </html>

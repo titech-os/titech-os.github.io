@@ -1,17 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>poff</title>
+<title>pos</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L506'>poff</a>              506 fs.c           dirlookup(struct inode *dp, char *name, uint *poff)</span>
-<span class='curline'><a href='../S/22.html#L521'>poff</a>              521 fs.c                 if(poff)</span>
-<span class='curline'><a href='../S/22.html#L522'>poff</a>              522 fs.c                   *poff = off;</span>
+<span class='curline'><a href='../S/8.html#L133'>pos</a>               133 console.c        int pos;</span>
+<span class='curline'><a href='../S/8.html#L137'>pos</a>               137 console.c        pos = inb(CRTPORT+1) &lt;&lt; 8;</span>
+<span class='curline'><a href='../S/8.html#L139'>pos</a>               139 console.c        pos |= inb(CRTPORT+1);</span>
+<span class='curline'><a href='../S/8.html#L142'>pos</a>               142 console.c          pos += 80 - pos%80;</span>
+<span class='curline'><a href='../S/8.html#L144'>pos</a>               144 console.c          if(pos &gt; 0) --pos;</span>
+<span class='curline'><a href='../S/8.html#L146'>pos</a>               146 console.c          crt[pos++] = (c&amp;0xff) | 0x0700;  // black on white</span>
+<span class='curline'><a href='../S/8.html#L148'>pos</a>               148 console.c        if(pos &lt; 0 || pos &gt; 25*80)</span>
+<span class='curline'><a href='../S/8.html#L151'>pos</a>               151 console.c        if((pos/80) &gt;= 24){  // Scroll up.</span>
+<span class='curline'><a href='../S/8.html#L153'>pos</a>               153 console.c          pos -= 80;</span>
+<span class='curline'><a href='../S/8.html#L154'>pos</a>               154 console.c          memset(crt+pos, 0, sizeof(crt[0])*(24*80 - pos));</span>
+<span class='curline'><a href='../S/8.html#L158'>pos</a>               158 console.c        outb(CRTPORT+1, pos&gt;&gt;8);</span>
+<span class='curline'><a href='../S/8.html#L160'>pos</a>               160 console.c        outb(CRTPORT+1, pos);</span>
+<span class='curline'><a href='../S/8.html#L161'>pos</a>               161 console.c        crt[pos] = ' ' | 0x0700;</span>
 </pre>
 </body>
 </html>

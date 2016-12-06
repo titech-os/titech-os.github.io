@@ -3,37 +3,38 @@
 <head>
 <title>sb</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/11.html#L37'>sb</a>                 37 defs.h         void            readsb(int dev, struct superblock *sb);</span>
-<span class='curline'><a href='../S/22.html#L25'>sb</a>                 25 fs.c           struct superblock sb;   // there should be one per dev, but we run with one dev</span>
-<span class='curline'><a href='../S/22.html#L29'>sb</a>                 29 fs.c           readsb(int dev, struct superblock *sb)</span>
-<span class='curline'><a href='../S/22.html#L34'>sb</a>                 34 fs.c             memmove(sb, bp-&gt;data, sizeof(*sb));</span>
-<span class='curline'><a href='../S/22.html#L60'>sb</a>                 60 fs.c             for(b = 0; b &lt; sb.size; b += BPB){</span>
-<span class='curline'><a href='../S/22.html#L61'>sb</a>                 61 fs.c               bp = bread(dev, BBLOCK(b, sb));</span>
-<span class='curline'><a href='../S/22.html#L62'>sb</a>                 62 fs.c               for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
-<span class='curline'><a href='../S/22.html#L84'>sb</a>                 84 fs.c             readsb(dev, &amp;sb);</span>
-<span class='curline'><a href='../S/22.html#L85'>sb</a>                 85 fs.c             bp = bread(dev, BBLOCK(b, sb));</span>
-<span class='curline'><a href='../S/22.html#L166'>sb</a>                166 fs.c             readsb(dev, &amp;sb);</span>
-<span class='curline'><a href='../S/22.html#L167'>sb</a>                167 fs.c             cprintf("sb: size %d nblocks %d ninodes %d nlog %d logstart %d inodestart %d bmap start %d\n", sb.size,</span>
-<span class='curline'><a href='../S/22.html#L168'>sb</a>                168 fs.c                     sb.nblocks, sb.ninodes, sb.nlog, sb.logstart, sb.inodestart, sb.bmapstart);</span>
-<span class='curline'><a href='../S/22.html#L183'>sb</a>                183 fs.c             for(inum = 1; inum &lt; sb.ninodes; inum++){</span>
-<span class='curline'><a href='../S/22.html#L184'>sb</a>                184 fs.c               bp = bread(dev, IBLOCK(inum, sb));</span>
-<span class='curline'><a href='../S/22.html#L205'>sb</a>                205 fs.c             bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
-<span class='curline'><a href='../S/22.html#L282'>sb</a>                282 fs.c               bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
-<span class='curline'><a href='../S/23.html#L41'>sb</a>                 41 fs.h           #define IBLOCK(i, sb)     ((i) / IPB + sb.inodestart)</span>
-<span class='curline'><a href='../S/23.html#L47'>sb</a>                 47 fs.h           #define BBLOCK(b, sb) (b/BPB + sb.bmapstart)</span>
-<span class='curline'><a href='../S/35.html#L207'>sb</a>                207 lapic.c          int sb, bcd;</span>
-<span class='curline'><a href='../S/35.html#L209'>sb</a>                209 lapic.c          sb = cmos_read(CMOS_STATB);</span>
-<span class='curline'><a href='../S/35.html#L211'>sb</a>                211 lapic.c          bcd = (sb &amp; (1 &lt;&lt; 2)) == 0;</span>
-<span class='curline'><a href='../S/38.html#L58'>sb</a>                 58 log.c            struct superblock sb;</span>
-<span class='curline'><a href='../S/38.html#L60'>sb</a>                 60 log.c            readsb(dev, &amp;sb);</span>
-<span class='curline'><a href='../S/38.html#L61'>sb</a>                 61 log.c            log.start = sb.logstart;</span>
-<span class='curline'><a href='../S/38.html#L62'>sb</a>                 62 log.c            log.size = sb.nlog;</span>
+<span class='curline'><a href='../S/11.html#L38'>sb</a>                 38 defs.h         void            readsb(int dev, struct superblock *sb);</span>
+<span class='curline'><a href='../S/22.html#L28'>sb</a>                 28 fs.c           struct superblock sb; </span>
+<span class='curline'><a href='../S/22.html#L32'>sb</a>                 32 fs.c           readsb(int dev, struct superblock *sb)</span>
+<span class='curline'><a href='../S/22.html#L37'>sb</a>                 37 fs.c             memmove(sb, bp-&gt;data, sizeof(*sb));</span>
+<span class='curline'><a href='../S/22.html#L63'>sb</a>                 63 fs.c             for(b = 0; b &lt; sb.size; b += BPB){</span>
+<span class='curline'><a href='../S/22.html#L64'>sb</a>                 64 fs.c               bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/22.html#L65'>sb</a>                 65 fs.c               for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
+<span class='curline'><a href='../S/22.html#L87'>sb</a>                 87 fs.c             readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/22.html#L88'>sb</a>                 88 fs.c             bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/22.html#L173'>sb</a>                173 fs.c             readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/22.html#L175'>sb</a>                175 fs.c            inodestart %d bmap start %d\n", sb.size, sb.nblocks,</span>
+<span class='curline'><a href='../S/22.html#L176'>sb</a>                176 fs.c                     sb.ninodes, sb.nlog, sb.logstart, sb.inodestart,</span>
+<span class='curline'><a href='../S/22.html#L177'>sb</a>                177 fs.c                     sb.bmapstart);</span>
+<span class='curline'><a href='../S/22.html#L192'>sb</a>                192 fs.c             for(inum = 1; inum &lt; sb.ninodes; inum++){</span>
+<span class='curline'><a href='../S/22.html#L193'>sb</a>                193 fs.c               bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/22.html#L214'>sb</a>                214 fs.c             bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/22.html#L287'>sb</a>                287 fs.c               bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/23.html#L42'>sb</a>                 42 fs.h           #define IBLOCK(i, sb)     ((i) / IPB + sb.inodestart)</span>
+<span class='curline'><a href='../S/23.html#L48'>sb</a>                 48 fs.h           #define BBLOCK(b, sb) (b/BPB + sb.bmapstart)</span>
+<span class='curline'><a href='../S/35.html#L217'>sb</a>                217 lapic.c          int sb, bcd;</span>
+<span class='curline'><a href='../S/35.html#L219'>sb</a>                219 lapic.c          sb = cmos_read(CMOS_STATB);</span>
+<span class='curline'><a href='../S/35.html#L221'>sb</a>                221 lapic.c          bcd = (sb &amp; (1 &lt;&lt; 2)) == 0;</span>
+<span class='curline'><a href='../S/38.html#L59'>sb</a>                 59 log.c            struct superblock sb;</span>
+<span class='curline'><a href='../S/38.html#L61'>sb</a>                 61 log.c            readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/38.html#L62'>sb</a>                 62 log.c            log.start = sb.logstart;</span>
+<span class='curline'><a href='../S/38.html#L63'>sb</a>                 63 log.c            log.size = sb.nlog;</span>
 <span class='curline'><a href='../S/45.html#L30'>sb</a>                 30 mkfs.c         struct superblock sb;</span>
 <span class='curline'><a href='../S/45.html#L97'>sb</a>                 97 mkfs.c           sb.size = xint(FSSIZE);</span>
 <span class='curline'><a href='../S/45.html#L98'>sb</a>                 98 mkfs.c           sb.nblocks = xint(nblocks);</span>

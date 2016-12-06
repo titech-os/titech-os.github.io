@@ -1,24 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nread</title>
+<title>num</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/52.html#L15'>nread</a>              15 pipe.c           uint nread;     // number of bytes read</span>
-<span class='curline'><a href='../S/52.html#L35'>nread</a>              35 pipe.c           p-&gt;nread = 0;</span>
-<span class='curline'><a href='../S/52.html#L64'>nread</a>              64 pipe.c             wakeup(&amp;p-&gt;nread);</span>
-<span class='curline'><a href='../S/52.html#L84'>nread</a>              84 pipe.c             while(p-&gt;nwrite == p-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
-<span class='curline'><a href='../S/52.html#L89'>nread</a>              89 pipe.c               wakeup(&amp;p-&gt;nread);</span>
-<span class='curline'><a href='../S/52.html#L94'>nread</a>              94 pipe.c           wakeup(&amp;p-&gt;nread);  //DOC: pipewrite-wakeup1</span>
-<span class='curline'><a href='../S/52.html#L105'>nread</a>             105 pipe.c           while(p-&gt;nread == p-&gt;nwrite &amp;&amp; p-&gt;writeopen){  //DOC: pipe-empty</span>
-<span class='curline'><a href='../S/52.html#L110'>nread</a>             110 pipe.c             sleep(&amp;p-&gt;nread, &amp;p-&gt;lock); //DOC: piperead-sleep</span>
-<span class='curline'><a href='../S/52.html#L113'>nread</a>             113 pipe.c             if(p-&gt;nread == p-&gt;nwrite)</span>
-<span class='curline'><a href='../S/52.html#L115'>nread</a>             115 pipe.c             addr[i] = p-&gt;data[p-&gt;nread++ % PIPESIZE];</span>
+<span class='curline'><a href='../S/78.html#L129'>num</a>               129 syscall.c        int num;</span>
+<span class='curline'><a href='../S/78.html#L131'>num</a>               131 syscall.c        num = proc-&gt;tf-&gt;eax;</span>
+<span class='curline'><a href='../S/78.html#L132'>num</a>               132 syscall.c        if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {</span>
+<span class='curline'><a href='../S/78.html#L133'>num</a>               133 syscall.c          proc-&gt;tf-&gt;eax = syscalls[num]();</span>
+<span class='curline'><a href='../S/78.html#L136'>num</a>               136 syscall.c                  proc-&gt;pid, proc-&gt;name, num);</span>
 </pre>
 </body>
 </html>

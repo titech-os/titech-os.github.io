@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>runoff1</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/runoff1</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>#!/usr/bin/perl
+<a id='L2' name='L2'></a>
+<a id='L3' name='L3'></a>$n = 0;
+<a id='L4' name='L4'></a>$v = 0;
+<a id='L5' name='L5'></a>if($ARGV[0] eq "-v") {
+<a id='L6' name='L6'></a>        $v = 1;
+<a id='L7' name='L7'></a>        shift @ARGV;
+<a id='L8' name='L8'></a>}
+<a id='L9' name='L9'></a>if($ARGV[0] eq "-n") {
+<a id='L10' name='L10'></a>        $n = $ARGV[1];
+<a id='L11' name='L11'></a>        shift @ARGV;
+<a id='L12' name='L12'></a>        shift @ARGV;
+<a id='L13' name='L13'></a>}
+<a id='L14' name='L14'></a>$n = int(($n+49)/50)*50 - 1;
+<a id='L15' name='L15'></a>
+<a id='L16' name='L16'></a>$file = $ARGV[0];
+<a id='L17' name='L17'></a>@lines = &lt;&gt;;
+<a id='L18' name='L18'></a>$linenum = 0;
+<a id='L19' name='L19'></a>foreach (@lines) {
+<a id='L20' name='L20'></a>        $linenum++;
+<a id='L21' name='L21'></a>        chomp;
+<a id='L22' name='L22'></a>        s/\s+$//;
+<a id='L23' name='L23'></a>        if(length() &gt;= 75){
+<a id='L24' name='L24'></a>                print STDERR "$file:$linenum: line too long\n";
+<a id='L25' name='L25'></a>        }
+<a id='L26' name='L26'></a>}
+<a id='L27' name='L27'></a>@outlines = ();
+<a id='L28' name='L28'></a>$nextout = 0;
+<a id='L29' name='L29'></a>
+<a id='L30' name='L30'></a>for($i=0; $i&lt;@lines; ){
+<a id='L31' name='L31'></a>        # Skip leading blank lines.
+<a id='L32' name='L32'></a>        $i++ while $i&lt;@lines &amp;&amp; $lines[$i] =~ /^$/;
+<a id='L33' name='L33'></a>        last if $i&gt;=@lines;
+<a id='L34' name='L34'></a>
+<a id='L35' name='L35'></a>        # If the rest of the file fits, use the whole thing.
+<a id='L36' name='L36'></a>        if(@lines &lt;= $i+50 &amp;&amp; !grep { /PAGEBREAK/ } @lines){
+<a id='L37' name='L37'></a>                $breakbefore = @lines;
+<a id='L38' name='L38'></a>        }else{
+<a id='L39' name='L39'></a>                # Find a good next page break;
+<a id='L40' name='L40'></a>                # Hope for end of function.
+<a id='L41' name='L41'></a>                # but settle for a blank line (but not first blank line
+<a id='L42' name='L42'></a>                # in function, which comes after variable declarations).
+<a id='L43' name='L43'></a>                $breakbefore = $i;
+<a id='L44' name='L44'></a>                $lastblank = $i;
+<a id='L45' name='L45'></a>                $sawbrace = 0;
+<a id='L46' name='L46'></a>                $breaksize = 15;  # 15 lines to get to function
+<a id='L47' name='L47'></a>                for($j=$i; $j&lt;$i+50 &amp;&amp; $j &lt; @lines; $j++){
+<a id='L48' name='L48'></a>                        if($lines[$j] =~ /PAGEBREAK!/){
+<a id='L49' name='L49'></a>                                $lines[$j] = "";
+<a id='L50' name='L50'></a>                                $breakbefore = $j;
+<a id='L51' name='L51'></a>                                $breaksize = 100;
+<a id='L52' name='L52'></a>                                last;
+<a id='L53' name='L53'></a>                        }
+<a id='L54' name='L54'></a>                        if($lines[$j] =~ /PAGEBREAK:\s*([0-9]+)/){
+<a id='L55' name='L55'></a>                                $breaksize = $1;
+<a id='L56' name='L56'></a>                                $breakbefore = $j;
+<a id='L57' name='L57'></a>                                $lines[$j] = "";
+<a id='L58' name='L58'></a>                        }
+<a id='L59' name='L59'></a>                        if($lines[$j] =~ /^};?$/){
+<a id='L60' name='L60'></a>                                $breakbefore = $j+1;
+<a id='L61' name='L61'></a>                                $breaksize = 15;
+<a id='L62' name='L62'></a>                        }
+<a id='L63' name='L63'></a>                        if($lines[$j] =~ /^{$/){
+<a id='L64' name='L64'></a>                                $sawbrace = 1;
+<a id='L65' name='L65'></a>                        }
+<a id='L66' name='L66'></a>                        if($lines[$j] =~ /^$/){
+<a id='L67' name='L67'></a>                                if($sawbrace){
+<a id='L68' name='L68'></a>                                        $sawbrace = 0;
+<a id='L69' name='L69'></a>                                }else{
+<a id='L70' name='L70'></a>                                        $lastblank = $j;
+<a id='L71' name='L71'></a>                                }
+<a id='L72' name='L72'></a>                        }
+<a id='L73' name='L73'></a>                }
+<a id='L74' name='L74'></a>                if($j&lt;@lines &amp;&amp; $lines[$j] =~ /^$/){
+<a id='L75' name='L75'></a>                        $lastblank = $j;
+<a id='L76' name='L76'></a>                }
+<a id='L77' name='L77'></a>
+<a id='L78' name='L78'></a>                # If we are not putting enough on a page, try a blank line.
+<a id='L79' name='L79'></a>                if($breakbefore - $i &lt; 50 - $breaksize &amp;&amp; $lastblank &gt; $breakbefore &amp;&amp; $lastblank &gt;= $i+50 - 5){
+<a id='L80' name='L80'></a>                        if($v){
+<a id='L81' name='L81'></a>                                print STDERR "breakbefore $breakbefore i $i breaksize $breaksize\n";
+<a id='L82' name='L82'></a>                        }
+<a id='L83' name='L83'></a>                        $breakbefore = $lastblank;
+<a id='L84' name='L84'></a>                        $breaksize = 5;  # only 5 lines to get to blank line
+<a id='L85' name='L85'></a>                }
+<a id='L86' name='L86'></a>
+<a id='L87' name='L87'></a>                # If we are not putting enough on a page, force a full page.
+<a id='L88' name='L88'></a>                if($breakbefore - $i &lt; 50 - $breaksize &amp;&amp; $breakbefore != @lines){
+<a id='L89' name='L89'></a>                        $breakbefore = $i + 50;
+<a id='L90' name='L90'></a>                        $breakbefore = @lines if @lines &lt; $breakbefore;
+<a id='L91' name='L91'></a>                }
+<a id='L92' name='L92'></a>
+<a id='L93' name='L93'></a>                if($breakbefore &lt; $i+2){
+<a id='L94' name='L94'></a>                        $breakbefore = $i+2;
+<a id='L95' name='L95'></a>                }
+<a id='L96' name='L96'></a>        }
+<a id='L97' name='L97'></a>
+<a id='L98' name='L98'></a>        # Emit the page.
+<a id='L99' name='L99'></a>        $i50 = $i + 50;
+<a id='L100' name='L100'></a>        for(; $i&lt;$breakbefore; $i++){
+<a id='L101' name='L101'></a>                printf "%04d %s\n", ++$n, $lines[$i];
+<a id='L102' name='L102'></a>        }
+<a id='L103' name='L103'></a>
+<a id='L104' name='L104'></a>        # Finish page
+<a id='L105' name='L105'></a>        for($j=$i; $j&lt;$i50; $j++){
+<a id='L106' name='L106'></a>                printf "%04d \n", ++$n;
+<a id='L107' name='L107'></a>        }
+<a id='L108' name='L108'></a>}
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

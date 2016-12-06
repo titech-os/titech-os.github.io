@@ -1,37 +1,41 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>din</title>
+<title>dip</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/45.html#L74'>din</a>                74 mkfs.c           struct dinode din;</span>
-<span class='curline'><a href='../S/45.html#L159'>din</a>               159 mkfs.c           rinode(rootino, &amp;din);</span>
-<span class='curline'><a href='../S/45.html#L160'>din</a>               160 mkfs.c           off = xint(din.size);</span>
-<span class='curline'><a href='../S/45.html#L162'>din</a>               162 mkfs.c           din.size = xint(off);</span>
-<span class='curline'><a href='../S/45.html#L163'>din</a>               163 mkfs.c           winode(rootino, &amp;din);</span>
-<span class='curline'><a href='../S/45.html#L227'>din</a>               227 mkfs.c           struct dinode din;</span>
-<span class='curline'><a href='../S/45.html#L229'>din</a>               229 mkfs.c           bzero(&amp;din, sizeof(din));</span>
-<span class='curline'><a href='../S/45.html#L230'>din</a>               230 mkfs.c           din.type = xshort(type);</span>
-<span class='curline'><a href='../S/45.html#L231'>din</a>               231 mkfs.c           din.nlink = xshort(1);</span>
-<span class='curline'><a href='../S/45.html#L232'>din</a>               232 mkfs.c           din.size = xint(0);</span>
-<span class='curline'><a href='../S/45.html#L233'>din</a>               233 mkfs.c           winode(inum, &amp;din);</span>
-<span class='curline'><a href='../S/45.html#L260'>din</a>               260 mkfs.c           struct dinode din;</span>
-<span class='curline'><a href='../S/45.html#L265'>din</a>               265 mkfs.c           rinode(inum, &amp;din);</span>
-<span class='curline'><a href='../S/45.html#L266'>din</a>               266 mkfs.c           off = xint(din.size);</span>
-<span class='curline'><a href='../S/45.html#L272'>din</a>               272 mkfs.c               if(xint(din.addrs[fbn]) == 0){</span>
-<span class='curline'><a href='../S/45.html#L273'>din</a>               273 mkfs.c                 din.addrs[fbn] = xint(freeblock++);</span>
-<span class='curline'><a href='../S/45.html#L275'>din</a>               275 mkfs.c               x = xint(din.addrs[fbn]);</span>
-<span class='curline'><a href='../S/45.html#L277'>din</a>               277 mkfs.c               if(xint(din.addrs[NDIRECT]) == 0){</span>
-<span class='curline'><a href='../S/45.html#L278'>din</a>               278 mkfs.c                 din.addrs[NDIRECT] = xint(freeblock++);</span>
-<span class='curline'><a href='../S/45.html#L280'>din</a>               280 mkfs.c               rsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
-<span class='curline'><a href='../S/45.html#L283'>din</a>               283 mkfs.c                 wsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
-<span class='curline'><a href='../S/45.html#L295'>din</a>               295 mkfs.c           din.size = xint(off);</span>
-<span class='curline'><a href='../S/45.html#L296'>din</a>               296 mkfs.c           winode(inum, &amp;din);</span>
+<span class='curline'><a href='../S/22.html#L190'>dip</a>               190 fs.c             struct dinode *dip;</span>
+<span class='curline'><a href='../S/22.html#L194'>dip</a>               194 fs.c               dip = (struct dinode*)bp-&gt;data + inum%IPB;</span>
+<span class='curline'><a href='../S/22.html#L195'>dip</a>               195 fs.c               if(dip-&gt;type == 0){  // a free inode</span>
+<span class='curline'><a href='../S/22.html#L196'>dip</a>               196 fs.c                 memset(dip, 0, sizeof(*dip));</span>
+<span class='curline'><a href='../S/22.html#L197'>dip</a>               197 fs.c                 dip-&gt;type = type;</span>
+<span class='curline'><a href='../S/22.html#L212'>dip</a>               212 fs.c             struct dinode *dip;</span>
+<span class='curline'><a href='../S/22.html#L215'>dip</a>               215 fs.c             dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/22.html#L216'>dip</a>               216 fs.c             dip-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/22.html#L217'>dip</a>               217 fs.c             dip-&gt;major = ip-&gt;major;</span>
+<span class='curline'><a href='../S/22.html#L218'>dip</a>               218 fs.c             dip-&gt;minor = ip-&gt;minor;</span>
+<span class='curline'><a href='../S/22.html#L219'>dip</a>               219 fs.c             dip-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/22.html#L220'>dip</a>               220 fs.c             dip-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/22.html#L221'>dip</a>               221 fs.c             memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/22.html#L279'>dip</a>               279 fs.c             struct dinode *dip;</span>
+<span class='curline'><a href='../S/22.html#L288'>dip</a>               288 fs.c               dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/22.html#L289'>dip</a>               289 fs.c               ip-&gt;type = dip-&gt;type;</span>
+<span class='curline'><a href='../S/22.html#L290'>dip</a>               290 fs.c               ip-&gt;major = dip-&gt;major;</span>
+<span class='curline'><a href='../S/22.html#L291'>dip</a>               291 fs.c               ip-&gt;minor = dip-&gt;minor;</span>
+<span class='curline'><a href='../S/22.html#L292'>dip</a>               292 fs.c               ip-&gt;nlink = dip-&gt;nlink;</span>
+<span class='curline'><a href='../S/22.html#L293'>dip</a>               293 fs.c               ip-&gt;size = dip-&gt;size;</span>
+<span class='curline'><a href='../S/22.html#L294'>dip</a>               294 fs.c               memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/45.html#L188'>dip</a>               188 mkfs.c           struct dinode *dip;</span>
+<span class='curline'><a href='../S/45.html#L192'>dip</a>               192 mkfs.c           dip = ((struct dinode*)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/45.html#L193'>dip</a>               193 mkfs.c           *dip = *ip;</span>
+<span class='curline'><a href='../S/45.html#L202'>dip</a>               202 mkfs.c           struct dinode *dip;</span>
+<span class='curline'><a href='../S/45.html#L206'>dip</a>               206 mkfs.c           dip = ((struct dinode*)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/45.html#L207'>dip</a>               207 mkfs.c           *ip = *dip;</span>
 </pre>
 </body>
 </html>

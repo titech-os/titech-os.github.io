@@ -1,34 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>np</title>
+<title>nu</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L132'>np</a>                132 proc.c           struct proc *np;</span>
-<span class='curline'><a href='../S/56.html#L135'>np</a>                135 proc.c           if((np = allocproc()) == 0)</span>
-<span class='curline'><a href='../S/56.html#L139'>np</a>                139 proc.c           if((np-&gt;pgdir = copyuvm(proc-&gt;pgdir, proc-&gt;sz)) == 0){</span>
-<span class='curline'><a href='../S/56.html#L140'>np</a>                140 proc.c             kfree(np-&gt;kstack);</span>
-<span class='curline'><a href='../S/56.html#L141'>np</a>                141 proc.c             np-&gt;kstack = 0;</span>
-<span class='curline'><a href='../S/56.html#L142'>np</a>                142 proc.c             np-&gt;state = UNUSED;</span>
-<span class='curline'><a href='../S/56.html#L145'>np</a>                145 proc.c           np-&gt;sz = proc-&gt;sz;</span>
-<span class='curline'><a href='../S/56.html#L146'>np</a>                146 proc.c           np-&gt;parent = proc;</span>
-<span class='curline'><a href='../S/56.html#L147'>np</a>                147 proc.c           *np-&gt;tf = *proc-&gt;tf;</span>
-<span class='curline'><a href='../S/56.html#L150'>np</a>                150 proc.c           np-&gt;tf-&gt;eax = 0;</span>
-<span class='curline'><a href='../S/56.html#L154'>np</a>                154 proc.c               np-&gt;ofile[i] = filedup(proc-&gt;ofile[i]);</span>
-<span class='curline'><a href='../S/56.html#L155'>np</a>                155 proc.c           np-&gt;cwd = idup(proc-&gt;cwd);</span>
-<span class='curline'><a href='../S/56.html#L157'>np</a>                157 proc.c           safestrcpy(np-&gt;name, proc-&gt;name, sizeof(proc-&gt;name));</span>
-<span class='curline'><a href='../S/56.html#L159'>np</a>                159 proc.c           pid = np-&gt;pid;</span>
-<span class='curline'><a href='../S/56.html#L163'>np</a>                163 proc.c           np-&gt;state = RUNNABLE;</span>
-<span class='curline'><a href='../S/92.html#L467'>np</a>                467 usertests.c      int fd, pid, i, n, nc, np;</span>
-<span class='curline'><a href='../S/92.html#L496'>np</a>                496 usertests.c      nc = np = 0;</span>
-<span class='curline'><a href='../S/92.html#L502'>np</a>                502 usertests.c            np++;</span>
-<span class='curline'><a href='../S/92.html#L507'>np</a>                507 usertests.c      if(nc == 10000 &amp;&amp; np == 10000){</span>
-<span class='curline'><a href='../S/92.html#L510'>np</a>                510 usertests.c        printf(1, "sharedfd oops %d %d\n", nc, np);</span>
+<span class='curline'><a href='../S/92.html#L47'>nu</a>                 47 umalloc.c      morecore(uint nu)</span>
+<span class='curline'><a href='../S/92.html#L52'>nu</a>                 52 umalloc.c        if(nu &lt; 4096)</span>
+<span class='curline'><a href='../S/92.html#L53'>nu</a>                 53 umalloc.c          nu = 4096;</span>
+<span class='curline'><a href='../S/92.html#L54'>nu</a>                 54 umalloc.c        p = sbrk(nu * sizeof(Header));</span>
+<span class='curline'><a href='../S/92.html#L58'>nu</a>                 58 umalloc.c        hp-&gt;s.size = nu;</span>
 </pre>
 </body>
 </html>

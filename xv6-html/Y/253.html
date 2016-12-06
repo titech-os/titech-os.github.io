@@ -1,19 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>num</title>
+<title>nwrite</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/76.html#L129'>num</a>               129 syscall.c        int num;</span>
-<span class='curline'><a href='../S/76.html#L131'>num</a>               131 syscall.c        num = proc-&gt;tf-&gt;eax;</span>
-<span class='curline'><a href='../S/76.html#L132'>num</a>               132 syscall.c        if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {</span>
-<span class='curline'><a href='../S/76.html#L133'>num</a>               133 syscall.c          proc-&gt;tf-&gt;eax = syscalls[num]();</span>
-<span class='curline'><a href='../S/76.html#L136'>num</a>               136 syscall.c                  proc-&gt;pid, proc-&gt;name, num);</span>
+<span class='curline'><a href='../S/52.html#L17'>nwrite</a>             17 pipe.c           uint nwrite;    // number of bytes written</span>
+<span class='curline'><a href='../S/52.html#L35'>nwrite</a>             35 pipe.c           p-&gt;nwrite = 0;</span>
+<span class='curline'><a href='../S/52.html#L68'>nwrite</a>             68 pipe.c             wakeup(&amp;p-&gt;nwrite);</span>
+<span class='curline'><a href='../S/52.html#L85'>nwrite</a>             85 pipe.c             while(p-&gt;nwrite == p-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/52.html#L91'>nwrite</a>             91 pipe.c               sleep(&amp;p-&gt;nwrite, &amp;p-&gt;lock);  //DOC: pipewrite-sleep</span>
+<span class='curline'><a href='../S/52.html#L93'>nwrite</a>             93 pipe.c             p-&gt;data[p-&gt;nwrite++ % PIPESIZE] = addr[i];</span>
+<span class='curline'><a href='../S/52.html#L106'>nwrite</a>            106 pipe.c           while(p-&gt;nread == p-&gt;nwrite &amp;&amp; p-&gt;writeopen){  //DOC: pipe-empty</span>
+<span class='curline'><a href='../S/52.html#L114'>nwrite</a>            114 pipe.c             if(p-&gt;nread == p-&gt;nwrite)</span>
+<span class='curline'><a href='../S/52.html#L118'>nwrite</a>            118 pipe.c           wakeup(&amp;p-&gt;nwrite);  //DOC: piperead-wakeup</span>
 </pre>
 </body>
 </html>

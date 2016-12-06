@@ -1,43 +1,39 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pte</title>
+<title>q</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L144'>pte</a>               144 mmu.h          #define PTE_ADDR(pte)   ((uint)(pte) &amp; ~0xFFF)</span>
-<span class='curline'><a href='../S/46.html#L145'>pte</a>               145 mmu.h          #define PTE_FLAGS(pte)  ((uint)(pte) &amp;  0xFFF)</span>
-<span class='curline'><a href='../S/95.html#L74'>pte</a>                74 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/95.html#L79'>pte</a>                79 vm.c               if((pte = walkpgdir(pgdir, a, 1)) == 0)</span>
-<span class='curline'><a href='../S/95.html#L81'>pte</a>                81 vm.c               if(*pte &amp; PTE_P)</span>
-<span class='curline'><a href='../S/95.html#L83'>pte</a>                83 vm.c               *pte = pa | perm | PTE_P;</span>
-<span class='curline'><a href='../S/95.html#L200'>pte</a>               200 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/95.html#L205'>pte</a>               205 vm.c               if((pte = walkpgdir(pgdir, addr+i, 0)) == 0)</span>
-<span class='curline'><a href='../S/95.html#L207'>pte</a>               207 vm.c               pa = PTE_ADDR(*pte);</span>
-<span class='curline'><a href='../S/95.html#L252'>pte</a>               252 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/95.html#L260'>pte</a>               260 vm.c               pte = walkpgdir(pgdir, (char*)a, 0);</span>
-<span class='curline'><a href='../S/95.html#L261'>pte</a>               261 vm.c               if(!pte)</span>
-<span class='curline'><a href='../S/95.html#L263'>pte</a>               263 vm.c               else if((*pte &amp; PTE_P) != 0){</span>
-<span class='curline'><a href='../S/95.html#L264'>pte</a>               264 vm.c                 pa = PTE_ADDR(*pte);</span>
-<span class='curline'><a href='../S/95.html#L269'>pte</a>               269 vm.c                 *pte = 0;</span>
-<span class='curline'><a href='../S/95.html#L299'>pte</a>               299 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/95.html#L301'>pte</a>               301 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
-<span class='curline'><a href='../S/95.html#L302'>pte</a>               302 vm.c             if(pte == 0)</span>
-<span class='curline'><a href='../S/95.html#L304'>pte</a>               304 vm.c             *pte &amp;= ~PTE_U;</span>
-<span class='curline'><a href='../S/95.html#L313'>pte</a>               313 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/95.html#L320'>pte</a>               320 vm.c               if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)</span>
-<span class='curline'><a href='../S/95.html#L322'>pte</a>               322 vm.c               if(!(*pte &amp; PTE_P))</span>
-<span class='curline'><a href='../S/95.html#L324'>pte</a>               324 vm.c               pa = PTE_ADDR(*pte);</span>
-<span class='curline'><a href='../S/95.html#L325'>pte</a>               325 vm.c               flags = PTE_FLAGS(*pte);</span>
-<span class='curline'><a href='../S/95.html#L344'>pte</a>               344 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/95.html#L346'>pte</a>               346 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
-<span class='curline'><a href='../S/95.html#L347'>pte</a>               347 vm.c             if((*pte &amp; PTE_P) == 0)</span>
-<span class='curline'><a href='../S/95.html#L349'>pte</a>               349 vm.c             if((*pte &amp; PTE_U) == 0)</span>
-<span class='curline'><a href='../S/95.html#L351'>pte</a>               351 vm.c             return (char*)p2v(PTE_ADDR(*pte));</span>
+<span class='curline'><a href='../S/25.html#L14'>q</a>                  14 grep.c           char *p, *q;</span>
+<span class='curline'><a href='../S/25.html#L21'>q</a>                  21 grep.c             while((q = strchr(p, '\n')) != 0){</span>
+<span class='curline'><a href='../S/25.html#L22'>q</a>                  22 grep.c               *q = 0;</span>
+<span class='curline'><a href='../S/25.html#L24'>q</a>                  24 grep.c                 *q = '\n';</span>
+<span class='curline'><a href='../S/25.html#L25'>q</a>                  25 grep.c                 write(1, p, q+1 - p);</span>
+<span class='curline'><a href='../S/25.html#L27'>q</a>                  27 grep.c               p = q+1;</span>
+<span class='curline'><a href='../S/64.html#L266'>q</a>                 266 sh.c           gettoken(char **ps, char *es, char **q, char **eq)</span>
+<span class='curline'><a href='../S/64.html#L274'>q</a>                 274 sh.c             if(q)</span>
+<span class='curline'><a href='../S/64.html#L275'>q</a>                 275 sh.c               *q = s;</span>
+<span class='curline'><a href='../S/64.html#L378'>q</a>                 378 sh.c             char *q, *eq;</span>
+<span class='curline'><a href='../S/64.html#L382'>q</a>                 382 sh.c               if(gettoken(ps, es, &amp;q, &amp;eq) != 'a')</span>
+<span class='curline'><a href='../S/64.html#L386'>q</a>                 386 sh.c                 cmd = redircmd(cmd, q, eq, O_RDONLY, 0);</span>
+<span class='curline'><a href='../S/64.html#L389'>q</a>                 389 sh.c                 cmd = redircmd(cmd, q, eq, O_WRONLY|O_CREATE, 1);</span>
+<span class='curline'><a href='../S/64.html#L392'>q</a>                 392 sh.c                 cmd = redircmd(cmd, q, eq, O_WRONLY|O_CREATE, 1);</span>
+<span class='curline'><a href='../S/64.html#L418'>q</a>                 418 sh.c             char *q, *eq;</span>
+<span class='curline'><a href='../S/64.html#L432'>q</a>                 432 sh.c               if((tok=gettoken(ps, es, &amp;q, &amp;eq)) == 0)</span>
+<span class='curline'><a href='../S/64.html#L436'>q</a>                 436 sh.c               cmd-&gt;argv[argc] = q;</span>
+<span class='curline'><a href='../S/75.html#L59'>q</a>                  59 string.c       strncmp(const char *p, const char *q, uint n)</span>
+<span class='curline'><a href='../S/75.html#L61'>q</a>                  61 string.c         while(n &gt; 0 &amp;&amp; *p &amp;&amp; *p == *q)</span>
+<span class='curline'><a href='../S/75.html#L62'>q</a>                  62 string.c           n--, p++, q++;</span>
+<span class='curline'><a href='../S/75.html#L65'>q</a>                  65 string.c         return (uchar)*p - (uchar)*q;</span>
+<span class='curline'><a href='../S/91.html#L19'>q</a>                  19 ulib.c         strcmp(const char *p, const char *q)</span>
+<span class='curline'><a href='../S/91.html#L21'>q</a>                  21 ulib.c           while(*p &amp;&amp; *p == *q)</span>
+<span class='curline'><a href='../S/91.html#L22'>q</a>                  22 ulib.c             p++, q++;</span>
+<span class='curline'><a href='../S/91.html#L23'>q</a>                  23 ulib.c           return (uchar)*p - (uchar)*q;</span>
 </pre>
 </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>cuth</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/cuth</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>#!/usr/bin/perl
+<a id='L2' name='L2'></a>
+<a id='L3' name='L3'></a>$| = 1;
+<a id='L4' name='L4'></a>
+<a id='L5' name='L5'></a>sub writefile($@){
+<a id='L6' name='L6'></a>        my ($file, @lines) = @_;
+<a id='L7' name='L7'></a>        
+<a id='L8' name='L8'></a>        sleep(1);
+<a id='L9' name='L9'></a>        open(F, "&gt;$file") || die "open &gt;$file: $!";
+<a id='L10' name='L10'></a>        print F @lines;
+<a id='L11' name='L11'></a>        close(F);
+<a id='L12' name='L12'></a>}
+<a id='L13' name='L13'></a>
+<a id='L14' name='L14'></a># Cut out #include lines that don't contribute anything.
+<a id='L15' name='L15'></a>for($i=0; $i&lt;@ARGV; $i++){
+<a id='L16' name='L16'></a>        $file = $ARGV[$i];
+<a id='L17' name='L17'></a>        if(!open(F, $file)){
+<a id='L18' name='L18'></a>                print STDERR "open $file: $!\n";
+<a id='L19' name='L19'></a>                next;
+<a id='L20' name='L20'></a>        }
+<a id='L21' name='L21'></a>        @lines = &lt;F&gt;;
+<a id='L22' name='L22'></a>        close(F);
+<a id='L23' name='L23'></a>        
+<a id='L24' name='L24'></a>        $obj = "$file.o";
+<a id='L25' name='L25'></a>        $obj =~ s/\.c\.o$/.o/;
+<a id='L26' name='L26'></a>        system("touch $file");
+<a id='L27' name='L27'></a>
+<a id='L28' name='L28'></a>        if(system("make CC='gcc -Werror' $obj &gt;/dev/null 2&gt;\&amp;1") != 0){
+<a id='L29' name='L29'></a>                print STDERR "make $obj failed: $rv\n";
+<a id='L30' name='L30'></a>                next;
+<a id='L31' name='L31'></a>        }
+<a id='L32' name='L32'></a>
+<a id='L33' name='L33'></a>        system("cp $file =$file");
+<a id='L34' name='L34'></a>        for($j=@lines-1; $j&gt;=0; $j--){
+<a id='L35' name='L35'></a>                if($lines[$j] =~ /^#include/){
+<a id='L36' name='L36'></a>                        $old = $lines[$j];
+<a id='L37' name='L37'></a>                        $lines[$j] = "/* CUT-H */\n";
+<a id='L38' name='L38'></a>                        writefile($file, @lines);
+<a id='L39' name='L39'></a>                        if(system("make CC='gcc -Werror' $obj &gt;/dev/null 2&gt;\&amp;1") != 0){
+<a id='L40' name='L40'></a>                                $lines[$j] = $old;
+<a id='L41' name='L41'></a>                        }else{
+<a id='L42' name='L42'></a>                                print STDERR "$file $old";
+<a id='L43' name='L43'></a>                        }
+<a id='L44' name='L44'></a>                }
+<a id='L45' name='L45'></a>        }
+<a id='L46' name='L46'></a>        writefile($file, grep {!/CUT-H/} @lines);
+<a id='L47' name='L47'></a>        system("rm =$file");
+<a id='L48' name='L48'></a>}
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

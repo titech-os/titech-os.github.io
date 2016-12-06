@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>README</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/README</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
+<a id='L2' name='L2'></a>Version 6 (v6).  xv6 loosely follows the structure and style of v6,
+<a id='L3' name='L3'></a>but is implemented for a modern x86-based multiprocessor using ANSI C.
+<a id='L4' name='L4'></a>
+<a id='L5' name='L5'></a>ACKNOWLEDGMENTS
+<a id='L6' name='L6'></a>
+<a id='L7' name='L7'></a>xv6 is inspired by John Lions's Commentary on UNIX 6th Edition (Peer
+<a id='L8' name='L8'></a>to Peer Communications; ISBN: 1-57398-013-7; 1st edition (June 14,
+<a id='L9' name='L9'></a>2000)). See also http://pdos.csail.mit.edu/6.828/2016/xv6.html, which
+<a id='L10' name='L10'></a>provides pointers to on-line resources for v6.
+<a id='L11' name='L11'></a>
+<a id='L12' name='L12'></a>xv6 borrows code from the following sources:
+<a id='L13' name='L13'></a>    JOS (asm.h, elf.h, mmu.h, bootasm.S, ide.c, console.c, and others)
+<a id='L14' name='L14'></a>    Plan 9 (entryother.S, mp.h, mp.c, lapic.c)
+<a id='L15' name='L15'></a>    FreeBSD (ioapic.c)
+<a id='L16' name='L16'></a>    NetBSD (console.c)
+<a id='L17' name='L17'></a>
+<a id='L18' name='L18'></a>The following people have made contributions: Russ Cox (context switching,
+<a id='L19' name='L19'></a>locking), Cliff Frey (MP), Xiao Yu (MP), Nickolai Zeldovich, and Austin
+<a id='L20' name='L20'></a>Clements.
+<a id='L21' name='L21'></a>
+<a id='L22' name='L22'></a>We are also grateful for the bug reports and patches contributed by Silas
+<a id='L23' name='L23'></a>Boyd-Wickizer, Mike CAT, Nelson Elhage, Nathaniel Filardo, Peter Froehlich,
+<a id='L24' name='L24'></a>Yakir Goaran, Shivam Handa, Bryan Henry, Jim Huang, Anders Kaseorg, kehao95,
+<a id='L25' name='L25'></a>Eddie Kohler, Imbar Marinescu, Yandong Mao, Hitoshi Mitake, Carmi Merimovich,
+<a id='L26' name='L26'></a>Joel Nider, Greg Price, Ayan Shafqat, Eldar Sehayek, Yongming Shen, Cam Tenny,
+<a id='L27' name='L27'></a>Rafael Ubal, Warren Toomey, Stephen Tu, Pablo Ventura, Xi Wang, Keiichi
+<a id='L28' name='L28'></a>Watanabe, Nicolas Wolovick, Jindong Zhang, and Zou Chang Wei.
+<a id='L29' name='L29'></a>
+<a id='L30' name='L30'></a>The code in the files that constitute xv6 is
+<a id='L31' name='L31'></a>Copyright 2006-2016 Frans Kaashoek, Robert Morris, and Russ Cox.
+<a id='L32' name='L32'></a>
+<a id='L33' name='L33'></a>ERROR REPORTS
+<a id='L34' name='L34'></a>
+<a id='L35' name='L35'></a>If you spot errors or have suggestions for improvement, please send email to
+<a id='L36' name='L36'></a>Frans Kaashoek and Robert Morris (kaashoek,rtm@csail.mit.edu).  If you have
+<a id='L37' name='L37'></a>suggestions for improvements, please keep in mind that the main purpose of xv6
+<a id='L38' name='L38'></a>is as a teaching operating system for MIT's 6.828. For example, we are in
+<a id='L39' name='L39'></a>particular interested in simplifications and clarifications, instead of
+<a id='L40' name='L40'></a>suggestions for new systems calls, more portability, etc.
+<a id='L41' name='L41'></a>
+<a id='L42' name='L42'></a>BUILDING AND RUNNING XV6
+<a id='L43' name='L43'></a>
+<a id='L44' name='L44'></a>To build xv6 on an x86 ELF machine (like Linux or FreeBSD), run "make".
+<a id='L45' name='L45'></a>On non-x86 or non-ELF machines (like OS X, even on x86), you will
+<a id='L46' name='L46'></a>need to install a cross-compiler gcc suite capable of producing x86 ELF
+<a id='L47' name='L47'></a>binaries.  See http://pdos.csail.mit.edu/6.828/2016/tools.html.
+<a id='L48' name='L48'></a>Then run "make TOOLPREFIX=i386-jos-elf-".
+<a id='L49' name='L49'></a>
+<a id='L50' name='L50'></a>To run xv6, install the QEMU PC simulators.  To run in QEMU, run "make qemu".
+<a id='L51' name='L51'></a>
+<a id='L52' name='L52'></a>To create a typeset version of the code, run "make xv6.pdf".  This
+<a id='L53' name='L53'></a>requires the "mpage" utility.  See http://www.mesa.nl/pub/mpage/.
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

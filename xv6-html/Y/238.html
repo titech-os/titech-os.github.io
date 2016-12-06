@@ -1,24 +1,31 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>newsz</title>
+<title>next</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/95.html#L221'>newsz</a>             221 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/95.html#L226'>newsz</a>             226 vm.c             if(newsz &gt;= KERNBASE)</span>
-<span class='curline'><a href='../S/95.html#L228'>newsz</a>             228 vm.c             if(newsz &lt; oldsz)</span>
-<span class='curline'><a href='../S/95.html#L232'>newsz</a>             232 vm.c             for(; a &lt; newsz; a += PGSIZE){</span>
-<span class='curline'><a href='../S/95.html#L236'>newsz</a>             236 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
-<span class='curline'><a href='../S/95.html#L242'>newsz</a>             242 vm.c             return newsz;</span>
-<span class='curline'><a href='../S/95.html#L250'>newsz</a>             250 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/95.html#L255'>newsz</a>             255 vm.c             if(newsz &gt;= oldsz)</span>
-<span class='curline'><a href='../S/95.html#L258'>newsz</a>             258 vm.c             a = PGROUNDUP(newsz);</span>
-<span class='curline'><a href='../S/95.html#L272'>newsz</a>             272 vm.c             return newsz;</span>
+<span class='curline'><a href='../S/2.html#L48'>next</a>               48 bio.c            bcache.head.next = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/2.html#L50'>next</a>               50 bio.c              b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/2.html#L53'>next</a>               53 bio.c              bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/2.html#L54'>next</a>               54 bio.c              bcache.head.next = b;</span>
+<span class='curline'><a href='../S/2.html#L69'>next</a>               69 bio.c            for(b = bcache.head.next; b != &amp;bcache.head; b = b-&gt;next){</span>
+<span class='curline'><a href='../S/2.html#L132'>next</a>              132 bio.c              b-&gt;next-&gt;prev = b-&gt;prev;</span>
+<span class='curline'><a href='../S/2.html#L133'>next</a>              133 bio.c              b-&gt;prev-&gt;next = b-&gt;next;</span>
+<span class='curline'><a href='../S/2.html#L134'>next</a>              134 bio.c              b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/2.html#L136'>next</a>              136 bio.c              bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/2.html#L137'>next</a>              137 bio.c              bcache.head.next = b;</span>
+<span class='curline'><a href='../S/5.html#L8'>next</a>                8 buf.h            struct buf *next;</span>
+<span class='curline'><a href='../S/22.html#L613'>next</a>              613 fs.c             struct inode *ip, *next;</span>
+<span class='curline'><a href='../S/22.html#L631'>next</a>              631 fs.c               if((next = dirlookup(ip, name, 0)) == 0){</span>
+<span class='curline'><a href='../S/22.html#L636'>next</a>              636 fs.c               ip = next;</span>
+<span class='curline'><a href='../S/30.html#L16'>next</a>               16 kalloc.c         struct run *next;</span>
+<span class='curline'><a href='../S/30.html#L73'>next</a>               73 kalloc.c         r-&gt;next = kmem.freelist;</span>
+<span class='curline'><a href='../S/30.html#L91'>next</a>               91 kalloc.c           kmem.freelist = r-&gt;next;</span>
 </pre>
 </body>
 </html>

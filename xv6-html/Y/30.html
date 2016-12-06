@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>base</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1.html#L11'>base</a>               11 asm.h          #define SEG_ASM(type,base,lim)                                  \</span>
+<span class='curline'><a href='../S/1.html#L12'>base</a>               12 asm.h                  .word (((lim) &gt;&gt; 12) &amp; 0xffff), ((base) &amp; 0xffff);      \</span>
+<span class='curline'><a href='../S/1.html#L13'>base</a>               13 asm.h                  .byte (((base) &gt;&gt; 16) &amp; 0xff), (0x90 | (type)),         \</span>
+<span class='curline'><a href='../S/1.html#L14'>base</a>               14 asm.h                          (0xC0 | (((lim) &gt;&gt; 28) &amp; 0xf)), (((base) &gt;&gt; 24) &amp; 0xff)</span>
+<span class='curline'><a href='../S/8.html#L28'>base</a>               28 console.c      printint(int xx, int base, int sign)</span>
+<span class='curline'><a href='../S/8.html#L42'>base</a>               42 console.c          buf[i++] = digits[x % base];</span>
+<span class='curline'><a href='../S/8.html#L43'>base</a>               43 console.c        }while((x /= base) != 0);</span>
+<span class='curline'><a href='../S/46.html#L73'>base</a>               73 mmu.h          #define SEG(type, base, lim, dpl) (struct segdesc)    \</span>
+<span class='curline'><a href='../S/46.html#L74'>base</a>               74 mmu.h          { ((lim) &gt;&gt; 12) &amp; 0xffff, (uint)(base) &amp; 0xffff,      \</span>
+<span class='curline'><a href='../S/46.html#L75'>base</a>               75 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
+<span class='curline'><a href='../S/46.html#L76'>base</a>               76 mmu.h            (uint)(lim) &gt;&gt; 28, 0, 0, 1, 1, (uint)(base) &gt;&gt; 24 }</span>
+<span class='curline'><a href='../S/46.html#L77'>base</a>               77 mmu.h          #define SEG16(type, base, lim, dpl) (struct segdesc)  \</span>
+<span class='curline'><a href='../S/46.html#L78'>base</a>               78 mmu.h          { (lim) &amp; 0xffff, (uint)(base) &amp; 0xffff,              \</span>
+<span class='curline'><a href='../S/46.html#L79'>base</a>               79 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
+<span class='curline'><a href='../S/46.html#L80'>base</a>               80 mmu.h            (uint)(lim) &gt;&gt; 16, 0, 0, 1, 0, (uint)(base) &gt;&gt; 24 }</span>
+<span class='curline'><a href='../S/54.html#L12'>base</a>               12 printf.c       printint(int fd, int xx, int base, int sgn)</span>
+<span class='curline'><a href='../S/54.html#L29'>base</a>               29 printf.c           buf[i++] = digits[x % base];</span>
+<span class='curline'><a href='../S/54.html#L30'>base</a>               30 printf.c         }while((x /= base) != 0);</span>
+<span class='curline'><a href='../S/92.html#L21'>base</a>               21 umalloc.c      static Header base;</span>
+<span class='curline'><a href='../S/92.html#L71'>base</a>               71 umalloc.c          base.s.ptr = freep = prevp = &amp;base;</span>
+<span class='curline'><a href='../S/92.html#L72'>base</a>               72 umalloc.c          base.s.size = 0;</span>
+</pre>
+</body>
+</html>

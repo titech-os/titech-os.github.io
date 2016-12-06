@@ -1,16 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>normalmap</title>
+<title>nread</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L11'>normalmap</a>          11 kbd.c              normalmap, shiftmap, ctlmap, ctlmap</span>
-<span class='curline'><a href='../S/32.html#L51'>normalmap</a>          51 kbd.h          static uchar normalmap[256] =</span>
+<span class='curline'><a href='../S/52.html#L16'>nread</a>              16 pipe.c           uint nread;     // number of bytes read</span>
+<span class='curline'><a href='../S/52.html#L36'>nread</a>              36 pipe.c           p-&gt;nread = 0;</span>
+<span class='curline'><a href='../S/52.html#L65'>nread</a>              65 pipe.c             wakeup(&amp;p-&gt;nread);</span>
+<span class='curline'><a href='../S/52.html#L85'>nread</a>              85 pipe.c             while(p-&gt;nwrite == p-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/52.html#L90'>nread</a>              90 pipe.c               wakeup(&amp;p-&gt;nread);</span>
+<span class='curline'><a href='../S/52.html#L95'>nread</a>              95 pipe.c           wakeup(&amp;p-&gt;nread);  //DOC: pipewrite-wakeup1</span>
+<span class='curline'><a href='../S/52.html#L106'>nread</a>             106 pipe.c           while(p-&gt;nread == p-&gt;nwrite &amp;&amp; p-&gt;writeopen){  //DOC: pipe-empty</span>
+<span class='curline'><a href='../S/52.html#L111'>nread</a>             111 pipe.c             sleep(&amp;p-&gt;nread, &amp;p-&gt;lock); //DOC: piperead-sleep</span>
+<span class='curline'><a href='../S/52.html#L114'>nread</a>             114 pipe.c             if(p-&gt;nread == p-&gt;nwrite)</span>
+<span class='curline'><a href='../S/52.html#L116'>nread</a>             116 pipe.c             addr[i] = p-&gt;data[p-&gt;nread++ % PIPESIZE];</span>
 </pre>
 </body>
 </html>

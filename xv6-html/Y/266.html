@@ -1,19 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>oldbrk</title>
+<title>oldsz</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/92.html#L1418'>oldbrk</a>           1418 usertests.c      char *a, *b, *c, *lastaddr, *oldbrk, *p, scratch;</span>
-<span class='curline'><a href='../S/92.html#L1422'>oldbrk</a>           1422 usertests.c      oldbrk = sbrk(0);</span>
-<span class='curline'><a href='../S/92.html#L1490'>oldbrk</a>           1490 usertests.c      c = sbrk(-(sbrk(0) - oldbrk));</span>
-<span class='curline'><a href='../S/92.html#L1543'>oldbrk</a>           1543 usertests.c      if(sbrk(0) &gt; oldbrk)</span>
-<span class='curline'><a href='../S/92.html#L1544'>oldbrk</a>           1544 usertests.c        sbrk(-(sbrk(0) - oldbrk));</span>
+<span class='curline'><a href='../S/97.html#L223'>oldsz</a>             223 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/97.html#L230'>oldsz</a>             230 vm.c             if(newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/97.html#L231'>oldsz</a>             231 vm.c               return oldsz;</span>
+<span class='curline'><a href='../S/97.html#L233'>oldsz</a>             233 vm.c             a = PGROUNDUP(oldsz);</span>
+<span class='curline'><a href='../S/97.html#L238'>oldsz</a>             238 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/97.html#L244'>oldsz</a>             244 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/97.html#L257'>oldsz</a>             257 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/97.html#L262'>oldsz</a>             262 vm.c             if(newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/97.html#L263'>oldsz</a>             263 vm.c               return oldsz;</span>
+<span class='curline'><a href='../S/97.html#L266'>oldsz</a>             266 vm.c             for(; a  &lt; oldsz; a += PGSIZE){</span>
 </pre>
 </body>
 </html>

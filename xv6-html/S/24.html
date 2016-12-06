@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>gdbutil</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/gdbutil</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a># -*- gdb-script -*-
+<a id='L2' name='L2'></a>
+<a id='L3' name='L3'></a># Utility functions to pretty-print x86 segment/interrupt descriptors.
+<a id='L4' name='L4'></a># To load this file, run "source gdbutil" in gdb.
+<a id='L5' name='L5'></a># printdesc and printdescs are the main entry points.
+<a id='L6' name='L6'></a>
+<a id='L7' name='L7'></a># IA32 2007, Volume 3A, Table 3-2
+<a id='L8' name='L8'></a>set $STS_T16A = 0x1
+<a id='L9' name='L9'></a>set $STS_LDT  = 0x2
+<a id='L10' name='L10'></a>set $STS_T16B = 0x3
+<a id='L11' name='L11'></a>set $STS_CG16 = 0x4
+<a id='L12' name='L12'></a>set $STS_TG   = 0x5
+<a id='L13' name='L13'></a>set $STS_IG16 = 0x6
+<a id='L14' name='L14'></a>set $STS_TG16 = 0x7
+<a id='L15' name='L15'></a>set $STS_T32A = 0x9
+<a id='L16' name='L16'></a>set $STS_T32B = 0xB
+<a id='L17' name='L17'></a>set $STS_CG32 = 0xC
+<a id='L18' name='L18'></a>set $STS_IG32 = 0xE
+<a id='L19' name='L19'></a>set $STS_TG32 = 0xF
+<a id='L20' name='L20'></a>
+<a id='L21' name='L21'></a>define outputsts
+<a id='L22' name='L22'></a>  while 1
+<a id='L23' name='L23'></a>    if $arg0 == $STS_T16A
+<a id='L24' name='L24'></a>      echo STS_T16A
+<a id='L25' name='L25'></a>      loop_break
+<a id='L26' name='L26'></a>    end
+<a id='L27' name='L27'></a>    if $arg0 == $STS_LDT
+<a id='L28' name='L28'></a>      echo STS_LDT\ 
+<a id='L29' name='L29'></a>      loop_break
+<a id='L30' name='L30'></a>    end
+<a id='L31' name='L31'></a>    if $arg0 == $STS_T16B
+<a id='L32' name='L32'></a>      echo STS_T16B
+<a id='L33' name='L33'></a>      loop_break
+<a id='L34' name='L34'></a>    end
+<a id='L35' name='L35'></a>    if $arg0 == $STS_CG16
+<a id='L36' name='L36'></a>      echo STS_CG16
+<a id='L37' name='L37'></a>      loop_break
+<a id='L38' name='L38'></a>    end
+<a id='L39' name='L39'></a>    if $arg0 == $STS_TG
+<a id='L40' name='L40'></a>      echo STS_TG\ \ 
+<a id='L41' name='L41'></a>      loop_break
+<a id='L42' name='L42'></a>    end
+<a id='L43' name='L43'></a>    if $arg0 == $STS_IG16
+<a id='L44' name='L44'></a>      echo STS_IG16
+<a id='L45' name='L45'></a>      loop_break
+<a id='L46' name='L46'></a>    end
+<a id='L47' name='L47'></a>    if $arg0 == $STS_TG16
+<a id='L48' name='L48'></a>      echo STS_TG16
+<a id='L49' name='L49'></a>      loop_break
+<a id='L50' name='L50'></a>    end
+<a id='L51' name='L51'></a>    if $arg0 == $STS_T32A
+<a id='L52' name='L52'></a>      echo STS_T32A
+<a id='L53' name='L53'></a>      loop_break
+<a id='L54' name='L54'></a>    end
+<a id='L55' name='L55'></a>    if $arg0 == $STS_T32B
+<a id='L56' name='L56'></a>      echo STS_T32B
+<a id='L57' name='L57'></a>      loop_break
+<a id='L58' name='L58'></a>    end
+<a id='L59' name='L59'></a>    if $arg0 == $STS_CG32
+<a id='L60' name='L60'></a>      echo STS_CG32
+<a id='L61' name='L61'></a>      loop_break
+<a id='L62' name='L62'></a>    end
+<a id='L63' name='L63'></a>    if $arg0 == $STS_IG32
+<a id='L64' name='L64'></a>      echo STS_IG32
+<a id='L65' name='L65'></a>      loop_break
+<a id='L66' name='L66'></a>    end
+<a id='L67' name='L67'></a>    if $arg0 == $STS_TG32
+<a id='L68' name='L68'></a>      echo STS_TG32
+<a id='L69' name='L69'></a>      loop_break
+<a id='L70' name='L70'></a>    end
+<a id='L71' name='L71'></a>    echo Reserved
+<a id='L72' name='L72'></a>    loop_break
+<a id='L73' name='L73'></a>  end
+<a id='L74' name='L74'></a>end  
+<a id='L75' name='L75'></a>
+<a id='L76' name='L76'></a># IA32 2007, Volume 3A, Table 3-1
+<a id='L77' name='L77'></a>set $STA_X = 0x8
+<a id='L78' name='L78'></a>set $STA_E = 0x4
+<a id='L79' name='L79'></a>set $STA_C = 0x4
+<a id='L80' name='L80'></a>set $STA_W = 0x2
+<a id='L81' name='L81'></a>set $STA_R = 0x2
+<a id='L82' name='L82'></a>set $STA_A = 0x1
+<a id='L83' name='L83'></a>
+<a id='L84' name='L84'></a>define outputsta
+<a id='L85' name='L85'></a>  if $arg0 &amp; $STA_X
+<a id='L86' name='L86'></a>    # Code segment
+<a id='L87' name='L87'></a>    echo code
+<a id='L88' name='L88'></a>    if $arg0 &amp; $STA_C
+<a id='L89' name='L89'></a>      echo |STA_C
+<a id='L90' name='L90'></a>    end
+<a id='L91' name='L91'></a>    if $arg0 &amp; $STA_R
+<a id='L92' name='L92'></a>      echo |STA_R
+<a id='L93' name='L93'></a>    end
+<a id='L94' name='L94'></a>  else
+<a id='L95' name='L95'></a>    # Data segment
+<a id='L96' name='L96'></a>    echo data
+<a id='L97' name='L97'></a>    if $arg0 &amp; $STA_E
+<a id='L98' name='L98'></a>      echo |STA_E
+<a id='L99' name='L99'></a>    end
+<a id='L100' name='L100'></a>    if $arg0 &amp; $STA_W
+<a id='L101' name='L101'></a>      echo |STA_W
+<a id='L102' name='L102'></a>    end
+<a id='L103' name='L103'></a>  end
+<a id='L104' name='L104'></a>  if $arg0 &amp; $STA_A
+<a id='L105' name='L105'></a>    echo |STA_A
+<a id='L106' name='L106'></a>  else
+<a id='L107' name='L107'></a>    printf "      "
+<a id='L108' name='L108'></a>  end
+<a id='L109' name='L109'></a>end
+<a id='L110' name='L110'></a>
+<a id='L111' name='L111'></a># xv6-specific
+<a id='L112' name='L112'></a>set $SEG_KCODE = 1
+<a id='L113' name='L113'></a>set $SEG_KDATA = 2
+<a id='L114' name='L114'></a>set $SEG_KCPU  = 3
+<a id='L115' name='L115'></a>set $SEG_UCODE = 4
+<a id='L116' name='L116'></a>set $SEG_UDATA = 5
+<a id='L117' name='L117'></a>set $SEG_TSS   = 6
+<a id='L118' name='L118'></a>
+<a id='L119' name='L119'></a>define outputcs
+<a id='L120' name='L120'></a>  if ($arg0 &amp; 4) == 0
+<a id='L121' name='L121'></a>    if $arg0 &gt;&gt; 3 == $SEG_KCODE
+<a id='L122' name='L122'></a>      printf "SEG_KCODE&lt;&lt;3"
+<a id='L123' name='L123'></a>    end
+<a id='L124' name='L124'></a>    if $arg0 &gt;&gt; 3 == $SEG_KDATA
+<a id='L125' name='L125'></a>      printf "SEG_KDATA&lt;&lt;3"
+<a id='L126' name='L126'></a>    end
+<a id='L127' name='L127'></a>    if $arg0 &gt;&gt; 3 == $SEG_KCPU
+<a id='L128' name='L128'></a>      printf "SEG_KCPU&lt;&lt;3"
+<a id='L129' name='L129'></a>    end
+<a id='L130' name='L130'></a>    if $arg0 &gt;&gt; 3 == $SEG_UCODE
+<a id='L131' name='L131'></a>      printf "SEG_UCODE&lt;&lt;3"
+<a id='L132' name='L132'></a>    end
+<a id='L133' name='L133'></a>    if $arg0 &gt;&gt; 3 == $SEG_UDATA
+<a id='L134' name='L134'></a>      printf "SEG_UDATA&lt;&lt;3"
+<a id='L135' name='L135'></a>    end
+<a id='L136' name='L136'></a>    if $arg0 &gt;&gt; 3 == $SEG_TSS
+<a id='L137' name='L137'></a>      printf "SEG_TSS&lt;&lt;3"
+<a id='L138' name='L138'></a>    end
+<a id='L139' name='L139'></a>    if ($arg0 &gt;&gt; 3 &lt; 1) + ($arg0 &gt;&gt; 3 &gt; 6)
+<a id='L140' name='L140'></a>      printf "GDT[%d]", $arg0 &gt;&gt; 3
+<a id='L141' name='L141'></a>    end
+<a id='L142' name='L142'></a>  else
+<a id='L143' name='L143'></a>    printf "LDT[%d]", $arg0 &gt;&gt; 3
+<a id='L144' name='L144'></a>  end
+<a id='L145' name='L145'></a>  if ($arg0 &amp; 3) &gt; 0
+<a id='L146' name='L146'></a>    printf "|"
+<a id='L147' name='L147'></a>    outputdpl ($arg0&amp;3)
+<a id='L148' name='L148'></a>  end
+<a id='L149' name='L149'></a>end
+<a id='L150' name='L150'></a>
+<a id='L151' name='L151'></a>define outputdpl
+<a id='L152' name='L152'></a>  if $arg0 == 0
+<a id='L153' name='L153'></a>    printf "DPL_KERN"
+<a id='L154' name='L154'></a>  else
+<a id='L155' name='L155'></a>    if $arg0 == 3
+<a id='L156' name='L156'></a>      printf "DPL_USER"
+<a id='L157' name='L157'></a>    else
+<a id='L158' name='L158'></a>      printf "DPL%d", $arg0
+<a id='L159' name='L159'></a>    end
+<a id='L160' name='L160'></a>  end
+<a id='L161' name='L161'></a>end
+<a id='L162' name='L162'></a>
+<a id='L163' name='L163'></a>define printdesc
+<a id='L164' name='L164'></a>  if $argc != 1
+<a id='L165' name='L165'></a>    echo Usage: printdesc expr
+<a id='L166' name='L166'></a>  else
+<a id='L167' name='L167'></a>    _printdesc ((uint*)&amp;($arg0))[0] ((uint*)&amp;($arg0))[1]
+<a id='L168' name='L168'></a>    printf "\n"
+<a id='L169' name='L169'></a>  end
+<a id='L170' name='L170'></a>end
+<a id='L171' name='L171'></a>
+<a id='L172' name='L172'></a>document printdesc
+<a id='L173' name='L173'></a>Print an x86 segment or gate descriptor.
+<a id='L174' name='L174'></a>printdesc EXPR
+<a id='L175' name='L175'></a>EXPR must evaluate to a descriptor value.  It can be of any C type.
+<a id='L176' name='L176'></a>end
+<a id='L177' name='L177'></a>
+<a id='L178' name='L178'></a>define _printdesc
+<a id='L179' name='L179'></a>  _printdesc1 $arg0 $arg1 ($arg1&gt;&gt;15&amp;1) ($arg1&gt;&gt;13&amp;3) ($arg1&gt;&gt;12&amp;1) ($arg1&gt;&gt;8&amp;15)
+<a id='L180' name='L180'></a>end
+<a id='L181' name='L181'></a>
+<a id='L182' name='L182'></a>define _printdesc1
+<a id='L183' name='L183'></a>  # 2:P 3:DPL 4:S 5:Type
+<a id='L184' name='L184'></a>  if $arg2 == 0
+<a id='L185' name='L185'></a>    printf "P = 0 (Not present)"
+<a id='L186' name='L186'></a>  else
+<a id='L187' name='L187'></a>    printf "type = "
+<a id='L188' name='L188'></a>    if $arg4 == 0
+<a id='L189' name='L189'></a>      # System segment
+<a id='L190' name='L190'></a>      outputsts $arg5
+<a id='L191' name='L191'></a>      printf " (0x%x)    ", $arg5
+<a id='L192' name='L192'></a>      _printsysdesc $arg0 $arg1 $arg5
+<a id='L193' name='L193'></a>    else
+<a id='L194' name='L194'></a>      # Code/data segment
+<a id='L195' name='L195'></a>      outputsta $arg5
+<a id='L196' name='L196'></a>      printf "  "
+<a id='L197' name='L197'></a>      _printsegdesc $arg0 $arg1
+<a id='L198' name='L198'></a>    end
+<a id='L199' name='L199'></a>
+<a id='L200' name='L200'></a>    printf "  DPL = "
+<a id='L201' name='L201'></a>    outputdpl $arg3
+<a id='L202' name='L202'></a>    printf " (%d)", $arg3
+<a id='L203' name='L203'></a>  end
+<a id='L204' name='L204'></a>end
+<a id='L205' name='L205'></a>
+<a id='L206' name='L206'></a>define _printsysdesc
+<a id='L207' name='L207'></a>  # 2:Type
+<a id='L208' name='L208'></a>  # GDB's || is buggy
+<a id='L209' name='L209'></a>  if ($arg2 == $STS_TG) + (($arg2&amp;7) == $STS_IG16) + (($arg2&amp;7) == $STS_TG16)
+<a id='L210' name='L210'></a>    # Gate descriptor
+<a id='L211' name='L211'></a>    _printgate $arg2 ($arg0&gt;&gt;16) ($arg0&amp;0xFFFF) ($arg1&gt;&gt;16)
+<a id='L212' name='L212'></a>  else
+<a id='L213' name='L213'></a>    # System segment descriptor
+<a id='L214' name='L214'></a>    _printsegdesc $arg0 $arg1
+<a id='L215' name='L215'></a>  end
+<a id='L216' name='L216'></a>end
+<a id='L217' name='L217'></a>
+<a id='L218' name='L218'></a>define _printgate
+<a id='L219' name='L219'></a>  # IA32 2007, Voume 3A, Figure 5-2
+<a id='L220' name='L220'></a>  # 0:Type 1:CS 2:Offset 15..0 3:Offset 31..16
+<a id='L221' name='L221'></a>  printf "CS = "
+<a id='L222' name='L222'></a>  outputcs $arg1
+<a id='L223' name='L223'></a>  printf " (%d)", $arg1
+<a id='L224' name='L224'></a>
+<a id='L225' name='L225'></a>  if (($arg0&amp;7) == $STS_IG16) + (($arg0&amp;7) == $STS_TG16)
+<a id='L226' name='L226'></a>    printf "  Offset = "
+<a id='L227' name='L227'></a>    output/a $arg3 &lt;&lt; 16 | $arg2
+<a id='L228' name='L228'></a>  end
+<a id='L229' name='L229'></a>end
+<a id='L230' name='L230'></a>
+<a id='L231' name='L231'></a>define _printsegdesc
+<a id='L232' name='L232'></a>  # IA32 20007, Volume 3A, Figure 3-8 and Figure 4-1
+<a id='L233' name='L233'></a>  _printsegdesc1 ($arg0&gt;&gt;16) ($arg1&amp;0xFF) ($arg1&gt;&gt;24) ($arg0&amp;0xFFFF) ($arg1&gt;&gt;16&amp;15) ($arg1&gt;&gt;23&amp;1)
+<a id='L234' name='L234'></a>  if ($arg1&gt;&gt;12&amp;1) == 1
+<a id='L235' name='L235'></a>    printf "  AVL = %d", $arg1&gt;&gt;20&amp;1
+<a id='L236' name='L236'></a>    if ($arg1&gt;&gt;11&amp;1) == 0
+<a id='L237' name='L237'></a>      # Data segment
+<a id='L238' name='L238'></a>      if ($arg1&gt;&gt;22&amp;1) == 0
+<a id='L239' name='L239'></a>        printf "  B = small (0) "
+<a id='L240' name='L240'></a>      else
+<a id='L241' name='L241'></a>        printf "  B = big (1)   "
+<a id='L242' name='L242'></a>      end
+<a id='L243' name='L243'></a>    else
+<a id='L244' name='L244'></a>      # Code segment
+<a id='L245' name='L245'></a>      printf "  D = "
+<a id='L246' name='L246'></a>      if ($arg1&gt;&gt;22&amp;1) == 0
+<a id='L247' name='L247'></a>        printf "16-bit (0)"
+<a id='L248' name='L248'></a>      else
+<a id='L249' name='L249'></a>        printf "32-bit (1)"
+<a id='L250' name='L250'></a>      end
+<a id='L251' name='L251'></a>    end
+<a id='L252' name='L252'></a>  end
+<a id='L253' name='L253'></a>end
+<a id='L254' name='L254'></a>
+<a id='L255' name='L255'></a>define _printsegdesc1
+<a id='L256' name='L256'></a>  # 0:Base 0..15  1:Base 16..23  2:Base 24..32  3:Limit 0..15  4:Limit 16..19  5:G
+<a id='L257' name='L257'></a>  printf "base = 0x%08x", $arg0 | ($arg1&lt;&lt;16) | ($arg2&lt;&lt;24)
+<a id='L258' name='L258'></a>  printf "  limit = 0x"
+<a id='L259' name='L259'></a>  if $arg5 == 0
+<a id='L260' name='L260'></a>    printf "%08x", $arg3 | ($arg4&lt;&lt;16)
+<a id='L261' name='L261'></a>  else
+<a id='L262' name='L262'></a>    printf "%08x", (($arg3 | ($arg4&lt;&lt;16)) &lt;&lt; 12) | 0xFFF
+<a id='L263' name='L263'></a>  end
+<a id='L264' name='L264'></a>end
+<a id='L265' name='L265'></a>
+<a id='L266' name='L266'></a>define printdescs
+<a id='L267' name='L267'></a>  if $argc &lt; 1 || $argc &gt; 2
+<a id='L268' name='L268'></a>    echo Usage: printdescs expr [count]
+<a id='L269' name='L269'></a>  else
+<a id='L270' name='L270'></a>    if $argc == 1
+<a id='L271' name='L271'></a>      _printdescs ($arg0) (sizeof($arg0)/sizeof(($arg0)[0]))
+<a id='L272' name='L272'></a>    else
+<a id='L273' name='L273'></a>      _printdescs ($arg0) ($arg1)
+<a id='L274' name='L274'></a>    end
+<a id='L275' name='L275'></a>  end
+<a id='L276' name='L276'></a>end
+<a id='L277' name='L277'></a>
+<a id='L278' name='L278'></a>document printdescs
+<a id='L279' name='L279'></a>Print an array of x86 segment or gate descriptors.
+<a id='L280' name='L280'></a>printdescs EXPR [COUNT]
+<a id='L281' name='L281'></a>EXPR must evaluate to an array of descriptors.
+<a id='L282' name='L282'></a>end
+<a id='L283' name='L283'></a>
+<a id='L284' name='L284'></a>define _printdescs
+<a id='L285' name='L285'></a>  set $i = 0
+<a id='L286' name='L286'></a>  while $i &lt; $arg1
+<a id='L287' name='L287'></a>    printf "[%d] ", $i
+<a id='L288' name='L288'></a>    printdesc $arg0[$i]
+<a id='L289' name='L289'></a>    set $i = $i + 1
+<a id='L290' name='L290'></a>  end
+<a id='L291' name='L291'></a>end
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

@@ -3,16 +3,18 @@
 <head>
 <title>sector_per_block</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/26.html#L78'>sector_per_block</a>   78 ide.c            int sector_per_block =  BSIZE/SECTOR_SIZE;</span>
-<span class='curline'><a href='../S/26.html#L79'>sector_per_block</a>   79 ide.c            int sector = b-&gt;blockno * sector_per_block;</span>
-<span class='curline'><a href='../S/26.html#L81'>sector_per_block</a>   81 ide.c            if (sector_per_block &gt; 7) panic("idestart");</span>
-<span class='curline'><a href='../S/26.html#L85'>sector_per_block</a>   85 ide.c            outb(0x1f2, sector_per_block);  // number of sectors</span>
+<span class='curline'><a href='../S/26.html#L81'>sector_per_block</a>   81 ide.c            int sector_per_block =  BSIZE/SECTOR_SIZE;</span>
+<span class='curline'><a href='../S/26.html#L82'>sector_per_block</a>   82 ide.c            int sector = b-&gt;blockno * sector_per_block;</span>
+<span class='curline'><a href='../S/26.html#L83'>sector_per_block</a>   83 ide.c            int read_cmd = (sector_per_block == 1) ? IDE_CMD_READ :  IDE_CMD_RDMUL;</span>
+<span class='curline'><a href='../S/26.html#L84'>sector_per_block</a>   84 ide.c            int write_cmd = (sector_per_block == 1) ? IDE_CMD_WRITE : IDE_CMD_WRMUL;</span>
+<span class='curline'><a href='../S/26.html#L86'>sector_per_block</a>   86 ide.c            if (sector_per_block &gt; 7) panic("idestart");</span>
+<span class='curline'><a href='../S/26.html#L90'>sector_per_block</a>   90 ide.c            outb(0x1f2, sector_per_block);  // number of sectors</span>
 </pre>
 </body>
 </html>

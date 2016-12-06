@@ -1,41 +1,168 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>syscall.h</title>
+<title>symlink.patch</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/syscall.h</h2>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/symlink.patch</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'><a href='../J/57.html' title='Multiple included from 4 places.'>INCLUDED FROM</a></h2>
-<hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='comment'>// System call numbers</em>
-<a id='L2' name='L2'></a>   2 <em class='sharp'>#define</em> <a href='../S/76.html#L103' title='Referred from 103 in syscall.c.'>SYS_fork</a>    1
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#define</em> <a href='../S/76.html#L104' title='Referred from 104 in syscall.c.'>SYS_exit</a>    2
-<a id='L4' name='L4'></a>   4 <em class='sharp'>#define</em> <a href='../S/76.html#L105' title='Referred from 105 in syscall.c.'>SYS_wait</a>    3
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#define</em> <a href='../S/76.html#L106' title='Referred from 106 in syscall.c.'>SYS_pipe</a>    4
-<a id='L6' name='L6'></a>   6 <em class='sharp'>#define</em> <a href='../S/76.html#L107' title='Referred from 107 in syscall.c.'>SYS_read</a>    5
-<a id='L7' name='L7'></a>   7 <em class='sharp'>#define</em> <a href='../S/76.html#L108' title='Referred from 108 in syscall.c.'>SYS_kill</a>    6
-<a id='L8' name='L8'></a>   8 <em class='sharp'>#define</em> <a href='../S/76.html#L109' title='Referred from 109 in syscall.c.'>SYS_exec</a>    7
-<a id='L9' name='L9'></a>   9 <em class='sharp'>#define</em> <a href='../S/76.html#L110' title='Referred from 110 in syscall.c.'>SYS_fstat</a>   8
-<a id='L10' name='L10'></a>  10 <em class='sharp'>#define</em> <a href='../S/76.html#L111' title='Referred from 111 in syscall.c.'>SYS_chdir</a>   9
-<a id='L11' name='L11'></a>  11 <em class='sharp'>#define</em> <a href='../S/76.html#L112' title='Referred from 112 in syscall.c.'>SYS_dup</a>    10
-<a id='L12' name='L12'></a>  12 <em class='sharp'>#define</em> <a href='../S/76.html#L113' title='Referred from 113 in syscall.c.'>SYS_getpid</a> 11
-<a id='L13' name='L13'></a>  13 <em class='sharp'>#define</em> <a href='../S/76.html#L114' title='Referred from 114 in syscall.c.'>SYS_sbrk</a>   12
-<a id='L14' name='L14'></a>  14 <em class='sharp'>#define</em> <a href='../R/196.html' title='Multiple referred from 2 places.'>SYS_sleep</a>  13
-<a id='L15' name='L15'></a>  15 <em class='sharp'>#define</em> <a href='../S/76.html#L116' title='Referred from 116 in syscall.c.'>SYS_uptime</a> 14
-<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../S/76.html#L117' title='Referred from 117 in syscall.c.'>SYS_open</a>   15
-<a id='L17' name='L17'></a>  17 <em class='sharp'>#define</em> <a href='../S/76.html#L118' title='Referred from 118 in syscall.c.'>SYS_write</a>  16
-<a id='L18' name='L18'></a>  18 <em class='sharp'>#define</em> <a href='../S/76.html#L119' title='Referred from 119 in syscall.c.'>SYS_mknod</a>  17
-<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../S/76.html#L120' title='Referred from 120 in syscall.c.'>SYS_unlink</a> 18
-<a id='L20' name='L20'></a>  20 <em class='sharp'>#define</em> <a href='../S/76.html#L121' title='Referred from 121 in syscall.c.'>SYS_link</a>   19
-<a id='L21' name='L21'></a>  21 <em class='sharp'>#define</em> <a href='../S/76.html#L122' title='Referred from 122 in syscall.c.'>SYS_mkdir</a>  20
-<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/76.html#L123' title='Referred from 123 in syscall.c.'>SYS_close</a>  21
+<a id='L1' name='L1'></a>diff -r f8a4e40ab1d6 fs.c
+<a id='L2' name='L2'></a>--- a/fs.c      Thu Aug 30 14:32:06 2007 -0400
+<a id='L3' name='L3'></a>+++ b/fs.c      Thu Aug 30 14:29:02 2007 -0400
+<a id='L4' name='L4'></a>@@ -577,12 +577,18 @@ skipelem(char *path, char *name)
+<a id='L5' name='L5'></a> // If parent != 0, return the inode for the parent and copy the final
+<a id='L6' name='L6'></a> // path element into name, which must have room for DIRSIZ bytes.
+<a id='L7' name='L7'></a> static struct inode*
+<a id='L8' name='L8'></a>-_namei(char *path, int parent, char *name)
+<a id='L9' name='L9'></a>+_namei(struct inode *root, char *path, int parent, char *name, int depth)
+<a id='L10' name='L10'></a> {
+<a id='L11' name='L11'></a>   struct inode *ip, *next;
+<a id='L12' name='L12'></a>+  char buf[100], tname[DIRSIZ];
+<a id='L13' name='L13'></a>+
+<a id='L14' name='L14'></a>+  if(depth &gt; 5)
+<a id='L15' name='L15'></a>+    return 0;
+<a id='L16' name='L16'></a> 
+<a id='L17' name='L17'></a>   if(*path == '/')
+<a id='L18' name='L18'></a>     ip = iget(ROOTDEV, 1);
+<a id='L19' name='L19'></a>+  else if(root)
+<a id='L20' name='L20'></a>+    ip = idup(root);
+<a id='L21' name='L21'></a>   else
+<a id='L22' name='L22'></a>     ip = idup(cp-&gt;cwd);
+<a id='L23' name='L23'></a> 
+<a id='L24' name='L24'></a>@@ -598,10 +604,24 @@ _namei(char *path, int parent, char *nam
+<a id='L25' name='L25'></a>       return ip;
+<a id='L26' name='L26'></a>     }
+<a id='L27' name='L27'></a>     if((next = dirlookup(ip, name, 0)) == 0){
+<a id='L28' name='L28'></a>+      cprintf("did not find %s\n", name);
+<a id='L29' name='L29'></a>       iunlockput(ip);
+<a id='L30' name='L30'></a>       return 0;
+<a id='L31' name='L31'></a>     }
+<a id='L32' name='L32'></a>-    iunlockput(ip);
+<a id='L33' name='L33'></a>+    iunlock(ip);
+<a id='L34' name='L34'></a>+    ilock(next);
+<a id='L35' name='L35'></a>+    if(next-&gt;type == T_SYMLINK){
+<a id='L36' name='L36'></a>+      if(next-&gt;size &gt;= sizeof(buf) || readi(next, buf, 0, next-&gt;size) != next-&gt;size){
+<a id='L37' name='L37'></a>+        iunlockput(next);
+<a id='L38' name='L38'></a>+        iput(ip);
+<a id='L39' name='L39'></a>+        return 0;
+<a id='L40' name='L40'></a>+      }
+<a id='L41' name='L41'></a>+      buf[next-&gt;size] = 0;
+<a id='L42' name='L42'></a>+      iunlockput(next);
+<a id='L43' name='L43'></a>+      next = _namei(ip, buf, 0, tname, depth+1);
+<a id='L44' name='L44'></a>+    }else
+<a id='L45' name='L45'></a>+      iunlock(next);
+<a id='L46' name='L46'></a>+    iput(ip);
+<a id='L47' name='L47'></a>     ip = next;
+<a id='L48' name='L48'></a>   }
+<a id='L49' name='L49'></a>   if(parent){
+<a id='L50' name='L50'></a>@@ -615,11 +635,11 @@ namei(char *path)
+<a id='L51' name='L51'></a> namei(char *path)
+<a id='L52' name='L52'></a> {
+<a id='L53' name='L53'></a>   char name[DIRSIZ];
+<a id='L54' name='L54'></a>-  return _namei(path, 0, name);
+<a id='L55' name='L55'></a>+  return _namei(0, path, 0, name, 0);
+<a id='L56' name='L56'></a> }
+<a id='L57' name='L57'></a> 
+<a id='L58' name='L58'></a> struct inode*
+<a id='L59' name='L59'></a> nameiparent(char *path, char *name)
+<a id='L60' name='L60'></a> {
+<a id='L61' name='L61'></a>-  return _namei(path, 1, name);
+<a id='L62' name='L62'></a>-}
+<a id='L63' name='L63'></a>+  return _namei(0, path, 1, name, 0);
+<a id='L64' name='L64'></a>+}
+<a id='L65' name='L65'></a>diff -r f8a4e40ab1d6 fs.h
+<a id='L66' name='L66'></a>--- a/fs.h      Thu Aug 30 14:32:06 2007 -0400
+<a id='L67' name='L67'></a>+++ b/fs.h      Thu Aug 30 13:05:43 2007 -0400
+<a id='L68' name='L68'></a>@@ -33,6 +33,7 @@ struct dinode {
+<a id='L69' name='L69'></a> #define T_DIR  1   // Directory
+<a id='L70' name='L70'></a> #define T_FILE 2   // File
+<a id='L71' name='L71'></a> #define T_DEV  3   // Special device
+<a id='L72' name='L72'></a>+#define T_SYMLINK 4  // Symlink
+<a id='L73' name='L73'></a> 
+<a id='L74' name='L74'></a> // Inodes per block.
+<a id='L75' name='L75'></a> #define IPB           (BSIZE / sizeof(struct dinode))
+<a id='L76' name='L76'></a>diff -r f8a4e40ab1d6 syscall.c
+<a id='L77' name='L77'></a>--- a/syscall.c Thu Aug 30 14:32:06 2007 -0400
+<a id='L78' name='L78'></a>+++ b/syscall.c Thu Aug 30 13:05:29 2007 -0400
+<a id='L79' name='L79'></a>@@ -96,6 +96,7 @@ extern int sys_unlink(void);
+<a id='L80' name='L80'></a> extern int sys_unlink(void);
+<a id='L81' name='L81'></a> extern int sys_wait(void);
+<a id='L82' name='L82'></a> extern int sys_write(void);
+<a id='L83' name='L83'></a>+extern int sys_symlink(void);
+<a id='L84' name='L84'></a> 
+<a id='L85' name='L85'></a> static int (*syscalls[])(void) = {
+<a id='L86' name='L86'></a> [SYS_chdir]   sys_chdir,
+<a id='L87' name='L87'></a>@@ -118,6 +119,7 @@ static int (*syscalls[])(void) = {
+<a id='L88' name='L88'></a> [SYS_unlink]  sys_unlink,
+<a id='L89' name='L89'></a> [SYS_wait]    sys_wait,
+<a id='L90' name='L90'></a> [SYS_write]   sys_write,
+<a id='L91' name='L91'></a>+[SYS_symlink]  sys_symlink,
+<a id='L92' name='L92'></a> };
+<a id='L93' name='L93'></a> 
+<a id='L94' name='L94'></a> void
+<a id='L95' name='L95'></a>diff -r f8a4e40ab1d6 syscall.h
+<a id='L96' name='L96'></a>--- a/syscall.h Thu Aug 30 14:32:06 2007 -0400
+<a id='L97' name='L97'></a>+++ b/syscall.h Thu Aug 30 13:02:48 2007 -0400
+<a id='L98' name='L98'></a>@@ -19,3 +19,4 @@
+<a id='L99' name='L99'></a> #define SYS_getpid 18
+<a id='L100' name='L100'></a> #define SYS_sbrk   19
+<a id='L101' name='L101'></a> #define SYS_sleep  20
+<a id='L102' name='L102'></a>+#define SYS_symlink 21
+<a id='L103' name='L103'></a>diff -r f8a4e40ab1d6 sysfile.c
+<a id='L104' name='L104'></a>--- a/sysfile.c Thu Aug 30 14:32:06 2007 -0400
+<a id='L105' name='L105'></a>+++ b/sysfile.c Thu Aug 30 13:10:31 2007 -0400
+<a id='L106' name='L106'></a>@@ -257,6 +257,21 @@ create(char *path, int canexist, short t
+<a id='L107' name='L107'></a> }
+<a id='L108' name='L108'></a> 
+<a id='L109' name='L109'></a> int
+<a id='L110' name='L110'></a>+sys_symlink(void)
+<a id='L111' name='L111'></a>+{
+<a id='L112' name='L112'></a>+  char *old, *new;
+<a id='L113' name='L113'></a>+  struct inode *ip;
+<a id='L114' name='L114'></a>+  
+<a id='L115' name='L115'></a>+  if(argstr(0, &amp;old) &lt; 0 || argstr(1, &amp;new) &lt; 0)
+<a id='L116' name='L116'></a>+    return -1;
+<a id='L117' name='L117'></a>+  if((ip = create(new, 0, T_SYMLINK, 0, 0)) == 0)
+<a id='L118' name='L118'></a>+    return -1;
+<a id='L119' name='L119'></a>+  writei(ip, old, 0, strlen(old));
+<a id='L120' name='L120'></a>+  iunlockput(ip);
+<a id='L121' name='L121'></a>+  return 0;
+<a id='L122' name='L122'></a>+}
+<a id='L123' name='L123'></a>+
+<a id='L124' name='L124'></a>+int
+<a id='L125' name='L125'></a> sys_open(void)
+<a id='L126' name='L126'></a> {
+<a id='L127' name='L127'></a>   char *path;
+<a id='L128' name='L128'></a>@@ -393,3 +408,4 @@ sys_pipe(void)
+<a id='L129' name='L129'></a>   fd[1] = fd1;
+<a id='L130' name='L130'></a>   return 0;
+<a id='L131' name='L131'></a> }
+<a id='L132' name='L132'></a>+
+<a id='L133' name='L133'></a>diff -r f8a4e40ab1d6 user.h
+<a id='L134' name='L134'></a>--- a/user.h    Thu Aug 30 14:32:06 2007 -0400
+<a id='L135' name='L135'></a>+++ b/user.h    Thu Aug 30 13:02:34 2007 -0400
+<a id='L136' name='L136'></a>@@ -21,6 +21,7 @@ int getpid();
+<a id='L137' name='L137'></a> int getpid();
+<a id='L138' name='L138'></a> char* sbrk(int);
+<a id='L139' name='L139'></a> int sleep(int);
+<a id='L140' name='L140'></a>+int symlink(int);
+<a id='L141' name='L141'></a> 
+<a id='L142' name='L142'></a> // ulib.c
+<a id='L143' name='L143'></a> int stat(char*, struct stat*);
+<a id='L144' name='L144'></a>diff -r f8a4e40ab1d6 usys.S
+<a id='L145' name='L145'></a>--- a/usys.S    Thu Aug 30 14:32:06 2007 -0400
+<a id='L146' name='L146'></a>+++ b/usys.S    Thu Aug 30 13:05:54 2007 -0400
+<a id='L147' name='L147'></a>@@ -28,3 +28,4 @@ STUB(getpid)
+<a id='L148' name='L148'></a> STUB(getpid)
+<a id='L149' name='L149'></a> STUB(sbrk)
+<a id='L150' name='L150'></a> STUB(sleep)
+<a id='L151' name='L151'></a>+STUB(symlink)
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

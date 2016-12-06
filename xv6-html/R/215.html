@@ -1,17 +1,29 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>T_SYSCALL</title>
+<title>T_IRQ0</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/83.html#L24'>T_SYSCALL</a>          24 trap.c           SETGATE(idt[T_SYSCALL], 1, SEG_KCODE&lt;&lt;3, vectors[T_SYSCALL], DPL_USER);</span>
-<span class='curline'><a href='../S/83.html#L39'>T_SYSCALL</a>          39 trap.c           if(tf-&gt;trapno == T_SYSCALL){</span>
-<span class='curline'><a href='../S/92.html#L1558'>T_SYSCALL</a>        1558 usertests.c          "a" (SYS_sleep), "n" (T_SYSCALL), "c" (p) :</span>
+<span class='curline'><a href='../S/29.html#L65'>T_IRQ0</a>             65 ioapic.c           ioapicwrite(REG_TABLE+2*i, INT_DISABLED | (T_IRQ0 + i));</span>
+<span class='curline'><a href='../S/29.html#L79'>T_IRQ0</a>             79 ioapic.c         ioapicwrite(REG_TABLE+2*irq, T_IRQ0 + irq);</span>
+<span class='curline'><a href='../S/35.html#L62'>T_IRQ0</a>             62 lapic.c          lapicw(SVR, ENABLE | (T_IRQ0 + IRQ_SPURIOUS));</span>
+<span class='curline'><a href='../S/35.html#L69'>T_IRQ0</a>             69 lapic.c          lapicw(TIMER, PERIODIC | (T_IRQ0 + IRQ_TIMER));</span>
+<span class='curline'><a href='../S/35.html#L82'>T_IRQ0</a>             82 lapic.c          lapicw(ERROR, T_IRQ0 + IRQ_ERROR);</span>
+<span class='curline'><a href='../S/51.html#L48'>T_IRQ0</a>             48 picirq.c         outb(IO_PIC1+1, T_IRQ0);</span>
+<span class='curline'><a href='../S/51.html#L66'>T_IRQ0</a>             66 picirq.c         outb(IO_PIC2+1, T_IRQ0 + 8);      // ICW2</span>
+<span class='curline'><a href='../S/85.html#L50'>T_IRQ0</a>             50 trap.c           case T_IRQ0 + IRQ_TIMER:</span>
+<span class='curline'><a href='../S/85.html#L59'>T_IRQ0</a>             59 trap.c           case T_IRQ0 + IRQ_IDE:</span>
+<span class='curline'><a href='../S/85.html#L63'>T_IRQ0</a>             63 trap.c           case T_IRQ0 + IRQ_IDE+1:</span>
+<span class='curline'><a href='../S/85.html#L66'>T_IRQ0</a>             66 trap.c           case T_IRQ0 + IRQ_KBD:</span>
+<span class='curline'><a href='../S/85.html#L70'>T_IRQ0</a>             70 trap.c           case T_IRQ0 + IRQ_COM1:</span>
+<span class='curline'><a href='../S/85.html#L74'>T_IRQ0</a>             74 trap.c           case T_IRQ0 + 7:</span>
+<span class='curline'><a href='../S/85.html#L75'>T_IRQ0</a>             75 trap.c           case T_IRQ0 + IRQ_SPURIOUS:</span>
+<span class='curline'><a href='../S/85.html#L105'>T_IRQ0</a>            105 trap.c           if(proc &amp;&amp; proc-&gt;state == RUNNING &amp;&amp; tf-&gt;trapno == T_IRQ0+IRQ_TIMER)</span>
 </pre>
 </body>
 </html>

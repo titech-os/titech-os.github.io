@@ -1,20 +1,36 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>outstanding</title>
+<title>pa</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L42'>outstanding</a>        42 log.c            int outstanding; // how many FS sys calls are executing.</span>
-<span class='curline'><a href='../S/38.html#L131'>outstanding</a>       131 log.c              } else if(log.lh.n + (log.outstanding+1)*MAXOPBLOCKS &gt; LOGSIZE){</span>
-<span class='curline'><a href='../S/38.html#L135'>outstanding</a>       135 log.c                log.outstanding += 1;</span>
-<span class='curline'><a href='../S/38.html#L150'>outstanding</a>       150 log.c            log.outstanding -= 1;</span>
-<span class='curline'><a href='../S/38.html#L153'>outstanding</a>       153 log.c            if(log.outstanding == 0){</span>
-<span class='curline'><a href='../S/38.html#L217'>outstanding</a>       217 log.c            if (log.outstanding &lt; 1)</span>
+<span class='curline'><a href='../S/4.html#L23'>pa</a>                 23 bootmain.c       uchar* pa;</span>
+<span class='curline'><a href='../S/4.html#L38'>pa</a>                 38 bootmain.c         pa = (uchar*)ph-&gt;paddr;</span>
+<span class='curline'><a href='../S/4.html#L39'>pa</a>                 39 bootmain.c         readseg(pa, ph-&gt;filesz, ph-&gt;off);</span>
+<span class='curline'><a href='../S/4.html#L41'>pa</a>                 41 bootmain.c           stosb(pa + ph-&gt;filesz, 0, ph-&gt;memsz - ph-&gt;filesz);</span>
+<span class='curline'><a href='../S/4.html#L79'>pa</a>                 79 bootmain.c     readseg(uchar* pa, uint count, uint offset)</span>
+<span class='curline'><a href='../S/4.html#L83'>pa</a>                 83 bootmain.c       epa = pa + count;</span>
+<span class='curline'><a href='../S/4.html#L86'>pa</a>                 86 bootmain.c       pa -= offset % SECTSIZE;</span>
+<span class='curline'><a href='../S/4.html#L94'>pa</a>                 94 bootmain.c       for(; pa &lt; epa; pa += SECTSIZE, offset++)</span>
+<span class='curline'><a href='../S/4.html#L95'>pa</a>                 95 bootmain.c         readsect(pa, offset);</span>
+<span class='curline'><a href='../S/97.html#L70'>pa</a>                 70 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
+<span class='curline'><a href='../S/97.html#L82'>pa</a>                 82 vm.c               *pte = pa | perm | PTE_P;</span>
+<span class='curline'><a href='../S/97.html#L86'>pa</a>                 86 vm.c               pa += PGSIZE;</span>
+<span class='curline'><a href='../S/97.html#L201'>pa</a>                201 vm.c             uint i, pa, n;</span>
+<span class='curline'><a href='../S/97.html#L209'>pa</a>                209 vm.c               pa = PTE_ADDR(*pte);</span>
+<span class='curline'><a href='../S/97.html#L214'>pa</a>                214 vm.c               if(readi(ip, P2V(pa), offset+i, n) != n)</span>
+<span class='curline'><a href='../S/97.html#L260'>pa</a>                260 vm.c             uint a, pa;</span>
+<span class='curline'><a href='../S/97.html#L271'>pa</a>                271 vm.c                 pa = PTE_ADDR(*pte);</span>
+<span class='curline'><a href='../S/97.html#L272'>pa</a>                272 vm.c                 if(pa == 0)</span>
+<span class='curline'><a href='../S/97.html#L274'>pa</a>                274 vm.c                 char *v = P2V(pa);</span>
+<span class='curline'><a href='../S/97.html#L321'>pa</a>                321 vm.c             uint pa, i, flags;</span>
+<span class='curline'><a href='../S/97.html#L331'>pa</a>                331 vm.c               pa = PTE_ADDR(*pte);</span>
+<span class='curline'><a href='../S/97.html#L335'>pa</a>                335 vm.c               memmove(mem, (char*)P2V(pa), PGSIZE);</span>
 </pre>
 </body>
 </html>

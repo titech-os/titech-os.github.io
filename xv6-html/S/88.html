@@ -1,106 +1,160 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uart.c</title>
+<title>TRICKS</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/uart.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L19'>[^]</a><a href='#L74'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
-<hr />
-<h2 class='header'>DEFINITIONS</h2>
-This source file includes following definitions.
-<ol>
-<li><a href='#L19' title='Defined at 19.'>uartinit</a></li>
-<li><a href='#L52' title='Defined at 52.'>uartputc</a></li>
-<li><a href='#L64' title='Defined at 64.'>uartgetc</a></li>
-<li><a href='#L74' title='Defined at 74.'>uartintr</a></li>
-</ol>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/TRICKS</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='comment'>// Intel 8250 serial port (UART).</em>
-<a id='L2' name='L2'></a>   2 
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='87.html'>types.h</a>"
-<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='11.html'>defs.h</a>"
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='50.html'>param.h</a>"
-<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='85.html'>traps.h</a>"
-<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='69.html'>spinlock.h</a>"
-<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='23.html'>fs.h</a>"
-<a id='L9' name='L9'></a>   9 <em class='sharp'>#include</em> "<a href='20.html'>file.h</a>"
-<a id='L10' name='L10'></a>  10 <em class='sharp'>#include</em> "<a href='46.html'>mmu.h</a>"
-<a id='L11' name='L11'></a>  11 <em class='sharp'>#include</em> "<a href='57.html'>proc.h</a>"
-<a id='L12' name='L12'></a>  12 <em class='sharp'>#include</em> "<a href='97.html'>x86.h</a>"
-<a id='L13' name='L13'></a>  13 
-<a id='L14' name='L14'></a>  14 <em class='sharp'>#define</em> <a href='../R/21.html' title='Multiple referred from 14 places.'>COM1</a>    0x3f8
-<a id='L15' name='L15'></a>  15 
-<a id='L16' name='L16'></a>  16 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../Y/414.html' title='Multiple used in 4 places.'>uart</a>;    <em class='comment'>// is there a uart?</em>
-<a id='L17' name='L17'></a>  17 
-<a id='L18' name='L18'></a>  18 <strong class='reserved'>void</strong>
-<a id='L19' name='L19'></a>  19 <a href='../R/512.html' title='Multiple referred from 2 places.'>uartinit</a>(<strong class='reserved'>void</strong>)
-<a id='L20' name='L20'></a>  20 <em class='brace'>{</em>
-<a id='L21' name='L21'></a>  21   <strong class='reserved'>char</strong> *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>;
-<a id='L22' name='L22'></a>  22 
-<a id='L23' name='L23'></a>  23   <em class='comment'>// Turn off the FIFO</em>
-<a id='L24' name='L24'></a>  24   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+2, 0);
-<a id='L25' name='L25'></a>  25   
-<a id='L26' name='L26'></a>  26   <em class='comment'>// 9600 baud, 8 data bits, 1 stop bit, parity off.</em>
-<a id='L27' name='L27'></a>  27   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+3, 0x80);    <em class='comment'>// Unlock divisor</em>
-<a id='L28' name='L28'></a>  28   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+0, 115200/9600);
-<a id='L29' name='L29'></a>  29   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+1, 0);
-<a id='L30' name='L30'></a>  30   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+3, 0x03);    <em class='comment'>// Lock divisor, 8 data bits.</em>
-<a id='L31' name='L31'></a>  31   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+4, 0);
-<a id='L32' name='L32'></a>  32   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+1, 0x01);    <em class='comment'>// Enable receive interrupts.</em>
-<a id='L33' name='L33'></a>  33 
-<a id='L34' name='L34'></a>  34   <em class='comment'>// If status is 0xFF, no serial port.</em>
-<a id='L35' name='L35'></a>  35   <strong class='reserved'>if</strong>(<a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+5) == 0xFF)
-<a id='L36' name='L36'></a>  36     <strong class='reserved'>return</strong>;
-<a id='L37' name='L37'></a>  37   <a href='../Y/414.html' title='Multiple used in 4 places.'>uart</a> = 1;
-<a id='L38' name='L38'></a>  38 
-<a id='L39' name='L39'></a>  39   <em class='comment'>// Acknowledge pre-existing interrupt conditions;</em>
-<a id='L40' name='L40'></a>  40   <em class='comment'>// enable interrupts.</em>
-<a id='L41' name='L41'></a>  41   <a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+2);
-<a id='L42' name='L42'></a>  42   <a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+0);
-<a id='L43' name='L43'></a>  43   <a href='../S/51.html#L26' title='Defined at 26 in picirq.c.'>picenable</a>(<a href='../S/85.html#L34' title='Defined at 34 in traps.h.'>IRQ_COM1</a>);
-<a id='L44' name='L44'></a>  44   <a href='../S/29.html#L71' title='Defined at 71 in ioapic.c.'>ioapicenable</a>(<a href='../S/85.html#L34' title='Defined at 34 in traps.h.'>IRQ_COM1</a>, 0);
-<a id='L45' name='L45'></a>  45   
-<a id='L46' name='L46'></a>  46   <em class='comment'>// Announce that we're here.</em>
-<a id='L47' name='L47'></a>  47   <strong class='reserved'>for</strong>(<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>="xv6...\n"; *<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>; <a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>++)
-<a id='L48' name='L48'></a>  48     <a href='../S/88.html#L52' title='Defined at 52 in uart.c.'>uartputc</a>(*<a href='../Y/273.html' title='Multiple used in 243 places.'>p</a>);
-<a id='L49' name='L49'></a>  49 <em class='brace'>}</em>
-<a id='L50' name='L50'></a>  50 
-<a id='L51' name='L51'></a>  51 <strong class='reserved'>void</strong>
-<a id='L52' name='L52'></a>  52 <a href='../R/514.html' title='Multiple referred from 4 places.'>uartputc</a>(<strong class='reserved'>int</strong> <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a>)
-<a id='L53' name='L53'></a>  53 <em class='brace'>{</em>
-<a id='L54' name='L54'></a>  54   <strong class='reserved'>int</strong> <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>;
-<a id='L55' name='L55'></a>  55 
-<a id='L56' name='L56'></a>  56   <strong class='reserved'>if</strong>(!<a href='../Y/414.html' title='Multiple used in 4 places.'>uart</a>)
-<a id='L57' name='L57'></a>  57     <strong class='reserved'>return</strong>;
-<a id='L58' name='L58'></a>  58   <strong class='reserved'>for</strong>(<a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> = 0; <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a> &lt; 128 &amp;&amp; !(<a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+5) &amp; 0x20); <a href='../Y/155.html' title='Multiple used in 262 places.'>i</a>++)
-<a id='L59' name='L59'></a>  59     <a href='../S/35.html#L130' title='Defined at 130 in lapic.c.'>microdelay</a>(10);
-<a id='L60' name='L60'></a>  60   <a href='../S/97.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+0, <a href='../Y/47.html' title='Multiple used in 101 places.'>c</a>);
-<a id='L61' name='L61'></a>  61 <em class='brace'>}</em>
-<a id='L62' name='L62'></a>  62 
-<a id='L63' name='L63'></a>  63 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
-<a id='L64' name='L64'></a>  64 <a href='../S/88.html#L76' title='Referred from 76 in uart.c.'>uartgetc</a>(<strong class='reserved'>void</strong>)
-<a id='L65' name='L65'></a>  65 <em class='brace'>{</em>
-<a id='L66' name='L66'></a>  66   <strong class='reserved'>if</strong>(!<a href='../Y/414.html' title='Multiple used in 4 places.'>uart</a>)
-<a id='L67' name='L67'></a>  67     <strong class='reserved'>return</strong> -1;
-<a id='L68' name='L68'></a>  68   <strong class='reserved'>if</strong>(!(<a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+5) &amp; 0x01))
-<a id='L69' name='L69'></a>  69     <strong class='reserved'>return</strong> -1;
-<a id='L70' name='L70'></a>  70   <strong class='reserved'>return</strong> <a href='../S/97.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/88.html#L14' title='Defined at 14 in uart.c.'>COM1</a>+0);
-<a id='L71' name='L71'></a>  71 <em class='brace'>}</em>
-<a id='L72' name='L72'></a>  72 
-<a id='L73' name='L73'></a>  73 <strong class='reserved'>void</strong>
-<a id='L74' name='L74'></a>  74 <a href='../R/513.html' title='Multiple referred from 2 places.'>uartintr</a>(<strong class='reserved'>void</strong>)
-<a id='L75' name='L75'></a>  75 <em class='brace'>{</em>
-<a id='L76' name='L76'></a>  76   <a href='../S/8.html#L188' title='Defined at 188 in console.c.'>consoleintr</a>(<a href='../S/88.html#L64' title='Defined at 64 in uart.c.'>uartgetc</a>);
-<a id='L77' name='L77'></a>  77 <em class='brace'>}</em>
+<a id='L1' name='L1'></a>This file lists subtle things that might not be commented 
+<a id='L2' name='L2'></a>as well as they should be in the source code and that
+<a id='L3' name='L3'></a>might be worth pointing out in a longer explanation or in class.
+<a id='L4' name='L4'></a>
+<a id='L5' name='L5'></a>---
+<a id='L6' name='L6'></a>
+<a id='L7' name='L7'></a>[2009/07/12: No longer relevant; forkret1 changed
+<a id='L8' name='L8'></a>and this is now cleaner.]
+<a id='L9' name='L9'></a>
+<a id='L10' name='L10'></a>forkret1 in trapasm.S is called with a tf argument.
+<a id='L11' name='L11'></a>In order to use it, forkret1 copies the tf pointer into
+<a id='L12' name='L12'></a>%esp and then jumps to trapret, which pops the 
+<a id='L13' name='L13'></a>register state out of the trap frame.  If an interrupt
+<a id='L14' name='L14'></a>came in between the mov tf, %esp and the iret that
+<a id='L15' name='L15'></a>goes back out to user space, the interrupt stack frame
+<a id='L16' name='L16'></a>would end up scribbling over the tf and whatever memory
+<a id='L17' name='L17'></a>lay under it.
+<a id='L18' name='L18'></a>
+<a id='L19' name='L19'></a>Why is this safe?  Because forkret1 is only called
+<a id='L20' name='L20'></a>the first time a process returns to user space, and
+<a id='L21' name='L21'></a>at that point, cp-&gt;tf is set to point to a trap frame
+<a id='L22' name='L22'></a>constructed at the top of cp's kernel stack.  So tf 
+<a id='L23' name='L23'></a>*is* a valid %esp that can hold interrupt state.
+<a id='L24' name='L24'></a>
+<a id='L25' name='L25'></a>If other tf's were used in forkret1, we could add
+<a id='L26' name='L26'></a>a cli before the mov tf, %esp.
+<a id='L27' name='L27'></a>
+<a id='L28' name='L28'></a>---
+<a id='L29' name='L29'></a>
+<a id='L30' name='L30'></a>In pushcli, must cli() no matter what.  It is not safe to do
+<a id='L31' name='L31'></a>
+<a id='L32' name='L32'></a>  if(cpus[cpu()].ncli == 0)
+<a id='L33' name='L33'></a>    cli();
+<a id='L34' name='L34'></a>  cpus[cpu()].ncli++;
+<a id='L35' name='L35'></a>
+<a id='L36' name='L36'></a>because if interrupts are off then we might call cpu(), get
+<a id='L37' name='L37'></a>rescheduled to a different cpu, look at cpus[oldcpu].ncli,
+<a id='L38' name='L38'></a>and wrongly decide not to disable interrupts on the new cpu.
+<a id='L39' name='L39'></a>
+<a id='L40' name='L40'></a>Instead do 
+<a id='L41' name='L41'></a>
+<a id='L42' name='L42'></a>  cli();
+<a id='L43' name='L43'></a>  cpus[cpu()].ncli++;
+<a id='L44' name='L44'></a>
+<a id='L45' name='L45'></a>always.
+<a id='L46' name='L46'></a>
+<a id='L47' name='L47'></a>---
+<a id='L48' name='L48'></a>
+<a id='L49' name='L49'></a>There is a (harmless) race in pushcli, which does
+<a id='L50' name='L50'></a>
+<a id='L51' name='L51'></a>        eflags = readeflags();
+<a id='L52' name='L52'></a>        cli();
+<a id='L53' name='L53'></a>        if(c-&gt;ncli++ == 0)
+<a id='L54' name='L54'></a>                c-&gt;intena = eflags &amp; FL_IF;
+<a id='L55' name='L55'></a>
+<a id='L56' name='L56'></a>Consider a bottom-level pushcli.  
+<a id='L57' name='L57'></a>If interrupts are disabled already, then the right thing
+<a id='L58' name='L58'></a>happens: read_eflags finds that FL_IF is not set,
+<a id='L59' name='L59'></a>and intena = 0.  If interrupts are enabled, then
+<a id='L60' name='L60'></a>it is less clear that the right thing happens:
+<a id='L61' name='L61'></a>the readeflags can execute, then the process
+<a id='L62' name='L62'></a>can get preempted and rescheduled on another cpu,
+<a id='L63' name='L63'></a>and then once it starts running, perhaps with 
+<a id='L64' name='L64'></a>interrupts disabled (can happen since the scheduler
+<a id='L65' name='L65'></a>only enables interrupts once per scheduling loop,
+<a id='L66' name='L66'></a>not every time it schedules a process), it will 
+<a id='L67' name='L67'></a>incorrectly record that interrupts *were* enabled.
+<a id='L68' name='L68'></a>This doesn't matter, because if it was safe to be
+<a id='L69' name='L69'></a>running with interrupts enabled before the context
+<a id='L70' name='L70'></a>switch, it is still safe (and arguably more correct)
+<a id='L71' name='L71'></a>to run with them enabled after the context switch too.
+<a id='L72' name='L72'></a>
+<a id='L73' name='L73'></a>In fact it would be safe if scheduler always set
+<a id='L74' name='L74'></a>        c-&gt;intena = 1;
+<a id='L75' name='L75'></a>before calling swtch, and perhaps it should.
+<a id='L76' name='L76'></a>
+<a id='L77' name='L77'></a>---
+<a id='L78' name='L78'></a>
+<a id='L79' name='L79'></a>The x86's processor-ordering memory model 
+<a id='L80' name='L80'></a>matches spin locks well, so no explicit memory
+<a id='L81' name='L81'></a>synchronization instructions are required in
+<a id='L82' name='L82'></a>acquire and release.  
+<a id='L83' name='L83'></a>
+<a id='L84' name='L84'></a>Consider two sequences of code on different CPUs:
+<a id='L85' name='L85'></a>
+<a id='L86' name='L86'></a>CPU0
+<a id='L87' name='L87'></a>A;
+<a id='L88' name='L88'></a>release(lk);
+<a id='L89' name='L89'></a>
+<a id='L90' name='L90'></a>and
+<a id='L91' name='L91'></a>
+<a id='L92' name='L92'></a>CPU1
+<a id='L93' name='L93'></a>acquire(lk);
+<a id='L94' name='L94'></a>B;
+<a id='L95' name='L95'></a>
+<a id='L96' name='L96'></a>We want to make sure that:
+<a id='L97' name='L97'></a>  - all reads in B see the effects of writes in A.
+<a id='L98' name='L98'></a>  - all reads in A do *not* see the effects of writes in B.
+<a id='L99' name='L99'></a> 
+<a id='L100' name='L100'></a>The x86 guarantees that writes in A will go out
+<a id='L101' name='L101'></a>to memory before the write of lk-&gt;locked = 0 in 
+<a id='L102' name='L102'></a>release(lk).  It further guarantees that CPU1 
+<a id='L103' name='L103'></a>will observe CPU0's write of lk-&gt;locked = 0 only
+<a id='L104' name='L104'></a>after observing the earlier writes by CPU0.
+<a id='L105' name='L105'></a>So any reads in B are guaranteed to observe the
+<a id='L106' name='L106'></a>effects of writes in A.
+<a id='L107' name='L107'></a>
+<a id='L108' name='L108'></a>According to the Intel manual behavior spec, the
+<a id='L109' name='L109'></a>second condition requires a serialization instruction
+<a id='L110' name='L110'></a>in release, to avoid reads in A happening after giving
+<a id='L111' name='L111'></a>up lk.  No Intel SMP processor in existence actually
+<a id='L112' name='L112'></a>moves reads down after writes, but the language in
+<a id='L113' name='L113'></a>the spec allows it.  There is no telling whether future
+<a id='L114' name='L114'></a>processors will need it.
+<a id='L115' name='L115'></a>
+<a id='L116' name='L116'></a>---
+<a id='L117' name='L117'></a>
+<a id='L118' name='L118'></a>The code in fork needs to read np-&gt;pid before
+<a id='L119' name='L119'></a>setting np-&gt;state to RUNNABLE.  The following
+<a id='L120' name='L120'></a>is not a correct way to do this:
+<a id='L121' name='L121'></a>
+<a id='L122' name='L122'></a>        int
+<a id='L123' name='L123'></a>        fork(void)
+<a id='L124' name='L124'></a>        {
+<a id='L125' name='L125'></a>          ...
+<a id='L126' name='L126'></a>          np-&gt;state = RUNNABLE;
+<a id='L127' name='L127'></a>          return np-&gt;pid; // oops
+<a id='L128' name='L128'></a>        }
+<a id='L129' name='L129'></a>
+<a id='L130' name='L130'></a>After setting np-&gt;state to RUNNABLE, some other CPU
+<a id='L131' name='L131'></a>might run the process, it might exit, and then it might
+<a id='L132' name='L132'></a>get reused for a different process (with a new pid), all
+<a id='L133' name='L133'></a>before the return statement.  So it's not safe to just
+<a id='L134' name='L134'></a>"return np-&gt;pid". Even saving a copy of np-&gt;pid before
+<a id='L135' name='L135'></a>setting np-&gt;state isn't safe, since the compiler is
+<a id='L136' name='L136'></a>allowed to re-order statements.
+<a id='L137' name='L137'></a>
+<a id='L138' name='L138'></a>The real code saves a copy of np-&gt;pid, then acquires a lock
+<a id='L139' name='L139'></a>around the write to np-&gt;state. The acquire() prevents the
+<a id='L140' name='L140'></a>compiler from re-ordering.
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L19'>[^]</a><a href='#L74'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

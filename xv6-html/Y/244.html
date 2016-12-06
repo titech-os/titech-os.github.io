@@ -1,18 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ninodes</title>
+<title>nlog</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L168'>ninodes</a>           168 fs.c                     sb.nblocks, sb.ninodes, sb.nlog, sb.logstart, sb.inodestart, sb.bmapstart);</span>
-<span class='curline'><a href='../S/22.html#L183'>ninodes</a>           183 fs.c             for(inum = 1; inum &lt; sb.ninodes; inum++){</span>
-<span class='curline'><a href='../S/23.html#L16'>ninodes</a>            16 fs.h             uint ninodes;      // Number of inodes.</span>
-<span class='curline'><a href='../S/45.html#L99'>ninodes</a>            99 mkfs.c           sb.ninodes = xint(NINODES);</span>
+<span class='curline'><a href='../S/22.html#L176'>nlog</a>              176 fs.c                     sb.ninodes, sb.nlog, sb.logstart, sb.inodestart,</span>
+<span class='curline'><a href='../S/23.html#L18'>nlog</a>               18 fs.h             uint nlog;         // Number of log blocks</span>
+<span class='curline'><a href='../S/38.html#L63'>nlog</a>               63 log.c            log.size = sb.nlog;</span>
+<span class='curline'><a href='../S/45.html#L25'>nlog</a>               25 mkfs.c         int nlog = LOGSIZE;</span>
+<span class='curline'><a href='../S/45.html#L94'>nlog</a>               94 mkfs.c           nmeta = 2 + nlog + ninodeblocks + nbitmap;</span>
+<span class='curline'><a href='../S/45.html#L100'>nlog</a>              100 mkfs.c           sb.nlog = xint(nlog);</span>
+<span class='curline'><a href='../S/45.html#L102'>nlog</a>              102 mkfs.c           sb.inodestart = xint(2+nlog);</span>
+<span class='curline'><a href='../S/45.html#L103'>nlog</a>              103 mkfs.c           sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
+<span class='curline'><a href='../S/45.html#L106'>nlog</a>              106 mkfs.c                  nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);</span>
 </pre>
 </body>
 </html>

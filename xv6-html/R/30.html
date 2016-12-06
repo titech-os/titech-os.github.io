@@ -1,21 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>DPL_USER</title>
+<title>E0ESC</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L91'>DPL_USER</a>           91 proc.c           p-&gt;tf-&gt;cs = (SEG_UCODE &lt;&lt; 3) | DPL_USER;</span>
-<span class='curline'><a href='../S/56.html#L92'>DPL_USER</a>           92 proc.c           p-&gt;tf-&gt;ds = (SEG_UDATA &lt;&lt; 3) | DPL_USER;</span>
-<span class='curline'><a href='../S/83.html#L24'>DPL_USER</a>           24 trap.c           SETGATE(idt[T_SYSCALL], 1, SEG_KCODE&lt;&lt;3, vectors[T_SYSCALL], DPL_USER);</span>
-<span class='curline'><a href='../S/83.html#L100'>DPL_USER</a>          100 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
-<span class='curline'><a href='../S/83.html#L109'>DPL_USER</a>          109 trap.c           if(proc &amp;&amp; proc-&gt;killed &amp;&amp; (tf-&gt;cs&amp;3) == DPL_USER)</span>
-<span class='curline'><a href='../S/95.html#L28'>DPL_USER</a>           28 vm.c             c-&gt;gdt[SEG_UCODE] = SEG(STA_X|STA_R, 0, 0xffffffff, DPL_USER);</span>
-<span class='curline'><a href='../S/95.html#L29'>DPL_USER</a>           29 vm.c             c-&gt;gdt[SEG_UDATA] = SEG(STA_W, 0, 0xffffffff, DPL_USER);</span>
+<span class='curline'><a href='../S/31.html#L21'>E0ESC</a>              21 kbd.c              shift |= E0ESC;</span>
+<span class='curline'><a href='../S/31.html#L25'>E0ESC</a>              25 kbd.c              data = (shift &amp; E0ESC ? data : data &amp; 0x7F);</span>
+<span class='curline'><a href='../S/31.html#L26'>E0ESC</a>              26 kbd.c              shift &amp;= ~(shiftcode[data] | E0ESC);</span>
+<span class='curline'><a href='../S/31.html#L28'>E0ESC</a>              28 kbd.c            } else if(shift &amp; E0ESC){</span>
+<span class='curline'><a href='../S/31.html#L31'>E0ESC</a>              31 kbd.c              shift &amp;= ~E0ESC;</span>
 </pre>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <title>asm.h</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -11,7 +11,7 @@
 <a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/asm.h</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'><a href='../J/1.html' title='Multiple included from 3 places.'>INCLUDED FROM</a></h2>
+<h2 class='header'><a href='../J/7.html' title='Multiple included from 3 places.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
 <a id='L1' name='L1'></a>   1 <em class='comment'>//</em>
@@ -19,21 +19,21 @@
 <a id='L3' name='L3'></a>   3 <em class='comment'>//</em>
 <a id='L4' name='L4'></a>   4 
 <a id='L5' name='L5'></a>   5 <em class='sharp'>#define</em> SEG_NULLASM                                             \
-<a id='L6' name='L6'></a>   6         .<a href='../Y/442.html' title='Multiple used in 2 places.'>word</a> 0, 0;                                             \
+<a id='L6' name='L6'></a>   6         .<a href='../Y/441.html' title='Multiple used in 2 places.'>word</a> 0, 0;                                             \
 <a id='L7' name='L7'></a>   7         .<a href='../Y/46.html' title='Multiple used in 2 places.'>byte</a> 0, 0, 0, 0
 <a id='L8' name='L8'></a>   8 
 <a id='L9' name='L9'></a>   9 <em class='comment'>// The 0xC0 means the limit is in 4096-byte units</em>
 <a id='L10' name='L10'></a>  10 <em class='comment'>// and (for executable segments) 32-bit mode.</em>
-<a id='L11' name='L11'></a>  11 <em class='sharp'>#define</em> SEG_ASM(<a href='../Y/411.html' title='Multiple used in 70 places.'>type</a>,<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>,<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>)                                  \
-<a id='L12' name='L12'></a>  12         .<a href='../Y/442.html' title='Multiple used in 2 places.'>word</a> (((<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &gt;&gt; 12) &amp; 0xffff), ((<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &amp; 0xffff);      \
-<a id='L13' name='L13'></a>  13         .<a href='../Y/46.html' title='Multiple used in 2 places.'>byte</a> (((<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 16) &amp; 0xff), (0x90 | (<a href='../Y/411.html' title='Multiple used in 70 places.'>type</a>)),         \
-<a id='L14' name='L14'></a>  14                 (0xC0 | (((<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &gt;&gt; 28) &amp; 0xf)), (((<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 24) &amp; 0xff)
+<a id='L11' name='L11'></a>  11 <em class='sharp'>#define</em> SEG_ASM(<a href='../Y/411.html' title='Multiple used in 70 places.'>type</a>,<a href='../Y/30.html' title='Multiple used in 21 places.'>base</a>,<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>)                                  \
+<a id='L12' name='L12'></a>  12         .<a href='../Y/441.html' title='Multiple used in 2 places.'>word</a> (((<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &gt;&gt; 12) &amp; 0xffff), ((<a href='../Y/30.html' title='Multiple used in 21 places.'>base</a>) &amp; 0xffff);      \
+<a id='L13' name='L13'></a>  13         .<a href='../Y/46.html' title='Multiple used in 2 places.'>byte</a> (((<a href='../Y/30.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 16) &amp; 0xff), (0x90 | (<a href='../Y/411.html' title='Multiple used in 70 places.'>type</a>)),         \
+<a id='L14' name='L14'></a>  14                 (0xC0 | (((<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &gt;&gt; 28) &amp; 0xf)), (((<a href='../Y/30.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 24) &amp; 0xff)
 <a id='L15' name='L15'></a>  15 
-<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../R/175.html' title='Multiple referred from 2 places.'>STA_X</a>     0x8       <em class='comment'>// Executable segment</em>
+<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../R/176.html' title='Multiple referred from 2 places.'>STA_X</a>     0x8       <em class='comment'>// Executable segment</em>
 <a id='L17' name='L17'></a>  17 <em class='sharp'>#define</em> STA_E     0x4       <em class='comment'>// Expand down (non-executable segments)</em>
 <a id='L18' name='L18'></a>  18 <em class='sharp'>#define</em> STA_C     0x4       <em class='comment'>// Conforming code segment (executable only)</em>
-<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../R/174.html' title='Multiple referred from 3 places.'>STA_W</a>     0x2       <em class='comment'>// Writeable (non-executable segments)</em>
-<a id='L20' name='L20'></a>  20 <em class='sharp'>#define</em> <a href='../R/173.html' title='Multiple referred from 2 places.'>STA_R</a>     0x2       <em class='comment'>// Readable (executable segments)</em>
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../R/175.html' title='Multiple referred from 3 places.'>STA_W</a>     0x2       <em class='comment'>// Writeable (non-executable segments)</em>
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#define</em> <a href='../R/174.html' title='Multiple referred from 2 places.'>STA_R</a>     0x2       <em class='comment'>// Readable (executable segments)</em>
 <a id='L21' name='L21'></a>  21 <em class='sharp'>#define</em> STA_A     0x1       <em class='comment'>// Accessed</em>
 </pre>
 <hr />

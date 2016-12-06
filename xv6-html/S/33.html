@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel.ld</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.5' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/kernel.ld</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>/* Simple linker script for the JOS kernel.
+<a id='L2' name='L2'></a>   See the GNU ld 'info' manual ("info ld") to learn the syntax. */
+<a id='L3' name='L3'></a>
+<a id='L4' name='L4'></a>OUTPUT_FORMAT("elf32-i386", "elf32-i386", "elf32-i386")
+<a id='L5' name='L5'></a>OUTPUT_ARCH(i386)
+<a id='L6' name='L6'></a>ENTRY(_start)
+<a id='L7' name='L7'></a>
+<a id='L8' name='L8'></a>SECTIONS
+<a id='L9' name='L9'></a>{
+<a id='L10' name='L10'></a>        /* Link the kernel at this address: "." means the current address */
+<a id='L11' name='L11'></a>        /* Must be equal to KERNLINK */
+<a id='L12' name='L12'></a>        . = 0x80100000;
+<a id='L13' name='L13'></a>
+<a id='L14' name='L14'></a>        .text : AT(0x100000) {
+<a id='L15' name='L15'></a>                *(.text .stub .text.* .gnu.linkonce.t.*)
+<a id='L16' name='L16'></a>        }
+<a id='L17' name='L17'></a>
+<a id='L18' name='L18'></a>        PROVIDE(etext = .);     /* Define the 'etext' symbol to this value */
+<a id='L19' name='L19'></a>
+<a id='L20' name='L20'></a>        .rodata : {
+<a id='L21' name='L21'></a>                *(.rodata .rodata.* .gnu.linkonce.r.*)
+<a id='L22' name='L22'></a>        }
+<a id='L23' name='L23'></a>
+<a id='L24' name='L24'></a>        /* Include debugging information in kernel memory */
+<a id='L25' name='L25'></a>        .stab : {
+<a id='L26' name='L26'></a>                PROVIDE(__STAB_BEGIN__ = .);
+<a id='L27' name='L27'></a>                *(.stab);
+<a id='L28' name='L28'></a>                PROVIDE(__STAB_END__ = .);
+<a id='L29' name='L29'></a>                BYTE(0)         /* Force the linker to allocate space
+<a id='L30' name='L30'></a>                                   for this section */
+<a id='L31' name='L31'></a>        }
+<a id='L32' name='L32'></a>
+<a id='L33' name='L33'></a>        .stabstr : {
+<a id='L34' name='L34'></a>                PROVIDE(__STABSTR_BEGIN__ = .);
+<a id='L35' name='L35'></a>                *(.stabstr);
+<a id='L36' name='L36'></a>                PROVIDE(__STABSTR_END__ = .);
+<a id='L37' name='L37'></a>                BYTE(0)         /* Force the linker to allocate space
+<a id='L38' name='L38'></a>                                   for this section */
+<a id='L39' name='L39'></a>        }
+<a id='L40' name='L40'></a>
+<a id='L41' name='L41'></a>        /* Adjust the address for the data segment to the next page */
+<a id='L42' name='L42'></a>        . = ALIGN(0x1000);
+<a id='L43' name='L43'></a>
+<a id='L44' name='L44'></a>        /* Conventionally, Unix linkers provide pseudo-symbols
+<a id='L45' name='L45'></a>         * etext, edata, and end, at the end of the text, data, and bss.
+<a id='L46' name='L46'></a>         * For the kernel mapping, we need the address at the beginning
+<a id='L47' name='L47'></a>         * of the data section, but that's not one of the conventional
+<a id='L48' name='L48'></a>         * symbols, because the convention started before there was a
+<a id='L49' name='L49'></a>         * read-only rodata section between text and data. */
+<a id='L50' name='L50'></a>        PROVIDE(data = .);
+<a id='L51' name='L51'></a>
+<a id='L52' name='L52'></a>        /* The data segment */
+<a id='L53' name='L53'></a>        .data : {
+<a id='L54' name='L54'></a>                *(.data)
+<a id='L55' name='L55'></a>        }
+<a id='L56' name='L56'></a>
+<a id='L57' name='L57'></a>        PROVIDE(edata = .);
+<a id='L58' name='L58'></a>
+<a id='L59' name='L59'></a>        .bss : {
+<a id='L60' name='L60'></a>                *(.bss)
+<a id='L61' name='L61'></a>        }
+<a id='L62' name='L62'></a>
+<a id='L63' name='L63'></a>        PROVIDE(end = .);
+<a id='L64' name='L64'></a>
+<a id='L65' name='L65'></a>        /DISCARD/ : {
+<a id='L66' name='L66'></a>                *(.eh_frame .note.GNU-stack)
+<a id='L67' name='L67'></a>        }
+<a id='L68' name='L68'></a>}
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

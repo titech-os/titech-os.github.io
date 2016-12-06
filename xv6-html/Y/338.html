@@ -1,19 +1,32 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>readopen</title>
+<title>ref</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.1' />
+<meta name='generator' content='GLOBAL-6.5.5' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/52.html#L17'>readopen</a>           17 pipe.c           int readopen;   // read fd is still open</span>
-<span class='curline'><a href='../S/52.html#L32'>readopen</a>           32 pipe.c           p-&gt;readopen = 1;</span>
-<span class='curline'><a href='../S/52.html#L66'>readopen</a>           66 pipe.c             p-&gt;readopen = 0;</span>
-<span class='curline'><a href='../S/52.html#L69'>readopen</a>           69 pipe.c           if(p-&gt;readopen == 0 &amp;&amp; p-&gt;writeopen == 0){</span>
-<span class='curline'><a href='../S/52.html#L85'>readopen</a>           85 pipe.c               if(p-&gt;readopen == 0 || proc-&gt;killed){</span>
+<span class='curline'><a href='../S/19.html#L33'>ref</a>                33 file.c             if(f-&gt;ref == 0){</span>
+<span class='curline'><a href='../S/19.html#L34'>ref</a>                34 file.c               f-&gt;ref = 1;</span>
+<span class='curline'><a href='../S/19.html#L48'>ref</a>                48 file.c           if(f-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/19.html#L50'>ref</a>                50 file.c           f-&gt;ref++;</span>
+<span class='curline'><a href='../S/19.html#L62'>ref</a>                62 file.c           if(f-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/19.html#L64'>ref</a>                64 file.c           if(--f-&gt;ref &gt; 0){</span>
+<span class='curline'><a href='../S/19.html#L69'>ref</a>                69 file.c           f-&gt;ref = 0;</span>
+<span class='curline'><a href='../S/20.html#L3'>ref</a>                 3 file.h           int ref; // reference count</span>
+<span class='curline'><a href='../S/20.html#L16'>ref</a>                16 file.h           int ref;            // Reference count</span>
+<span class='curline'><a href='../S/22.html#L239'>ref</a>               239 fs.c               if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum){</span>
+<span class='curline'><a href='../S/22.html#L240'>ref</a>               240 fs.c                 ip-&gt;ref++;</span>
+<span class='curline'><a href='../S/22.html#L244'>ref</a>               244 fs.c               if(empty == 0 &amp;&amp; ip-&gt;ref == 0)    // Remember empty slot.</span>
+<span class='curline'><a href='../S/22.html#L255'>ref</a>               255 fs.c             ip-&gt;ref = 1;</span>
+<span class='curline'><a href='../S/22.html#L268'>ref</a>               268 fs.c             ip-&gt;ref++;</span>
+<span class='curline'><a href='../S/22.html#L281'>ref</a>               281 fs.c             if(ip == 0 || ip-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/22.html#L306'>ref</a>               306 fs.c             if(ip == 0 || !holdingsleep(&amp;ip-&gt;lock) || ip-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/22.html#L323'>ref</a>               323 fs.c             if(ip-&gt;ref == 1 &amp;&amp; (ip-&gt;flags &amp; I_VALID) &amp;&amp; ip-&gt;nlink == 0){</span>
+<span class='curline'><a href='../S/22.html#L332'>ref</a>               332 fs.c             ip-&gt;ref--;</span>
 </pre>
 </body>
 </html>
