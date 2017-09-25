@@ -1,16 +1,34 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>normalmap</title>
+<title>np</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L11'>normalmap</a>          11 kbd.c              normalmap, shiftmap, ctlmap, ctlmap</span>
-<span class='curline'><a href='../S/32.html#L51'>normalmap</a>          51 kbd.h          static uchar normalmap[256] =</span>
+<span class='curline'><a href='../S/107.html#L184'>np</a>                184 proc.c           struct proc *np;</span>
+<span class='curline'><a href='../S/107.html#L188'>np</a>                188 proc.c           if((np = allocproc()) == 0){</span>
+<span class='curline'><a href='../S/107.html#L193'>np</a>                193 proc.c           if((np-&gt;pgdir = copyuvm(curproc-&gt;pgdir, curproc-&gt;sz)) == 0){</span>
+<span class='curline'><a href='../S/107.html#L194'>np</a>                194 proc.c             kfree(np-&gt;kstack);</span>
+<span class='curline'><a href='../S/107.html#L195'>np</a>                195 proc.c             np-&gt;kstack = 0;</span>
+<span class='curline'><a href='../S/107.html#L196'>np</a>                196 proc.c             np-&gt;state = UNUSED;</span>
+<span class='curline'><a href='../S/107.html#L199'>np</a>                199 proc.c           np-&gt;sz = curproc-&gt;sz;</span>
+<span class='curline'><a href='../S/107.html#L200'>np</a>                200 proc.c           np-&gt;parent = curproc;</span>
+<span class='curline'><a href='../S/107.html#L201'>np</a>                201 proc.c           *np-&gt;tf = *curproc-&gt;tf;</span>
+<span class='curline'><a href='../S/107.html#L204'>np</a>                204 proc.c           np-&gt;tf-&gt;eax = 0;</span>
+<span class='curline'><a href='../S/107.html#L208'>np</a>                208 proc.c               np-&gt;ofile[i] = filedup(curproc-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/107.html#L209'>np</a>                209 proc.c           np-&gt;cwd = idup(curproc-&gt;cwd);</span>
+<span class='curline'><a href='../S/107.html#L211'>np</a>                211 proc.c           safestrcpy(np-&gt;name, curproc-&gt;name, sizeof(curproc-&gt;name));</span>
+<span class='curline'><a href='../S/107.html#L213'>np</a>                213 proc.c           pid = np-&gt;pid;</span>
+<span class='curline'><a href='../S/107.html#L217'>np</a>                217 proc.c           np-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/165.html#L467'>np</a>                467 usertests.c      int fd, pid, i, n, nc, np;</span>
+<span class='curline'><a href='../S/165.html#L496'>np</a>                496 usertests.c      nc = np = 0;</span>
+<span class='curline'><a href='../S/165.html#L502'>np</a>                502 usertests.c            np++;</span>
+<span class='curline'><a href='../S/165.html#L507'>np</a>                507 usertests.c      if(nc == 10000 &amp;&amp; np == 10000){</span>
+<span class='curline'><a href='../S/165.html#L510'>np</a>                510 usertests.c        printf(1, "sharedfd oops %d %d\n", nc, np);</span>
 </pre>
 </body>
 </html>

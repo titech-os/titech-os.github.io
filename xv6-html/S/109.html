@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>proc.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.7' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/proc.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/47.html' title='Multiple included from 17 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Per-CPU state</em>
+<a id='L2' name='L2'></a>   2 <strong class='reserved'>struct</strong> <a href='../R/258.html' title='Multiple referred from 14 places.'>cpu</a> <em class='brace'>{</em>
+<a id='L3' name='L3'></a>   3   <a href='../S/156.html#L3' title='Defined at 3 in types.h.'>uchar</a> <a href='../Y/19.html' title='Multiple used in 10 places.'>apicid</a>;                <em class='comment'>// Local APIC ID</em>
+<a id='L4' name='L4'></a>   4   <strong class='reserved'>struct</strong> <a href='../S/109.html#L27' title='Defined at 27 in proc.h.'>context</a> *<a href='../S/107.html#L323' title='Defined at 323 in proc.c.'>scheduler</a>;   <em class='comment'>// swtch() here to enter scheduler</em>
+<a id='L5' name='L5'></a>   5   <strong class='reserved'>struct</strong> <a href='../S/93.html#L153' title='Defined at 153 in mmu.h.'>taskstate</a> <a href='../Y/412.html' title='Multiple used in 6 places.'>ts</a>;         <em class='comment'>// Used by x86 to find stack for interrupt</em>
+<a id='L6' name='L6'></a>   6   <strong class='reserved'>struct</strong> <a href='../S/93.html#L54' title='Defined at 54 in mmu.h.'>segdesc</a> <a href='../Y/145.html' title='Multiple used in 8 places.'>gdt</a>[<a href='../S/93.html#L50' title='Defined at 50 in mmu.h.'>NSEGS</a>];   <em class='comment'>// x86 global descriptor table</em>
+<a id='L7' name='L7'></a>   7   <strong class='reserved'>volatile</strong> <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/383.html' title='Multiple used in 3 places.'>started</a>;       <em class='comment'>// Has the CPU started?</em>
+<a id='L8' name='L8'></a>   8   <strong class='reserved'>int</strong> <a href='../Y/231.html' title='Multiple used in 6 places.'>ncli</a>;                    <em class='comment'>// Depth of pushcli nesting.</em>
+<a id='L9' name='L9'></a>   9   <strong class='reserved'>int</strong> <a href='../Y/170.html' title='Multiple used in 6 places.'>intena</a>;                  <em class='comment'>// Were interrupts enabled before pushcli?</em>
+<a id='L10' name='L10'></a>  10   <strong class='reserved'>struct</strong> <a href='../S/109.html#L38' title='Defined at 38 in proc.h.'>proc</a> *<a href='../S/109.html#L38' title='Defined at 38 in proc.h.'>proc</a>;           <em class='comment'>// The process running on this cpu or null</em>
+<a id='L11' name='L11'></a>  11 <em class='brace'>}</em>;
+<a id='L12' name='L12'></a>  12 
+<a id='L13' name='L13'></a>  13 <strong class='reserved'>extern</strong> <strong class='reserved'>struct</strong> <a href='../S/109.html#L2' title='Defined at 2 in proc.h.'>cpu</a> <a href='../Y/61.html' title='Multiple used in 8 places.'>cpus</a>[<a href='../S/98.html#L3' title='Defined at 3 in param.h.'>NCPU</a>];
+<a id='L14' name='L14'></a>  14 <strong class='reserved'>extern</strong> <strong class='reserved'>int</strong> <a href='../Y/232.html' title='Multiple used in 8 places.'>ncpu</a>;
+<a id='L15' name='L15'></a>  15 
+<a id='L16' name='L16'></a>  16 <em class='comment'>//PAGEBREAK: 17</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>// Saved registers for kernel context switches.</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'>// Don't need to save all the segment registers (%cs, etc),</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'>// because they are constant across kernel contexts.</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'>// Don't need to save %eax, %ecx, %edx, because the</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'>// x86 convention is that the caller has saved them.</em>
+<a id='L22' name='L22'></a>  22 <em class='comment'>// Contexts are stored at the bottom of the stack they</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'>// describe; the stack pointer is the address of the context.</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'>// The layout of the context matches the layout of the stack in swtch.S</em>
+<a id='L25' name='L25'></a>  25 <em class='comment'>// at the "Switch stacks" comment. Switch doesn't save eip explicitly,</em>
+<a id='L26' name='L26'></a>  26 <em class='comment'>// but it is on the stack and allocproc() manipulates it.</em>
+<a id='L27' name='L27'></a>  27 <strong class='reserved'>struct</strong> <a href='../R/254.html' title='Multiple referred from 11 places.'>context</a> <em class='brace'>{</em>
+<a id='L28' name='L28'></a>  28   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/94.html' title='Multiple used in 3 places.'>edi</a>;
+<a id='L29' name='L29'></a>  29   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/111.html' title='Multiple used in 3 places.'>esi</a>;
+<a id='L30' name='L30'></a>  30   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/90.html' title='Multiple used in 3 places.'>ebx</a>;
+<a id='L31' name='L31'></a>  31   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/89.html' title='Multiple used in 9 places.'>ebp</a>;
+<a id='L32' name='L32'></a>  32   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/99.html' title='Multiple used in 9 places.'>eip</a>;
+<a id='L33' name='L33'></a>  33 <em class='brace'>}</em>;
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35 <strong class='reserved'>enum</strong> <a href='../S/109.html#L42' title='Referred from 42 in proc.h.'>procstate</a> <em class='brace'>{</em> <a href='../R/207.html' title='Multiple referred from 6 places.'>UNUSED</a>, <a href='../R/33.html' title='Multiple referred from 2 places.'>EMBRYO</a>, <a href='../R/168.html' title='Multiple referred from 5 places.'>SLEEPING</a>, <a href='../R/153.html' title='Multiple referred from 7 places.'>RUNNABLE</a>, <a href='../R/154.html' title='Multiple referred from 4 places.'>RUNNING</a>, <a href='../R/212.html' title='Multiple referred from 4 places.'>ZOMBIE</a> <em class='brace'>}</em>;
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <em class='comment'>// Per-process state</em>
+<a id='L38' name='L38'></a>  38 <strong class='reserved'>struct</strong> <a href='../R/426.html' title='Multiple referred from 48 places.'>proc</a> <em class='brace'>{</em>
+<a id='L39' name='L39'></a>  39   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/392.html' title='Multiple used in 37 places.'>sz</a>;                     <em class='comment'>// Size of process memory (bytes)</em>
+<a id='L40' name='L40'></a>  40   <a href='../S/156.html#L4' title='Defined at 4 in types.h.'>pde_t</a>* <a href='../Y/299.html' title='Multiple used in 57 places.'>pgdir</a>;                <em class='comment'>// Page table</em>
+<a id='L41' name='L41'></a>  41   <strong class='reserved'>char</strong> *<a href='../Y/184.html' title='Multiple used in 9 places.'>kstack</a>;                <em class='comment'>// Bottom of kernel stack for this process</em>
+<a id='L42' name='L42'></a>  42   <strong class='reserved'>enum</strong> <a href='../S/109.html#L35' title='Defined at 35 in proc.h.'>procstate</a> <a href='../Y/384.html' title='Multiple used in 34 places.'>state</a>;        <em class='comment'>// Process state</em>
+<a id='L43' name='L43'></a>  43   <strong class='reserved'>int</strong> <a href='../Y/310.html' title='Multiple used in 103 places.'>pid</a>;                     <em class='comment'>// Process ID</em>
+<a id='L44' name='L44'></a>  44   <strong class='reserved'>struct</strong> <a href='../S/109.html#L38' title='Defined at 38 in proc.h.'>proc</a> *<a href='../Y/286.html' title='Multiple used in 7 places.'>parent</a>;         <em class='comment'>// Parent process</em>
+<a id='L45' name='L45'></a>  45   <strong class='reserved'>struct</strong> <a href='../S/177.html#L150' title='Defined at 150 in x86.h.'>trapframe</a> *<a href='../Y/399.html' title='Multiple used in 31 places.'>tf</a>;        <em class='comment'>// Trap frame for current syscall</em>
+<a id='L46' name='L46'></a>  46   <strong class='reserved'>struct</strong> <a href='../S/109.html#L27' title='Defined at 27 in proc.h.'>context</a> *<a href='../S/109.html#L27' title='Defined at 27 in proc.h.'>context</a>;     <em class='comment'>// swtch() here to run process</em>
+<a id='L47' name='L47'></a>  47   <strong class='reserved'>void</strong> *<a href='../Y/48.html' title='Multiple used in 9 places.'>chan</a>;                  <em class='comment'>// If non-zero, sleeping on chan</em>
+<a id='L48' name='L48'></a>  48   <strong class='reserved'>int</strong> <a href='../Y/181.html' title='Multiple used in 13 places.'>killed</a>;                  <em class='comment'>// If non-zero, have been killed</em>
+<a id='L49' name='L49'></a>  49   <strong class='reserved'>struct</strong> <a href='../S/35.html#L1' title='Defined at 1 in file.h.'>file</a> *<a href='../Y/261.html' title='Multiple used in 11 places.'>ofile</a>[<a href='../S/98.html#L4' title='Defined at 4 in param.h.'>NOFILE</a>];  <em class='comment'>// Open files</em>
+<a id='L50' name='L50'></a>  50   <strong class='reserved'>struct</strong> <a href='../S/35.html#L13' title='Defined at 13 in file.h.'>inode</a> *<a href='../Y/67.html' title='Multiple used in 8 places.'>cwd</a>;           <em class='comment'>// Current directory</em>
+<a id='L51' name='L51'></a>  51   <strong class='reserved'>char</strong> <a href='../Y/224.html' title='Multiple used in 107 places.'>name</a>[16];               <em class='comment'>// Process name (debugging)</em>
+<a id='L52' name='L52'></a>  52 <em class='brace'>}</em>;
+<a id='L53' name='L53'></a>  53 
+<a id='L54' name='L54'></a>  54 <em class='comment'>// Process memory is laid out contiguously, low addresses first:</em>
+<a id='L55' name='L55'></a>  55 <em class='comment'>//   text</em>
+<a id='L56' name='L56'></a>  56 <em class='comment'>//   original data and bss</em>
+<a id='L57' name='L57'></a>  57 <em class='comment'>//   fixed-size stack</em>
+<a id='L58' name='L58'></a>  58 <em class='comment'>//   expandable heap</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

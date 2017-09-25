@@ -1,17 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>new</title>
+<title>newsz</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/80.html#L120'>new</a>               120 sysfile.c        char name[DIRSIZ], *new, *old;</span>
-<span class='curline'><a href='../S/80.html#L123'>new</a>               123 sysfile.c        if(argstr(0, &amp;old) &lt; 0 || argstr(1, &amp;new) &lt; 0)</span>
-<span class='curline'><a href='../S/80.html#L143'>new</a>               143 sysfile.c        if((dp = nameiparent(new, name)) == 0)</span>
+<span class='curline'><a href='../S/171.html#L222'>newsz</a>             222 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/171.html#L227'>newsz</a>             227 vm.c             if(newsz &gt;= KERNBASE)</span>
+<span class='curline'><a href='../S/171.html#L229'>newsz</a>             229 vm.c             if(newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/171.html#L233'>newsz</a>             233 vm.c             for(; a &lt; newsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/171.html#L237'>newsz</a>             237 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/171.html#L243'>newsz</a>             243 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/171.html#L248'>newsz</a>             248 vm.c             return newsz;</span>
+<span class='curline'><a href='../S/171.html#L256'>newsz</a>             256 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/171.html#L261'>newsz</a>             261 vm.c             if(newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/171.html#L264'>newsz</a>             264 vm.c             a = PGROUNDUP(newsz);</span>
+<span class='curline'><a href='../S/171.html#L278'>newsz</a>             278 vm.c             return newsz;</span>
 </pre>
 </body>
 </html>

@@ -1,21 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ustack</title>
+<title>use_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L15'>ustack</a>             15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
-<span class='curline'><a href='../S/17.html#L76'>ustack</a>             76 exec.c             ustack[3+argc] = sp;</span>
-<span class='curline'><a href='../S/17.html#L78'>ustack</a>             78 exec.c           ustack[3+argc] = 0;</span>
-<span class='curline'><a href='../S/17.html#L80'>ustack</a>             80 exec.c           ustack[0] = 0xffffffff;  // fake return PC</span>
-<span class='curline'><a href='../S/17.html#L81'>ustack</a>             81 exec.c           ustack[1] = argc;</span>
-<span class='curline'><a href='../S/17.html#L82'>ustack</a>             82 exec.c           ustack[2] = sp - (argc+1)*4;  // argv pointer</span>
-<span class='curline'><a href='../S/17.html#L85'>ustack</a>             85 exec.c           if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)</span>
+<span class='curline'><a href='../S/58.html#L22'>use_lock</a>           22 kalloc.c         int use_lock;</span>
+<span class='curline'><a href='../S/58.html#L35'>use_lock</a>           35 kalloc.c         kmem.use_lock = 0;</span>
+<span class='curline'><a href='../S/58.html#L43'>use_lock</a>           43 kalloc.c         kmem.use_lock = 1;</span>
+<span class='curline'><a href='../S/58.html#L70'>use_lock</a>           70 kalloc.c         if(kmem.use_lock)</span>
+<span class='curline'><a href='../S/58.html#L75'>use_lock</a>           75 kalloc.c         if(kmem.use_lock)</span>
+<span class='curline'><a href='../S/58.html#L87'>use_lock</a>           87 kalloc.c         if(kmem.use_lock)</span>
+<span class='curline'><a href='../S/58.html#L92'>use_lock</a>           92 kalloc.c         if(kmem.use_lock)</span>
 </pre>
 </body>
 </html>

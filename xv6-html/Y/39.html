@@ -1,26 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bi</title>
+<title>block</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L59'>bi</a>                 59 fs.c             int b, bi, m;</span>
-<span class='curline'><a href='../S/22.html#L65'>bi</a>                 65 fs.c               for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
-<span class='curline'><a href='../S/22.html#L66'>bi</a>                 66 fs.c                 m = 1 &lt;&lt; (bi % 8);</span>
-<span class='curline'><a href='../S/22.html#L67'>bi</a>                 67 fs.c                 if((bp-&gt;data[bi/8] &amp; m) == 0){  // Is block free?</span>
-<span class='curline'><a href='../S/22.html#L68'>bi</a>                 68 fs.c                   bp-&gt;data[bi/8] |= m;  // Mark block in use.</span>
-<span class='curline'><a href='../S/22.html#L71'>bi</a>                 71 fs.c                   bzero(dev, b + bi);</span>
-<span class='curline'><a href='../S/22.html#L72'>bi</a>                 72 fs.c                   return b + bi;</span>
-<span class='curline'><a href='../S/22.html#L85'>bi</a>                 85 fs.c             int bi, m;</span>
-<span class='curline'><a href='../S/22.html#L89'>bi</a>                 89 fs.c             bi = b % BPB;</span>
-<span class='curline'><a href='../S/22.html#L90'>bi</a>                 90 fs.c             m = 1 &lt;&lt; (bi % 8);</span>
-<span class='curline'><a href='../S/22.html#L91'>bi</a>                 91 fs.c             if((bp-&gt;data[bi/8] &amp; m) == 0)</span>
-<span class='curline'><a href='../S/22.html#L93'>bi</a>                 93 fs.c             bp-&gt;data[bi/8] &amp;= ~m;</span>
+<span class='curline'><a href='../S/77.html#L36'>block</a>              36 log.c            int block[LOGSIZE];</span>
+<span class='curline'><a href='../S/77.html#L76'>block</a>              76 log.c              struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/77.html#L93'>block</a>              93 log.c              log.lh.block[i] = lh-&gt;block[i];</span>
+<span class='curline'><a href='../S/77.html#L109'>block</a>             109 log.c              hb-&gt;block[i] = log.lh.block[i];</span>
+<span class='curline'><a href='../S/77.html#L184'>block</a>             184 log.c              struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/77.html#L225'>block</a>             225 log.c              if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
+<span class='curline'><a href='../S/77.html#L228'>block</a>             228 log.c            log.lh.block[i] = b-&gt;blockno;</span>
 </pre>
 </body>
 </html>

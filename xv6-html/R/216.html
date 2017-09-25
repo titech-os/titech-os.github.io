@@ -1,17 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>T_SYSCALL</title>
+<title>allocuvm</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/85.html#L24'>T_SYSCALL</a>          24 trap.c           SETGATE(idt[T_SYSCALL], 1, SEG_KCODE&lt;&lt;3, vectors[T_SYSCALL], DPL_USER);</span>
-<span class='curline'><a href='../S/85.html#L39'>T_SYSCALL</a>          39 trap.c           if(tf-&gt;trapno == T_SYSCALL){</span>
-<span class='curline'><a href='../S/94.html#L1558'>T_SYSCALL</a>        1558 usertests.c          "a" (SYS_sleep), "n" (T_SYSCALL), "c" (p) :</span>
+<span class='curline'><a href='../S/19.html#L178'>allocuvm</a>          178 defs.h         int             allocuvm(pde_t*, uint, uint);</span>
+<span class='curline'><a href='../S/30.html#L52'>allocuvm</a>           52 exec.c             if((sz = allocuvm(pgdir, sz, ph.vaddr + ph.memsz)) == 0)</span>
+<span class='curline'><a href='../S/30.html#L66'>allocuvm</a>           66 exec.c           if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)</span>
+<span class='curline'><a href='../S/107.html#L166'>allocuvm</a>          166 proc.c             if((sz = allocuvm(curproc-&gt;pgdir, sz, sz + n)) == 0)</span>
 </pre>
 </body>
 </html>

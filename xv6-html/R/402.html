@@ -1,17 +1,51 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>mpsearch1</title>
+<title>outb</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L58'>mpsearch1</a>          58 mp.c               if((mp = mpsearch1(p, 1024)))</span>
-<span class='curline'><a href='../S/47.html#L62'>mpsearch1</a>          62 mp.c               if((mp = mpsearch1(p-1024, 1024)))</span>
-<span class='curline'><a href='../S/47.html#L65'>mpsearch1</a>          65 mp.c             return mpsearch1(0xF0000, 0x10000);</span>
+<span class='curline'><a href='../S/7.html#L64'>outb</a>               64 bootmain.c       outb(0x1F2, 1);   // count = 1</span>
+<span class='curline'><a href='../S/7.html#L65'>outb</a>               65 bootmain.c       outb(0x1F3, offset);</span>
+<span class='curline'><a href='../S/7.html#L66'>outb</a>               66 bootmain.c       outb(0x1F4, offset &gt;&gt; 8);</span>
+<span class='curline'><a href='../S/7.html#L67'>outb</a>               67 bootmain.c       outb(0x1F5, offset &gt;&gt; 16);</span>
+<span class='curline'><a href='../S/7.html#L68'>outb</a>               68 bootmain.c       outb(0x1F6, (offset &gt;&gt; 24) | 0xE0);</span>
+<span class='curline'><a href='../S/7.html#L69'>outb</a>               69 bootmain.c       outb(0x1F7, 0x20);  // cmd 0x20 - read sectors</span>
+<span class='curline'><a href='../S/15.html#L137'>outb</a>              137 console.c        outb(CRTPORT, 14);</span>
+<span class='curline'><a href='../S/15.html#L139'>outb</a>              139 console.c        outb(CRTPORT, 15);</span>
+<span class='curline'><a href='../S/15.html#L158'>outb</a>              158 console.c        outb(CRTPORT, 14);</span>
+<span class='curline'><a href='../S/15.html#L159'>outb</a>              159 console.c        outb(CRTPORT+1, pos&gt;&gt;8);</span>
+<span class='curline'><a href='../S/15.html#L160'>outb</a>              160 console.c        outb(CRTPORT, 15);</span>
+<span class='curline'><a href='../S/15.html#L161'>outb</a>              161 console.c        outb(CRTPORT+1, pos);</span>
+<span class='curline'><a href='../S/47.html#L60'>outb</a>               60 ide.c            outb(0x1f6, 0xe0 | (1&lt;&lt;4));</span>
+<span class='curline'><a href='../S/47.html#L69'>outb</a>               69 ide.c            outb(0x1f6, 0xe0 | (0&lt;&lt;4));</span>
+<span class='curline'><a href='../S/47.html#L88'>outb</a>               88 ide.c            outb(0x3f6, 0);  // generate interrupt</span>
+<span class='curline'><a href='../S/47.html#L89'>outb</a>               89 ide.c            outb(0x1f2, sector_per_block);  // number of sectors</span>
+<span class='curline'><a href='../S/47.html#L90'>outb</a>               90 ide.c            outb(0x1f3, sector &amp; 0xff);</span>
+<span class='curline'><a href='../S/47.html#L91'>outb</a>               91 ide.c            outb(0x1f4, (sector &gt;&gt; 8) &amp; 0xff);</span>
+<span class='curline'><a href='../S/47.html#L92'>outb</a>               92 ide.c            outb(0x1f5, (sector &gt;&gt; 16) &amp; 0xff);</span>
+<span class='curline'><a href='../S/47.html#L93'>outb</a>               93 ide.c            outb(0x1f6, 0xe0 | ((b-&gt;dev&amp;1)&lt;&lt;4) | ((sector&gt;&gt;24)&amp;0x0f));</span>
+<span class='curline'><a href='../S/47.html#L95'>outb</a>               95 ide.c              outb(0x1f7, write_cmd);</span>
+<span class='curline'><a href='../S/47.html#L98'>outb</a>               98 ide.c              outb(0x1f7, read_cmd);</span>
+<span class='curline'><a href='../S/70.html#L137'>outb</a>              137 lapic.c          outb(CMOS_PORT, 0xF);  // offset 0xF is shutdown code</span>
+<span class='curline'><a href='../S/70.html#L138'>outb</a>              138 lapic.c          outb(CMOS_PORT+1, 0x0A);</span>
+<span class='curline'><a href='../S/70.html#L176'>outb</a>              176 lapic.c          outb(CMOS_PORT,  reg);</span>
+<span class='curline'><a href='../S/94.html#L136'>outb</a>              136 mp.c               outb(0x22, 0x70);   // Select IMCR</span>
+<span class='curline'><a href='../S/94.html#L137'>outb</a>              137 mp.c               outb(0x23, inb(0x23) | 1);  // Mask external interrupts.</span>
+<span class='curline'><a href='../S/99.html#L14'>outb</a>               14 picirq.c         outb(IO_PIC1+1, 0xFF);</span>
+<span class='curline'><a href='../S/99.html#L15'>outb</a>               15 picirq.c         outb(IO_PIC2+1, 0xFF);</span>
+<span class='curline'><a href='../S/157.html#L25'>outb</a>               25 uart.c           outb(COM1+2, 0);</span>
+<span class='curline'><a href='../S/157.html#L28'>outb</a>               28 uart.c           outb(COM1+3, 0x80);    // Unlock divisor</span>
+<span class='curline'><a href='../S/157.html#L29'>outb</a>               29 uart.c           outb(COM1+0, 115200/9600);</span>
+<span class='curline'><a href='../S/157.html#L30'>outb</a>               30 uart.c           outb(COM1+1, 0);</span>
+<span class='curline'><a href='../S/157.html#L31'>outb</a>               31 uart.c           outb(COM1+3, 0x03);    // Lock divisor, 8 data bits.</span>
+<span class='curline'><a href='../S/157.html#L32'>outb</a>               32 uart.c           outb(COM1+4, 0);</span>
+<span class='curline'><a href='../S/157.html#L33'>outb</a>               33 uart.c           outb(COM1+1, 0x01);    // Enable receive interrupts.</span>
+<span class='curline'><a href='../S/157.html#L60'>outb</a>               60 uart.c           outb(COM1+0, c);</span>
 </pre>
 </body>
 </html>

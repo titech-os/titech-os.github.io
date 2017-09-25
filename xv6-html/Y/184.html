@@ -3,20 +3,21 @@
 <head>
 <title>kstack</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L56'>kstack</a>             56 proc.c           if((p-&gt;kstack = kalloc()) == 0){</span>
-<span class='curline'><a href='../S/56.html#L60'>kstack</a>             60 proc.c           sp = p-&gt;kstack + KSTACKSIZE;</span>
-<span class='curline'><a href='../S/56.html#L153'>kstack</a>            153 proc.c             kfree(np-&gt;kstack);</span>
-<span class='curline'><a href='../S/56.html#L154'>kstack</a>            154 proc.c             np-&gt;kstack = 0;</span>
-<span class='curline'><a href='../S/56.html#L247'>kstack</a>            247 proc.c                 kfree(p-&gt;kstack);</span>
-<span class='curline'><a href='../S/56.html#L248'>kstack</a>            248 proc.c                 p-&gt;kstack = 0;</span>
-<span class='curline'><a href='../S/57.html#L55'>kstack</a>             55 proc.h           char *kstack;                // Bottom of kernel stack for this process</span>
-<span class='curline'><a href='../S/97.html#L170'>kstack</a>            170 vm.c             cpu-&gt;ts.esp0 = (uint)proc-&gt;kstack + KSTACKSIZE;</span>
+<span class='curline'><a href='../S/107.html#L95'>kstack</a>             95 proc.c           if((p-&gt;kstack = kalloc()) == 0){</span>
+<span class='curline'><a href='../S/107.html#L99'>kstack</a>             99 proc.c           sp = p-&gt;kstack + KSTACKSIZE;</span>
+<span class='curline'><a href='../S/107.html#L194'>kstack</a>            194 proc.c             kfree(np-&gt;kstack);</span>
+<span class='curline'><a href='../S/107.html#L195'>kstack</a>            195 proc.c             np-&gt;kstack = 0;</span>
+<span class='curline'><a href='../S/107.html#L290'>kstack</a>            290 proc.c                 kfree(p-&gt;kstack);</span>
+<span class='curline'><a href='../S/107.html#L291'>kstack</a>            291 proc.c                 p-&gt;kstack = 0;</span>
+<span class='curline'><a href='../S/109.html#L41'>kstack</a>             41 proc.h           char *kstack;                // Bottom of kernel stack for this process</span>
+<span class='curline'><a href='../S/171.html#L161'>kstack</a>            161 vm.c             if(p-&gt;kstack == 0)</span>
+<span class='curline'><a href='../S/171.html#L171'>kstack</a>            171 vm.c             mycpu()-&gt;ts.esp0 = (uint)p-&gt;kstack + KSTACKSIZE;</span>
 </pre>
 </body>
 </html>

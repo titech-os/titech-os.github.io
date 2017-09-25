@@ -1,26 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>offset</title>
+<title>ofile</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/4.html#L60'>offset</a>             60 bootmain.c     readsect(void *dst, uint offset)</span>
-<span class='curline'><a href='../S/4.html#L65'>offset</a>             65 bootmain.c       outb(0x1F3, offset);</span>
-<span class='curline'><a href='../S/4.html#L66'>offset</a>             66 bootmain.c       outb(0x1F4, offset &gt;&gt; 8);</span>
-<span class='curline'><a href='../S/4.html#L67'>offset</a>             67 bootmain.c       outb(0x1F5, offset &gt;&gt; 16);</span>
-<span class='curline'><a href='../S/4.html#L68'>offset</a>             68 bootmain.c       outb(0x1F6, (offset &gt;&gt; 24) | 0xE0);</span>
-<span class='curline'><a href='../S/4.html#L79'>offset</a>             79 bootmain.c     readseg(uchar* pa, uint count, uint offset)</span>
-<span class='curline'><a href='../S/4.html#L86'>offset</a>             86 bootmain.c       pa -= offset % SECTSIZE;</span>
-<span class='curline'><a href='../S/4.html#L89'>offset</a>             89 bootmain.c       offset = (offset / SECTSIZE) + 1;</span>
-<span class='curline'><a href='../S/4.html#L94'>offset</a>             94 bootmain.c       for(; pa &lt; epa; pa += SECTSIZE, offset++)</span>
-<span class='curline'><a href='../S/4.html#L95'>offset</a>             95 bootmain.c         readsect(pa, offset);</span>
-<span class='curline'><a href='../S/97.html#L199'>offset</a>            199 vm.c           loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)</span>
-<span class='curline'><a href='../S/97.html#L214'>offset</a>            214 vm.c               if(readi(ip, P2V(pa), offset+i, n) != n)</span>
+<span class='curline'><a href='../S/107.html#L207'>ofile</a>             207 proc.c             if(curproc-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/107.html#L208'>ofile</a>             208 proc.c               np-&gt;ofile[i] = filedup(curproc-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/107.html#L239'>ofile</a>             239 proc.c             if(curproc-&gt;ofile[fd]){</span>
+<span class='curline'><a href='../S/107.html#L240'>ofile</a>             240 proc.c               fileclose(curproc-&gt;ofile[fd]);</span>
+<span class='curline'><a href='../S/107.html#L241'>ofile</a>             241 proc.c               curproc-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/109.html#L49'>ofile</a>              49 proc.h           struct file *ofile[NOFILE];  // Open files</span>
+<span class='curline'><a href='../S/145.html#L29'>ofile</a>              29 sysfile.c        if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/145.html#L47'>ofile</a>              47 sysfile.c          if(curproc-&gt;ofile[fd] == 0){</span>
+<span class='curline'><a href='../S/145.html#L48'>ofile</a>              48 sysfile.c            curproc-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/145.html#L101'>ofile</a>             101 sysfile.c        myproc()-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/145.html#L437'>ofile</a>             437 sysfile.c            myproc()-&gt;ofile[fd0] = 0;</span>
 </pre>
 </body>
 </html>

@@ -1,18 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uarg</title>
+<title>ts</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/80.html#L400'>uarg</a>              400 sysfile.c        uint uargv, uarg;</span>
-<span class='curline'><a href='../S/80.html#L409'>uarg</a>              409 sysfile.c          if(fetchint(uargv+4*i, (int*)&amp;uarg) &lt; 0)</span>
-<span class='curline'><a href='../S/80.html#L411'>uarg</a>              411 sysfile.c          if(uarg == 0){</span>
-<span class='curline'><a href='../S/80.html#L415'>uarg</a>              415 sysfile.c          if(fetchstr(uarg, &amp;argv[i]) &lt; 0)</span>
+<span class='curline'><a href='../S/109.html#L5'>ts</a>                  5 proc.h           struct taskstate ts;         // Used by x86 to find stack for interrupt</span>
+<span class='curline'><a href='../S/171.html#L167'>ts</a>                167 vm.c             mycpu()-&gt;gdt[SEG_TSS] = SEG16(STS_T32A, &amp;mycpu()-&gt;ts,</span>
+<span class='curline'><a href='../S/171.html#L168'>ts</a>                168 vm.c                                           sizeof(mycpu()-&gt;ts)-1, 0);</span>
+<span class='curline'><a href='../S/171.html#L170'>ts</a>                170 vm.c             mycpu()-&gt;ts.ss0 = SEG_KDATA &lt;&lt; 3;</span>
+<span class='curline'><a href='../S/171.html#L171'>ts</a>                171 vm.c             mycpu()-&gt;ts.esp0 = (uint)p-&gt;kstack + KSTACKSIZE;</span>
+<span class='curline'><a href='../S/171.html#L174'>ts</a>                174 vm.c             mycpu()-&gt;ts.iomb = (ushort) 0xFFFF;</span>
 </pre>
 </body>
 </html>

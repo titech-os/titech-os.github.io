@@ -1,47 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pde_t</title>
+<title>pipecmd</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/11.html#L172'>pde_t</a>             172 defs.h         pde_t*          setupkvm(void);</span>
-<span class='curline'><a href='../S/11.html#L173'>pde_t</a>             173 defs.h         char*           uva2ka(pde_t*, char*);</span>
-<span class='curline'><a href='../S/11.html#L174'>pde_t</a>             174 defs.h         int             allocuvm(pde_t*, uint, uint);</span>
-<span class='curline'><a href='../S/11.html#L175'>pde_t</a>             175 defs.h         int             deallocuvm(pde_t*, uint, uint);</span>
-<span class='curline'><a href='../S/11.html#L176'>pde_t</a>             176 defs.h         void            freevm(pde_t*);</span>
-<span class='curline'><a href='../S/11.html#L177'>pde_t</a>             177 defs.h         void            inituvm(pde_t*, char*, uint);</span>
-<span class='curline'><a href='../S/11.html#L178'>pde_t</a>             178 defs.h         int             loaduvm(pde_t*, char*, struct inode*, uint, uint);</span>
-<span class='curline'><a href='../S/11.html#L179'>pde_t</a>             179 defs.h         pde_t*          copyuvm(pde_t*, uint);</span>
-<span class='curline'><a href='../S/11.html#L182'>pde_t</a>             182 defs.h         int             copyout(pde_t*, uint, void*, uint);</span>
-<span class='curline'><a href='../S/11.html#L183'>pde_t</a>             183 defs.h         void            clearpteu(pde_t *pgdir, char *uva);</span>
-<span class='curline'><a href='../S/17.html#L19'>pde_t</a>              19 exec.c           pde_t *pgdir, *oldpgdir;</span>
-<span class='curline'><a href='../S/40.html#L11'>pde_t</a>              11 main.c         extern pde_t *kpgdir;</span>
-<span class='curline'><a href='../S/40.html#L63'>pde_t</a>              63 main.c         pde_t entrypgdir[];  // For entry.S</span>
-<span class='curline'><a href='../S/40.html#L106'>pde_t</a>             106 main.c         pde_t entrypgdir[NPDENTRIES] = {</span>
-<span class='curline'><a href='../S/57.html#L54'>pde_t</a>              54 proc.h           pde_t* pgdir;                // Page table</span>
-<span class='curline'><a href='../S/97.html#L11'>pde_t</a>              11 vm.c           pde_t *kpgdir;  // for use in scheduler()</span>
-<span class='curline'><a href='../S/97.html#L45'>pde_t</a>              45 vm.c           walkpgdir(pde_t *pgdir, const void *va, int alloc)</span>
-<span class='curline'><a href='../S/97.html#L47'>pde_t</a>              47 vm.c             pde_t *pde;</span>
-<span class='curline'><a href='../S/97.html#L70'>pde_t</a>              70 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
-<span class='curline'><a href='../S/97.html#L127'>pde_t</a>             127 vm.c           pde_t*</span>
-<span class='curline'><a href='../S/97.html#L130'>pde_t</a>             130 vm.c             pde_t *pgdir;</span>
-<span class='curline'><a href='../S/97.html#L133'>pde_t</a>             133 vm.c             if((pgdir = (pde_t*)kalloc()) == 0)</span>
-<span class='curline'><a href='../S/97.html#L184'>pde_t</a>             184 vm.c           inituvm(pde_t *pgdir, char *init, uint sz)</span>
-<span class='curline'><a href='../S/97.html#L199'>pde_t</a>             199 vm.c           loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)</span>
-<span class='curline'><a href='../S/97.html#L223'>pde_t</a>             223 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/97.html#L257'>pde_t</a>             257 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/97.html#L285'>pde_t</a>             285 vm.c           freevm(pde_t *pgdir)</span>
-<span class='curline'><a href='../S/97.html#L304'>pde_t</a>             304 vm.c           clearpteu(pde_t *pgdir, char *uva)</span>
-<span class='curline'><a href='../S/97.html#L316'>pde_t</a>             316 vm.c           pde_t*</span>
-<span class='curline'><a href='../S/97.html#L317'>pde_t</a>             317 vm.c           copyuvm(pde_t *pgdir, uint sz)</span>
-<span class='curline'><a href='../S/97.html#L319'>pde_t</a>             319 vm.c             pde_t *d;</span>
-<span class='curline'><a href='../S/97.html#L349'>pde_t</a>             349 vm.c           uva2ka(pde_t *pgdir, char *uva)</span>
-<span class='curline'><a href='../S/97.html#L365'>pde_t</a>             365 vm.c           copyout(pde_t *pgdir, uint va, void *p, uint len)</span>
+<span class='curline'><a href='../S/120.html#L64'>pipecmd</a>            64 sh.c             struct pipecmd *pcmd;</span>
+<span class='curline'><a href='../S/120.html#L101'>pipecmd</a>           101 sh.c               pcmd = (struct pipecmd*)cmd;</span>
+<span class='curline'><a href='../S/120.html#L225'>pipecmd</a>           225 sh.c             struct pipecmd *cmd;</span>
+<span class='curline'><a href='../S/120.html#L369'>pipecmd</a>           369 sh.c               cmd = pipecmd(cmd, parsepipe(ps, es));</span>
+<span class='curline'><a href='../S/120.html#L456'>pipecmd</a>           456 sh.c             struct pipecmd *pcmd;</span>
+<span class='curline'><a href='../S/120.html#L476'>pipecmd</a>           476 sh.c               pcmd = (struct pipecmd*)cmd;</span>
 </pre>
 </body>
 </html>

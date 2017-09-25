@@ -1,19 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>irqmask</title>
+<title>irq</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/51.html#L15'>irqmask</a>            15 picirq.c       static ushort irqmask = 0xFFFF &amp; ~(1&lt;&lt;IRQ_SLAVE);</span>
-<span class='curline'><a href='../S/51.html#L20'>irqmask</a>            20 picirq.c         irqmask = mask;</span>
-<span class='curline'><a href='../S/51.html#L28'>irqmask</a>            28 picirq.c         picsetmask(irqmask &amp; ~(1&lt;&lt;irq));</span>
-<span class='curline'><a href='../S/51.html#L82'>irqmask</a>            82 picirq.c         if(irqmask != 0xFFFF)</span>
-<span class='curline'><a href='../S/51.html#L83'>irqmask</a>            83 picirq.c           picsetmask(irqmask);</span>
+<span class='curline'><a href='../S/19.html#L62'>irq</a>                62 defs.h         void            ioapicenable(int irq, int cpu);</span>
+<span class='curline'><a href='../S/56.html#L68'>irq</a>                68 ioapic.c       ioapicenable(int irq, int cpunum)</span>
+<span class='curline'><a href='../S/56.html#L73'>irq</a>                73 ioapic.c         ioapicwrite(REG_TABLE+2*irq, T_IRQ0 + irq);</span>
+<span class='curline'><a href='../S/56.html#L74'>irq</a>                74 ioapic.c         ioapicwrite(REG_TABLE+2*irq+1, cpunum &lt;&lt; 24);</span>
 </pre>
 </body>
 </html>

@@ -1,21 +1,68 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>parent</title>
+<title>path</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L159'>parent</a>            159 proc.c           np-&gt;parent = proc;</span>
-<span class='curline'><a href='../S/56.html#L211'>parent</a>            211 proc.c           wakeup1(proc-&gt;parent);</span>
-<span class='curline'><a href='../S/56.html#L215'>parent</a>            215 proc.c             if(p-&gt;parent == proc){</span>
-<span class='curline'><a href='../S/56.html#L216'>parent</a>            216 proc.c               p-&gt;parent = initproc;</span>
-<span class='curline'><a href='../S/56.html#L241'>parent</a>            241 proc.c               if(p-&gt;parent != proc)</span>
-<span class='curline'><a href='../S/56.html#L251'>parent</a>            251 proc.c                 p-&gt;parent = 0;</span>
-<span class='curline'><a href='../S/57.html#L58'>parent</a>             58 proc.h           struct proc *parent;         // Parent process</span>
+<span class='curline'><a href='../S/30.html#L11'>path</a>               11 exec.c         exec(char *path, char **argv)</span>
+<span class='curline'><a href='../S/30.html#L24'>path</a>               24 exec.c           if((ip = namei(path)) == 0){</span>
+<span class='curline'><a href='../S/30.html#L91'>path</a>               91 exec.c           for(last=s=path; *s; s++)</span>
+<span class='curline'><a href='../S/39.html#L597'>path</a>              597 fs.c           skipelem(char *path, char *name)</span>
+<span class='curline'><a href='../S/39.html#L602'>path</a>              602 fs.c             while(*path == '/')</span>
+<span class='curline'><a href='../S/39.html#L603'>path</a>              603 fs.c               path++;</span>
+<span class='curline'><a href='../S/39.html#L604'>path</a>              604 fs.c             if(*path == 0)</span>
+<span class='curline'><a href='../S/39.html#L606'>path</a>              606 fs.c             s = path;</span>
+<span class='curline'><a href='../S/39.html#L607'>path</a>              607 fs.c             while(*path != '/' &amp;&amp; *path != 0)</span>
+<span class='curline'><a href='../S/39.html#L608'>path</a>              608 fs.c               path++;</span>
+<span class='curline'><a href='../S/39.html#L609'>path</a>              609 fs.c             len = path - s;</span>
+<span class='curline'><a href='../S/39.html#L616'>path</a>              616 fs.c             while(*path == '/')</span>
+<span class='curline'><a href='../S/39.html#L617'>path</a>              617 fs.c               path++;</span>
+<span class='curline'><a href='../S/39.html#L618'>path</a>              618 fs.c             return path;</span>
+<span class='curline'><a href='../S/39.html#L626'>path</a>              626 fs.c           namex(char *path, int nameiparent, char *name)</span>
+<span class='curline'><a href='../S/39.html#L630'>path</a>              630 fs.c             if(*path == '/')</span>
+<span class='curline'><a href='../S/39.html#L635'>path</a>              635 fs.c             while((path = skipelem(path, name)) != 0){</span>
+<span class='curline'><a href='../S/39.html#L641'>path</a>              641 fs.c               if(nameiparent &amp;&amp; *path == '\0'){</span>
+<span class='curline'><a href='../S/39.html#L661'>path</a>              661 fs.c           namei(char *path)</span>
+<span class='curline'><a href='../S/39.html#L664'>path</a>              664 fs.c             return namex(path, 0, name);</span>
+<span class='curline'><a href='../S/39.html#L668'>path</a>              668 fs.c           nameiparent(char *path, char *name)</span>
+<span class='curline'><a href='../S/39.html#L670'>path</a>              670 fs.c             return namex(path, 1, name);</span>
+<span class='curline'><a href='../S/80.html#L7'>path</a>                7 ls.c           fmtname(char *path)</span>
+<span class='curline'><a href='../S/80.html#L13'>path</a>               13 ls.c             for(p=path+strlen(path); p &gt;= path &amp;&amp; *p != '/'; p--)</span>
+<span class='curline'><a href='../S/80.html#L26'>path</a>               26 ls.c           ls(char *path)</span>
+<span class='curline'><a href='../S/80.html#L33'>path</a>               33 ls.c             if((fd = open(path, 0)) &lt; 0){</span>
+<span class='curline'><a href='../S/80.html#L34'>path</a>               34 ls.c               printf(2, "ls: cannot open %s\n", path);</span>
+<span class='curline'><a href='../S/80.html#L39'>path</a>               39 ls.c               printf(2, "ls: cannot stat %s\n", path);</span>
+<span class='curline'><a href='../S/80.html#L46'>path</a>               46 ls.c               printf(1, "%s %d %d %d\n", fmtname(path), st.type, st.ino, st.size);</span>
+<span class='curline'><a href='../S/80.html#L50'>path</a>               50 ls.c               if(strlen(path) + 1 + DIRSIZ + 1 &gt; sizeof buf){</span>
+<span class='curline'><a href='../S/80.html#L54'>path</a>               54 ls.c               strcpy(buf, path);</span>
+<span class='curline'><a href='../S/135.html#L20'>path</a>               20 stressfs.c       char path[] = "stressfs0";</span>
+<span class='curline'><a href='../S/135.html#L32'>path</a>               32 stressfs.c       path[8] += i;</span>
+<span class='curline'><a href='../S/135.html#L33'>path</a>               33 stressfs.c       fd = open(path, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/135.html#L41'>path</a>               41 stressfs.c       fd = open(path, O_RDONLY);</span>
+<span class='curline'><a href='../S/145.html#L189'>path</a>              189 sysfile.c        char name[DIRSIZ], *path;</span>
+<span class='curline'><a href='../S/145.html#L192'>path</a>              192 sysfile.c        if(argstr(0, &amp;path) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L196'>path</a>              196 sysfile.c        if((dp = nameiparent(path, name)) == 0){</span>
+<span class='curline'><a href='../S/145.html#L242'>path</a>              242 sysfile.c      create(char *path, short type, short major, short minor)</span>
+<span class='curline'><a href='../S/145.html#L248'>path</a>              248 sysfile.c        if((dp = nameiparent(path, name)) == 0)</span>
+<span class='curline'><a href='../S/145.html#L289'>path</a>              289 sysfile.c        char *path;</span>
+<span class='curline'><a href='../S/145.html#L294'>path</a>              294 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || argint(1, &amp;omode) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L300'>path</a>              300 sysfile.c          ip = create(path, T_FILE, 0, 0);</span>
+<span class='curline'><a href='../S/145.html#L306'>path</a>              306 sysfile.c          if((ip = namei(path)) == 0){</span>
+<span class='curline'><a href='../S/145.html#L339'>path</a>              339 sysfile.c        char *path;</span>
+<span class='curline'><a href='../S/145.html#L343'>path</a>              343 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || (ip = create(path, T_DIR, 0, 0)) == 0){</span>
+<span class='curline'><a href='../S/145.html#L356'>path</a>              356 sysfile.c        char *path;</span>
+<span class='curline'><a href='../S/145.html#L360'>path</a>              360 sysfile.c        if((argstr(0, &amp;path)) &lt; 0 ||</span>
+<span class='curline'><a href='../S/145.html#L363'>path</a>              363 sysfile.c           (ip = create(path, T_DEV, major, minor)) == 0){</span>
+<span class='curline'><a href='../S/145.html#L375'>path</a>              375 sysfile.c        char *path;</span>
+<span class='curline'><a href='../S/145.html#L380'>path</a>              380 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || (ip = namei(path)) == 0){</span>
+<span class='curline'><a href='../S/145.html#L400'>path</a>              400 sysfile.c        char *path, *argv[MAXARG];</span>
+<span class='curline'><a href='../S/145.html#L404'>path</a>              404 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || argint(1, (int*)&amp;uargv) &lt; 0){</span>
+<span class='curline'><a href='../S/145.html#L420'>path</a>              420 sysfile.c        return exec(path, argv);</span>
 </pre>
 </body>
 </html>

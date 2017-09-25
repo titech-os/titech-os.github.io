@@ -1,16 +1,29 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ideinit</title>
+<title>inb</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/11.html#L57'>ideinit</a>            57 defs.h         void            ideinit(void);</span>
-<span class='curline'><a href='../S/40.html#L34'>ideinit</a>            34 main.c           ideinit();       // disk</span>
+<span class='curline'><a href='../S/7.html#L54'>inb</a>                54 bootmain.c       while((inb(0x1F7) &amp; 0xC0) != 0x40)</span>
+<span class='curline'><a href='../S/15.html#L138'>inb</a>               138 console.c        pos = inb(CRTPORT+1) &lt;&lt; 8;</span>
+<span class='curline'><a href='../S/15.html#L140'>inb</a>               140 console.c        pos |= inb(CRTPORT+1);</span>
+<span class='curline'><a href='../S/47.html#L43'>inb</a>                43 ide.c            while(((r = inb(0x1f7)) &amp; (IDE_BSY|IDE_DRDY)) != IDE_DRDY)</span>
+<span class='curline'><a href='../S/47.html#L62'>inb</a>                62 ide.c              if(inb(0x1f7) != 0){</span>
+<span class='curline'><a href='../S/60.html#L15'>inb</a>                15 kbd.c            st = inb(KBSTATP);</span>
+<span class='curline'><a href='../S/60.html#L18'>inb</a>                18 kbd.c            data = inb(KBDATAP);</span>
+<span class='curline'><a href='../S/70.html#L179'>inb</a>               179 lapic.c          return inb(CMOS_RETURN);</span>
+<span class='curline'><a href='../S/94.html#L137'>inb</a>               137 mp.c               outb(0x23, inb(0x23) | 1);  // Mask external interrupts.</span>
+<span class='curline'><a href='../S/157.html#L36'>inb</a>                36 uart.c           if(inb(COM1+5) == 0xFF)</span>
+<span class='curline'><a href='../S/157.html#L42'>inb</a>                42 uart.c           inb(COM1+2);</span>
+<span class='curline'><a href='../S/157.html#L43'>inb</a>                43 uart.c           inb(COM1+0);</span>
+<span class='curline'><a href='../S/157.html#L58'>inb</a>                58 uart.c           for(i = 0; i &lt; 128 &amp;&amp; !(inb(COM1+5) &amp; 0x20); i++)</span>
+<span class='curline'><a href='../S/157.html#L68'>inb</a>                68 uart.c           if(!(inb(COM1+5) &amp; 0x01))</span>
+<span class='curline'><a href='../S/157.html#L70'>inb</a>                70 uart.c           return inb(COM1+0);</span>
 </pre>
 </body>
 </html>

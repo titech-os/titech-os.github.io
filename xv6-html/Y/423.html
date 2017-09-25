@@ -1,26 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>v</title>
+<title>ustack</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/30.html#L60'>v</a>                  60 kalloc.c       kfree(char *v)</span>
-<span class='curline'><a href='../S/30.html#L64'>v</a>                  64 kalloc.c         if((uint)v % PGSIZE || v &lt; end || V2P(v) &gt;= PHYSTOP)</span>
-<span class='curline'><a href='../S/30.html#L68'>v</a>                  68 kalloc.c         memset(v, 1, PGSIZE);</span>
-<span class='curline'><a href='../S/30.html#L72'>v</a>                  72 kalloc.c         r = (struct run*)v;</span>
-<span class='curline'><a href='../S/70.html#L72'>v</a>                  72 spinlock.c     getcallerpcs(void *v, uint pcs[])</span>
-<span class='curline'><a href='../S/70.html#L77'>v</a>                  77 spinlock.c       ebp = (uint*)v - 2;</span>
-<span class='curline'><a href='../S/97.html#L274'>v</a>                 274 vm.c                 char *v = P2V(pa);</span>
-<span class='curline'><a href='../S/97.html#L275'>v</a>                 275 vm.c                 kfree(v);</span>
-<span class='curline'><a href='../S/97.html#L294'>v</a>                 294 vm.c                 char * v = P2V(PTE_ADDR(pgdir[i]));</span>
-<span class='curline'><a href='../S/97.html#L295'>v</a>                 295 vm.c                 kfree(v);</span>
-<span class='curline'><a href='../S/99.html#L103'>v</a>                 103 x86.h          loadgs(ushort v)</span>
-<span class='curline'><a href='../S/99.html#L105'>v</a>                 105 x86.h            asm volatile("movw %0, %%gs" : : "r" (v));</span>
+<span class='curline'><a href='../S/30.html#L15'>ustack</a>             15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
+<span class='curline'><a href='../S/30.html#L78'>ustack</a>             78 exec.c             ustack[3+argc] = sp;</span>
+<span class='curline'><a href='../S/30.html#L80'>ustack</a>             80 exec.c           ustack[3+argc] = 0;</span>
+<span class='curline'><a href='../S/30.html#L82'>ustack</a>             82 exec.c           ustack[0] = 0xffffffff;  // fake return PC</span>
+<span class='curline'><a href='../S/30.html#L83'>ustack</a>             83 exec.c           ustack[1] = argc;</span>
+<span class='curline'><a href='../S/30.html#L84'>ustack</a>             84 exec.c           ustack[2] = sp - (argc+1)*4;  // argv pointer</span>
+<span class='curline'><a href='../S/30.html#L87'>ustack</a>             87 exec.c           if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)</span>
 </pre>
 </body>
 </html>

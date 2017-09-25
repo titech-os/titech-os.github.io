@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>off</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.7' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/7.html#L39'>off</a>                39 bootmain.c         readseg(pa, ph-&gt;filesz, ph-&gt;off);</span>
+<span class='curline'><a href='../S/25.html#L27'>off</a>                27 elf.h            uint off;</span>
+<span class='curline'><a href='../S/30.html#L14'>off</a>                14 exec.c           int i, off;</span>
+<span class='curline'><a href='../S/30.html#L43'>off</a>                43 exec.c           for(i=0, off=elf.phoff; i&lt;elf.phnum; i++, off+=sizeof(ph)){</span>
+<span class='curline'><a href='../S/30.html#L44'>off</a>                44 exec.c             if(readi(ip, (char*)&amp;ph, off, sizeof(ph)) != sizeof(ph))</span>
+<span class='curline'><a href='../S/30.html#L56'>off</a>                56 exec.c             if(loaduvm(pgdir, (char*)ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/33.html#L107'>off</a>               107 file.c             if((r = readi(f-&gt;ip, addr, f-&gt;off, n)) &gt; 0)</span>
+<span class='curline'><a href='../S/33.html#L108'>off</a>               108 file.c               f-&gt;off += r;</span>
+<span class='curline'><a href='../S/33.html#L142'>off</a>               142 file.c               if ((r = writei(f-&gt;ip, addr + i, f-&gt;off, n1)) &gt; 0)</span>
+<span class='curline'><a href='../S/33.html#L143'>off</a>               143 file.c                 f-&gt;off += r;</span>
+<span class='curline'><a href='../S/35.html#L8'>off</a>                 8 file.h           uint off;</span>
+<span class='curline'><a href='../S/39.html#L454'>off</a>               454 fs.c           readi(struct inode *ip, char *dst, uint off, uint n)</span>
+<span class='curline'><a href='../S/39.html#L465'>off</a>               465 fs.c             if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/39.html#L467'>off</a>               467 fs.c             if(off + n &gt; ip-&gt;size)</span>
+<span class='curline'><a href='../S/39.html#L468'>off</a>               468 fs.c               n = ip-&gt;size - off;</span>
+<span class='curline'><a href='../S/39.html#L470'>off</a>               470 fs.c             for(tot=0; tot&lt;n; tot+=m, off+=m, dst+=m){</span>
+<span class='curline'><a href='../S/39.html#L471'>off</a>               471 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/39.html#L472'>off</a>               472 fs.c               m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/39.html#L473'>off</a>               473 fs.c               memmove(dst, bp-&gt;data + off%BSIZE, m);</span>
+<span class='curline'><a href='../S/39.html#L483'>off</a>               483 fs.c           writei(struct inode *ip, char *src, uint off, uint n)</span>
+<span class='curline'><a href='../S/39.html#L494'>off</a>               494 fs.c             if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/39.html#L496'>off</a>               496 fs.c             if(off + n &gt; MAXFILE*BSIZE)</span>
+<span class='curline'><a href='../S/39.html#L499'>off</a>               499 fs.c             for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
+<span class='curline'><a href='../S/39.html#L500'>off</a>               500 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/39.html#L501'>off</a>               501 fs.c               m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/39.html#L502'>off</a>               502 fs.c               memmove(bp-&gt;data + off%BSIZE, src, m);</span>
+<span class='curline'><a href='../S/39.html#L507'>off</a>               507 fs.c             if(n &gt; 0 &amp;&amp; off &gt; ip-&gt;size){</span>
+<span class='curline'><a href='../S/39.html#L508'>off</a>               508 fs.c               ip-&gt;size = off;</span>
+<span class='curline'><a href='../S/39.html#L528'>off</a>               528 fs.c             uint off, inum;</span>
+<span class='curline'><a href='../S/39.html#L534'>off</a>               534 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/39.html#L535'>off</a>               535 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/39.html#L542'>off</a>               542 fs.c                   *poff = off;</span>
+<span class='curline'><a href='../S/39.html#L555'>off</a>               555 fs.c             int off;</span>
+<span class='curline'><a href='../S/39.html#L566'>off</a>               566 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/39.html#L567'>off</a>               567 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/39.html#L575'>off</a>               575 fs.c             if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/92.html#L71'>off</a>                71 mkfs.c           uint rootino, inum, off;</span>
+<span class='curline'><a href='../S/92.html#L160'>off</a>               160 mkfs.c           off = xint(din.size);</span>
+<span class='curline'><a href='../S/92.html#L161'>off</a>               161 mkfs.c           off = ((off/BSIZE) + 1) * BSIZE;</span>
+<span class='curline'><a href='../S/92.html#L162'>off</a>               162 mkfs.c           din.size = xint(off);</span>
+<span class='curline'><a href='../S/92.html#L259'>off</a>               259 mkfs.c           uint fbn, off, n1;</span>
+<span class='curline'><a href='../S/92.html#L266'>off</a>               266 mkfs.c           off = xint(din.size);</span>
+<span class='curline'><a href='../S/92.html#L269'>off</a>               269 mkfs.c             fbn = off / BSIZE;</span>
+<span class='curline'><a href='../S/92.html#L287'>off</a>               287 mkfs.c             n1 = min(n, (fbn + 1) * BSIZE - off);</span>
+<span class='curline'><a href='../S/92.html#L289'>off</a>               289 mkfs.c             bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
+<span class='curline'><a href='../S/92.html#L292'>off</a>               292 mkfs.c             off += n1;</span>
+<span class='curline'><a href='../S/92.html#L295'>off</a>               295 mkfs.c           din.size = xint(off);</span>
+<span class='curline'><a href='../S/93.html#L215'>off</a>               215 mmu.h          #define SETGATE(gate, istrap, sel, off, d)                \</span>
+<span class='curline'><a href='../S/93.html#L217'>off</a>               217 mmu.h            (gate).off_15_0 = (uint)(off) &amp; 0xffff;                \</span>
+<span class='curline'><a href='../S/93.html#L225'>off</a>               225 mmu.h            (gate).off_31_16 = (uint)(off) &gt;&gt; 16;                  \</span>
+<span class='curline'><a href='../S/145.html#L171'>off</a>               171 sysfile.c        int off;</span>
+<span class='curline'><a href='../S/145.html#L174'>off</a>               174 sysfile.c        for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
+<span class='curline'><a href='../S/145.html#L175'>off</a>               175 sysfile.c          if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/145.html#L190'>off</a>               190 sysfile.c        uint off;</span>
+<span class='curline'><a href='../S/145.html#L207'>off</a>               207 sysfile.c        if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
+<span class='curline'><a href='../S/145.html#L219'>off</a>               219 sysfile.c        if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/145.html#L244'>off</a>               244 sysfile.c        uint off;</span>
+<span class='curline'><a href='../S/145.html#L252'>off</a>               252 sysfile.c        if((ip = dirlookup(dp, name, &amp;off)) != 0){</span>
+<span class='curline'><a href='../S/145.html#L330'>off</a>               330 sysfile.c        f-&gt;off = 0;</span>
+</pre>
+</body>
+</html>

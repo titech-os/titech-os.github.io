@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>sp</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.7' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/30.html#L15'>sp</a>                 15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
+<span class='curline'><a href='../S/30.html#L69'>sp</a>                 69 exec.c           sp = sz;</span>
+<span class='curline'><a href='../S/30.html#L75'>sp</a>                 75 exec.c             sp = (sp - (strlen(argv[argc]) + 1)) &amp; ~3;</span>
+<span class='curline'><a href='../S/30.html#L76'>sp</a>                 76 exec.c             if(copyout(pgdir, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
+<span class='curline'><a href='../S/30.html#L78'>sp</a>                 78 exec.c             ustack[3+argc] = sp;</span>
+<span class='curline'><a href='../S/30.html#L84'>sp</a>                 84 exec.c           ustack[2] = sp - (argc+1)*4;  // argv pointer</span>
+<span class='curline'><a href='../S/30.html#L86'>sp</a>                 86 exec.c           sp -= (3+argc+1) * 4;</span>
+<span class='curline'><a href='../S/30.html#L87'>sp</a>                 87 exec.c           if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)</span>
+<span class='curline'><a href='../S/30.html#L101'>sp</a>                101 exec.c           curproc-&gt;tf-&gt;esp = sp;</span>
+<span class='curline'><a href='../S/107.html#L77'>sp</a>                 77 proc.c           char *sp;</span>
+<span class='curline'><a href='../S/107.html#L99'>sp</a>                 99 proc.c           sp = p-&gt;kstack + KSTACKSIZE;</span>
+<span class='curline'><a href='../S/107.html#L102'>sp</a>                102 proc.c           sp -= sizeof *p-&gt;tf;</span>
+<span class='curline'><a href='../S/107.html#L103'>sp</a>                103 proc.c           p-&gt;tf = (struct trapframe*)sp;</span>
+<span class='curline'><a href='../S/107.html#L107'>sp</a>                107 proc.c           sp -= 4;</span>
+<span class='curline'><a href='../S/107.html#L108'>sp</a>                108 proc.c           *(uint*)sp = (uint)trapret;</span>
+<span class='curline'><a href='../S/107.html#L110'>sp</a>                110 proc.c           sp -= sizeof *p-&gt;context;</span>
+<span class='curline'><a href='../S/107.html#L111'>sp</a>                111 proc.c           p-&gt;context = (struct context*)sp;</span>
+</pre>
+</body>
+</html>

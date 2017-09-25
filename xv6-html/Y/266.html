@@ -1,24 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>oldsz</title>
+<title>omode</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/97.html#L223'>oldsz</a>             223 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/97.html#L230'>oldsz</a>             230 vm.c             if(newsz &lt; oldsz)</span>
-<span class='curline'><a href='../S/97.html#L231'>oldsz</a>             231 vm.c               return oldsz;</span>
-<span class='curline'><a href='../S/97.html#L233'>oldsz</a>             233 vm.c             a = PGROUNDUP(oldsz);</span>
-<span class='curline'><a href='../S/97.html#L238'>oldsz</a>             238 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
-<span class='curline'><a href='../S/97.html#L244'>oldsz</a>             244 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
-<span class='curline'><a href='../S/97.html#L257'>oldsz</a>             257 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/97.html#L262'>oldsz</a>             262 vm.c             if(newsz &gt;= oldsz)</span>
-<span class='curline'><a href='../S/97.html#L263'>oldsz</a>             263 vm.c               return oldsz;</span>
-<span class='curline'><a href='../S/97.html#L266'>oldsz</a>             266 vm.c             for(; a  &lt; oldsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/145.html#L290'>omode</a>             290 sysfile.c        int fd, omode;</span>
+<span class='curline'><a href='../S/145.html#L294'>omode</a>             294 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || argint(1, &amp;omode) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L299'>omode</a>             299 sysfile.c        if(omode &amp; O_CREATE){</span>
+<span class='curline'><a href='../S/145.html#L311'>omode</a>             311 sysfile.c          if(ip-&gt;type == T_DIR &amp;&amp; omode != O_RDONLY){</span>
+<span class='curline'><a href='../S/145.html#L331'>omode</a>             331 sysfile.c        f-&gt;readable = !(omode &amp; O_WRONLY);</span>
+<span class='curline'><a href='../S/145.html#L332'>omode</a>             332 sysfile.c        f-&gt;writable = (omode &amp; O_WRONLY) || (omode &amp; O_RDWR);</span>
 </pre>
 </body>
 </html>

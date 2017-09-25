@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>uart.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.7' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/uart.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L20'>[^]</a><a href='#L74'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L20' title='Defined at 20.'>uartinit</a></li>
+<li><a href='#L52' title='Defined at 52.'>uartputc</a></li>
+<li><a href='#L64' title='Defined at 64.'>uartgetc</a></li>
+<li><a href='#L74' title='Defined at 74.'>uartintr</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Intel 8250 serial port (UART).</em>
+<a id='L2' name='L2'></a>   2 
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='156.html'>types.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='19.html'>defs.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='98.html'>param.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='154.html'>traps.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='131.html'>spinlock.h</a>"
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='128.html'>sleeplock.h</a>"
+<a id='L9' name='L9'></a>   9 <em class='sharp'>#include</em> "<a href='41.html'>fs.h</a>"
+<a id='L10' name='L10'></a>  10 <em class='sharp'>#include</em> "<a href='35.html'>file.h</a>"
+<a id='L11' name='L11'></a>  11 <em class='sharp'>#include</em> "<a href='93.html'>mmu.h</a>"
+<a id='L12' name='L12'></a>  12 <em class='sharp'>#include</em> "<a href='109.html'>proc.h</a>"
+<a id='L13' name='L13'></a>  13 <em class='sharp'>#include</em> "<a href='177.html'>x86.h</a>"
+<a id='L14' name='L14'></a>  14 
+<a id='L15' name='L15'></a>  15 <em class='sharp'>#define</em> <a href='../R/20.html' title='Multiple referred from 14 places.'>COM1</a>    0x3f8
+<a id='L16' name='L16'></a>  16 
+<a id='L17' name='L17'></a>  17 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../Y/416.html' title='Multiple used in 4 places.'>uart</a>;    <em class='comment'>// is there a uart?</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <strong class='reserved'>void</strong>
+<a id='L20' name='L20'></a>  20 <a href='../R/506.html' title='Multiple referred from 2 places.'>uartinit</a>(<strong class='reserved'>void</strong>)
+<a id='L21' name='L21'></a>  21 <em class='brace'>{</em>
+<a id='L22' name='L22'></a>  22   <strong class='reserved'>char</strong> *<a href='../Y/270.html' title='Multiple used in 257 places.'>p</a>;
+<a id='L23' name='L23'></a>  23 
+<a id='L24' name='L24'></a>  24   <em class='comment'>// Turn off the FIFO</em>
+<a id='L25' name='L25'></a>  25   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+2, 0);
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27   <em class='comment'>// 9600 baud, 8 data bits, 1 stop bit, parity off.</em>
+<a id='L28' name='L28'></a>  28   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+3, 0x80);    <em class='comment'>// Unlock divisor</em>
+<a id='L29' name='L29'></a>  29   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+0, 115200/9600);
+<a id='L30' name='L30'></a>  30   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+1, 0);
+<a id='L31' name='L31'></a>  31   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+3, 0x03);    <em class='comment'>// Lock divisor, 8 data bits.</em>
+<a id='L32' name='L32'></a>  32   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+4, 0);
+<a id='L33' name='L33'></a>  33   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+1, 0x01);    <em class='comment'>// Enable receive interrupts.</em>
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35   <em class='comment'>// If status is 0xFF, no serial port.</em>
+<a id='L36' name='L36'></a>  36   <strong class='reserved'>if</strong>(<a href='../S/177.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+5) == 0xFF)
+<a id='L37' name='L37'></a>  37     <strong class='reserved'>return</strong>;
+<a id='L38' name='L38'></a>  38   <a href='../Y/416.html' title='Multiple used in 4 places.'>uart</a> = 1;
+<a id='L39' name='L39'></a>  39 
+<a id='L40' name='L40'></a>  40   <em class='comment'>// Acknowledge pre-existing interrupt conditions;</em>
+<a id='L41' name='L41'></a>  41   <em class='comment'>// enable interrupts.</em>
+<a id='L42' name='L42'></a>  42   <a href='../S/177.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+2);
+<a id='L43' name='L43'></a>  43   <a href='../S/177.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+0);
+<a id='L44' name='L44'></a>  44   <a href='../S/56.html#L68' title='Defined at 68 in ioapic.c.'>ioapicenable</a>(<a href='../S/154.html#L34' title='Defined at 34 in traps.h.'>IRQ_COM1</a>, 0);
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46   <em class='comment'>// Announce that we're here.</em>
+<a id='L47' name='L47'></a>  47   <strong class='reserved'>for</strong>(<a href='../Y/270.html' title='Multiple used in 257 places.'>p</a>="xv6...\n"; *<a href='../Y/270.html' title='Multiple used in 257 places.'>p</a>; <a href='../Y/270.html' title='Multiple used in 257 places.'>p</a>++)
+<a id='L48' name='L48'></a>  48     <a href='../S/157.html#L52' title='Defined at 52 in uart.c.'>uartputc</a>(*<a href='../Y/270.html' title='Multiple used in 257 places.'>p</a>);
+<a id='L49' name='L49'></a>  49 <em class='brace'>}</em>
+<a id='L50' name='L50'></a>  50 
+<a id='L51' name='L51'></a>  51 <strong class='reserved'>void</strong>
+<a id='L52' name='L52'></a>  52 <a href='../R/508.html' title='Multiple referred from 4 places.'>uartputc</a>(<strong class='reserved'>int</strong> <a href='../Y/46.html' title='Multiple used in 107 places.'>c</a>)
+<a id='L53' name='L53'></a>  53 <em class='brace'>{</em>
+<a id='L54' name='L54'></a>  54   <strong class='reserved'>int</strong> <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>;
+<a id='L55' name='L55'></a>  55 
+<a id='L56' name='L56'></a>  56   <strong class='reserved'>if</strong>(!<a href='../Y/416.html' title='Multiple used in 4 places.'>uart</a>)
+<a id='L57' name='L57'></a>  57     <strong class='reserved'>return</strong>;
+<a id='L58' name='L58'></a>  58   <strong class='reserved'>for</strong>(<a href='../Y/156.html' title='Multiple used in 269 places.'>i</a> = 0; <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a> &lt; 128 &amp;&amp; !(<a href='../S/177.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+5) &amp; 0x20); <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>++)
+<a id='L59' name='L59'></a>  59     <a href='../S/70.html#L119' title='Defined at 119 in lapic.c.'>microdelay</a>(10);
+<a id='L60' name='L60'></a>  60   <a href='../S/177.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+0, <a href='../Y/46.html' title='Multiple used in 107 places.'>c</a>);
+<a id='L61' name='L61'></a>  61 <em class='brace'>}</em>
+<a id='L62' name='L62'></a>  62 
+<a id='L63' name='L63'></a>  63 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L64' name='L64'></a>  64 <a href='../S/157.html#L76' title='Referred from 76 in uart.c.'>uartgetc</a>(<strong class='reserved'>void</strong>)
+<a id='L65' name='L65'></a>  65 <em class='brace'>{</em>
+<a id='L66' name='L66'></a>  66   <strong class='reserved'>if</strong>(!<a href='../Y/416.html' title='Multiple used in 4 places.'>uart</a>)
+<a id='L67' name='L67'></a>  67     <strong class='reserved'>return</strong> -1;
+<a id='L68' name='L68'></a>  68   <strong class='reserved'>if</strong>(!(<a href='../S/177.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+5) &amp; 0x01))
+<a id='L69' name='L69'></a>  69     <strong class='reserved'>return</strong> -1;
+<a id='L70' name='L70'></a>  70   <strong class='reserved'>return</strong> <a href='../S/177.html#L4' title='Defined at 4 in x86.h.'>inb</a>(<a href='../S/157.html#L15' title='Defined at 15 in uart.c.'>COM1</a>+0);
+<a id='L71' name='L71'></a>  71 <em class='brace'>}</em>
+<a id='L72' name='L72'></a>  72 
+<a id='L73' name='L73'></a>  73 <strong class='reserved'>void</strong>
+<a id='L74' name='L74'></a>  74 <a href='../R/507.html' title='Multiple referred from 2 places.'>uartintr</a>(<strong class='reserved'>void</strong>)
+<a id='L75' name='L75'></a>  75 <em class='brace'>{</em>
+<a id='L76' name='L76'></a>  76   <a href='../S/15.html#L192' title='Defined at 192 in console.c.'>consoleintr</a>(<a href='../S/157.html#L64' title='Defined at 64 in uart.c.'>uartgetc</a>);
+<a id='L77' name='L77'></a>  77 <em class='brace'>}</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L20'>[^]</a><a href='#L74'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

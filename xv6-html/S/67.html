@@ -1,154 +1,43 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sleep1.p</title>
+<title>kill.c</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/sleep1.p</h2>
-<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/kill.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L6'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L6' title='Defined at 6.'>main</a></li>
+</ol>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>/*
-<a id='L2' name='L2'></a>This file defines a Promela model for xv6's
-<a id='L3' name='L3'></a>acquire, release, sleep, and wakeup, along with
-<a id='L4' name='L4'></a>a model of a simple producer/consumer queue.
-<a id='L5' name='L5'></a>
-<a id='L6' name='L6'></a>To run:
-<a id='L7' name='L7'></a>        spinp sleep1.p
-<a id='L8' name='L8'></a>
-<a id='L9' name='L9'></a>(You may need to install Spin, available at http://spinroot.com/.)
-<a id='L10' name='L10'></a>
-<a id='L11' name='L11'></a>After a successful run spin prints something like:
-<a id='L12' name='L12'></a>
-<a id='L13' name='L13'></a>        unreached in proctype consumer
-<a id='L14' name='L14'></a>                (0 of 37 states)
-<a id='L15' name='L15'></a>        unreached in proctype producer
-<a id='L16' name='L16'></a>                (0 of 23 states)
-<a id='L17' name='L17'></a>
-<a id='L18' name='L18'></a>After an unsuccessful run, the spinp script prints
-<a id='L19' name='L19'></a>an execution trace that causes a deadlock.
-<a id='L20' name='L20'></a>
-<a id='L21' name='L21'></a>The safe body of producer reads:
-<a id='L22' name='L22'></a>
-<a id='L23' name='L23'></a>                acquire(lk);
-<a id='L24' name='L24'></a>                x = value; value = x + 1; x = 0;
-<a id='L25' name='L25'></a>                wakeup(0);
-<a id='L26' name='L26'></a>                release(lk);
-<a id='L27' name='L27'></a>                i = i + 1;
-<a id='L28' name='L28'></a>
-<a id='L29' name='L29'></a>If this is changed to:
-<a id='L30' name='L30'></a>
-<a id='L31' name='L31'></a>                x = value; value = x + 1; x = 0;
-<a id='L32' name='L32'></a>                acquire(lk);
-<a id='L33' name='L33'></a>                wakeup(0);
-<a id='L34' name='L34'></a>                release(lk);
-<a id='L35' name='L35'></a>                i = i + 1;
-<a id='L36' name='L36'></a>
-<a id='L37' name='L37'></a>then a deadlock can happen, because the non-atomic
-<a id='L38' name='L38'></a>increment of value conflicts with the non-atomic 
-<a id='L39' name='L39'></a>decrement in consumer, causing value to have a bad value.
-<a id='L40' name='L40'></a>Try this.
-<a id='L41' name='L41'></a>
-<a id='L42' name='L42'></a>If it is changed to:
-<a id='L43' name='L43'></a>
-<a id='L44' name='L44'></a>                acquire(lk);
-<a id='L45' name='L45'></a>                x = value; value = x + 1; x = 0;
-<a id='L46' name='L46'></a>                release(lk);
-<a id='L47' name='L47'></a>                wakeup(0);
-<a id='L48' name='L48'></a>                i = i + 1;
-<a id='L49' name='L49'></a>
-<a id='L50' name='L50'></a>then nothing bad happens: it is okay to wakeup after release
-<a id='L51' name='L51'></a>instead of before, although it seems morally wrong.
-<a id='L52' name='L52'></a>*/
-<a id='L53' name='L53'></a>
-<a id='L54' name='L54'></a>#define ITER 4
-<a id='L55' name='L55'></a>#define N 2
-<a id='L56' name='L56'></a>
-<a id='L57' name='L57'></a>bit lk;
-<a id='L58' name='L58'></a>byte value;
-<a id='L59' name='L59'></a>bit sleeping[N];
-<a id='L60' name='L60'></a>
-<a id='L61' name='L61'></a>inline acquire(x)
-<a id='L62' name='L62'></a>{
-<a id='L63' name='L63'></a>        atomic { x == 0; x = 1 }
-<a id='L64' name='L64'></a>}
-<a id='L65' name='L65'></a>
-<a id='L66' name='L66'></a>inline release(x)
-<a id='L67' name='L67'></a>{
-<a id='L68' name='L68'></a>        assert x==1;
-<a id='L69' name='L69'></a>        x = 0
-<a id='L70' name='L70'></a>}
-<a id='L71' name='L71'></a>
-<a id='L72' name='L72'></a>inline sleep(cond, lk)
-<a id='L73' name='L73'></a>{
-<a id='L74' name='L74'></a>        assert !sleeping[_pid];
-<a id='L75' name='L75'></a>        if
-<a id='L76' name='L76'></a>        :: cond -&gt;
-<a id='L77' name='L77'></a>                skip
-<a id='L78' name='L78'></a>        :: else -&gt;
-<a id='L79' name='L79'></a>                atomic { release(lk); sleeping[_pid] = 1 };
-<a id='L80' name='L80'></a>                sleeping[_pid] == 0;
-<a id='L81' name='L81'></a>                acquire(lk)
-<a id='L82' name='L82'></a>        fi
-<a id='L83' name='L83'></a>}
-<a id='L84' name='L84'></a>
-<a id='L85' name='L85'></a>inline wakeup()
-<a id='L86' name='L86'></a>{
-<a id='L87' name='L87'></a>        w = 0;
-<a id='L88' name='L88'></a>        do
-<a id='L89' name='L89'></a>        :: w &lt; N -&gt;
-<a id='L90' name='L90'></a>                sleeping[w] = 0;
-<a id='L91' name='L91'></a>                w = w + 1
-<a id='L92' name='L92'></a>        :: else -&gt;
-<a id='L93' name='L93'></a>                break
-<a id='L94' name='L94'></a>        od
-<a id='L95' name='L95'></a>}
-<a id='L96' name='L96'></a>
-<a id='L97' name='L97'></a>active[N] proctype consumer()
-<a id='L98' name='L98'></a>{
-<a id='L99' name='L99'></a>        byte i, x;
-<a id='L100' name='L100'></a>        
-<a id='L101' name='L101'></a>        i = 0;
-<a id='L102' name='L102'></a>        do
-<a id='L103' name='L103'></a>        :: i &lt; ITER -&gt;
-<a id='L104' name='L104'></a>                acquire(lk);
-<a id='L105' name='L105'></a>                sleep(value &gt; 0, lk);
-<a id='L106' name='L106'></a>                x = value; value = x - 1; x = 0;
-<a id='L107' name='L107'></a>                release(lk);
-<a id='L108' name='L108'></a>                i = i + 1;
-<a id='L109' name='L109'></a>        :: else -&gt;
-<a id='L110' name='L110'></a>                break
-<a id='L111' name='L111'></a>        od;
-<a id='L112' name='L112'></a>        i = 0;
-<a id='L113' name='L113'></a>        skip
-<a id='L114' name='L114'></a>}
-<a id='L115' name='L115'></a>
-<a id='L116' name='L116'></a>active[N] proctype producer()
-<a id='L117' name='L117'></a>{
-<a id='L118' name='L118'></a>        byte i, x, w;
-<a id='L119' name='L119'></a>        
-<a id='L120' name='L120'></a>        i = 0;
-<a id='L121' name='L121'></a>        do
-<a id='L122' name='L122'></a>        :: i &lt; ITER -&gt;
-<a id='L123' name='L123'></a>                acquire(lk);
-<a id='L124' name='L124'></a>                x = value; value = x + 1; x = 0;
-<a id='L125' name='L125'></a>                release(lk);
-<a id='L126' name='L126'></a>                wakeup();
-<a id='L127' name='L127'></a>                i = i + 1;
-<a id='L128' name='L128'></a>        :: else -&gt;
-<a id='L129' name='L129'></a>                break
-<a id='L130' name='L130'></a>        od;
-<a id='L131' name='L131'></a>        i = 0;
-<a id='L132' name='L132'></a>        skip    
-<a id='L133' name='L133'></a>}
-<a id='L134' name='L134'></a>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='156.html'>types.h</a>"
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='133.html'>stat.h</a>"
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='163.html'>user.h</a>"
+<a id='L4' name='L4'></a>   4 
+<a id='L5' name='L5'></a>   5 <strong class='reserved'>int</strong>
+<a id='L6' name='L6'></a>   6 main(<strong class='reserved'>int</strong> <a href='../Y/21.html' title='Multiple used in 51 places.'>argc</a>, <strong class='reserved'>char</strong> **<a href='../Y/24.html' title='Multiple used in 56 places.'>argv</a>)
+<a id='L7' name='L7'></a>   7 <em class='brace'>{</em>
+<a id='L8' name='L8'></a>   8   <strong class='reserved'>int</strong> <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>;
+<a id='L9' name='L9'></a>   9 
+<a id='L10' name='L10'></a>  10   <strong class='reserved'>if</strong>(<a href='../Y/21.html' title='Multiple used in 51 places.'>argc</a> &lt; 2)<em class='brace'>{</em>
+<a id='L11' name='L11'></a>  11     <a href='../D/517.html' title='Multiple defined in 2 places.'>printf</a>(2, "usage: kill pid...\n");
+<a id='L12' name='L12'></a>  12     <a href='../S/107.html#L228' title='Defined at 228 in proc.c.'>exit</a>();
+<a id='L13' name='L13'></a>  13   <em class='brace'>}</em>
+<a id='L14' name='L14'></a>  14   <strong class='reserved'>for</strong>(<a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>=1; <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>&lt;<a href='../Y/21.html' title='Multiple used in 51 places.'>argc</a>; <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>++)
+<a id='L15' name='L15'></a>  15     <a href='../S/107.html#L480' title='Defined at 480 in proc.c.'>kill</a>(<a href='../S/159.html#L85' title='Defined at 85 in ulib.c.'>atoi</a>(<a href='../Y/24.html' title='Multiple used in 56 places.'>argv</a>[<a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>]));
+<a id='L16' name='L16'></a>  16   <a href='../S/107.html#L228' title='Defined at 228 in proc.c.'>exit</a>();
+<a id='L17' name='L17'></a>  17 <em class='brace'>}</em>
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;][^]<a href='#L6'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

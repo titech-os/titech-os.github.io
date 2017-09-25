@@ -1,19 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vaddr</title>
+<title>va</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/14.html#L28'>vaddr</a>              28 elf.h            uint vaddr;</span>
-<span class='curline'><a href='../S/17.html#L48'>vaddr</a>              48 exec.c             if(ph.vaddr + ph.memsz &lt; ph.vaddr)</span>
-<span class='curline'><a href='../S/17.html#L50'>vaddr</a>              50 exec.c             if((sz = allocuvm(pgdir, sz, ph.vaddr + ph.memsz)) == 0)</span>
-<span class='curline'><a href='../S/17.html#L52'>vaddr</a>              52 exec.c             if(ph.vaddr % PGSIZE != 0)</span>
-<span class='curline'><a href='../S/17.html#L54'>vaddr</a>              54 exec.c             if(loaduvm(pgdir, (char*)ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/93.html#L114'>va</a>                114 mmu.h          #define PDX(va)         (((uint)(va) &gt;&gt; PDXSHIFT) &amp; 0x3FF)</span>
+<span class='curline'><a href='../S/93.html#L117'>va</a>                117 mmu.h          #define PTX(va)         (((uint)(va) &gt;&gt; PTXSHIFT) &amp; 0x3FF)</span>
+<span class='curline'><a href='../S/171.html#L36'>va</a>                 36 vm.c           walkpgdir(pde_t *pgdir, const void *va, int alloc)</span>
+<span class='curline'><a href='../S/171.html#L41'>va</a>                 41 vm.c             pde = &amp;pgdir[PDX(va)];</span>
+<span class='curline'><a href='../S/171.html#L54'>va</a>                 54 vm.c             return &amp;pgtab[PTX(va)];</span>
+<span class='curline'><a href='../S/171.html#L61'>va</a>                 61 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
+<span class='curline'><a href='../S/171.html#L66'>va</a>                 66 vm.c             a = (char*)PGROUNDDOWN((uint)va);</span>
+<span class='curline'><a href='../S/171.html#L67'>va</a>                 67 vm.c             last = (char*)PGROUNDDOWN(((uint)va) + size - 1);</span>
+<span class='curline'><a href='../S/171.html#L364'>va</a>                364 vm.c           copyout(pde_t *pgdir, uint va, void *p, uint len)</span>
+<span class='curline'><a href='../S/171.html#L371'>va</a>                371 vm.c               va0 = (uint)PGROUNDDOWN(va);</span>
+<span class='curline'><a href='../S/171.html#L375'>va</a>                375 vm.c               n = PGSIZE - (va - va0);</span>
+<span class='curline'><a href='../S/171.html#L378'>va</a>                378 vm.c               memmove(pa0 + (va - va0), buf, n);</span>
+<span class='curline'><a href='../S/171.html#L381'>va</a>                381 vm.c               va = va0 + PGSIZE;</span>
 </pre>
 </body>
 </html>

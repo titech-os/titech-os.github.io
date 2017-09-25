@@ -1,20 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>empty</title>
+<title>elf</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L232'>empty</a>             232 fs.c             struct inode *ip, *empty;</span>
-<span class='curline'><a href='../S/22.html#L237'>empty</a>             237 fs.c             empty = 0;</span>
-<span class='curline'><a href='../S/22.html#L244'>empty</a>             244 fs.c               if(empty == 0 &amp;&amp; ip-&gt;ref == 0)    // Remember empty slot.</span>
-<span class='curline'><a href='../S/22.html#L245'>empty</a>             245 fs.c                 empty = ip;</span>
-<span class='curline'><a href='../S/22.html#L249'>empty</a>             249 fs.c             if(empty == 0)</span>
-<span class='curline'><a href='../S/22.html#L252'>empty</a>             252 fs.c             ip = empty;</span>
+<span class='curline'><a href='../S/7.html#L20'>elf</a>                20 bootmain.c       struct elfhdr *elf;</span>
+<span class='curline'><a href='../S/7.html#L25'>elf</a>                25 bootmain.c       elf = (struct elfhdr*)0x10000;  // scratch space</span>
+<span class='curline'><a href='../S/7.html#L28'>elf</a>                28 bootmain.c       readseg((uchar*)elf, 4096, 0);</span>
+<span class='curline'><a href='../S/7.html#L31'>elf</a>                31 bootmain.c       if(elf-&gt;magic != ELF_MAGIC)</span>
+<span class='curline'><a href='../S/7.html#L35'>elf</a>                35 bootmain.c       ph = (struct proghdr*)((uchar*)elf + elf-&gt;phoff);</span>
+<span class='curline'><a href='../S/7.html#L36'>elf</a>                36 bootmain.c       eph = ph + elf-&gt;phnum;</span>
+<span class='curline'><a href='../S/7.html#L46'>elf</a>                46 bootmain.c       entry = (void(*)(void))(elf-&gt;entry);</span>
+<span class='curline'><a href='../S/25.html#L8'>elf</a>                 8 elf.h            uchar elf[12];</span>
+<span class='curline'><a href='../S/30.html#L16'>elf</a>                16 exec.c           struct elfhdr elf;</span>
+<span class='curline'><a href='../S/30.html#L33'>elf</a>                33 exec.c           if(readi(ip, (char*)&amp;elf, 0, sizeof(elf)) != sizeof(elf))</span>
+<span class='curline'><a href='../S/30.html#L35'>elf</a>                35 exec.c           if(elf.magic != ELF_MAGIC)</span>
+<span class='curline'><a href='../S/30.html#L43'>elf</a>                43 exec.c           for(i=0, off=elf.phoff; i&lt;elf.phnum; i++, off+=sizeof(ph)){</span>
+<span class='curline'><a href='../S/30.html#L100'>elf</a>               100 exec.c           curproc-&gt;tf-&gt;eip = elf.entry;  // main</span>
 </pre>
 </body>
 </html>

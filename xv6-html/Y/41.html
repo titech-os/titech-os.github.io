@@ -1,26 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>blockno</title>
+<title>bmapstart</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/2.html#L62'>blockno</a>            62 bio.c          bget(uint dev, uint blockno)</span>
-<span class='curline'><a href='../S/2.html#L70'>blockno</a>            70 bio.c              if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
-<span class='curline'><a href='../S/2.html#L84'>blockno</a>            84 bio.c                b-&gt;blockno = blockno;</span>
-<span class='curline'><a href='../S/2.html#L97'>blockno</a>            97 bio.c          bread(uint dev, uint blockno)</span>
-<span class='curline'><a href='../S/2.html#L101'>blockno</a>           101 bio.c            b = bget(dev, blockno);</span>
-<span class='curline'><a href='../S/5.html#L4'>blockno</a>             4 buf.h            uint blockno;</span>
-<span class='curline'><a href='../S/26.html#L79'>blockno</a>            79 ide.c            if(b-&gt;blockno &gt;= FSSIZE)</span>
-<span class='curline'><a href='../S/26.html#L82'>blockno</a>            82 ide.c            int sector = b-&gt;blockno * sector_per_block;</span>
-<span class='curline'><a href='../S/38.html#L223'>blockno</a>           223 log.c              if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
-<span class='curline'><a href='../S/38.html#L226'>blockno</a>           226 log.c            log.lh.block[i] = b-&gt;blockno;</span>
-<span class='curline'><a href='../S/42.html#L48'>blockno</a>            48 memide.c         if(b-&gt;blockno &gt;= disksize)</span>
-<span class='curline'><a href='../S/42.html#L51'>blockno</a>            51 memide.c         p = memdisk + b-&gt;blockno*BSIZE;</span>
+<span class='curline'><a href='../S/39.html#L186'>bmapstart</a>         186 fs.c                     sb.bmapstart);</span>
+<span class='curline'><a href='../S/41.html#L21'>bmapstart</a>          21 fs.h             uint bmapstart;    // Block number of first free map block</span>
+<span class='curline'><a href='../S/41.html#L48'>bmapstart</a>          48 fs.h           #define BBLOCK(b, sb) (b/BPB + sb.bmapstart)</span>
+<span class='curline'><a href='../S/92.html#L103'>bmapstart</a>         103 mkfs.c           sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
+<span class='curline'><a href='../S/92.html#L249'>bmapstart</a>         249 mkfs.c           printf("balloc: write bitmap block at sector %d\n", sb.bmapstart);</span>
+<span class='curline'><a href='../S/92.html#L250'>bmapstart</a>         250 mkfs.c           wsect(sb.bmapstart, buf);</span>
 </pre>
 </body>
 </html>

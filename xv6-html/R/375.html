@@ -1,63 +1,16 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>log</title>
+<title>matchstar</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L48'>log</a>                48 log.c          struct log log;</span>
-<span class='curline'><a href='../S/38.html#L60'>log</a>                60 log.c            initlock(&amp;log.lock, "log");</span>
-<span class='curline'><a href='../S/38.html#L62'>log</a>                62 log.c            log.start = sb.logstart;</span>
-<span class='curline'><a href='../S/38.html#L63'>log</a>                63 log.c            log.size = sb.nlog;</span>
-<span class='curline'><a href='../S/38.html#L64'>log</a>                64 log.c            log.dev = dev;</span>
-<span class='curline'><a href='../S/38.html#L74'>log</a>                74 log.c            for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
-<span class='curline'><a href='../S/38.html#L75'>log</a>                75 log.c              struct buf *lbuf = bread(log.dev, log.start+tail+1); // read log block</span>
-<span class='curline'><a href='../S/38.html#L76'>log</a>                76 log.c              struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
-<span class='curline'><a href='../S/38.html#L88'>log</a>                88 log.c            struct buf *buf = bread(log.dev, log.start);</span>
-<span class='curline'><a href='../S/38.html#L91'>log</a>                91 log.c            log.lh.n = lh-&gt;n;</span>
-<span class='curline'><a href='../S/38.html#L92'>log</a>                92 log.c            for (i = 0; i &lt; log.lh.n; i++) {</span>
-<span class='curline'><a href='../S/38.html#L93'>log</a>                93 log.c              log.lh.block[i] = lh-&gt;block[i];</span>
-<span class='curline'><a href='../S/38.html#L104'>log</a>               104 log.c            struct buf *buf = bread(log.dev, log.start);</span>
-<span class='curline'><a href='../S/38.html#L107'>log</a>               107 log.c            hb-&gt;n = log.lh.n;</span>
-<span class='curline'><a href='../S/38.html#L108'>log</a>               108 log.c            for (i = 0; i &lt; log.lh.n; i++) {</span>
-<span class='curline'><a href='../S/38.html#L109'>log</a>               109 log.c              hb-&gt;block[i] = log.lh.block[i];</span>
-<span class='curline'><a href='../S/38.html#L120'>log</a>               120 log.c            log.lh.n = 0;</span>
-<span class='curline'><a href='../S/38.html#L128'>log</a>               128 log.c            acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L130'>log</a>               130 log.c              if(log.committing){</span>
-<span class='curline'><a href='../S/38.html#L131'>log</a>               131 log.c                sleep(&amp;log, &amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L132'>log</a>               132 log.c              } else if(log.lh.n + (log.outstanding+1)*MAXOPBLOCKS &gt; LOGSIZE){</span>
-<span class='curline'><a href='../S/38.html#L134'>log</a>               134 log.c                sleep(&amp;log, &amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L136'>log</a>               136 log.c                log.outstanding += 1;</span>
-<span class='curline'><a href='../S/38.html#L137'>log</a>               137 log.c                release(&amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L150'>log</a>               150 log.c            acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L151'>log</a>               151 log.c            log.outstanding -= 1;</span>
-<span class='curline'><a href='../S/38.html#L152'>log</a>               152 log.c            if(log.committing)</span>
-<span class='curline'><a href='../S/38.html#L154'>log</a>               154 log.c            if(log.outstanding == 0){</span>
-<span class='curline'><a href='../S/38.html#L156'>log</a>               156 log.c              log.committing = 1;</span>
-<span class='curline'><a href='../S/38.html#L159'>log</a>               159 log.c              wakeup(&amp;log);</span>
-<span class='curline'><a href='../S/38.html#L161'>log</a>               161 log.c            release(&amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L167'>log</a>               167 log.c              acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L168'>log</a>               168 log.c              log.committing = 0;</span>
-<span class='curline'><a href='../S/38.html#L169'>log</a>               169 log.c              wakeup(&amp;log);</span>
-<span class='curline'><a href='../S/38.html#L170'>log</a>               170 log.c              release(&amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L180'>log</a>               180 log.c            for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
-<span class='curline'><a href='../S/38.html#L181'>log</a>               181 log.c              struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
-<span class='curline'><a href='../S/38.html#L182'>log</a>               182 log.c              struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
-<span class='curline'><a href='../S/38.html#L193'>log</a>               193 log.c            if (log.lh.n &gt; 0) {</span>
-<span class='curline'><a href='../S/38.html#L197'>log</a>               197 log.c              log.lh.n = 0;</span>
-<span class='curline'><a href='../S/38.html#L216'>log</a>               216 log.c            if (log.lh.n &gt;= LOGSIZE || log.lh.n &gt;= log.size - 1)</span>
-<span class='curline'><a href='../S/38.html#L218'>log</a>               218 log.c            if (log.outstanding &lt; 1)</span>
-<span class='curline'><a href='../S/38.html#L221'>log</a>               221 log.c            acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/38.html#L222'>log</a>               222 log.c            for (i = 0; i &lt; log.lh.n; i++) {</span>
-<span class='curline'><a href='../S/38.html#L223'>log</a>               223 log.c              if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
-<span class='curline'><a href='../S/38.html#L226'>log</a>               226 log.c            log.lh.block[i] = b-&gt;blockno;</span>
-<span class='curline'><a href='../S/38.html#L227'>log</a>               227 log.c            if (i == log.lh.n)</span>
-<span class='curline'><a href='../S/38.html#L228'>log</a>               228 log.c              log.lh.n++;</span>
-<span class='curline'><a href='../S/38.html#L230'>log</a>               230 log.c            release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/44.html#L70'>matchstar</a>          70 grep.c         int matchstar(int, char*, char*);</span>
+<span class='curline'><a href='../S/44.html#L90'>matchstar</a>          90 grep.c             return matchstar(re[0], re+2, text);</span>
 </pre>
 </body>
 </html>

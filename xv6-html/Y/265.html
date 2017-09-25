@@ -1,17 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>oldpgdir</title>
+<title>oldsz</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L19'>oldpgdir</a>           19 exec.c           pde_t *pgdir, *oldpgdir;</span>
-<span class='curline'><a href='../S/17.html#L95'>oldpgdir</a>           95 exec.c           oldpgdir = proc-&gt;pgdir;</span>
-<span class='curline'><a href='../S/17.html#L101'>oldpgdir</a>          101 exec.c           freevm(oldpgdir);</span>
+<span class='curline'><a href='../S/171.html#L222'>oldsz</a>             222 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/171.html#L229'>oldsz</a>             229 vm.c             if(newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/171.html#L230'>oldsz</a>             230 vm.c               return oldsz;</span>
+<span class='curline'><a href='../S/171.html#L232'>oldsz</a>             232 vm.c             a = PGROUNDUP(oldsz);</span>
+<span class='curline'><a href='../S/171.html#L237'>oldsz</a>             237 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/171.html#L243'>oldsz</a>             243 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/171.html#L256'>oldsz</a>             256 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/171.html#L261'>oldsz</a>             261 vm.c             if(newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/171.html#L262'>oldsz</a>             262 vm.c               return oldsz;</span>
+<span class='curline'><a href='../S/171.html#L265'>oldsz</a>             265 vm.c             for(; a  &lt; oldsz; a += PGSIZE){</span>
 </pre>
 </body>
 </html>

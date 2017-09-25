@@ -1,17 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>panicked</title>
+<title>parent</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/8.html#L20'>panicked</a>           20 console.c      static int panicked = 0;</span>
-<span class='curline'><a href='../S/8.html#L120'>panicked</a>          120 console.c        panicked = 1; // freeze other CPU</span>
-<span class='curline'><a href='../S/8.html#L167'>panicked</a>          167 console.c        if(panicked){</span>
+<span class='curline'><a href='../S/107.html#L200'>parent</a>            200 proc.c           np-&gt;parent = curproc;</span>
+<span class='curline'><a href='../S/107.html#L253'>parent</a>            253 proc.c           wakeup1(curproc-&gt;parent);</span>
+<span class='curline'><a href='../S/107.html#L257'>parent</a>            257 proc.c             if(p-&gt;parent == curproc){</span>
+<span class='curline'><a href='../S/107.html#L258'>parent</a>            258 proc.c               p-&gt;parent = initproc;</span>
+<span class='curline'><a href='../S/107.html#L284'>parent</a>            284 proc.c               if(p-&gt;parent != curproc)</span>
+<span class='curline'><a href='../S/107.html#L294'>parent</a>            294 proc.c                 p-&gt;parent = 0;</span>
+<span class='curline'><a href='../S/109.html#L44'>parent</a>             44 proc.h           struct proc *parent;         // Parent process</span>
 </pre>
 </body>
 </html>

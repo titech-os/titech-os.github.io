@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>V2P</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.7' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/58.html#L64'>V2P</a>                64 kalloc.c         if((uint)v % PGSIZE || v &lt; end || V2P(v) &gt;= PHYSTOP)</span>
+<span class='curline'><a href='../S/83.html#L87'>V2P</a>                87 main.c             *(int**)(code-12) = (void *) V2P(entrypgdir);</span>
+<span class='curline'><a href='../S/83.html#L89'>V2P</a>                89 main.c             lapicstartap(c-&gt;apicid, V2P(code));</span>
+<span class='curline'><a href='../S/171.html#L52'>V2P</a>                52 vm.c               *pde = V2P(pgtab) | PTE_P | PTE_W | PTE_U;</span>
+<span class='curline'><a href='../S/171.html#L112'>V2P</a>               112 vm.c            { (void*)KERNLINK, V2P(KERNLINK), V2P(data), 0},     // kern text+rodata</span>
+<span class='curline'><a href='../S/171.html#L113'>V2P</a>               113 vm.c            { (void*)data,     V2P(data),     PHYSTOP,   PTE_W}, // kern data+memory</span>
+<span class='curline'><a href='../S/171.html#L152'>V2P</a>               152 vm.c             lcr3(V2P(kpgdir));   // switch to the kernel page table</span>
+<span class='curline'><a href='../S/171.html#L176'>V2P</a>               176 vm.c             lcr3(V2P(p-&gt;pgdir));  // switch to process's address space</span>
+<span class='curline'><a href='../S/171.html#L191'>V2P</a>               191 vm.c             mappages(pgdir, 0, PGSIZE, V2P(mem), PTE_W|PTE_U);</span>
+<span class='curline'><a href='../S/171.html#L241'>V2P</a>               241 vm.c               if(mappages(pgdir, (char*)a, PGSIZE, V2P(mem), PTE_W|PTE_U) &lt; 0){</span>
+<span class='curline'><a href='../S/171.html#L335'>V2P</a>               335 vm.c               if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) &lt; 0)</span>
+</pre>
+</body>
+</html>

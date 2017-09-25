@@ -1,20 +1,29 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>intena</title>
+<title>input</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L322'>intena</a>            322 proc.c           int intena;</span>
-<span class='curline'><a href='../S/56.html#L332'>intena</a>            332 proc.c           intena = cpu-&gt;intena;</span>
-<span class='curline'><a href='../S/56.html#L334'>intena</a>            334 proc.c           cpu-&gt;intena = intena;</span>
-<span class='curline'><a href='../S/57.html#L9'>intena</a>              9 proc.h           int intena;                  // Were interrupts enabled before pushcli?</span>
-<span class='curline'><a href='../S/70.html#L108'>intena</a>            108 spinlock.c         cpu-&gt;intena = eflags &amp; FL_IF;</span>
-<span class='curline'><a href='../S/70.html#L119'>intena</a>            119 spinlock.c       if(cpu-&gt;ncli == 0 &amp;&amp; cpu-&gt;intena)</span>
+<span class='curline'><a href='../S/15.html#L187'>input</a>             187 console.c      } input;</span>
+<span class='curline'><a href='../S/15.html#L204'>input</a>             204 console.c            while(input.e != input.w &amp;&amp;</span>
+<span class='curline'><a href='../S/15.html#L205'>input</a>             205 console.c                  input.buf[(input.e-1) % INPUT_BUF] != '\n'){</span>
+<span class='curline'><a href='../S/15.html#L206'>input</a>             206 console.c              input.e--;</span>
+<span class='curline'><a href='../S/15.html#L211'>input</a>             211 console.c            if(input.e != input.w){</span>
+<span class='curline'><a href='../S/15.html#L212'>input</a>             212 console.c              input.e--;</span>
+<span class='curline'><a href='../S/15.html#L217'>input</a>             217 console.c            if(c != 0 &amp;&amp; input.e-input.r &lt; INPUT_BUF){</span>
+<span class='curline'><a href='../S/15.html#L219'>input</a>             219 console.c              input.buf[input.e++ % INPUT_BUF] = c;</span>
+<span class='curline'><a href='../S/15.html#L221'>input</a>             221 console.c              if(c == '\n' || c == C('D') || input.e == input.r+INPUT_BUF){</span>
+<span class='curline'><a href='../S/15.html#L222'>input</a>             222 console.c                input.w = input.e;</span>
+<span class='curline'><a href='../S/15.html#L223'>input</a>             223 console.c                wakeup(&amp;input.r);</span>
+<span class='curline'><a href='../S/15.html#L245'>input</a>             245 console.c          while(input.r == input.w){</span>
+<span class='curline'><a href='../S/15.html#L251'>input</a>             251 console.c            sleep(&amp;input.r, &amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L253'>input</a>             253 console.c          c = input.buf[input.r++ % INPUT_BUF];</span>
+<span class='curline'><a href='../S/15.html#L258'>input</a>             258 console.c              input.r--;</span>
 </pre>
 </body>
 </html>

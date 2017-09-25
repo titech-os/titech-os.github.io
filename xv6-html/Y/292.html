@@ -1,23 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pcs</title>
+<title>pd</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/8.html#L110'>pcs</a>               110 console.c        uint pcs[10];</span>
-<span class='curline'><a href='../S/8.html#L117'>pcs</a>               117 console.c        getcallerpcs(&amp;s, pcs);</span>
-<span class='curline'><a href='../S/8.html#L119'>pcs</a>               119 console.c          cprintf(" %p", pcs[i]);</span>
-<span class='curline'><a href='../S/70.html#L42'>pcs</a>                42 spinlock.c       getcallerpcs(&amp;lk, lk-&gt;pcs);</span>
-<span class='curline'><a href='../S/70.html#L52'>pcs</a>                52 spinlock.c       lk-&gt;pcs[0] = 0;</span>
-<span class='curline'><a href='../S/70.html#L72'>pcs</a>                72 spinlock.c     getcallerpcs(void *v, uint pcs[])</span>
-<span class='curline'><a href='../S/70.html#L81'>pcs</a>                81 spinlock.c         pcs[i] = ebp[1];     // saved %eip</span>
-<span class='curline'><a href='../S/70.html#L85'>pcs</a>                85 spinlock.c         pcs[i] = 0;</span>
-<span class='curline'><a href='../S/71.html#L8'>pcs</a>                 8 spinlock.h       uint pcs[10];      // The call stack (an array of program counters)</span>
+<span class='curline'><a href='../S/177.html#L65'>pd</a>                 65 x86.h            volatile ushort pd[3];</span>
+<span class='curline'><a href='../S/177.html#L67'>pd</a>                 67 x86.h            pd[0] = size-1;</span>
+<span class='curline'><a href='../S/177.html#L68'>pd</a>                 68 x86.h            pd[1] = (uint)p;</span>
+<span class='curline'><a href='../S/177.html#L69'>pd</a>                 69 x86.h            pd[2] = (uint)p &gt;&gt; 16;</span>
+<span class='curline'><a href='../S/177.html#L71'>pd</a>                 71 x86.h            asm volatile("lgdt (%0)" : : "r" (pd));</span>
+<span class='curline'><a href='../S/177.html#L79'>pd</a>                 79 x86.h            volatile ushort pd[3];</span>
+<span class='curline'><a href='../S/177.html#L81'>pd</a>                 81 x86.h            pd[0] = size-1;</span>
+<span class='curline'><a href='../S/177.html#L82'>pd</a>                 82 x86.h            pd[1] = (uint)p;</span>
+<span class='curline'><a href='../S/177.html#L83'>pd</a>                 83 x86.h            pd[2] = (uint)p &gt;&gt; 16;</span>
+<span class='curline'><a href='../S/177.html#L85'>pd</a>                 85 x86.h            asm volatile("lidt (%0)" : : "r" (pd));</span>
 </pre>
 </body>
 </html>

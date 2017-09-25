@@ -1,82 +1,16 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bp</title>
+<title>byte</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L34'>bp</a>                 34 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L36'>bp</a>                 36 fs.c             bp = bread(dev, 1);</span>
-<span class='curline'><a href='../S/22.html#L37'>bp</a>                 37 fs.c             memmove(sb, bp-&gt;data, sizeof(*sb));</span>
-<span class='curline'><a href='../S/22.html#L38'>bp</a>                 38 fs.c             brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L45'>bp</a>                 45 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L47'>bp</a>                 47 fs.c             bp = bread(dev, bno);</span>
-<span class='curline'><a href='../S/22.html#L48'>bp</a>                 48 fs.c             memset(bp-&gt;data, 0, BSIZE);</span>
-<span class='curline'><a href='../S/22.html#L49'>bp</a>                 49 fs.c             log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L50'>bp</a>                 50 fs.c             brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L60'>bp</a>                 60 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L62'>bp</a>                 62 fs.c             bp = 0;</span>
-<span class='curline'><a href='../S/22.html#L64'>bp</a>                 64 fs.c               bp = bread(dev, BBLOCK(b, sb));</span>
-<span class='curline'><a href='../S/22.html#L67'>bp</a>                 67 fs.c                 if((bp-&gt;data[bi/8] &amp; m) == 0){  // Is block free?</span>
-<span class='curline'><a href='../S/22.html#L68'>bp</a>                 68 fs.c                   bp-&gt;data[bi/8] |= m;  // Mark block in use.</span>
-<span class='curline'><a href='../S/22.html#L69'>bp</a>                 69 fs.c                   log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L70'>bp</a>                 70 fs.c                   brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L75'>bp</a>                 75 fs.c               brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L84'>bp</a>                 84 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L88'>bp</a>                 88 fs.c             bp = bread(dev, BBLOCK(b, sb));</span>
-<span class='curline'><a href='../S/22.html#L91'>bp</a>                 91 fs.c             if((bp-&gt;data[bi/8] &amp; m) == 0)</span>
-<span class='curline'><a href='../S/22.html#L93'>bp</a>                 93 fs.c             bp-&gt;data[bi/8] &amp;= ~m;</span>
-<span class='curline'><a href='../S/22.html#L94'>bp</a>                 94 fs.c             log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L95'>bp</a>                 95 fs.c             brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L189'>bp</a>                189 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L193'>bp</a>                193 fs.c               bp = bread(dev, IBLOCK(inum, sb));</span>
-<span class='curline'><a href='../S/22.html#L194'>bp</a>                194 fs.c               dip = (struct dinode*)bp-&gt;data + inum%IPB;</span>
-<span class='curline'><a href='../S/22.html#L198'>bp</a>                198 fs.c                 log_write(bp);   // mark it allocated on the disk</span>
-<span class='curline'><a href='../S/22.html#L199'>bp</a>                199 fs.c                 brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L202'>bp</a>                202 fs.c               brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L211'>bp</a>                211 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L214'>bp</a>                214 fs.c             bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
-<span class='curline'><a href='../S/22.html#L215'>bp</a>                215 fs.c             dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
-<span class='curline'><a href='../S/22.html#L222'>bp</a>                222 fs.c             log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L223'>bp</a>                223 fs.c             brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L278'>bp</a>                278 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L287'>bp</a>                287 fs.c               bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
-<span class='curline'><a href='../S/22.html#L288'>bp</a>                288 fs.c               dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
-<span class='curline'><a href='../S/22.html#L295'>bp</a>                295 fs.c               brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L358'>bp</a>                358 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L371'>bp</a>                371 fs.c               bp = bread(ip-&gt;dev, addr);</span>
-<span class='curline'><a href='../S/22.html#L372'>bp</a>                372 fs.c               a = (uint*)bp-&gt;data;</span>
-<span class='curline'><a href='../S/22.html#L375'>bp</a>                375 fs.c                 log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L377'>bp</a>                377 fs.c               brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L393'>bp</a>                393 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L404'>bp</a>                404 fs.c               bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
-<span class='curline'><a href='../S/22.html#L405'>bp</a>                405 fs.c               a = (uint*)bp-&gt;data;</span>
-<span class='curline'><a href='../S/22.html#L410'>bp</a>                410 fs.c               brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L436'>bp</a>                436 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L450'>bp</a>                450 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
-<span class='curline'><a href='../S/22.html#L459'>bp</a>                459 fs.c               memmove(dst, bp-&gt;data + off%BSIZE, m);</span>
-<span class='curline'><a href='../S/22.html#L460'>bp</a>                460 fs.c               brelse(bp);</span>
-<span class='curline'><a href='../S/22.html#L471'>bp</a>                471 fs.c             struct buf *bp;</span>
-<span class='curline'><a href='../S/22.html#L485'>bp</a>                485 fs.c               bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
-<span class='curline'><a href='../S/22.html#L487'>bp</a>                487 fs.c               memmove(bp-&gt;data + off%BSIZE, src, m);</span>
-<span class='curline'><a href='../S/22.html#L488'>bp</a>                488 fs.c               log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L489'>bp</a>                489 fs.c               brelse(bp);</span>
-<span class='curline'><a href='../S/92.html#L27'>bp</a>                 27 umalloc.c        Header *bp, *p;</span>
-<span class='curline'><a href='../S/92.html#L29'>bp</a>                 29 umalloc.c        bp = (Header*)ap - 1;</span>
-<span class='curline'><a href='../S/92.html#L30'>bp</a>                 30 umalloc.c        for(p = freep; !(bp &gt; p &amp;&amp; bp &lt; p-&gt;s.ptr); p = p-&gt;s.ptr)</span>
-<span class='curline'><a href='../S/92.html#L31'>bp</a>                 31 umalloc.c          if(p &gt;= p-&gt;s.ptr &amp;&amp; (bp &gt; p || bp &lt; p-&gt;s.ptr))</span>
-<span class='curline'><a href='../S/92.html#L33'>bp</a>                 33 umalloc.c        if(bp + bp-&gt;s.size == p-&gt;s.ptr){</span>
-<span class='curline'><a href='../S/92.html#L34'>bp</a>                 34 umalloc.c          bp-&gt;s.size += p-&gt;s.ptr-&gt;s.size;</span>
-<span class='curline'><a href='../S/92.html#L35'>bp</a>                 35 umalloc.c          bp-&gt;s.ptr = p-&gt;s.ptr-&gt;s.ptr;</span>
-<span class='curline'><a href='../S/92.html#L37'>bp</a>                 37 umalloc.c          bp-&gt;s.ptr = p-&gt;s.ptr;</span>
-<span class='curline'><a href='../S/92.html#L38'>bp</a>                 38 umalloc.c        if(p + p-&gt;s.size == bp){</span>
-<span class='curline'><a href='../S/92.html#L39'>bp</a>                 39 umalloc.c          p-&gt;s.size += bp-&gt;s.size;</span>
-<span class='curline'><a href='../S/92.html#L40'>bp</a>                 40 umalloc.c          p-&gt;s.ptr = bp-&gt;s.ptr;</span>
-<span class='curline'><a href='../S/92.html#L42'>bp</a>                 42 umalloc.c          p-&gt;s.ptr = bp;</span>
+<span class='curline'><a href='../S/1.html#L7'>byte</a>                7 asm.h                  .byte 0, 0, 0, 0</span>
+<span class='curline'><a href='../S/1.html#L13'>byte</a>               13 asm.h                  .byte (((base) &gt;&gt; 16) &amp; 0xff), (0x90 | (type)),         \</span>
 </pre>
 </body>
 </html>

@@ -1,25 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>context</title>
+<title>devsw</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/11.html#L2'>context</a>             2 defs.h         struct context;</span>
-<span class='curline'><a href='../S/11.html#L121'>context</a>           121 defs.h         void            swtch(struct context**, struct context*);</span>
-<span class='curline'><a href='../S/56.html#L71'>context</a>            71 proc.c           sp -= sizeof *p-&gt;context;</span>
-<span class='curline'><a href='../S/56.html#L72'>context</a>            72 proc.c           p-&gt;context = (struct context*)sp;</span>
-<span class='curline'><a href='../S/56.html#L73'>context</a>            73 proc.c           memset(p-&gt;context, 0, sizeof *p-&gt;context);</span>
-<span class='curline'><a href='../S/56.html#L74'>context</a>            74 proc.c           p-&gt;context-&gt;eip = (uint)forkret;</span>
-<span class='curline'><a href='../S/56.html#L300'>context</a>           300 proc.c               swtch(&amp;cpu-&gt;scheduler, p-&gt;context);</span>
-<span class='curline'><a href='../S/56.html#L333'>context</a>           333 proc.c           swtch(&amp;proc-&gt;context, cpu-&gt;scheduler);</span>
-<span class='curline'><a href='../S/56.html#L479'>context</a>           479 proc.c               getcallerpcs((uint*)p-&gt;context-&gt;ebp+2, pc);</span>
-<span class='curline'><a href='../S/57.html#L4'>context</a>             4 proc.h           struct context *scheduler;   // swtch() here to enter scheduler</span>
-<span class='curline'><a href='../S/57.html#L60'>context</a>            60 proc.h           struct context *context;     // swtch() here to run process</span>
+<span class='curline'><a href='../S/15.html#L293'>devsw</a>             293 console.c        devsw[CONSOLE].write = consolewrite;</span>
+<span class='curline'><a href='../S/15.html#L294'>devsw</a>             294 console.c        devsw[CONSOLE].read = consoleread;</span>
+<span class='curline'><a href='../S/33.html#L13'>devsw</a>              13 file.c         struct devsw devsw[NDEV];</span>
+<span class='curline'><a href='../S/35.html#L35'>devsw</a>              35 file.h         extern struct devsw devsw[];</span>
+<span class='curline'><a href='../S/39.html#L460'>devsw</a>             460 fs.c               if(ip-&gt;major &lt; 0 || ip-&gt;major &gt;= NDEV || !devsw[ip-&gt;major].read)</span>
+<span class='curline'><a href='../S/39.html#L462'>devsw</a>             462 fs.c               return devsw[ip-&gt;major].read(ip, dst, n);</span>
+<span class='curline'><a href='../S/39.html#L489'>devsw</a>             489 fs.c               if(ip-&gt;major &lt; 0 || ip-&gt;major &gt;= NDEV || !devsw[ip-&gt;major].write)</span>
+<span class='curline'><a href='../S/39.html#L491'>devsw</a>             491 fs.c               return devsw[ip-&gt;major].write(ip, src, n);</span>
 </pre>
 </body>
 </html>

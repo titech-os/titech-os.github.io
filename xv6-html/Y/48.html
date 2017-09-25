@@ -1,41 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>cc</title>
+<title>chan</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/45.html#L70'>cc</a>                 70 mkfs.c           int i, cc, fd;</span>
-<span class='curline'><a href='../S/45.html#L152'>cc</a>                152 mkfs.c             while((cc = read(fd, buf, sizeof(buf))) &gt; 0)</span>
-<span class='curline'><a href='../S/45.html#L153'>cc</a>                153 mkfs.c               iappend(inum, buf, cc);</span>
-<span class='curline'><a href='../S/91.html#L55'>cc</a>                 55 ulib.c           int i, cc;</span>
-<span class='curline'><a href='../S/91.html#L59'>cc</a>                 59 ulib.c             cc = read(0, &amp;c, 1);</span>
-<span class='curline'><a href='../S/91.html#L60'>cc</a>                 60 ulib.c             if(cc &lt; 1)</span>
-<span class='curline'><a href='../S/94.html#L309'>cc</a>                309 usertests.c      int seq, i, n, cc, total;</span>
-<span class='curline'><a href='../S/94.html#L331'>cc</a>                331 usertests.c        cc = 1;</span>
-<span class='curline'><a href='../S/94.html#L332'>cc</a>                332 usertests.c        while((n = read(fds[0], buf, cc)) &gt; 0){</span>
-<span class='curline'><a href='../S/94.html#L340'>cc</a>                340 usertests.c          cc = cc * 2;</span>
-<span class='curline'><a href='../S/94.html#L341'>cc</a>                341 usertests.c          if(cc &gt; sizeof(buf))</span>
-<span class='curline'><a href='../S/94.html#L342'>cc</a>                342 usertests.c            cc = sizeof(buf);</span>
-<span class='curline'><a href='../S/94.html#L937'>cc</a>                937 usertests.c      int fd, cc;</span>
-<span class='curline'><a href='../S/94.html#L978'>cc</a>                978 usertests.c      cc = read(fd, buf, sizeof(buf));</span>
-<span class='curline'><a href='../S/94.html#L979'>cc</a>                979 usertests.c      if(cc != 2 || buf[0] != 'f'){</span>
-<span class='curline'><a href='../S/94.html#L1134'>cc</a>               1134 usertests.c          int cc = write(fd, buf, sz);</span>
-<span class='curline'><a href='../S/94.html#L1135'>cc</a>               1135 usertests.c          if(cc != sz){</span>
-<span class='curline'><a href='../S/94.html#L1136'>cc</a>               1136 usertests.c            printf(1, "write(%d) ret %d\n", sz, cc);</span>
-<span class='curline'><a href='../S/94.html#L1150'>cc</a>               1150 usertests.c      int fd, i, total, cc;</span>
-<span class='curline'><a href='../S/94.html#L1176'>cc</a>               1176 usertests.c        cc = read(fd, buf, 300);</span>
-<span class='curline'><a href='../S/94.html#L1177'>cc</a>               1177 usertests.c        if(cc &lt; 0){</span>
-<span class='curline'><a href='../S/94.html#L1181'>cc</a>               1181 usertests.c        if(cc == 0)</span>
-<span class='curline'><a href='../S/94.html#L1183'>cc</a>               1183 usertests.c        if(cc != 300){</span>
-<span class='curline'><a href='../S/94.html#L1191'>cc</a>               1191 usertests.c        total += cc;</span>
-<span class='curline'><a href='../S/94.html#L1671'>cc</a>               1671 usertests.c          int cc = write(fd, buf, 512);</span>
-<span class='curline'><a href='../S/94.html#L1672'>cc</a>               1672 usertests.c          if(cc &lt; 512)</span>
-<span class='curline'><a href='../S/94.html#L1674'>cc</a>               1674 usertests.c          total += cc;</span>
+<span class='curline'><a href='../S/107.html#L21'>chan</a>               21 proc.c         static void wakeup1(void *chan);</span>
+<span class='curline'><a href='../S/107.html#L418'>chan</a>              418 proc.c         sleep(void *chan, struct spinlock *lk)</span>
+<span class='curline'><a href='../S/107.html#L439'>chan</a>              439 proc.c           p-&gt;chan = chan;</span>
+<span class='curline'><a href='../S/107.html#L445'>chan</a>              445 proc.c           p-&gt;chan = 0;</span>
+<span class='curline'><a href='../S/107.html#L458'>chan</a>              458 proc.c         wakeup1(void *chan)</span>
+<span class='curline'><a href='../S/107.html#L463'>chan</a>              463 proc.c             if(p-&gt;state == SLEEPING &amp;&amp; p-&gt;chan == chan)</span>
+<span class='curline'><a href='../S/107.html#L469'>chan</a>              469 proc.c         wakeup(void *chan)</span>
+<span class='curline'><a href='../S/107.html#L472'>chan</a>              472 proc.c           wakeup1(chan);</span>
+<span class='curline'><a href='../S/109.html#L47'>chan</a>               47 proc.h           void *chan;                  // If non-zero, sleeping on chan</span>
 </pre>
 </body>
 </html>

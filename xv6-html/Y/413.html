@@ -1,17 +1,84 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uargv</title>
+<title>type</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/80.html#L400'>uargv</a>             400 sysfile.c        uint uargv, uarg;</span>
-<span class='curline'><a href='../S/80.html#L402'>uargv</a>             402 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || argint(1, (int*)&amp;uargv) &lt; 0){</span>
-<span class='curline'><a href='../S/80.html#L409'>uargv</a>             409 sysfile.c          if(fetchint(uargv+4*i, (int*)&amp;uarg) &lt; 0)</span>
+<span class='curline'><a href='../S/1.html#L11'>type</a>               11 asm.h          #define SEG_ASM(type,base,lim)                                  \</span>
+<span class='curline'><a href='../S/1.html#L13'>type</a>               13 asm.h                  .byte (((base) &gt;&gt; 16) &amp; 0xff), (0x90 | (type)),         \</span>
+<span class='curline'><a href='../S/25.html#L9'>type</a>                9 elf.h            ushort type;</span>
+<span class='curline'><a href='../S/25.html#L26'>type</a>               26 elf.h            uint type;</span>
+<span class='curline'><a href='../S/30.html#L46'>type</a>               46 exec.c             if(ph.type != ELF_PROG_LOAD)</span>
+<span class='curline'><a href='../S/33.html#L70'>type</a>               70 file.c           f-&gt;type = FD_NONE;</span>
+<span class='curline'><a href='../S/33.html#L73'>type</a>               73 file.c           if(ff.type == FD_PIPE)</span>
+<span class='curline'><a href='../S/33.html#L75'>type</a>               75 file.c           else if(ff.type == FD_INODE){</span>
+<span class='curline'><a href='../S/33.html#L86'>type</a>               86 file.c           if(f-&gt;type == FD_INODE){</span>
+<span class='curline'><a href='../S/33.html#L103'>type</a>              103 file.c           if(f-&gt;type == FD_PIPE)</span>
+<span class='curline'><a href='../S/33.html#L105'>type</a>              105 file.c           if(f-&gt;type == FD_INODE){</span>
+<span class='curline'><a href='../S/33.html#L124'>type</a>              124 file.c           if(f-&gt;type == FD_PIPE)</span>
+<span class='curline'><a href='../S/33.html#L126'>type</a>              126 file.c           if(f-&gt;type == FD_INODE){</span>
+<span class='curline'><a href='../S/35.html#L2'>type</a>                2 file.h           enum { FD_NONE, FD_PIPE, FD_INODE } type;</span>
+<span class='curline'><a href='../S/35.html#L20'>type</a>               20 file.h           short type;         // copy of disk inode</span>
+<span class='curline'><a href='../S/39.html#L196'>type</a>              196 fs.c           ialloc(uint dev, short type)</span>
+<span class='curline'><a href='../S/39.html#L205'>type</a>              205 fs.c               if(dip-&gt;type == 0){  // a free inode</span>
+<span class='curline'><a href='../S/39.html#L207'>type</a>              207 fs.c                 dip-&gt;type = type;</span>
+<span class='curline'><a href='../S/39.html#L229'>type</a>              229 fs.c             dip-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/39.html#L302'>type</a>              302 fs.c               ip-&gt;type = dip-&gt;type;</span>
+<span class='curline'><a href='../S/39.html#L310'>type</a>              310 fs.c               if(ip-&gt;type == 0)</span>
+<span class='curline'><a href='../S/39.html#L343'>type</a>              343 fs.c                 ip-&gt;type = 0;</span>
+<span class='curline'><a href='../S/39.html#L445'>type</a>              445 fs.c             st-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/39.html#L459'>type</a>              459 fs.c             if(ip-&gt;type == T_DEV){</span>
+<span class='curline'><a href='../S/39.html#L488'>type</a>              488 fs.c             if(ip-&gt;type == T_DEV){</span>
+<span class='curline'><a href='../S/39.html#L531'>type</a>              531 fs.c             if(dp-&gt;type != T_DIR)</span>
+<span class='curline'><a href='../S/39.html#L637'>type</a>              637 fs.c               if(ip-&gt;type != T_DIR){</span>
+<span class='curline'><a href='../S/41.html#L30'>type</a>               30 fs.h             short type;           // File type</span>
+<span class='curline'><a href='../S/80.html#L44'>type</a>               44 ls.c             switch(st.type){</span>
+<span class='curline'><a href='../S/80.html#L46'>type</a>               46 ls.c               printf(1, "%s %d %d %d\n", fmtname(path), st.type, st.ino, st.size);</span>
+<span class='curline'><a href='../S/80.html#L66'>type</a>               66 ls.c                 printf(1, "%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);</span>
+<span class='curline'><a href='../S/92.html#L41'>type</a>               41 mkfs.c         uint ialloc(ushort type);</span>
+<span class='curline'><a href='../S/92.html#L224'>type</a>              224 mkfs.c         ialloc(ushort type)</span>
+<span class='curline'><a href='../S/92.html#L230'>type</a>              230 mkfs.c           din.type = xshort(type);</span>
+<span class='curline'><a href='../S/93.html#L58'>type</a>               58 mmu.h            uint type : 4;       // Segment type (see STS_ constants)</span>
+<span class='curline'><a href='../S/93.html#L71'>type</a>               71 mmu.h          #define SEG(type, base, lim, dpl) (struct segdesc)    \</span>
+<span class='curline'><a href='../S/93.html#L73'>type</a>               73 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
+<span class='curline'><a href='../S/93.html#L75'>type</a>               75 mmu.h          #define SEG16(type, base, lim, dpl) (struct segdesc)  \</span>
+<span class='curline'><a href='../S/93.html#L77'>type</a>               77 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
+<span class='curline'><a href='../S/93.html#L200'>type</a>              200 mmu.h            uint type : 4;        // type(STS_{TG,IG32,TG32})</span>
+<span class='curline'><a href='../S/93.html#L221'>type</a>              221 mmu.h            (gate).type = (istrap) ? STS_TG32 : STS_IG32;           \</span>
+<span class='curline'><a href='../S/96.html#L9'>type</a>                9 mp.h             uchar type;                   // MP system config type</span>
+<span class='curline'><a href='../S/96.html#L30'>type</a>               30 mp.h             uchar type;                   // entry type (0)</span>
+<span class='curline'><a href='../S/96.html#L41'>type</a>               41 mp.h             uchar type;                   // entry type (2)</span>
+<span class='curline'><a href='../S/101.html#L38'>type</a>               38 pipe.c           (*f0)-&gt;type = FD_PIPE;</span>
+<span class='curline'><a href='../S/101.html#L42'>type</a>               42 pipe.c           (*f1)-&gt;type = FD_PIPE;</span>
+<span class='curline'><a href='../S/120.html#L17'>type</a>               17 sh.c             int type;</span>
+<span class='curline'><a href='../S/120.html#L21'>type</a>               21 sh.c             int type;</span>
+<span class='curline'><a href='../S/120.html#L27'>type</a>               27 sh.c             int type;</span>
+<span class='curline'><a href='../S/120.html#L36'>type</a>               36 sh.c             int type;</span>
+<span class='curline'><a href='../S/120.html#L42'>type</a>               42 sh.c             int type;</span>
+<span class='curline'><a href='../S/120.html#L48'>type</a>               48 sh.c             int type;</span>
+<span class='curline'><a href='../S/120.html#L70'>type</a>               70 sh.c             switch(cmd-&gt;type){</span>
+<span class='curline'><a href='../S/120.html#L202'>type</a>              202 sh.c             cmd-&gt;type = EXEC;</span>
+<span class='curline'><a href='../S/120.html#L213'>type</a>              213 sh.c             cmd-&gt;type = REDIR;</span>
+<span class='curline'><a href='../S/120.html#L229'>type</a>              229 sh.c             cmd-&gt;type = PIPE;</span>
+<span class='curline'><a href='../S/120.html#L242'>type</a>              242 sh.c             cmd-&gt;type = LIST;</span>
+<span class='curline'><a href='../S/120.html#L255'>type</a>              255 sh.c             cmd-&gt;type = BACK;</span>
+<span class='curline'><a href='../S/120.html#L462'>type</a>              462 sh.c             switch(cmd-&gt;type){</span>
+<span class='curline'><a href='../S/133.html#L6'>type</a>                6 stat.h           short type;  // Type of file</span>
+<span class='curline'><a href='../S/145.html#L134'>type</a>              134 sysfile.c        if(ip-&gt;type == T_DIR){</span>
+<span class='curline'><a href='../S/145.html#L213'>type</a>              213 sysfile.c        if(ip-&gt;type == T_DIR &amp;&amp; !isdirempty(ip)){</span>
+<span class='curline'><a href='../S/145.html#L221'>type</a>              221 sysfile.c        if(ip-&gt;type == T_DIR){</span>
+<span class='curline'><a href='../S/145.html#L242'>type</a>              242 sysfile.c      create(char *path, short type, short major, short minor)</span>
+<span class='curline'><a href='../S/145.html#L255'>type</a>              255 sysfile.c          if(type == T_FILE &amp;&amp; ip-&gt;type == T_FILE)</span>
+<span class='curline'><a href='../S/145.html#L261'>type</a>              261 sysfile.c        if((ip = ialloc(dp-&gt;dev, type)) == 0)</span>
+<span class='curline'><a href='../S/145.html#L270'>type</a>              270 sysfile.c        if(type == T_DIR){  // Create . and .. entries.</span>
+<span class='curline'><a href='../S/145.html#L311'>type</a>              311 sysfile.c          if(ip-&gt;type == T_DIR &amp;&amp; omode != O_RDONLY){</span>
+<span class='curline'><a href='../S/145.html#L328'>type</a>              328 sysfile.c        f-&gt;type = FD_INODE;</span>
+<span class='curline'><a href='../S/145.html#L385'>type</a>              385 sysfile.c        if(ip-&gt;type != T_DIR){</span>
 </pre>
 </body>
 </html>

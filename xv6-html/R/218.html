@@ -1,25 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>V2P</title>
+<title>argint</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/30.html#L64'>V2P</a>                64 kalloc.c         if((uint)v % PGSIZE || v &lt; end || V2P(v) &gt;= PHYSTOP)</span>
-<span class='curline'><a href='../S/40.html#L90'>V2P</a>                90 main.c             *(int**)(code-12) = (void *) V2P(entrypgdir);</span>
-<span class='curline'><a href='../S/40.html#L92'>V2P</a>                92 main.c             lapicstartap(c-&gt;apicid, V2P(code));</span>
-<span class='curline'><a href='../S/97.html#L61'>V2P</a>                61 vm.c               *pde = V2P(pgtab) | PTE_P | PTE_W | PTE_U;</span>
-<span class='curline'><a href='../S/97.html#L121'>V2P</a>               121 vm.c            { (void*)KERNLINK, V2P(KERNLINK), V2P(data), 0},     // kern text+rodata</span>
-<span class='curline'><a href='../S/97.html#L122'>V2P</a>               122 vm.c            { (void*)data,     V2P(data),     PHYSTOP,   PTE_W}, // kern data+memory</span>
-<span class='curline'><a href='../S/97.html#L159'>V2P</a>               159 vm.c             lcr3(V2P(kpgdir));   // switch to the kernel page table</span>
-<span class='curline'><a href='../S/97.html#L177'>V2P</a>               177 vm.c             lcr3(V2P(p-&gt;pgdir));  // switch to process's address space</span>
-<span class='curline'><a href='../S/97.html#L192'>V2P</a>               192 vm.c             mappages(pgdir, 0, PGSIZE, V2P(mem), PTE_W|PTE_U);</span>
-<span class='curline'><a href='../S/97.html#L242'>V2P</a>               242 vm.c               if(mappages(pgdir, (char*)a, PGSIZE, V2P(mem), PTE_W|PTE_U) &lt; 0){</span>
-<span class='curline'><a href='../S/97.html#L336'>V2P</a>               336 vm.c               if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) &lt; 0)</span>
+<span class='curline'><a href='../S/19.html#L152'>argint</a>            152 defs.h         int             argint(int, int*);</span>
+<span class='curline'><a href='../S/142.html#L64'>argint</a>             64 syscall.c        if(argint(n, &amp;i) &lt; 0)</span>
+<span class='curline'><a href='../S/142.html#L80'>argint</a>             80 syscall.c        if(argint(n, &amp;addr) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L27'>argint</a>             27 sysfile.c        if(argint(n, &amp;fd) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L76'>argint</a>             76 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argptr(1, &amp;p, n) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L88'>argint</a>             88 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argptr(1, &amp;p, n) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L294'>argint</a>            294 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || argint(1, &amp;omode) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L361'>argint</a>            361 sysfile.c           argint(1, &amp;major) &lt; 0 ||</span>
+<span class='curline'><a href='../S/145.html#L362'>argint</a>            362 sysfile.c           argint(2, &amp;minor) &lt; 0 ||</span>
+<span class='curline'><a href='../S/145.html#L404'>argint</a>            404 sysfile.c        if(argstr(0, &amp;path) &lt; 0 || argint(1, (int*)&amp;uargv) &lt; 0){</span>
+<span class='curline'><a href='../S/147.html#L34'>argint</a>             34 sysproc.c        if(argint(0, &amp;pid) &lt; 0)</span>
+<span class='curline'><a href='../S/147.html#L51'>argint</a>             51 sysproc.c        if(argint(0, &amp;n) &lt; 0)</span>
+<span class='curline'><a href='../S/147.html#L65'>argint</a>             65 sysproc.c        if(argint(0, &amp;n) &lt; 0)</span>
 </pre>
 </body>
 </html>

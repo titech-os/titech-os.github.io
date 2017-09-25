@@ -1,17 +1,58 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>esi</title>
+<title>es</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L175'>esi</a>               175 mmu.h            uint esi;</span>
-<span class='curline'><a href='../S/57.html#L43'>esi</a>                43 proc.h           uint esi;</span>
-<span class='curline'><a href='../S/99.html#L153'>esi</a>               153 x86.h            uint esi;</span>
+<span class='curline'><a href='../S/93.html#L175'>es</a>                175 mmu.h            ushort es;         // Even more saved state (segment selectors)</span>
+<span class='curline'><a href='../S/107.html#L136'>es</a>                136 proc.c           p-&gt;tf-&gt;es = p-&gt;tf-&gt;ds;</span>
+<span class='curline'><a href='../S/120.html#L266'>es</a>                266 sh.c           gettoken(char **ps, char *es, char **q, char **eq)</span>
+<span class='curline'><a href='../S/120.html#L272'>es</a>                272 sh.c             while(s &lt; es &amp;&amp; strchr(whitespace, *s))</span>
+<span class='curline'><a href='../S/120.html#L297'>es</a>                297 sh.c               while(s &lt; es &amp;&amp; !strchr(whitespace, *s) &amp;&amp; !strchr(symbols, *s))</span>
+<span class='curline'><a href='../S/120.html#L304'>es</a>                304 sh.c             while(s &lt; es &amp;&amp; strchr(whitespace, *s))</span>
+<span class='curline'><a href='../S/120.html#L311'>es</a>                311 sh.c           peek(char **ps, char *es, char *toks)</span>
+<span class='curline'><a href='../S/120.html#L316'>es</a>                316 sh.c             while(s &lt; es &amp;&amp; strchr(whitespace, *s))</span>
+<span class='curline'><a href='../S/120.html#L330'>es</a>                330 sh.c             char *es;</span>
+<span class='curline'><a href='../S/120.html#L333'>es</a>                333 sh.c             es = s + strlen(s);</span>
+<span class='curline'><a href='../S/120.html#L334'>es</a>                334 sh.c             cmd = parseline(&amp;s, es);</span>
+<span class='curline'><a href='../S/120.html#L335'>es</a>                335 sh.c             peek(&amp;s, es, "");</span>
+<span class='curline'><a href='../S/120.html#L336'>es</a>                336 sh.c             if(s != es){</span>
+<span class='curline'><a href='../S/120.html#L345'>es</a>                345 sh.c           parseline(char **ps, char *es)</span>
+<span class='curline'><a href='../S/120.html#L349'>es</a>                349 sh.c             cmd = parsepipe(ps, es);</span>
+<span class='curline'><a href='../S/120.html#L350'>es</a>                350 sh.c             while(peek(ps, es, "&amp;")){</span>
+<span class='curline'><a href='../S/120.html#L351'>es</a>                351 sh.c               gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/120.html#L354'>es</a>                354 sh.c             if(peek(ps, es, ";")){</span>
+<span class='curline'><a href='../S/120.html#L355'>es</a>                355 sh.c               gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/120.html#L356'>es</a>                356 sh.c               cmd = listcmd(cmd, parseline(ps, es));</span>
+<span class='curline'><a href='../S/120.html#L362'>es</a>                362 sh.c           parsepipe(char **ps, char *es)</span>
+<span class='curline'><a href='../S/120.html#L366'>es</a>                366 sh.c             cmd = parseexec(ps, es);</span>
+<span class='curline'><a href='../S/120.html#L367'>es</a>                367 sh.c             if(peek(ps, es, "|")){</span>
+<span class='curline'><a href='../S/120.html#L368'>es</a>                368 sh.c               gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/120.html#L369'>es</a>                369 sh.c               cmd = pipecmd(cmd, parsepipe(ps, es));</span>
+<span class='curline'><a href='../S/120.html#L375'>es</a>                375 sh.c           parseredirs(struct cmd *cmd, char **ps, char *es)</span>
+<span class='curline'><a href='../S/120.html#L380'>es</a>                380 sh.c             while(peek(ps, es, "&lt;&gt;")){</span>
+<span class='curline'><a href='../S/120.html#L381'>es</a>                381 sh.c               tok = gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/120.html#L382'>es</a>                382 sh.c               if(gettoken(ps, es, &amp;q, &amp;eq) != 'a')</span>
+<span class='curline'><a href='../S/120.html#L400'>es</a>                400 sh.c           parseblock(char **ps, char *es)</span>
+<span class='curline'><a href='../S/120.html#L404'>es</a>                404 sh.c             if(!peek(ps, es, "("))</span>
+<span class='curline'><a href='../S/120.html#L406'>es</a>                406 sh.c             gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/120.html#L407'>es</a>                407 sh.c             cmd = parseline(ps, es);</span>
+<span class='curline'><a href='../S/120.html#L408'>es</a>                408 sh.c             if(!peek(ps, es, ")"))</span>
+<span class='curline'><a href='../S/120.html#L410'>es</a>                410 sh.c             gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/120.html#L411'>es</a>                411 sh.c             cmd = parseredirs(cmd, ps, es);</span>
+<span class='curline'><a href='../S/120.html#L416'>es</a>                416 sh.c           parseexec(char **ps, char *es)</span>
+<span class='curline'><a href='../S/120.html#L423'>es</a>                423 sh.c             if(peek(ps, es, "("))</span>
+<span class='curline'><a href='../S/120.html#L424'>es</a>                424 sh.c               return parseblock(ps, es);</span>
+<span class='curline'><a href='../S/120.html#L430'>es</a>                430 sh.c             ret = parseredirs(ret, ps, es);</span>
+<span class='curline'><a href='../S/120.html#L431'>es</a>                431 sh.c             while(!peek(ps, es, "|)&amp;;")){</span>
+<span class='curline'><a href='../S/120.html#L432'>es</a>                432 sh.c               if((tok=gettoken(ps, es, &amp;q, &amp;eq)) == 0)</span>
+<span class='curline'><a href='../S/120.html#L441'>es</a>                441 sh.c               ret = parseredirs(ret, ps, es);</span>
+<span class='curline'><a href='../S/177.html#L166'>es</a>                166 x86.h            ushort es;</span>
 </pre>
 </body>
 </html>

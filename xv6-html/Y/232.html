@@ -1,20 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ncli</title>
+<title>ncpu</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L326'>ncli</a>              326 proc.c           if(cpu-&gt;ncli != 1)</span>
-<span class='curline'><a href='../S/57.html#L8'>ncli</a>                8 proc.h           int ncli;                    // Depth of pushcli nesting.</span>
-<span class='curline'><a href='../S/70.html#L107'>ncli</a>              107 spinlock.c       if(cpu-&gt;ncli == 0)</span>
-<span class='curline'><a href='../S/70.html#L109'>ncli</a>              109 spinlock.c       cpu-&gt;ncli += 1;</span>
-<span class='curline'><a href='../S/70.html#L117'>ncli</a>              117 spinlock.c       if(--cpu-&gt;ncli &lt; 0)</span>
-<span class='curline'><a href='../S/70.html#L119'>ncli</a>              119 spinlock.c       if(cpu-&gt;ncli == 0 &amp;&amp; cpu-&gt;intena)</span>
+<span class='curline'><a href='../S/47.html#L56'>ncpu</a>               56 ide.c            ioapicenable(IRQ_IDE, ncpu - 1);</span>
+<span class='curline'><a href='../S/83.html#L77'>ncpu</a>               77 main.c           for(c = cpus; c &lt; cpus+ncpu; c++){</span>
+<span class='curline'><a href='../S/94.html#L15'>ncpu</a>               15 mp.c           int ncpu;</span>
+<span class='curline'><a href='../S/94.html#L109'>ncpu</a>              109 mp.c                 if(ncpu &lt; NCPU) {</span>
+<span class='curline'><a href='../S/94.html#L110'>ncpu</a>              110 mp.c                   cpus[ncpu].apicid = proc-&gt;apicid;  // apicid may differ from ncpu</span>
+<span class='curline'><a href='../S/94.html#L111'>ncpu</a>              111 mp.c                   ncpu++;</span>
+<span class='curline'><a href='../S/107.html#L48'>ncpu</a>               48 proc.c           for (i = 0; i &lt; ncpu; ++i) {</span>
+<span class='curline'><a href='../S/109.html#L14'>ncpu</a>               14 proc.h         extern int ncpu;</span>
 </pre>
 </body>
 </html>

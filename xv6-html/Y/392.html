@@ -1,24 +1,51 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>t</title>
+<title>sz</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L503'>t</a>                 503 fs.c           namecmp(const char *s, const char *t)</span>
-<span class='curline'><a href='../S/22.html#L505'>t</a>                 505 fs.c             return strncmp(s, t, DIRSIZ);</span>
-<span class='curline'><a href='../S/46.html#L122'>t</a>                 122 mmu.h          #define PGADDR(d, t, o) ((uint)((d) &lt;&lt; PDXSHIFT | (t) &lt;&lt; PTXSHIFT | (o)))</span>
-<span class='curline'><a href='../S/46.html#L191'>t</a>                 191 mmu.h            ushort t;          // Trap on task switch</span>
-<span class='curline'><a href='../S/75.html#L69'>t</a>                  69 string.c       strncpy(char *s, const char *t, int n)</span>
-<span class='curline'><a href='../S/75.html#L74'>t</a>                  74 string.c         while(n-- &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
-<span class='curline'><a href='../S/75.html#L83'>t</a>                  83 string.c       safestrcpy(char *s, const char *t, int n)</span>
-<span class='curline'><a href='../S/75.html#L90'>t</a>                  90 string.c         while(--n &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
-<span class='curline'><a href='../S/91.html#L8'>t</a>                   8 ulib.c         strcpy(char *s, char *t)</span>
-<span class='curline'><a href='../S/91.html#L13'>t</a>                  13 ulib.c           while((*s++ = *t++) != 0)</span>
+<span class='curline'><a href='../S/30.html#L15'>sz</a>                 15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
+<span class='curline'><a href='../S/30.html#L42'>sz</a>                 42 exec.c           sz = 0;</span>
+<span class='curline'><a href='../S/30.html#L52'>sz</a>                 52 exec.c             if((sz = allocuvm(pgdir, sz, ph.vaddr + ph.memsz)) == 0)</span>
+<span class='curline'><a href='../S/30.html#L65'>sz</a>                 65 exec.c           sz = PGROUNDUP(sz);</span>
+<span class='curline'><a href='../S/30.html#L66'>sz</a>                 66 exec.c           if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)</span>
+<span class='curline'><a href='../S/30.html#L68'>sz</a>                 68 exec.c           clearpteu(pgdir, (char*)(sz - 2*PGSIZE));</span>
+<span class='curline'><a href='../S/30.html#L69'>sz</a>                 69 exec.c           sp = sz;</span>
+<span class='curline'><a href='../S/30.html#L99'>sz</a>                 99 exec.c           curproc-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/93.html#L131'>sz</a>                131 mmu.h          #define PGROUNDUP(sz)  (((sz)+PGSIZE-1) &amp; ~(PGSIZE-1))</span>
+<span class='curline'><a href='../S/107.html#L132'>sz</a>                132 proc.c           p-&gt;sz = PGSIZE;</span>
+<span class='curline'><a href='../S/107.html#L161'>sz</a>                161 proc.c           uint sz;</span>
+<span class='curline'><a href='../S/107.html#L164'>sz</a>                164 proc.c           sz = curproc-&gt;sz;</span>
+<span class='curline'><a href='../S/107.html#L166'>sz</a>                166 proc.c             if((sz = allocuvm(curproc-&gt;pgdir, sz, sz + n)) == 0)</span>
+<span class='curline'><a href='../S/107.html#L169'>sz</a>                169 proc.c             if((sz = deallocuvm(curproc-&gt;pgdir, sz, sz + n)) == 0)</span>
+<span class='curline'><a href='../S/107.html#L172'>sz</a>                172 proc.c           curproc-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/107.html#L193'>sz</a>                193 proc.c           if((np-&gt;pgdir = copyuvm(curproc-&gt;pgdir, curproc-&gt;sz)) == 0){</span>
+<span class='curline'><a href='../S/107.html#L199'>sz</a>                199 proc.c           np-&gt;sz = curproc-&gt;sz;</span>
+<span class='curline'><a href='../S/109.html#L39'>sz</a>                 39 proc.h           uint sz;                     // Size of process memory (bytes)</span>
+<span class='curline'><a href='../S/142.html#L22'>sz</a>                 22 syscall.c        if(addr &gt;= curproc-&gt;sz || addr+4 &gt; curproc-&gt;sz)</span>
+<span class='curline'><a href='../S/142.html#L37'>sz</a>                 37 syscall.c        if(addr &gt;= curproc-&gt;sz)</span>
+<span class='curline'><a href='../S/142.html#L40'>sz</a>                 40 syscall.c        ep = (char*)curproc-&gt;sz;</span>
+<span class='curline'><a href='../S/142.html#L66'>sz</a>                 66 syscall.c        if(size &lt; 0 || (uint)i &gt;= curproc-&gt;sz || (uint)i+size &gt; curproc-&gt;sz)</span>
+<span class='curline'><a href='../S/147.html#L53'>sz</a>                 53 sysproc.c        addr = myproc()-&gt;sz;</span>
+<span class='curline'><a href='../S/165.html#L1121'>sz</a>               1121 usertests.c      int fd, sz;</span>
+<span class='curline'><a href='../S/165.html#L1126'>sz</a>               1126 usertests.c      for(sz = 499; sz &lt; 12*512; sz += 471){</span>
+<span class='curline'><a href='../S/165.html#L1134'>sz</a>               1134 usertests.c          int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/165.html#L1135'>sz</a>               1135 usertests.c          if(cc != sz){</span>
+<span class='curline'><a href='../S/165.html#L1136'>sz</a>               1136 usertests.c            printf(1, "write(%d) ret %d\n", sz, cc);</span>
+<span class='curline'><a href='../S/171.html#L183'>sz</a>                183 vm.c           inituvm(pde_t *pgdir, char *init, uint sz)</span>
+<span class='curline'><a href='../S/171.html#L187'>sz</a>                187 vm.c             if(sz &gt;= PGSIZE)</span>
+<span class='curline'><a href='../S/171.html#L192'>sz</a>                192 vm.c             memmove(mem, init, sz);</span>
+<span class='curline'><a href='../S/171.html#L198'>sz</a>                198 vm.c           loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)</span>
+<span class='curline'><a href='../S/171.html#L205'>sz</a>                205 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/171.html#L209'>sz</a>                209 vm.c               if(sz - i &lt; PGSIZE)</span>
+<span class='curline'><a href='../S/171.html#L210'>sz</a>                210 vm.c                 n = sz - i;</span>
+<span class='curline'><a href='../S/171.html#L316'>sz</a>                316 vm.c           copyuvm(pde_t *pgdir, uint sz)</span>
+<span class='curline'><a href='../S/171.html#L325'>sz</a>                325 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
 </pre>
 </body>
 </html>

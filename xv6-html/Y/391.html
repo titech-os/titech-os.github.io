@@ -1,51 +1,17 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sz</title>
+<title>syscalls</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L15'>sz</a>                 15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
-<span class='curline'><a href='../S/17.html#L40'>sz</a>                 40 exec.c           sz = 0;</span>
-<span class='curline'><a href='../S/17.html#L50'>sz</a>                 50 exec.c             if((sz = allocuvm(pgdir, sz, ph.vaddr + ph.memsz)) == 0)</span>
-<span class='curline'><a href='../S/17.html#L63'>sz</a>                 63 exec.c           sz = PGROUNDUP(sz);</span>
-<span class='curline'><a href='../S/17.html#L64'>sz</a>                 64 exec.c           if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)</span>
-<span class='curline'><a href='../S/17.html#L66'>sz</a>                 66 exec.c           clearpteu(pgdir, (char*)(sz - 2*PGSIZE));</span>
-<span class='curline'><a href='../S/17.html#L67'>sz</a>                 67 exec.c           sp = sz;</span>
-<span class='curline'><a href='../S/17.html#L97'>sz</a>                 97 exec.c           proc-&gt;sz = sz;</span>
-<span class='curline'><a href='../S/46.html#L133'>sz</a>                133 mmu.h          #define PGROUNDUP(sz)  (((sz)+PGSIZE-1) &amp; ~(PGSIZE-1))</span>
-<span class='curline'><a href='../S/56.html#L93'>sz</a>                 93 proc.c           p-&gt;sz = PGSIZE;</span>
-<span class='curline'><a href='../S/56.html#L122'>sz</a>                122 proc.c           uint sz;</span>
-<span class='curline'><a href='../S/56.html#L124'>sz</a>                124 proc.c           sz = proc-&gt;sz;</span>
-<span class='curline'><a href='../S/56.html#L126'>sz</a>                126 proc.c             if((sz = allocuvm(proc-&gt;pgdir, sz, sz + n)) == 0)</span>
-<span class='curline'><a href='../S/56.html#L129'>sz</a>                129 proc.c             if((sz = deallocuvm(proc-&gt;pgdir, sz, sz + n)) == 0)</span>
-<span class='curline'><a href='../S/56.html#L132'>sz</a>                132 proc.c           proc-&gt;sz = sz;</span>
-<span class='curline'><a href='../S/56.html#L152'>sz</a>                152 proc.c           if((np-&gt;pgdir = copyuvm(proc-&gt;pgdir, proc-&gt;sz)) == 0){</span>
-<span class='curline'><a href='../S/56.html#L158'>sz</a>                158 proc.c           np-&gt;sz = proc-&gt;sz;</span>
-<span class='curline'><a href='../S/57.html#L53'>sz</a>                 53 proc.h           uint sz;                     // Size of process memory (bytes)</span>
-<span class='curline'><a href='../S/78.html#L20'>sz</a>                 20 syscall.c        if(addr &gt;= proc-&gt;sz || addr+4 &gt; proc-&gt;sz)</span>
-<span class='curline'><a href='../S/78.html#L34'>sz</a>                 34 syscall.c        if(addr &gt;= proc-&gt;sz)</span>
-<span class='curline'><a href='../S/78.html#L37'>sz</a>                 37 syscall.c        ep = (char*)proc-&gt;sz;</span>
-<span class='curline'><a href='../S/78.html#L61'>sz</a>                 61 syscall.c        if(size &lt; 0 || (uint)i &gt;= proc-&gt;sz || (uint)i+size &gt; proc-&gt;sz)</span>
-<span class='curline'><a href='../S/81.html#L53'>sz</a>                 53 sysproc.c        addr = proc-&gt;sz;</span>
-<span class='curline'><a href='../S/94.html#L1121'>sz</a>               1121 usertests.c      int fd, sz;</span>
-<span class='curline'><a href='../S/94.html#L1126'>sz</a>               1126 usertests.c      for(sz = 499; sz &lt; 12*512; sz += 471){</span>
-<span class='curline'><a href='../S/94.html#L1134'>sz</a>               1134 usertests.c          int cc = write(fd, buf, sz);</span>
-<span class='curline'><a href='../S/94.html#L1135'>sz</a>               1135 usertests.c          if(cc != sz){</span>
-<span class='curline'><a href='../S/94.html#L1136'>sz</a>               1136 usertests.c            printf(1, "write(%d) ret %d\n", sz, cc);</span>
-<span class='curline'><a href='../S/97.html#L184'>sz</a>                184 vm.c           inituvm(pde_t *pgdir, char *init, uint sz)</span>
-<span class='curline'><a href='../S/97.html#L188'>sz</a>                188 vm.c             if(sz &gt;= PGSIZE)</span>
-<span class='curline'><a href='../S/97.html#L193'>sz</a>                193 vm.c             memmove(mem, init, sz);</span>
-<span class='curline'><a href='../S/97.html#L199'>sz</a>                199 vm.c           loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)</span>
-<span class='curline'><a href='../S/97.html#L206'>sz</a>                206 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
-<span class='curline'><a href='../S/97.html#L210'>sz</a>                210 vm.c               if(sz - i &lt; PGSIZE)</span>
-<span class='curline'><a href='../S/97.html#L211'>sz</a>                211 vm.c                 n = sz - i;</span>
-<span class='curline'><a href='../S/97.html#L317'>sz</a>                317 vm.c           copyuvm(pde_t *pgdir, uint sz)</span>
-<span class='curline'><a href='../S/97.html#L326'>sz</a>                326 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/142.html#L107'>syscalls</a>          107 syscall.c      static int (*syscalls[])(void) = {</span>
+<span class='curline'><a href='../S/142.html#L138'>syscalls</a>          138 syscall.c        if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {</span>
+<span class='curline'><a href='../S/142.html#L139'>syscalls</a>          139 syscall.c          curproc-&gt;tf-&gt;eax = syscalls[num]();</span>
 </pre>
 </body>
 </html>

@@ -1,24 +1,29 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>conf</title>
+<title>cons</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L76'>conf</a>               76 mp.c             struct mpconf *conf;</span>
-<span class='curline'><a href='../S/47.html#L81'>conf</a>               81 mp.c             conf = (struct mpconf*) P2V((uint) mp-&gt;physaddr);</span>
-<span class='curline'><a href='../S/47.html#L82'>conf</a>               82 mp.c             if(memcmp(conf, "PCMP", 4) != 0)</span>
-<span class='curline'><a href='../S/47.html#L84'>conf</a>               84 mp.c             if(conf-&gt;version != 1 &amp;&amp; conf-&gt;version != 4)</span>
-<span class='curline'><a href='../S/47.html#L86'>conf</a>               86 mp.c             if(sum((uchar*)conf, conf-&gt;length) != 0)</span>
-<span class='curline'><a href='../S/47.html#L89'>conf</a>               89 mp.c             return conf;</span>
-<span class='curline'><a href='../S/47.html#L97'>conf</a>               97 mp.c             struct mpconf *conf;</span>
-<span class='curline'><a href='../S/47.html#L101'>conf</a>              101 mp.c             if((conf = mpconfig(&amp;mp)) == 0)</span>
-<span class='curline'><a href='../S/47.html#L104'>conf</a>              104 mp.c             lapic = (uint*)conf-&gt;lapicaddr;</span>
-<span class='curline'><a href='../S/47.html#L105'>conf</a>              105 mp.c             for(p=(uchar*)(conf+1), e=(uchar*)conf+conf-&gt;length; p&lt;e; ){</span>
+<span class='curline'><a href='../S/15.html#L25'>cons</a>               25 console.c      } cons;</span>
+<span class='curline'><a href='../S/15.html#L61'>cons</a>               61 console.c        locking = cons.locking;</span>
+<span class='curline'><a href='../S/15.html#L63'>cons</a>               63 console.c          acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L103'>cons</a>              103 console.c          release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L113'>cons</a>              113 console.c        cons.locking = 0;</span>
+<span class='curline'><a href='../S/15.html#L196'>cons</a>              196 console.c        acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L229'>cons</a>              229 console.c        release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L243'>cons</a>              243 console.c        acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L247'>cons</a>              247 console.c              release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L251'>cons</a>              251 console.c            sleep(&amp;input.r, &amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L267'>cons</a>              267 console.c        release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L279'>cons</a>              279 console.c        acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L282'>cons</a>              282 console.c        release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/15.html#L291'>cons</a>              291 console.c        initlock(&amp;cons.lock, "console");</span>
+<span class='curline'><a href='../S/15.html#L295'>cons</a>              295 console.c        cons.locking = 1;</span>
 </pre>
 </body>
 </html>

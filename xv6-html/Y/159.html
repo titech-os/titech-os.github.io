@@ -1,21 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>idequeue</title>
+<title>idelock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/26.html#L32'>idequeue</a>           32 ide.c          static struct buf *idequeue;</span>
-<span class='curline'><a href='../S/26.html#L111'>idequeue</a>          111 ide.c            if((b = idequeue) == 0){</span>
-<span class='curline'><a href='../S/26.html#L116'>idequeue</a>          116 ide.c            idequeue = b-&gt;qnext;</span>
-<span class='curline'><a href='../S/26.html#L128'>idequeue</a>          128 ide.c            if(idequeue != 0)</span>
-<span class='curline'><a href='../S/26.html#L129'>idequeue</a>          129 ide.c              idestart(idequeue);</span>
-<span class='curline'><a href='../S/26.html#L154'>idequeue</a>          154 ide.c            for(pp=&amp;idequeue; *pp; pp=&amp;(*pp)-&gt;qnext)  //DOC:insert-queue</span>
-<span class='curline'><a href='../S/26.html#L159'>idequeue</a>          159 ide.c            if(idequeue == b)</span>
+<span class='curline'><a href='../S/47.html#L31'>idelock</a>            31 ide.c          static struct spinlock idelock;</span>
+<span class='curline'><a href='../S/47.html#L55'>idelock</a>            55 ide.c            initlock(&amp;idelock, "ide");</span>
+<span class='curline'><a href='../S/47.html#L109'>idelock</a>           109 ide.c            acquire(&amp;idelock);</span>
+<span class='curline'><a href='../S/47.html#L112'>idelock</a>           112 ide.c              release(&amp;idelock);</span>
+<span class='curline'><a href='../S/47.html#L130'>idelock</a>           130 ide.c            release(&amp;idelock);</span>
+<span class='curline'><a href='../S/47.html#L149'>idelock</a>           149 ide.c            acquire(&amp;idelock);  //DOC:acquire-lock</span>
+<span class='curline'><a href='../S/47.html#L163'>idelock</a>           163 ide.c              sleep(b, &amp;idelock);</span>
+<span class='curline'><a href='../S/47.html#L167'>idelock</a>           167 ide.c            release(&amp;idelock);</span>
 </pre>
 </body>
 </html>

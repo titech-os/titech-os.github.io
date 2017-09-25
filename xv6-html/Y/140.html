@@ -1,17 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>fstat</title>
+<title>fsfd</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/39.html#L38'>fstat</a>              38 ls.c             if(fstat(fd, &amp;st) &lt; 0){</span>
-<span class='curline'><a href='../S/91.html#L79'>fstat</a>              79 ulib.c           r = fstat(fd, st);</span>
-<span class='curline'><a href='../S/93.html#L17'>fstat</a>              17 user.h         int fstat(int fd, struct stat*);</span>
+<span class='curline'><a href='../S/92.html#L29'>fsfd</a>               29 mkfs.c         int fsfd;</span>
+<span class='curline'><a href='../S/92.html#L87'>fsfd</a>               87 mkfs.c           fsfd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);</span>
+<span class='curline'><a href='../S/92.html#L88'>fsfd</a>               88 mkfs.c           if(fsfd &lt; 0){</span>
+<span class='curline'><a href='../S/92.html#L173'>fsfd</a>              173 mkfs.c           if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE){</span>
+<span class='curline'><a href='../S/92.html#L177'>fsfd</a>              177 mkfs.c           if(write(fsfd, buf, BSIZE) != BSIZE){</span>
+<span class='curline'><a href='../S/92.html#L213'>fsfd</a>              213 mkfs.c           if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE){</span>
+<span class='curline'><a href='../S/92.html#L217'>fsfd</a>              217 mkfs.c           if(read(fsfd, buf, BSIZE) != BSIZE){</span>
 </pre>
 </body>
 </html>

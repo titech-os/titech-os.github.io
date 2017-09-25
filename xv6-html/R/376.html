@@ -1,22 +1,30 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>log_write</title>
+<title>mem</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/11.html#L86'>log_write</a>          86 defs.h         void            log_write(struct buf*);</span>
-<span class='curline'><a href='../S/22.html#L49'>log_write</a>          49 fs.c             log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L69'>log_write</a>          69 fs.c                   log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L94'>log_write</a>          94 fs.c             log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L198'>log_write</a>         198 fs.c                 log_write(bp);   // mark it allocated on the disk</span>
-<span class='curline'><a href='../S/22.html#L222'>log_write</a>         222 fs.c             log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L375'>log_write</a>         375 fs.c                 log_write(bp);</span>
-<span class='curline'><a href='../S/22.html#L488'>log_write</a>         488 fs.c               log_write(bp);</span>
+<span class='curline'><a href='../S/165.html#L1782'>mem</a>              1782 usertests.c      mem();</span>
+<span class='curline'><a href='../S/171.html#L185'>mem</a>               185 vm.c             char *mem;</span>
+<span class='curline'><a href='../S/171.html#L189'>mem</a>               189 vm.c             mem = kalloc();</span>
+<span class='curline'><a href='../S/171.html#L190'>mem</a>               190 vm.c             memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/171.html#L191'>mem</a>               191 vm.c             mappages(pgdir, 0, PGSIZE, V2P(mem), PTE_W|PTE_U);</span>
+<span class='curline'><a href='../S/171.html#L192'>mem</a>               192 vm.c             memmove(mem, init, sz);</span>
+<span class='curline'><a href='../S/171.html#L224'>mem</a>               224 vm.c             char *mem;</span>
+<span class='curline'><a href='../S/171.html#L234'>mem</a>               234 vm.c               mem = kalloc();</span>
+<span class='curline'><a href='../S/171.html#L235'>mem</a>               235 vm.c               if(mem == 0){</span>
+<span class='curline'><a href='../S/171.html#L240'>mem</a>               240 vm.c               memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/171.html#L241'>mem</a>               241 vm.c               if(mappages(pgdir, (char*)a, PGSIZE, V2P(mem), PTE_W|PTE_U) &lt; 0){</span>
+<span class='curline'><a href='../S/171.html#L244'>mem</a>               244 vm.c                 kfree(mem);</span>
+<span class='curline'><a href='../S/171.html#L321'>mem</a>               321 vm.c             char *mem;</span>
+<span class='curline'><a href='../S/171.html#L332'>mem</a>               332 vm.c               if((mem = kalloc()) == 0)</span>
+<span class='curline'><a href='../S/171.html#L334'>mem</a>               334 vm.c               memmove(mem, (char*)P2V(pa), PGSIZE);</span>
+<span class='curline'><a href='../S/171.html#L335'>mem</a>               335 vm.c               if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) &lt; 0)</span>
 </pre>
 </body>
 </html>

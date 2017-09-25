@@ -1,21 +1,53 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>dpl</title>
+<title>dp</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L62'>dpl</a>                62 mmu.h            uint dpl : 2;        // Descriptor Privilege Level</span>
-<span class='curline'><a href='../S/46.html#L73'>dpl</a>                73 mmu.h          #define SEG(type, base, lim, dpl) (struct segdesc)    \</span>
-<span class='curline'><a href='../S/46.html#L75'>dpl</a>                75 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
-<span class='curline'><a href='../S/46.html#L77'>dpl</a>                77 mmu.h          #define SEG16(type, base, lim, dpl) (struct segdesc)  \</span>
-<span class='curline'><a href='../S/46.html#L79'>dpl</a>                79 mmu.h            ((uint)(base) &gt;&gt; 16) &amp; 0xff, type, 1, dpl, 1,       \</span>
-<span class='curline'><a href='../S/46.html#L204'>dpl</a>               204 mmu.h            uint dpl : 2;         // descriptor(meaning new) privilege level</span>
-<span class='curline'><a href='../S/46.html#L225'>dpl</a>               225 mmu.h            (gate).dpl = (d);                                       \</span>
+<span class='curline'><a href='../S/39.html#L526'>dp</a>                526 fs.c           dirlookup(struct inode *dp, char *name, uint *poff)</span>
+<span class='curline'><a href='../S/39.html#L531'>dp</a>                531 fs.c             if(dp-&gt;type != T_DIR)</span>
+<span class='curline'><a href='../S/39.html#L534'>dp</a>                534 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/39.html#L535'>dp</a>                535 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/39.html#L544'>dp</a>                544 fs.c                 return iget(dp-&gt;dev, inum);</span>
+<span class='curline'><a href='../S/39.html#L553'>dp</a>                553 fs.c           dirlink(struct inode *dp, char *name, uint inum)</span>
+<span class='curline'><a href='../S/39.html#L560'>dp</a>                560 fs.c             if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/39.html#L566'>dp</a>                566 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/39.html#L567'>dp</a>                567 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/39.html#L575'>dp</a>                575 fs.c             if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/145.html#L122'>dp</a>                122 sysfile.c        struct inode *dp, *ip;</span>
+<span class='curline'><a href='../S/145.html#L144'>dp</a>                144 sysfile.c        if((dp = nameiparent(new, name)) == 0)</span>
+<span class='curline'><a href='../S/145.html#L146'>dp</a>                146 sysfile.c        ilock(dp);</span>
+<span class='curline'><a href='../S/145.html#L147'>dp</a>                147 sysfile.c        if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
+<span class='curline'><a href='../S/145.html#L148'>dp</a>                148 sysfile.c          iunlockput(dp);</span>
+<span class='curline'><a href='../S/145.html#L151'>dp</a>                151 sysfile.c        iunlockput(dp);</span>
+<span class='curline'><a href='../S/145.html#L169'>dp</a>                169 sysfile.c      isdirempty(struct inode *dp)</span>
+<span class='curline'><a href='../S/145.html#L174'>dp</a>                174 sysfile.c        for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
+<span class='curline'><a href='../S/145.html#L175'>dp</a>                175 sysfile.c          if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/145.html#L187'>dp</a>                187 sysfile.c        struct inode *ip, *dp;</span>
+<span class='curline'><a href='../S/145.html#L196'>dp</a>                196 sysfile.c        if((dp = nameiparent(path, name)) == 0){</span>
+<span class='curline'><a href='../S/145.html#L201'>dp</a>                201 sysfile.c        ilock(dp);</span>
+<span class='curline'><a href='../S/145.html#L207'>dp</a>                207 sysfile.c        if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
+<span class='curline'><a href='../S/145.html#L219'>dp</a>                219 sysfile.c        if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/145.html#L222'>dp</a>                222 sysfile.c          dp-&gt;nlink--;</span>
+<span class='curline'><a href='../S/145.html#L223'>dp</a>                223 sysfile.c          iupdate(dp);</span>
+<span class='curline'><a href='../S/145.html#L225'>dp</a>                225 sysfile.c        iunlockput(dp);</span>
+<span class='curline'><a href='../S/145.html#L236'>dp</a>                236 sysfile.c        iunlockput(dp);</span>
+<span class='curline'><a href='../S/145.html#L245'>dp</a>                245 sysfile.c        struct inode *ip, *dp;</span>
+<span class='curline'><a href='../S/145.html#L248'>dp</a>                248 sysfile.c        if((dp = nameiparent(path, name)) == 0)</span>
+<span class='curline'><a href='../S/145.html#L250'>dp</a>                250 sysfile.c        ilock(dp);</span>
+<span class='curline'><a href='../S/145.html#L252'>dp</a>                252 sysfile.c        if((ip = dirlookup(dp, name, &amp;off)) != 0){</span>
+<span class='curline'><a href='../S/145.html#L253'>dp</a>                253 sysfile.c          iunlockput(dp);</span>
+<span class='curline'><a href='../S/145.html#L261'>dp</a>                261 sysfile.c        if((ip = ialloc(dp-&gt;dev, type)) == 0)</span>
+<span class='curline'><a href='../S/145.html#L271'>dp</a>                271 sysfile.c          dp-&gt;nlink++;  // for ".."</span>
+<span class='curline'><a href='../S/145.html#L272'>dp</a>                272 sysfile.c          iupdate(dp);</span>
+<span class='curline'><a href='../S/145.html#L274'>dp</a>                274 sysfile.c          if(dirlink(ip, ".", ip-&gt;inum) &lt; 0 || dirlink(ip, "..", dp-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L278'>dp</a>                278 sysfile.c        if(dirlink(dp, name, ip-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/145.html#L281'>dp</a>                281 sysfile.c        iunlockput(dp);</span>
 </pre>
 </body>
 </html>

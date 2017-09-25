@@ -1,17 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>shiftcode</title>
+<title>shift</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L26'>shiftcode</a>          26 kbd.c              shift &amp;= ~(shiftcode[data] | E0ESC);</span>
-<span class='curline'><a href='../S/31.html#L34'>shiftcode</a>          34 kbd.c            shift |= shiftcode[data];</span>
-<span class='curline'><a href='../S/32.html#L34'>shiftcode</a>          34 kbd.h          static uchar shiftcode[256] =</span>
+<span class='curline'><a href='../S/60.html#L9'>shift</a>               9 kbd.c            static uint shift;</span>
+<span class='curline'><a href='../S/60.html#L21'>shift</a>              21 kbd.c              shift |= E0ESC;</span>
+<span class='curline'><a href='../S/60.html#L25'>shift</a>              25 kbd.c              data = (shift &amp; E0ESC ? data : data &amp; 0x7F);</span>
+<span class='curline'><a href='../S/60.html#L26'>shift</a>              26 kbd.c              shift &amp;= ~(shiftcode[data] | E0ESC);</span>
+<span class='curline'><a href='../S/60.html#L28'>shift</a>              28 kbd.c            } else if(shift &amp; E0ESC){</span>
+<span class='curline'><a href='../S/60.html#L31'>shift</a>              31 kbd.c              shift &amp;= ~E0ESC;</span>
+<span class='curline'><a href='../S/60.html#L34'>shift</a>              34 kbd.c            shift |= shiftcode[data];</span>
+<span class='curline'><a href='../S/60.html#L35'>shift</a>              35 kbd.c            shift ^= togglecode[data];</span>
+<span class='curline'><a href='../S/60.html#L36'>shift</a>              36 kbd.c            c = charcode[shift &amp; (CTL | SHIFT)][data];</span>
+<span class='curline'><a href='../S/60.html#L37'>shift</a>              37 kbd.c            if(shift &amp; CAPSLOCK){</span>
 </pre>
 </body>
 </html>

@@ -1,31 +1,65 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sp</title>
+<title>size</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L15'>sp</a>                 15 exec.c           uint argc, sz, sp, ustack[3+MAXARG+1];</span>
-<span class='curline'><a href='../S/17.html#L67'>sp</a>                 67 exec.c           sp = sz;</span>
-<span class='curline'><a href='../S/17.html#L73'>sp</a>                 73 exec.c             sp = (sp - (strlen(argv[argc]) + 1)) &amp; ~3;</span>
-<span class='curline'><a href='../S/17.html#L74'>sp</a>                 74 exec.c             if(copyout(pgdir, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
-<span class='curline'><a href='../S/17.html#L76'>sp</a>                 76 exec.c             ustack[3+argc] = sp;</span>
-<span class='curline'><a href='../S/17.html#L82'>sp</a>                 82 exec.c           ustack[2] = sp - (argc+1)*4;  // argv pointer</span>
-<span class='curline'><a href='../S/17.html#L84'>sp</a>                 84 exec.c           sp -= (3+argc+1) * 4;</span>
-<span class='curline'><a href='../S/17.html#L85'>sp</a>                 85 exec.c           if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)</span>
-<span class='curline'><a href='../S/17.html#L99'>sp</a>                 99 exec.c           proc-&gt;tf-&gt;esp = sp;</span>
-<span class='curline'><a href='../S/56.html#L38'>sp</a>                 38 proc.c           char *sp;</span>
-<span class='curline'><a href='../S/56.html#L60'>sp</a>                 60 proc.c           sp = p-&gt;kstack + KSTACKSIZE;</span>
-<span class='curline'><a href='../S/56.html#L63'>sp</a>                 63 proc.c           sp -= sizeof *p-&gt;tf;</span>
-<span class='curline'><a href='../S/56.html#L64'>sp</a>                 64 proc.c           p-&gt;tf = (struct trapframe*)sp;</span>
-<span class='curline'><a href='../S/56.html#L68'>sp</a>                 68 proc.c           sp -= 4;</span>
-<span class='curline'><a href='../S/56.html#L69'>sp</a>                 69 proc.c           *(uint*)sp = (uint)trapret;</span>
-<span class='curline'><a href='../S/56.html#L71'>sp</a>                 71 proc.c           sp -= sizeof *p-&gt;context;</span>
-<span class='curline'><a href='../S/56.html#L72'>sp</a>                 72 proc.c           p-&gt;context = (struct context*)sp;</span>
+<span class='curline'><a href='../S/35.html#L24'>size</a>               24 file.h           uint size;</span>
+<span class='curline'><a href='../S/39.html#L63'>size</a>               63 fs.c             for(b = 0; b &lt; sb.size; b += BPB){</span>
+<span class='curline'><a href='../S/39.html#L65'>size</a>               65 fs.c               for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
+<span class='curline'><a href='../S/39.html#L184'>size</a>              184 fs.c            inodestart %d bmap start %d\n", sb.size, sb.nblocks,</span>
+<span class='curline'><a href='../S/39.html#L233'>size</a>              233 fs.c             dip-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/39.html#L306'>size</a>              306 fs.c               ip-&gt;size = dip-&gt;size;</span>
+<span class='curline'><a href='../S/39.html#L434'>size</a>              434 fs.c             ip-&gt;size = 0;</span>
+<span class='curline'><a href='../S/39.html#L447'>size</a>              447 fs.c             st-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/39.html#L465'>size</a>              465 fs.c             if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/39.html#L467'>size</a>              467 fs.c             if(off + n &gt; ip-&gt;size)</span>
+<span class='curline'><a href='../S/39.html#L468'>size</a>              468 fs.c               n = ip-&gt;size - off;</span>
+<span class='curline'><a href='../S/39.html#L494'>size</a>              494 fs.c             if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/39.html#L507'>size</a>              507 fs.c             if(n &gt; 0 &amp;&amp; off &gt; ip-&gt;size){</span>
+<span class='curline'><a href='../S/39.html#L508'>size</a>              508 fs.c               ip-&gt;size = off;</span>
+<span class='curline'><a href='../S/39.html#L534'>size</a>              534 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/39.html#L566'>size</a>              566 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/41.html#L15'>size</a>               15 fs.h             uint size;         // Size of file system image (blocks)</span>
+<span class='curline'><a href='../S/41.html#L34'>size</a>               34 fs.h             uint size;            // Size of file (bytes)</span>
+<span class='curline'><a href='../S/77.html#L42'>size</a>               42 log.c            int size;</span>
+<span class='curline'><a href='../S/77.html#L63'>size</a>               63 log.c            log.size = sb.nlog;</span>
+<span class='curline'><a href='../S/77.html#L218'>size</a>              218 log.c            if (log.lh.n &gt;= LOGSIZE || log.lh.n &gt;= log.size - 1)</span>
+<span class='curline'><a href='../S/80.html#L46'>size</a>               46 ls.c               printf(1, "%s %d %d %d\n", fmtname(path), st.type, st.ino, st.size);</span>
+<span class='curline'><a href='../S/80.html#L66'>size</a>               66 ls.c                 printf(1, "%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);</span>
+<span class='curline'><a href='../S/92.html#L97'>size</a>               97 mkfs.c           sb.size = xint(FSSIZE);</span>
+<span class='curline'><a href='../S/92.html#L160'>size</a>              160 mkfs.c           off = xint(din.size);</span>
+<span class='curline'><a href='../S/92.html#L162'>size</a>              162 mkfs.c           din.size = xint(off);</span>
+<span class='curline'><a href='../S/92.html#L232'>size</a>              232 mkfs.c           din.size = xint(0);</span>
+<span class='curline'><a href='../S/92.html#L266'>size</a>              266 mkfs.c           off = xint(din.size);</span>
+<span class='curline'><a href='../S/92.html#L295'>size</a>              295 mkfs.c           din.size = xint(off);</span>
+<span class='curline'><a href='../S/133.html#L10'>size</a>               10 stat.h           uint size;   // Size of file in bytes</span>
+<span class='curline'><a href='../S/142.html#L59'>size</a>               59 syscall.c      argptr(int n, char **pp, int size)</span>
+<span class='curline'><a href='../S/142.html#L66'>size</a>               66 syscall.c        if(size &lt; 0 || (uint)i &gt;= curproc-&gt;sz || (uint)i+size &gt; curproc-&gt;sz)</span>
+<span class='curline'><a href='../S/145.html#L174'>size</a>              174 sysfile.c        for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
+<span class='curline'><a href='../S/161.html#L14'>size</a>               14 umalloc.c          uint size;</span>
+<span class='curline'><a href='../S/161.html#L33'>size</a>               33 umalloc.c        if(bp + bp-&gt;s.size == p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/161.html#L34'>size</a>               34 umalloc.c          bp-&gt;s.size += p-&gt;s.ptr-&gt;s.size;</span>
+<span class='curline'><a href='../S/161.html#L38'>size</a>               38 umalloc.c        if(p + p-&gt;s.size == bp){</span>
+<span class='curline'><a href='../S/161.html#L39'>size</a>               39 umalloc.c          p-&gt;s.size += bp-&gt;s.size;</span>
+<span class='curline'><a href='../S/161.html#L58'>size</a>               58 umalloc.c        hp-&gt;s.size = nu;</span>
+<span class='curline'><a href='../S/161.html#L72'>size</a>               72 umalloc.c          base.s.size = 0;</span>
+<span class='curline'><a href='../S/161.html#L75'>size</a>               75 umalloc.c          if(p-&gt;s.size &gt;= nunits){</span>
+<span class='curline'><a href='../S/161.html#L76'>size</a>               76 umalloc.c            if(p-&gt;s.size == nunits)</span>
+<span class='curline'><a href='../S/161.html#L79'>size</a>               79 umalloc.c              p-&gt;s.size -= nunits;</span>
+<span class='curline'><a href='../S/161.html#L80'>size</a>               80 umalloc.c              p += p-&gt;s.size;</span>
+<span class='curline'><a href='../S/161.html#L81'>size</a>               81 umalloc.c              p-&gt;s.size = nunits;</span>
+<span class='curline'><a href='../S/171.html#L61'>size</a>               61 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
+<span class='curline'><a href='../S/171.html#L67'>size</a>               67 vm.c             last = (char*)PGROUNDDOWN(((uint)va) + size - 1);</span>
+<span class='curline'><a href='../S/177.html#L63'>size</a>               63 x86.h          lgdt(struct segdesc *p, int size)</span>
+<span class='curline'><a href='../S/177.html#L67'>size</a>               67 x86.h            pd[0] = size-1;</span>
+<span class='curline'><a href='../S/177.html#L77'>size</a>               77 x86.h          lidt(struct gatedesc *p, int size)</span>
+<span class='curline'><a href='../S/177.html#L81'>size</a>               81 x86.h            pd[0] = size-1;</span>
 </pre>
 </body>
 </html>

@@ -3,48 +3,48 @@
 <head>
 <title>ptable</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L13'>ptable</a>             13 proc.c         } ptable;</span>
-<span class='curline'><a href='../S/56.html#L26'>ptable</a>             26 proc.c           initlock(&amp;ptable.lock, "ptable");</span>
-<span class='curline'><a href='../S/56.html#L40'>ptable</a>             40 proc.c           acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L42'>ptable</a>             42 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span>
-<span class='curline'><a href='../S/56.html#L46'>ptable</a>             46 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L53'>ptable</a>             53 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L110'>ptable</a>            110 proc.c           acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L114'>ptable</a>            114 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L174'>ptable</a>            174 proc.c           acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L178'>ptable</a>            178 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L208'>ptable</a>            208 proc.c           acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L214'>ptable</a>            214 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
-<span class='curline'><a href='../S/56.html#L236'>ptable</a>            236 proc.c           acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L240'>ptable</a>            240 proc.c             for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
-<span class='curline'><a href='../S/56.html#L255'>ptable</a>            255 proc.c                 release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L262'>ptable</a>            262 proc.c               release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L267'>ptable</a>            267 proc.c             sleep(proc, &amp;ptable.lock);  //DOC: wait-sleep</span>
-<span class='curline'><a href='../S/56.html#L289'>ptable</a>            289 proc.c             acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L290'>ptable</a>            290 proc.c             for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
-<span class='curline'><a href='../S/56.html#L307'>ptable</a>            307 proc.c             release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L324'>ptable</a>            324 proc.c           if(!holding(&amp;ptable.lock))</span>
-<span class='curline'><a href='../S/56.html#L341'>ptable</a>            341 proc.c           acquire(&amp;ptable.lock);  //DOC: yieldlock</span>
-<span class='curline'><a href='../S/56.html#L344'>ptable</a>            344 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L354'>ptable</a>            354 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L385'>ptable</a>            385 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock0</span>
-<span class='curline'><a href='../S/56.html#L386'>ptable</a>            386 proc.c             acquire(&amp;ptable.lock);  //DOC: sleeplock1</span>
-<span class='curline'><a href='../S/56.html#L399'>ptable</a>            399 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock2</span>
-<span class='curline'><a href='../S/56.html#L400'>ptable</a>            400 proc.c             release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L413'>ptable</a>            413 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span>
-<span class='curline'><a href='../S/56.html#L422'>ptable</a>            422 proc.c           acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L424'>ptable</a>            424 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L435'>ptable</a>            435 proc.c           acquire(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L436'>ptable</a>            436 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
-<span class='curline'><a href='../S/56.html#L442'>ptable</a>            442 proc.c               release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L446'>ptable</a>            446 proc.c           release(&amp;ptable.lock);</span>
-<span class='curline'><a href='../S/56.html#L470'>ptable</a>            470 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/107.html#L13'>ptable</a>             13 proc.c         } ptable;</span>
+<span class='curline'><a href='../S/107.html#L26'>ptable</a>             26 proc.c           initlock(&amp;ptable.lock, "ptable");</span>
+<span class='curline'><a href='../S/107.html#L79'>ptable</a>             79 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L81'>ptable</a>             81 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span>
+<span class='curline'><a href='../S/107.html#L85'>ptable</a>             85 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L92'>ptable</a>             92 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L149'>ptable</a>            149 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L153'>ptable</a>            153 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L215'>ptable</a>            215 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L219'>ptable</a>            219 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L250'>ptable</a>            250 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L256'>ptable</a>            256 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/107.html#L279'>ptable</a>            279 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L283'>ptable</a>            283 proc.c             for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/107.html#L298'>ptable</a>            298 proc.c                 release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L305'>ptable</a>            305 proc.c               release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L310'>ptable</a>            310 proc.c             sleep(curproc, &amp;ptable.lock);  //DOC: wait-sleep</span>
+<span class='curline'><a href='../S/107.html#L334'>ptable</a>            334 proc.c             acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L335'>ptable</a>            335 proc.c             for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/107.html#L353'>ptable</a>            353 proc.c             release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L371'>ptable</a>            371 proc.c           if(!holding(&amp;ptable.lock))</span>
+<span class='curline'><a href='../S/107.html#L388'>ptable</a>            388 proc.c           acquire(&amp;ptable.lock);  //DOC: yieldlock</span>
+<span class='curline'><a href='../S/107.html#L391'>ptable</a>            391 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L401'>ptable</a>            401 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L434'>ptable</a>            434 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock0</span>
+<span class='curline'><a href='../S/107.html#L435'>ptable</a>            435 proc.c             acquire(&amp;ptable.lock);  //DOC: sleeplock1</span>
+<span class='curline'><a href='../S/107.html#L448'>ptable</a>            448 proc.c           if(lk != &amp;ptable.lock){  //DOC: sleeplock2</span>
+<span class='curline'><a href='../S/107.html#L449'>ptable</a>            449 proc.c             release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L462'>ptable</a>            462 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span>
+<span class='curline'><a href='../S/107.html#L471'>ptable</a>            471 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L473'>ptable</a>            473 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L484'>ptable</a>            484 proc.c           acquire(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L485'>ptable</a>            485 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/107.html#L491'>ptable</a>            491 proc.c               release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L495'>ptable</a>            495 proc.c           release(&amp;ptable.lock);</span>
+<span class='curline'><a href='../S/107.html#L519'>ptable</a>            519 proc.c           for(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++){</span>
 </pre>
 </body>
 </html>

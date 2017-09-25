@@ -1,295 +1,76 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>Makefile</title>
+<title>fs.h</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/Makefile</h2>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/fs.h</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
+<h2 class='header'><a href='../J/20.html' title='Multiple included from 14 places.'>INCLUDED FROM</a></h2>
+<hr />
 <pre>
-<a id='L1' name='L1'></a>OBJS = \
-<a id='L2' name='L2'></a>        bio.o\
-<a id='L3' name='L3'></a>        console.o\
-<a id='L4' name='L4'></a>        exec.o\
-<a id='L5' name='L5'></a>        file.o\
-<a id='L6' name='L6'></a>        fs.o\
-<a id='L7' name='L7'></a>        ide.o\
-<a id='L8' name='L8'></a>        ioapic.o\
-<a id='L9' name='L9'></a>        kalloc.o\
-<a id='L10' name='L10'></a>        kbd.o\
-<a id='L11' name='L11'></a>        lapic.o\
-<a id='L12' name='L12'></a>        log.o\
-<a id='L13' name='L13'></a>        main.o\
-<a id='L14' name='L14'></a>        mp.o\
-<a id='L15' name='L15'></a>        picirq.o\
-<a id='L16' name='L16'></a>        pipe.o\
-<a id='L17' name='L17'></a>        proc.o\
-<a id='L18' name='L18'></a>        sleeplock.o\
-<a id='L19' name='L19'></a>        spinlock.o\
-<a id='L20' name='L20'></a>        string.o\
-<a id='L21' name='L21'></a>        swtch.o\
-<a id='L22' name='L22'></a>        syscall.o\
-<a id='L23' name='L23'></a>        sysfile.o\
-<a id='L24' name='L24'></a>        sysproc.o\
-<a id='L25' name='L25'></a>        timer.o\
-<a id='L26' name='L26'></a>        trapasm.o\
-<a id='L27' name='L27'></a>        trap.o\
-<a id='L28' name='L28'></a>        uart.o\
-<a id='L29' name='L29'></a>        vectors.o\
-<a id='L30' name='L30'></a>        vm.o\
-<a id='L31' name='L31'></a>
-<a id='L32' name='L32'></a># Cross-compiling (e.g., on Mac OS X)
-<a id='L33' name='L33'></a># TOOLPREFIX = i386-jos-elf
-<a id='L34' name='L34'></a>
-<a id='L35' name='L35'></a># Using native tools (e.g., on X86 Linux)
-<a id='L36' name='L36'></a>#TOOLPREFIX = 
-<a id='L37' name='L37'></a>
-<a id='L38' name='L38'></a># Try to infer the correct TOOLPREFIX if not set
-<a id='L39' name='L39'></a>ifndef TOOLPREFIX
-<a id='L40' name='L40'></a>TOOLPREFIX := $(shell if i386-jos-elf-objdump -i 2&gt;&amp;1 | grep '^elf32-i386$$' &gt;/dev/null 2&gt;&amp;1; \
-<a id='L41' name='L41'></a>        then echo 'i386-jos-elf-'; \
-<a id='L42' name='L42'></a>        elif objdump -i 2&gt;&amp;1 | grep 'elf32-i386' &gt;/dev/null 2&gt;&amp;1; \
-<a id='L43' name='L43'></a>        then echo ''; \
-<a id='L44' name='L44'></a>        else echo "***" 1&gt;&amp;2; \
-<a id='L45' name='L45'></a>        echo "*** Error: Couldn't find an i386-*-elf version of GCC/binutils." 1&gt;&amp;2; \
-<a id='L46' name='L46'></a>        echo "*** Is the directory with i386-jos-elf-gcc in your PATH?" 1&gt;&amp;2; \
-<a id='L47' name='L47'></a>        echo "*** If your i386-*-elf toolchain is installed with a command" 1&gt;&amp;2; \
-<a id='L48' name='L48'></a>        echo "*** prefix other than 'i386-jos-elf-', set your TOOLPREFIX" 1&gt;&amp;2; \
-<a id='L49' name='L49'></a>        echo "*** environment variable to that prefix and run 'make' again." 1&gt;&amp;2; \
-<a id='L50' name='L50'></a>        echo "*** To turn off this error, run 'gmake TOOLPREFIX= ...'." 1&gt;&amp;2; \
-<a id='L51' name='L51'></a>        echo "***" 1&gt;&amp;2; exit 1; fi)
-<a id='L52' name='L52'></a>endif
-<a id='L53' name='L53'></a>
-<a id='L54' name='L54'></a># If the makefile can't find QEMU, specify its path here
-<a id='L55' name='L55'></a># QEMU = qemu-system-i386
-<a id='L56' name='L56'></a>
-<a id='L57' name='L57'></a># Try to infer the correct QEMU
-<a id='L58' name='L58'></a>ifndef QEMU
-<a id='L59' name='L59'></a>QEMU = $(shell if which qemu &gt; /dev/null; \
-<a id='L60' name='L60'></a>        then echo qemu; exit; \
-<a id='L61' name='L61'></a>        elif which qemu-system-i386 &gt; /dev/null; \
-<a id='L62' name='L62'></a>        then echo qemu-system-i386; exit; \
-<a id='L63' name='L63'></a>        else \
-<a id='L64' name='L64'></a>        qemu=/Applications/Q.app/Contents/MacOS/i386-softmmu.app/Contents/MacOS/i386-softmmu; \
-<a id='L65' name='L65'></a>        if test -x $$qemu; then echo $$qemu; exit; fi; fi; \
-<a id='L66' name='L66'></a>        echo "***" 1&gt;&amp;2; \
-<a id='L67' name='L67'></a>        echo "*** Error: Couldn't find a working QEMU executable." 1&gt;&amp;2; \
-<a id='L68' name='L68'></a>        echo "*** Is the directory containing the qemu binary in your PATH" 1&gt;&amp;2; \
-<a id='L69' name='L69'></a>        echo "*** or have you tried setting the QEMU variable in Makefile?" 1&gt;&amp;2; \
-<a id='L70' name='L70'></a>        echo "***" 1&gt;&amp;2; exit 1)
-<a id='L71' name='L71'></a>endif
-<a id='L72' name='L72'></a>
-<a id='L73' name='L73'></a>CC = $(TOOLPREFIX)gcc
-<a id='L74' name='L74'></a>AS = $(TOOLPREFIX)gas
-<a id='L75' name='L75'></a>LD = $(TOOLPREFIX)ld
-<a id='L76' name='L76'></a>OBJCOPY = $(TOOLPREFIX)objcopy
-<a id='L77' name='L77'></a>OBJDUMP = $(TOOLPREFIX)objdump
-<a id='L78' name='L78'></a>CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer
-<a id='L79' name='L79'></a>#CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -fvar-tracking -fvar-tracking-assignments -O0 -g -Wall -MD -gdwarf-2 -m32 -Werror -fno-omit-frame-pointer
-<a id='L80' name='L80'></a>CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo -fno-stack-protector)
-<a id='L81' name='L81'></a>ASFLAGS = -m32 -gdwarf-2 -Wa,-divide
-<a id='L82' name='L82'></a># FreeBSD ld wants ``elf_i386_fbsd''
-<a id='L83' name='L83'></a>LDFLAGS += -m $(shell $(LD) -V | grep elf_i386 2&gt;/dev/null | head -n 1)
-<a id='L84' name='L84'></a>
-<a id='L85' name='L85'></a>xv6.img: bootblock kernel fs.img
-<a id='L86' name='L86'></a>        dd if=/dev/zero of=xv6.img count=10000
-<a id='L87' name='L87'></a>        dd if=bootblock of=xv6.img conv=notrunc
-<a id='L88' name='L88'></a>        dd if=kernel of=xv6.img seek=1 conv=notrunc
-<a id='L89' name='L89'></a>
-<a id='L90' name='L90'></a>xv6memfs.img: bootblock kernelmemfs
-<a id='L91' name='L91'></a>        dd if=/dev/zero of=xv6memfs.img count=10000
-<a id='L92' name='L92'></a>        dd if=bootblock of=xv6memfs.img conv=notrunc
-<a id='L93' name='L93'></a>        dd if=kernelmemfs of=xv6memfs.img seek=1 conv=notrunc
-<a id='L94' name='L94'></a>
-<a id='L95' name='L95'></a>bootblock: bootasm.S bootmain.c
-<a id='L96' name='L96'></a>        $(CC) $(CFLAGS) -fno-pic -O -nostdinc -I. -c bootmain.c
-<a id='L97' name='L97'></a>        $(CC) $(CFLAGS) -fno-pic -nostdinc -I. -c bootasm.S
-<a id='L98' name='L98'></a>        $(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o bootblock.o bootasm.o bootmain.o
-<a id='L99' name='L99'></a>        $(OBJDUMP) -S bootblock.o &gt; bootblock.asm
-<a id='L100' name='L100'></a>        $(OBJCOPY) -S -O binary -j .text bootblock.o bootblock
-<a id='L101' name='L101'></a>        ./sign.pl bootblock
-<a id='L102' name='L102'></a>
-<a id='L103' name='L103'></a>entryother: entryother.S
-<a id='L104' name='L104'></a>        $(CC) $(CFLAGS) -fno-pic -nostdinc -I. -c entryother.S
-<a id='L105' name='L105'></a>        $(LD) $(LDFLAGS) -N -e start -Ttext 0x7000 -o bootblockother.o entryother.o
-<a id='L106' name='L106'></a>        $(OBJCOPY) -S -O binary -j .text bootblockother.o entryother
-<a id='L107' name='L107'></a>        $(OBJDUMP) -S bootblockother.o &gt; entryother.asm
-<a id='L108' name='L108'></a>
-<a id='L109' name='L109'></a>initcode: initcode.S
-<a id='L110' name='L110'></a>        $(CC) $(CFLAGS) -nostdinc -I. -c initcode.S
-<a id='L111' name='L111'></a>        $(LD) $(LDFLAGS) -N -e start -Ttext 0 -o initcode.out initcode.o
-<a id='L112' name='L112'></a>        $(OBJCOPY) -S -O binary initcode.out initcode
-<a id='L113' name='L113'></a>        $(OBJDUMP) -S initcode.o &gt; initcode.asm
-<a id='L114' name='L114'></a>
-<a id='L115' name='L115'></a>kernel: $(OBJS) entry.o entryother initcode kernel.ld
-<a id='L116' name='L116'></a>        $(LD) $(LDFLAGS) -T kernel.ld -o kernel entry.o $(OBJS) -b binary initcode entryother
-<a id='L117' name='L117'></a>        $(OBJDUMP) -S kernel &gt; kernel.asm
-<a id='L118' name='L118'></a>        $(OBJDUMP) -t kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' &gt; kernel.sym
-<a id='L119' name='L119'></a>
-<a id='L120' name='L120'></a># kernelmemfs is a copy of kernel that maintains the
-<a id='L121' name='L121'></a># disk image in memory instead of writing to a disk.
-<a id='L122' name='L122'></a># This is not so useful for testing persistent storage or
-<a id='L123' name='L123'></a># exploring disk buffering implementations, but it is
-<a id='L124' name='L124'></a># great for testing the kernel on real hardware without
-<a id='L125' name='L125'></a># needing a scratch disk.
-<a id='L126' name='L126'></a>MEMFSOBJS = $(filter-out ide.o,$(OBJS)) memide.o
-<a id='L127' name='L127'></a>kernelmemfs: $(MEMFSOBJS) entry.o entryother initcode kernel.ld fs.img
-<a id='L128' name='L128'></a>        $(LD) $(LDFLAGS) -T kernel.ld -o kernelmemfs entry.o  $(MEMFSOBJS) -b binary initcode entryother fs.img
-<a id='L129' name='L129'></a>        $(OBJDUMP) -S kernelmemfs &gt; kernelmemfs.asm
-<a id='L130' name='L130'></a>        $(OBJDUMP) -t kernelmemfs | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' &gt; kernelmemfs.sym
-<a id='L131' name='L131'></a>
-<a id='L132' name='L132'></a>tags: $(OBJS) entryother.S _init
-<a id='L133' name='L133'></a>        etags *.S *.c
-<a id='L134' name='L134'></a>
-<a id='L135' name='L135'></a>vectors.S: vectors.pl
-<a id='L136' name='L136'></a>        perl vectors.pl &gt; vectors.S
-<a id='L137' name='L137'></a>
-<a id='L138' name='L138'></a>ULIB = ulib.o usys.o printf.o umalloc.o
-<a id='L139' name='L139'></a>
-<a id='L140' name='L140'></a>_%: %.o $(ULIB)
-<a id='L141' name='L141'></a>        $(LD) $(LDFLAGS) -N -e main -Ttext 0 -o $@ $^
-<a id='L142' name='L142'></a>        $(OBJDUMP) -S $@ &gt; $*.asm
-<a id='L143' name='L143'></a>        $(OBJDUMP) -t $@ | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' &gt; $*.sym
-<a id='L144' name='L144'></a>
-<a id='L145' name='L145'></a>_forktest: forktest.o $(ULIB)
-<a id='L146' name='L146'></a>        # forktest has less library code linked in - needs to be small
-<a id='L147' name='L147'></a>        # in order to be able to max out the proc table.
-<a id='L148' name='L148'></a>        $(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _forktest forktest.o ulib.o usys.o
-<a id='L149' name='L149'></a>        $(OBJDUMP) -S _forktest &gt; forktest.asm
-<a id='L150' name='L150'></a>
-<a id='L151' name='L151'></a>mkfs: mkfs.c fs.h
-<a id='L152' name='L152'></a>        gcc -Werror -Wall -o mkfs mkfs.c
-<a id='L153' name='L153'></a>
-<a id='L154' name='L154'></a># Prevent deletion of intermediate files, e.g. cat.o, after first build, so
-<a id='L155' name='L155'></a># that disk image changes after first build are persistent until clean.  More
-<a id='L156' name='L156'></a># details:
-<a id='L157' name='L157'></a># http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
-<a id='L158' name='L158'></a>.PRECIOUS: %.o
-<a id='L159' name='L159'></a>
-<a id='L160' name='L160'></a>UPROGS=\
-<a id='L161' name='L161'></a>        _cat\
-<a id='L162' name='L162'></a>        _echo\
-<a id='L163' name='L163'></a>        _forktest\
-<a id='L164' name='L164'></a>        _grep\
-<a id='L165' name='L165'></a>        _init\
-<a id='L166' name='L166'></a>        _kill\
-<a id='L167' name='L167'></a>        _ln\
-<a id='L168' name='L168'></a>        _ls\
-<a id='L169' name='L169'></a>        _mkdir\
-<a id='L170' name='L170'></a>        _rm\
-<a id='L171' name='L171'></a>        _sh\
-<a id='L172' name='L172'></a>        _stressfs\
-<a id='L173' name='L173'></a>        _usertests\
-<a id='L174' name='L174'></a>        _wc\
-<a id='L175' name='L175'></a>        _zombie\
-<a id='L176' name='L176'></a>
-<a id='L177' name='L177'></a>fs.img: mkfs README $(UPROGS)
-<a id='L178' name='L178'></a>        ./mkfs fs.img README $(UPROGS)
-<a id='L179' name='L179'></a>
-<a id='L180' name='L180'></a>-include *.d
-<a id='L181' name='L181'></a>
-<a id='L182' name='L182'></a>clean: 
-<a id='L183' name='L183'></a>        rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \
-<a id='L184' name='L184'></a>        *.o *.d *.asm *.sym vectors.S bootblock entryother \
-<a id='L185' name='L185'></a>        initcode initcode.out kernel xv6.img fs.img kernelmemfs mkfs \
-<a id='L186' name='L186'></a>        .gdbinit \
-<a id='L187' name='L187'></a>        $(UPROGS)
-<a id='L188' name='L188'></a>
-<a id='L189' name='L189'></a># make a printout
-<a id='L190' name='L190'></a>FILES = $(shell grep -v '^\#' runoff.list)
-<a id='L191' name='L191'></a>PRINT = runoff.list runoff.spec README toc.hdr toc.ftr $(FILES)
-<a id='L192' name='L192'></a>
-<a id='L193' name='L193'></a>xv6.pdf: $(PRINT)
-<a id='L194' name='L194'></a>        ./runoff
-<a id='L195' name='L195'></a>        ls -l xv6.pdf
-<a id='L196' name='L196'></a>
-<a id='L197' name='L197'></a>print: xv6.pdf
-<a id='L198' name='L198'></a>
-<a id='L199' name='L199'></a># run in emulators
-<a id='L200' name='L200'></a>
-<a id='L201' name='L201'></a>bochs : fs.img xv6.img
-<a id='L202' name='L202'></a>        if [ ! -e .bochsrc ]; then ln -s dot-bochsrc .bochsrc; fi
-<a id='L203' name='L203'></a>        bochs -q
-<a id='L204' name='L204'></a>
-<a id='L205' name='L205'></a># try to generate a unique GDB port
-<a id='L206' name='L206'></a>GDBPORT = $(shell expr `id -u` % 5000 + 25000)
-<a id='L207' name='L207'></a># QEMU's gdb stub command line changed in 0.11
-<a id='L208' name='L208'></a>QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \
-<a id='L209' name='L209'></a>        then echo "-gdb tcp::$(GDBPORT)"; \
-<a id='L210' name='L210'></a>        else echo "-s -p $(GDBPORT)"; fi)
-<a id='L211' name='L211'></a>ifndef CPUS
-<a id='L212' name='L212'></a>CPUS := 2
-<a id='L213' name='L213'></a>endif
-<a id='L214' name='L214'></a>QEMUOPTS = -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp $(CPUS) -m 512 $(QEMUEXTRA)
-<a id='L215' name='L215'></a>
-<a id='L216' name='L216'></a>qemu: fs.img xv6.img
-<a id='L217' name='L217'></a>        $(QEMU) -serial mon:stdio $(QEMUOPTS)
-<a id='L218' name='L218'></a>
-<a id='L219' name='L219'></a>qemu-memfs: xv6memfs.img
-<a id='L220' name='L220'></a>        $(QEMU) -drive file=xv6memfs.img,index=0,media=disk,format=raw -smp $(CPUS) -m 256
-<a id='L221' name='L221'></a>
-<a id='L222' name='L222'></a>qemu-nox: fs.img xv6.img
-<a id='L223' name='L223'></a>        $(QEMU) -nographic $(QEMUOPTS)
-<a id='L224' name='L224'></a>
-<a id='L225' name='L225'></a>.gdbinit: .gdbinit.tmpl
-<a id='L226' name='L226'></a>        sed "s/localhost:1234/localhost:$(GDBPORT)/" &lt; $^ &gt; $@
-<a id='L227' name='L227'></a>
-<a id='L228' name='L228'></a>qemu-gdb: fs.img xv6.img .gdbinit
-<a id='L229' name='L229'></a>        @echo "*** Now run 'gdb'." 1&gt;&amp;2
-<a id='L230' name='L230'></a>        $(QEMU) -serial mon:stdio $(QEMUOPTS) -S $(QEMUGDB)
-<a id='L231' name='L231'></a>
-<a id='L232' name='L232'></a>qemu-nox-gdb: fs.img xv6.img .gdbinit
-<a id='L233' name='L233'></a>        @echo "*** Now run 'gdb'." 1&gt;&amp;2
-<a id='L234' name='L234'></a>        $(QEMU) -nographic $(QEMUOPTS) -S $(QEMUGDB)
-<a id='L235' name='L235'></a>
-<a id='L236' name='L236'></a># CUT HERE
-<a id='L237' name='L237'></a># prepare dist for students
-<a id='L238' name='L238'></a># after running make dist, probably want to
-<a id='L239' name='L239'></a># rename it to rev0 or rev1 or so on and then
-<a id='L240' name='L240'></a># check in that version.
-<a id='L241' name='L241'></a>
-<a id='L242' name='L242'></a>EXTRA=\
-<a id='L243' name='L243'></a>        mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
-<a id='L244' name='L244'></a>        ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-<a id='L245' name='L245'></a>        printf.c umalloc.c\
-<a id='L246' name='L246'></a>        README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
-<a id='L247' name='L247'></a>        .gdbinit.tmpl gdbutil\
-<a id='L248' name='L248'></a>
-<a id='L249' name='L249'></a>dist:
-<a id='L250' name='L250'></a>        rm -rf dist
-<a id='L251' name='L251'></a>        mkdir dist
-<a id='L252' name='L252'></a>        for i in $(FILES); \
-<a id='L253' name='L253'></a>        do \
-<a id='L254' name='L254'></a>                grep -v PAGEBREAK $$i &gt;dist/$$i; \
-<a id='L255' name='L255'></a>        done
-<a id='L256' name='L256'></a>        sed '/CUT HERE/,$$d' Makefile &gt;dist/Makefile
-<a id='L257' name='L257'></a>        echo &gt;dist/runoff.spec
-<a id='L258' name='L258'></a>        cp $(EXTRA) dist
-<a id='L259' name='L259'></a>
-<a id='L260' name='L260'></a>dist-test:
-<a id='L261' name='L261'></a>        rm -rf dist
-<a id='L262' name='L262'></a>        make dist
-<a id='L263' name='L263'></a>        rm -rf dist-test
-<a id='L264' name='L264'></a>        mkdir dist-test
-<a id='L265' name='L265'></a>        cp dist/* dist-test
-<a id='L266' name='L266'></a>        cd dist-test; $(MAKE) print
-<a id='L267' name='L267'></a>        cd dist-test; $(MAKE) bochs || true
-<a id='L268' name='L268'></a>        cd dist-test; $(MAKE) qemu
-<a id='L269' name='L269'></a>
-<a id='L270' name='L270'></a># update this rule (change rev#) when it is time to
-<a id='L271' name='L271'></a># make a new revision.
-<a id='L272' name='L272'></a>tar:
-<a id='L273' name='L273'></a>        rm -rf /tmp/xv6
-<a id='L274' name='L274'></a>        mkdir -p /tmp/xv6
-<a id='L275' name='L275'></a>        cp dist/* dist/.gdbinit.tmpl /tmp/xv6
-<a id='L276' name='L276'></a>        (cd /tmp; tar cf - xv6) | gzip &gt;xv6-rev9.tar.gz  # the next one will be 9 (6/27/15)
-<a id='L277' name='L277'></a>
-<a id='L278' name='L278'></a>.PHONY: dist-test dist
+<a id='L1' name='L1'></a>   1 <em class='comment'>// On-disk file system format.</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>// Both the kernel and user programs use this header file.</em>
+<a id='L3' name='L3'></a>   3 
+<a id='L4' name='L4'></a>   4 
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#define</em> <a href='../R/150.html' title='Multiple referred from 2 places.'>ROOTINO</a> 1  <em class='comment'>// root i-number</em>
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#define</em> <a href='../R/10.html' title='Multiple referred from 41 places.'>BSIZE</a> 512  <em class='comment'>// block size</em>
+<a id='L7' name='L7'></a>   7 
+<a id='L8' name='L8'></a>   8 <em class='comment'>// Disk layout:</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>// [ boot block | super block | log | inode blocks |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>//                                          free bit map | data blocks]</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>//</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>// mkfs computes the super block and builds an initial file system. The</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>// super block describes the disk layout:</em>
+<a id='L14' name='L14'></a>  14 <strong class='reserved'>struct</strong> <a href='../R/477.html' title='Multiple referred from 6 places.'>superblock</a> <em class='brace'>{</em>
+<a id='L15' name='L15'></a>  15   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/372.html' title='Multiple used in 51 places.'>size</a>;         <em class='comment'>// Size of file system image (blocks)</em>
+<a id='L16' name='L16'></a>  16   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/227.html' title='Multiple used in 6 places.'>nblocks</a>;      <em class='comment'>// Number of data blocks</em>
+<a id='L17' name='L17'></a>  17   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/241.html' title='Multiple used in 4 places.'>ninodes</a>;      <em class='comment'>// Number of inodes.</em>
+<a id='L18' name='L18'></a>  18   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/243.html' title='Multiple used in 9 places.'>nlog</a>;         <em class='comment'>// Number of log blocks</em>
+<a id='L19' name='L19'></a>  19   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/205.html' title='Multiple used in 4 places.'>logstart</a>;     <em class='comment'>// Block number of first log block</em>
+<a id='L20' name='L20'></a>  20   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/168.html' title='Multiple used in 4 places.'>inodestart</a>;   <em class='comment'>// Block number of first inode block</em>
+<a id='L21' name='L21'></a>  21   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/41.html' title='Multiple used in 6 places.'>bmapstart</a>;    <em class='comment'>// Block number of first free map block</em>
+<a id='L22' name='L22'></a>  22 <em class='brace'>}</em>;
+<a id='L23' name='L23'></a>  23 
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#define</em> <a href='../R/109.html' title='Multiple referred from 20 places.'>NDIRECT</a> 12
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/112.html' title='Multiple referred from 4 places.'>NINDIRECT</a> (<a href='../S/41.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a> / <strong class='reserved'>sizeof</strong>(<a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a>))
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#define</em> <a href='../R/96.html' title='Multiple referred from 4 places.'>MAXFILE</a> (<a href='../S/41.html#L24' title='Defined at 24 in fs.h.'>NDIRECT</a> + <a href='../S/41.html#L25' title='Defined at 25 in fs.h.'>NINDIRECT</a>)
+<a id='L27' name='L27'></a>  27 
+<a id='L28' name='L28'></a>  28 <em class='comment'>// On-disk inode structure</em>
+<a id='L29' name='L29'></a>  29 <strong class='reserved'>struct</strong> <a href='../R/265.html' title='Multiple referred from 19 places.'>dinode</a> <em class='brace'>{</em>
+<a id='L30' name='L30'></a>  30   <strong class='reserved'>short</strong> <a href='../Y/413.html' title='Multiple used in 70 places.'>type</a>;           <em class='comment'>// File type</em>
+<a id='L31' name='L31'></a>  31   <strong class='reserved'>short</strong> <a href='../Y/211.html' title='Multiple used in 13 places.'>major</a>;          <em class='comment'>// Major device number (T_DEV only)</em>
+<a id='L32' name='L32'></a>  32   <strong class='reserved'>short</strong> <a href='../Y/216.html' title='Multiple used in 9 places.'>minor</a>;          <em class='comment'>// Minor device number (T_DEV only)</em>
+<a id='L33' name='L33'></a>  33   <strong class='reserved'>short</strong> <a href='../Y/242.html' title='Multiple used in 15 places.'>nlink</a>;          <em class='comment'>// Number of links to inode in file system</em>
+<a id='L34' name='L34'></a>  34   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/372.html' title='Multiple used in 51 places.'>size</a>;            <em class='comment'>// Size of file (bytes)</em>
+<a id='L35' name='L35'></a>  35   <a href='../S/156.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/14.html' title='Multiple used in 22 places.'>addrs</a>[<a href='../S/41.html#L24' title='Defined at 24 in fs.h.'>NDIRECT</a>+1];   <em class='comment'>// Data block addresses</em>
+<a id='L36' name='L36'></a>  36 <em class='brace'>}</em>;
+<a id='L37' name='L37'></a>  37 
+<a id='L38' name='L38'></a>  38 <em class='comment'>// Inodes per block.</em>
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#define</em> <a href='../R/65.html' title='Multiple referred from 7 places.'>IPB</a>           (<a href='../S/41.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a> / <strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/41.html#L29' title='Defined at 29 in fs.h.'>dinode</a>))
+<a id='L40' name='L40'></a>  40 
+<a id='L41' name='L41'></a>  41 <em class='comment'>// Block containing inode i</em>
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../R/47.html' title='Multiple referred from 5 places.'>IBLOCK</a>(<a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>, <a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>)     ((<a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>) / <a href='../S/41.html#L39' title='Defined at 39 in fs.h.'>IPB</a> + <a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>.<a href='../Y/168.html' title='Multiple used in 4 places.'>inodestart</a>)
+<a id='L43' name='L43'></a>  43 
+<a id='L44' name='L44'></a>  44 <em class='comment'>// Bitmap bits per block</em>
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#define</em> <a href='../R/9.html' title='Multiple referred from 4 places.'>BPB</a>           (<a href='../S/41.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>*8)
+<a id='L46' name='L46'></a>  46 
+<a id='L47' name='L47'></a>  47 <em class='comment'>// Block of free map containing bit for block b</em>
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/6.html' title='Multiple referred from 2 places.'>BBLOCK</a>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>, <a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>) (<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>/<a href='../S/41.html#L45' title='Defined at 45 in fs.h.'>BPB</a> + <a href='../Y/352.html' title='Multiple used in 39 places.'>sb</a>.<a href='../Y/41.html' title='Multiple used in 6 places.'>bmapstart</a>)
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50 <em class='comment'>// Directory is a file containing a sequence of dirent structures.</em>
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#define</em> <a href='../R/28.html' title='Multiple referred from 16 places.'>DIRSIZ</a> 14
+<a id='L52' name='L52'></a>  52 
+<a id='L53' name='L53'></a>  53 <strong class='reserved'>struct</strong> <a href='../R/266.html' title='Multiple referred from 7 places.'>dirent</a> <em class='brace'>{</em>
+<a id='L54' name='L54'></a>  54   <a href='../S/156.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/171.html' title='Multiple used in 50 places.'>inum</a>;
+<a id='L55' name='L55'></a>  55   <strong class='reserved'>char</strong> <a href='../Y/224.html' title='Multiple used in 107 places.'>name</a>[<a href='../S/41.html#L51' title='Defined at 51 in fs.h.'>DIRSIZ</a>];
+<a id='L56' name='L56'></a>  56 <em class='brace'>}</em>;
+<a id='L57' name='L57'></a>  57 
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

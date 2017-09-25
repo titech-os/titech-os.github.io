@@ -1,29 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>input</title>
+<title>inodestart</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.5' />
+<meta name='generator' content='GLOBAL-6.5.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/8.html#L186'>input</a>             186 console.c      } input;</span>
-<span class='curline'><a href='../S/8.html#L203'>input</a>             203 console.c            while(input.e != input.w &amp;&amp;</span>
-<span class='curline'><a href='../S/8.html#L204'>input</a>             204 console.c                  input.buf[(input.e-1) % INPUT_BUF] != '\n'){</span>
-<span class='curline'><a href='../S/8.html#L205'>input</a>             205 console.c              input.e--;</span>
-<span class='curline'><a href='../S/8.html#L210'>input</a>             210 console.c            if(input.e != input.w){</span>
-<span class='curline'><a href='../S/8.html#L211'>input</a>             211 console.c              input.e--;</span>
-<span class='curline'><a href='../S/8.html#L216'>input</a>             216 console.c            if(c != 0 &amp;&amp; input.e-input.r &lt; INPUT_BUF){</span>
-<span class='curline'><a href='../S/8.html#L218'>input</a>             218 console.c              input.buf[input.e++ % INPUT_BUF] = c;</span>
-<span class='curline'><a href='../S/8.html#L220'>input</a>             220 console.c              if(c == '\n' || c == C('D') || input.e == input.r+INPUT_BUF){</span>
-<span class='curline'><a href='../S/8.html#L221'>input</a>             221 console.c                input.w = input.e;</span>
-<span class='curline'><a href='../S/8.html#L222'>input</a>             222 console.c                wakeup(&amp;input.r);</span>
-<span class='curline'><a href='../S/8.html#L244'>input</a>             244 console.c          while(input.r == input.w){</span>
-<span class='curline'><a href='../S/8.html#L250'>input</a>             250 console.c            sleep(&amp;input.r, &amp;cons.lock);</span>
-<span class='curline'><a href='../S/8.html#L252'>input</a>             252 console.c          c = input.buf[input.r++ % INPUT_BUF];</span>
-<span class='curline'><a href='../S/8.html#L257'>input</a>             257 console.c              input.r--;</span>
+<span class='curline'><a href='../S/39.html#L185'>inodestart</a>        185 fs.c                     sb.ninodes, sb.nlog, sb.logstart, sb.inodestart,</span>
+<span class='curline'><a href='../S/41.html#L20'>inodestart</a>         20 fs.h             uint inodestart;   // Block number of first inode block</span>
+<span class='curline'><a href='../S/41.html#L42'>inodestart</a>         42 fs.h           #define IBLOCK(i, sb)     ((i) / IPB + sb.inodestart)</span>
+<span class='curline'><a href='../S/92.html#L102'>inodestart</a>        102 mkfs.c           sb.inodestart = xint(2+nlog);</span>
 </pre>
 </body>
 </html>
