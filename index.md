@@ -10,7 +10,8 @@
 * [渡部卓雄 (情報工学系)](http://www.psg.c.titech.ac.jp/~takuo/)
 
 ## 講義時間・講義室
-* 月曜7-8限・木曜7-8限，W641講義室
+* 月曜7-8限・木曜7-8限
+* W641講義室
 
 ## 講義概要
 オペレーティングシステムの役割，オペレーティングシステムカーネルの構成と実現方式，およびオペレーティングシステムカーネルにおいて用いられるアルゴリズムを理解する．
@@ -55,11 +56,11 @@ OCW-iで配布する予定ですが，一部の資料や例題などは本Github
 
 ## 関連・参考サイト
 * 本演習のGithubアカウント: [http://github.com/titech-os/](http://github.com/titech-os/)
-  * xv6の講義用Githubリポジトリ: [http://github.com/titech-os/xv6-public/](http://github.com/titech-os/xv6-public/)
-  * GNU GlobalでHTML化したxv6のソースコード: [https://titech-os.github.io/xv6-html/](https://titech-os.github.io/xv6-html/)
+  - xv6の講義用Githubリポジトリ: [http://github.com/titech-os/xv6-public/](http://github.com/titech-os/xv6-public/)
+  - GNU GlobalでHTML化したxv6のソースコード: [https://titech-os.github.io/xv6-html/](https://titech-os.github.io/xv6-html/)
 * xv6のオフィシャルサイト: [https://pdos.csail.mit.edu/6.828/2017/xv6.html](https://pdos.csail.mit.edu/6.828/2017/xv6.html)
-  * ブックレット [https://pdos.csail.mit.edu/6.828/2017/xv6/book-rev10.pdf](https://pdos.csail.mit.edu/6.828/2017/xv6/book-rev10.pdf)
-  * xv6のオフィシャルGithubリポジトリ: [https://github.com/mit-pdos/xv6-public/](https://github.com/mit-pdos/xv6-public/)
+  - ブックレット [https://pdos.csail.mit.edu/6.828/2017/xv6/book-rev10.pdf](https://pdos.csail.mit.edu/6.828/2017/xv6/book-rev10.pdf)
+  - xv6のオフィシャルGithubリポジトリ: [https://github.com/mit-pdos/xv6-public/](https://github.com/mit-pdos/xv6-public/)
 * インテル64およびIA-32アーキテクチャー・ソフトウェア・デベロッパーズ・マニュアル: [http://www.intel.co.jp/content/www/jp/ja/processors/architectures-software-developer-manuals.html](http://www.intel.co.jp/content/www/jp/ja/processors/architectures-software-developer-manuals.html)
 * git: [https://git-scm.com](https://git-scm.com)
-  * 解説書（日本語版）: [https://git-scm.com/book/ja/v2](https://git-scm.com/book/ja/v2)
+  - 解説書（日本語版）: [https://git-scm.com/book/ja/v2](https://git-scm.com/book/ja/v2)
