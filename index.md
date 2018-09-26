@@ -1,11 +1,8 @@
 # システムソフトウェア(CSC.T371)
 
 ## お知らせ
-* 11月16日(木)は講義を行います．11月20日(月)は行いません．
-* 期末試験の情報を掲載しました．
-* 第7回（**10月12日(木)・9-10限**）は**情報工学系計算機室**で行います．
-* 第3回（**9月28日(木)・9-10限**）は**情報工学系計算機室**で行います．
-* 初回（9月25日(月)・7-8限）はスケジュール通りW641講義室で行います．
+* 第3回（**10月1日(月)・9-10限**）は**情報工学系計算機室**で行います．
+* 初回（9月27日(木)・7-8限）はスケジュール通りW641講義室で行います．
 
 ## 担当
 * [渡部卓雄 (情報工学系)](http://www.psg.c.titech.ac.jp/~takuo/)
@@ -49,19 +46,14 @@
 15. 保護機構とセキュリティ
 
 ## 休講予定
-10/23(月)と10/26(木)は出張のため休講とします．
+11/5(月)と11/8(木)は出張のため休講とします．
 
 ## 期末試験
-* 日時: 2017年11月27日(月) 7-8限(15:05-16:35)
-* 場所: W933講義室(大岡山西9号館)  **授業で使った講義室とは異なるので注意**
-* 試験範囲: 講義で扱った内容
-    - プロセス管理，同期機構，メモリ管理，ファイルシステムおよびこれらのxv6における実装
-    - 今年はxv6のswtch.Sの動作についてよく復習して理解しておいてください．
-* 持ち込み:
-    - カンニング用紙（A4一枚以内・手書きのみ）持ち込み可
-    - 配布資料とノート，図書，PC等は持ち込み不可
 
-### 過去の問題とその解答・解説
+試験期間前にアナウンスします．
+
+### 過去の期末試験問題とその解答・解説
+* 2017年度: [問題](ex/2017.pdf) / [解答・解説](ex/2017a.pdf)
 * 2016年度: [問題](ex/2016.pdf) / [解答・解説](ex/2016a.pdf)
 * 2015年度: [問題](ex/2015.pdf) / [解答・解説](ex/2015a.pdf)
 * 2014年度: [問題](ex/2014.pdf) / [解答・解説](ex/2014a.pdf)
@@ -78,9 +70,13 @@ OCW-iで配布する予定ですが，一部の資料や例題などは本Github
 * 本演習のGithubアカウント: [http://github.com/titech-os/](http://github.com/titech-os/)
   - xv6の講義用Githubリポジトリ: [http://github.com/titech-os/xv6-public/](http://github.com/titech-os/xv6-public/)
   - GNU GlobalでHTML化したxv6のソースコード: [https://titech-os.github.io/xv6-html/](https://titech-os.github.io/xv6-html/)
-* xv6のオフィシャルサイト: [https://pdos.csail.mit.edu/6.828/2017/xv6.html](https://pdos.csail.mit.edu/6.828/2017/xv6.html)
-  - ブックレット [https://pdos.csail.mit.edu/6.828/2017/xv6/book-rev10.pdf](https://pdos.csail.mit.edu/6.828/2017/xv6/book-rev10.pdf)
+* xv6のオフィシャルサイト: [https://pdos.csail.mit.edu/6.828/2018/xv6.html](https://pdos.csail.mit.edu/6.828/2018/xv6.html)
+  - ブックレット [https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
   - xv6のオフィシャルGithubリポジトリ: [https://github.com/mit-pdos/xv6-public/](https://github.com/mit-pdos/xv6-public/)
-* インテル64およびIA-32アーキテクチャー・ソフトウェア・デベロッパーズ・マニュアル: [http://www.intel.co.jp/content/www/jp/ja/processors/architectures-software-developer-manuals.html](http://www.intel.co.jp/content/www/jp/ja/processors/architectures-software-developer-manuals.html)
+* インテルIA-32アーキテクチャー・ソフトウェア・デベロッパーズ・マニュアル(PDF)
+  - [IA-32 インテル ® アーキテクチャ ソフトウェア・デベロッパーズ・ マニュアル（上巻：基本アーキテクチャ）](https://www.intel.co.jp/content/dam/www/public/ijkk/jp/ja/documents/developer/IA32_Arh_Dev_Man_Vol1_Online_i.pdf)
+  - [IA-32 インテル ® アーキテクチャ ソフトウェア・デベロッパーズ・ マニュアル（中巻A：命令セット・リファレンス A-M）](https://www.intel.co.jp/content/dam/www/public/ijkk/jp/ja/documents/developer/IA32_Arh_Dev_Man_Vol2A_i.pdf)
+  - [IA-32 インテル ® アーキテクチャ ソフトウェア・デベロッパーズ・ マニュアル（中巻B：命令セット・リファレンス N-Z）](https://www.intel.co.jp/content/dam/www/public/ijkk/jp/ja/documents/developer/IA32_Arh_Dev_Man_Vol2B_i.pdf)
+  - [IA-32 インテル ® アーキテクチャ ソフトウェア・デベロッパーズ・ マニュアル（下巻：システム・プログラミング・ガイド）](https://www.intel.co.jp/content/dam/www/public/ijkk/jp/ja/documents/developer/IA32_Arh_Dev_Man_Vol3_i.pdf)
 * git: [https://git-scm.com](https://git-scm.com)
   - 解説書（日本語版）: [https://git-scm.com/book/ja/v2](https://git-scm.com/book/ja/v2)
