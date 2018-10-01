@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>picirq.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.2' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/picirq.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L11'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L11' title='Defined at 11.'>picinit</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='18.html'>types.h</a>"
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='51.html'>x86.h</a>"
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='85.html'>traps.h</a>"
+<a id='L4' name='L4'></a>   4 
+<a id='L5' name='L5'></a>   5 <em class='comment'>// I/O Addresses of the two programmable interrupt controllers</em>
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#define</em> <a href='../S/28.html#L14' title='Referred from 14 in picirq.c.'>IO_PIC1</a>         0x20    <em class='comment'>// Master (IRQs 0-7)</em>
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#define</em> <a href='../S/28.html#L15' title='Referred from 15 in picirq.c.'>IO_PIC2</a>         0xA0    <em class='comment'>// Slave (IRQs 8-15)</em>
+<a id='L8' name='L8'></a>   8 
+<a id='L9' name='L9'></a>   9 <em class='comment'>// Don't use the 8259A interrupt controllers.  Xv6 assumes SMP hardware.</em>
+<a id='L10' name='L10'></a>  10 <strong class='reserved'>void</strong>
+<a id='L11' name='L11'></a>  11 <a href='../R/413.html' title='Multiple referred from 2 places.'>picinit</a>(<strong class='reserved'>void</strong>)
+<a id='L12' name='L12'></a>  12 <em class='brace'>{</em>
+<a id='L13' name='L13'></a>  13   <em class='comment'>// mask all interrupts</em>
+<a id='L14' name='L14'></a>  14   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/28.html#L6' title='Defined at 6 in picirq.c.'>IO_PIC1</a>+1, 0xFF);
+<a id='L15' name='L15'></a>  15   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(<a href='../S/28.html#L7' title='Defined at 7 in picirq.c.'>IO_PIC2</a>+1, 0xFF);
+<a id='L16' name='L16'></a>  16 <em class='brace'>}</em>
+<a id='L17' name='L17'></a>  17 
+<a id='L18' name='L18'></a>  18 <em class='comment'>//PAGEBREAK!</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'>// Blank page.</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^]<a href='#L11'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

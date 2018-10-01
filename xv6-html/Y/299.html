@@ -3,69 +3,69 @@
 <head>
 <title>pgdir</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.7' />
+<meta name='generator' content='GLOBAL-6.6.2' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/19.html#L187'>pgdir</a>             187 defs.h         void            clearpteu(pde_t *pgdir, char *uva);</span>
-<span class='curline'><a href='../S/30.html#L19'>pgdir</a>              19 exec.c           pde_t *pgdir, *oldpgdir;</span>
-<span class='curline'><a href='../S/30.html#L30'>pgdir</a>              30 exec.c           pgdir = 0;</span>
-<span class='curline'><a href='../S/30.html#L38'>pgdir</a>              38 exec.c           if((pgdir = setupkvm()) == 0)</span>
-<span class='curline'><a href='../S/30.html#L52'>pgdir</a>              52 exec.c             if((sz = allocuvm(pgdir, sz, ph.vaddr + ph.memsz)) == 0)</span>
-<span class='curline'><a href='../S/30.html#L56'>pgdir</a>              56 exec.c             if(loaduvm(pgdir, (char*)ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
-<span class='curline'><a href='../S/30.html#L66'>pgdir</a>              66 exec.c           if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)</span>
-<span class='curline'><a href='../S/30.html#L68'>pgdir</a>              68 exec.c           clearpteu(pgdir, (char*)(sz - 2*PGSIZE));</span>
-<span class='curline'><a href='../S/30.html#L76'>pgdir</a>              76 exec.c             if(copyout(pgdir, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
-<span class='curline'><a href='../S/30.html#L87'>pgdir</a>              87 exec.c           if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)</span>
-<span class='curline'><a href='../S/30.html#L97'>pgdir</a>              97 exec.c           oldpgdir = curproc-&gt;pgdir;</span>
-<span class='curline'><a href='../S/30.html#L98'>pgdir</a>              98 exec.c           curproc-&gt;pgdir = pgdir;</span>
-<span class='curline'><a href='../S/30.html#L107'>pgdir</a>             107 exec.c           if(pgdir)</span>
-<span class='curline'><a href='../S/30.html#L108'>pgdir</a>             108 exec.c             freevm(pgdir);</span>
-<span class='curline'><a href='../S/107.html#L129'>pgdir</a>             129 proc.c           if((p-&gt;pgdir = setupkvm()) == 0)</span>
-<span class='curline'><a href='../S/107.html#L131'>pgdir</a>             131 proc.c           inituvm(p-&gt;pgdir, _binary_initcode_start, (int)_binary_initcode_size);</span>
-<span class='curline'><a href='../S/107.html#L166'>pgdir</a>             166 proc.c             if((sz = allocuvm(curproc-&gt;pgdir, sz, sz + n)) == 0)</span>
-<span class='curline'><a href='../S/107.html#L169'>pgdir</a>             169 proc.c             if((sz = deallocuvm(curproc-&gt;pgdir, sz, sz + n)) == 0)</span>
-<span class='curline'><a href='../S/107.html#L193'>pgdir</a>             193 proc.c           if((np-&gt;pgdir = copyuvm(curproc-&gt;pgdir, curproc-&gt;sz)) == 0){</span>
-<span class='curline'><a href='../S/107.html#L292'>pgdir</a>             292 proc.c                 freevm(p-&gt;pgdir);</span>
-<span class='curline'><a href='../S/109.html#L40'>pgdir</a>              40 proc.h           pde_t* pgdir;                // Page table</span>
-<span class='curline'><a href='../S/171.html#L36'>pgdir</a>              36 vm.c           walkpgdir(pde_t *pgdir, const void *va, int alloc)</span>
-<span class='curline'><a href='../S/171.html#L41'>pgdir</a>              41 vm.c             pde = &amp;pgdir[PDX(va)];</span>
-<span class='curline'><a href='../S/171.html#L61'>pgdir</a>              61 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
-<span class='curline'><a href='../S/171.html#L69'>pgdir</a>              69 vm.c               if((pte = walkpgdir(pgdir, a, 1)) == 0)</span>
-<span class='curline'><a href='../S/171.html#L121'>pgdir</a>             121 vm.c             pde_t *pgdir;</span>
-<span class='curline'><a href='../S/171.html#L124'>pgdir</a>             124 vm.c             if((pgdir = (pde_t*)kalloc()) == 0)</span>
-<span class='curline'><a href='../S/171.html#L126'>pgdir</a>             126 vm.c             memset(pgdir, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/171.html#L130'>pgdir</a>             130 vm.c               if(mappages(pgdir, k-&gt;virt, k-&gt;phys_end - k-&gt;phys_start,</span>
-<span class='curline'><a href='../S/171.html#L132'>pgdir</a>             132 vm.c                 freevm(pgdir);</span>
-<span class='curline'><a href='../S/171.html#L135'>pgdir</a>             135 vm.c             return pgdir;</span>
-<span class='curline'><a href='../S/171.html#L163'>pgdir</a>             163 vm.c             if(p-&gt;pgdir == 0)</span>
-<span class='curline'><a href='../S/171.html#L176'>pgdir</a>             176 vm.c             lcr3(V2P(p-&gt;pgdir));  // switch to process's address space</span>
-<span class='curline'><a href='../S/171.html#L183'>pgdir</a>             183 vm.c           inituvm(pde_t *pgdir, char *init, uint sz)</span>
-<span class='curline'><a href='../S/171.html#L191'>pgdir</a>             191 vm.c             mappages(pgdir, 0, PGSIZE, V2P(mem), PTE_W|PTE_U);</span>
-<span class='curline'><a href='../S/171.html#L198'>pgdir</a>             198 vm.c           loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)</span>
-<span class='curline'><a href='../S/171.html#L206'>pgdir</a>             206 vm.c               if((pte = walkpgdir(pgdir, addr+i, 0)) == 0)</span>
-<span class='curline'><a href='../S/171.html#L222'>pgdir</a>             222 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/171.html#L237'>pgdir</a>             237 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
-<span class='curline'><a href='../S/171.html#L241'>pgdir</a>             241 vm.c               if(mappages(pgdir, (char*)a, PGSIZE, V2P(mem), PTE_W|PTE_U) &lt; 0){</span>
-<span class='curline'><a href='../S/171.html#L243'>pgdir</a>             243 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
-<span class='curline'><a href='../S/171.html#L256'>pgdir</a>             256 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
-<span class='curline'><a href='../S/171.html#L266'>pgdir</a>             266 vm.c               pte = walkpgdir(pgdir, (char*)a, 0);</span>
-<span class='curline'><a href='../S/171.html#L284'>pgdir</a>             284 vm.c           freevm(pde_t *pgdir)</span>
-<span class='curline'><a href='../S/171.html#L288'>pgdir</a>             288 vm.c             if(pgdir == 0)</span>
-<span class='curline'><a href='../S/171.html#L290'>pgdir</a>             290 vm.c             deallocuvm(pgdir, KERNBASE, 0);</span>
-<span class='curline'><a href='../S/171.html#L292'>pgdir</a>             292 vm.c               if(pgdir[i] &amp; PTE_P){</span>
-<span class='curline'><a href='../S/171.html#L293'>pgdir</a>             293 vm.c                 char * v = P2V(PTE_ADDR(pgdir[i]));</span>
-<span class='curline'><a href='../S/171.html#L297'>pgdir</a>             297 vm.c             kfree((char*)pgdir);</span>
-<span class='curline'><a href='../S/171.html#L303'>pgdir</a>             303 vm.c           clearpteu(pde_t *pgdir, char *uva)</span>
-<span class='curline'><a href='../S/171.html#L307'>pgdir</a>             307 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
-<span class='curline'><a href='../S/171.html#L316'>pgdir</a>             316 vm.c           copyuvm(pde_t *pgdir, uint sz)</span>
-<span class='curline'><a href='../S/171.html#L326'>pgdir</a>             326 vm.c               if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)</span>
-<span class='curline'><a href='../S/171.html#L348'>pgdir</a>             348 vm.c           uva2ka(pde_t *pgdir, char *uva)</span>
-<span class='curline'><a href='../S/171.html#L352'>pgdir</a>             352 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
-<span class='curline'><a href='../S/171.html#L364'>pgdir</a>             364 vm.c           copyout(pde_t *pgdir, uint va, void *p, uint len)</span>
-<span class='curline'><a href='../S/171.html#L372'>pgdir</a>             372 vm.c               pa0 = uva2ka(pgdir, (char*)va0);</span>
+<span class='curline'><a href='../S/9.html#L187'>pgdir</a>             187 defs.h         void            clearpteu(pde_t *pgdir, char *uva);</span>
+<span class='curline'><a href='../S/15.html#L19'>pgdir</a>              19 exec.c           pde_t *pgdir, *oldpgdir;</span>
+<span class='curline'><a href='../S/15.html#L30'>pgdir</a>              30 exec.c           pgdir = 0;</span>
+<span class='curline'><a href='../S/15.html#L38'>pgdir</a>              38 exec.c           if((pgdir = setupkvm()) == 0)</span>
+<span class='curline'><a href='../S/15.html#L52'>pgdir</a>              52 exec.c             if((sz = allocuvm(pgdir, sz, ph.vaddr + ph.memsz)) == 0)</span>
+<span class='curline'><a href='../S/15.html#L56'>pgdir</a>              56 exec.c             if(loaduvm(pgdir, (char*)ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/15.html#L66'>pgdir</a>              66 exec.c           if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)</span>
+<span class='curline'><a href='../S/15.html#L68'>pgdir</a>              68 exec.c           clearpteu(pgdir, (char*)(sz - 2*PGSIZE));</span>
+<span class='curline'><a href='../S/15.html#L76'>pgdir</a>              76 exec.c             if(copyout(pgdir, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
+<span class='curline'><a href='../S/15.html#L87'>pgdir</a>              87 exec.c           if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)</span>
+<span class='curline'><a href='../S/15.html#L97'>pgdir</a>              97 exec.c           oldpgdir = curproc-&gt;pgdir;</span>
+<span class='curline'><a href='../S/15.html#L98'>pgdir</a>              98 exec.c           curproc-&gt;pgdir = pgdir;</span>
+<span class='curline'><a href='../S/15.html#L107'>pgdir</a>             107 exec.c           if(pgdir)</span>
+<span class='curline'><a href='../S/15.html#L108'>pgdir</a>             108 exec.c             freevm(pgdir);</span>
+<span class='curline'><a href='../S/75.html#L129'>pgdir</a>             129 proc.c           if((p-&gt;pgdir = setupkvm()) == 0)</span>
+<span class='curline'><a href='../S/75.html#L131'>pgdir</a>             131 proc.c           inituvm(p-&gt;pgdir, _binary_initcode_start, (int)_binary_initcode_size);</span>
+<span class='curline'><a href='../S/75.html#L166'>pgdir</a>             166 proc.c             if((sz = allocuvm(curproc-&gt;pgdir, sz, sz + n)) == 0)</span>
+<span class='curline'><a href='../S/75.html#L169'>pgdir</a>             169 proc.c             if((sz = deallocuvm(curproc-&gt;pgdir, sz, sz + n)) == 0)</span>
+<span class='curline'><a href='../S/75.html#L193'>pgdir</a>             193 proc.c           if((np-&gt;pgdir = copyuvm(curproc-&gt;pgdir, curproc-&gt;sz)) == 0){</span>
+<span class='curline'><a href='../S/75.html#L292'>pgdir</a>             292 proc.c                 freevm(p-&gt;pgdir);</span>
+<span class='curline'><a href='../S/14.html#L40'>pgdir</a>              40 proc.h           pde_t* pgdir;                // Page table</span>
+<span class='curline'><a href='../S/22.html#L36'>pgdir</a>              36 vm.c           walkpgdir(pde_t *pgdir, const void *va, int alloc)</span>
+<span class='curline'><a href='../S/22.html#L41'>pgdir</a>              41 vm.c             pde = &amp;pgdir[PDX(va)];</span>
+<span class='curline'><a href='../S/22.html#L61'>pgdir</a>              61 vm.c           mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</span>
+<span class='curline'><a href='../S/22.html#L69'>pgdir</a>              69 vm.c               if((pte = walkpgdir(pgdir, a, 1)) == 0)</span>
+<span class='curline'><a href='../S/22.html#L121'>pgdir</a>             121 vm.c             pde_t *pgdir;</span>
+<span class='curline'><a href='../S/22.html#L124'>pgdir</a>             124 vm.c             if((pgdir = (pde_t*)kalloc()) == 0)</span>
+<span class='curline'><a href='../S/22.html#L126'>pgdir</a>             126 vm.c             memset(pgdir, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/22.html#L130'>pgdir</a>             130 vm.c               if(mappages(pgdir, k-&gt;virt, k-&gt;phys_end - k-&gt;phys_start,</span>
+<span class='curline'><a href='../S/22.html#L132'>pgdir</a>             132 vm.c                 freevm(pgdir);</span>
+<span class='curline'><a href='../S/22.html#L135'>pgdir</a>             135 vm.c             return pgdir;</span>
+<span class='curline'><a href='../S/22.html#L163'>pgdir</a>             163 vm.c             if(p-&gt;pgdir == 0)</span>
+<span class='curline'><a href='../S/22.html#L176'>pgdir</a>             176 vm.c             lcr3(V2P(p-&gt;pgdir));  // switch to process's address space</span>
+<span class='curline'><a href='../S/22.html#L183'>pgdir</a>             183 vm.c           inituvm(pde_t *pgdir, char *init, uint sz)</span>
+<span class='curline'><a href='../S/22.html#L191'>pgdir</a>             191 vm.c             mappages(pgdir, 0, PGSIZE, V2P(mem), PTE_W|PTE_U);</span>
+<span class='curline'><a href='../S/22.html#L198'>pgdir</a>             198 vm.c           loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)</span>
+<span class='curline'><a href='../S/22.html#L206'>pgdir</a>             206 vm.c               if((pte = walkpgdir(pgdir, addr+i, 0)) == 0)</span>
+<span class='curline'><a href='../S/22.html#L222'>pgdir</a>             222 vm.c           allocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/22.html#L237'>pgdir</a>             237 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/22.html#L241'>pgdir</a>             241 vm.c               if(mappages(pgdir, (char*)a, PGSIZE, V2P(mem), PTE_W|PTE_U) &lt; 0){</span>
+<span class='curline'><a href='../S/22.html#L243'>pgdir</a>             243 vm.c                 deallocuvm(pgdir, newsz, oldsz);</span>
+<span class='curline'><a href='../S/22.html#L256'>pgdir</a>             256 vm.c           deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)</span>
+<span class='curline'><a href='../S/22.html#L266'>pgdir</a>             266 vm.c               pte = walkpgdir(pgdir, (char*)a, 0);</span>
+<span class='curline'><a href='../S/22.html#L284'>pgdir</a>             284 vm.c           freevm(pde_t *pgdir)</span>
+<span class='curline'><a href='../S/22.html#L288'>pgdir</a>             288 vm.c             if(pgdir == 0)</span>
+<span class='curline'><a href='../S/22.html#L290'>pgdir</a>             290 vm.c             deallocuvm(pgdir, KERNBASE, 0);</span>
+<span class='curline'><a href='../S/22.html#L292'>pgdir</a>             292 vm.c               if(pgdir[i] &amp; PTE_P){</span>
+<span class='curline'><a href='../S/22.html#L293'>pgdir</a>             293 vm.c                 char * v = P2V(PTE_ADDR(pgdir[i]));</span>
+<span class='curline'><a href='../S/22.html#L297'>pgdir</a>             297 vm.c             kfree((char*)pgdir);</span>
+<span class='curline'><a href='../S/22.html#L303'>pgdir</a>             303 vm.c           clearpteu(pde_t *pgdir, char *uva)</span>
+<span class='curline'><a href='../S/22.html#L307'>pgdir</a>             307 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
+<span class='curline'><a href='../S/22.html#L316'>pgdir</a>             316 vm.c           copyuvm(pde_t *pgdir, uint sz)</span>
+<span class='curline'><a href='../S/22.html#L326'>pgdir</a>             326 vm.c               if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)</span>
+<span class='curline'><a href='../S/22.html#L350'>pgdir</a>             350 vm.c           uva2ka(pde_t *pgdir, char *uva)</span>
+<span class='curline'><a href='../S/22.html#L354'>pgdir</a>             354 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
+<span class='curline'><a href='../S/22.html#L366'>pgdir</a>             366 vm.c           copyout(pde_t *pgdir, uint va, void *p, uint len)</span>
+<span class='curline'><a href='../S/22.html#L374'>pgdir</a>             374 vm.c               pa0 = uva2ka(pgdir, (char*)va0);</span>
 </pre>
 </body>
 </html>

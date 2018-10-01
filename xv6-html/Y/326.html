@@ -3,41 +3,41 @@
 <head>
 <title>pte</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.7' />
+<meta name='generator' content='GLOBAL-6.6.2' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/93.html#L146'>pte</a>               146 mmu.h          #define PTE_ADDR(pte)   ((uint)(pte) &amp; ~0xFFF)</span>
-<span class='curline'><a href='../S/93.html#L147'>pte</a>               147 mmu.h          #define PTE_FLAGS(pte)  ((uint)(pte) &amp;  0xFFF)</span>
-<span class='curline'><a href='../S/171.html#L64'>pte</a>                64 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/171.html#L69'>pte</a>                69 vm.c               if((pte = walkpgdir(pgdir, a, 1)) == 0)</span>
-<span class='curline'><a href='../S/171.html#L71'>pte</a>                71 vm.c               if(*pte &amp; PTE_P)</span>
-<span class='curline'><a href='../S/171.html#L73'>pte</a>                73 vm.c               *pte = pa | perm | PTE_P;</span>
-<span class='curline'><a href='../S/171.html#L201'>pte</a>               201 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/171.html#L206'>pte</a>               206 vm.c               if((pte = walkpgdir(pgdir, addr+i, 0)) == 0)</span>
-<span class='curline'><a href='../S/171.html#L208'>pte</a>               208 vm.c               pa = PTE_ADDR(*pte);</span>
-<span class='curline'><a href='../S/171.html#L258'>pte</a>               258 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/171.html#L266'>pte</a>               266 vm.c               pte = walkpgdir(pgdir, (char*)a, 0);</span>
-<span class='curline'><a href='../S/171.html#L267'>pte</a>               267 vm.c               if(!pte)</span>
-<span class='curline'><a href='../S/171.html#L269'>pte</a>               269 vm.c               else if((*pte &amp; PTE_P) != 0){</span>
-<span class='curline'><a href='../S/171.html#L270'>pte</a>               270 vm.c                 pa = PTE_ADDR(*pte);</span>
-<span class='curline'><a href='../S/171.html#L275'>pte</a>               275 vm.c                 *pte = 0;</span>
-<span class='curline'><a href='../S/171.html#L305'>pte</a>               305 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/171.html#L307'>pte</a>               307 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
-<span class='curline'><a href='../S/171.html#L308'>pte</a>               308 vm.c             if(pte == 0)</span>
-<span class='curline'><a href='../S/171.html#L310'>pte</a>               310 vm.c             *pte &amp;= ~PTE_U;</span>
-<span class='curline'><a href='../S/171.html#L319'>pte</a>               319 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/171.html#L326'>pte</a>               326 vm.c               if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)</span>
-<span class='curline'><a href='../S/171.html#L328'>pte</a>               328 vm.c               if(!(*pte &amp; PTE_P))</span>
-<span class='curline'><a href='../S/171.html#L330'>pte</a>               330 vm.c               pa = PTE_ADDR(*pte);</span>
-<span class='curline'><a href='../S/171.html#L331'>pte</a>               331 vm.c               flags = PTE_FLAGS(*pte);</span>
-<span class='curline'><a href='../S/171.html#L350'>pte</a>               350 vm.c             pte_t *pte;</span>
-<span class='curline'><a href='../S/171.html#L352'>pte</a>               352 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
-<span class='curline'><a href='../S/171.html#L353'>pte</a>               353 vm.c             if((*pte &amp; PTE_P) == 0)</span>
-<span class='curline'><a href='../S/171.html#L355'>pte</a>               355 vm.c             if((*pte &amp; PTE_U) == 0)</span>
-<span class='curline'><a href='../S/171.html#L357'>pte</a>               357 vm.c             return (char*)P2V(PTE_ADDR(*pte));</span>
+<span class='curline'><a href='../S/42.html#L100'>pte</a>               100 mmu.h          #define PTE_ADDR(pte)   ((uint)(pte) &amp; ~0xFFF)</span>
+<span class='curline'><a href='../S/42.html#L101'>pte</a>               101 mmu.h          #define PTE_FLAGS(pte)  ((uint)(pte) &amp;  0xFFF)</span>
+<span class='curline'><a href='../S/22.html#L64'>pte</a>                64 vm.c             pte_t *pte;</span>
+<span class='curline'><a href='../S/22.html#L69'>pte</a>                69 vm.c               if((pte = walkpgdir(pgdir, a, 1)) == 0)</span>
+<span class='curline'><a href='../S/22.html#L71'>pte</a>                71 vm.c               if(*pte &amp; PTE_P)</span>
+<span class='curline'><a href='../S/22.html#L73'>pte</a>                73 vm.c               *pte = pa | perm | PTE_P;</span>
+<span class='curline'><a href='../S/22.html#L201'>pte</a>               201 vm.c             pte_t *pte;</span>
+<span class='curline'><a href='../S/22.html#L206'>pte</a>               206 vm.c               if((pte = walkpgdir(pgdir, addr+i, 0)) == 0)</span>
+<span class='curline'><a href='../S/22.html#L208'>pte</a>               208 vm.c               pa = PTE_ADDR(*pte);</span>
+<span class='curline'><a href='../S/22.html#L258'>pte</a>               258 vm.c             pte_t *pte;</span>
+<span class='curline'><a href='../S/22.html#L266'>pte</a>               266 vm.c               pte = walkpgdir(pgdir, (char*)a, 0);</span>
+<span class='curline'><a href='../S/22.html#L267'>pte</a>               267 vm.c               if(!pte)</span>
+<span class='curline'><a href='../S/22.html#L269'>pte</a>               269 vm.c               else if((*pte &amp; PTE_P) != 0){</span>
+<span class='curline'><a href='../S/22.html#L270'>pte</a>               270 vm.c                 pa = PTE_ADDR(*pte);</span>
+<span class='curline'><a href='../S/22.html#L275'>pte</a>               275 vm.c                 *pte = 0;</span>
+<span class='curline'><a href='../S/22.html#L305'>pte</a>               305 vm.c             pte_t *pte;</span>
+<span class='curline'><a href='../S/22.html#L307'>pte</a>               307 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
+<span class='curline'><a href='../S/22.html#L308'>pte</a>               308 vm.c             if(pte == 0)</span>
+<span class='curline'><a href='../S/22.html#L310'>pte</a>               310 vm.c             *pte &amp;= ~PTE_U;</span>
+<span class='curline'><a href='../S/22.html#L319'>pte</a>               319 vm.c             pte_t *pte;</span>
+<span class='curline'><a href='../S/22.html#L326'>pte</a>               326 vm.c               if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)</span>
+<span class='curline'><a href='../S/22.html#L328'>pte</a>               328 vm.c               if(!(*pte &amp; PTE_P))</span>
+<span class='curline'><a href='../S/22.html#L330'>pte</a>               330 vm.c               pa = PTE_ADDR(*pte);</span>
+<span class='curline'><a href='../S/22.html#L331'>pte</a>               331 vm.c               flags = PTE_FLAGS(*pte);</span>
+<span class='curline'><a href='../S/22.html#L352'>pte</a>               352 vm.c             pte_t *pte;</span>
+<span class='curline'><a href='../S/22.html#L354'>pte</a>               354 vm.c             pte = walkpgdir(pgdir, uva, 0);</span>
+<span class='curline'><a href='../S/22.html#L355'>pte</a>               355 vm.c             if((*pte &amp; PTE_P) == 0)</span>
+<span class='curline'><a href='../S/22.html#L357'>pte</a>               357 vm.c             if((*pte &amp; PTE_U) == 0)</span>
+<span class='curline'><a href='../S/22.html#L359'>pte</a>               359 vm.c             return (char*)P2V(PTE_ADDR(*pte));</span>
 </pre>
 </body>
 </html>

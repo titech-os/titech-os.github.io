@@ -3,44 +3,44 @@
 <head>
 <title>PGSIZE</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.7' />
+<meta name='generator' content='GLOBAL-6.6.2' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/30.html#L54'>PGSIZE</a>             54 exec.c             if(ph.vaddr % PGSIZE != 0)</span>
-<span class='curline'><a href='../S/30.html#L66'>PGSIZE</a>             66 exec.c           if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)</span>
-<span class='curline'><a href='../S/30.html#L68'>PGSIZE</a>             68 exec.c           clearpteu(pgdir, (char*)(sz - 2*PGSIZE));</span>
-<span class='curline'><a href='../S/58.html#L51'>PGSIZE</a>             51 kalloc.c         for(; p + PGSIZE &lt;= (char*)vend; p += PGSIZE)</span>
-<span class='curline'><a href='../S/58.html#L64'>PGSIZE</a>             64 kalloc.c         if((uint)v % PGSIZE || v &lt; end || V2P(v) &gt;= PHYSTOP)</span>
-<span class='curline'><a href='../S/58.html#L68'>PGSIZE</a>             68 kalloc.c         memset(v, 1, PGSIZE);</span>
-<span class='curline'><a href='../S/83.html#L102'>PGSIZE</a>            102 main.c         __attribute__((__aligned__(PGSIZE)))</span>
-<span class='curline'><a href='../S/93.html#L131'>PGSIZE</a>            131 mmu.h          #define PGROUNDUP(sz)  (((sz)+PGSIZE-1) &amp; ~(PGSIZE-1))</span>
-<span class='curline'><a href='../S/93.html#L132'>PGSIZE</a>            132 mmu.h          #define PGROUNDDOWN(a) (((a)) &amp; ~(PGSIZE-1))</span>
-<span class='curline'><a href='../S/107.html#L132'>PGSIZE</a>            132 proc.c           p-&gt;sz = PGSIZE;</span>
-<span class='curline'><a href='../S/107.html#L139'>PGSIZE</a>            139 proc.c           p-&gt;tf-&gt;esp = PGSIZE;</span>
-<span class='curline'><a href='../S/171.html#L48'>PGSIZE</a>             48 vm.c               memset(pgtab, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/171.html#L76'>PGSIZE</a>             76 vm.c               a += PGSIZE;</span>
-<span class='curline'><a href='../S/171.html#L77'>PGSIZE</a>             77 vm.c               pa += PGSIZE;</span>
-<span class='curline'><a href='../S/171.html#L126'>PGSIZE</a>            126 vm.c             memset(pgdir, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/171.html#L187'>PGSIZE</a>            187 vm.c             if(sz &gt;= PGSIZE)</span>
-<span class='curline'><a href='../S/171.html#L190'>PGSIZE</a>            190 vm.c             memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/171.html#L191'>PGSIZE</a>            191 vm.c             mappages(pgdir, 0, PGSIZE, V2P(mem), PTE_W|PTE_U);</span>
-<span class='curline'><a href='../S/171.html#L203'>PGSIZE</a>            203 vm.c             if((uint) addr % PGSIZE != 0)</span>
-<span class='curline'><a href='../S/171.html#L205'>PGSIZE</a>            205 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
-<span class='curline'><a href='../S/171.html#L209'>PGSIZE</a>            209 vm.c               if(sz - i &lt; PGSIZE)</span>
-<span class='curline'><a href='../S/171.html#L212'>PGSIZE</a>            212 vm.c                 n = PGSIZE;</span>
-<span class='curline'><a href='../S/171.html#L233'>PGSIZE</a>            233 vm.c             for(; a &lt; newsz; a += PGSIZE){</span>
-<span class='curline'><a href='../S/171.html#L240'>PGSIZE</a>            240 vm.c               memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/171.html#L241'>PGSIZE</a>            241 vm.c               if(mappages(pgdir, (char*)a, PGSIZE, V2P(mem), PTE_W|PTE_U) &lt; 0){</span>
-<span class='curline'><a href='../S/171.html#L265'>PGSIZE</a>            265 vm.c             for(; a  &lt; oldsz; a += PGSIZE){</span>
-<span class='curline'><a href='../S/171.html#L268'>PGSIZE</a>            268 vm.c                 a = PGADDR(PDX(a) + 1, 0, 0) - PGSIZE;</span>
-<span class='curline'><a href='../S/171.html#L325'>PGSIZE</a>            325 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
-<span class='curline'><a href='../S/171.html#L334'>PGSIZE</a>            334 vm.c               memmove(mem, (char*)P2V(pa), PGSIZE);</span>
-<span class='curline'><a href='../S/171.html#L335'>PGSIZE</a>            335 vm.c               if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) &lt; 0)</span>
-<span class='curline'><a href='../S/171.html#L375'>PGSIZE</a>            375 vm.c               n = PGSIZE - (va - va0);</span>
-<span class='curline'><a href='../S/171.html#L381'>PGSIZE</a>            381 vm.c               va = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/15.html#L54'>PGSIZE</a>             54 exec.c             if(ph.vaddr % PGSIZE != 0)</span>
+<span class='curline'><a href='../S/15.html#L66'>PGSIZE</a>             66 exec.c           if((sz = allocuvm(pgdir, sz, sz + 2*PGSIZE)) == 0)</span>
+<span class='curline'><a href='../S/15.html#L68'>PGSIZE</a>             68 exec.c           clearpteu(pgdir, (char*)(sz - 2*PGSIZE));</span>
+<span class='curline'><a href='../S/91.html#L51'>PGSIZE</a>             51 kalloc.c         for(; p + PGSIZE &lt;= (char*)vend; p += PGSIZE)</span>
+<span class='curline'><a href='../S/91.html#L64'>PGSIZE</a>             64 kalloc.c         if((uint)v % PGSIZE || v &lt; end || V2P(v) &gt;= PHYSTOP)</span>
+<span class='curline'><a href='../S/91.html#L68'>PGSIZE</a>             68 kalloc.c         memset(v, 1, PGSIZE);</span>
+<span class='curline'><a href='../S/69.html#L102'>PGSIZE</a>            102 main.c         __attribute__((__aligned__(PGSIZE)))</span>
+<span class='curline'><a href='../S/42.html#L90'>PGSIZE</a>             90 mmu.h          #define PGROUNDUP(sz)  (((sz)+PGSIZE-1) &amp; ~(PGSIZE-1))</span>
+<span class='curline'><a href='../S/42.html#L91'>PGSIZE</a>             91 mmu.h          #define PGROUNDDOWN(a) (((a)) &amp; ~(PGSIZE-1))</span>
+<span class='curline'><a href='../S/75.html#L132'>PGSIZE</a>            132 proc.c           p-&gt;sz = PGSIZE;</span>
+<span class='curline'><a href='../S/75.html#L139'>PGSIZE</a>            139 proc.c           p-&gt;tf-&gt;esp = PGSIZE;</span>
+<span class='curline'><a href='../S/22.html#L48'>PGSIZE</a>             48 vm.c               memset(pgtab, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/22.html#L76'>PGSIZE</a>             76 vm.c               a += PGSIZE;</span>
+<span class='curline'><a href='../S/22.html#L77'>PGSIZE</a>             77 vm.c               pa += PGSIZE;</span>
+<span class='curline'><a href='../S/22.html#L126'>PGSIZE</a>            126 vm.c             memset(pgdir, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/22.html#L187'>PGSIZE</a>            187 vm.c             if(sz &gt;= PGSIZE)</span>
+<span class='curline'><a href='../S/22.html#L190'>PGSIZE</a>            190 vm.c             memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/22.html#L191'>PGSIZE</a>            191 vm.c             mappages(pgdir, 0, PGSIZE, V2P(mem), PTE_W|PTE_U);</span>
+<span class='curline'><a href='../S/22.html#L203'>PGSIZE</a>            203 vm.c             if((uint) addr % PGSIZE != 0)</span>
+<span class='curline'><a href='../S/22.html#L205'>PGSIZE</a>            205 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/22.html#L209'>PGSIZE</a>            209 vm.c               if(sz - i &lt; PGSIZE)</span>
+<span class='curline'><a href='../S/22.html#L212'>PGSIZE</a>            212 vm.c                 n = PGSIZE;</span>
+<span class='curline'><a href='../S/22.html#L233'>PGSIZE</a>            233 vm.c             for(; a &lt; newsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/22.html#L240'>PGSIZE</a>            240 vm.c               memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/22.html#L241'>PGSIZE</a>            241 vm.c               if(mappages(pgdir, (char*)a, PGSIZE, V2P(mem), PTE_W|PTE_U) &lt; 0){</span>
+<span class='curline'><a href='../S/22.html#L265'>PGSIZE</a>            265 vm.c             for(; a  &lt; oldsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/22.html#L268'>PGSIZE</a>            268 vm.c                 a = PGADDR(PDX(a) + 1, 0, 0) - PGSIZE;</span>
+<span class='curline'><a href='../S/22.html#L325'>PGSIZE</a>            325 vm.c             for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/22.html#L334'>PGSIZE</a>            334 vm.c               memmove(mem, (char*)P2V(pa), PGSIZE);</span>
+<span class='curline'><a href='../S/22.html#L335'>PGSIZE</a>            335 vm.c               if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) &lt; 0) {</span>
+<span class='curline'><a href='../S/22.html#L377'>PGSIZE</a>            377 vm.c               n = PGSIZE - (va - va0);</span>
+<span class='curline'><a href='../S/22.html#L383'>PGSIZE</a>            383 vm.c               va = va0 + PGSIZE;</span>
 </pre>
 </body>
 </html>

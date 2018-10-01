@@ -3,80 +3,80 @@
 <head>
 <title>f</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.7' />
+<meta name='generator' content='GLOBAL-6.6.2' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/33.html#L29'>f</a>                  29 file.c           struct file *f;</span>
-<span class='curline'><a href='../S/33.html#L32'>f</a>                  32 file.c           for(f = ftable.file; f &lt; ftable.file + NFILE; f++){</span>
-<span class='curline'><a href='../S/33.html#L33'>f</a>                  33 file.c             if(f-&gt;ref == 0){</span>
-<span class='curline'><a href='../S/33.html#L34'>f</a>                  34 file.c               f-&gt;ref = 1;</span>
-<span class='curline'><a href='../S/33.html#L36'>f</a>                  36 file.c               return f;</span>
-<span class='curline'><a href='../S/33.html#L45'>f</a>                  45 file.c         filedup(struct file *f)</span>
-<span class='curline'><a href='../S/33.html#L48'>f</a>                  48 file.c           if(f-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/33.html#L50'>f</a>                  50 file.c           f-&gt;ref++;</span>
-<span class='curline'><a href='../S/33.html#L52'>f</a>                  52 file.c           return f;</span>
-<span class='curline'><a href='../S/33.html#L57'>f</a>                  57 file.c         fileclose(struct file *f)</span>
-<span class='curline'><a href='../S/33.html#L62'>f</a>                  62 file.c           if(f-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/33.html#L64'>f</a>                  64 file.c           if(--f-&gt;ref &gt; 0){</span>
-<span class='curline'><a href='../S/33.html#L68'>f</a>                  68 file.c           ff = *f;</span>
-<span class='curline'><a href='../S/33.html#L69'>f</a>                  69 file.c           f-&gt;ref = 0;</span>
-<span class='curline'><a href='../S/33.html#L70'>f</a>                  70 file.c           f-&gt;type = FD_NONE;</span>
-<span class='curline'><a href='../S/33.html#L84'>f</a>                  84 file.c         filestat(struct file *f, struct stat *st)</span>
-<span class='curline'><a href='../S/33.html#L86'>f</a>                  86 file.c           if(f-&gt;type == FD_INODE){</span>
-<span class='curline'><a href='../S/33.html#L87'>f</a>                  87 file.c             ilock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/33.html#L88'>f</a>                  88 file.c             stati(f-&gt;ip, st);</span>
-<span class='curline'><a href='../S/33.html#L89'>f</a>                  89 file.c             iunlock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/33.html#L97'>f</a>                  97 file.c         fileread(struct file *f, char *addr, int n)</span>
-<span class='curline'><a href='../S/33.html#L101'>f</a>                 101 file.c           if(f-&gt;readable == 0)</span>
-<span class='curline'><a href='../S/33.html#L103'>f</a>                 103 file.c           if(f-&gt;type == FD_PIPE)</span>
-<span class='curline'><a href='../S/33.html#L104'>f</a>                 104 file.c             return piperead(f-&gt;pipe, addr, n);</span>
-<span class='curline'><a href='../S/33.html#L105'>f</a>                 105 file.c           if(f-&gt;type == FD_INODE){</span>
-<span class='curline'><a href='../S/33.html#L106'>f</a>                 106 file.c             ilock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/33.html#L107'>f</a>                 107 file.c             if((r = readi(f-&gt;ip, addr, f-&gt;off, n)) &gt; 0)</span>
-<span class='curline'><a href='../S/33.html#L108'>f</a>                 108 file.c               f-&gt;off += r;</span>
-<span class='curline'><a href='../S/33.html#L109'>f</a>                 109 file.c             iunlock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/33.html#L118'>f</a>                 118 file.c         filewrite(struct file *f, char *addr, int n)</span>
-<span class='curline'><a href='../S/33.html#L122'>f</a>                 122 file.c           if(f-&gt;writable == 0)</span>
-<span class='curline'><a href='../S/33.html#L124'>f</a>                 124 file.c           if(f-&gt;type == FD_PIPE)</span>
-<span class='curline'><a href='../S/33.html#L125'>f</a>                 125 file.c             return pipewrite(f-&gt;pipe, addr, n);</span>
-<span class='curline'><a href='../S/33.html#L126'>f</a>                 126 file.c           if(f-&gt;type == FD_INODE){</span>
-<span class='curline'><a href='../S/33.html#L141'>f</a>                 141 file.c               ilock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/33.html#L142'>f</a>                 142 file.c               if ((r = writei(f-&gt;ip, addr + i, f-&gt;off, n1)) &gt; 0)</span>
-<span class='curline'><a href='../S/33.html#L143'>f</a>                 143 file.c                 f-&gt;off += r;</span>
-<span class='curline'><a href='../S/33.html#L144'>f</a>                 144 file.c               iunlock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/145.html#L25'>f</a>                  25 sysfile.c        struct file *f;</span>
-<span class='curline'><a href='../S/145.html#L29'>f</a>                  29 sysfile.c        if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
-<span class='curline'><a href='../S/145.html#L34'>f</a>                  34 sysfile.c          *pf = f;</span>
-<span class='curline'><a href='../S/145.html#L41'>f</a>                  41 sysfile.c      fdalloc(struct file *f)</span>
-<span class='curline'><a href='../S/145.html#L48'>f</a>                  48 sysfile.c            curproc-&gt;ofile[fd] = f;</span>
-<span class='curline'><a href='../S/145.html#L58'>f</a>                  58 sysfile.c        struct file *f;</span>
-<span class='curline'><a href='../S/145.html#L61'>f</a>                  61 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0)</span>
-<span class='curline'><a href='../S/145.html#L63'>f</a>                  63 sysfile.c        if((fd=fdalloc(f)) &lt; 0)</span>
-<span class='curline'><a href='../S/145.html#L65'>f</a>                  65 sysfile.c        filedup(f);</span>
-<span class='curline'><a href='../S/145.html#L72'>f</a>                  72 sysfile.c        struct file *f;</span>
-<span class='curline'><a href='../S/145.html#L76'>f</a>                  76 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argptr(1, &amp;p, n) &lt; 0)</span>
-<span class='curline'><a href='../S/145.html#L78'>f</a>                  78 sysfile.c        return fileread(f, p, n);</span>
-<span class='curline'><a href='../S/145.html#L84'>f</a>                  84 sysfile.c        struct file *f;</span>
-<span class='curline'><a href='../S/145.html#L88'>f</a>                  88 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argptr(1, &amp;p, n) &lt; 0)</span>
-<span class='curline'><a href='../S/145.html#L90'>f</a>                  90 sysfile.c        return filewrite(f, p, n);</span>
-<span class='curline'><a href='../S/145.html#L97'>f</a>                  97 sysfile.c        struct file *f;</span>
-<span class='curline'><a href='../S/145.html#L99'>f</a>                  99 sysfile.c        if(argfd(0, &amp;fd, &amp;f) &lt; 0)</span>
-<span class='curline'><a href='../S/145.html#L102'>f</a>                 102 sysfile.c        fileclose(f);</span>
-<span class='curline'><a href='../S/145.html#L109'>f</a>                 109 sysfile.c        struct file *f;</span>
-<span class='curline'><a href='../S/145.html#L112'>f</a>                 112 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argptr(1, (void*)&amp;st, sizeof(*st)) &lt; 0)</span>
-<span class='curline'><a href='../S/145.html#L114'>f</a>                 114 sysfile.c        return filestat(f, st);</span>
-<span class='curline'><a href='../S/145.html#L291'>f</a>                 291 sysfile.c        struct file *f;</span>
-<span class='curline'><a href='../S/145.html#L318'>f</a>                 318 sysfile.c        if((f = filealloc()) == 0 || (fd = fdalloc(f)) &lt; 0){</span>
-<span class='curline'><a href='../S/145.html#L319'>f</a>                 319 sysfile.c          if(f)</span>
-<span class='curline'><a href='../S/145.html#L320'>f</a>                 320 sysfile.c            fileclose(f);</span>
-<span class='curline'><a href='../S/145.html#L328'>f</a>                 328 sysfile.c        f-&gt;type = FD_INODE;</span>
-<span class='curline'><a href='../S/145.html#L329'>f</a>                 329 sysfile.c        f-&gt;ip = ip;</span>
-<span class='curline'><a href='../S/145.html#L330'>f</a>                 330 sysfile.c        f-&gt;off = 0;</span>
-<span class='curline'><a href='../S/145.html#L331'>f</a>                 331 sysfile.c        f-&gt;readable = !(omode &amp; O_WRONLY);</span>
-<span class='curline'><a href='../S/145.html#L332'>f</a>                 332 sysfile.c        f-&gt;writable = (omode &amp; O_WRONLY) || (omode &amp; O_RDWR);</span>
+<span class='curline'><a href='../S/80.html#L29'>f</a>                  29 file.c           struct file *f;</span>
+<span class='curline'><a href='../S/80.html#L32'>f</a>                  32 file.c           for(f = ftable.file; f &lt; ftable.file + NFILE; f++){</span>
+<span class='curline'><a href='../S/80.html#L33'>f</a>                  33 file.c             if(f-&gt;ref == 0){</span>
+<span class='curline'><a href='../S/80.html#L34'>f</a>                  34 file.c               f-&gt;ref = 1;</span>
+<span class='curline'><a href='../S/80.html#L36'>f</a>                  36 file.c               return f;</span>
+<span class='curline'><a href='../S/80.html#L45'>f</a>                  45 file.c         filedup(struct file *f)</span>
+<span class='curline'><a href='../S/80.html#L48'>f</a>                  48 file.c           if(f-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/80.html#L50'>f</a>                  50 file.c           f-&gt;ref++;</span>
+<span class='curline'><a href='../S/80.html#L52'>f</a>                  52 file.c           return f;</span>
+<span class='curline'><a href='../S/80.html#L57'>f</a>                  57 file.c         fileclose(struct file *f)</span>
+<span class='curline'><a href='../S/80.html#L62'>f</a>                  62 file.c           if(f-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/80.html#L64'>f</a>                  64 file.c           if(--f-&gt;ref &gt; 0){</span>
+<span class='curline'><a href='../S/80.html#L68'>f</a>                  68 file.c           ff = *f;</span>
+<span class='curline'><a href='../S/80.html#L69'>f</a>                  69 file.c           f-&gt;ref = 0;</span>
+<span class='curline'><a href='../S/80.html#L70'>f</a>                  70 file.c           f-&gt;type = FD_NONE;</span>
+<span class='curline'><a href='../S/80.html#L84'>f</a>                  84 file.c         filestat(struct file *f, struct stat *st)</span>
+<span class='curline'><a href='../S/80.html#L86'>f</a>                  86 file.c           if(f-&gt;type == FD_INODE){</span>
+<span class='curline'><a href='../S/80.html#L87'>f</a>                  87 file.c             ilock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/80.html#L88'>f</a>                  88 file.c             stati(f-&gt;ip, st);</span>
+<span class='curline'><a href='../S/80.html#L89'>f</a>                  89 file.c             iunlock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/80.html#L97'>f</a>                  97 file.c         fileread(struct file *f, char *addr, int n)</span>
+<span class='curline'><a href='../S/80.html#L101'>f</a>                 101 file.c           if(f-&gt;readable == 0)</span>
+<span class='curline'><a href='../S/80.html#L103'>f</a>                 103 file.c           if(f-&gt;type == FD_PIPE)</span>
+<span class='curline'><a href='../S/80.html#L104'>f</a>                 104 file.c             return piperead(f-&gt;pipe, addr, n);</span>
+<span class='curline'><a href='../S/80.html#L105'>f</a>                 105 file.c           if(f-&gt;type == FD_INODE){</span>
+<span class='curline'><a href='../S/80.html#L106'>f</a>                 106 file.c             ilock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/80.html#L107'>f</a>                 107 file.c             if((r = readi(f-&gt;ip, addr, f-&gt;off, n)) &gt; 0)</span>
+<span class='curline'><a href='../S/80.html#L108'>f</a>                 108 file.c               f-&gt;off += r;</span>
+<span class='curline'><a href='../S/80.html#L109'>f</a>                 109 file.c             iunlock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/80.html#L118'>f</a>                 118 file.c         filewrite(struct file *f, char *addr, int n)</span>
+<span class='curline'><a href='../S/80.html#L122'>f</a>                 122 file.c           if(f-&gt;writable == 0)</span>
+<span class='curline'><a href='../S/80.html#L124'>f</a>                 124 file.c           if(f-&gt;type == FD_PIPE)</span>
+<span class='curline'><a href='../S/80.html#L125'>f</a>                 125 file.c             return pipewrite(f-&gt;pipe, addr, n);</span>
+<span class='curline'><a href='../S/80.html#L126'>f</a>                 126 file.c           if(f-&gt;type == FD_INODE){</span>
+<span class='curline'><a href='../S/80.html#L141'>f</a>                 141 file.c               ilock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/80.html#L142'>f</a>                 142 file.c               if ((r = writei(f-&gt;ip, addr + i, f-&gt;off, n1)) &gt; 0)</span>
+<span class='curline'><a href='../S/80.html#L143'>f</a>                 143 file.c                 f-&gt;off += r;</span>
+<span class='curline'><a href='../S/80.html#L144'>f</a>                 144 file.c               iunlock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/31.html#L25'>f</a>                  25 sysfile.c        struct file *f;</span>
+<span class='curline'><a href='../S/31.html#L29'>f</a>                  29 sysfile.c        if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/31.html#L34'>f</a>                  34 sysfile.c          *pf = f;</span>
+<span class='curline'><a href='../S/31.html#L41'>f</a>                  41 sysfile.c      fdalloc(struct file *f)</span>
+<span class='curline'><a href='../S/31.html#L48'>f</a>                  48 sysfile.c            curproc-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/31.html#L58'>f</a>                  58 sysfile.c        struct file *f;</span>
+<span class='curline'><a href='../S/31.html#L61'>f</a>                  61 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0)</span>
+<span class='curline'><a href='../S/31.html#L63'>f</a>                  63 sysfile.c        if((fd=fdalloc(f)) &lt; 0)</span>
+<span class='curline'><a href='../S/31.html#L65'>f</a>                  65 sysfile.c        filedup(f);</span>
+<span class='curline'><a href='../S/31.html#L72'>f</a>                  72 sysfile.c        struct file *f;</span>
+<span class='curline'><a href='../S/31.html#L76'>f</a>                  76 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argptr(1, &amp;p, n) &lt; 0)</span>
+<span class='curline'><a href='../S/31.html#L78'>f</a>                  78 sysfile.c        return fileread(f, p, n);</span>
+<span class='curline'><a href='../S/31.html#L84'>f</a>                  84 sysfile.c        struct file *f;</span>
+<span class='curline'><a href='../S/31.html#L88'>f</a>                  88 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argptr(1, &amp;p, n) &lt; 0)</span>
+<span class='curline'><a href='../S/31.html#L90'>f</a>                  90 sysfile.c        return filewrite(f, p, n);</span>
+<span class='curline'><a href='../S/31.html#L97'>f</a>                  97 sysfile.c        struct file *f;</span>
+<span class='curline'><a href='../S/31.html#L99'>f</a>                  99 sysfile.c        if(argfd(0, &amp;fd, &amp;f) &lt; 0)</span>
+<span class='curline'><a href='../S/31.html#L102'>f</a>                 102 sysfile.c        fileclose(f);</span>
+<span class='curline'><a href='../S/31.html#L109'>f</a>                 109 sysfile.c        struct file *f;</span>
+<span class='curline'><a href='../S/31.html#L112'>f</a>                 112 sysfile.c        if(argfd(0, 0, &amp;f) &lt; 0 || argptr(1, (void*)&amp;st, sizeof(*st)) &lt; 0)</span>
+<span class='curline'><a href='../S/31.html#L114'>f</a>                 114 sysfile.c        return filestat(f, st);</span>
+<span class='curline'><a href='../S/31.html#L291'>f</a>                 291 sysfile.c        struct file *f;</span>
+<span class='curline'><a href='../S/31.html#L318'>f</a>                 318 sysfile.c        if((f = filealloc()) == 0 || (fd = fdalloc(f)) &lt; 0){</span>
+<span class='curline'><a href='../S/31.html#L319'>f</a>                 319 sysfile.c          if(f)</span>
+<span class='curline'><a href='../S/31.html#L320'>f</a>                 320 sysfile.c            fileclose(f);</span>
+<span class='curline'><a href='../S/31.html#L328'>f</a>                 328 sysfile.c        f-&gt;type = FD_INODE;</span>
+<span class='curline'><a href='../S/31.html#L329'>f</a>                 329 sysfile.c        f-&gt;ip = ip;</span>
+<span class='curline'><a href='../S/31.html#L330'>f</a>                 330 sysfile.c        f-&gt;off = 0;</span>
+<span class='curline'><a href='../S/31.html#L331'>f</a>                 331 sysfile.c        f-&gt;readable = !(omode &amp; O_WRONLY);</span>
+<span class='curline'><a href='../S/31.html#L332'>f</a>                 332 sysfile.c        f-&gt;writable = (omode &amp; O_WRONLY) || (omode &amp; O_RDWR);</span>
 </pre>
 </body>
 </html>

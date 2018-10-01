@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>buf.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.2' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/buf.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/5.html' title='Multiple included from 5 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <strong class='reserved'>struct</strong> <a href='../R/237.html' title='Multiple referred from 171 places.'>buf</a> <em class='brace'>{</em>
+<a id='L2' name='L2'></a>   2   <strong class='reserved'>int</strong> <a href='../S/56.html#L32' title='Defined at 32 in entry.S.'>flags</a>;
+<a id='L3' name='L3'></a>   3   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/74.html' title='Multiple used in 59 places.'>dev</a>;
+<a id='L4' name='L4'></a>   4   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/40.html' title='Multiple used in 12 places.'>blockno</a>;
+<a id='L5' name='L5'></a>   5   <strong class='reserved'>struct</strong> <a href='../S/78.html#L2' title='Defined at 2 in sleeplock.h.'>sleeplock</a> <a href='../Y/202.html' title='Multiple used in 118 places.'>lock</a>;
+<a id='L6' name='L6'></a>   6   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/339.html' title='Multiple used in 6 places.'>refcnt</a>;
+<a id='L7' name='L7'></a>   7   <strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/321.html' title='Multiple used in 9 places.'>prev</a>; <em class='comment'>// LRU cache list</em>
+<a id='L8' name='L8'></a>   8   <strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/237.html' title='Multiple used in 17 places.'>next</a>;
+<a id='L9' name='L9'></a>   9   <strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/329.html' title='Multiple used in 4 places.'>qnext</a>; <em class='comment'>// disk queue</em>
+<a id='L10' name='L10'></a>  10   <a href='../S/18.html#L3' title='Defined at 3 in types.h.'>uchar</a> <a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>[<a href='../S/94.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>];
+<a id='L11' name='L11'></a>  11 <em class='brace'>}</em>;
+<a id='L12' name='L12'></a>  12 <em class='sharp'>#define</em> <a href='../R/12.html' title='Multiple referred from 6 places.'>B_VALID</a> 0x2  <em class='comment'>// buffer has been read from disk</em>
+<a id='L13' name='L13'></a>  13 <em class='sharp'>#define</em> <a href='../R/11.html' title='Multiple referred from 11 places.'>B_DIRTY</a> 0x4  <em class='comment'>// buffer needs to be written to disk</em>
+<a id='L14' name='L14'></a>  14 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

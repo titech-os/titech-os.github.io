@@ -3,56 +3,56 @@
 <head>
 <title>de</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.5.7' />
+<meta name='generator' content='GLOBAL-6.6.2' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/39.html#L529'>de</a>                529 fs.c             struct dirent de;</span>
-<span class='curline'><a href='../S/39.html#L534'>de</a>                534 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
-<span class='curline'><a href='../S/39.html#L535'>de</a>                535 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/39.html#L537'>de</a>                537 fs.c               if(de.inum == 0)</span>
-<span class='curline'><a href='../S/39.html#L539'>de</a>                539 fs.c               if(namecmp(name, de.name) == 0){</span>
-<span class='curline'><a href='../S/39.html#L543'>de</a>                543 fs.c                 inum = de.inum;</span>
-<span class='curline'><a href='../S/39.html#L556'>de</a>                556 fs.c             struct dirent de;</span>
-<span class='curline'><a href='../S/39.html#L566'>de</a>                566 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
-<span class='curline'><a href='../S/39.html#L567'>de</a>                567 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/39.html#L569'>de</a>                569 fs.c               if(de.inum == 0)</span>
-<span class='curline'><a href='../S/39.html#L573'>de</a>                573 fs.c             strncpy(de.name, name, DIRSIZ);</span>
-<span class='curline'><a href='../S/39.html#L574'>de</a>                574 fs.c             de.inum = inum;</span>
-<span class='curline'><a href='../S/39.html#L575'>de</a>                575 fs.c             if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/80.html#L30'>de</a>                 30 ls.c             struct dirent de;</span>
-<span class='curline'><a href='../S/80.html#L57'>de</a>                 57 ls.c               while(read(fd, &amp;de, sizeof(de)) == sizeof(de)){</span>
-<span class='curline'><a href='../S/80.html#L58'>de</a>                 58 ls.c                 if(de.inum == 0)</span>
-<span class='curline'><a href='../S/80.html#L60'>de</a>                 60 ls.c                 memmove(p, de.name, DIRSIZ);</span>
-<span class='curline'><a href='../S/92.html#L72'>de</a>                 72 mkfs.c           struct dirent de;</span>
-<span class='curline'><a href='../S/92.html#L120'>de</a>                120 mkfs.c           bzero(&amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/92.html#L121'>de</a>                121 mkfs.c           de.inum = xshort(rootino);</span>
-<span class='curline'><a href='../S/92.html#L122'>de</a>                122 mkfs.c           strcpy(de.name, ".");</span>
-<span class='curline'><a href='../S/92.html#L123'>de</a>                123 mkfs.c           iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/92.html#L125'>de</a>                125 mkfs.c           bzero(&amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/92.html#L126'>de</a>                126 mkfs.c           de.inum = xshort(rootino);</span>
-<span class='curline'><a href='../S/92.html#L127'>de</a>                127 mkfs.c           strcpy(de.name, "..");</span>
-<span class='curline'><a href='../S/92.html#L128'>de</a>                128 mkfs.c           iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/92.html#L147'>de</a>                147 mkfs.c             bzero(&amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/92.html#L148'>de</a>                148 mkfs.c             de.inum = xshort(inum);</span>
-<span class='curline'><a href='../S/92.html#L149'>de</a>                149 mkfs.c             strncpy(de.name, argv[i], DIRSIZ);</span>
-<span class='curline'><a href='../S/92.html#L150'>de</a>                150 mkfs.c             iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/145.html#L172'>de</a>                172 sysfile.c        struct dirent de;</span>
-<span class='curline'><a href='../S/145.html#L174'>de</a>                174 sysfile.c        for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
-<span class='curline'><a href='../S/145.html#L175'>de</a>                175 sysfile.c          if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/145.html#L177'>de</a>                177 sysfile.c          if(de.inum != 0)</span>
-<span class='curline'><a href='../S/145.html#L188'>de</a>                188 sysfile.c        struct dirent de;</span>
-<span class='curline'><a href='../S/145.html#L218'>de</a>                218 sysfile.c        memset(&amp;de, 0, sizeof(de));</span>
-<span class='curline'><a href='../S/145.html#L219'>de</a>                219 sysfile.c        if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/165.html#L773'>de</a>                773 usertests.c      } de;</span>
-<span class='curline'><a href='../S/165.html#L803'>de</a>                803 usertests.c      while(read(fd, &amp;de, sizeof(de)) &gt; 0){</span>
-<span class='curline'><a href='../S/165.html#L804'>de</a>                804 usertests.c        if(de.inum == 0)</span>
-<span class='curline'><a href='../S/165.html#L806'>de</a>                806 usertests.c        if(de.name[0] == 'C' &amp;&amp; de.name[2] == '\0'){</span>
-<span class='curline'><a href='../S/165.html#L807'>de</a>                807 usertests.c          i = de.name[1] - '0';</span>
-<span class='curline'><a href='../S/165.html#L809'>de</a>                809 usertests.c            printf(1, "concreate weird file %s\n", de.name);</span>
-<span class='curline'><a href='../S/165.html#L813'>de</a>                813 usertests.c            printf(1, "concreate duplicate file %s\n", de.name);</span>
+<span class='curline'><a href='../S/46.html#L529'>de</a>                529 fs.c             struct dirent de;</span>
+<span class='curline'><a href='../S/46.html#L534'>de</a>                534 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/46.html#L535'>de</a>                535 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/46.html#L537'>de</a>                537 fs.c               if(de.inum == 0)</span>
+<span class='curline'><a href='../S/46.html#L539'>de</a>                539 fs.c               if(namecmp(name, de.name) == 0){</span>
+<span class='curline'><a href='../S/46.html#L543'>de</a>                543 fs.c                 inum = de.inum;</span>
+<span class='curline'><a href='../S/46.html#L556'>de</a>                556 fs.c             struct dirent de;</span>
+<span class='curline'><a href='../S/46.html#L566'>de</a>                566 fs.c             for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/46.html#L567'>de</a>                567 fs.c               if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/46.html#L569'>de</a>                569 fs.c               if(de.inum == 0)</span>
+<span class='curline'><a href='../S/46.html#L573'>de</a>                573 fs.c             strncpy(de.name, name, DIRSIZ);</span>
+<span class='curline'><a href='../S/46.html#L574'>de</a>                574 fs.c             de.inum = inum;</span>
+<span class='curline'><a href='../S/46.html#L575'>de</a>                575 fs.c             if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/12.html#L30'>de</a>                 30 ls.c             struct dirent de;</span>
+<span class='curline'><a href='../S/12.html#L57'>de</a>                 57 ls.c               while(read(fd, &amp;de, sizeof(de)) == sizeof(de)){</span>
+<span class='curline'><a href='../S/12.html#L58'>de</a>                 58 ls.c                 if(de.inum == 0)</span>
+<span class='curline'><a href='../S/12.html#L60'>de</a>                 60 ls.c                 memmove(p, de.name, DIRSIZ);</span>
+<span class='curline'><a href='../S/86.html#L72'>de</a>                 72 mkfs.c           struct dirent de;</span>
+<span class='curline'><a href='../S/86.html#L120'>de</a>                120 mkfs.c           bzero(&amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/86.html#L121'>de</a>                121 mkfs.c           de.inum = xshort(rootino);</span>
+<span class='curline'><a href='../S/86.html#L122'>de</a>                122 mkfs.c           strcpy(de.name, ".");</span>
+<span class='curline'><a href='../S/86.html#L123'>de</a>                123 mkfs.c           iappend(rootino, &amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/86.html#L125'>de</a>                125 mkfs.c           bzero(&amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/86.html#L126'>de</a>                126 mkfs.c           de.inum = xshort(rootino);</span>
+<span class='curline'><a href='../S/86.html#L127'>de</a>                127 mkfs.c           strcpy(de.name, "..");</span>
+<span class='curline'><a href='../S/86.html#L128'>de</a>                128 mkfs.c           iappend(rootino, &amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/86.html#L147'>de</a>                147 mkfs.c             bzero(&amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/86.html#L148'>de</a>                148 mkfs.c             de.inum = xshort(inum);</span>
+<span class='curline'><a href='../S/86.html#L149'>de</a>                149 mkfs.c             strncpy(de.name, argv[i], DIRSIZ);</span>
+<span class='curline'><a href='../S/86.html#L150'>de</a>                150 mkfs.c             iappend(rootino, &amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/31.html#L172'>de</a>                172 sysfile.c        struct dirent de;</span>
+<span class='curline'><a href='../S/31.html#L174'>de</a>                174 sysfile.c        for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
+<span class='curline'><a href='../S/31.html#L175'>de</a>                175 sysfile.c          if(readi(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/31.html#L177'>de</a>                177 sysfile.c          if(de.inum != 0)</span>
+<span class='curline'><a href='../S/31.html#L188'>de</a>                188 sysfile.c        struct dirent de;</span>
+<span class='curline'><a href='../S/31.html#L218'>de</a>                218 sysfile.c        memset(&amp;de, 0, sizeof(de));</span>
+<span class='curline'><a href='../S/31.html#L219'>de</a>                219 sysfile.c        if(writei(dp, (char*)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/96.html#L773'>de</a>                773 usertests.c      } de;</span>
+<span class='curline'><a href='../S/96.html#L803'>de</a>                803 usertests.c      while(read(fd, &amp;de, sizeof(de)) &gt; 0){</span>
+<span class='curline'><a href='../S/96.html#L804'>de</a>                804 usertests.c        if(de.inum == 0)</span>
+<span class='curline'><a href='../S/96.html#L806'>de</a>                806 usertests.c        if(de.name[0] == 'C' &amp;&amp; de.name[2] == '\0'){</span>
+<span class='curline'><a href='../S/96.html#L807'>de</a>                807 usertests.c          i = de.name[1] - '0';</span>
+<span class='curline'><a href='../S/96.html#L809'>de</a>                809 usertests.c            printf(1, "concreate weird file %s\n", de.name);</span>
+<span class='curline'><a href='../S/96.html#L813'>de</a>                813 usertests.c            printf(1, "concreate duplicate file %s\n", de.name);</span>
 </pre>
 </body>
 </html>

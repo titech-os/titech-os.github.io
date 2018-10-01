@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ide.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.2' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/ide.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L39'>[^]</a><a href='#L138'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L39' title='Defined at 39.'>idewait</a></li>
+<li><a href='#L51' title='Defined at 51.'>ideinit</a></li>
+<li><a href='#L74' title='Defined at 74.'>idestart</a></li>
+<li><a href='#L104' title='Defined at 104.'>ideintr</a></li>
+<li><a href='#L138' title='Defined at 138.'>iderw</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Simple PIO-based (non-DMA) IDE driver code.</em>
+<a id='L2' name='L2'></a>   2 
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='18.html'>types.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='9.html'>defs.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='65.html'>param.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='47.html'>memlayout.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='42.html'>mmu.h</a>"
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='14.html'>proc.h</a>"
+<a id='L9' name='L9'></a>   9 <em class='sharp'>#include</em> "<a href='51.html'>x86.h</a>"
+<a id='L10' name='L10'></a>  10 <em class='sharp'>#include</em> "<a href='85.html'>traps.h</a>"
+<a id='L11' name='L11'></a>  11 <em class='sharp'>#include</em> "<a href='7.html'>spinlock.h</a>"
+<a id='L12' name='L12'></a>  12 <em class='sharp'>#include</em> "<a href='78.html'>sleeplock.h</a>"
+<a id='L13' name='L13'></a>  13 <em class='sharp'>#include</em> "<a href='94.html'>fs.h</a>"
+<a id='L14' name='L14'></a>  14 <em class='sharp'>#include</em> "<a href='40.html'>buf.h</a>"
+<a id='L15' name='L15'></a>  15 
+<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../S/81.html#L80' title='Referred from 80 in ide.c.'>SECTOR_SIZE</a>   512
+<a id='L17' name='L17'></a>  17 <em class='sharp'>#define</em> <a href='../S/81.html#L43' title='Referred from 43 in ide.c.'>IDE_BSY</a>       0x80
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#define</em> <a href='../S/81.html#L43' title='Referred from 43 in ide.c.'>IDE_DRDY</a>      0x40
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../S/81.html#L45' title='Referred from 45 in ide.c.'>IDE_DF</a>        0x20
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#define</em> <a href='../S/81.html#L45' title='Referred from 45 in ide.c.'>IDE_ERR</a>       0x01
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/81.html#L82' title='Referred from 82 in ide.c.'>IDE_CMD_READ</a>  0x20
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> <a href='../S/81.html#L83' title='Referred from 83 in ide.c.'>IDE_CMD_WRITE</a> 0x30
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#define</em> <a href='../S/81.html#L82' title='Referred from 82 in ide.c.'>IDE_CMD_RDMUL</a> 0xc4
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../S/81.html#L83' title='Referred from 83 in ide.c.'>IDE_CMD_WRMUL</a> 0xc5
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <em class='comment'>// idequeue points to the buf now being read/written to the disk.</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'>// idequeue-&gt;qnext points to the next buf to be processed.</em>
+<a id='L29' name='L29'></a>  29 <em class='comment'>// You must hold idelock while manipulating queue.</em>
+<a id='L30' name='L30'></a>  30 
+<a id='L31' name='L31'></a>  31 <strong class='reserved'>static</strong> <strong class='reserved'>struct</strong> <a href='../S/7.html#L2' title='Defined at 2 in spinlock.h.'>spinlock</a> <a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>;
+<a id='L32' name='L32'></a>  32 <strong class='reserved'>static</strong> <strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/160.html' title='Multiple used in 7 places.'>idequeue</a>;
+<a id='L33' name='L33'></a>  33 
+<a id='L34' name='L34'></a>  34 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../Y/149.html' title='Multiple used in 3 places.'>havedisk1</a>;
+<a id='L35' name='L35'></a>  35 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/81.html#L74' title='Defined at 74 in ide.c.'>idestart</a>(<strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a>*);
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <em class='comment'>// Wait for IDE disk to become ready.</em>
+<a id='L38' name='L38'></a>  38 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L39' name='L39'></a>  39 <a href='../R/317.html' title='Multiple referred from 3 places.'>idewait</a>(<strong class='reserved'>int</strong> <a href='../Y/51.html' title='Multiple used in 2 places.'>checkerr</a>)
+<a id='L40' name='L40'></a>  40 <em class='brace'>{</em>
+<a id='L41' name='L41'></a>  41   <strong class='reserved'>int</strong> <a href='../Y/330.html' title='Multiple used in 52 places.'>r</a>;
+<a id='L42' name='L42'></a>  42 
+<a id='L43' name='L43'></a>  43   <strong class='reserved'>while</strong>(((<a href='../Y/330.html' title='Multiple used in 52 places.'>r</a> = <a href='../S/51.html#L4' title='Defined at 4 in x86.h.'>inb</a>(0x1f7)) &amp; (<a href='../S/81.html#L17' title='Defined at 17 in ide.c.'>IDE_BSY</a>|<a href='../S/81.html#L18' title='Defined at 18 in ide.c.'>IDE_DRDY</a>)) != <a href='../S/81.html#L18' title='Defined at 18 in ide.c.'>IDE_DRDY</a>)
+<a id='L44' name='L44'></a>  44     ;
+<a id='L45' name='L45'></a>  45   <strong class='reserved'>if</strong>(<a href='../Y/51.html' title='Multiple used in 2 places.'>checkerr</a> &amp;&amp; (<a href='../Y/330.html' title='Multiple used in 52 places.'>r</a> &amp; (<a href='../S/81.html#L19' title='Defined at 19 in ide.c.'>IDE_DF</a>|<a href='../S/81.html#L20' title='Defined at 20 in ide.c.'>IDE_ERR</a>)) != 0)
+<a id='L46' name='L46'></a>  46     <strong class='reserved'>return</strong> -1;
+<a id='L47' name='L47'></a>  47   <strong class='reserved'>return</strong> 0;
+<a id='L48' name='L48'></a>  48 <em class='brace'>}</em>
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50 <strong class='reserved'>void</strong>
+<a id='L51' name='L51'></a>  51 <a href='../R/313.html' title='Multiple referred from 2 places.'>ideinit</a>(<strong class='reserved'>void</strong>)
+<a id='L52' name='L52'></a>  52 <em class='brace'>{</em>
+<a id='L53' name='L53'></a>  53   <strong class='reserved'>int</strong> <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>;
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55   <a href='../S/66.html#L13' title='Defined at 13 in spinlock.c.'>initlock</a>(&amp;<a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>, "ide");
+<a id='L56' name='L56'></a>  56   <a href='../S/2.html#L68' title='Defined at 68 in ioapic.c.'>ioapicenable</a>(<a href='../S/85.html#L35' title='Defined at 35 in traps.h.'>IRQ_IDE</a>, <a href='../Y/232.html' title='Multiple used in 8 places.'>ncpu</a> - 1);
+<a id='L57' name='L57'></a>  57   <a href='../S/81.html#L39' title='Defined at 39 in ide.c.'>idewait</a>(0);
+<a id='L58' name='L58'></a>  58 
+<a id='L59' name='L59'></a>  59   <em class='comment'>// Check if disk 1 is present</em>
+<a id='L60' name='L60'></a>  60   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f6, 0xe0 | (1&lt;&lt;4));
+<a id='L61' name='L61'></a>  61   <strong class='reserved'>for</strong>(<a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>=0; <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>&lt;1000; <a href='../Y/156.html' title='Multiple used in 269 places.'>i</a>++)<em class='brace'>{</em>
+<a id='L62' name='L62'></a>  62     <strong class='reserved'>if</strong>(<a href='../S/51.html#L4' title='Defined at 4 in x86.h.'>inb</a>(0x1f7) != 0)<em class='brace'>{</em>
+<a id='L63' name='L63'></a>  63       <a href='../Y/149.html' title='Multiple used in 3 places.'>havedisk1</a> = 1;
+<a id='L64' name='L64'></a>  64       <strong class='reserved'>break</strong>;
+<a id='L65' name='L65'></a>  65     <em class='brace'>}</em>
+<a id='L66' name='L66'></a>  66   <em class='brace'>}</em>
+<a id='L67' name='L67'></a>  67 
+<a id='L68' name='L68'></a>  68   <em class='comment'>// Switch back to disk 0.</em>
+<a id='L69' name='L69'></a>  69   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f6, 0xe0 | (0&lt;&lt;4));
+<a id='L70' name='L70'></a>  70 <em class='brace'>}</em>
+<a id='L71' name='L71'></a>  71 
+<a id='L72' name='L72'></a>  72 <em class='comment'>// Start the request for b.  Caller must hold idelock.</em>
+<a id='L73' name='L73'></a>  73 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L74' name='L74'></a>  74 <a href='../R/316.html' title='Multiple referred from 3 places.'>idestart</a>(<strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>)
+<a id='L75' name='L75'></a>  75 <em class='brace'>{</em>
+<a id='L76' name='L76'></a>  76   <strong class='reserved'>if</strong>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a> == 0)
+<a id='L77' name='L77'></a>  77     <a href='../D/451.html' title='Multiple defined in 2 places.'>panic</a>("idestart");
+<a id='L78' name='L78'></a>  78   <strong class='reserved'>if</strong>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/40.html' title='Multiple used in 12 places.'>blockno</a> &gt;= <a href='../S/65.html#L13' title='Defined at 13 in param.h.'>FSSIZE</a>)
+<a id='L79' name='L79'></a>  79     <a href='../D/451.html' title='Multiple defined in 2 places.'>panic</a>("incorrect blockno");
+<a id='L80' name='L80'></a>  80   <strong class='reserved'>int</strong> <a href='../Y/358.html' title='Multiple used in 6 places.'>sector_per_block</a> =  <a href='../S/94.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>/<a href='../S/81.html#L16' title='Defined at 16 in ide.c.'>SECTOR_SIZE</a>;
+<a id='L81' name='L81'></a>  81   <strong class='reserved'>int</strong> <a href='../Y/357.html' title='Multiple used in 5 places.'>sector</a> = <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/40.html' title='Multiple used in 12 places.'>blockno</a> * <a href='../Y/358.html' title='Multiple used in 6 places.'>sector_per_block</a>;
+<a id='L82' name='L82'></a>  82   <strong class='reserved'>int</strong> <a href='../Y/335.html' title='Multiple used in 2 places.'>read_cmd</a> = (<a href='../Y/358.html' title='Multiple used in 6 places.'>sector_per_block</a> == 1) ? <a href='../S/81.html#L22' title='Defined at 22 in ide.c.'>IDE_CMD_READ</a> :  <a href='../S/81.html#L24' title='Defined at 24 in ide.c.'>IDE_CMD_RDMUL</a>;
+<a id='L83' name='L83'></a>  83   <strong class='reserved'>int</strong> <a href='../Y/448.html' title='Multiple used in 2 places.'>write_cmd</a> = (<a href='../Y/358.html' title='Multiple used in 6 places.'>sector_per_block</a> == 1) ? <a href='../S/81.html#L23' title='Defined at 23 in ide.c.'>IDE_CMD_WRITE</a> : <a href='../S/81.html#L25' title='Defined at 25 in ide.c.'>IDE_CMD_WRMUL</a>;
+<a id='L84' name='L84'></a>  84 
+<a id='L85' name='L85'></a>  85   <strong class='reserved'>if</strong> (<a href='../Y/358.html' title='Multiple used in 6 places.'>sector_per_block</a> &gt; 7) <a href='../D/451.html' title='Multiple defined in 2 places.'>panic</a>("idestart");
+<a id='L86' name='L86'></a>  86 
+<a id='L87' name='L87'></a>  87   <a href='../S/81.html#L39' title='Defined at 39 in ide.c.'>idewait</a>(0);
+<a id='L88' name='L88'></a>  88   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x3f6, 0);  <em class='comment'>// generate interrupt</em>
+<a id='L89' name='L89'></a>  89   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f2, <a href='../Y/358.html' title='Multiple used in 6 places.'>sector_per_block</a>);  <em class='comment'>// number of sectors</em>
+<a id='L90' name='L90'></a>  90   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f3, <a href='../Y/357.html' title='Multiple used in 5 places.'>sector</a> &amp; 0xff);
+<a id='L91' name='L91'></a>  91   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f4, (<a href='../Y/357.html' title='Multiple used in 5 places.'>sector</a> &gt;&gt; 8) &amp; 0xff);
+<a id='L92' name='L92'></a>  92   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f5, (<a href='../Y/357.html' title='Multiple used in 5 places.'>sector</a> &gt;&gt; 16) &amp; 0xff);
+<a id='L93' name='L93'></a>  93   <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f6, 0xe0 | ((<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/74.html' title='Multiple used in 59 places.'>dev</a>&amp;1)&lt;&lt;4) | ((<a href='../Y/357.html' title='Multiple used in 5 places.'>sector</a>&gt;&gt;24)&amp;0x0f));
+<a id='L94' name='L94'></a>  94   <strong class='reserved'>if</strong>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../S/56.html#L32' title='Defined at 32 in entry.S.'>flags</a> &amp; <a href='../S/40.html#L13' title='Defined at 13 in buf.h.'>B_DIRTY</a>)<em class='brace'>{</em>
+<a id='L95' name='L95'></a>  95     <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f7, <a href='../Y/448.html' title='Multiple used in 2 places.'>write_cmd</a>);
+<a id='L96' name='L96'></a>  96     <a href='../S/51.html#L34' title='Defined at 34 in x86.h.'>outsl</a>(0x1f0, <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>, <a href='../S/94.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>/4);
+<a id='L97' name='L97'></a>  97   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L98' name='L98'></a>  98     <a href='../S/51.html#L22' title='Defined at 22 in x86.h.'>outb</a>(0x1f7, <a href='../Y/335.html' title='Multiple used in 2 places.'>read_cmd</a>);
+<a id='L99' name='L99'></a>  99   <em class='brace'>}</em>
+<a id='L100' name='L100'></a> 100 <em class='brace'>}</em>
+<a id='L101' name='L101'></a> 101 
+<a id='L102' name='L102'></a> 102 <em class='comment'>// Interrupt handler.</em>
+<a id='L103' name='L103'></a> 103 <strong class='reserved'>void</strong>
+<a id='L104' name='L104'></a> 104 <a href='../R/314.html' title='Multiple referred from 2 places.'>ideintr</a>(<strong class='reserved'>void</strong>)
+<a id='L105' name='L105'></a> 105 <em class='brace'>{</em>
+<a id='L106' name='L106'></a> 106   <strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>;
+<a id='L107' name='L107'></a> 107 
+<a id='L108' name='L108'></a> 108   <em class='comment'>// First queued buffer is the active request.</em>
+<a id='L109' name='L109'></a> 109   <a href='../S/66.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>);
+<a id='L110' name='L110'></a> 110 
+<a id='L111' name='L111'></a> 111   <strong class='reserved'>if</strong>((<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a> = <a href='../Y/160.html' title='Multiple used in 7 places.'>idequeue</a>) == 0)<em class='brace'>{</em>
+<a id='L112' name='L112'></a> 112     <a href='../S/66.html#L47' title='Defined at 47 in spinlock.c.'>release</a>(&amp;<a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>);
+<a id='L113' name='L113'></a> 113     <strong class='reserved'>return</strong>;
+<a id='L114' name='L114'></a> 114   <em class='brace'>}</em>
+<a id='L115' name='L115'></a> 115   <a href='../Y/160.html' title='Multiple used in 7 places.'>idequeue</a> = <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/329.html' title='Multiple used in 4 places.'>qnext</a>;
+<a id='L116' name='L116'></a> 116 
+<a id='L117' name='L117'></a> 117   <em class='comment'>// Read data if needed.</em>
+<a id='L118' name='L118'></a> 118   <strong class='reserved'>if</strong>(!(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../S/56.html#L32' title='Defined at 32 in entry.S.'>flags</a> &amp; <a href='../S/40.html#L13' title='Defined at 13 in buf.h.'>B_DIRTY</a>) &amp;&amp; <a href='../S/81.html#L39' title='Defined at 39 in ide.c.'>idewait</a>(1) &gt;= 0)
+<a id='L119' name='L119'></a> 119     <a href='../S/51.html#L13' title='Defined at 13 in x86.h.'>insl</a>(0x1f0, <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/69.html' title='Multiple used in 57 places.'>data</a>, <a href='../S/94.html#L6' title='Defined at 6 in fs.h.'>BSIZE</a>/4);
+<a id='L120' name='L120'></a> 120 
+<a id='L121' name='L121'></a> 121   <em class='comment'>// Wake process waiting for this buf.</em>
+<a id='L122' name='L122'></a> 122   <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../S/56.html#L32' title='Defined at 32 in entry.S.'>flags</a> |= <a href='../S/40.html#L12' title='Defined at 12 in buf.h.'>B_VALID</a>;
+<a id='L123' name='L123'></a> 123   <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../S/56.html#L32' title='Defined at 32 in entry.S.'>flags</a> &amp;= ~<a href='../S/40.html#L13' title='Defined at 13 in buf.h.'>B_DIRTY</a>;
+<a id='L124' name='L124'></a> 124   <a href='../S/75.html#L469' title='Defined at 469 in proc.c.'>wakeup</a>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>);
+<a id='L125' name='L125'></a> 125 
+<a id='L126' name='L126'></a> 126   <em class='comment'>// Start disk on next buf in queue.</em>
+<a id='L127' name='L127'></a> 127   <strong class='reserved'>if</strong>(<a href='../Y/160.html' title='Multiple used in 7 places.'>idequeue</a> != 0)
+<a id='L128' name='L128'></a> 128     <a href='../S/81.html#L74' title='Defined at 74 in ide.c.'>idestart</a>(<a href='../Y/160.html' title='Multiple used in 7 places.'>idequeue</a>);
+<a id='L129' name='L129'></a> 129 
+<a id='L130' name='L130'></a> 130   <a href='../S/66.html#L47' title='Defined at 47 in spinlock.c.'>release</a>(&amp;<a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>);
+<a id='L131' name='L131'></a> 131 <em class='brace'>}</em>
+<a id='L132' name='L132'></a> 132 
+<a id='L133' name='L133'></a> 133 <em class='comment'>//PAGEBREAK!</em>
+<a id='L134' name='L134'></a> 134 <em class='comment'>// Sync buf with disk.</em>
+<a id='L135' name='L135'></a> 135 <em class='comment'>// If B_DIRTY is set, write buf to disk, clear B_DIRTY, set B_VALID.</em>
+<a id='L136' name='L136'></a> 136 <em class='comment'>// Else if B_VALID is not set, read buf from disk, set B_VALID.</em>
+<a id='L137' name='L137'></a> 137 <strong class='reserved'>void</strong>
+<a id='L138' name='L138'></a> 138 <a href='../R/315.html' title='Multiple referred from 3 places.'>iderw</a>(<strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> *<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>)
+<a id='L139' name='L139'></a> 139 <em class='brace'>{</em>
+<a id='L140' name='L140'></a> 140   <strong class='reserved'>struct</strong> <a href='../S/40.html#L1' title='Defined at 1 in buf.h.'>buf</a> **<a href='../Y/319.html' title='Multiple used in 11 places.'>pp</a>;
+<a id='L141' name='L141'></a> 141 
+<a id='L142' name='L142'></a> 142   <strong class='reserved'>if</strong>(!<a href='../S/32.html#L45' title='Defined at 45 in sleeplock.c.'>holdingsleep</a>(&amp;<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/202.html' title='Multiple used in 118 places.'>lock</a>))
+<a id='L143' name='L143'></a> 143     <a href='../D/451.html' title='Multiple defined in 2 places.'>panic</a>("iderw: buf not locked");
+<a id='L144' name='L144'></a> 144   <strong class='reserved'>if</strong>((<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../S/56.html#L32' title='Defined at 32 in entry.S.'>flags</a> &amp; (<a href='../S/40.html#L12' title='Defined at 12 in buf.h.'>B_VALID</a>|<a href='../S/40.html#L13' title='Defined at 13 in buf.h.'>B_DIRTY</a>)) == <a href='../S/40.html#L12' title='Defined at 12 in buf.h.'>B_VALID</a>)
+<a id='L145' name='L145'></a> 145     <a href='../D/451.html' title='Multiple defined in 2 places.'>panic</a>("iderw: nothing to do");
+<a id='L146' name='L146'></a> 146   <strong class='reserved'>if</strong>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/74.html' title='Multiple used in 59 places.'>dev</a> != 0 &amp;&amp; !<a href='../Y/149.html' title='Multiple used in 3 places.'>havedisk1</a>)
+<a id='L147' name='L147'></a> 147     <a href='../D/451.html' title='Multiple defined in 2 places.'>panic</a>("iderw: ide disk 1 not present");
+<a id='L148' name='L148'></a> 148 
+<a id='L149' name='L149'></a> 149   <a href='../S/66.html#L25' title='Defined at 25 in spinlock.c.'>acquire</a>(&amp;<a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>);  <em class='comment'>//DOC:acquire-lock</em>
+<a id='L150' name='L150'></a> 150 
+<a id='L151' name='L151'></a> 151   <em class='comment'>// Append b to idequeue.</em>
+<a id='L152' name='L152'></a> 152   <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../Y/329.html' title='Multiple used in 4 places.'>qnext</a> = 0;
+<a id='L153' name='L153'></a> 153   <strong class='reserved'>for</strong>(<a href='../Y/319.html' title='Multiple used in 11 places.'>pp</a>=&amp;<a href='../Y/160.html' title='Multiple used in 7 places.'>idequeue</a>; *<a href='../Y/319.html' title='Multiple used in 11 places.'>pp</a>; <a href='../Y/319.html' title='Multiple used in 11 places.'>pp</a>=&amp;(*<a href='../Y/319.html' title='Multiple used in 11 places.'>pp</a>)-&gt;<a href='../Y/329.html' title='Multiple used in 4 places.'>qnext</a>)  <em class='comment'>//DOC:insert-queue</em>
+<a id='L154' name='L154'></a> 154     ;
+<a id='L155' name='L155'></a> 155   *<a href='../Y/319.html' title='Multiple used in 11 places.'>pp</a> = <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>;
+<a id='L156' name='L156'></a> 156 
+<a id='L157' name='L157'></a> 157   <em class='comment'>// Start disk if necessary.</em>
+<a id='L158' name='L158'></a> 158   <strong class='reserved'>if</strong>(<a href='../Y/160.html' title='Multiple used in 7 places.'>idequeue</a> == <a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>)
+<a id='L159' name='L159'></a> 159     <a href='../S/81.html#L74' title='Defined at 74 in ide.c.'>idestart</a>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>);
+<a id='L160' name='L160'></a> 160 
+<a id='L161' name='L161'></a> 161   <em class='comment'>// Wait for request to finish.</em>
+<a id='L162' name='L162'></a> 162   <strong class='reserved'>while</strong>((<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>-&gt;<a href='../S/56.html#L32' title='Defined at 32 in entry.S.'>flags</a> &amp; (<a href='../S/40.html#L12' title='Defined at 12 in buf.h.'>B_VALID</a>|<a href='../S/40.html#L13' title='Defined at 13 in buf.h.'>B_DIRTY</a>)) != <a href='../S/40.html#L12' title='Defined at 12 in buf.h.'>B_VALID</a>)<em class='brace'>{</em>
+<a id='L163' name='L163'></a> 163     <a href='../S/75.html#L418' title='Defined at 418 in proc.c.'>sleep</a>(<a href='../Y/27.html' title='Multiple used in 100 places.'>b</a>, &amp;<a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>);
+<a id='L164' name='L164'></a> 164   <em class='brace'>}</em>
+<a id='L165' name='L165'></a> 165 
+<a id='L166' name='L166'></a> 166 
+<a id='L167' name='L167'></a> 167   <a href='../S/66.html#L47' title='Defined at 47 in spinlock.c.'>release</a>(&amp;<a href='../Y/159.html' title='Multiple used in 8 places.'>idelock</a>);
+<a id='L168' name='L168'></a> 168 <em class='brace'>}</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L39'>[^]</a><a href='#L138'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

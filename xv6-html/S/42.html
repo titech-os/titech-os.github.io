@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>mmu.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.2' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/mmu.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/39.html' title='Multiple included from 23 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// This file contains definitions for the</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>// x86 memory management unit (MMU).</em>
+<a id='L3' name='L3'></a>   3 
+<a id='L4' name='L4'></a>   4 <em class='comment'>// Eflags register</em>
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#define</em> <a href='../R/43.html' title='Multiple referred from 5 places.'>FL_IF</a>           0x00000200      <em class='comment'>// Interrupt Enable</em>
+<a id='L6' name='L6'></a>   6 
+<a id='L7' name='L7'></a>   7 <em class='comment'>// Control Register flags</em>
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#define</em> CR0_PE          0x00000001      <em class='comment'>// Protection Enable</em>
+<a id='L9' name='L9'></a>   9 <em class='sharp'>#define</em> CR0_WP          0x00010000      <em class='comment'>// Write Protect</em>
+<a id='L10' name='L10'></a>  10 <em class='sharp'>#define</em> CR0_PG          0x80000000      <em class='comment'>// Paging</em>
+<a id='L11' name='L11'></a>  11 
+<a id='L12' name='L12'></a>  12 <em class='sharp'>#define</em> CR4_PSE         0x00000010      <em class='comment'>// Page size extension</em>
+<a id='L13' name='L13'></a>  13 
+<a id='L14' name='L14'></a>  14 <em class='comment'>// various segment selectors.</em>
+<a id='L15' name='L15'></a>  15 <em class='sharp'>#define</em> <a href='../R/161.html' title='Multiple referred from 3 places.'>SEG_KCODE</a> 1  <em class='comment'>// kernel code</em>
+<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../R/162.html' title='Multiple referred from 2 places.'>SEG_KDATA</a> 2  <em class='comment'>// kernel data+stack</em>
+<a id='L17' name='L17'></a>  17 <em class='sharp'>#define</em> <a href='../R/164.html' title='Multiple referred from 2 places.'>SEG_UCODE</a> 3  <em class='comment'>// user code</em>
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#define</em> <a href='../R/165.html' title='Multiple referred from 2 places.'>SEG_UDATA</a> 4  <em class='comment'>// user data+stack</em>
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../R/163.html' title='Multiple referred from 3 places.'>SEG_TSS</a>   5  <em class='comment'>// this process's task state</em>
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <em class='comment'>// cpu-&gt;gdt[NSEGS] holds the above segments.</em>
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/14.html#L6' title='Referred from 6 in proc.h.'>NSEGS</a>     6
+<a id='L23' name='L23'></a>  23 
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#ifndef</em> <a href='../Y/3.html' title='Multiple used in 2 places.'>__ASSEMBLER__</a>
+<a id='L25' name='L25'></a>  25 <em class='comment'>// Segment Descriptor</em>
+<a id='L26' name='L26'></a>  26 <strong class='reserved'>struct</strong> <a href='../R/454.html' title='Multiple referred from 5 places.'>segdesc</a> <em class='brace'>{</em>
+<a id='L27' name='L27'></a>  27   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> lim_15_0 : 16;  <em class='comment'>// Low bits of segment limit</em>
+<a id='L28' name='L28'></a>  28   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> base_15_0 : 16; <em class='comment'>// Low bits of segment base address</em>
+<a id='L29' name='L29'></a>  29   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> base_23_16 : 8; <em class='comment'>// Middle bits of segment base address</em>
+<a id='L30' name='L30'></a>  30   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/413.html' title='Multiple used in 70 places.'>type</a> : 4;       <em class='comment'>// Segment type (see STS_ constants)</em>
+<a id='L31' name='L31'></a>  31   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/349.html' title='Multiple used in 116 places.'>s</a> : 1;          <em class='comment'>// 0 = system, 1 = application</em>
+<a id='L32' name='L32'></a>  32   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/82.html' title='Multiple used in 7 places.'>dpl</a> : 2;        <em class='comment'>// Descriptor Privilege Level</em>
+<a id='L33' name='L33'></a>  33   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/270.html' title='Multiple used in 257 places.'>p</a> : 1;          <em class='comment'>// Present</em>
+<a id='L34' name='L34'></a>  34   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> lim_19_16 : 4;  <em class='comment'>// High bits of segment limit</em>
+<a id='L35' name='L35'></a>  35   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> avl : 1;        <em class='comment'>// Unused (available for software use)</em>
+<a id='L36' name='L36'></a>  36   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/348.html' title='Multiple used in 3 places.'>rsv1</a> : 1;       <em class='comment'>// Reserved</em>
+<a id='L37' name='L37'></a>  37   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> db : 1;         <em class='comment'>// 0 = 16-bit segment, 1 = 32-bit segment</em>
+<a id='L38' name='L38'></a>  38   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> g : 1;          <em class='comment'>// Granularity: limit scaled by 4K when set</em>
+<a id='L39' name='L39'></a>  39   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> base_31_24 : 8; <em class='comment'>// High bits of segment base address</em>
+<a id='L40' name='L40'></a>  40 <em class='brace'>}</em>;
+<a id='L41' name='L41'></a>  41 
+<a id='L42' name='L42'></a>  42 <em class='comment'>// Normal segment</em>
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../R/159.html' title='Multiple referred from 4 places.'>SEG</a>(<a href='../Y/413.html' title='Multiple used in 70 places.'>type</a>, <a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>, <a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>, <a href='../Y/82.html' title='Multiple used in 7 places.'>dpl</a>) (<strong class='reserved'>struct</strong> <a href='../S/42.html#L26' title='Defined at 26 in mmu.h.'>segdesc</a>)    \
+<a id='L44' name='L44'></a>  44 <em class='brace'>{</em> ((<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &gt;&gt; 12) &amp; 0xffff, (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &amp; 0xffff,      \
+<a id='L45' name='L45'></a>  45   ((<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 16) &amp; 0xff, <a href='../Y/413.html' title='Multiple used in 70 places.'>type</a>, 1, <a href='../Y/82.html' title='Multiple used in 7 places.'>dpl</a>, 1,       \
+<a id='L46' name='L46'></a>  46   (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &gt;&gt; 28, 0, 0, 1, 1, (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 24 <em class='brace'>}</em>
+<a id='L47' name='L47'></a>  47 <em class='sharp'>#define</em> <a href='../S/22.html#L167' title='Referred from 167 in vm.c.'>SEG16</a>(<a href='../Y/413.html' title='Multiple used in 70 places.'>type</a>, <a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>, <a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>, <a href='../Y/82.html' title='Multiple used in 7 places.'>dpl</a>) (<strong class='reserved'>struct</strong> <a href='../S/42.html#L26' title='Defined at 26 in mmu.h.'>segdesc</a>)  \
+<a id='L48' name='L48'></a>  48 <em class='brace'>{</em> (<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &amp; 0xffff, (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &amp; 0xffff,              \
+<a id='L49' name='L49'></a>  49   ((<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 16) &amp; 0xff, <a href='../Y/413.html' title='Multiple used in 70 places.'>type</a>, 1, <a href='../Y/82.html' title='Multiple used in 7 places.'>dpl</a>, 1,       \
+<a id='L50' name='L50'></a>  50   (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/197.html' title='Multiple used in 9 places.'>lim</a>) &gt;&gt; 16, 0, 0, 1, 0, (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/29.html' title='Multiple used in 21 places.'>base</a>) &gt;&gt; 24 <em class='brace'>}</em>
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#endif</em>
+<a id='L52' name='L52'></a>  52 
+<a id='L53' name='L53'></a>  53 <em class='sharp'>#define</em> <a href='../R/29.html' title='Multiple referred from 7 places.'>DPL_USER</a>    0x3     <em class='comment'>// User DPL</em>
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55 <em class='comment'>// Application segment type bits</em>
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../R/172.html' title='Multiple referred from 2 places.'>STA_X</a>       0x8     <em class='comment'>// Executable segment</em>
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../R/171.html' title='Multiple referred from 2 places.'>STA_W</a>       0x2     <em class='comment'>// Writeable (non-executable segments)</em>
+<a id='L58' name='L58'></a>  58 <em class='sharp'>#define</em> <a href='../R/170.html' title='Multiple referred from 2 places.'>STA_R</a>       0x2     <em class='comment'>// Readable (executable segments)</em>
+<a id='L59' name='L59'></a>  59 
+<a id='L60' name='L60'></a>  60 <em class='comment'>// System segment type bits</em>
+<a id='L61' name='L61'></a>  61 <em class='sharp'>#define</em> <a href='../S/22.html#L167' title='Referred from 167 in vm.c.'>STS_T32A</a>    0x9     <em class='comment'>// Available 32-bit TSS</em>
+<a id='L62' name='L62'></a>  62 <em class='sharp'>#define</em> <a href='../S/42.html#L174' title='Referred from 174 in mmu.h.'>STS_IG32</a>    0xE     <em class='comment'>// 32-bit Interrupt Gate</em>
+<a id='L63' name='L63'></a>  63 <em class='sharp'>#define</em> <a href='../S/42.html#L174' title='Referred from 174 in mmu.h.'>STS_TG32</a>    0xF     <em class='comment'>// 32-bit Trap Gate</em>
+<a id='L64' name='L64'></a>  64 
+<a id='L65' name='L65'></a>  65 <em class='comment'>// A virtual address 'la' has a three-part structure as follows:</em>
+<a id='L66' name='L66'></a>  66 <em class='comment'>//</em>
+<a id='L67' name='L67'></a>  67 <em class='comment'>// +--------10------+-------10-------+---------12----------+</em>
+<a id='L68' name='L68'></a>  68 <em class='comment'>// | Page Directory |   Page Table   | Offset within Page  |</em>
+<a id='L69' name='L69'></a>  69 <em class='comment'>// |      Index     |      Index     |                     |</em>
+<a id='L70' name='L70'></a>  70 <em class='comment'>// +----------------+----------------+---------------------+</em>
+<a id='L71' name='L71'></a>  71 <em class='comment'>//  \--- PDX(va) --/ \--- PTX(va) --/</em>
+<a id='L72' name='L72'></a>  72 
+<a id='L73' name='L73'></a>  73 <em class='comment'>// page directory index</em>
+<a id='L74' name='L74'></a>  74 <em class='sharp'>#define</em> <a href='../R/127.html' title='Multiple referred from 2 places.'>PDX</a>(<a href='../Y/428.html' title='Multiple used in 13 places.'>va</a>)         (((<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/428.html' title='Multiple used in 13 places.'>va</a>) &gt;&gt; <a href='../S/42.html#L88' title='Defined at 88 in mmu.h.'>PDXSHIFT</a>) &amp; 0x3FF)
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <em class='comment'>// page table index</em>
+<a id='L77' name='L77'></a>  77 <em class='sharp'>#define</em> <a href='../S/22.html#L54' title='Referred from 54 in vm.c.'>PTX</a>(<a href='../Y/428.html' title='Multiple used in 13 places.'>va</a>)         (((<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/428.html' title='Multiple used in 13 places.'>va</a>) &gt;&gt; <a href='../S/42.html#L87' title='Defined at 87 in mmu.h.'>PTXSHIFT</a>) &amp; 0x3FF)
+<a id='L78' name='L78'></a>  78 
+<a id='L79' name='L79'></a>  79 <em class='comment'>// construct virtual address from indexes and offset</em>
+<a id='L80' name='L80'></a>  80 <em class='sharp'>#define</em> <a href='../S/22.html#L268' title='Referred from 268 in vm.c.'>PGADDR</a>(<a href='../Y/68.html' title='Multiple used in 14 places.'>d</a>, <a href='../Y/393.html' title='Multiple used in 10 places.'>t</a>, o) ((<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)((<a href='../Y/68.html' title='Multiple used in 14 places.'>d</a>) &lt;&lt; <a href='../S/42.html#L88' title='Defined at 88 in mmu.h.'>PDXSHIFT</a> | (<a href='../Y/393.html' title='Multiple used in 10 places.'>t</a>) &lt;&lt; <a href='../S/42.html#L87' title='Defined at 87 in mmu.h.'>PTXSHIFT</a> | (o)))
+<a id='L81' name='L81'></a>  81 
+<a id='L82' name='L82'></a>  82 <em class='comment'>// Page directory and page table constants.</em>
+<a id='L83' name='L83'></a>  83 <em class='sharp'>#define</em> <a href='../R/117.html' title='Multiple referred from 2 places.'>NPDENTRIES</a>      1024    <em class='comment'>// # directory entries per page directory</em>
+<a id='L84' name='L84'></a>  84 <em class='sharp'>#define</em> NPTENTRIES      1024    <em class='comment'>// # PTEs per page table</em>
+<a id='L85' name='L85'></a>  85 <em class='sharp'>#define</em> <a href='../R/133.html' title='Multiple referred from 32 places.'>PGSIZE</a>          4096    <em class='comment'>// bytes mapped by a page</em>
+<a id='L86' name='L86'></a>  86 
+<a id='L87' name='L87'></a>  87 <em class='sharp'>#define</em> <a href='../R/144.html' title='Multiple referred from 2 places.'>PTXSHIFT</a>        12      <em class='comment'>// offset of PTX in a linear address</em>
+<a id='L88' name='L88'></a>  88 <em class='sharp'>#define</em> <a href='../R/128.html' title='Multiple referred from 3 places.'>PDXSHIFT</a>        22      <em class='comment'>// offset of PDX in a linear address</em>
+<a id='L89' name='L89'></a>  89 
+<a id='L90' name='L90'></a>  90 <em class='sharp'>#define</em> <a href='../R/132.html' title='Multiple referred from 4 places.'>PGROUNDUP</a>(<a href='../Y/392.html' title='Multiple used in 37 places.'>sz</a>)  (((<a href='../Y/392.html' title='Multiple used in 37 places.'>sz</a>)+<a href='../S/42.html#L85' title='Defined at 85 in mmu.h.'>PGSIZE</a>-1) &amp; ~(<a href='../S/42.html#L85' title='Defined at 85 in mmu.h.'>PGSIZE</a>-1))
+<a id='L91' name='L91'></a>  91 <em class='sharp'>#define</em> <a href='../R/131.html' title='Multiple referred from 3 places.'>PGROUNDDOWN</a>(<a href='../Y/12.html' title='Multiple used in 58 places.'>a</a>) (((<a href='../Y/12.html' title='Multiple used in 58 places.'>a</a>)) &amp; ~(<a href='../S/42.html#L85' title='Defined at 85 in mmu.h.'>PGSIZE</a>-1))
+<a id='L92' name='L92'></a>  92 
+<a id='L93' name='L93'></a>  93 <em class='comment'>// Page table/directory entry flags.</em>
+<a id='L94' name='L94'></a>  94 <em class='sharp'>#define</em> <a href='../R/139.html' title='Multiple referred from 10 places.'>PTE_P</a>           0x001   <em class='comment'>// Present</em>
+<a id='L95' name='L95'></a>  95 <em class='sharp'>#define</em> <a href='../R/142.html' title='Multiple referred from 8 places.'>PTE_W</a>           0x002   <em class='comment'>// Writeable</em>
+<a id='L96' name='L96'></a>  96 <em class='sharp'>#define</em> <a href='../R/141.html' title='Multiple referred from 5 places.'>PTE_U</a>           0x004   <em class='comment'>// User</em>
+<a id='L97' name='L97'></a>  97 <em class='sharp'>#define</em> <a href='../R/140.html' title='Multiple referred from 2 places.'>PTE_PS</a>          0x080   <em class='comment'>// Page Size</em>
+<a id='L98' name='L98'></a>  98 
+<a id='L99' name='L99'></a>  99 <em class='comment'>// Address in page table or page directory entry</em>
+<a id='L100' name='L100'></a> 100 <em class='sharp'>#define</em> <a href='../R/137.html' title='Multiple referred from 6 places.'>PTE_ADDR</a>(<a href='../Y/326.html' title='Multiple used in 29 places.'>pte</a>)   ((<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/326.html' title='Multiple used in 29 places.'>pte</a>) &amp; ~0xFFF)
+<a id='L101' name='L101'></a> 101 <em class='sharp'>#define</em> <a href='../S/22.html#L331' title='Referred from 331 in vm.c.'>PTE_FLAGS</a>(<a href='../Y/326.html' title='Multiple used in 29 places.'>pte</a>)  ((<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/326.html' title='Multiple used in 29 places.'>pte</a>) &amp;  0xFFF)
+<a id='L102' name='L102'></a> 102 
+<a id='L103' name='L103'></a> 103 <em class='sharp'>#ifndef</em> <a href='../Y/3.html' title='Multiple used in 2 places.'>__ASSEMBLER__</a>
+<a id='L104' name='L104'></a> 104 <strong class='reserved'>typedef</strong> <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../R/430.html' title='Multiple referred from 10 places.'>pte_t</a>;
+<a id='L105' name='L105'></a> 105 
+<a id='L106' name='L106'></a> 106 <em class='comment'>// Task state segment format</em>
+<a id='L107' name='L107'></a> 107 <strong class='reserved'>struct</strong> <a href='../S/14.html#L5' title='Referred from 5 in proc.h.'>taskstate</a> <em class='brace'>{</em>
+<a id='L108' name='L108'></a> 108   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/200.html' title='Multiple used in 18 places.'>link</a>;         <em class='comment'>// Old ts selector</em>
+<a id='L109' name='L109'></a> 109   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/113.html' title='Multiple used in 2 places.'>esp0</a>;         <em class='comment'>// Stack pointers and segment selectors</em>
+<a id='L110' name='L110'></a> 110   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/377.html' title='Multiple used in 2 places.'>ss0</a>;        <em class='comment'>//   after an increase in privilege level</em>
+<a id='L111' name='L111'></a> 111   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/274.html' title='Multiple used in 2 places.'>padding1</a>;
+<a id='L112' name='L112'></a> 112   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> *esp1;
+<a id='L113' name='L113'></a> 113   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> ss1;
+<a id='L114' name='L114'></a> 114   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/276.html' title='Multiple used in 2 places.'>padding2</a>;
+<a id='L115' name='L115'></a> 115   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> *esp2;
+<a id='L116' name='L116'></a> 116   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> ss2;
+<a id='L117' name='L117'></a> 117   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/277.html' title='Multiple used in 2 places.'>padding3</a>;
+<a id='L118' name='L118'></a> 118   <strong class='reserved'>void</strong> *cr3;         <em class='comment'>// Page directory base</em>
+<a id='L119' name='L119'></a> 119   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> *<a href='../Y/99.html' title='Multiple used in 9 places.'>eip</a>;         <em class='comment'>// Saved state from last task switch</em>
+<a id='L120' name='L120'></a> 120   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/97.html' title='Multiple used in 9 places.'>eflags</a>;
+<a id='L121' name='L121'></a> 121   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/88.html' title='Multiple used in 6 places.'>eax</a>;          <em class='comment'>// More saved state (registers)</em>
+<a id='L122' name='L122'></a> 122   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/93.html' title='Multiple used in 2 places.'>ecx</a>;
+<a id='L123' name='L123'></a> 123   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/95.html' title='Multiple used in 2 places.'>edx</a>;
+<a id='L124' name='L124'></a> 124   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/90.html' title='Multiple used in 3 places.'>ebx</a>;
+<a id='L125' name='L125'></a> 125   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> *<a href='../Y/112.html' title='Multiple used in 5 places.'>esp</a>;
+<a id='L126' name='L126'></a> 126   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> *<a href='../Y/89.html' title='Multiple used in 9 places.'>ebp</a>;
+<a id='L127' name='L127'></a> 127   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/111.html' title='Multiple used in 3 places.'>esi</a>;
+<a id='L128' name='L128'></a> 128   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/94.html' title='Multiple used in 3 places.'>edi</a>;
+<a id='L129' name='L129'></a> 129   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/110.html' title='Multiple used in 44 places.'>es</a>;         <em class='comment'>// Even more saved state (segment selectors)</em>
+<a id='L130' name='L130'></a> 130   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/278.html' title='Multiple used in 2 places.'>padding4</a>;
+<a id='L131' name='L131'></a> 131   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/64.html' title='Multiple used in 9 places.'>cs</a>;
+<a id='L132' name='L132'></a> 132   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/279.html' title='Multiple used in 2 places.'>padding5</a>;
+<a id='L133' name='L133'></a> 133   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/376.html' title='Multiple used in 3 places.'>ss</a>;
+<a id='L134' name='L134'></a> 134   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/280.html' title='Multiple used in 2 places.'>padding6</a>;
+<a id='L135' name='L135'></a> 135   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/83.html' title='Multiple used in 5 places.'>ds</a>;
+<a id='L136' name='L136'></a> 136   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> padding7;
+<a id='L137' name='L137'></a> 137   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/138.html' title='Multiple used in 2 places.'>fs</a>;
+<a id='L138' name='L138'></a> 138   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> padding8;
+<a id='L139' name='L139'></a> 139   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/148.html' title='Multiple used in 2 places.'>gs</a>;
+<a id='L140' name='L140'></a> 140   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> padding9;
+<a id='L141' name='L141'></a> 141   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> ldt;
+<a id='L142' name='L142'></a> 142   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> padding10;
+<a id='L143' name='L143'></a> 143   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/393.html' title='Multiple used in 10 places.'>t</a>;          <em class='comment'>// Trap on task switch</em>
+<a id='L144' name='L144'></a> 144   <a href='../S/18.html#L2' title='Defined at 2 in types.h.'>ushort</a> <a href='../Y/174.html' title='Multiple used in 2 places.'>iomb</a>;       <em class='comment'>// I/O map base address</em>
+<a id='L145' name='L145'></a> 145 <em class='brace'>}</em>;
+<a id='L146' name='L146'></a> 146 
+<a id='L147' name='L147'></a> 147 <em class='comment'>// Gate descriptors for interrupts and traps</em>
+<a id='L148' name='L148'></a> 148 <strong class='reserved'>struct</strong> <a href='../R/301.html' title='Multiple referred from 3 places.'>gatedesc</a> <em class='brace'>{</em>
+<a id='L149' name='L149'></a> 149   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/258.html' title='Multiple used in 2 places.'>off_15_0</a> : 16;   <em class='comment'>// low 16 bits of offset in segment</em>
+<a id='L150' name='L150'></a> 150   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/64.html' title='Multiple used in 9 places.'>cs</a> : 16;         <em class='comment'>// code segment selector</em>
+<a id='L151' name='L151'></a> 151   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/23.html' title='Multiple used in 6 places.'>args</a> : 5;        <em class='comment'>// # args, 0 for interrupt/trap gates</em>
+<a id='L152' name='L152'></a> 152   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/348.html' title='Multiple used in 3 places.'>rsv1</a> : 3;        <em class='comment'>// reserved(should be zero I guess)</em>
+<a id='L153' name='L153'></a> 153   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/413.html' title='Multiple used in 70 places.'>type</a> : 4;        <em class='comment'>// type(STS_{IG32,TG32})</em>
+<a id='L154' name='L154'></a> 154   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/349.html' title='Multiple used in 116 places.'>s</a> : 1;           <em class='comment'>// must be 0 (system)</em>
+<a id='L155' name='L155'></a> 155   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/82.html' title='Multiple used in 7 places.'>dpl</a> : 2;         <em class='comment'>// descriptor(meaning new) privilege level</em>
+<a id='L156' name='L156'></a> 156   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/270.html' title='Multiple used in 257 places.'>p</a> : 1;           <em class='comment'>// Present</em>
+<a id='L157' name='L157'></a> 157   <a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a> <a href='../Y/259.html' title='Multiple used in 2 places.'>off_31_16</a> : 16;  <em class='comment'>// high bits of offset in segment</em>
+<a id='L158' name='L158'></a> 158 <em class='brace'>}</em>;
+<a id='L159' name='L159'></a> 159 
+<a id='L160' name='L160'></a> 160 <em class='comment'>// Set up a normal interrupt/trap gate descriptor.</em>
+<a id='L161' name='L161'></a> 161 <em class='comment'>// - istrap: 1 for a trap (= exception) gate, 0 for an interrupt gate.</em>
+<a id='L162' name='L162'></a> 162 <em class='comment'>//   interrupt gate clears FL_IF, trap gate leaves FL_IF alone</em>
+<a id='L163' name='L163'></a> 163 <em class='comment'>// - sel: Code segment selector for interrupt/trap handler</em>
+<a id='L164' name='L164'></a> 164 <em class='comment'>// - off: Offset in code segment for interrupt/trap handler</em>
+<a id='L165' name='L165'></a> 165 <em class='comment'>// - dpl: Descriptor Privilege Level -</em>
+<a id='L166' name='L166'></a> 166 <em class='comment'>//        the privilege level required for software to invoke</em>
+<a id='L167' name='L167'></a> 167 <em class='comment'>//        this interrupt/trap gate explicitly using an int instruction.</em>
+<a id='L168' name='L168'></a> 168 <em class='sharp'>#define</em> <a href='../R/166.html' title='Multiple referred from 2 places.'>SETGATE</a>(<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>, <a href='../Y/178.html' title='Multiple used in 2 places.'>istrap</a>, <a href='../Y/359.html' title='Multiple used in 4 places.'>sel</a>, <a href='../Y/257.html' title='Multiple used in 59 places.'>off</a>, <a href='../Y/68.html' title='Multiple used in 14 places.'>d</a>)                \
+<a id='L169' name='L169'></a> 169 <em class='brace'>{</em>                                                         \
+<a id='L170' name='L170'></a> 170   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/258.html' title='Multiple used in 2 places.'>off_15_0</a> = (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/257.html' title='Multiple used in 59 places.'>off</a>) &amp; 0xffff;                \
+<a id='L171' name='L171'></a> 171   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/64.html' title='Multiple used in 9 places.'>cs</a> = (<a href='../Y/359.html' title='Multiple used in 4 places.'>sel</a>);                                      \
+<a id='L172' name='L172'></a> 172   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/23.html' title='Multiple used in 6 places.'>args</a> = 0;                                        \
+<a id='L173' name='L173'></a> 173   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/348.html' title='Multiple used in 3 places.'>rsv1</a> = 0;                                        \
+<a id='L174' name='L174'></a> 174   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/413.html' title='Multiple used in 70 places.'>type</a> = (<a href='../Y/178.html' title='Multiple used in 2 places.'>istrap</a>) ? <a href='../S/42.html#L63' title='Defined at 63 in mmu.h.'>STS_TG32</a> : <a href='../S/42.html#L62' title='Defined at 62 in mmu.h.'>STS_IG32</a>;           \
+<a id='L175' name='L175'></a> 175   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/349.html' title='Multiple used in 116 places.'>s</a> = 0;                                           \
+<a id='L176' name='L176'></a> 176   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/82.html' title='Multiple used in 7 places.'>dpl</a> = (<a href='../Y/68.html' title='Multiple used in 14 places.'>d</a>);                                       \
+<a id='L177' name='L177'></a> 177   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/270.html' title='Multiple used in 257 places.'>p</a> = 1;                                           \
+<a id='L178' name='L178'></a> 178   (<a href='../Y/144.html' title='Multiple used in 10 places.'>gate</a>).<a href='../Y/259.html' title='Multiple used in 2 places.'>off_31_16</a> = (<a href='../S/18.html#L1' title='Defined at 1 in types.h.'>uint</a>)(<a href='../Y/257.html' title='Multiple used in 59 places.'>off</a>) &gt;&gt; 16;                  \
+<a id='L179' name='L179'></a> 179 <em class='brace'>}</em>
+<a id='L180' name='L180'></a> 180 
+<a id='L181' name='L181'></a> 181 <em class='sharp'>#endif</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>
