@@ -1,6 +1,7 @@
 # システムソフトウェア(CSC.T371)
 
 ## お知らせ
+* 課題提出状況: [小課題1](https://titech-os.github.io/misc/hw1.txt), [小課題2](https://titech-os.github.io/misc/hw2.txt)
 * 小課題2レポートのための[LaTeXテンプレート](https://titech-os.github.io/misc/reptemp2.zip)を用意しました．
 * 休講：10月18日(木)
 * 第7回（**10月15日(月)・9-10限**）は**情報工学系計算機室**で行います．
