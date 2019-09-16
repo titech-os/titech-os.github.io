@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>nwrite</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/34.html#L17'>nwrite</a>             17 kernel/pipe.c    uint nwrite;    // number of bytes written</span>
+<span class='curline'><a href='../S/34.html#L35'>nwrite</a>             35 kernel/pipe.c    pi-&gt;nwrite = 0;</span>
+<span class='curline'><a href='../S/34.html#L67'>nwrite</a>             67 kernel/pipe.c      wakeup(&amp;pi-&gt;nwrite);</span>
+<span class='curline'><a href='../S/34.html#L85'>nwrite</a>             85 kernel/pipe.c      while(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/34.html#L91'>nwrite</a>             91 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L95'>nwrite</a>             95 kernel/pipe.c      pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
+<span class='curline'><a href='../S/34.html#L110'>nwrite</a>            110 kernel/pipe.c    while(pi-&gt;nread == pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  //DOC: pipe-empty</span>
+<span class='curline'><a href='../S/34.html#L118'>nwrite</a>            118 kernel/pipe.c      if(pi-&gt;nread == pi-&gt;nwrite)</span>
+<span class='curline'><a href='../S/34.html#L124'>nwrite</a>            124 kernel/pipe.c    wakeup(&amp;pi-&gt;nwrite);  //DOC: piperead-wakeup</span>
+</pre>
+</body>
+</html>

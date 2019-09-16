@@ -1,14 +1,12 @@
 # システムソフトウェア(CSC.T371)
 
 ## お知らせ
-* 課題提出状況: [小課題1](https://titech-os.github.io/misc/hw1.txt), [小課題2](https://titech-os.github.io/misc/hw2.txt)
-* 小課題2レポートのための[LaTeXテンプレート](https://titech-os.github.io/misc/reptemp2.zip)を用意しました．
-* 休講：10月18日(木)
-* 第7回（**10月15日(月)・9-10限**）は**情報工学系計算機室**で行います．
-* 第3回（**10月1日(月)・9-10限**）は**情報工学系計算機室**で行います．
-* 初回（9月27日(木)・7-8限）および第2回（10月1日(月)・7-8限）はスケジュール通りW641講義室で行います．
+* 初回講義は9月30日(月)に行います．9月26日(木)は出張のため休講とします．
+* 学士特定課題研究のオリエンテーションを以下の予定で行います．
+  - 日時: 10月4日(金) 15:15-16:30
+  - 場所: 西8号館E棟10F大会議室
 
-## 担当
+## 講義担当
 * [渡部卓雄 (情報工学系)](http://www.psg.c.titech.ac.jp/~takuo/)
 
 ## 講義時間・講義室
@@ -30,7 +28,7 @@
 
 ## 成績評価（詳細は第1回スライドを参照）
 * 期末試験(50)
-* 小課題(10)×2，中課題(30)×1
+* 課題1(20)，課題2(30)
 
 ## 予定
 1. 導入・オペレーティングシステムの役割と機能
@@ -50,20 +48,13 @@
 15. 保護機構とセキュリティ
 
 ## 休講予定
-11/5(月)と11/8(木)は出張のため休講とします．
+9月26日(木), 10月21日(月), 10月24日(木)は出張のため休講とします．
 
 ## 期末試験
-
-* 日時: 2018年11月26日(月) 7-8限 (15:05-16:35)
-* 試験会場: W641
-* 試験範囲: 講義で扱った内容
-  - プロセス管理，同期機構，メモリ管理，ファイルシステムおよびこれらのxv6における実装
-* 持ち込みについて
-  - カンニング用紙（A4一枚・手書き）持ち込み可
-  - 配布資料とノート，図書，PC等は**持ち込み不可**
-* 期末試験については[教務課サイト](https://www.titech.ac.jp/enrolled/life/undergraduate_exam.html)を必ず参照すること．
+試験範囲，日程，試験室等については後日掲載します．
 
 ### 過去の期末試験問題とその解答・解説
+* 2018年度: [問題](ex/2018.pdf) / [解答・解説](ex/2018a.pdf)
 * 2017年度: [問題](ex/2017.pdf) / [解答・解説](ex/2017a.pdf)
 * 2016年度: [問題](ex/2016.pdf) / [解答・解説](ex/2016a.pdf)
 * 2015年度: [問題](ex/2015.pdf) / [解答・解説](ex/2015a.pdf)
@@ -79,11 +70,18 @@ OCW-iで配布する予定ですが，一部の資料や例題などは本Github
 
 ## 関連・参考サイト
 * 本演習のGithubアカウント: [http://github.com/titech-os/](http://github.com/titech-os/)
-  - xv6の講義用Githubリポジトリ: [http://github.com/titech-os/xv6-public/](http://github.com/titech-os/xv6-public/)
-  - GNU GlobalでHTML化したxv6のソースコード: [https://titech-os.github.io/xv6-html/](https://titech-os.github.io/xv6-html/)
-* xv6のオフィシャルサイト: [https://pdos.csail.mit.edu/6.828/2018/xv6.html](https://pdos.csail.mit.edu/6.828/2018/xv6.html)
-  - ブックレット [https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
-  - xv6のオフィシャルGithubリポジトリ: [https://github.com/mit-pdos/xv6-public/](https://github.com/mit-pdos/xv6-public/)
+* [xv6 (2019年版 RISC-V)](https://pdos.csail.mit.edu/6.828/2019/xv6.html)
+  - [ブックレット (PDF)](https://pdos.csail.mit.edu/6.828/2019/xv6/book-riscv-rev0.pdf)
+  - [Githubリポジトリ](https://github.com/mit-pdos/xv6-riscv/)
+  - [HTML化したソースコード](https://titech-os.github.io/xv6-riscv-html/)
+* [xv6 (2018年版 x86)](https://pdos.csail.mit.edu/6.828/2018/xv6.html)
+  - [ブックレット (PDF)](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
+  - [Githubリポジトリ](https://github.com/mit-pdos/xv6-public/)
+  - [HTML化したソースコード](https://titech-os.github.io/xv6-html/)
+* RISC-V
+  - [riscv.org](https://riscv.org)
+  - [Specifications](https://riscv.org/specifications/)
+  - [GNU Toolchain](https://github.com/riscv/riscv-gnu-toolchain)
 * インテルIA-32アーキテクチャー・ソフトウェア・デベロッパーズ・マニュアル(PDF)
   - [IA-32 インテル ® アーキテクチャ ソフトウェア・デベロッパーズ・ マニュアル（上巻：基本アーキテクチャ）](https://www.intel.co.jp/content/dam/www/public/ijkk/jp/ja/documents/developer/IA32_Arh_Dev_Man_Vol1_Online_i.pdf)
   - [IA-32 インテル ® アーキテクチャ ソフトウェア・デベロッパーズ・ マニュアル（中巻A：命令セット・リファレンス A-M）](https://www.intel.co.jp/content/dam/www/public/ijkk/jp/ja/documents/developer/IA32_Arh_Dev_Man_Vol2A_i.pdf)

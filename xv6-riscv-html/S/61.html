@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel/bio.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/bio.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L36'>[^]</a><a href='#L145'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L36' title='Defined at 36.'>binit</a></li>
+<li><a href='#L58' title='Defined at 58.'>bget</a></li>
+<li><a href='#L91' title='Defined at 91.'>bread</a></li>
+<li><a href='#L105' title='Defined at 105.'>bwrite</a></li>
+<li><a href='#L115' title='Defined at 115.'>brelse</a></li>
+<li><a href='#L138' title='Defined at 138.'>bpin</a></li>
+<li><a href='#L145' title='Defined at 145.'>bunpin</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Buffer cache.</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>//</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>// The buffer cache is a linked list of buf structures holding</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>// cached copies of disk block contents.  Caching disk blocks</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>// in memory reduces the number of disk reads and also provides</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>// a synchronization point for disk blocks used by multiple processes.</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>//</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>// Interface:</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>// * To get a buffer for a particular disk block, call bread.</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>// * After changing buffer data, call bwrite to write it to disk.</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>// * When done with the buffer, call brelse.</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>// * Do not use the buffer after calling brelse.</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>// * Only one process at a time can use a buffer,</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>//     so do not keep them longer than necessary.</em>
+<a id='L15' name='L15'></a>  15 
+<a id='L16' name='L16'></a>  16 
+<a id='L17' name='L17'></a>  17 <em class='sharp'>#include</em> "<a href='37.html'>types.h</a>"
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#include</em> "<a href='58.html'>param.h</a>"
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#include</em> "<a href='30.html'>spinlock.h</a>"
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#include</em> "<a href='66.html'>sleeplock.h</a>"
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#include</em> "<a href='64.html'>riscv.h</a>"
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#include</em> "<a href='31.html'>defs.h</a>"
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#include</em> "<a href='71.html'>fs.h</a>"
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#include</em> "<a href='47.html'>buf.h</a>"
+<a id='L25' name='L25'></a>  25 
+<a id='L26' name='L26'></a>  26 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L27' name='L27'></a>  27   <strong class='reserved'>struct</strong> <a href='../S/30.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>;
+<a id='L28' name='L28'></a>  28   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../S/58.html#L11' title='Defined at 11 in kernel/param.h.'>NBUF</a>];
+<a id='L29' name='L29'></a>  29 
+<a id='L30' name='L30'></a>  30   <em class='comment'>// Linked list of all buffers, through prev/next.</em>
+<a id='L31' name='L31'></a>  31   <em class='comment'>// head.next is most recently used.</em>
+<a id='L32' name='L32'></a>  32   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> <a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>;
+<a id='L33' name='L33'></a>  33 <em class='brace'>}</em> <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>;
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35 <strong class='reserved'>void</strong>
+<a id='L36' name='L36'></a>  36 <a href='../R/194.html' title='Multiple referred from 2 places.'>binit</a>(<strong class='reserved'>void</strong>)
+<a id='L37' name='L37'></a>  37 <em class='brace'>{</em>
+<a id='L38' name='L38'></a>  38   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L39' name='L39'></a>  39 
+<a id='L40' name='L40'></a>  40   <a href='../S/59.html#L12' title='Defined at 12 in kernel/spinlock.c.'>initlock</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>, "bcache");
+<a id='L41' name='L41'></a>  41 
+<a id='L42' name='L42'></a>  42   <em class='comment'>// Create linked list of buffers</em>
+<a id='L43' name='L43'></a>  43   <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a> = &amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>;
+<a id='L44' name='L44'></a>  44   <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a> = &amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>;
+<a id='L45' name='L45'></a>  45   <strong class='reserved'>for</strong>(<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> = <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>; <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> &lt; <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>+<a href='../S/58.html#L11' title='Defined at 11 in kernel/param.h.'>NBUF</a>; <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>++)<em class='brace'>{</em>
+<a id='L46' name='L46'></a>  46     <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a> = <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>;
+<a id='L47' name='L47'></a>  47     <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a> = &amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>;
+<a id='L48' name='L48'></a>  48     <a href='../S/44.html#L13' title='Defined at 13 in kernel/sleeplock.c.'>initsleeplock</a>(&amp;<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>, "buffer");
+<a id='L49' name='L49'></a>  49     <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L50' name='L50'></a>  50     <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L51' name='L51'></a>  51   <em class='brace'>}</em>
+<a id='L52' name='L52'></a>  52 <em class='brace'>}</em>
+<a id='L53' name='L53'></a>  53 
+<a id='L54' name='L54'></a>  54 <em class='comment'>// Look through buffer cache for block on device dev.</em>
+<a id='L55' name='L55'></a>  55 <em class='comment'>// If not found, allocate a buffer.</em>
+<a id='L56' name='L56'></a>  56 <em class='comment'>// In either case, return locked buffer.</em>
+<a id='L57' name='L57'></a>  57 <strong class='reserved'>static</strong> <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>*
+<a id='L58' name='L58'></a>  58 <a href='../S/61.html#L95' title='Referred from 95 in kernel/bio.c.'>bget</a>(<a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/38.html' title='Multiple used in 11 places.'>blockno</a>)
+<a id='L59' name='L59'></a>  59 <em class='brace'>{</em>
+<a id='L60' name='L60'></a>  60   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L61' name='L61'></a>  61 
+<a id='L62' name='L62'></a>  62   <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L63' name='L63'></a>  63 
+<a id='L64' name='L64'></a>  64   <em class='comment'>// Is the block already cached?</em>
+<a id='L65' name='L65'></a>  65   <strong class='reserved'>for</strong>(<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> = <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>; <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> != &amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>; <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>)<em class='brace'>{</em>
+<a id='L66' name='L66'></a>  66     <strong class='reserved'>if</strong>(<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a> == <a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a> &amp;&amp; <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/38.html' title='Multiple used in 11 places.'>blockno</a> == <a href='../Y/38.html' title='Multiple used in 11 places.'>blockno</a>)<em class='brace'>{</em>
+<a id='L67' name='L67'></a>  67       <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/281.html' title='Multiple used in 8 places.'>refcnt</a>++;
+<a id='L68' name='L68'></a>  68       <a href='../S/59.html#L46' title='Defined at 46 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L69' name='L69'></a>  69       <a href='../S/44.html#L22' title='Defined at 22 in kernel/sleeplock.c.'>acquiresleep</a>(&amp;<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L70' name='L70'></a>  70       <strong class='reserved'>return</strong> <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L71' name='L71'></a>  71     <em class='brace'>}</em>
+<a id='L72' name='L72'></a>  72   <em class='brace'>}</em>
+<a id='L73' name='L73'></a>  73 
+<a id='L74' name='L74'></a>  74   <em class='comment'>// Not cached; recycle an unused buffer.</em>
+<a id='L75' name='L75'></a>  75   <strong class='reserved'>for</strong>(<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> = <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a>; <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> != &amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>; <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a>)<em class='brace'>{</em>
+<a id='L76' name='L76'></a>  76     <strong class='reserved'>if</strong>(<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/281.html' title='Multiple used in 8 places.'>refcnt</a> == 0) <em class='brace'>{</em>
+<a id='L77' name='L77'></a>  77       <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a> = <a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a>;
+<a id='L78' name='L78'></a>  78       <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/38.html' title='Multiple used in 11 places.'>blockno</a> = <a href='../Y/38.html' title='Multiple used in 11 places.'>blockno</a>;
+<a id='L79' name='L79'></a>  79       <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/384.html' title='Multiple used in 10 places.'>valid</a> = 0;
+<a id='L80' name='L80'></a>  80       <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/281.html' title='Multiple used in 8 places.'>refcnt</a> = 1;
+<a id='L81' name='L81'></a>  81       <a href='../S/59.html#L46' title='Defined at 46 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L82' name='L82'></a>  82       <a href='../S/44.html#L22' title='Defined at 22 in kernel/sleeplock.c.'>acquiresleep</a>(&amp;<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L83' name='L83'></a>  83       <strong class='reserved'>return</strong> <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L84' name='L84'></a>  84     <em class='brace'>}</em>
+<a id='L85' name='L85'></a>  85   <em class='brace'>}</em>
+<a id='L86' name='L86'></a>  86   <a href='../D/363.html' title='Multiple defined in 2 places.'>panic</a>("bget: no buffers");
+<a id='L87' name='L87'></a>  87 <em class='brace'>}</em>
+<a id='L88' name='L88'></a>  88 
+<a id='L89' name='L89'></a>  89 <em class='comment'>// Return a locked buf with the contents of the indicated block.</em>
+<a id='L90' name='L90'></a>  90 <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>*
+<a id='L91' name='L91'></a>  91 <a href='../R/197.html' title='Multiple referred from 18 places.'>bread</a>(<a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/38.html' title='Multiple used in 11 places.'>blockno</a>)
+<a id='L92' name='L92'></a>  92 <em class='brace'>{</em>
+<a id='L93' name='L93'></a>  93   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95   <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a> = <a href='../S/61.html#L58' title='Defined at 58 in kernel/bio.c.'>bget</a>(<a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a>, <a href='../Y/38.html' title='Multiple used in 11 places.'>blockno</a>);
+<a id='L96' name='L96'></a>  96   <strong class='reserved'>if</strong>(!<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/384.html' title='Multiple used in 10 places.'>valid</a>) <em class='brace'>{</em>
+<a id='L97' name='L97'></a>  97     <a href='../S/65.html#L169' title='Defined at 169 in kernel/virtio_disk.c.'>virtio_disk_rw</a>(<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>, 0);
+<a id='L98' name='L98'></a>  98     <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/384.html' title='Multiple used in 10 places.'>valid</a> = 1;
+<a id='L99' name='L99'></a>  99   <em class='brace'>}</em>
+<a id='L100' name='L100'></a> 100   <strong class='reserved'>return</strong> <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L101' name='L101'></a> 101 <em class='brace'>}</em>
+<a id='L102' name='L102'></a> 102 
+<a id='L103' name='L103'></a> 103 <em class='comment'>// Write b's contents to disk.  Must be locked.</em>
+<a id='L104' name='L104'></a> 104 <strong class='reserved'>void</strong>
+<a id='L105' name='L105'></a> 105 <a href='../R/202.html' title='Multiple referred from 4 places.'>bwrite</a>(<strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>)
+<a id='L106' name='L106'></a> 106 <em class='brace'>{</em>
+<a id='L107' name='L107'></a> 107   <strong class='reserved'>if</strong>(!<a href='../S/44.html#L44' title='Defined at 44 in kernel/sleeplock.c.'>holdingsleep</a>(&amp;<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>))
+<a id='L108' name='L108'></a> 108     <a href='../D/363.html' title='Multiple defined in 2 places.'>panic</a>("bwrite");
+<a id='L109' name='L109'></a> 109   <a href='../S/65.html#L169' title='Defined at 169 in kernel/virtio_disk.c.'>virtio_disk_rw</a>(<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>, 1);
+<a id='L110' name='L110'></a> 110 <em class='brace'>}</em>
+<a id='L111' name='L111'></a> 111 
+<a id='L112' name='L112'></a> 112 <em class='comment'>// Release a locked buffer.</em>
+<a id='L113' name='L113'></a> 113 <em class='comment'>// Move to the head of the MRU list.</em>
+<a id='L114' name='L114'></a> 114 <strong class='reserved'>void</strong>
+<a id='L115' name='L115'></a> 115 <a href='../R/198.html' title='Multiple referred from 22 places.'>brelse</a>(<strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>)
+<a id='L116' name='L116'></a> 116 <em class='brace'>{</em>
+<a id='L117' name='L117'></a> 117   <strong class='reserved'>if</strong>(!<a href='../S/44.html#L44' title='Defined at 44 in kernel/sleeplock.c.'>holdingsleep</a>(&amp;<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>))
+<a id='L118' name='L118'></a> 118     <a href='../D/363.html' title='Multiple defined in 2 places.'>panic</a>("brelse");
+<a id='L119' name='L119'></a> 119 
+<a id='L120' name='L120'></a> 120   <a href='../S/44.html#L34' title='Defined at 34 in kernel/sleeplock.c.'>releasesleep</a>(&amp;<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L121' name='L121'></a> 121 
+<a id='L122' name='L122'></a> 122   <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L123' name='L123'></a> 123   <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/281.html' title='Multiple used in 8 places.'>refcnt</a>--;
+<a id='L124' name='L124'></a> 124   <strong class='reserved'>if</strong> (<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/281.html' title='Multiple used in 8 places.'>refcnt</a> == 0) <em class='brace'>{</em>
+<a id='L125' name='L125'></a> 125     <em class='comment'>// no one is waiting for it.</em>
+<a id='L126' name='L126'></a> 126     <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a>;
+<a id='L127' name='L127'></a> 127     <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a>-&gt;<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>;
+<a id='L128' name='L128'></a> 128     <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a> = <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>;
+<a id='L129' name='L129'></a> 129     <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a> = &amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>;
+<a id='L130' name='L130'></a> 130     <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a>-&gt;<a href='../Y/264.html' title='Multiple used in 9 places.'>prev</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L131' name='L131'></a> 131     <a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/128.html' title='Multiple used in 13 places.'>head</a>.<a href='../Y/202.html' title='Multiple used in 22 places.'>next</a> = <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>;
+<a id='L132' name='L132'></a> 132   <em class='brace'>}</em>
+<a id='L133' name='L133'></a> 133   
+<a id='L134' name='L134'></a> 134   <a href='../S/59.html#L46' title='Defined at 46 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L135' name='L135'></a> 135 <em class='brace'>}</em>
+<a id='L136' name='L136'></a> 136 
+<a id='L137' name='L137'></a> 137 <strong class='reserved'>void</strong>
+<a id='L138' name='L138'></a> 138 <a href='../R/196.html' title='Multiple referred from 2 places.'>bpin</a>(<strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>) <em class='brace'>{</em>
+<a id='L139' name='L139'></a> 139   <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L140' name='L140'></a> 140   <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/281.html' title='Multiple used in 8 places.'>refcnt</a>++;
+<a id='L141' name='L141'></a> 141   <a href='../S/59.html#L46' title='Defined at 46 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L142' name='L142'></a> 142 <em class='brace'>}</em>
+<a id='L143' name='L143'></a> 143 
+<a id='L144' name='L144'></a> 144 <strong class='reserved'>void</strong>
+<a id='L145' name='L145'></a> 145 <a href='../R/201.html' title='Multiple referred from 2 places.'>bunpin</a>(<strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>) <em class='brace'>{</em>
+<a id='L146' name='L146'></a> 146   <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L147' name='L147'></a> 147   <a href='../Y/30.html' title='Multiple used in 89 places.'>b</a>-&gt;<a href='../Y/281.html' title='Multiple used in 8 places.'>refcnt</a>--;
+<a id='L148' name='L148'></a> 148   <a href='../S/59.html#L46' title='Defined at 46 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/33.html' title='Multiple used in 24 places.'>bcache</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
+<a id='L149' name='L149'></a> 149 <em class='brace'>}</em>
+<a id='L150' name='L150'></a> 150 
+<a id='L151' name='L151'></a> 151 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L36'>[^]</a><a href='#L145'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

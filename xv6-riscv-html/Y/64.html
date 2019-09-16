@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>desc</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/65.html#L29'>desc</a>               29 kernel/virtio_disk.c   struct VRingDesc *desc;</span>
+<span class='curline'><a href='../S/65.html#L105'>desc</a>              105 kernel/virtio_disk.c   disk.desc = (struct VRingDesc *) disk.pages;</span>
+<span class='curline'><a href='../S/65.html#L106'>desc</a>              106 kernel/virtio_disk.c   disk.avail = (uint16*)(((char*)disk.desc) + NUM*sizeof(struct VRingDesc));</span>
+<span class='curline'><a href='../S/65.html#L136'>desc</a>              136 kernel/virtio_disk.c   disk.desc[i].addr = 0;</span>
+<span class='curline'><a href='../S/65.html#L147'>desc</a>              147 kernel/virtio_disk.c     if(disk.desc[i].flags &amp; VRING_DESC_F_NEXT)</span>
+<span class='curline'><a href='../S/65.html#L148'>desc</a>              148 kernel/virtio_disk.c       i = disk.desc[i].next;</span>
+<span class='curline'><a href='../S/65.html#L206'>desc</a>              206 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) kvmpa((uint64) &amp;buf0);</span>
+<span class='curline'><a href='../S/65.html#L207'>desc</a>              207 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(buf0);</span>
+<span class='curline'><a href='../S/65.html#L208'>desc</a>              208 kernel/virtio_disk.c   disk.desc[idx[0]].flags = VRING_DESC_F_NEXT;</span>
+<span class='curline'><a href='../S/65.html#L209'>desc</a>              209 kernel/virtio_disk.c   disk.desc[idx[0]].next = idx[1];</span>
+<span class='curline'><a href='../S/65.html#L211'>desc</a>              211 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
+<span class='curline'><a href='../S/65.html#L212'>desc</a>              212 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
+<span class='curline'><a href='../S/65.html#L214'>desc</a>              214 kernel/virtio_disk.c     disk.desc[idx[1]].flags = 0; // device reads b-&gt;data</span>
+<span class='curline'><a href='../S/65.html#L216'>desc</a>              216 kernel/virtio_disk.c     disk.desc[idx[1]].flags = VRING_DESC_F_WRITE; // device writes b-&gt;data</span>
+<span class='curline'><a href='../S/65.html#L217'>desc</a>              217 kernel/virtio_disk.c   disk.desc[idx[1]].flags |= VRING_DESC_F_NEXT;</span>
+<span class='curline'><a href='../S/65.html#L218'>desc</a>              218 kernel/virtio_disk.c   disk.desc[idx[1]].next = idx[2];</span>
+<span class='curline'><a href='../S/65.html#L221'>desc</a>              221 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64) &amp;disk.info[idx[0]].status;</span>
+<span class='curline'><a href='../S/65.html#L222'>desc</a>              222 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
+<span class='curline'><a href='../S/65.html#L223'>desc</a>              223 kernel/virtio_disk.c   disk.desc[idx[2]].flags = VRING_DESC_F_WRITE; // device writes the status</span>
+<span class='curline'><a href='../S/65.html#L224'>desc</a>              224 kernel/virtio_disk.c   disk.desc[idx[2]].next = 0;</span>
+</pre>
+</body>
+</html>

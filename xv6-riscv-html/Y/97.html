@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>fd</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/63.html#L331'>fd</a>                331 kernel/proc.c    for(int fd = 0; fd &lt; NOFILE; fd++){</span>
+<span class='curline'><a href='../S/63.html#L332'>fd</a>                332 kernel/proc.c      if(p-&gt;ofile[fd]){</span>
+<span class='curline'><a href='../S/63.html#L333'>fd</a>                333 kernel/proc.c        struct file *f = p-&gt;ofile[fd];</span>
+<span class='curline'><a href='../S/63.html#L335'>fd</a>                335 kernel/proc.c        p-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/43.html#L24'>fd</a>                 24 kernel/sysfile.c   int fd;</span>
+<span class='curline'><a href='../S/43.html#L27'>fd</a>                 27 kernel/sysfile.c   if(argint(n, &amp;fd) &lt; 0)</span>
+<span class='curline'><a href='../S/43.html#L29'>fd</a>                 29 kernel/sysfile.c   if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/43.html#L32'>fd</a>                 32 kernel/sysfile.c     *pfd = fd;</span>
+<span class='curline'><a href='../S/43.html#L43'>fd</a>                 43 kernel/sysfile.c   int fd;</span>
+<span class='curline'><a href='../S/43.html#L46'>fd</a>                 46 kernel/sysfile.c   for(fd = 0; fd &lt; NOFILE; fd++){</span>
+<span class='curline'><a href='../S/43.html#L47'>fd</a>                 47 kernel/sysfile.c     if(p-&gt;ofile[fd] == 0){</span>
+<span class='curline'><a href='../S/43.html#L48'>fd</a>                 48 kernel/sysfile.c       p-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/43.html#L49'>fd</a>                 49 kernel/sysfile.c       return fd;</span>
+<span class='curline'><a href='../S/43.html#L59'>fd</a>                 59 kernel/sysfile.c   int fd;</span>
+<span class='curline'><a href='../S/43.html#L63'>fd</a>                 63 kernel/sysfile.c   if((fd=fdalloc(f)) &lt; 0)</span>
+<span class='curline'><a href='../S/43.html#L66'>fd</a>                 66 kernel/sysfile.c   return fd;</span>
+<span class='curline'><a href='../S/43.html#L97'>fd</a>                 97 kernel/sysfile.c   int fd;</span>
+<span class='curline'><a href='../S/43.html#L100'>fd</a>                100 kernel/sysfile.c   if(argfd(0, &amp;fd, &amp;f) &lt; 0)</span>
+<span class='curline'><a href='../S/43.html#L102'>fd</a>                102 kernel/sysfile.c   myproc()-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/43.html#L290'>fd</a>                290 kernel/sysfile.c   int fd, omode;</span>
+<span class='curline'><a href='../S/43.html#L325'>fd</a>                325 kernel/sysfile.c   if((f = filealloc()) == 0 || (fd = fdalloc(f)) &lt; 0){</span>
+<span class='curline'><a href='../S/43.html#L347'>fd</a>                347 kernel/sysfile.c   return fd;</span>
+<span class='curline'><a href='../S/3.html#L70'>fd</a>                 70 mkfs/mkfs.c      int i, cc, fd;</span>
+<span class='curline'><a href='../S/3.html#L141'>fd</a>                141 mkfs/mkfs.c        if((fd = open(argv[i], 0)) &lt; 0){</span>
+<span class='curline'><a href='../S/3.html#L160'>fd</a>                160 mkfs/mkfs.c        while((cc = read(fd, buf, sizeof(buf))) &gt; 0)</span>
+<span class='curline'><a href='../S/3.html#L163'>fd</a>                163 mkfs/mkfs.c        close(fd);</span>
+<span class='curline'><a href='../S/9.html#L8'>fd</a>                  8 user/cat.c     cat(int fd)</span>
+<span class='curline'><a href='../S/9.html#L12'>fd</a>                 12 user/cat.c       while((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
+<span class='curline'><a href='../S/9.html#L27'>fd</a>                 27 user/cat.c       int fd, i;</span>
+<span class='curline'><a href='../S/9.html#L35'>fd</a>                 35 user/cat.c         if((fd = open(argv[i], 0)) &lt; 0){</span>
+<span class='curline'><a href='../S/9.html#L39'>fd</a>                 39 user/cat.c         cat(fd);</span>
+<span class='curline'><a href='../S/9.html#L40'>fd</a>                 40 user/cat.c         close(fd);</span>
+<span class='curline'><a href='../S/21.html#L11'>fd</a>                 11 user/grep.c    grep(char *pattern, int fd)</span>
+<span class='curline'><a href='../S/21.html#L17'>fd</a>                 17 user/grep.c      while((n = read(fd, buf+m, sizeof(buf)-m-1)) &gt; 0){</span>
+<span class='curline'><a href='../S/21.html#L39'>fd</a>                 39 user/grep.c      int fd, i;</span>
+<span class='curline'><a href='../S/21.html#L54'>fd</a>                 54 user/grep.c        if((fd = open(argv[i], 0)) &lt; 0){</span>
+<span class='curline'><a href='../S/21.html#L58'>fd</a>                 58 user/grep.c        grep(pattern, fd);</span>
+<span class='curline'><a href='../S/21.html#L59'>fd</a>                 59 user/grep.c        close(fd);</span>
+<span class='curline'><a href='../S/6.html#L29'>fd</a>                 29 user/ls.c        int fd;</span>
+<span class='curline'><a href='../S/6.html#L33'>fd</a>                 33 user/ls.c        if((fd = open(path, 0)) &lt; 0){</span>
+<span class='curline'><a href='../S/6.html#L38'>fd</a>                 38 user/ls.c        if(fstat(fd, &amp;st) &lt; 0){</span>
+<span class='curline'><a href='../S/6.html#L40'>fd</a>                 40 user/ls.c          close(fd);</span>
+<span class='curline'><a href='../S/6.html#L57'>fd</a>                 57 user/ls.c          while(read(fd, &amp;de, sizeof(de)) == sizeof(de)){</span>
+<span class='curline'><a href='../S/6.html#L70'>fd</a>                 70 user/ls.c        close(fd);</span>
+<span class='curline'><a href='../S/4.html#L10'>fd</a>                 10 user/printf.c  putc(int fd, char c)</span>
+<span class='curline'><a href='../S/4.html#L12'>fd</a>                 12 user/printf.c    write(fd, &amp;c, 1);</span>
+<span class='curline'><a href='../S/4.html#L16'>fd</a>                 16 user/printf.c  printint(int fd, int xx, int base, int sgn)</span>
+<span class='curline'><a href='../S/4.html#L38'>fd</a>                 38 user/printf.c      putc(fd, buf[i]);</span>
+<span class='curline'><a href='../S/4.html#L42'>fd</a>                 42 user/printf.c  printptr(int fd, uint64 x) {</span>
+<span class='curline'><a href='../S/4.html#L44'>fd</a>                 44 user/printf.c    putc(fd, '0');</span>
+<span class='curline'><a href='../S/4.html#L45'>fd</a>                 45 user/printf.c    putc(fd, 'x');</span>
+<span class='curline'><a href='../S/4.html#L47'>fd</a>                 47 user/printf.c      putc(fd, digits[x &gt;&gt; (sizeof(uint64) * 8 - 4)]);</span>
+<span class='curline'><a href='../S/4.html#L52'>fd</a>                 52 user/printf.c  vprintf(int fd, const char *fmt, va_list ap)</span>
+<span class='curline'><a href='../S/4.html#L64'>fd</a>                 64 user/printf.c          putc(fd, c);</span>
+<span class='curline'><a href='../S/4.html#L68'>fd</a>                 68 user/printf.c          printint(fd, va_arg(ap, int), 10, 1);</span>
+<span class='curline'><a href='../S/4.html#L70'>fd</a>                 70 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L72'>fd</a>                 72 user/printf.c          printint(fd, va_arg(ap, int), 16, 0);</span>
+<span class='curline'><a href='../S/4.html#L74'>fd</a>                 74 user/printf.c          printptr(fd, va_arg(ap, uint64));</span>
+<span class='curline'><a href='../S/4.html#L80'>fd</a>                 80 user/printf.c            putc(fd, *s);</span>
+<span class='curline'><a href='../S/4.html#L84'>fd</a>                 84 user/printf.c          putc(fd, va_arg(ap, uint));</span>
+<span class='curline'><a href='../S/4.html#L86'>fd</a>                 86 user/printf.c          putc(fd, c);</span>
+<span class='curline'><a href='../S/4.html#L89'>fd</a>                 89 user/printf.c          putc(fd, '%');</span>
+<span class='curline'><a href='../S/4.html#L90'>fd</a>                 90 user/printf.c          putc(fd, c);</span>
+<span class='curline'><a href='../S/4.html#L98'>fd</a>                 98 user/printf.c  fprintf(int fd, const char *fmt, ...)</span>
+<span class='curline'><a href='../S/4.html#L103'>fd</a>                103 user/printf.c    vprintf(fd, fmt, ap);</span>
+<span class='curline'><a href='../S/17.html#L32'>fd</a>                 32 user/sh.c        int fd;</span>
+<span class='curline'><a href='../S/17.html#L84'>fd</a>                 84 user/sh.c          close(rcmd-&gt;fd);</span>
+<span class='curline'><a href='../S/17.html#L148'>fd</a>                148 user/sh.c        int fd;</span>
+<span class='curline'><a href='../S/17.html#L151'>fd</a>                151 user/sh.c        while((fd = open("console", O_RDWR)) &gt;= 0){</span>
+<span class='curline'><a href='../S/17.html#L152'>fd</a>                152 user/sh.c          if(fd &gt;= 3){</span>
+<span class='curline'><a href='../S/17.html#L153'>fd</a>                153 user/sh.c            close(fd);</span>
+<span class='curline'><a href='../S/17.html#L207'>fd</a>                207 user/sh.c      redircmd(struct cmd *subcmd, char *file, char *efile, int mode, int fd)</span>
+<span class='curline'><a href='../S/17.html#L218'>fd</a>                218 user/sh.c        cmd-&gt;fd = fd;</span>
+<span class='curline'><a href='../S/22.html#L19'>fd</a>                 19 user/stressfs.c   int fd, i;</span>
+<span class='curline'><a href='../S/22.html#L33'>fd</a>                 33 user/stressfs.c   fd = open(path, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/22.html#L36'>fd</a>                 36 user/stressfs.c     write(fd, data, sizeof(data));</span>
+<span class='curline'><a href='../S/22.html#L37'>fd</a>                 37 user/stressfs.c   close(fd);</span>
+<span class='curline'><a href='../S/22.html#L41'>fd</a>                 41 user/stressfs.c   fd = open(path, O_RDONLY);</span>
+<span class='curline'><a href='../S/22.html#L43'>fd</a>                 43 user/stressfs.c     read(fd, data, sizeof(data));</span>
+<span class='curline'><a href='../S/22.html#L44'>fd</a>                 44 user/stressfs.c   close(fd);</span>
+<span class='curline'><a href='../S/19.html#L76'>fd</a>                 76 user/ulib.c      int fd;</span>
+<span class='curline'><a href='../S/19.html#L79'>fd</a>                 79 user/ulib.c      fd = open(n, O_RDONLY);</span>
+<span class='curline'><a href='../S/19.html#L80'>fd</a>                 80 user/ulib.c      if(fd &lt; 0)</span>
+<span class='curline'><a href='../S/19.html#L82'>fd</a>                 82 user/ulib.c      r = fstat(fd, st);</span>
+<span class='curline'><a href='../S/19.html#L83'>fd</a>                 83 user/ulib.c      close(fd);</span>
+<span class='curline'><a href='../S/15.html#L17'>fd</a>                 17 user/user.h    int fstat(int fd, struct stat*);</span>
+<span class='curline'><a href='../S/24.html#L101'>fd</a>                101 user/usertests.c     int fd = open("oidir", O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L102'>fd</a>                102 user/usertests.c     if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L122'>fd</a>                122 user/usertests.c   int fd;</span>
+<span class='curline'><a href='../S/24.html#L125'>fd</a>                125 user/usertests.c   fd = open("echo", 0);</span>
+<span class='curline'><a href='../S/24.html#L126'>fd</a>                126 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L130'>fd</a>                130 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L131'>fd</a>                131 user/usertests.c   fd = open("doesnotexist", 0);</span>
+<span class='curline'><a href='../S/24.html#L132'>fd</a>                132 user/usertests.c   if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L142'>fd</a>                142 user/usertests.c   int fd;</span>
+<span class='curline'><a href='../S/24.html#L147'>fd</a>                147 user/usertests.c   fd = open("small", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L148'>fd</a>                148 user/usertests.c   if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L155'>fd</a>                155 user/usertests.c     if(write(fd, "aaaaaaaaaa", SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L159'>fd</a>                159 user/usertests.c     if(write(fd, "bbbbbbbbbb", SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L165'>fd</a>                165 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L166'>fd</a>                166 user/usertests.c   fd = open("small", O_RDONLY);</span>
+<span class='curline'><a href='../S/24.html#L167'>fd</a>                167 user/usertests.c   if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L173'>fd</a>                173 user/usertests.c   i = read(fd, buf, N*SZ*2);</span>
+<span class='curline'><a href='../S/24.html#L180'>fd</a>                180 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L192'>fd</a>                192 user/usertests.c   int i, fd, n;</span>
+<span class='curline'><a href='../S/24.html#L196'>fd</a>                196 user/usertests.c   fd = open("big", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L197'>fd</a>                197 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L204'>fd</a>                204 user/usertests.c     if(write(fd, buf, BSIZE) != BSIZE){</span>
+<span class='curline'><a href='../S/24.html#L210'>fd</a>                210 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L212'>fd</a>                212 user/usertests.c   fd = open("big", O_RDONLY);</span>
+<span class='curline'><a href='../S/24.html#L213'>fd</a>                213 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L220'>fd</a>                220 user/usertests.c     i = read(fd, buf, BSIZE);</span>
+<span class='curline'><a href='../S/24.html#L238'>fd</a>                238 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L249'>fd</a>                249 user/usertests.c   int i, fd;</span>
+<span class='curline'><a href='../S/24.html#L258'>fd</a>                258 user/usertests.c     fd = open(name, O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L259'>fd</a>                259 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/24.html#L572'>fd</a>                572 user/usertests.c       int fd = open("stopforking", 0);</span>
+<span class='curline'><a href='../S/24.html#L573'>fd</a>                573 user/usertests.c       if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L632'>fd</a>                632 user/usertests.c   int fd, pid, i, n, nc, np;</span>
+<span class='curline'><a href='../S/24.html#L639'>fd</a>                639 user/usertests.c   fd = open("sharedfd", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L640'>fd</a>                640 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L647'>fd</a>                647 user/usertests.c     if(write(fd, buf, sizeof(buf)) != sizeof(buf)){</span>
+<span class='curline'><a href='../S/24.html#L656'>fd</a>                656 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L657'>fd</a>                657 user/usertests.c   fd = open("sharedfd", 0);</span>
+<span class='curline'><a href='../S/24.html#L658'>fd</a>                658 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L663'>fd</a>                663 user/usertests.c   while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
+<span class='curline'><a href='../S/24.html#L671'>fd</a>                671 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L686'>fd</a>                686 user/usertests.c   int fd, pid, i, j, n, total, pi;</span>
+<span class='curline'><a href='../S/24.html#L704'>fd</a>                704 user/usertests.c       fd = open(fname, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L705'>fd</a>                705 user/usertests.c       if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L712'>fd</a>                712 user/usertests.c         if((n = write(fd, buf, SZ)) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L727'>fd</a>                727 user/usertests.c     fd = open(fname, 0);</span>
+<span class='curline'><a href='../S/24.html#L729'>fd</a>                729 user/usertests.c     while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
+<span class='curline'><a href='../S/24.html#L738'>fd</a>                738 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/24.html#L754'>fd</a>                754 user/usertests.c   int pid, i, fd, pi;</span>
+<span class='curline'><a href='../S/24.html#L771'>fd</a>                771 user/usertests.c         fd = open(name, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L772'>fd</a>                772 user/usertests.c         if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L776'>fd</a>                776 user/usertests.c         close(fd);</span>
+<span class='curline'><a href='../S/24.html#L798'>fd</a>                798 user/usertests.c       fd = open(name, 0);</span>
+<span class='curline'><a href='../S/24.html#L799'>fd</a>                799 user/usertests.c       if((i == 0 || i &gt;= N/2) &amp;&amp; fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L802'>fd</a>                802 user/usertests.c       } else if((i &gt;= 1 &amp;&amp; i &lt; N/2) &amp;&amp; fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L806'>fd</a>                806 user/usertests.c       if(fd &gt;= 0)</span>
+<span class='curline'><a href='../S/24.html#L807'>fd</a>                807 user/usertests.c         close(fd);</span>
+<span class='curline'><a href='../S/24.html#L827'>fd</a>                827 user/usertests.c   int fd, fd1;</span>
+<span class='curline'><a href='../S/24.html#L830'>fd</a>                830 user/usertests.c   fd = open("unlinkread", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L831'>fd</a>                831 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L835'>fd</a>                835 user/usertests.c   write(fd, "hello", SZ);</span>
+<span class='curline'><a href='../S/24.html#L836'>fd</a>                836 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L838'>fd</a>                838 user/usertests.c   fd = open("unlinkread", O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L839'>fd</a>                839 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L852'>fd</a>                852 user/usertests.c   if(read(fd, buf, sizeof(buf)) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L860'>fd</a>                860 user/usertests.c   if(write(fd, buf, 10) != 10){</span>
+<span class='curline'><a href='../S/24.html#L864'>fd</a>                864 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L873'>fd</a>                873 user/usertests.c   int fd;</span>
+<span class='curline'><a href='../S/24.html#L880'>fd</a>                880 user/usertests.c   fd = open("lf1", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L881'>fd</a>                881 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L885'>fd</a>                885 user/usertests.c   if(write(fd, "hello", SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L889'>fd</a>                889 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L902'>fd</a>                902 user/usertests.c   fd = open("lf2", 0);</span>
+<span class='curline'><a href='../S/24.html#L903'>fd</a>                903 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L907'>fd</a>                907 user/usertests.c   if(read(fd, buf, sizeof(buf)) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L911'>fd</a>                911 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L938'>fd</a>                938 user/usertests.c   int i, pid, n, fd;</span>
+<span class='curline'><a href='../S/24.html#L957'>fd</a>                957 user/usertests.c       fd = open(file, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L958'>fd</a>                958 user/usertests.c       if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L962'>fd</a>                962 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/24.html#L971'>fd</a>                971 user/usertests.c   fd = open(".", 0);</span>
+<span class='curline'><a href='../S/24.html#L973'>fd</a>                973 user/usertests.c   while(read(fd, &amp;de, sizeof(de)) &gt; 0){</span>
+<span class='curline'><a href='../S/24.html#L990'>fd</a>                990 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1066'>fd</a>               1066 user/usertests.c   int i, fd;</span>
+<span class='curline'><a href='../S/24.html#L1072'>fd</a>               1072 user/usertests.c   fd = open("bd", O_CREATE);</span>
+<span class='curline'><a href='../S/24.html#L1073'>fd</a>               1073 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1077'>fd</a>               1077 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1108'>fd</a>               1108 user/usertests.c   int fd, cc;</span>
+<span class='curline'><a href='../S/24.html#L1118'>fd</a>               1118 user/usertests.c   fd = open("dd/ff", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1119'>fd</a>               1119 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1123'>fd</a>               1123 user/usertests.c   write(fd, "ff", 2);</span>
+<span class='curline'><a href='../S/24.html#L1124'>fd</a>               1124 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1136'>fd</a>               1136 user/usertests.c   fd = open("dd/dd/ff", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1137'>fd</a>               1137 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1141'>fd</a>               1141 user/usertests.c   write(fd, "FF", 2);</span>
+<span class='curline'><a href='../S/24.html#L1142'>fd</a>               1142 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1144'>fd</a>               1144 user/usertests.c   fd = open("dd/dd/../ff", 0);</span>
+<span class='curline'><a href='../S/24.html#L1145'>fd</a>               1145 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1149'>fd</a>               1149 user/usertests.c   cc = read(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/24.html#L1154'>fd</a>               1154 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1187'>fd</a>               1187 user/usertests.c   fd = open("dd/dd/ffff", 0);</span>
+<span class='curline'><a href='../S/24.html#L1188'>fd</a>               1188 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1192'>fd</a>               1192 user/usertests.c   if(read(fd, buf, sizeof(buf)) != 2){</span>
+<span class='curline'><a href='../S/24.html#L1196'>fd</a>               1196 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1292'>fd</a>               1292 user/usertests.c   int fd, sz;</span>
+<span class='curline'><a href='../S/24.html#L1298'>fd</a>               1298 user/usertests.c     fd = open("bigwrite", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1299'>fd</a>               1299 user/usertests.c     if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1305'>fd</a>               1305 user/usertests.c       int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/24.html#L1311'>fd</a>               1311 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1322'>fd</a>               1322 user/usertests.c   int fd, i, total, cc;</span>
+<span class='curline'><a href='../S/24.html#L1327'>fd</a>               1327 user/usertests.c   fd = open("bigfile", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1328'>fd</a>               1328 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1334'>fd</a>               1334 user/usertests.c     if(write(fd, buf, SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L1339'>fd</a>               1339 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1341'>fd</a>               1341 user/usertests.c   fd = open("bigfile", 0);</span>
+<span class='curline'><a href='../S/24.html#L1342'>fd</a>               1342 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1348'>fd</a>               1348 user/usertests.c     cc = read(fd, buf, SZ/2);</span>
+<span class='curline'><a href='../S/24.html#L1365'>fd</a>               1365 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1378'>fd</a>               1378 user/usertests.c   int fd;</span>
+<span class='curline'><a href='../S/24.html#L1391'>fd</a>               1391 user/usertests.c   fd = open("123456789012345/123456789012345/123456789012345", O_CREATE);</span>
+<span class='curline'><a href='../S/24.html#L1392'>fd</a>               1392 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1396'>fd</a>               1396 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1397'>fd</a>               1397 user/usertests.c   fd = open("12345678901234/12345678901234/12345678901234", 0);</span>
+<span class='curline'><a href='../S/24.html#L1398'>fd</a>               1398 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1402'>fd</a>               1402 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1458'>fd</a>               1458 user/usertests.c   int fd;</span>
+<span class='curline'><a href='../S/24.html#L1462'>fd</a>               1462 user/usertests.c   fd = open("dirfile", O_CREATE);</span>
+<span class='curline'><a href='../S/24.html#L1463'>fd</a>               1463 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1467'>fd</a>               1467 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1472'>fd</a>               1472 user/usertests.c   fd = open("dirfile/xx", 0);</span>
+<span class='curline'><a href='../S/24.html#L1473'>fd</a>               1473 user/usertests.c   if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L1477'>fd</a>               1477 user/usertests.c   fd = open("dirfile/xx", O_CREATE);</span>
+<span class='curline'><a href='../S/24.html#L1478'>fd</a>               1478 user/usertests.c   if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L1499'>fd</a>               1499 user/usertests.c   fd = open(".", O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1500'>fd</a>               1500 user/usertests.c   if(fd &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L1504'>fd</a>               1504 user/usertests.c   fd = open(".", 0);</span>
+<span class='curline'><a href='../S/24.html#L1505'>fd</a>               1505 user/usertests.c   if(write(fd, "x", 1) &gt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1509'>fd</a>               1509 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1518'>fd</a>               1518 user/usertests.c   int i, fd;</span>
+<span class='curline'><a href='../S/24.html#L1534'>fd</a>               1534 user/usertests.c     fd = open("", O_CREATE);</span>
+<span class='curline'><a href='../S/24.html#L1535'>fd</a>               1535 user/usertests.c     if(fd &gt;= 0)</span>
+<span class='curline'><a href='../S/24.html#L1536'>fd</a>               1536 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1537'>fd</a>               1537 user/usertests.c     fd = open("xx", O_CREATE);</span>
+<span class='curline'><a href='../S/24.html#L1538'>fd</a>               1538 user/usertests.c     if(fd &gt;= 0)</span>
+<span class='curline'><a href='../S/24.html#L1539'>fd</a>               1539 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1598'>fd</a>               1598 user/usertests.c   int fd;</span>
+<span class='curline'><a href='../S/24.html#L1754'>fd</a>               1754 user/usertests.c   fd = open("sbrk", O_CREATE|O_WRONLY);</span>
+<span class='curline'><a href='../S/24.html#L1756'>fd</a>               1756 user/usertests.c   if(fd &lt; 0)  {</span>
+<span class='curline'><a href='../S/24.html#L1760'>fd</a>               1760 user/usertests.c   if ((n = write(fd, a, 10)) &lt; 0) {</span>
+<span class='curline'><a href='../S/24.html#L1764'>fd</a>               1764 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1822'>fd</a>               1822 user/usertests.c   int pid, fd;</span>
+<span class='curline'><a href='../S/24.html#L1835'>fd</a>               1835 user/usertests.c     fd = open("bigarg-ok", O_CREATE);</span>
+<span class='curline'><a href='../S/24.html#L1836'>fd</a>               1836 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1843'>fd</a>               1843 user/usertests.c   fd = open("bigarg-ok", 0);</span>
+<span class='curline'><a href='../S/24.html#L1844'>fd</a>               1844 user/usertests.c   if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1848'>fd</a>               1848 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1871'>fd</a>               1871 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1872'>fd</a>               1872 user/usertests.c     if(fd &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1878'>fd</a>               1878 user/usertests.c       int cc = write(fd, buf, BSIZE);</span>
+<span class='curline'><a href='../S/24.html#L1885'>fd</a>               1885 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/24.html#L1907'>fd</a>               1907 user/usertests.c   int fd;</span>
+<span class='curline'><a href='../S/24.html#L1908'>fd</a>               1908 user/usertests.c   fd = open("init", O_RDONLY);</span>
+<span class='curline'><a href='../S/24.html#L1909'>fd</a>               1909 user/usertests.c   if (fd &lt; 0) {</span>
+<span class='curline'><a href='../S/24.html#L1913'>fd</a>               1913 user/usertests.c   read(fd, sbrk(0) - 1, -1);</span>
+<span class='curline'><a href='../S/24.html#L1914'>fd</a>               1914 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/10.html#L8'>fd</a>                  8 user/wc.c      wc(int fd, char *name)</span>
+<span class='curline'><a href='../S/10.html#L15'>fd</a>                 15 user/wc.c        while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
+<span class='curline'><a href='../S/10.html#L38'>fd</a>                 38 user/wc.c        int fd, i;</span>
+<span class='curline'><a href='../S/10.html#L46'>fd</a>                 46 user/wc.c          if((fd = open(argv[i], 0)) &lt; 0){</span>
+<span class='curline'><a href='../S/10.html#L50'>fd</a>                 50 user/wc.c          wc(fd, argv[i]);</span>
+<span class='curline'><a href='../S/10.html#L51'>fd</a>                 51 user/wc.c          close(fd);</span>
+</pre>
+</body>
+</html>

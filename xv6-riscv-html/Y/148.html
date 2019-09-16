@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>irq</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/62.html#L51'>irq</a>                51 kernel/plic.c    int irq = *(uint32*)PLIC_SCLAIM(hart);</span>
+<span class='curline'><a href='../S/62.html#L52'>irq</a>                52 kernel/plic.c    return irq;</span>
+<span class='curline'><a href='../S/62.html#L57'>irq</a>                57 kernel/plic.c  plic_complete(int irq)</span>
+<span class='curline'><a href='../S/62.html#L61'>irq</a>                61 kernel/plic.c    *(uint32*)PLIC_SCLAIM(hart) = irq;</span>
+<span class='curline'><a href='../S/56.html#L186'>irq</a>               186 kernel/trap.c      int irq = plic_claim();</span>
+<span class='curline'><a href='../S/56.html#L188'>irq</a>               188 kernel/trap.c      if(irq == UART0_IRQ){</span>
+<span class='curline'><a href='../S/56.html#L190'>irq</a>               190 kernel/trap.c      } else if(irq == VIRTIO0_IRQ){</span>
+<span class='curline'><a href='../S/56.html#L194'>irq</a>               194 kernel/trap.c      plic_complete(irq);</span>
+</pre>
+</body>
+</html>

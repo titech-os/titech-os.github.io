@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel/kernelvec.S</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/kernelvec.S</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>        #</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>        # interrupts and exceptions while in supervisor</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>        # mode come here.</em>
+<a id='L4' name='L4'></a>   4 <em class='sharp'>        #</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>        # push all registers, call kerneltrap(), restore, return.</em>
+<a id='L6' name='L6'></a>   6 <em class='sharp'>        #</em>
+<a id='L7' name='L7'></a>   7 .globl kerneltrap
+<a id='L8' name='L8'></a>   8 .globl kernelvec
+<a id='L9' name='L9'></a>   9 .align 4
+<a id='L10' name='L10'></a>  10 kernelvec:
+<a id='L11' name='L11'></a>  11         <em class='comment'>// make room to save registers.</em>
+<a id='L12' name='L12'></a>  12         addi sp, sp, -256
+<a id='L13' name='L13'></a>  13 
+<a id='L14' name='L14'></a>  14         <em class='comment'>// save the registers.</em>
+<a id='L15' name='L15'></a>  15         sd ra, 0(sp)
+<a id='L16' name='L16'></a>  16         sd sp, 8(sp)
+<a id='L17' name='L17'></a>  17         sd gp, 16(sp)
+<a id='L18' name='L18'></a>  18         sd tp, 24(sp)
+<a id='L19' name='L19'></a>  19         sd t0, 32(sp)
+<a id='L20' name='L20'></a>  20         sd t1, 40(sp)
+<a id='L21' name='L21'></a>  21         sd t2, 48(sp)
+<a id='L22' name='L22'></a>  22         sd s0, 56(sp)
+<a id='L23' name='L23'></a>  23         sd s1, 64(sp)
+<a id='L24' name='L24'></a>  24         sd a0, 72(sp)
+<a id='L25' name='L25'></a>  25         sd a1, 80(sp)
+<a id='L26' name='L26'></a>  26         sd a2, 88(sp)
+<a id='L27' name='L27'></a>  27         sd a3, 96(sp)
+<a id='L28' name='L28'></a>  28         sd a4, 104(sp)
+<a id='L29' name='L29'></a>  29         sd a5, 112(sp)
+<a id='L30' name='L30'></a>  30         sd a6, 120(sp)
+<a id='L31' name='L31'></a>  31         sd a7, 128(sp)
+<a id='L32' name='L32'></a>  32         sd s2, 136(sp)
+<a id='L33' name='L33'></a>  33         sd s3, 144(sp)
+<a id='L34' name='L34'></a>  34         sd s4, 152(sp)
+<a id='L35' name='L35'></a>  35         sd s5, 160(sp)
+<a id='L36' name='L36'></a>  36         sd s6, 168(sp)
+<a id='L37' name='L37'></a>  37         sd s7, 176(sp)
+<a id='L38' name='L38'></a>  38         sd s8, 184(sp)
+<a id='L39' name='L39'></a>  39         sd s9, 192(sp)
+<a id='L40' name='L40'></a>  40         sd s10, 200(sp)
+<a id='L41' name='L41'></a>  41         sd s11, 208(sp)
+<a id='L42' name='L42'></a>  42         sd t3, 216(sp)
+<a id='L43' name='L43'></a>  43         sd t4, 224(sp)
+<a id='L44' name='L44'></a>  44         sd t5, 232(sp)
+<a id='L45' name='L45'></a>  45         sd t6, 240(sp)
+<a id='L46' name='L46'></a>  46 
+<a id='L47' name='L47'></a>  47         <em class='comment'>// call the C trap handler in trap.c</em>
+<a id='L48' name='L48'></a>  48         call kerneltrap
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50         <em class='comment'>// restore registers.</em>
+<a id='L51' name='L51'></a>  51         ld ra, 0(sp)
+<a id='L52' name='L52'></a>  52         ld sp, 8(sp)
+<a id='L53' name='L53'></a>  53         ld gp, 16(sp)
+<a id='L54' name='L54'></a>  54         <em class='comment'>// not this, in case we moved CPUs: ld tp, 24(sp)</em>
+<a id='L55' name='L55'></a>  55         ld t0, 32(sp)
+<a id='L56' name='L56'></a>  56         ld t1, 40(sp)
+<a id='L57' name='L57'></a>  57         ld t2, 48(sp)
+<a id='L58' name='L58'></a>  58         ld s0, 56(sp)
+<a id='L59' name='L59'></a>  59         ld s1, 64(sp)
+<a id='L60' name='L60'></a>  60         ld a0, 72(sp)
+<a id='L61' name='L61'></a>  61         ld a1, 80(sp)
+<a id='L62' name='L62'></a>  62         ld a2, 88(sp)
+<a id='L63' name='L63'></a>  63         ld a3, 96(sp)
+<a id='L64' name='L64'></a>  64         ld a4, 104(sp)
+<a id='L65' name='L65'></a>  65         ld a5, 112(sp)
+<a id='L66' name='L66'></a>  66         ld a6, 120(sp)
+<a id='L67' name='L67'></a>  67         ld a7, 128(sp)
+<a id='L68' name='L68'></a>  68         ld s2, 136(sp)
+<a id='L69' name='L69'></a>  69         ld s3, 144(sp)
+<a id='L70' name='L70'></a>  70         ld s4, 152(sp)
+<a id='L71' name='L71'></a>  71         ld s5, 160(sp)
+<a id='L72' name='L72'></a>  72         ld s6, 168(sp)
+<a id='L73' name='L73'></a>  73         ld s7, 176(sp)
+<a id='L74' name='L74'></a>  74         ld s8, 184(sp)
+<a id='L75' name='L75'></a>  75         ld s9, 192(sp)
+<a id='L76' name='L76'></a>  76         ld s10, 200(sp)
+<a id='L77' name='L77'></a>  77         ld s11, 208(sp)
+<a id='L78' name='L78'></a>  78         ld t3, 216(sp)
+<a id='L79' name='L79'></a>  79         ld t4, 224(sp)
+<a id='L80' name='L80'></a>  80         ld t5, 232(sp)
+<a id='L81' name='L81'></a>  81         ld t6, 240(sp)
+<a id='L82' name='L82'></a>  82 
+<a id='L83' name='L83'></a>  83         addi sp, sp, 256
+<a id='L84' name='L84'></a>  84 
+<a id='L85' name='L85'></a>  85         <em class='comment'>// return to whatever we were doing in the kernel.</em>
+<a id='L86' name='L86'></a>  86         sret
+<a id='L87' name='L87'></a>  87 
+<a id='L88' name='L88'></a>  88 <em class='sharp'>        #</em>
+<a id='L89' name='L89'></a>  89 <em class='comment'>        # machine-mode timer interrupt.</em>
+<a id='L90' name='L90'></a>  90 <em class='sharp'>        #</em>
+<a id='L91' name='L91'></a>  91 .globl timervec
+<a id='L92' name='L92'></a>  92 .align 4
+<a id='L93' name='L93'></a>  93 timervec:
+<a id='L94' name='L94'></a>  94 <em class='comment'>        # start.c has set up the memory that mscratch points to:</em>
+<a id='L95' name='L95'></a>  95 <em class='comment'>        # scratch[0,8,16] : register save area.</em>
+<a id='L96' name='L96'></a>  96 <em class='comment'>        # scratch[32] : address of CLINT's MTIMECMP register.</em>
+<a id='L97' name='L97'></a>  97 <em class='comment'>        # scratch[40] : desired interval between interrupts.</em>
+<a id='L98' name='L98'></a>  98         
+<a id='L99' name='L99'></a>  99         csrrw a0, mscratch, a0
+<a id='L100' name='L100'></a> 100         sd a1, 0(a0)
+<a id='L101' name='L101'></a> 101         sd a2, 8(a0)
+<a id='L102' name='L102'></a> 102         sd a3, 16(a0)
+<a id='L103' name='L103'></a> 103 
+<a id='L104' name='L104'></a> 104 <em class='comment'>        # schedule the next timer interrupt</em>
+<a id='L105' name='L105'></a> 105 <em class='comment'>        # by adding interval to mtimecmp.</em>
+<a id='L106' name='L106'></a> 106         ld a1, 32(a0) # CLINT_MTIMECMP(hart)
+<a id='L107' name='L107'></a> 107         ld a2, 40(a0) # interval
+<a id='L108' name='L108'></a> 108         ld a3, 0(a1)
+<a id='L109' name='L109'></a> 109         add a3, a3, a2
+<a id='L110' name='L110'></a> 110         sd a3, 0(a1)
+<a id='L111' name='L111'></a> 111 
+<a id='L112' name='L112'></a> 112 <em class='comment'>        # raise a supervisor software interrupt.</em>
+<a id='L113' name='L113'></a> 113         li a1, 2
+<a id='L114' name='L114'></a> 114         csrw sip, a1
+<a id='L115' name='L115'></a> 115 
+<a id='L116' name='L116'></a> 116         ld a3, 16(a0)
+<a id='L117' name='L117'></a> 117         ld a2, 8(a0)
+<a id='L118' name='L118'></a> 118         ld a1, 0(a0)
+<a id='L119' name='L119'></a> 119         csrrw a0, mscratch, a0
+<a id='L120' name='L120'></a> 120 
+<a id='L121' name='L121'></a> 121         mret
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

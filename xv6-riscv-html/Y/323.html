@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>src</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/57.html#L64'>src</a>                64 kernel/console.c consolewrite(int user_src, uint64 src, int n)</span>
+<span class='curline'><a href='../S/57.html#L71'>src</a>                71 kernel/console.c     if(either_copyin(&amp;c, user_src, src+i, 1) == -1)</span>
+<span class='curline'><a href='../S/31.html#L103'>src</a>               103 kernel/defs.h  int             either_copyout(int user_dst, uint64 dst, void *src, uint64 len);</span>
+<span class='curline'><a href='../S/31.html#L104'>src</a>               104 kernel/defs.h  int             either_copyin(void *dst, int user_src, uint64 src, uint64 len);</span>
+<span class='curline'><a href='../S/48.html#L487'>src</a>               487 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L497'>src</a>               497 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
+<span class='curline'><a href='../S/48.html#L500'>src</a>               500 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
+<span class='curline'><a href='../S/63.html#L602'>src</a>               602 kernel/proc.c  either_copyout(int user_dst, uint64 dst, void *src, uint64 len)</span>
+<span class='curline'><a href='../S/63.html#L606'>src</a>               606 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/63.html#L608'>src</a>               608 kernel/proc.c      memmove((char *)dst, src, len);</span>
+<span class='curline'><a href='../S/63.html#L617'>src</a>               617 kernel/proc.c  either_copyin(void *dst, int user_src, uint64 src, uint64 len)</span>
+<span class='curline'><a href='../S/63.html#L621'>src</a>               621 kernel/proc.c      return copyin(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/63.html#L623'>src</a>               623 kernel/proc.c      memmove(dst, (char*)src, len);</span>
+<span class='curline'><a href='../S/46.html#L31'>src</a>                31 kernel/string.c memmove(void *dst, const void *src, uint n)</span>
+<span class='curline'><a href='../S/46.html#L36'>src</a>                36 kernel/string.c   s = src;</span>
+<span class='curline'><a href='../S/46.html#L52'>src</a>                52 kernel/string.c memcpy(void *dst, const void *src, uint n)</span>
+<span class='curline'><a href='../S/46.html#L54'>src</a>                54 kernel/string.c   return memmove(dst, src, n);</span>
+<span class='curline'><a href='../S/38.html#L218'>src</a>               218 kernel/vm.c    uvminit(pagetable_t pagetable, uchar *src, uint sz)</span>
+<span class='curline'><a href='../S/38.html#L227'>src</a>               227 kernel/vm.c      memmove(mem, src, sz);</span>
+<span class='curline'><a href='../S/38.html#L354'>src</a>               354 kernel/vm.c    copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)</span>
+<span class='curline'><a href='../S/38.html#L366'>src</a>               366 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
+<span class='curline'><a href='../S/38.html#L369'>src</a>               369 kernel/vm.c        src += n;</span>
+<span class='curline'><a href='../S/19.html#L102'>src</a>               102 user/ulib.c      const char *src;</span>
+<span class='curline'><a href='../S/19.html#L105'>src</a>               105 user/ulib.c      src = vsrc;</span>
+<span class='curline'><a href='../S/19.html#L107'>src</a>               107 user/ulib.c        *dst++ = *src++;</span>
+</pre>
+</body>
+</html>

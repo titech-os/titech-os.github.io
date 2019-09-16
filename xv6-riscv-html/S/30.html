@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel/spinlock.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.3' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/spinlock.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/30.html' title='Multiple included from 19 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Mutual exclusion lock.</em>
+<a id='L2' name='L2'></a>   2 <strong class='reserved'>struct</strong> <a href='../R/416.html' title='Multiple referred from 25 places.'>spinlock</a> <em class='brace'>{</em>
+<a id='L3' name='L3'></a>   3   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/171.html' title='Multiple used in 11 places.'>locked</a>;       <em class='comment'>// Is the lock held?</em>
+<a id='L4' name='L4'></a>   4 
+<a id='L5' name='L5'></a>   5   <em class='comment'>// For debugging:</em>
+<a id='L6' name='L6'></a>   6   <strong class='reserved'>char</strong> *<a href='../Y/192.html' title='Multiple used in 106 places.'>name</a>;        <em class='comment'>// Name of lock.</em>
+<a id='L7' name='L7'></a>   7   <strong class='reserved'>struct</strong> <a href='../S/35.html#L22' title='Defined at 22 in kernel/proc.h.'>cpu</a> *<a href='../S/35.html#L22' title='Defined at 22 in kernel/proc.h.'>cpu</a>;   <em class='comment'>// The cpu holding the lock.</em>
+<a id='L8' name='L8'></a>   8 <em class='brace'>}</em>;
+<a id='L9' name='L9'></a>   9 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>
