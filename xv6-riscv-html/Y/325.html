@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sp</title>
+<title>src</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,27 +9,31 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L17'>sp</a>                 17 kernel/exec.c    uint64 argc, sz, sp, ustack[MAXARG+1], stackbase;</span>
-<span class='curline'><a href='../S/38.html#L72'>sp</a>                 72 kernel/exec.c    sp = sz;</span>
-<span class='curline'><a href='../S/38.html#L73'>sp</a>                 73 kernel/exec.c    stackbase = sp - PGSIZE;</span>
-<span class='curline'><a href='../S/38.html#L79'>sp</a>                 79 kernel/exec.c      sp -= strlen(argv[argc]) + 1;</span>
-<span class='curline'><a href='../S/38.html#L80'>sp</a>                 80 kernel/exec.c      sp -= sp % 16; // riscv sp must be 16-byte aligned</span>
-<span class='curline'><a href='../S/38.html#L81'>sp</a>                 81 kernel/exec.c      if(sp &lt; stackbase)</span>
-<span class='curline'><a href='../S/38.html#L83'>sp</a>                 83 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
-<span class='curline'><a href='../S/38.html#L85'>sp</a>                 85 kernel/exec.c      ustack[argc] = sp;</span>
-<span class='curline'><a href='../S/38.html#L90'>sp</a>                 90 kernel/exec.c    sp -= (argc+1) * sizeof(uint64);</span>
-<span class='curline'><a href='../S/38.html#L91'>sp</a>                 91 kernel/exec.c    sp -= sp % 16;</span>
-<span class='curline'><a href='../S/38.html#L92'>sp</a>                 92 kernel/exec.c    if(sp &lt; stackbase)</span>
-<span class='curline'><a href='../S/38.html#L94'>sp</a>                 94 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
-<span class='curline'><a href='../S/38.html#L100'>sp</a>                100 kernel/exec.c    p-&gt;tf-&gt;a1 = sp;</span>
-<span class='curline'><a href='../S/38.html#L113'>sp</a>                113 kernel/exec.c    p-&gt;tf-&gt;sp = sp; // initial stack pointer</span>
-<span class='curline'><a href='../S/65.html#L121'>sp</a>                121 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
-<span class='curline'><a href='../S/65.html#L211'>sp</a>                211 kernel/proc.c    p-&gt;tf-&gt;sp = PGSIZE;  // user stack pointer</span>
-<span class='curline'><a href='../S/37.html#L4'>sp</a>                  4 kernel/proc.h    uint64 sp;</span>
-<span class='curline'><a href='../S/37.html#L51'>sp</a>                 51 kernel/proc.h    /*  48 */ uint64 sp;</span>
-<span class='curline'><a href='../S/26.html#L1949'>sp</a>               1949 user/usertests.c     char *sp = (char *) r_sp();</span>
-<span class='curline'><a href='../S/26.html#L1950'>sp</a>               1950 user/usertests.c     sp -= PGSIZE;</span>
-<span class='curline'><a href='../S/26.html#L1952'>sp</a>               1952 user/usertests.c     printf("%s: stacktest: read below stack %p\n", *sp);</span>
+<span class='curline'><a href='../S/57.html#L64'>src</a>                64 kernel/console.c consolewrite(int user_src, uint64 src, int n)</span>
+<span class='curline'><a href='../S/57.html#L71'>src</a>                71 kernel/console.c     if(either_copyin(&amp;c, user_src, src+i, 1) == -1)</span>
+<span class='curline'><a href='../S/31.html#L103'>src</a>               103 kernel/defs.h  int             either_copyout(int user_dst, uint64 dst, void *src, uint64 len);</span>
+<span class='curline'><a href='../S/31.html#L104'>src</a>               104 kernel/defs.h  int             either_copyin(void *dst, int user_src, uint64 src, uint64 len);</span>
+<span class='curline'><a href='../S/48.html#L487'>src</a>               487 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L497'>src</a>               497 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
+<span class='curline'><a href='../S/48.html#L500'>src</a>               500 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
+<span class='curline'><a href='../S/63.html#L620'>src</a>               620 kernel/proc.c  either_copyout(int user_dst, uint64 dst, void *src, uint64 len)</span>
+<span class='curline'><a href='../S/63.html#L624'>src</a>               624 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/63.html#L626'>src</a>               626 kernel/proc.c      memmove((char *)dst, src, len);</span>
+<span class='curline'><a href='../S/63.html#L635'>src</a>               635 kernel/proc.c  either_copyin(void *dst, int user_src, uint64 src, uint64 len)</span>
+<span class='curline'><a href='../S/63.html#L639'>src</a>               639 kernel/proc.c      return copyin(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/63.html#L641'>src</a>               641 kernel/proc.c      memmove(dst, (char*)src, len);</span>
+<span class='curline'><a href='../S/46.html#L31'>src</a>                31 kernel/string.c memmove(void *dst, const void *src, uint n)</span>
+<span class='curline'><a href='../S/46.html#L36'>src</a>                36 kernel/string.c   s = src;</span>
+<span class='curline'><a href='../S/46.html#L52'>src</a>                52 kernel/string.c memcpy(void *dst, const void *src, uint n)</span>
+<span class='curline'><a href='../S/46.html#L54'>src</a>                54 kernel/string.c   return memmove(dst, src, n);</span>
+<span class='curline'><a href='../S/38.html#L221'>src</a>               221 kernel/vm.c    uvminit(pagetable_t pagetable, uchar *src, uint sz)</span>
+<span class='curline'><a href='../S/38.html#L230'>src</a>               230 kernel/vm.c      memmove(mem, src, sz);</span>
+<span class='curline'><a href='../S/38.html#L361'>src</a>               361 kernel/vm.c    copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)</span>
+<span class='curline'><a href='../S/38.html#L373'>src</a>               373 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
+<span class='curline'><a href='../S/38.html#L376'>src</a>               376 kernel/vm.c        src += n;</span>
+<span class='curline'><a href='../S/19.html#L102'>src</a>               102 user/ulib.c      const char *src;</span>
+<span class='curline'><a href='../S/19.html#L105'>src</a>               105 user/ulib.c      src = vsrc;</span>
+<span class='curline'><a href='../S/19.html#L107'>src</a>               107 user/ulib.c        *dst++ = *src++;</span>
 </pre>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>satp</title>
+<title>sb</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,39 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/58.html#L121'>satp</a>              121 kernel/trap.c    uint64 satp = MAKE_SATP(p-&gt;pagetable);</span>
-<span class='curline'><a href='../S/58.html#L127'>satp</a>              127 kernel/trap.c    ((void (*)(uint64,uint64))fn)(TRAPFRAME, satp);</span>
+<span class='curline'><a href='../S/48.html#L28'>sb</a>                 28 kernel/fs.c    struct superblock sb; </span>
+<span class='curline'><a href='../S/48.html#L32'>sb</a>                 32 kernel/fs.c    readsb(int dev, struct superblock *sb)</span>
+<span class='curline'><a href='../S/48.html#L37'>sb</a>                 37 kernel/fs.c      memmove(sb, bp-&gt;data, sizeof(*sb));</span>
+<span class='curline'><a href='../S/48.html#L44'>sb</a>                 44 kernel/fs.c      readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/48.html#L45'>sb</a>                 45 kernel/fs.c      if(sb.magic != FSMAGIC)</span>
+<span class='curline'><a href='../S/48.html#L47'>sb</a>                 47 kernel/fs.c      initlog(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/48.html#L72'>sb</a>                 72 kernel/fs.c      for(b = 0; b &lt; sb.size; b += BPB){</span>
+<span class='curline'><a href='../S/48.html#L73'>sb</a>                 73 kernel/fs.c        bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/48.html#L74'>sb</a>                 74 kernel/fs.c        for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
+<span class='curline'><a href='../S/48.html#L96'>sb</a>                 96 kernel/fs.c      bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/48.html#L203'>sb</a>                203 kernel/fs.c      for(inum = 1; inum &lt; sb.ninodes; inum++){</span>
+<span class='curline'><a href='../S/48.html#L204'>sb</a>                204 kernel/fs.c        bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/48.html#L228'>sb</a>                228 kernel/fs.c      bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/48.html#L301'>sb</a>                301 kernel/fs.c        bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/71.html#L45'>sb</a>                 45 kernel/fs.h    #define IBLOCK(i, sb)     ((i) / IPB + sb.inodestart)</span>
+<span class='curline'><a href='../S/71.html#L51'>sb</a>                 51 kernel/fs.h    #define BBLOCK(b, sb) ((b)/BPB + sb.bmapstart)</span>
+<span class='curline'><a href='../S/28.html#L55'>sb</a>                 55 kernel/log.c   initlog(int dev, struct superblock *sb)</span>
+<span class='curline'><a href='../S/28.html#L61'>sb</a>                 61 kernel/log.c     log.start = sb-&gt;logstart;</span>
+<span class='curline'><a href='../S/28.html#L62'>sb</a>                 62 kernel/log.c     log.size = sb-&gt;nlog;</span>
+<span class='curline'><a href='../S/3.html#L30'>sb</a>                 30 mkfs/mkfs.c    struct superblock sb;</span>
+<span class='curline'><a href='../S/3.html#L97'>sb</a>                 97 mkfs/mkfs.c      sb.magic = FSMAGIC;</span>
+<span class='curline'><a href='../S/3.html#L98'>sb</a>                 98 mkfs/mkfs.c      sb.size = xint(FSSIZE);</span>
+<span class='curline'><a href='../S/3.html#L99'>sb</a>                 99 mkfs/mkfs.c      sb.nblocks = xint(nblocks);</span>
+<span class='curline'><a href='../S/3.html#L100'>sb</a>                100 mkfs/mkfs.c      sb.ninodes = xint(NINODES);</span>
+<span class='curline'><a href='../S/3.html#L101'>sb</a>                101 mkfs/mkfs.c      sb.nlog = xint(nlog);</span>
+<span class='curline'><a href='../S/3.html#L102'>sb</a>                102 mkfs/mkfs.c      sb.logstart = xint(2);</span>
+<span class='curline'><a href='../S/3.html#L103'>sb</a>                103 mkfs/mkfs.c      sb.inodestart = xint(2+nlog);</span>
+<span class='curline'><a href='../S/3.html#L104'>sb</a>                104 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
+<span class='curline'><a href='../S/3.html#L115'>sb</a>                115 mkfs/mkfs.c      memmove(buf, &amp;sb, sizeof(sb));</span>
+<span class='curline'><a href='../S/3.html#L198'>sb</a>                198 mkfs/mkfs.c      bn = IBLOCK(inum, sb);</span>
+<span class='curline'><a href='../S/3.html#L212'>sb</a>                212 mkfs/mkfs.c      bn = IBLOCK(inum, sb);</span>
+<span class='curline'><a href='../S/3.html#L257'>sb</a>                257 mkfs/mkfs.c      printf("balloc: write bitmap block at sector %d\n", sb.bmapstart);</span>
+<span class='curline'><a href='../S/3.html#L258'>sb</a>                258 mkfs/mkfs.c      wsect(sb.bmapstart, buf);</span>
 </pre>
 </body>
 </html>

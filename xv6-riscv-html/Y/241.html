@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pagetable</title>
+<title>panicked</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,91 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L21'>pagetable</a>          21 kernel/exec.c    pagetable_t pagetable = 0, oldpagetable;</span>
-<span class='curline'><a href='../S/38.html#L38'>pagetable</a>          38 kernel/exec.c    if((pagetable = proc_pagetable(p)) == 0)</span>
-<span class='curline'><a href='../S/38.html#L52'>pagetable</a>          52 kernel/exec.c      if((sz = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz)) == 0)</span>
-<span class='curline'><a href='../S/38.html#L56'>pagetable</a>          56 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
-<span class='curline'><a href='../S/38.html#L69'>pagetable</a>          69 kernel/exec.c    if((sz = uvmalloc(pagetable, sz, sz + 2*PGSIZE)) == 0)</span>
-<span class='curline'><a href='../S/38.html#L71'>pagetable</a>          71 kernel/exec.c    uvmclear(pagetable, sz-2*PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L83'>pagetable</a>          83 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
-<span class='curline'><a href='../S/38.html#L94'>pagetable</a>          94 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
-<span class='curline'><a href='../S/38.html#L109'>pagetable</a>         109 kernel/exec.c    oldpagetable = p-&gt;pagetable;</span>
-<span class='curline'><a href='../S/38.html#L110'>pagetable</a>         110 kernel/exec.c    p-&gt;pagetable = pagetable;</span>
-<span class='curline'><a href='../S/38.html#L118'>pagetable</a>         118 kernel/exec.c    if(pagetable)</span>
-<span class='curline'><a href='../S/38.html#L119'>pagetable</a>         119 kernel/exec.c      proc_freepagetable(pagetable, sz);</span>
-<span class='curline'><a href='../S/38.html#L132'>pagetable</a>         132 kernel/exec.c  loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)</span>
-<span class='curline'><a href='../S/38.html#L141'>pagetable</a>         141 kernel/exec.c      pa = walkaddr(pagetable, va + i);</span>
-<span class='curline'><a href='../S/69.html#L97'>pagetable</a>          97 kernel/file.c      if(copyout(p-&gt;pagetable, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
-<span class='curline'><a href='../S/36.html#L93'>pagetable</a>          93 kernel/pipe.c      if(copyin(pr-&gt;pagetable, &amp;ch, addr + i, 1) == -1)</span>
-<span class='curline'><a href='../S/36.html#L121'>pagetable</a>         121 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
-<span class='curline'><a href='../S/65.html#L115'>pagetable</a>         115 kernel/proc.c    p-&gt;pagetable = proc_pagetable(p);</span>
-<span class='curline'><a href='../S/65.html#L135'>pagetable</a>         135 kernel/proc.c    if(p-&gt;pagetable)</span>
-<span class='curline'><a href='../S/65.html#L136'>pagetable</a>         136 kernel/proc.c      proc_freepagetable(p-&gt;pagetable, p-&gt;sz);</span>
-<span class='curline'><a href='../S/65.html#L137'>pagetable</a>         137 kernel/proc.c    p-&gt;pagetable = 0;</span>
-<span class='curline'><a href='../S/65.html#L153'>pagetable</a>         153 kernel/proc.c    pagetable_t pagetable;</span>
-<span class='curline'><a href='../S/65.html#L156'>pagetable</a>         156 kernel/proc.c    pagetable = uvmcreate();</span>
-<span class='curline'><a href='../S/65.html#L162'>pagetable</a>         162 kernel/proc.c    mappages(pagetable, TRAMPOLINE, PGSIZE,</span>
-<span class='curline'><a href='../S/65.html#L166'>pagetable</a>         166 kernel/proc.c    mappages(pagetable, TRAPFRAME, PGSIZE,</span>
-<span class='curline'><a href='../S/65.html#L169'>pagetable</a>         169 kernel/proc.c    return pagetable;</span>
-<span class='curline'><a href='../S/65.html#L175'>pagetable</a>         175 kernel/proc.c  proc_freepagetable(pagetable_t pagetable, uint64 sz)</span>
-<span class='curline'><a href='../S/65.html#L177'>pagetable</a>         177 kernel/proc.c    uvmunmap(pagetable, TRAMPOLINE, PGSIZE, 0);</span>
-<span class='curline'><a href='../S/65.html#L178'>pagetable</a>         178 kernel/proc.c    uvmunmap(pagetable, TRAPFRAME, PGSIZE, 0);</span>
-<span class='curline'><a href='../S/65.html#L180'>pagetable</a>         180 kernel/proc.c      uvmfree(pagetable, sz);</span>
-<span class='curline'><a href='../S/65.html#L206'>pagetable</a>         206 kernel/proc.c    uvminit(p-&gt;pagetable, initcode, sizeof(initcode));</span>
-<span class='curline'><a href='../S/65.html#L231'>pagetable</a>         231 kernel/proc.c      if((sz = uvmalloc(p-&gt;pagetable, sz, sz + n)) == 0) {</span>
-<span class='curline'><a href='../S/65.html#L235'>pagetable</a>         235 kernel/proc.c      sz = uvmdealloc(p-&gt;pagetable, sz, sz + n);</span>
-<span class='curline'><a href='../S/65.html#L256'>pagetable</a>         256 kernel/proc.c    if(uvmcopy(p-&gt;pagetable, np-&gt;pagetable, p-&gt;sz) &lt; 0){</span>
-<span class='curline'><a href='../S/65.html#L408'>pagetable</a>         408 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;np-&gt;xstate,</span>
-<span class='curline'><a href='../S/65.html#L624'>pagetable</a>         624 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
-<span class='curline'><a href='../S/65.html#L639'>pagetable</a>         639 kernel/proc.c      return copyin(p-&gt;pagetable, dst, src, len);</span>
-<span class='curline'><a href='../S/37.html#L100'>pagetable</a>         100 kernel/proc.h    pagetable_t pagetable;       // Page table</span>
-<span class='curline'><a href='../S/66.html#L187'>pagetable</a>         187 kernel/riscv.h #define MAKE_SATP(pagetable) (SATP_SV39 | (((uint64)pagetable) &gt;&gt; 12))</span>
-<span class='curline'><a href='../S/53.html#L17'>pagetable</a>          17 kernel/syscall.c   if(copyin(p-&gt;pagetable, (char *)ip, addr, sizeof(*ip)) != 0)</span>
-<span class='curline'><a href='../S/53.html#L28'>pagetable</a>          28 kernel/syscall.c   int err = copyinstr(p-&gt;pagetable, buf, addr, max);</span>
-<span class='curline'><a href='../S/45.html#L474'>pagetable</a>         474 kernel/sysfile.c   if(copyout(p-&gt;pagetable, fdarray, (char*)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
-<span class='curline'><a href='../S/45.html#L475'>pagetable</a>         475 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
-<span class='curline'><a href='../S/58.html#L121'>pagetable</a>         121 kernel/trap.c    uint64 satp = MAKE_SATP(p-&gt;pagetable);</span>
-<span class='curline'><a href='../S/40.html#L74'>pagetable</a>          74 kernel/vm.c    walk(pagetable_t pagetable, uint64 va, int alloc)</span>
-<span class='curline'><a href='../S/40.html#L80'>pagetable</a>          80 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
-<span class='curline'><a href='../S/40.html#L82'>pagetable</a>          82 kernel/vm.c          pagetable = (pagetable_t)PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/40.html#L84'>pagetable</a>          84 kernel/vm.c          if(!alloc || (pagetable = (pde_t*)kalloc()) == 0)</span>
-<span class='curline'><a href='../S/40.html#L86'>pagetable</a>          86 kernel/vm.c          memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L87'>pagetable</a>          87 kernel/vm.c          *pte = PA2PTE(pagetable) | PTE_V;</span>
-<span class='curline'><a href='../S/40.html#L90'>pagetable</a>          90 kernel/vm.c      return &amp;pagetable[PX(0, va)];</span>
-<span class='curline'><a href='../S/40.html#L97'>pagetable</a>          97 kernel/vm.c    walkaddr(pagetable_t pagetable, uint64 va)</span>
-<span class='curline'><a href='../S/40.html#L105'>pagetable</a>         105 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
-<span class='curline'><a href='../S/40.html#L151'>pagetable</a>         151 kernel/vm.c    mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)</span>
-<span class='curline'><a href='../S/40.html#L159'>pagetable</a>         159 kernel/vm.c        if((pte = walk(pagetable, a, 1)) == 0)</span>
-<span class='curline'><a href='../S/40.html#L176'>pagetable</a>         176 kernel/vm.c    uvmunmap(pagetable_t pagetable, uint64 va, uint64 size, int do_free)</span>
-<span class='curline'><a href='../S/40.html#L185'>pagetable</a>         185 kernel/vm.c        if((pte = walk(pagetable, a, 0)) == 0)</span>
-<span class='curline'><a href='../S/40.html#L209'>pagetable</a>         209 kernel/vm.c      pagetable_t pagetable;</span>
-<span class='curline'><a href='../S/40.html#L210'>pagetable</a>         210 kernel/vm.c      pagetable = (pagetable_t) kalloc();</span>
-<span class='curline'><a href='../S/40.html#L211'>pagetable</a>         211 kernel/vm.c      if(pagetable == 0)</span>
-<span class='curline'><a href='../S/40.html#L213'>pagetable</a>         213 kernel/vm.c      memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L214'>pagetable</a>         214 kernel/vm.c      return pagetable;</span>
-<span class='curline'><a href='../S/40.html#L221'>pagetable</a>         221 kernel/vm.c    uvminit(pagetable_t pagetable, uchar *src, uint sz)</span>
-<span class='curline'><a href='../S/40.html#L229'>pagetable</a>         229 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
-<span class='curline'><a href='../S/40.html#L236'>pagetable</a>         236 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
-<span class='curline'><a href='../S/40.html#L249'>pagetable</a>         249 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
-<span class='curline'><a href='../S/40.html#L253'>pagetable</a>         253 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_W|PTE_X|PTE_R|PTE_U) != 0){</span>
-<span class='curline'><a href='../S/40.html#L255'>pagetable</a>         255 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
-<span class='curline'><a href='../S/40.html#L267'>pagetable</a>         267 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
-<span class='curline'><a href='../S/40.html#L274'>pagetable</a>         274 kernel/vm.c        uvmunmap(pagetable, newup, oldsz - newup, 1);</span>
-<span class='curline'><a href='../S/40.html#L282'>pagetable</a>         282 kernel/vm.c    freewalk(pagetable_t pagetable)</span>
-<span class='curline'><a href='../S/40.html#L286'>pagetable</a>         286 kernel/vm.c        pte_t pte = pagetable[i];</span>
-<span class='curline'><a href='../S/40.html#L291'>pagetable</a>         291 kernel/vm.c          pagetable[i] = 0;</span>
-<span class='curline'><a href='../S/40.html#L296'>pagetable</a>         296 kernel/vm.c      kfree((void*)pagetable);</span>
-<span class='curline'><a href='../S/40.html#L302'>pagetable</a>         302 kernel/vm.c    uvmfree(pagetable_t pagetable, uint64 sz)</span>
-<span class='curline'><a href='../S/40.html#L304'>pagetable</a>         304 kernel/vm.c      uvmunmap(pagetable, 0, sz, 1);</span>
-<span class='curline'><a href='../S/40.html#L305'>pagetable</a>         305 kernel/vm.c      freewalk(pagetable);</span>
-<span class='curline'><a href='../S/40.html#L347'>pagetable</a>         347 kernel/vm.c    uvmclear(pagetable_t pagetable, uint64 va)</span>
-<span class='curline'><a href='../S/40.html#L351'>pagetable</a>         351 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
-<span class='curline'><a href='../S/40.html#L361'>pagetable</a>         361 kernel/vm.c    copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)</span>
-<span class='curline'><a href='../S/40.html#L367'>pagetable</a>         367 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
-<span class='curline'><a href='../S/40.html#L386'>pagetable</a>         386 kernel/vm.c    copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)</span>
-<span class='curline'><a href='../S/40.html#L392'>pagetable</a>         392 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
-<span class='curline'><a href='../S/40.html#L412'>pagetable</a>         412 kernel/vm.c    copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)</span>
-<span class='curline'><a href='../S/40.html#L419'>pagetable</a>         419 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/57.html#L34'>panicked</a>           34 kernel/console.c   extern volatile int panicked; // from printf.c</span>
+<span class='curline'><a href='../S/57.html#L36'>panicked</a>           36 kernel/console.c   if(panicked){</span>
+<span class='curline'><a href='../S/29.html#L18'>panicked</a>           18 kernel/printf.c volatile int panicked = 0;</span>
+<span class='curline'><a href='../S/29.html#L124'>panicked</a>          124 kernel/printf.c   panicked = 1; // freeze other CPUs</span>
 </pre>
 </body>
 </html>

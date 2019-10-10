@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uservec</title>
+<title>ustack</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/58.html#L12'>uservec</a>            12 kernel/trap.c  extern char trampoline[], uservec[], userret[];</span>
-<span class='curline'><a href='../S/58.html#L99'>uservec</a>            99 kernel/trap.c    w_stvec(TRAMPOLINE + (uservec - trampoline));</span>
+<span class='curline'><a href='../S/36.html#L17'>ustack</a>             17 kernel/exec.c    uint64 argc, sz, sp, ustack[MAXARG+1], stackbase;</span>
+<span class='curline'><a href='../S/36.html#L85'>ustack</a>             85 kernel/exec.c      ustack[argc] = sp;</span>
+<span class='curline'><a href='../S/36.html#L87'>ustack</a>             87 kernel/exec.c    ustack[argc] = 0;</span>
+<span class='curline'><a href='../S/36.html#L94'>ustack</a>             94 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
 </pre>
 </body>
 </html>

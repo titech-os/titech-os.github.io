@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kmem</title>
+<title>kstack</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,16 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/71.html#L24'>kmem</a>               24 kernel/kalloc.c } kmem;</span>
-<span class='curline'><a href='../S/71.html#L29'>kmem</a>               29 kernel/kalloc.c   initlock(&amp;kmem.lock, "kmem");</span>
-<span class='curline'><a href='../S/71.html#L59'>kmem</a>               59 kernel/kalloc.c   acquire(&amp;kmem.lock);</span>
-<span class='curline'><a href='../S/71.html#L60'>kmem</a>               60 kernel/kalloc.c   r-&gt;next = kmem.freelist;</span>
-<span class='curline'><a href='../S/71.html#L61'>kmem</a>               61 kernel/kalloc.c   kmem.freelist = r;</span>
-<span class='curline'><a href='../S/71.html#L62'>kmem</a>               62 kernel/kalloc.c   release(&amp;kmem.lock);</span>
-<span class='curline'><a href='../S/71.html#L73'>kmem</a>               73 kernel/kalloc.c   acquire(&amp;kmem.lock);</span>
-<span class='curline'><a href='../S/71.html#L74'>kmem</a>               74 kernel/kalloc.c   r = kmem.freelist;</span>
-<span class='curline'><a href='../S/71.html#L76'>kmem</a>               76 kernel/kalloc.c     kmem.freelist = r-&gt;next;</span>
-<span class='curline'><a href='../S/71.html#L77'>kmem</a>               77 kernel/kalloc.c   release(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/63.html#L40'>kstack</a>             40 kernel/proc.c        p-&gt;kstack = va;</span>
+<span class='curline'><a href='../S/63.html#L121'>kstack</a>            121 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
+<span class='curline'><a href='../S/35.html#L98'>kstack</a>             98 kernel/proc.h    uint64 kstack;               // Bottom of kernel stack for this process</span>
+<span class='curline'><a href='../S/56.html#L104'>kstack</a>            104 kernel/trap.c    p-&gt;tf-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
 </pre>
 </body>
 </html>

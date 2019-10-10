@@ -1,23 +1,30 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel/fcntl.h</title>
+<title>kernel/stat.h</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/75.html'>kernel</a>/fcntl.h</h2>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/stat.h</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'><a href='../J/9.html' title='Multiple included from 7 places.'>INCLUDED FROM</a></h2>
+<h2 class='header'><a href='../J/32.html' title='Multiple included from 22 places.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='sharp'>#define</em> <a href='../R/62.html' title='Multiple referred from 10 places.'>O_RDONLY</a>  0x000
-<a id='L2' name='L2'></a>   2 <em class='sharp'>#define</em> <a href='../R/64.html' title='Multiple referred from 9 places.'>O_WRONLY</a>  0x001
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#define</em> <a href='../R/63.html' title='Multiple referred from 30 places.'>O_RDWR</a>    0x002
-<a id='L4' name='L4'></a>   4 <em class='sharp'>#define</em> <a href='../R/61.html' title='Multiple referred from 37 places.'>O_CREATE</a>  0x200
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#define</em> <a href='../R/132.html' title='Multiple referred from 11 places.'>T_DIR</a>     1   <em class='comment'>// Directory</em>
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#define</em> <a href='../R/133.html' title='Multiple referred from 4 places.'>T_FILE</a>    2   <em class='comment'>// File</em>
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#define</em> <a href='../R/131.html' title='Multiple referred from 4 places.'>T_DEVICE</a>  3   <em class='comment'>// Device</em>
+<a id='L4' name='L4'></a>   4 
+<a id='L5' name='L5'></a>   5 <strong class='reserved'>struct</strong> <a href='../R/427.html' title='Multiple referred from 10 places.'>stat</a> <em class='brace'>{</em>
+<a id='L6' name='L6'></a>   6   <strong class='reserved'>int</strong> <a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a>;     <em class='comment'>// File system's disk device</em>
+<a id='L7' name='L7'></a>   7   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/142.html' title='Multiple used in 4 places.'>ino</a>;    <em class='comment'>// Inode number</em>
+<a id='L8' name='L8'></a>   8   <strong class='reserved'>short</strong> <a href='../Y/365.html' title='Multiple used in 64 places.'>type</a>;  <em class='comment'>// Type of file</em>
+<a id='L9' name='L9'></a>   9   <strong class='reserved'>short</strong> <a href='../Y/209.html' title='Multiple used in 15 places.'>nlink</a>; <em class='comment'>// Number of links to file</em>
+<a id='L10' name='L10'></a>  10   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/323.html' title='Multiple used in 46 places.'>size</a>; <em class='comment'>// Size of file in bytes</em>
+<a id='L11' name='L11'></a>  11 <em class='brace'>}</em>;
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

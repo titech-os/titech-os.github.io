@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pte</title>
+<title>ptr</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,47 +9,18 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/66.html#L339'>pte</a>               339 kernel/riscv.h #define PTE2PA(pte) (((pte) &gt;&gt; 10) &lt;&lt; 12)</span>
-<span class='curline'><a href='../S/66.html#L341'>pte</a>               341 kernel/riscv.h #define PTE_FLAGS(pte) ((pte) &amp; 0x3FF)</span>
-<span class='curline'><a href='../S/40.html#L80'>pte</a>                80 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
-<span class='curline'><a href='../S/40.html#L81'>pte</a>                81 kernel/vm.c        if(*pte &amp; PTE_V) {</span>
-<span class='curline'><a href='../S/40.html#L82'>pte</a>                82 kernel/vm.c          pagetable = (pagetable_t)PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/40.html#L87'>pte</a>                87 kernel/vm.c          *pte = PA2PTE(pagetable) | PTE_V;</span>
-<span class='curline'><a href='../S/40.html#L99'>pte</a>                99 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/40.html#L105'>pte</a>               105 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
-<span class='curline'><a href='../S/40.html#L106'>pte</a>               106 kernel/vm.c      if(pte == 0)</span>
-<span class='curline'><a href='../S/40.html#L108'>pte</a>               108 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/40.html#L110'>pte</a>               110 kernel/vm.c      if((*pte &amp; PTE_U) == 0)</span>
-<span class='curline'><a href='../S/40.html#L112'>pte</a>               112 kernel/vm.c      pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/40.html#L134'>pte</a>               134 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/40.html#L137'>pte</a>               137 kernel/vm.c      pte = walk(kernel_pagetable, va, 0);</span>
-<span class='curline'><a href='../S/40.html#L138'>pte</a>               138 kernel/vm.c      if(pte == 0)</span>
-<span class='curline'><a href='../S/40.html#L140'>pte</a>               140 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/40.html#L142'>pte</a>               142 kernel/vm.c      pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/40.html#L154'>pte</a>               154 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/40.html#L159'>pte</a>               159 kernel/vm.c        if((pte = walk(pagetable, a, 1)) == 0)</span>
-<span class='curline'><a href='../S/40.html#L161'>pte</a>               161 kernel/vm.c        if(*pte &amp; PTE_V)</span>
-<span class='curline'><a href='../S/40.html#L163'>pte</a>               163 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
-<span class='curline'><a href='../S/40.html#L179'>pte</a>               179 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/40.html#L185'>pte</a>               185 kernel/vm.c        if((pte = walk(pagetable, a, 0)) == 0)</span>
-<span class='curline'><a href='../S/40.html#L187'>pte</a>               187 kernel/vm.c        if((*pte &amp; PTE_V) == 0){</span>
-<span class='curline'><a href='../S/40.html#L188'>pte</a>               188 kernel/vm.c          printf("va=%p pte=%p\n", a, *pte);</span>
-<span class='curline'><a href='../S/40.html#L191'>pte</a>               191 kernel/vm.c        if(PTE_FLAGS(*pte) == PTE_V)</span>
-<span class='curline'><a href='../S/40.html#L194'>pte</a>               194 kernel/vm.c          pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/40.html#L197'>pte</a>               197 kernel/vm.c        *pte = 0;</span>
-<span class='curline'><a href='../S/40.html#L286'>pte</a>               286 kernel/vm.c        pte_t pte = pagetable[i];</span>
-<span class='curline'><a href='../S/40.html#L287'>pte</a>               287 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
-<span class='curline'><a href='../S/40.html#L289'>pte</a>               289 kernel/vm.c          uint64 child = PTE2PA(pte);</span>
-<span class='curline'><a href='../S/40.html#L292'>pte</a>               292 kernel/vm.c        } else if(pte &amp; PTE_V){</span>
-<span class='curline'><a href='../S/40.html#L317'>pte</a>               317 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/40.html#L323'>pte</a>               323 kernel/vm.c        if((pte = walk(old, i, 0)) == 0)</span>
-<span class='curline'><a href='../S/40.html#L325'>pte</a>               325 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/40.html#L327'>pte</a>               327 kernel/vm.c        pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/40.html#L328'>pte</a>               328 kernel/vm.c        flags = PTE_FLAGS(*pte);</span>
-<span class='curline'><a href='../S/40.html#L349'>pte</a>               349 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/40.html#L351'>pte</a>               351 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
-<span class='curline'><a href='../S/40.html#L352'>pte</a>               352 kernel/vm.c      if(pte == 0)</span>
-<span class='curline'><a href='../S/40.html#L354'>pte</a>               354 kernel/vm.c      *pte &amp;= ~PTE_U;</span>
+<span class='curline'><a href='../S/12.html#L13'>ptr</a>                13 user/umalloc.c     union header *ptr;</span>
+<span class='curline'><a href='../S/12.html#L30'>ptr</a>                30 user/umalloc.c   for(p = freep; !(bp &gt; p &amp;&amp; bp &lt; p-&gt;s.ptr); p = p-&gt;s.ptr)</span>
+<span class='curline'><a href='../S/12.html#L31'>ptr</a>                31 user/umalloc.c     if(p &gt;= p-&gt;s.ptr &amp;&amp; (bp &gt; p || bp &lt; p-&gt;s.ptr))</span>
+<span class='curline'><a href='../S/12.html#L33'>ptr</a>                33 user/umalloc.c   if(bp + bp-&gt;s.size == p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/12.html#L34'>ptr</a>                34 user/umalloc.c     bp-&gt;s.size += p-&gt;s.ptr-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L35'>ptr</a>                35 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L37'>ptr</a>                37 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L40'>ptr</a>                40 user/umalloc.c     p-&gt;s.ptr = bp-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L42'>ptr</a>                42 user/umalloc.c     p-&gt;s.ptr = bp;</span>
+<span class='curline'><a href='../S/12.html#L71'>ptr</a>                71 user/umalloc.c     base.s.ptr = freep = prevp = &amp;base;</span>
+<span class='curline'><a href='../S/12.html#L74'>ptr</a>                74 user/umalloc.c   for(p = prevp-&gt;s.ptr; ; prevp = p, p = p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/12.html#L77'>ptr</a>                77 user/umalloc.c         prevp-&gt;s.ptr = p-&gt;s.ptr;</span>
 </pre>
 </body>
 </html>

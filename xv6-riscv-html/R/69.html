@@ -9,74 +9,74 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L54'>PGSIZE</a>             54 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
-<span class='curline'><a href='../S/38.html#L69'>PGSIZE</a>             69 kernel/exec.c    if((sz = uvmalloc(pagetable, sz, sz + 2*PGSIZE)) == 0)</span>
-<span class='curline'><a href='../S/38.html#L71'>PGSIZE</a>             71 kernel/exec.c    uvmclear(pagetable, sz-2*PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L73'>PGSIZE</a>             73 kernel/exec.c    stackbase = sp - PGSIZE;</span>
-<span class='curline'><a href='../S/38.html#L137'>PGSIZE</a>            137 kernel/exec.c    if((va % PGSIZE) != 0)</span>
-<span class='curline'><a href='../S/38.html#L140'>PGSIZE</a>            140 kernel/exec.c    for(i = 0; i &lt; sz; i += PGSIZE){</span>
-<span class='curline'><a href='../S/38.html#L144'>PGSIZE</a>            144 kernel/exec.c      if(sz - i &lt; PGSIZE)</span>
-<span class='curline'><a href='../S/38.html#L147'>PGSIZE</a>            147 kernel/exec.c        n = PGSIZE;</span>
-<span class='curline'><a href='../S/71.html#L38'>PGSIZE</a>             38 kernel/kalloc.c   for(; p + PGSIZE &lt;= (char*)pa_end; p += PGSIZE)</span>
-<span class='curline'><a href='../S/71.html#L51'>PGSIZE</a>             51 kernel/kalloc.c   if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)</span>
-<span class='curline'><a href='../S/71.html#L55'>PGSIZE</a>             55 kernel/kalloc.c   memset(pa, 1, PGSIZE);</span>
-<span class='curline'><a href='../S/71.html#L80'>PGSIZE</a>             80 kernel/kalloc.c     memset((char*)r, 5, PGSIZE); // fill with junk</span>
-<span class='curline'><a href='../S/51.html#L52'>PGSIZE</a>             52 kernel/memlayout.h #define TRAMPOLINE (MAXVA - PGSIZE)</span>
-<span class='curline'><a href='../S/51.html#L56'>PGSIZE</a>             56 kernel/memlayout.h #define KSTACK(p) (TRAMPOLINE - ((p)+1)* 2*PGSIZE)</span>
-<span class='curline'><a href='../S/51.html#L67'>PGSIZE</a>             67 kernel/memlayout.h #define TRAPFRAME (TRAMPOLINE - PGSIZE)</span>
-<span class='curline'><a href='../S/65.html#L39'>PGSIZE</a>             39 kernel/proc.c        kvmmap(va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/65.html#L121'>PGSIZE</a>            121 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
-<span class='curline'><a href='../S/65.html#L162'>PGSIZE</a>            162 kernel/proc.c    mappages(pagetable, TRAMPOLINE, PGSIZE,</span>
-<span class='curline'><a href='../S/65.html#L166'>PGSIZE</a>            166 kernel/proc.c    mappages(pagetable, TRAPFRAME, PGSIZE,</span>
-<span class='curline'><a href='../S/65.html#L177'>PGSIZE</a>            177 kernel/proc.c    uvmunmap(pagetable, TRAMPOLINE, PGSIZE, 0);</span>
-<span class='curline'><a href='../S/65.html#L178'>PGSIZE</a>            178 kernel/proc.c    uvmunmap(pagetable, TRAPFRAME, PGSIZE, 0);</span>
-<span class='curline'><a href='../S/65.html#L207'>PGSIZE</a>            207 kernel/proc.c    p-&gt;sz = PGSIZE;</span>
-<span class='curline'><a href='../S/65.html#L211'>PGSIZE</a>            211 kernel/proc.c    p-&gt;tf-&gt;sp = PGSIZE;  // user stack pointer</span>
-<span class='curline'><a href='../S/66.html#L327'>PGSIZE</a>            327 kernel/riscv.h #define PGROUNDUP(sz)  (((sz)+PGSIZE-1) &amp; ~(PGSIZE-1))</span>
-<span class='curline'><a href='../S/66.html#L328'>PGSIZE</a>            328 kernel/riscv.h #define PGROUNDDOWN(a) (((a)) &amp; ~(PGSIZE-1))</span>
-<span class='curline'><a href='../S/45.html#L436'>PGSIZE</a>            436 kernel/sysfile.c     if(fetchstr(uarg, argv[i], PGSIZE) &lt; 0){</span>
-<span class='curline'><a href='../S/58.html#L104'>PGSIZE</a>            104 kernel/trap.c    p-&gt;tf-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
-<span class='curline'><a href='../S/67.html#L28'>PGSIZE</a>             28 kernel/virtio_disk.c   char pages[2*PGSIZE];</span>
-<span class='curline'><a href='../S/67.html#L47'>PGSIZE</a>             47 kernel/virtio_disk.c } __attribute__ ((aligned (PGSIZE))) disk;</span>
-<span class='curline'><a href='../S/67.html#L88'>PGSIZE</a>             88 kernel/virtio_disk.c   *R(VIRTIO_MMIO_GUEST_PAGE_SIZE) = PGSIZE;</span>
-<span class='curline'><a href='../S/67.html#L107'>PGSIZE</a>            107 kernel/virtio_disk.c   disk.used = (struct UsedArea *) (disk.pages + PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L27'>PGSIZE</a>             27 kernel/vm.c      memset(kernel_pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L30'>PGSIZE</a>             30 kernel/vm.c      kvmmap(UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/40.html#L33'>PGSIZE</a>             33 kernel/vm.c      kvmmap(VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/40.html#L49'>PGSIZE</a>             49 kernel/vm.c      kvmmap(TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
-<span class='curline'><a href='../S/40.html#L86'>PGSIZE</a>             86 kernel/vm.c          memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L133'>PGSIZE</a>            133 kernel/vm.c      uint64 off = va % PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L166'>PGSIZE</a>            166 kernel/vm.c        a += PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L167'>PGSIZE</a>            167 kernel/vm.c        pa += PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L200'>PGSIZE</a>            200 kernel/vm.c        a += PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L201'>PGSIZE</a>            201 kernel/vm.c        pa += PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L213'>PGSIZE</a>            213 kernel/vm.c      memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L225'>PGSIZE</a>            225 kernel/vm.c      if(sz &gt;= PGSIZE)</span>
-<span class='curline'><a href='../S/40.html#L228'>PGSIZE</a>            228 kernel/vm.c      memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L229'>PGSIZE</a>            229 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
-<span class='curline'><a href='../S/40.html#L246'>PGSIZE</a>            246 kernel/vm.c      for(; a &lt; newsz; a += PGSIZE){</span>
-<span class='curline'><a href='../S/40.html#L252'>PGSIZE</a>            252 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L253'>PGSIZE</a>            253 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_W|PTE_X|PTE_R|PTE_U) != 0){</span>
-<span class='curline'><a href='../S/40.html#L322'>PGSIZE</a>            322 kernel/vm.c      for(i = 0; i &lt; sz; i += PGSIZE){</span>
-<span class='curline'><a href='../S/40.html#L331'>PGSIZE</a>            331 kernel/vm.c        memmove(mem, (char*)pa, PGSIZE);</span>
-<span class='curline'><a href='../S/40.html#L332'>PGSIZE</a>            332 kernel/vm.c        if(mappages(new, i, PGSIZE, (uint64)mem, flags) != 0){</span>
-<span class='curline'><a href='../S/40.html#L370'>PGSIZE</a>            370 kernel/vm.c        n = PGSIZE - (dstva - va0);</span>
-<span class='curline'><a href='../S/40.html#L377'>PGSIZE</a>            377 kernel/vm.c        dstva = va0 + PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L395'>PGSIZE</a>            395 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
-<span class='curline'><a href='../S/40.html#L402'>PGSIZE</a>            402 kernel/vm.c        srcva = va0 + PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L422'>PGSIZE</a>            422 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
-<span class='curline'><a href='../S/40.html#L441'>PGSIZE</a>            441 kernel/vm.c        srcva = va0 + PGSIZE;</span>
-<span class='curline'><a href='../S/26.html#L1649'>PGSIZE</a>           1649 user/usertests.c   c = sbrk(-PGSIZE);</span>
-<span class='curline'><a href='../S/26.html#L1655'>PGSIZE</a>           1655 user/usertests.c   if(c != a - PGSIZE){</span>
-<span class='curline'><a href='../S/26.html#L1662'>PGSIZE</a>           1662 user/usertests.c   c = sbrk(PGSIZE);</span>
-<span class='curline'><a href='../S/26.html#L1663'>PGSIZE</a>           1663 user/usertests.c   if(c != a || sbrk(0) != a + PGSIZE){</span>
-<span class='curline'><a href='../S/26.html#L1736'>PGSIZE</a>           1736 user/usertests.c   c = sbrk(PGSIZE);</span>
-<span class='curline'><a href='../S/26.html#L1759'>PGSIZE</a>           1759 user/usertests.c     for (i = 0; i &lt; 10*BIG; i += PGSIZE) {</span>
-<span class='curline'><a href='../S/26.html#L1778'>PGSIZE</a>           1778 user/usertests.c   a = sbrk(PGSIZE);</span>
-<span class='curline'><a href='../S/26.html#L1785'>PGSIZE</a>           1785 user/usertests.c   if ((n = write(fd, a, PGSIZE)) &lt; 0) {</span>
-<span class='curline'><a href='../S/26.html#L1792'>PGSIZE</a>           1792 user/usertests.c   a = sbrk(PGSIZE);</span>
-<span class='curline'><a href='../S/26.html#L1806'>PGSIZE</a>           1806 user/usertests.c   for(p = 0; p &lt;= (uint)hi; p += PGSIZE){</span>
-<span class='curline'><a href='../S/26.html#L1950'>PGSIZE</a>           1950 user/usertests.c     sp -= PGSIZE;</span>
+<span class='curline'><a href='../S/36.html#L54'>PGSIZE</a>             54 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
+<span class='curline'><a href='../S/36.html#L69'>PGSIZE</a>             69 kernel/exec.c    if((sz = uvmalloc(pagetable, sz, sz + 2*PGSIZE)) == 0)</span>
+<span class='curline'><a href='../S/36.html#L71'>PGSIZE</a>             71 kernel/exec.c    uvmclear(pagetable, sz-2*PGSIZE);</span>
+<span class='curline'><a href='../S/36.html#L73'>PGSIZE</a>             73 kernel/exec.c    stackbase = sp - PGSIZE;</span>
+<span class='curline'><a href='../S/36.html#L137'>PGSIZE</a>            137 kernel/exec.c    if((va % PGSIZE) != 0)</span>
+<span class='curline'><a href='../S/36.html#L140'>PGSIZE</a>            140 kernel/exec.c    for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/36.html#L144'>PGSIZE</a>            144 kernel/exec.c      if(sz - i &lt; PGSIZE)</span>
+<span class='curline'><a href='../S/36.html#L147'>PGSIZE</a>            147 kernel/exec.c        n = PGSIZE;</span>
+<span class='curline'><a href='../S/69.html#L38'>PGSIZE</a>             38 kernel/kalloc.c   for(; p + PGSIZE &lt;= (char*)pa_end; p += PGSIZE)</span>
+<span class='curline'><a href='../S/69.html#L51'>PGSIZE</a>             51 kernel/kalloc.c   if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)</span>
+<span class='curline'><a href='../S/69.html#L55'>PGSIZE</a>             55 kernel/kalloc.c   memset(pa, 1, PGSIZE);</span>
+<span class='curline'><a href='../S/69.html#L80'>PGSIZE</a>             80 kernel/kalloc.c     memset((char*)r, 5, PGSIZE); // fill with junk</span>
+<span class='curline'><a href='../S/49.html#L52'>PGSIZE</a>             52 kernel/memlayout.h #define TRAMPOLINE (MAXVA - PGSIZE)</span>
+<span class='curline'><a href='../S/49.html#L56'>PGSIZE</a>             56 kernel/memlayout.h #define KSTACK(p) (TRAMPOLINE - ((p)+1)* 2*PGSIZE)</span>
+<span class='curline'><a href='../S/49.html#L67'>PGSIZE</a>             67 kernel/memlayout.h #define TRAPFRAME (TRAMPOLINE - PGSIZE)</span>
+<span class='curline'><a href='../S/63.html#L39'>PGSIZE</a>             39 kernel/proc.c        kvmmap(va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/63.html#L121'>PGSIZE</a>            121 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
+<span class='curline'><a href='../S/63.html#L162'>PGSIZE</a>            162 kernel/proc.c    mappages(pagetable, TRAMPOLINE, PGSIZE,</span>
+<span class='curline'><a href='../S/63.html#L166'>PGSIZE</a>            166 kernel/proc.c    mappages(pagetable, TRAPFRAME, PGSIZE,</span>
+<span class='curline'><a href='../S/63.html#L177'>PGSIZE</a>            177 kernel/proc.c    uvmunmap(pagetable, TRAMPOLINE, PGSIZE, 0);</span>
+<span class='curline'><a href='../S/63.html#L178'>PGSIZE</a>            178 kernel/proc.c    uvmunmap(pagetable, TRAPFRAME, PGSIZE, 0);</span>
+<span class='curline'><a href='../S/63.html#L207'>PGSIZE</a>            207 kernel/proc.c    p-&gt;sz = PGSIZE;</span>
+<span class='curline'><a href='../S/63.html#L211'>PGSIZE</a>            211 kernel/proc.c    p-&gt;tf-&gt;sp = PGSIZE;  // user stack pointer</span>
+<span class='curline'><a href='../S/64.html#L327'>PGSIZE</a>            327 kernel/riscv.h #define PGROUNDUP(sz)  (((sz)+PGSIZE-1) &amp; ~(PGSIZE-1))</span>
+<span class='curline'><a href='../S/64.html#L328'>PGSIZE</a>            328 kernel/riscv.h #define PGROUNDDOWN(a) (((a)) &amp; ~(PGSIZE-1))</span>
+<span class='curline'><a href='../S/43.html#L436'>PGSIZE</a>            436 kernel/sysfile.c     if(fetchstr(uarg, argv[i], PGSIZE) &lt; 0){</span>
+<span class='curline'><a href='../S/56.html#L104'>PGSIZE</a>            104 kernel/trap.c    p-&gt;tf-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
+<span class='curline'><a href='../S/65.html#L28'>PGSIZE</a>             28 kernel/virtio_disk.c   char pages[2*PGSIZE];</span>
+<span class='curline'><a href='../S/65.html#L47'>PGSIZE</a>             47 kernel/virtio_disk.c } __attribute__ ((aligned (PGSIZE))) disk;</span>
+<span class='curline'><a href='../S/65.html#L88'>PGSIZE</a>             88 kernel/virtio_disk.c   *R(VIRTIO_MMIO_GUEST_PAGE_SIZE) = PGSIZE;</span>
+<span class='curline'><a href='../S/65.html#L107'>PGSIZE</a>            107 kernel/virtio_disk.c   disk.used = (struct UsedArea *) (disk.pages + PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L27'>PGSIZE</a>             27 kernel/vm.c      memset(kernel_pagetable, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L30'>PGSIZE</a>             30 kernel/vm.c      kvmmap(UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/38.html#L33'>PGSIZE</a>             33 kernel/vm.c      kvmmap(VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/38.html#L49'>PGSIZE</a>             49 kernel/vm.c      kvmmap(TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/38.html#L86'>PGSIZE</a>             86 kernel/vm.c          memset(pagetable, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L133'>PGSIZE</a>            133 kernel/vm.c      uint64 off = va % PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L166'>PGSIZE</a>            166 kernel/vm.c        a += PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L167'>PGSIZE</a>            167 kernel/vm.c        pa += PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L200'>PGSIZE</a>            200 kernel/vm.c        a += PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L201'>PGSIZE</a>            201 kernel/vm.c        pa += PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L213'>PGSIZE</a>            213 kernel/vm.c      memset(pagetable, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L225'>PGSIZE</a>            225 kernel/vm.c      if(sz &gt;= PGSIZE)</span>
+<span class='curline'><a href='../S/38.html#L228'>PGSIZE</a>            228 kernel/vm.c      memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L229'>PGSIZE</a>            229 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
+<span class='curline'><a href='../S/38.html#L246'>PGSIZE</a>            246 kernel/vm.c      for(; a &lt; newsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/38.html#L252'>PGSIZE</a>            252 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L253'>PGSIZE</a>            253 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_W|PTE_X|PTE_R|PTE_U) != 0){</span>
+<span class='curline'><a href='../S/38.html#L322'>PGSIZE</a>            322 kernel/vm.c      for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/38.html#L331'>PGSIZE</a>            331 kernel/vm.c        memmove(mem, (char*)pa, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L332'>PGSIZE</a>            332 kernel/vm.c        if(mappages(new, i, PGSIZE, (uint64)mem, flags) != 0){</span>
+<span class='curline'><a href='../S/38.html#L370'>PGSIZE</a>            370 kernel/vm.c        n = PGSIZE - (dstva - va0);</span>
+<span class='curline'><a href='../S/38.html#L377'>PGSIZE</a>            377 kernel/vm.c        dstva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L395'>PGSIZE</a>            395 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/38.html#L402'>PGSIZE</a>            402 kernel/vm.c        srcva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L422'>PGSIZE</a>            422 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/38.html#L441'>PGSIZE</a>            441 kernel/vm.c        srcva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/24.html#L1649'>PGSIZE</a>           1649 user/usertests.c   c = sbrk(-PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L1655'>PGSIZE</a>           1655 user/usertests.c   if(c != a - PGSIZE){</span>
+<span class='curline'><a href='../S/24.html#L1662'>PGSIZE</a>           1662 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L1663'>PGSIZE</a>           1663 user/usertests.c   if(c != a || sbrk(0) != a + PGSIZE){</span>
+<span class='curline'><a href='../S/24.html#L1736'>PGSIZE</a>           1736 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L1759'>PGSIZE</a>           1759 user/usertests.c     for (i = 0; i &lt; 10*BIG; i += PGSIZE) {</span>
+<span class='curline'><a href='../S/24.html#L1778'>PGSIZE</a>           1778 user/usertests.c   a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L1785'>PGSIZE</a>           1785 user/usertests.c   if ((n = write(fd, a, PGSIZE)) &lt; 0) {</span>
+<span class='curline'><a href='../S/24.html#L1792'>PGSIZE</a>           1792 user/usertests.c   a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L1806'>PGSIZE</a>           1806 user/usertests.c   for(p = 0; p &lt;= (uint)hi; p += PGSIZE){</span>
+<span class='curline'><a href='../S/24.html#L1950'>PGSIZE</a>           1950 user/usertests.c     sp -= PGSIZE;</span>
 </pre>
 </body>
 </html>

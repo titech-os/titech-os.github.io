@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>echoargv</title>
+<title>ecmd</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,15 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/26.html#L286'>echoargv</a>          286 user/usertests.c   char *echoargv[] = { "echo", "OK", 0 };</span>
-<span class='curline'><a href='../S/26.html#L306'>echoargv</a>          306 user/usertests.c     if(exec("echo", echoargv) &lt; 0){</span>
+<span class='curline'><a href='../S/17.html#L62'>ecmd</a>               62 user/sh.c        struct execcmd *ecmd;</span>
+<span class='curline'><a href='../S/17.html#L75'>ecmd</a>               75 user/sh.c          ecmd = (struct execcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L76'>ecmd</a>               76 user/sh.c          if(ecmd-&gt;argv[0] == 0)</span>
+<span class='curline'><a href='../S/17.html#L78'>ecmd</a>               78 user/sh.c          exec(ecmd-&gt;argv[0], ecmd-&gt;argv);</span>
+<span class='curline'><a href='../S/17.html#L79'>ecmd</a>               79 user/sh.c          fprintf(2, "exec %s failed\n", ecmd-&gt;argv[0]);</span>
+<span class='curline'><a href='../S/17.html#L454'>ecmd</a>              454 user/sh.c        struct execcmd *ecmd;</span>
+<span class='curline'><a href='../S/17.html#L464'>ecmd</a>              464 user/sh.c          ecmd = (struct execcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L465'>ecmd</a>              465 user/sh.c          for(i=0; ecmd-&gt;argv[i]; i++)</span>
+<span class='curline'><a href='../S/17.html#L466'>ecmd</a>              466 user/sh.c            *ecmd-&gt;eargv[i] = 0;</span>
 </pre>
 </body>
 </html>

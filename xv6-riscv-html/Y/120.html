@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>fstat</title>
+<title>ftable</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,9 +9,17 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/6.html#L38'>fstat</a>              38 user/ls.c        if(fstat(fd, &amp;st) &lt; 0){</span>
-<span class='curline'><a href='../S/20.html#L82'>fstat</a>              82 user/ulib.c      r = fstat(fd, st);</span>
-<span class='curline'><a href='../S/16.html#L17'>fstat</a>              17 user/user.h    int fstat(int fd, struct stat*);</span>
+<span class='curline'><a href='../S/67.html#L20'>ftable</a>             20 kernel/file.c  } ftable;</span>
+<span class='curline'><a href='../S/67.html#L25'>ftable</a>             25 kernel/file.c    initlock(&amp;ftable.lock, "ftable");</span>
+<span class='curline'><a href='../S/67.html#L34'>ftable</a>             34 kernel/file.c    acquire(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L35'>ftable</a>             35 kernel/file.c    for(f = ftable.file; f &lt; ftable.file + NFILE; f++){</span>
+<span class='curline'><a href='../S/67.html#L38'>ftable</a>             38 kernel/file.c        release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L42'>ftable</a>             42 kernel/file.c    release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L50'>ftable</a>             50 kernel/file.c    acquire(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L54'>ftable</a>             54 kernel/file.c    release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L64'>ftable</a>             64 kernel/file.c    acquire(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L68'>ftable</a>             68 kernel/file.c      release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L74'>ftable</a>             74 kernel/file.c    release(&amp;ftable.lock);</span>
 </pre>
 </body>
 </html>

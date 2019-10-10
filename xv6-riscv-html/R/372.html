@@ -9,67 +9,67 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/33.html#L6'>proc</a>                6 kernel/defs.h  struct proc;</span>
-<span class='curline'><a href='../S/33.html#L88'>proc</a>               88 kernel/defs.h  pagetable_t     proc_pagetable(struct proc *);</span>
-<span class='curline'><a href='../S/33.html#L93'>proc</a>               93 kernel/defs.h  struct proc*    myproc();</span>
-<span class='curline'><a href='../S/33.html#L97'>proc</a>               97 kernel/defs.h  void            setproc(struct proc*);</span>
-<span class='curline'><a href='../S/38.html#L22'>proc</a>               22 kernel/exec.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/69.html#L90'>proc</a>               90 kernel/file.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/36.html#L81'>proc</a>               81 kernel/pipe.c    struct proc *pr = myproc();</span>
-<span class='curline'><a href='../S/36.html#L106'>proc</a>              106 kernel/pipe.c    struct proc *pr = myproc();</span>
-<span class='curline'><a href='../S/65.html#L11'>proc</a>               11 kernel/proc.c  struct proc proc[NPROC];</span>
-<span class='curline'><a href='../S/65.html#L13'>proc</a>               13 kernel/proc.c  struct proc *initproc;</span>
-<span class='curline'><a href='../S/65.html#L19'>proc</a>               19 kernel/proc.c  static void wakeup1(struct proc *chan);</span>
-<span class='curline'><a href='../S/65.html#L26'>proc</a>               26 kernel/proc.c    struct proc *p;</span>
-<span class='curline'><a href='../S/65.html#L29'>proc</a>               29 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
-<span class='curline'><a href='../S/65.html#L38'>proc</a>               38 kernel/proc.c        uint64 va = KSTACK((int) (p - proc));</span>
-<span class='curline'><a href='../S/65.html#L65'>proc</a>               65 kernel/proc.c  struct proc*</span>
-<span class='curline'><a href='../S/65.html#L69'>proc</a>               69 kernel/proc.c    struct proc *p = c-&gt;proc;</span>
-<span class='curline'><a href='../S/65.html#L90'>proc</a>               90 kernel/proc.c  static struct proc*</span>
-<span class='curline'><a href='../S/65.html#L93'>proc</a>               93 kernel/proc.c    struct proc *p;</span>
-<span class='curline'><a href='../S/65.html#L95'>proc</a>               95 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
-<span class='curline'><a href='../S/65.html#L130'>proc</a>              130 kernel/proc.c  freeproc(struct proc *p)</span>
-<span class='curline'><a href='../S/65.html#L151'>proc</a>              151 kernel/proc.c  proc_pagetable(struct proc *p)</span>
-<span class='curline'><a href='../S/65.html#L199'>proc</a>              199 kernel/proc.c    struct proc *p;</span>
-<span class='curline'><a href='../S/65.html#L227'>proc</a>              227 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L247'>proc</a>              247 kernel/proc.c    struct proc *np;</span>
-<span class='curline'><a href='../S/65.html#L248'>proc</a>              248 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L291'>proc</a>              291 kernel/proc.c  reparent(struct proc *p)</span>
-<span class='curline'><a href='../S/65.html#L293'>proc</a>              293 kernel/proc.c    struct proc *pp;</span>
-<span class='curline'><a href='../S/65.html#L295'>proc</a>              295 kernel/proc.c    for(pp = proc; pp &lt; &amp;proc[NPROC]; pp++){</span>
-<span class='curline'><a href='../S/65.html#L320'>proc</a>              320 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L355'>proc</a>              355 kernel/proc.c    struct proc *original_parent = p-&gt;parent;</span>
-<span class='curline'><a href='../S/65.html#L385'>proc</a>              385 kernel/proc.c    struct proc *np;</span>
-<span class='curline'><a href='../S/65.html#L387'>proc</a>              387 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L396'>proc</a>              396 kernel/proc.c      for(np = proc; np &lt; &amp;proc[NPROC]; np++){</span>
-<span class='curline'><a href='../S/65.html#L444'>proc</a>              444 kernel/proc.c    struct proc *p;</span>
-<span class='curline'><a href='../S/65.html#L447'>proc</a>              447 kernel/proc.c    c-&gt;proc = 0;</span>
-<span class='curline'><a href='../S/65.html#L452'>proc</a>              452 kernel/proc.c      for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
-<span class='curline'><a href='../S/65.html#L459'>proc</a>              459 kernel/proc.c          c-&gt;proc = p;</span>
-<span class='curline'><a href='../S/65.html#L464'>proc</a>              464 kernel/proc.c          c-&gt;proc = 0;</span>
-<span class='curline'><a href='../S/65.html#L482'>proc</a>              482 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L502'>proc</a>              502 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L535'>proc</a>              535 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L569'>proc</a>              569 kernel/proc.c    struct proc *p;</span>
-<span class='curline'><a href='../S/65.html#L571'>proc</a>              571 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
-<span class='curline'><a href='../S/65.html#L583'>proc</a>              583 kernel/proc.c  wakeup1(struct proc *p)</span>
-<span class='curline'><a href='../S/65.html#L598'>proc</a>              598 kernel/proc.c    struct proc *p;</span>
-<span class='curline'><a href='../S/65.html#L600'>proc</a>              600 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++){</span>
-<span class='curline'><a href='../S/65.html#L622'>proc</a>              622 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L637'>proc</a>              637 kernel/proc.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/65.html#L659'>proc</a>              659 kernel/proc.c    struct proc *p;</span>
-<span class='curline'><a href='../S/65.html#L663'>proc</a>              663 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++){</span>
-<span class='curline'><a href='../S/37.html#L23'>proc</a>               23 kernel/proc.h    struct proc *proc;          // The process running on this cpu, or null.</span>
-<span class='curline'><a href='../S/37.html#L91'>proc</a>               91 kernel/proc.h    struct proc *parent;         // Parent process</span>
-<span class='curline'><a href='../S/53.html#L14'>proc</a>               14 kernel/syscall.c   struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/53.html#L27'>proc</a>               27 kernel/syscall.c   struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/53.html#L37'>proc</a>               37 kernel/syscall.c   struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/53.html#L136'>proc</a>              136 kernel/syscall.c   struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/45.html#L44'>proc</a>               44 kernel/sysfile.c   struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/45.html#L391'>proc</a>              391 kernel/sysfile.c   struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/45.html#L460'>proc</a>              460 kernel/sysfile.c   struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/58.html#L48'>proc</a>               48 kernel/trap.c    struct proc *p = myproc();</span>
-<span class='curline'><a href='../S/58.html#L92'>proc</a>               92 kernel/trap.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/31.html#L6'>proc</a>                6 kernel/defs.h  struct proc;</span>
+<span class='curline'><a href='../S/31.html#L88'>proc</a>               88 kernel/defs.h  pagetable_t     proc_pagetable(struct proc *);</span>
+<span class='curline'><a href='../S/31.html#L93'>proc</a>               93 kernel/defs.h  struct proc*    myproc();</span>
+<span class='curline'><a href='../S/31.html#L97'>proc</a>               97 kernel/defs.h  void            setproc(struct proc*);</span>
+<span class='curline'><a href='../S/36.html#L22'>proc</a>               22 kernel/exec.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/67.html#L90'>proc</a>               90 kernel/file.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/34.html#L81'>proc</a>               81 kernel/pipe.c    struct proc *pr = myproc();</span>
+<span class='curline'><a href='../S/34.html#L106'>proc</a>              106 kernel/pipe.c    struct proc *pr = myproc();</span>
+<span class='curline'><a href='../S/63.html#L11'>proc</a>               11 kernel/proc.c  struct proc proc[NPROC];</span>
+<span class='curline'><a href='../S/63.html#L13'>proc</a>               13 kernel/proc.c  struct proc *initproc;</span>
+<span class='curline'><a href='../S/63.html#L19'>proc</a>               19 kernel/proc.c  static void wakeup1(struct proc *chan);</span>
+<span class='curline'><a href='../S/63.html#L26'>proc</a>               26 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/63.html#L29'>proc</a>               29 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/63.html#L38'>proc</a>               38 kernel/proc.c        uint64 va = KSTACK((int) (p - proc));</span>
+<span class='curline'><a href='../S/63.html#L65'>proc</a>               65 kernel/proc.c  struct proc*</span>
+<span class='curline'><a href='../S/63.html#L69'>proc</a>               69 kernel/proc.c    struct proc *p = c-&gt;proc;</span>
+<span class='curline'><a href='../S/63.html#L90'>proc</a>               90 kernel/proc.c  static struct proc*</span>
+<span class='curline'><a href='../S/63.html#L93'>proc</a>               93 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/63.html#L95'>proc</a>               95 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/63.html#L130'>proc</a>              130 kernel/proc.c  freeproc(struct proc *p)</span>
+<span class='curline'><a href='../S/63.html#L151'>proc</a>              151 kernel/proc.c  proc_pagetable(struct proc *p)</span>
+<span class='curline'><a href='../S/63.html#L199'>proc</a>              199 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/63.html#L227'>proc</a>              227 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L247'>proc</a>              247 kernel/proc.c    struct proc *np;</span>
+<span class='curline'><a href='../S/63.html#L248'>proc</a>              248 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L291'>proc</a>              291 kernel/proc.c  reparent(struct proc *p)</span>
+<span class='curline'><a href='../S/63.html#L293'>proc</a>              293 kernel/proc.c    struct proc *pp;</span>
+<span class='curline'><a href='../S/63.html#L295'>proc</a>              295 kernel/proc.c    for(pp = proc; pp &lt; &amp;proc[NPROC]; pp++){</span>
+<span class='curline'><a href='../S/63.html#L320'>proc</a>              320 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L355'>proc</a>              355 kernel/proc.c    struct proc *original_parent = p-&gt;parent;</span>
+<span class='curline'><a href='../S/63.html#L385'>proc</a>              385 kernel/proc.c    struct proc *np;</span>
+<span class='curline'><a href='../S/63.html#L387'>proc</a>              387 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L396'>proc</a>              396 kernel/proc.c      for(np = proc; np &lt; &amp;proc[NPROC]; np++){</span>
+<span class='curline'><a href='../S/63.html#L444'>proc</a>              444 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/63.html#L447'>proc</a>              447 kernel/proc.c    c-&gt;proc = 0;</span>
+<span class='curline'><a href='../S/63.html#L452'>proc</a>              452 kernel/proc.c      for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/63.html#L459'>proc</a>              459 kernel/proc.c          c-&gt;proc = p;</span>
+<span class='curline'><a href='../S/63.html#L464'>proc</a>              464 kernel/proc.c          c-&gt;proc = 0;</span>
+<span class='curline'><a href='../S/63.html#L482'>proc</a>              482 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L502'>proc</a>              502 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L535'>proc</a>              535 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L569'>proc</a>              569 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/63.html#L571'>proc</a>              571 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/63.html#L583'>proc</a>              583 kernel/proc.c  wakeup1(struct proc *p)</span>
+<span class='curline'><a href='../S/63.html#L598'>proc</a>              598 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/63.html#L600'>proc</a>              600 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/63.html#L622'>proc</a>              622 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L637'>proc</a>              637 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L659'>proc</a>              659 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/63.html#L663'>proc</a>              663 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/35.html#L23'>proc</a>               23 kernel/proc.h    struct proc *proc;          // The process running on this cpu, or null.</span>
+<span class='curline'><a href='../S/35.html#L91'>proc</a>               91 kernel/proc.h    struct proc *parent;         // Parent process</span>
+<span class='curline'><a href='../S/51.html#L14'>proc</a>               14 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/51.html#L27'>proc</a>               27 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/51.html#L37'>proc</a>               37 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/51.html#L136'>proc</a>              136 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/43.html#L44'>proc</a>               44 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/43.html#L391'>proc</a>              391 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/43.html#L460'>proc</a>              460 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/56.html#L48'>proc</a>               48 kernel/trap.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/56.html#L92'>proc</a>               92 kernel/trap.c    struct proc *p = myproc();</span>
 </pre>
 </body>
 </html>

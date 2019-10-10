@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ps</title>
+<title>pte</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,42 +9,47 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/18.html#L266'>ps</a>                266 user/sh.c      gettoken(char **ps, char *es, char **q, char **eq)</span>
-<span class='curline'><a href='../S/18.html#L271'>ps</a>                271 user/sh.c        s = *ps;</span>
-<span class='curline'><a href='../S/18.html#L306'>ps</a>                306 user/sh.c        *ps = s;</span>
-<span class='curline'><a href='../S/18.html#L311'>ps</a>                311 user/sh.c      peek(char **ps, char *es, char *toks)</span>
-<span class='curline'><a href='../S/18.html#L315'>ps</a>                315 user/sh.c        s = *ps;</span>
-<span class='curline'><a href='../S/18.html#L318'>ps</a>                318 user/sh.c        *ps = s;</span>
-<span class='curline'><a href='../S/18.html#L345'>ps</a>                345 user/sh.c      parseline(char **ps, char *es)</span>
-<span class='curline'><a href='../S/18.html#L349'>ps</a>                349 user/sh.c        cmd = parsepipe(ps, es);</span>
-<span class='curline'><a href='../S/18.html#L350'>ps</a>                350 user/sh.c        while(peek(ps, es, "&amp;")){</span>
-<span class='curline'><a href='../S/18.html#L351'>ps</a>                351 user/sh.c          gettoken(ps, es, 0, 0);</span>
-<span class='curline'><a href='../S/18.html#L354'>ps</a>                354 user/sh.c        if(peek(ps, es, ";")){</span>
-<span class='curline'><a href='../S/18.html#L355'>ps</a>                355 user/sh.c          gettoken(ps, es, 0, 0);</span>
-<span class='curline'><a href='../S/18.html#L356'>ps</a>                356 user/sh.c          cmd = listcmd(cmd, parseline(ps, es));</span>
-<span class='curline'><a href='../S/18.html#L362'>ps</a>                362 user/sh.c      parsepipe(char **ps, char *es)</span>
-<span class='curline'><a href='../S/18.html#L366'>ps</a>                366 user/sh.c        cmd = parseexec(ps, es);</span>
-<span class='curline'><a href='../S/18.html#L367'>ps</a>                367 user/sh.c        if(peek(ps, es, "|")){</span>
-<span class='curline'><a href='../S/18.html#L368'>ps</a>                368 user/sh.c          gettoken(ps, es, 0, 0);</span>
-<span class='curline'><a href='../S/18.html#L369'>ps</a>                369 user/sh.c          cmd = pipecmd(cmd, parsepipe(ps, es));</span>
-<span class='curline'><a href='../S/18.html#L375'>ps</a>                375 user/sh.c      parseredirs(struct cmd *cmd, char **ps, char *es)</span>
-<span class='curline'><a href='../S/18.html#L380'>ps</a>                380 user/sh.c        while(peek(ps, es, "&lt;&gt;")){</span>
-<span class='curline'><a href='../S/18.html#L381'>ps</a>                381 user/sh.c          tok = gettoken(ps, es, 0, 0);</span>
-<span class='curline'><a href='../S/18.html#L382'>ps</a>                382 user/sh.c          if(gettoken(ps, es, &amp;q, &amp;eq) != 'a')</span>
-<span class='curline'><a href='../S/18.html#L400'>ps</a>                400 user/sh.c      parseblock(char **ps, char *es)</span>
-<span class='curline'><a href='../S/18.html#L404'>ps</a>                404 user/sh.c        if(!peek(ps, es, "("))</span>
-<span class='curline'><a href='../S/18.html#L406'>ps</a>                406 user/sh.c        gettoken(ps, es, 0, 0);</span>
-<span class='curline'><a href='../S/18.html#L407'>ps</a>                407 user/sh.c        cmd = parseline(ps, es);</span>
-<span class='curline'><a href='../S/18.html#L408'>ps</a>                408 user/sh.c        if(!peek(ps, es, ")"))</span>
-<span class='curline'><a href='../S/18.html#L410'>ps</a>                410 user/sh.c        gettoken(ps, es, 0, 0);</span>
-<span class='curline'><a href='../S/18.html#L411'>ps</a>                411 user/sh.c        cmd = parseredirs(cmd, ps, es);</span>
-<span class='curline'><a href='../S/18.html#L416'>ps</a>                416 user/sh.c      parseexec(char **ps, char *es)</span>
-<span class='curline'><a href='../S/18.html#L423'>ps</a>                423 user/sh.c        if(peek(ps, es, "("))</span>
-<span class='curline'><a href='../S/18.html#L424'>ps</a>                424 user/sh.c          return parseblock(ps, es);</span>
-<span class='curline'><a href='../S/18.html#L430'>ps</a>                430 user/sh.c        ret = parseredirs(ret, ps, es);</span>
-<span class='curline'><a href='../S/18.html#L431'>ps</a>                431 user/sh.c        while(!peek(ps, es, "|)&amp;;")){</span>
-<span class='curline'><a href='../S/18.html#L432'>ps</a>                432 user/sh.c          if((tok=gettoken(ps, es, &amp;q, &amp;eq)) == 0)</span>
-<span class='curline'><a href='../S/18.html#L441'>ps</a>                441 user/sh.c          ret = parseredirs(ret, ps, es);</span>
+<span class='curline'><a href='../S/64.html#L339'>pte</a>               339 kernel/riscv.h #define PTE2PA(pte) (((pte) &gt;&gt; 10) &lt;&lt; 12)</span>
+<span class='curline'><a href='../S/64.html#L341'>pte</a>               341 kernel/riscv.h #define PTE_FLAGS(pte) ((pte) &amp; 0x3FF)</span>
+<span class='curline'><a href='../S/38.html#L80'>pte</a>                80 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
+<span class='curline'><a href='../S/38.html#L81'>pte</a>                81 kernel/vm.c        if(*pte &amp; PTE_V) {</span>
+<span class='curline'><a href='../S/38.html#L82'>pte</a>                82 kernel/vm.c          pagetable = (pagetable_t)PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/38.html#L87'>pte</a>                87 kernel/vm.c          *pte = PA2PTE(pagetable) | PTE_V;</span>
+<span class='curline'><a href='../S/38.html#L99'>pte</a>                99 kernel/vm.c      pte_t *pte;</span>
+<span class='curline'><a href='../S/38.html#L105'>pte</a>               105 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
+<span class='curline'><a href='../S/38.html#L106'>pte</a>               106 kernel/vm.c      if(pte == 0)</span>
+<span class='curline'><a href='../S/38.html#L108'>pte</a>               108 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/38.html#L110'>pte</a>               110 kernel/vm.c      if((*pte &amp; PTE_U) == 0)</span>
+<span class='curline'><a href='../S/38.html#L112'>pte</a>               112 kernel/vm.c      pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/38.html#L134'>pte</a>               134 kernel/vm.c      pte_t *pte;</span>
+<span class='curline'><a href='../S/38.html#L137'>pte</a>               137 kernel/vm.c      pte = walk(kernel_pagetable, va, 0);</span>
+<span class='curline'><a href='../S/38.html#L138'>pte</a>               138 kernel/vm.c      if(pte == 0)</span>
+<span class='curline'><a href='../S/38.html#L140'>pte</a>               140 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/38.html#L142'>pte</a>               142 kernel/vm.c      pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/38.html#L154'>pte</a>               154 kernel/vm.c      pte_t *pte;</span>
+<span class='curline'><a href='../S/38.html#L159'>pte</a>               159 kernel/vm.c        if((pte = walk(pagetable, a, 1)) == 0)</span>
+<span class='curline'><a href='../S/38.html#L161'>pte</a>               161 kernel/vm.c        if(*pte &amp; PTE_V)</span>
+<span class='curline'><a href='../S/38.html#L163'>pte</a>               163 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
+<span class='curline'><a href='../S/38.html#L179'>pte</a>               179 kernel/vm.c      pte_t *pte;</span>
+<span class='curline'><a href='../S/38.html#L185'>pte</a>               185 kernel/vm.c        if((pte = walk(pagetable, a, 0)) == 0)</span>
+<span class='curline'><a href='../S/38.html#L187'>pte</a>               187 kernel/vm.c        if((*pte &amp; PTE_V) == 0){</span>
+<span class='curline'><a href='../S/38.html#L188'>pte</a>               188 kernel/vm.c          printf("va=%p pte=%p\n", a, *pte);</span>
+<span class='curline'><a href='../S/38.html#L191'>pte</a>               191 kernel/vm.c        if(PTE_FLAGS(*pte) == PTE_V)</span>
+<span class='curline'><a href='../S/38.html#L194'>pte</a>               194 kernel/vm.c          pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/38.html#L197'>pte</a>               197 kernel/vm.c        *pte = 0;</span>
+<span class='curline'><a href='../S/38.html#L286'>pte</a>               286 kernel/vm.c        pte_t pte = pagetable[i];</span>
+<span class='curline'><a href='../S/38.html#L287'>pte</a>               287 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
+<span class='curline'><a href='../S/38.html#L289'>pte</a>               289 kernel/vm.c          uint64 child = PTE2PA(pte);</span>
+<span class='curline'><a href='../S/38.html#L292'>pte</a>               292 kernel/vm.c        } else if(pte &amp; PTE_V){</span>
+<span class='curline'><a href='../S/38.html#L317'>pte</a>               317 kernel/vm.c      pte_t *pte;</span>
+<span class='curline'><a href='../S/38.html#L323'>pte</a>               323 kernel/vm.c        if((pte = walk(old, i, 0)) == 0)</span>
+<span class='curline'><a href='../S/38.html#L325'>pte</a>               325 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/38.html#L327'>pte</a>               327 kernel/vm.c        pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/38.html#L328'>pte</a>               328 kernel/vm.c        flags = PTE_FLAGS(*pte);</span>
+<span class='curline'><a href='../S/38.html#L349'>pte</a>               349 kernel/vm.c      pte_t *pte;</span>
+<span class='curline'><a href='../S/38.html#L351'>pte</a>               351 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
+<span class='curline'><a href='../S/38.html#L352'>pte</a>               352 kernel/vm.c      if(pte == 0)</span>
+<span class='curline'><a href='../S/38.html#L354'>pte</a>               354 kernel/vm.c      *pte &amp;= ~PTE_U;</span>
 </pre>
 </body>
 </html>

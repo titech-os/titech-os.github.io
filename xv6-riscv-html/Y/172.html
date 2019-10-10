@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>lock</title>
+<title>locked</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,140 +9,17 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/63.html#L27'>lock</a>               27 kernel/bio.c     struct spinlock lock;</span>
-<span class='curline'><a href='../S/63.html#L40'>lock</a>               40 kernel/bio.c     initlock(&amp;bcache.lock, "bcache");</span>
-<span class='curline'><a href='../S/63.html#L48'>lock</a>               48 kernel/bio.c       initsleeplock(&amp;b-&gt;lock, "buffer");</span>
-<span class='curline'><a href='../S/63.html#L62'>lock</a>               62 kernel/bio.c     acquire(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L68'>lock</a>               68 kernel/bio.c         release(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L69'>lock</a>               69 kernel/bio.c         acquiresleep(&amp;b-&gt;lock);</span>
-<span class='curline'><a href='../S/63.html#L81'>lock</a>               81 kernel/bio.c         release(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L82'>lock</a>               82 kernel/bio.c         acquiresleep(&amp;b-&gt;lock);</span>
-<span class='curline'><a href='../S/63.html#L107'>lock</a>              107 kernel/bio.c     if(!holdingsleep(&amp;b-&gt;lock))</span>
-<span class='curline'><a href='../S/63.html#L117'>lock</a>              117 kernel/bio.c     if(!holdingsleep(&amp;b-&gt;lock))</span>
-<span class='curline'><a href='../S/63.html#L120'>lock</a>              120 kernel/bio.c     releasesleep(&amp;b-&gt;lock);</span>
-<span class='curline'><a href='../S/63.html#L122'>lock</a>              122 kernel/bio.c     acquire(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L134'>lock</a>              134 kernel/bio.c     release(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L139'>lock</a>              139 kernel/bio.c     acquire(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L141'>lock</a>              141 kernel/bio.c     release(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L146'>lock</a>              146 kernel/bio.c     acquire(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/63.html#L148'>lock</a>              148 kernel/bio.c     release(&amp;bcache.lock);</span>
-<span class='curline'><a href='../S/49.html#L6'>lock</a>                6 kernel/buf.h     struct sleeplock lock;</span>
-<span class='curline'><a href='../S/59.html#L50'>lock</a>               50 kernel/console.c   struct spinlock lock;</span>
-<span class='curline'><a href='../S/59.html#L68'>lock</a>               68 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L75'>lock</a>               75 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L94'>lock</a>               94 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L100'>lock</a>              100 kernel/console.c         release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L103'>lock</a>              103 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L131'>lock</a>              131 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L145'>lock</a>              145 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L185'>lock</a>              185 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L191'>lock</a>              191 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
-<span class='curline'><a href='../S/69.html#L18'>lock</a>               18 kernel/file.c    struct spinlock lock;</span>
-<span class='curline'><a href='../S/69.html#L25'>lock</a>               25 kernel/file.c    initlock(&amp;ftable.lock, "ftable");</span>
-<span class='curline'><a href='../S/69.html#L34'>lock</a>               34 kernel/file.c    acquire(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/69.html#L38'>lock</a>               38 kernel/file.c        release(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/69.html#L42'>lock</a>               42 kernel/file.c    release(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/69.html#L50'>lock</a>               50 kernel/file.c    acquire(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/69.html#L54'>lock</a>               54 kernel/file.c    release(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/69.html#L64'>lock</a>               64 kernel/file.c    acquire(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/69.html#L68'>lock</a>               68 kernel/file.c      release(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/69.html#L74'>lock</a>               74 kernel/file.c    release(&amp;ftable.lock);</span>
-<span class='curline'><a href='../S/43.html#L21'>lock</a>               21 kernel/file.h    struct sleeplock lock; // protects everything below here</span>
-<span class='curline'><a href='../S/50.html#L176'>lock</a>              176 kernel/fs.c      struct spinlock lock;</span>
-<span class='curline'><a href='../S/50.html#L185'>lock</a>              185 kernel/fs.c      initlock(&amp;icache.lock, "icache");</span>
-<span class='curline'><a href='../S/50.html#L187'>lock</a>              187 kernel/fs.c        initsleeplock(&amp;icache.inode[i].lock, "inode");</span>
-<span class='curline'><a href='../S/50.html#L248'>lock</a>              248 kernel/fs.c      acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L255'>lock</a>              255 kernel/fs.c          release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L271'>lock</a>              271 kernel/fs.c      release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L281'>lock</a>              281 kernel/fs.c      acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L283'>lock</a>              283 kernel/fs.c      release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L298'>lock</a>              298 kernel/fs.c      acquiresleep(&amp;ip-&gt;lock);</span>
-<span class='curline'><a href='../S/50.html#L320'>lock</a>              320 kernel/fs.c      if(ip == 0 || !holdingsleep(&amp;ip-&gt;lock) || ip-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/50.html#L323'>lock</a>              323 kernel/fs.c      releasesleep(&amp;ip-&gt;lock);</span>
-<span class='curline'><a href='../S/50.html#L336'>lock</a>              336 kernel/fs.c      acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L343'>lock</a>              343 kernel/fs.c        acquiresleep(&amp;ip-&gt;lock);</span>
-<span class='curline'><a href='../S/50.html#L345'>lock</a>              345 kernel/fs.c        release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L352'>lock</a>              352 kernel/fs.c        releasesleep(&amp;ip-&gt;lock);</span>
-<span class='curline'><a href='../S/50.html#L354'>lock</a>              354 kernel/fs.c        acquire(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/50.html#L358'>lock</a>              358 kernel/fs.c      release(&amp;icache.lock);</span>
-<span class='curline'><a href='../S/71.html#L22'>lock</a>               22 kernel/kalloc.c   struct spinlock lock;</span>
-<span class='curline'><a href='../S/71.html#L29'>lock</a>               29 kernel/kalloc.c   initlock(&amp;kmem.lock, "kmem");</span>
-<span class='curline'><a href='../S/71.html#L59'>lock</a>               59 kernel/kalloc.c   acquire(&amp;kmem.lock);</span>
-<span class='curline'><a href='../S/71.html#L62'>lock</a>               62 kernel/kalloc.c   release(&amp;kmem.lock);</span>
-<span class='curline'><a href='../S/71.html#L73'>lock</a>               73 kernel/kalloc.c   acquire(&amp;kmem.lock);</span>
-<span class='curline'><a href='../S/71.html#L77'>lock</a>               77 kernel/kalloc.c   release(&amp;kmem.lock);</span>
-<span class='curline'><a href='../S/30.html#L41'>lock</a>               41 kernel/log.c     struct spinlock lock;</span>
-<span class='curline'><a href='../S/30.html#L60'>lock</a>               60 kernel/log.c     initlock(&amp;log.lock, "log");</span>
-<span class='curline'><a href='../S/30.html#L128'>lock</a>              128 kernel/log.c     acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L131'>lock</a>              131 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L134'>lock</a>              134 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L137'>lock</a>              137 kernel/log.c         release(&amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L150'>lock</a>              150 kernel/log.c     acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L163'>lock</a>              163 kernel/log.c     release(&amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L169'>lock</a>              169 kernel/log.c       acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L172'>lock</a>              172 kernel/log.c       release(&amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L223'>lock</a>              223 kernel/log.c     acquire(&amp;log.lock);</span>
-<span class='curline'><a href='../S/30.html#L233'>lock</a>              233 kernel/log.c     release(&amp;log.lock);</span>
-<span class='curline'><a href='../S/36.html#L14'>lock</a>               14 kernel/pipe.c    struct spinlock lock;</span>
-<span class='curline'><a href='../S/36.html#L37'>lock</a>               37 kernel/pipe.c    initlock(&amp;pi-&gt;lock, "pipe");</span>
-<span class='curline'><a href='../S/36.html#L61'>lock</a>               61 kernel/pipe.c    acquire(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L70'>lock</a>               70 kernel/pipe.c      release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L73'>lock</a>               73 kernel/pipe.c      release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L83'>lock</a>               83 kernel/pipe.c    acquire(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L87'>lock</a>               87 kernel/pipe.c          release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L91'>lock</a>               91 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L98'>lock</a>               98 kernel/pipe.c    release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L109'>lock</a>              109 kernel/pipe.c    acquire(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L112'>lock</a>              112 kernel/pipe.c        release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/36.html#L115'>lock</a>              115 kernel/pipe.c      sleep(&amp;pi-&gt;nread, &amp;pi-&gt;lock); //DOC: piperead-sleep</span>
-<span class='curline'><a href='../S/36.html#L125'>lock</a>              125 kernel/pipe.c    release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/31.html#L22'>lock</a>               22 kernel/printf.c   struct spinlock lock;</span>
-<span class='curline'><a href='../S/31.html#L72'>lock</a>               72 kernel/printf.c     acquire(&amp;pr.lock);</span>
-<span class='curline'><a href='../S/31.html#L114'>lock</a>              114 kernel/printf.c     release(&amp;pr.lock);</span>
-<span class='curline'><a href='../S/31.html#L132'>lock</a>              132 kernel/printf.c   initlock(&amp;pr.lock, "pr");</span>
-<span class='curline'><a href='../S/65.html#L30'>lock</a>               30 kernel/proc.c        initlock(&amp;p-&gt;lock, "proc");</span>
-<span class='curline'><a href='../S/65.html#L96'>lock</a>               96 kernel/proc.c      acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L100'>lock</a>              100 kernel/proc.c        release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L110'>lock</a>              110 kernel/proc.c      release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L218'>lock</a>              218 kernel/proc.c    release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L258'>lock</a>              258 kernel/proc.c      release(&amp;np-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L283'>lock</a>              283 kernel/proc.c    release(&amp;np-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L303'>lock</a>              303 kernel/proc.c        acquire(&amp;pp-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L309'>lock</a>              309 kernel/proc.c        release(&amp;pp-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L344'>lock</a>              344 kernel/proc.c    acquire(&amp;initproc-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L346'>lock</a>              346 kernel/proc.c    release(&amp;initproc-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L354'>lock</a>              354 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L356'>lock</a>              356 kernel/proc.c    release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L360'>lock</a>              360 kernel/proc.c    acquire(&amp;original_parent-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L362'>lock</a>              362 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L373'>lock</a>              373 kernel/proc.c    release(&amp;original_parent-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L391'>lock</a>              391 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L403'>lock</a>              403 kernel/proc.c          acquire(&amp;np-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L410'>lock</a>              410 kernel/proc.c              release(&amp;np-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L411'>lock</a>              411 kernel/proc.c              release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L415'>lock</a>              415 kernel/proc.c            release(&amp;np-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L416'>lock</a>              416 kernel/proc.c            release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L419'>lock</a>              419 kernel/proc.c          release(&amp;np-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L425'>lock</a>              425 kernel/proc.c        release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L430'>lock</a>              430 kernel/proc.c      sleep(p, &amp;p-&gt;lock);  //DOC: wait-sleep</span>
-<span class='curline'><a href='../S/65.html#L453'>lock</a>              453 kernel/proc.c        acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L466'>lock</a>              466 kernel/proc.c        release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L484'>lock</a>              484 kernel/proc.c    if(!holding(&amp;p-&gt;lock))</span>
-<span class='curline'><a href='../S/65.html#L503'>lock</a>              503 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L506'>lock</a>              506 kernel/proc.c    release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L517'>lock</a>              517 kernel/proc.c    release(&amp;myproc()-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L543'>lock</a>              543 kernel/proc.c    if(lk != &amp;p-&gt;lock){  //DOC: sleeplock0</span>
-<span class='curline'><a href='../S/65.html#L544'>lock</a>              544 kernel/proc.c      acquire(&amp;p-&gt;lock);  //DOC: sleeplock1</span>
-<span class='curline'><a href='../S/65.html#L558'>lock</a>              558 kernel/proc.c    if(lk != &amp;p-&gt;lock){</span>
-<span class='curline'><a href='../S/65.html#L559'>lock</a>              559 kernel/proc.c      release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L572'>lock</a>              572 kernel/proc.c      acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L576'>lock</a>              576 kernel/proc.c      release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L585'>lock</a>              585 kernel/proc.c    if(!holding(&amp;p-&gt;lock))</span>
-<span class='curline'><a href='../S/65.html#L601'>lock</a>              601 kernel/proc.c      acquire(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L608'>lock</a>              608 kernel/proc.c        release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/65.html#L611'>lock</a>              611 kernel/proc.c      release(&amp;p-&gt;lock);</span>
-<span class='curline'><a href='../S/37.html#L87'>lock</a>               87 kernel/proc.h    struct spinlock lock;</span>
-<span class='curline'><a href='../S/34.html#L25'>lock</a>               25 kernel/ramdisk.c   if(!holdingsleep(&amp;b-&gt;lock))</span>
+<span class='curline'><a href='../S/44.html#L17'>locked</a>             17 kernel/sleeplock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/44.html#L25'>locked</a>             25 kernel/sleeplock.c   while (lk-&gt;locked) {</span>
+<span class='curline'><a href='../S/44.html#L28'>locked</a>             28 kernel/sleeplock.c   lk-&gt;locked = 1;</span>
+<span class='curline'><a href='../S/44.html#L37'>locked</a>             37 kernel/sleeplock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/44.html#L49'>locked</a>             49 kernel/sleeplock.c   r = lk-&gt;locked &amp;&amp; (lk-&gt;pid == myproc()-&gt;pid);</span>
+<span class='curline'><a href='../S/66.html#L3'>locked</a>              3 kernel/sleeplock.h   uint locked;       // Is the lock held?</span>
+<span class='curline'><a href='../S/59.html#L15'>locked</a>             15 kernel/spinlock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/59.html#L32'>locked</a>             32 kernel/spinlock.c   while(__sync_lock_test_and_set(&amp;lk-&gt;locked, 1) != 0)</span>
+<span class='curline'><a href='../S/59.html#L66'>locked</a>             66 kernel/spinlock.c   __sync_lock_release(&amp;lk-&gt;locked);</span>
+<span class='curline'><a href='../S/59.html#L77'>locked</a>             77 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
+<span class='curline'><a href='../S/30.html#L3'>locked</a>              3 kernel/spinlock.h   uint locked;       // Is the lock held?</span>
 </pre>
 </body>
 </html>

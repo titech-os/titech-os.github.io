@@ -1,61 +1,91 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel/elf.h</title>
+<title>kernel/virtio.h</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/75.html'>kernel</a>/elf.h</h2>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/virtio.h</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'><a href='../J/6.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<h2 class='header'><a href='65.html#L18' title='Included from 18 in kernel/virtio_disk.c.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='comment'>// Format of an ELF executable file</em>
-<a id='L2' name='L2'></a>   2 
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#define</em> <a href='../S/38.html#L35' title='Referred from 35 in kernel/exec.c.'>ELF_MAGIC</a> 0x464C457FU  <em class='comment'>// "\x7FELF" in little endian</em>
-<a id='L4' name='L4'></a>   4 
-<a id='L5' name='L5'></a>   5 <em class='comment'>// File header</em>
-<a id='L6' name='L6'></a>   6 <strong class='reserved'>struct</strong> <a href='../S/38.html#L18' title='Referred from 18 in kernel/exec.c.'>elfhdr</a> <em class='brace'>{</em>
-<a id='L7' name='L7'></a>   7   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/181.html' title='Multiple used in 5 places.'>magic</a>;  <em class='comment'>// must equal ELF_MAGIC</em>
-<a id='L8' name='L8'></a>   8   <a href='../S/39.html#L3' title='Defined at 3 in kernel/types.h.'>uchar</a> <a href='../Y/84.html' title='Multiple used in 6 places.'>elf</a>[12];
-<a id='L9' name='L9'></a>   9   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> <a href='../Y/366.html' title='Multiple used in 64 places.'>type</a>;
-<a id='L10' name='L10'></a>  10   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> machine;
-<a id='L11' name='L11'></a>  11   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> version;
-<a id='L12' name='L12'></a>  12   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/87.html' title='Multiple used in 2 places.'>entry</a>;
-<a id='L13' name='L13'></a>  13   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/256.html' title='Multiple used in 2 places.'>phoff</a>;
-<a id='L14' name='L14'></a>  14   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> shoff;
-<a id='L15' name='L15'></a>  15   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/108.html' title='Multiple used in 17 places.'>flags</a>;
-<a id='L16' name='L16'></a>  16   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> ehsize;
-<a id='L17' name='L17'></a>  17   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> phentsize;
-<a id='L18' name='L18'></a>  18   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> <a href='../Y/255.html' title='Multiple used in 2 places.'>phnum</a>;
-<a id='L19' name='L19'></a>  19   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> shentsize;
-<a id='L20' name='L20'></a>  20   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> shnum;
-<a id='L21' name='L21'></a>  21   <a href='../S/39.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> shstrndx;
-<a id='L22' name='L22'></a>  22 <em class='brace'>}</em>;
-<a id='L23' name='L23'></a>  23 
-<a id='L24' name='L24'></a>  24 <em class='comment'>// Program section header</em>
-<a id='L25' name='L25'></a>  25 <strong class='reserved'>struct</strong> <a href='../S/38.html#L20' title='Referred from 20 in kernel/exec.c.'>proghdr</a> <em class='brace'>{</em>
-<a id='L26' name='L26'></a>  26   <a href='../S/39.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/366.html' title='Multiple used in 64 places.'>type</a>;
-<a id='L27' name='L27'></a>  27   <a href='../S/39.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/108.html' title='Multiple used in 17 places.'>flags</a>;
-<a id='L28' name='L28'></a>  28   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/222.html' title='Multiple used in 55 places.'>off</a>;
-<a id='L29' name='L29'></a>  29   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/387.html' title='Multiple used in 5 places.'>vaddr</a>;
-<a id='L30' name='L30'></a>  30   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> paddr;
-<a id='L31' name='L31'></a>  31   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/106.html' title='Multiple used in 3 places.'>filesz</a>;
-<a id='L32' name='L32'></a>  32   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/185.html' title='Multiple used in 4 places.'>memsz</a>;
-<a id='L33' name='L33'></a>  33   <a href='../S/39.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> align;
-<a id='L34' name='L34'></a>  34 <em class='brace'>}</em>;
-<a id='L35' name='L35'></a>  35 
-<a id='L36' name='L36'></a>  36 <em class='comment'>// Values for Proghdr type</em>
-<a id='L37' name='L37'></a>  37 <em class='sharp'>#define</em> <a href='../S/38.html#L46' title='Referred from 46 in kernel/exec.c.'>ELF_PROG_LOAD</a>           1
-<a id='L38' name='L38'></a>  38 
-<a id='L39' name='L39'></a>  39 <em class='comment'>// Flag bits for Proghdr flags</em>
-<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> ELF_PROG_FLAG_EXEC      1
-<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> ELF_PROG_FLAG_WRITE     2
-<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> ELF_PROG_FLAG_READ      4
+<a id='L1' name='L1'></a>   1 <em class='comment'>//</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>// virtio device definitions.</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>// for both the mmio interface, and virtio descriptors.</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>// only tested with qemu.</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>// this is the "legacy" virtio interface.</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>//</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>// the virtio spec:</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>// https://docs.oasis-open.org/virtio/virtio/v1.1/virtio-v1.1.pdf</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>//</em>
+<a id='L10' name='L10'></a>  10 
+<a id='L11' name='L11'></a>  11 <em class='comment'>// virtio mmio control registers, mapped starting at 0x10001000.</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>// from qemu virtio_mmio.h</em>
+<a id='L13' name='L13'></a>  13 <em class='sharp'>#define</em> <a href='../S/65.html#L56' title='Referred from 56 in kernel/virtio_disk.c.'>VIRTIO_MMIO_MAGIC_VALUE</a>         0x000 <em class='comment'>// 0x74726976</em>
+<a id='L14' name='L14'></a>  14 <em class='sharp'>#define</em> <a href='../S/65.html#L57' title='Referred from 57 in kernel/virtio_disk.c.'>VIRTIO_MMIO_VERSION</a>             0x004 <em class='comment'>// version; 1 is legacy</em>
+<a id='L15' name='L15'></a>  15 <em class='sharp'>#define</em> <a href='../S/65.html#L58' title='Referred from 58 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DEVICE_ID</a>           0x008 <em class='comment'>// device type; 1 is net, 2 is disk</em>
+<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../S/65.html#L59' title='Referred from 59 in kernel/virtio_disk.c.'>VIRTIO_MMIO_VENDOR_ID</a>           0x00c <em class='comment'>// 0x554d4551</em>
+<a id='L17' name='L17'></a>  17 <em class='sharp'>#define</em> <a href='../S/65.html#L70' title='Referred from 70 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DEVICE_FEATURES</a>     0x010
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#define</em> <a href='../S/65.html#L78' title='Referred from 78 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DRIVER_FEATURES</a>     0x020
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../S/65.html#L88' title='Referred from 88 in kernel/virtio_disk.c.'>VIRTIO_MMIO_GUEST_PAGE_SIZE</a>     0x028 <em class='comment'>// page size for PFN, write-only</em>
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#define</em> <a href='../S/65.html#L91' title='Referred from 91 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_SEL</a>           0x030 <em class='comment'>// select queue, write-only</em>
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#define</em> <a href='../S/65.html#L92' title='Referred from 92 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_NUM_MAX</a>       0x034 <em class='comment'>// max size of current queue, read-only</em>
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/65.html#L97' title='Referred from 97 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_NUM</a>           0x038 <em class='comment'>// size of current queue, write-only</em>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> VIRTIO_MMIO_QUEUE_ALIGN         0x03c <em class='comment'>// used ring alignment, write-only</em>
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#define</em> <a href='../S/65.html#L99' title='Referred from 99 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_PFN</a>           0x040 <em class='comment'>// physical page number for queue, read/write</em>
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> VIRTIO_MMIO_QUEUE_READY         0x044 <em class='comment'>// ready bit</em>
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#define</em> <a href='../S/65.html#L238' title='Referred from 238 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_NOTIFY</a>        0x050 <em class='comment'>// write-only</em>
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> VIRTIO_MMIO_INTERRUPT_STATUS    0x060 <em class='comment'>// read-only</em>
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> VIRTIO_MMIO_INTERRUPT_ACK       0x064 <em class='comment'>// write-only</em>
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/161.html' title='Multiple referred from 4 places.'>VIRTIO_MMIO_STATUS</a>              0x070 <em class='comment'>// read/write</em>
+<a id='L30' name='L30'></a>  30 
+<a id='L31' name='L31'></a>  31 <em class='comment'>// status register bits, from qemu virtio_config.h</em>
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#define</em> <a href='../S/65.html#L63' title='Referred from 63 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_ACKNOWLEDGE</a>     1
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#define</em> <a href='../S/65.html#L66' title='Referred from 66 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_DRIVER</a>          2
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#define</em> <a href='../S/65.html#L85' title='Referred from 85 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_DRIVER_OK</a>       4
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#define</em> <a href='../S/65.html#L81' title='Referred from 81 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_FEATURES_OK</a>     8
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <em class='comment'>// device feature bits</em>
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#define</em> <a href='../S/65.html#L71' title='Referred from 71 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_RO</a>              5  <em class='comment'>/* Disk is read-only */</em>
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#define</em> <a href='../S/65.html#L72' title='Referred from 72 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_SCSI</a>            7  <em class='comment'>/* Supports scsi command passthru */</em>
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> <a href='../S/65.html#L73' title='Referred from 73 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_CONFIG_WCE</a>     11  <em class='comment'>/* Writeback mode available in config */</em>
+<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> <a href='../S/65.html#L74' title='Referred from 74 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_MQ</a>             12  <em class='comment'>/* support more than one vq */</em>
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../S/65.html#L75' title='Referred from 75 in kernel/virtio_disk.c.'>VIRTIO_F_ANY_LAYOUT</a>         27
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../S/65.html#L77' title='Referred from 77 in kernel/virtio_disk.c.'>VIRTIO_RING_F_INDIRECT_DESC</a> 28
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#define</em> <a href='../S/65.html#L76' title='Referred from 76 in kernel/virtio_disk.c.'>VIRTIO_RING_F_EVENT_IDX</a>     29
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46 <em class='comment'>// this many virtio descriptors.</em>
+<a id='L47' name='L47'></a>  47 <em class='comment'>// must be a power of two.</em>
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/60.html' title='Multiple referred from 12 places.'>NUM</a> 8
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50 <strong class='reserved'>struct</strong> <a href='../R/168.html' title='Multiple referred from 3 places.'>VRingDesc</a> <em class='brace'>{</em>
+<a id='L51' name='L51'></a>  51   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/18.html' title='Multiple used in 47 places.'>addr</a>;
+<a id='L52' name='L52'></a>  52   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/166.html' title='Multiple used in 28 places.'>len</a>;
+<a id='L53' name='L53'></a>  53   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/107.html' title='Multiple used in 17 places.'>flags</a>;
+<a id='L54' name='L54'></a>  54   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/204.html' title='Multiple used in 22 places.'>next</a>;
+<a id='L55' name='L55'></a>  55 <em class='brace'>}</em>;
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../R/166.html' title='Multiple referred from 3 places.'>VRING_DESC_F_NEXT</a>  1 <em class='comment'>// chained with another descriptor</em>
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../R/167.html' title='Multiple referred from 2 places.'>VRING_DESC_F_WRITE</a> 2 <em class='comment'>// device writes (vs read)</em>
+<a id='L58' name='L58'></a>  58 
+<a id='L59' name='L59'></a>  59 <strong class='reserved'>struct</strong> <a href='../S/54.html#L71' title='Referred from 71 in kernel/virtio.h.'>VRingUsedElem</a> <em class='brace'>{</em>
+<a id='L60' name='L60'></a>  60   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/135.html' title='Multiple used in 17 places.'>id</a>;   <em class='comment'>// index of start of completed descriptor chain</em>
+<a id='L61' name='L61'></a>  61   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/166.html' title='Multiple used in 28 places.'>len</a>;
+<a id='L62' name='L62'></a>  62 <em class='brace'>}</em>;
+<a id='L63' name='L63'></a>  63 
+<a id='L64' name='L64'></a>  64 <em class='comment'>// for disk ops</em>
+<a id='L65' name='L65'></a>  65 <em class='sharp'>#define</em> <a href='../S/65.html#L200' title='Referred from 200 in kernel/virtio_disk.c.'>VIRTIO_BLK_T_IN</a>  0 <em class='comment'>// read the disk</em>
+<a id='L66' name='L66'></a>  66 <em class='sharp'>#define</em> <a href='../S/65.html#L198' title='Referred from 198 in kernel/virtio_disk.c.'>VIRTIO_BLK_T_OUT</a> 1 <em class='comment'>// write the disk</em>
+<a id='L67' name='L67'></a>  67 
+<a id='L68' name='L68'></a>  68 <strong class='reserved'>struct</strong> <a href='../R/137.html' title='Multiple referred from 2 places.'>UsedArea</a> <em class='brace'>{</em>
+<a id='L69' name='L69'></a>  69   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/107.html' title='Multiple used in 17 places.'>flags</a>;
+<a id='L70' name='L70'></a>  70   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/135.html' title='Multiple used in 17 places.'>id</a>;
+<a id='L71' name='L71'></a>  71   <strong class='reserved'>struct</strong> <a href='../S/54.html#L59' title='Defined at 59 in kernel/virtio.h.'>VRingUsedElem</a> <a href='../Y/82.html' title='Multiple used in 2 places.'>elems</a>[<a href='../S/54.html#L48' title='Defined at 48 in kernel/virtio.h.'>NUM</a>];
+<a id='L72' name='L72'></a>  72 <em class='brace'>}</em>;
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>f</title>
+<title>f0</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,88 +9,15 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/69.html#L32'>f</a>                  32 kernel/file.c    struct file *f;</span>
-<span class='curline'><a href='../S/69.html#L35'>f</a>                  35 kernel/file.c    for(f = ftable.file; f &lt; ftable.file + NFILE; f++){</span>
-<span class='curline'><a href='../S/69.html#L36'>f</a>                  36 kernel/file.c      if(f-&gt;ref == 0){</span>
-<span class='curline'><a href='../S/69.html#L37'>f</a>                  37 kernel/file.c        f-&gt;ref = 1;</span>
-<span class='curline'><a href='../S/69.html#L39'>f</a>                  39 kernel/file.c        return f;</span>
-<span class='curline'><a href='../S/69.html#L48'>f</a>                  48 kernel/file.c  filedup(struct file *f)</span>
-<span class='curline'><a href='../S/69.html#L51'>f</a>                  51 kernel/file.c    if(f-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/69.html#L53'>f</a>                  53 kernel/file.c    f-&gt;ref++;</span>
-<span class='curline'><a href='../S/69.html#L55'>f</a>                  55 kernel/file.c    return f;</span>
-<span class='curline'><a href='../S/69.html#L60'>f</a>                  60 kernel/file.c  fileclose(struct file *f)</span>
-<span class='curline'><a href='../S/69.html#L65'>f</a>                  65 kernel/file.c    if(f-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/69.html#L67'>f</a>                  67 kernel/file.c    if(--f-&gt;ref &gt; 0){</span>
-<span class='curline'><a href='../S/69.html#L71'>f</a>                  71 kernel/file.c    ff = *f;</span>
-<span class='curline'><a href='../S/69.html#L72'>f</a>                  72 kernel/file.c    f-&gt;ref = 0;</span>
-<span class='curline'><a href='../S/69.html#L73'>f</a>                  73 kernel/file.c    f-&gt;type = FD_NONE;</span>
-<span class='curline'><a href='../S/69.html#L88'>f</a>                  88 kernel/file.c  filestat(struct file *f, uint64 addr)</span>
-<span class='curline'><a href='../S/69.html#L93'>f</a>                  93 kernel/file.c    if(f-&gt;type == FD_INODE || f-&gt;type == FD_DEVICE){</span>
-<span class='curline'><a href='../S/69.html#L94'>f</a>                  94 kernel/file.c      ilock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/69.html#L95'>f</a>                  95 kernel/file.c      stati(f-&gt;ip, &amp;st);</span>
-<span class='curline'><a href='../S/69.html#L96'>f</a>                  96 kernel/file.c      iunlock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/69.html#L107'>f</a>                 107 kernel/file.c  fileread(struct file *f, uint64 addr, int n)</span>
-<span class='curline'><a href='../S/69.html#L111'>f</a>                 111 kernel/file.c    if(f-&gt;readable == 0)</span>
-<span class='curline'><a href='../S/69.html#L114'>f</a>                 114 kernel/file.c    if(f-&gt;type == FD_PIPE){</span>
-<span class='curline'><a href='../S/69.html#L115'>f</a>                 115 kernel/file.c      r = piperead(f-&gt;pipe, addr, n);</span>
-<span class='curline'><a href='../S/69.html#L116'>f</a>                 116 kernel/file.c    } else if(f-&gt;type == FD_DEVICE){</span>
-<span class='curline'><a href='../S/69.html#L117'>f</a>                 117 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].read)</span>
-<span class='curline'><a href='../S/69.html#L119'>f</a>                 119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
-<span class='curline'><a href='../S/69.html#L120'>f</a>                 120 kernel/file.c    } else if(f-&gt;type == FD_INODE){</span>
-<span class='curline'><a href='../S/69.html#L121'>f</a>                 121 kernel/file.c      ilock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/69.html#L122'>f</a>                 122 kernel/file.c      if((r = readi(f-&gt;ip, 1, addr, f-&gt;off, n)) &gt; 0)</span>
-<span class='curline'><a href='../S/69.html#L123'>f</a>                 123 kernel/file.c        f-&gt;off += r;</span>
-<span class='curline'><a href='../S/69.html#L124'>f</a>                 124 kernel/file.c      iunlock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/69.html#L135'>f</a>                 135 kernel/file.c  filewrite(struct file *f, uint64 addr, int n)</span>
-<span class='curline'><a href='../S/69.html#L139'>f</a>                 139 kernel/file.c    if(f-&gt;writable == 0)</span>
-<span class='curline'><a href='../S/69.html#L142'>f</a>                 142 kernel/file.c    if(f-&gt;type == FD_PIPE){</span>
-<span class='curline'><a href='../S/69.html#L143'>f</a>                 143 kernel/file.c      ret = pipewrite(f-&gt;pipe, addr, n);</span>
-<span class='curline'><a href='../S/69.html#L144'>f</a>                 144 kernel/file.c    } else if(f-&gt;type == FD_DEVICE){</span>
-<span class='curline'><a href='../S/69.html#L145'>f</a>                 145 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].write)</span>
-<span class='curline'><a href='../S/69.html#L147'>f</a>                 147 kernel/file.c      ret = devsw[f-&gt;major].write(1, addr, n);</span>
-<span class='curline'><a href='../S/69.html#L148'>f</a>                 148 kernel/file.c    } else if(f-&gt;type == FD_INODE){</span>
-<span class='curline'><a href='../S/69.html#L163'>f</a>                 163 kernel/file.c        ilock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/69.html#L164'>f</a>                 164 kernel/file.c        if ((r = writei(f-&gt;ip, 1, addr + i, f-&gt;off, n1)) &gt; 0)</span>
-<span class='curline'><a href='../S/69.html#L165'>f</a>                 165 kernel/file.c          f-&gt;off += r;</span>
-<span class='curline'><a href='../S/69.html#L166'>f</a>                 166 kernel/file.c        iunlock(f-&gt;ip);</span>
-<span class='curline'><a href='../S/65.html#L328'>f</a>                 328 kernel/proc.c        struct file *f = p-&gt;ofile[fd];</span>
-<span class='curline'><a href='../S/65.html#L329'>f</a>                 329 kernel/proc.c        fileclose(f);</span>
-<span class='curline'><a href='../S/45.html#L25'>f</a>                  25 kernel/sysfile.c   struct file *f;</span>
-<span class='curline'><a href='../S/45.html#L29'>f</a>                  29 kernel/sysfile.c   if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
-<span class='curline'><a href='../S/45.html#L34'>f</a>                  34 kernel/sysfile.c     *pf = f;</span>
-<span class='curline'><a href='../S/45.html#L41'>f</a>                  41 kernel/sysfile.c fdalloc(struct file *f)</span>
-<span class='curline'><a href='../S/45.html#L48'>f</a>                  48 kernel/sysfile.c       p-&gt;ofile[fd] = f;</span>
-<span class='curline'><a href='../S/45.html#L58'>f</a>                  58 kernel/sysfile.c   struct file *f;</span>
-<span class='curline'><a href='../S/45.html#L61'>f</a>                  61 kernel/sysfile.c   if(argfd(0, 0, &amp;f) &lt; 0)</span>
-<span class='curline'><a href='../S/45.html#L63'>f</a>                  63 kernel/sysfile.c   if((fd=fdalloc(f)) &lt; 0)</span>
-<span class='curline'><a href='../S/45.html#L65'>f</a>                  65 kernel/sysfile.c   filedup(f);</span>
-<span class='curline'><a href='../S/45.html#L72'>f</a>                  72 kernel/sysfile.c   struct file *f;</span>
-<span class='curline'><a href='../S/45.html#L76'>f</a>                  76 kernel/sysfile.c   if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argaddr(1, &amp;p) &lt; 0)</span>
-<span class='curline'><a href='../S/45.html#L78'>f</a>                  78 kernel/sysfile.c   return fileread(f, p, n);</span>
-<span class='curline'><a href='../S/45.html#L84'>f</a>                  84 kernel/sysfile.c   struct file *f;</span>
-<span class='curline'><a href='../S/45.html#L88'>f</a>                  88 kernel/sysfile.c   if(argfd(0, 0, &amp;f) &lt; 0 || argint(2, &amp;n) &lt; 0 || argaddr(1, &amp;p) &lt; 0)</span>
-<span class='curline'><a href='../S/45.html#L91'>f</a>                  91 kernel/sysfile.c   return filewrite(f, p, n);</span>
-<span class='curline'><a href='../S/45.html#L98'>f</a>                  98 kernel/sysfile.c   struct file *f;</span>
-<span class='curline'><a href='../S/45.html#L100'>f</a>                 100 kernel/sysfile.c   if(argfd(0, &amp;fd, &amp;f) &lt; 0)</span>
-<span class='curline'><a href='../S/45.html#L103'>f</a>                 103 kernel/sysfile.c   fileclose(f);</span>
-<span class='curline'><a href='../S/45.html#L110'>f</a>                 110 kernel/sysfile.c   struct file *f;</span>
-<span class='curline'><a href='../S/45.html#L113'>f</a>                 113 kernel/sysfile.c   if(argfd(0, 0, &amp;f) &lt; 0 || argaddr(1, &amp;st) &lt; 0)</span>
-<span class='curline'><a href='../S/45.html#L115'>f</a>                 115 kernel/sysfile.c   return filestat(f, st);</span>
-<span class='curline'><a href='../S/45.html#L291'>f</a>                 291 kernel/sysfile.c   struct file *f;</span>
-<span class='curline'><a href='../S/45.html#L325'>f</a>                 325 kernel/sysfile.c   if((f = filealloc()) == 0 || (fd = fdalloc(f)) &lt; 0){</span>
-<span class='curline'><a href='../S/45.html#L326'>f</a>                 326 kernel/sysfile.c     if(f)</span>
-<span class='curline'><a href='../S/45.html#L327'>f</a>                 327 kernel/sysfile.c       fileclose(f);</span>
-<span class='curline'><a href='../S/45.html#L334'>f</a>                 334 kernel/sysfile.c     f-&gt;type = FD_DEVICE;</span>
-<span class='curline'><a href='../S/45.html#L335'>f</a>                 335 kernel/sysfile.c     f-&gt;major = ip-&gt;major;</span>
-<span class='curline'><a href='../S/45.html#L337'>f</a>                 337 kernel/sysfile.c     f-&gt;type = FD_INODE;</span>
-<span class='curline'><a href='../S/45.html#L338'>f</a>                 338 kernel/sysfile.c     f-&gt;off = 0;</span>
-<span class='curline'><a href='../S/45.html#L340'>f</a>                 340 kernel/sysfile.c   f-&gt;ip = ip;</span>
-<span class='curline'><a href='../S/45.html#L341'>f</a>                 341 kernel/sysfile.c   f-&gt;readable = !(omode &amp; O_WRONLY);</span>
-<span class='curline'><a href='../S/45.html#L342'>f</a>                 342 kernel/sysfile.c   f-&gt;writable = (omode &amp; O_WRONLY) || (omode &amp; O_RDWR);</span>
-<span class='curline'><a href='../S/26.html#L2093'>f</a>                2093 user/usertests.c run(void f(char *), char *s) {</span>
-<span class='curline'><a href='../S/26.html#L2103'>f</a>                2103 user/usertests.c     f(s);</span>
-<span class='curline'><a href='../S/26.html#L2124'>f</a>                2124 user/usertests.c     void (*f)(char *);</span>
-<span class='curline'><a href='../S/26.html#L2188'>f</a>                2188 user/usertests.c       if(!run(t-&gt;f, t-&gt;s))</span>
+<span class='curline'><a href='../S/34.html#L23'>f0</a>                 23 kernel/pipe.c  pipealloc(struct file **f0, struct file **f1)</span>
+<span class='curline'><a href='../S/34.html#L28'>f0</a>                 28 kernel/pipe.c    *f0 = *f1 = 0;</span>
+<span class='curline'><a href='../S/34.html#L29'>f0</a>                 29 kernel/pipe.c    if((*f0 = filealloc()) == 0 || (*f1 = filealloc()) == 0)</span>
+<span class='curline'><a href='../S/34.html#L38'>f0</a>                 38 kernel/pipe.c    (*f0)-&gt;type = FD_PIPE;</span>
+<span class='curline'><a href='../S/34.html#L39'>f0</a>                 39 kernel/pipe.c    (*f0)-&gt;readable = 1;</span>
+<span class='curline'><a href='../S/34.html#L40'>f0</a>                 40 kernel/pipe.c    (*f0)-&gt;writable = 0;</span>
+<span class='curline'><a href='../S/34.html#L41'>f0</a>                 41 kernel/pipe.c    (*f0)-&gt;pipe = pi;</span>
+<span class='curline'><a href='../S/34.html#L51'>f0</a>                 51 kernel/pipe.c    if(*f0)</span>
+<span class='curline'><a href='../S/34.html#L52'>f0</a>                 52 kernel/pipe.c      fileclose(*f0);</span>
 </pre>
 </body>
 </html>

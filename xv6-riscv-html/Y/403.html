@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>xstate</title>
+<title>xstatus</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,14 +9,60 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L144'>xstate</a>            144 kernel/proc.c    p-&gt;xstate = 0;</span>
-<span class='curline'><a href='../S/65.html#L370'>xstate</a>            370 kernel/proc.c    p-&gt;xstate = status;</span>
-<span class='curline'><a href='../S/65.html#L408'>xstate</a>            408 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;np-&gt;xstate,</span>
-<span class='curline'><a href='../S/65.html#L409'>xstate</a>            409 kernel/proc.c                                    sizeof(np-&gt;xstate)) &lt; 0) {</span>
-<span class='curline'><a href='../S/37.html#L94'>xstate</a>             94 kernel/proc.h    int xstate;                  // Exit status to be returned to parent's wait</span>
-<span class='curline'><a href='../S/26.html#L461'>xstate</a>            461 user/usertests.c       int xstate;</span>
-<span class='curline'><a href='../S/26.html#L462'>xstate</a>            462 user/usertests.c       if(wait(&amp;xstate) != pid){</span>
-<span class='curline'><a href='../S/26.html#L466'>xstate</a>            466 user/usertests.c       if(i != xstate) {</span>
+<span class='curline'><a href='../S/24.html#L51'>xstatus</a>            51 user/usertests.c   int pid, xstatus;</span>
+<span class='curline'><a href='../S/24.html#L73'>xstatus</a>            73 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L74'>xstatus</a>            74 user/usertests.c   exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L91'>xstatus</a>            91 user/usertests.c   int pid, xstatus;</span>
+<span class='curline'><a href='../S/24.html#L115'>xstatus</a>           115 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L116'>xstatus</a>           116 user/usertests.c   exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L285'>xstatus</a>           285 user/usertests.c   int fd, xstatus, pid;</span>
+<span class='curline'><a href='../S/24.html#L312'>xstatus</a>           312 user/usertests.c   if (wait(&amp;xstatus) != pid) {</span>
+<span class='curline'><a href='../S/24.html#L315'>xstatus</a>           315 user/usertests.c   if(xstatus != 0)</span>
+<span class='curline'><a href='../S/24.html#L316'>xstatus</a>           316 user/usertests.c     exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L342'>xstatus</a>           342 user/usertests.c   int fds[2], pid, xstatus;</span>
+<span class='curline'><a href='../S/24.html#L384'>xstatus</a>           384 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L385'>xstatus</a>           385 user/usertests.c     exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L561'>xstatus</a>           561 user/usertests.c   int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L563'>xstatus</a>           563 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L564'>xstatus</a>           564 user/usertests.c     if(xstatus != 0) {</span>
+<span class='curline'><a href='../S/24.html#L652'>xstatus</a>           652 user/usertests.c     int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L653'>xstatus</a>           653 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L654'>xstatus</a>           654 user/usertests.c     exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L686'>xstatus</a>           686 user/usertests.c     int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L687'>xstatus</a>           687 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L688'>xstatus</a>           688 user/usertests.c     if(xstatus != 0)</span>
+<span class='curline'><a href='../S/24.html#L689'>xstatus</a>           689 user/usertests.c       exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L755'>xstatus</a>           755 user/usertests.c   int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L757'>xstatus</a>           757 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L758'>xstatus</a>           758 user/usertests.c     if(xstatus != 0)</span>
+<span class='curline'><a href='../S/24.html#L759'>xstatus</a>           759 user/usertests.c       exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L822'>xstatus</a>           822 user/usertests.c   int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L824'>xstatus</a>           824 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L825'>xstatus</a>           825 user/usertests.c     if(xstatus != 0)</span>
+<span class='curline'><a href='../S/24.html#L994'>xstatus</a>           994 user/usertests.c       int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L995'>xstatus</a>           995 user/usertests.c       wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L996'>xstatus</a>           996 user/usertests.c       if(xstatus != 0)</span>
+<span class='curline'><a href='../S/24.html#L1589'>xstatus</a>          1589 user/usertests.c   int i, pid, xstatus;</span>
+<span class='curline'><a href='../S/24.html#L1623'>xstatus</a>          1623 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L1624'>xstatus</a>          1624 user/usertests.c   exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L1698'>xstatus</a>          1698 user/usertests.c     int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L1699'>xstatus</a>          1699 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L1700'>xstatus</a>          1700 user/usertests.c     if(xstatus != -1)  // did kernel kill child?</span>
+<span class='curline'><a href='../S/24.html#L1711'>xstatus</a>          1711 user/usertests.c   int i, xstatus;</span>
+<span class='curline'><a href='../S/24.html#L1765'>xstatus</a>          1765 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L1766'>xstatus</a>          1766 user/usertests.c   if(xstatus != -1)</span>
+<span class='curline'><a href='../S/24.html#L1836'>xstatus</a>          1836 user/usertests.c   int pid, fd, xstatus;</span>
+<span class='curline'><a href='../S/24.html#L1855'>xstatus</a>          1855 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L1856'>xstatus</a>          1856 user/usertests.c   if(xstatus != 0)</span>
+<span class='curline'><a href='../S/24.html#L1857'>xstatus</a>          1857 user/usertests.c     exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L1945'>xstatus</a>          1945 user/usertests.c   int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L1958'>xstatus</a>          1958 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L1959'>xstatus</a>          1959 user/usertests.c   if(xstatus == -1)  // kernel killed child?</span>
+<span class='curline'><a href='../S/24.html#L1962'>xstatus</a>          1962 user/usertests.c     exit(xstatus);</span>
+<span class='curline'><a href='../S/24.html#L2095'>xstatus</a>          2095 user/usertests.c   int xstatus;</span>
+<span class='curline'><a href='../S/24.html#L2106'>xstatus</a>          2106 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/24.html#L2107'>xstatus</a>          2107 user/usertests.c     if(xstatus != 0) </span>
+<span class='curline'><a href='../S/24.html#L2111'>xstatus</a>          2111 user/usertests.c     return xstatus == 0;</span>
 </pre>
 </body>
 </html>

@@ -1,27 +1,32 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel/date.h</title>
+<title>kernel/buf.h</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/75.html'>kernel</a>/date.h</h2>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/buf.h</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'><a href='35.html#L4' title='Included from 4 in kernel/sysproc.c.'>INCLUDED FROM</a></h2>
+<h2 class='header'><a href='../J/2.html' title='Multiple included from 5 places.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <strong class='reserved'>struct</strong> <a href='../S/16.html#L2' title='Referred from 2 in user/user.h.'>rtcdate</a> <em class='brace'>{</em>
-<a id='L2' name='L2'></a>   2   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> second;
-<a id='L3' name='L3'></a>   3   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> minute;
-<a id='L4' name='L4'></a>   4   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> hour;
-<a id='L5' name='L5'></a>   5   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> day;
-<a id='L6' name='L6'></a>   6   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> month;
-<a id='L7' name='L7'></a>   7   <a href='../S/39.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> year;
-<a id='L8' name='L8'></a>   8 <em class='brace'>}</em>;
+<a id='L1' name='L1'></a>   1 <strong class='reserved'>struct</strong> <a href='../R/201.html' title='Multiple referred from 173 places.'>buf</a> <em class='brace'>{</em>
+<a id='L2' name='L2'></a>   2   <strong class='reserved'>int</strong> <a href='../Y/387.html' title='Multiple used in 10 places.'>valid</a>;   <em class='comment'>// has data been read from disk?</em>
+<a id='L3' name='L3'></a>   3   <strong class='reserved'>int</strong> <a href='../S/65.html#L23' title='Defined at 23 in kernel/virtio_disk.c.'>disk</a>;    <em class='comment'>// does disk "own" buf?</em>
+<a id='L4' name='L4'></a>   4   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/65.html' title='Multiple used in 54 places.'>dev</a>;
+<a id='L5' name='L5'></a>   5   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/39.html' title='Multiple used in 11 places.'>blockno</a>;
+<a id='L6' name='L6'></a>   6   <strong class='reserved'>struct</strong> <a href='../S/66.html#L2' title='Defined at 2 in kernel/sleeplock.h.'>sleeplock</a> <a href='../Y/171.html' title='Multiple used in 134 places.'>lock</a>;
+<a id='L7' name='L7'></a>   7   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/283.html' title='Multiple used in 8 places.'>refcnt</a>;
+<a id='L8' name='L8'></a>   8   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/266.html' title='Multiple used in 9 places.'>prev</a>; <em class='comment'>// LRU cache list</em>
+<a id='L9' name='L9'></a>   9   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/204.html' title='Multiple used in 22 places.'>next</a>;
+<a id='L10' name='L10'></a>  10   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *qnext; <em class='comment'>// disk queue</em>
+<a id='L11' name='L11'></a>  11   <a href='../S/37.html#L3' title='Defined at 3 in kernel/types.h.'>uchar</a> <a href='../Y/60.html' title='Multiple used in 28 places.'>data</a>[<a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>];
+<a id='L12' name='L12'></a>  12 <em class='brace'>}</em>;
+<a id='L13' name='L13'></a>  13 
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

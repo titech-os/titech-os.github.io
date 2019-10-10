@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>panicked</title>
+<title>parent</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,10 +9,13 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/59.html#L34'>panicked</a>           34 kernel/console.c   extern volatile int panicked; // from printf.c</span>
-<span class='curline'><a href='../S/59.html#L36'>panicked</a>           36 kernel/console.c   if(panicked){</span>
-<span class='curline'><a href='../S/31.html#L18'>panicked</a>           18 kernel/printf.c volatile int panicked = 0;</span>
-<span class='curline'><a href='../S/31.html#L124'>panicked</a>          124 kernel/printf.c   panicked = 1; // freeze other CPUs</span>
+<span class='curline'><a href='../S/63.html#L140'>parent</a>            140 kernel/proc.c    p-&gt;parent = 0;</span>
+<span class='curline'><a href='../S/63.html#L263'>parent</a>            263 kernel/proc.c    np-&gt;parent = p;</span>
+<span class='curline'><a href='../S/63.html#L300'>parent</a>            300 kernel/proc.c      if(pp-&gt;parent == p){</span>
+<span class='curline'><a href='../S/63.html#L304'>parent</a>            304 kernel/proc.c        pp-&gt;parent = initproc;</span>
+<span class='curline'><a href='../S/63.html#L355'>parent</a>            355 kernel/proc.c    struct proc *original_parent = p-&gt;parent;</span>
+<span class='curline'><a href='../S/63.html#L400'>parent</a>            400 kernel/proc.c        if(np-&gt;parent == p){</span>
+<span class='curline'><a href='../S/35.html#L91'>parent</a>             91 kernel/proc.h    struct proc *parent;         // Parent process</span>
 </pre>
 </body>
 </html>

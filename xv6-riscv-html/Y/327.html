@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>srcva</title>
+<title>sstatus</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,16 +9,9 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/40.html#L386'>srcva</a>             386 kernel/vm.c    copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)</span>
-<span class='curline'><a href='../S/40.html#L391'>srcva</a>             391 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
-<span class='curline'><a href='../S/40.html#L395'>srcva</a>             395 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
-<span class='curline'><a href='../S/40.html#L398'>srcva</a>             398 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
-<span class='curline'><a href='../S/40.html#L402'>srcva</a>             402 kernel/vm.c        srcva = va0 + PGSIZE;</span>
-<span class='curline'><a href='../S/40.html#L412'>srcva</a>             412 kernel/vm.c    copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)</span>
-<span class='curline'><a href='../S/40.html#L418'>srcva</a>             418 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
-<span class='curline'><a href='../S/40.html#L422'>srcva</a>             422 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
-<span class='curline'><a href='../S/40.html#L426'>srcva</a>             426 kernel/vm.c        char *p = (char *) (pa0 + (srcva - va0));</span>
-<span class='curline'><a href='../S/40.html#L441'>srcva</a>             441 kernel/vm.c        srcva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/56.html#L138'>sstatus</a>           138 kernel/trap.c    uint64 sstatus = r_sstatus();</span>
+<span class='curline'><a href='../S/56.html#L141'>sstatus</a>           141 kernel/trap.c    if((sstatus &amp; SSTATUS_SPP) == 0)</span>
+<span class='curline'><a href='../S/56.html#L159'>sstatus</a>           159 kernel/trap.c    w_sstatus(sstatus);</span>
 </pre>
 </body>
 </html>
