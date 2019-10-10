@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>blockno</title>
+<title>block</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,17 +9,13 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/61.html#L58'>blockno</a>            58 kernel/bio.c   bget(uint dev, uint blockno)</span>
-<span class='curline'><a href='../S/61.html#L66'>blockno</a>            66 kernel/bio.c       if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
-<span class='curline'><a href='../S/61.html#L78'>blockno</a>            78 kernel/bio.c         b-&gt;blockno = blockno;</span>
-<span class='curline'><a href='../S/61.html#L91'>blockno</a>            91 kernel/bio.c   bread(uint dev, uint blockno)</span>
-<span class='curline'><a href='../S/61.html#L95'>blockno</a>            95 kernel/bio.c     b = bget(dev, blockno);</span>
-<span class='curline'><a href='../S/47.html#L5'>blockno</a>             5 kernel/buf.h     uint blockno;</span>
-<span class='curline'><a href='../S/28.html#L225'>blockno</a>           225 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
-<span class='curline'><a href='../S/28.html#L228'>blockno</a>           228 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
-<span class='curline'><a href='../S/32.html#L30'>blockno</a>            30 kernel/ramdisk.c   if(b-&gt;blockno &gt;= FSSIZE)</span>
-<span class='curline'><a href='../S/32.html#L33'>blockno</a>            33 kernel/ramdisk.c   uint64 diskaddr = b-&gt;blockno * BSIZE;</span>
-<span class='curline'><a href='../S/65.html#L171'>blockno</a>           171 kernel/virtio_disk.c   uint64 sector = b-&gt;blockno * (BSIZE / 512);</span>
+<span class='curline'><a href='../S/30.html#L37'>block</a>              37 kernel/log.c     int block[LOGSIZE];</span>
+<span class='curline'><a href='../S/30.html#L75'>block</a>              75 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/30.html#L93'>block</a>              93 kernel/log.c       log.lh.block[i] = lh-&gt;block[i];</span>
+<span class='curline'><a href='../S/30.html#L109'>block</a>             109 kernel/log.c       hb-&gt;block[i] = log.lh.block[i];</span>
+<span class='curline'><a href='../S/30.html#L184'>block</a>             184 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/30.html#L225'>block</a>             225 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
+<span class='curline'><a href='../S/30.html#L228'>block</a>             228 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
 </pre>
 </body>
 </html>

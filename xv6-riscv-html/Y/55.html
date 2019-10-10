@@ -9,29 +9,29 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/57.html#L58'>cons</a>               58 kernel/console.c } cons;</span>
-<span class='curline'><a href='../S/57.html#L68'>cons</a>               68 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L75'>cons</a>               75 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L94'>cons</a>               94 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L98'>cons</a>               98 kernel/console.c     while(cons.r == cons.w){</span>
-<span class='curline'><a href='../S/57.html#L100'>cons</a>              100 kernel/console.c         release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L103'>cons</a>              103 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L106'>cons</a>              106 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF];</span>
-<span class='curline'><a href='../S/57.html#L112'>cons</a>              112 kernel/console.c         cons.r--;</span>
-<span class='curline'><a href='../S/57.html#L131'>cons</a>              131 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L145'>cons</a>              145 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L152'>cons</a>              152 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
-<span class='curline'><a href='../S/57.html#L153'>cons</a>              153 kernel/console.c           cons.buf[(cons.e-1) % INPUT_BUF] != '\n'){</span>
-<span class='curline'><a href='../S/57.html#L154'>cons</a>              154 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/57.html#L160'>cons</a>              160 kernel/console.c     if(cons.e != cons.w){</span>
-<span class='curline'><a href='../S/57.html#L161'>cons</a>              161 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/57.html#L166'>cons</a>              166 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF){</span>
-<span class='curline'><a href='../S/57.html#L173'>cons</a>              173 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF] = c;</span>
-<span class='curline'><a href='../S/57.html#L175'>cons</a>              175 kernel/console.c       if(c == '\n' || c == C('D') || cons.e == cons.r+INPUT_BUF){</span>
-<span class='curline'><a href='../S/57.html#L178'>cons</a>              178 kernel/console.c         cons.w = cons.e;</span>
-<span class='curline'><a href='../S/57.html#L179'>cons</a>              179 kernel/console.c         wakeup(&amp;cons.r);</span>
-<span class='curline'><a href='../S/57.html#L185'>cons</a>              185 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L191'>cons</a>              191 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
+<span class='curline'><a href='../S/59.html#L58'>cons</a>               58 kernel/console.c } cons;</span>
+<span class='curline'><a href='../S/59.html#L68'>cons</a>               68 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L75'>cons</a>               75 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L94'>cons</a>               94 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L98'>cons</a>               98 kernel/console.c     while(cons.r == cons.w){</span>
+<span class='curline'><a href='../S/59.html#L100'>cons</a>              100 kernel/console.c         release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L103'>cons</a>              103 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L106'>cons</a>              106 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF];</span>
+<span class='curline'><a href='../S/59.html#L112'>cons</a>              112 kernel/console.c         cons.r--;</span>
+<span class='curline'><a href='../S/59.html#L131'>cons</a>              131 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L145'>cons</a>              145 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L152'>cons</a>              152 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
+<span class='curline'><a href='../S/59.html#L153'>cons</a>              153 kernel/console.c           cons.buf[(cons.e-1) % INPUT_BUF] != '\n'){</span>
+<span class='curline'><a href='../S/59.html#L154'>cons</a>              154 kernel/console.c       cons.e--;</span>
+<span class='curline'><a href='../S/59.html#L160'>cons</a>              160 kernel/console.c     if(cons.e != cons.w){</span>
+<span class='curline'><a href='../S/59.html#L161'>cons</a>              161 kernel/console.c       cons.e--;</span>
+<span class='curline'><a href='../S/59.html#L166'>cons</a>              166 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF){</span>
+<span class='curline'><a href='../S/59.html#L173'>cons</a>              173 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF] = c;</span>
+<span class='curline'><a href='../S/59.html#L175'>cons</a>              175 kernel/console.c       if(c == '\n' || c == C('D') || cons.e == cons.r+INPUT_BUF){</span>
+<span class='curline'><a href='../S/59.html#L178'>cons</a>              178 kernel/console.c         cons.w = cons.e;</span>
+<span class='curline'><a href='../S/59.html#L179'>cons</a>              179 kernel/console.c         wakeup(&amp;cons.r);</span>
+<span class='curline'><a href='../S/59.html#L185'>cons</a>              185 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L191'>cons</a>              191 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
 </pre>
 </body>
 </html>

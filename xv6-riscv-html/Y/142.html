@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>inodestart</title>
+<title>initproc</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,9 +9,13 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/71.html#L21'>inodestart</a>         21 kernel/fs.h      uint inodestart;   // Block number of first inode block</span>
-<span class='curline'><a href='../S/71.html#L45'>inodestart</a>         45 kernel/fs.h    #define IBLOCK(i, sb)     ((i) / IPB + sb.inodestart)</span>
-<span class='curline'><a href='../S/3.html#L103'>inodestart</a>        103 mkfs/mkfs.c      sb.inodestart = xint(2+nlog);</span>
+<span class='curline'><a href='../S/65.html#L13'>initproc</a>           13 kernel/proc.c  struct proc *initproc;</span>
+<span class='curline'><a href='../S/65.html#L202'>initproc</a>          202 kernel/proc.c    initproc = p;</span>
+<span class='curline'><a href='../S/65.html#L304'>initproc</a>          304 kernel/proc.c        pp-&gt;parent = initproc;</span>
+<span class='curline'><a href='../S/65.html#L322'>initproc</a>          322 kernel/proc.c    if(p == initproc)</span>
+<span class='curline'><a href='../S/65.html#L344'>initproc</a>          344 kernel/proc.c    acquire(&amp;initproc-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L345'>initproc</a>          345 kernel/proc.c    wakeup1(initproc);</span>
+<span class='curline'><a href='../S/65.html#L346'>initproc</a>          346 kernel/proc.c    release(&amp;initproc-&gt;lock);</span>
 </pre>
 </body>
 </html>

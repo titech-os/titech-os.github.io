@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ppid</title>
+<title>pid_lock</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,18 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/24.html#L523'>ppid</a>              523 user/usertests.c   int ppid = getpid();</span>
-<span class='curline'><a href='../S/24.html#L539'>ppid</a>              539 user/usertests.c           kill(ppid);</span>
-<span class='curline'><a href='../S/24.html#L596'>ppid</a>              596 user/usertests.c   int pid, ppid;</span>
-<span class='curline'><a href='../S/24.html#L599'>ppid</a>              599 user/usertests.c   ppid = getpid();</span>
-<span class='curline'><a href='../S/24.html#L614'>ppid</a>              614 user/usertests.c       kill(ppid);</span>
-<span class='curline'><a href='../S/24.html#L1595'>ppid</a>             1595 user/usertests.c   int i, fds[2], pids[10], pid, ppid;</span>
-<span class='curline'><a href='../S/24.html#L1683'>ppid</a>             1683 user/usertests.c     ppid = getpid();</span>
-<span class='curline'><a href='../S/24.html#L1691'>ppid</a>             1691 user/usertests.c       kill(ppid);</span>
-<span class='curline'><a href='../S/24.html#L1730'>ppid</a>             1730 user/usertests.c   ppid = getpid();</span>
-<span class='curline'><a href='../S/24.html#L1747'>ppid</a>             1747 user/usertests.c     kill(ppid);</span>
-<span class='curline'><a href='../S/24.html#L1932'>ppid</a>             1932 user/usertests.c   int ppid = getpid();</span>
-<span class='curline'><a href='../S/24.html#L1942'>ppid</a>             1942 user/usertests.c     kill(ppid);</span>
+<span class='curline'><a href='../S/65.html#L16'>pid_lock</a>           16 kernel/proc.c  struct spinlock pid_lock;</span>
+<span class='curline'><a href='../S/65.html#L28'>pid_lock</a>           28 kernel/proc.c    initlock(&amp;pid_lock, "nextpid");</span>
+<span class='curline'><a href='../S/65.html#L78'>pid_lock</a>           78 kernel/proc.c    acquire(&amp;pid_lock);</span>
+<span class='curline'><a href='../S/65.html#L81'>pid_lock</a>           81 kernel/proc.c    release(&amp;pid_lock);</span>
 </pre>
 </body>
 </html>

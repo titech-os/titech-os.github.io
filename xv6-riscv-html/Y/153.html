@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel_sp</title>
+<title>kernel_pagetable</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,12 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/35.html#L46'>kernel_sp</a>          46 kernel/proc.h    /*   8 */ uint64 kernel_sp;     // top of process's kernel stack</span>
-<span class='curline'><a href='../S/56.html#L104'>kernel_sp</a>         104 kernel/trap.c    p-&gt;tf-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
+<span class='curline'><a href='../S/40.html#L12'>kernel_pagetable</a>   12 kernel/vm.c    pagetable_t kernel_pagetable;</span>
+<span class='curline'><a href='../S/40.html#L26'>kernel_pagetable</a>   26 kernel/vm.c      kernel_pagetable = (pagetable_t) kalloc();</span>
+<span class='curline'><a href='../S/40.html#L27'>kernel_pagetable</a>   27 kernel/vm.c      memset(kernel_pagetable, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/40.html#L57'>kernel_pagetable</a>   57 kernel/vm.c      w_satp(MAKE_SATP(kernel_pagetable));</span>
+<span class='curline'><a href='../S/40.html#L122'>kernel_pagetable</a>  122 kernel/vm.c      if(mappages(kernel_pagetable, va, sz, pa, perm) != 0)</span>
+<span class='curline'><a href='../S/40.html#L137'>kernel_pagetable</a>  137 kernel/vm.c      pte = walk(kernel_pagetable, va, 0);</span>
 </pre>
 </body>
 </html>

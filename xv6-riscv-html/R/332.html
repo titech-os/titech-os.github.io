@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>namecmp</title>
+<title>mycpu</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,9 +9,19 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L49'>namecmp</a>            49 kernel/defs.h  int             namecmp(const char*, const char*);</span>
-<span class='curline'><a href='../S/48.html#L539'>namecmp</a>           539 kernel/fs.c        if(namecmp(name, de.name) == 0){</span>
-<span class='curline'><a href='../S/43.html#L204'>namecmp</a>           204 kernel/sysfile.c   if(namecmp(name, ".") == 0 || namecmp(name, "..") == 0)</span>
+<span class='curline'><a href='../S/33.html#L91'>mycpu</a>              91 kernel/defs.h  struct cpu*     mycpu(void);</span>
+<span class='curline'><a href='../S/65.html#L68'>mycpu</a>              68 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/65.html#L445'>mycpu</a>             445 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/65.html#L486'>mycpu</a>             486 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
+<span class='curline'><a href='../S/65.html#L493'>mycpu</a>             493 kernel/proc.c    intena = mycpu()-&gt;intena;</span>
+<span class='curline'><a href='../S/65.html#L494'>mycpu</a>             494 kernel/proc.c    swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;scheduler);</span>
+<span class='curline'><a href='../S/65.html#L495'>mycpu</a>             495 kernel/proc.c    mycpu()-&gt;intena = intena;</span>
+<span class='curline'><a href='../S/61.html#L41'>mycpu</a>              41 kernel/spinlock.c   lk-&gt;cpu = mycpu();</span>
+<span class='curline'><a href='../S/61.html#L77'>mycpu</a>              77 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
+<span class='curline'><a href='../S/61.html#L92'>mycpu</a>              92 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
+<span class='curline'><a href='../S/61.html#L93'>mycpu</a>              93 kernel/spinlock.c     mycpu()-&gt;intena = old;</span>
+<span class='curline'><a href='../S/61.html#L94'>mycpu</a>              94 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
+<span class='curline'><a href='../S/61.html#L100'>mycpu</a>             100 kernel/spinlock.c   struct cpu *c = mycpu();</span>
 </pre>
 </body>
 </html>

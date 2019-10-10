@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>os</title>
+<title>oldsz</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,16 +9,20 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L70'>os</a>                 70 kernel/string.c   char *os;</span>
-<span class='curline'><a href='../S/46.html#L72'>os</a>                 72 kernel/string.c   os = s;</span>
-<span class='curline'><a href='../S/46.html#L77'>os</a>                 77 kernel/string.c   return os;</span>
-<span class='curline'><a href='../S/46.html#L84'>os</a>                 84 kernel/string.c   char *os;</span>
-<span class='curline'><a href='../S/46.html#L86'>os</a>                 86 kernel/string.c   os = s;</span>
-<span class='curline'><a href='../S/46.html#L88'>os</a>                 88 kernel/string.c     return os;</span>
-<span class='curline'><a href='../S/46.html#L92'>os</a>                 92 kernel/string.c   return os;</span>
-<span class='curline'><a href='../S/19.html#L9'>os</a>                  9 user/ulib.c      char *os;</span>
-<span class='curline'><a href='../S/19.html#L11'>os</a>                 11 user/ulib.c      os = s;</span>
-<span class='curline'><a href='../S/19.html#L14'>os</a>                 14 user/ulib.c      return os;</span>
+<span class='curline'><a href='../S/38.html#L64'>oldsz</a>              64 kernel/exec.c    uint64 oldsz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/38.html#L114'>oldsz</a>             114 kernel/exec.c    proc_freepagetable(oldpagetable, oldsz);</span>
+<span class='curline'><a href='../S/40.html#L236'>oldsz</a>             236 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
+<span class='curline'><a href='../S/40.html#L241'>oldsz</a>             241 kernel/vm.c      if(newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/40.html#L242'>oldsz</a>             242 kernel/vm.c        return oldsz;</span>
+<span class='curline'><a href='../S/40.html#L244'>oldsz</a>             244 kernel/vm.c      oldsz = PGROUNDUP(oldsz);</span>
+<span class='curline'><a href='../S/40.html#L245'>oldsz</a>             245 kernel/vm.c      a = oldsz;</span>
+<span class='curline'><a href='../S/40.html#L249'>oldsz</a>             249 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
+<span class='curline'><a href='../S/40.html#L255'>oldsz</a>             255 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
+<span class='curline'><a href='../S/40.html#L267'>oldsz</a>             267 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
+<span class='curline'><a href='../S/40.html#L269'>oldsz</a>             269 kernel/vm.c      if(newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/40.html#L270'>oldsz</a>             270 kernel/vm.c        return oldsz;</span>
+<span class='curline'><a href='../S/40.html#L273'>oldsz</a>             273 kernel/vm.c      if(newup &lt; PGROUNDUP(oldsz))</span>
+<span class='curline'><a href='../S/40.html#L274'>oldsz</a>             274 kernel/vm.c        uvmunmap(pagetable, newup, oldsz - newup, 1);</span>
 </pre>
 </body>
 </html>

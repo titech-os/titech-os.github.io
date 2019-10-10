@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ustack</title>
+<title>user_dst</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,10 +9,13 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L17'>ustack</a>             17 kernel/exec.c    uint64 argc, sz, sp, ustack[MAXARG+1], stackbase;</span>
-<span class='curline'><a href='../S/36.html#L85'>ustack</a>             85 kernel/exec.c      ustack[argc] = sp;</span>
-<span class='curline'><a href='../S/36.html#L87'>ustack</a>             87 kernel/exec.c    ustack[argc] = 0;</span>
-<span class='curline'><a href='../S/36.html#L94'>ustack</a>             94 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
+<span class='curline'><a href='../S/59.html#L87'>user_dst</a>           87 kernel/console.c consoleread(int user_dst, uint64 dst, int n)</span>
+<span class='curline'><a href='../S/59.html#L119'>user_dst</a>          119 kernel/console.c     if(either_copyout(user_dst, dst, &amp;cbuf, 1) == -1)</span>
+<span class='curline'><a href='../S/33.html#L103'>user_dst</a>          103 kernel/defs.h  int             either_copyout(int user_dst, uint64 dst, void *src, uint64 len);</span>
+<span class='curline'><a href='../S/50.html#L460'>user_dst</a>          460 kernel/fs.c    readi(struct inode *ip, int user_dst, uint64 dst, uint off, uint n)</span>
+<span class='curline'><a href='../S/50.html#L473'>user_dst</a>          473 kernel/fs.c        if(either_copyout(user_dst, dst, bp-&gt;data + (off % BSIZE), m) == -1) {</span>
+<span class='curline'><a href='../S/65.html#L620'>user_dst</a>          620 kernel/proc.c  either_copyout(int user_dst, uint64 dst, void *src, uint64 len)</span>
+<span class='curline'><a href='../S/65.html#L623'>user_dst</a>          623 kernel/proc.c    if(user_dst){</span>
 </pre>
 </body>
 </html>

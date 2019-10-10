@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>last</title>
+<title>kstack</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,16 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L15'>last</a>               15 kernel/exec.c    char *s, *last;</span>
-<span class='curline'><a href='../S/36.html#L103'>last</a>              103 kernel/exec.c    for(last=s=path; *s; s++)</span>
-<span class='curline'><a href='../S/36.html#L105'>last</a>              105 kernel/exec.c        last = s+1;</span>
-<span class='curline'><a href='../S/36.html#L106'>last</a>              106 kernel/exec.c    safestrcpy(p-&gt;name, last, sizeof(p-&gt;name));</span>
-<span class='curline'><a href='../S/38.html#L150'>last</a>              150 kernel/vm.c      uint64 a, last;</span>
-<span class='curline'><a href='../S/38.html#L154'>last</a>              154 kernel/vm.c      last = PGROUNDDOWN(va + size - 1);</span>
-<span class='curline'><a href='../S/38.html#L161'>last</a>              161 kernel/vm.c        if(a == last)</span>
-<span class='curline'><a href='../S/38.html#L175'>last</a>              175 kernel/vm.c      uint64 a, last;</span>
-<span class='curline'><a href='../S/38.html#L180'>last</a>              180 kernel/vm.c      last = PGROUNDDOWN(va + size - 1);</span>
-<span class='curline'><a href='../S/38.html#L195'>last</a>              195 kernel/vm.c        if(a == last)</span>
+<span class='curline'><a href='../S/65.html#L40'>kstack</a>             40 kernel/proc.c        p-&gt;kstack = va;</span>
+<span class='curline'><a href='../S/65.html#L121'>kstack</a>            121 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
+<span class='curline'><a href='../S/37.html#L98'>kstack</a>             98 kernel/proc.h    uint64 kstack;               // Bottom of kernel stack for this process</span>
+<span class='curline'><a href='../S/58.html#L104'>kstack</a>            104 kernel/trap.c    p-&gt;tf-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
 </pre>
 </body>
 </html>

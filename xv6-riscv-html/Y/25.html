@@ -9,16 +9,16 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L17'>argc</a>               17 kernel/exec.c    uint64 argc, sz, sp, ustack[MAXARG+1], stackbase;</span>
-<span class='curline'><a href='../S/36.html#L76'>argc</a>               76 kernel/exec.c    for(argc = 0; argv[argc]; argc++) {</span>
-<span class='curline'><a href='../S/36.html#L77'>argc</a>               77 kernel/exec.c      if(argc &gt;= MAXARG)</span>
-<span class='curline'><a href='../S/36.html#L79'>argc</a>               79 kernel/exec.c      sp -= strlen(argv[argc]) + 1;</span>
-<span class='curline'><a href='../S/36.html#L83'>argc</a>               83 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
-<span class='curline'><a href='../S/36.html#L85'>argc</a>               85 kernel/exec.c      ustack[argc] = sp;</span>
-<span class='curline'><a href='../S/36.html#L87'>argc</a>               87 kernel/exec.c    ustack[argc] = 0;</span>
-<span class='curline'><a href='../S/36.html#L90'>argc</a>               90 kernel/exec.c    sp -= (argc+1) * sizeof(uint64);</span>
-<span class='curline'><a href='../S/36.html#L94'>argc</a>               94 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
-<span class='curline'><a href='../S/36.html#L115'>argc</a>              115 kernel/exec.c    return argc; // this ends up in a0, the first argument to main(argc, argv)</span>
+<span class='curline'><a href='../S/38.html#L17'>argc</a>               17 kernel/exec.c    uint64 argc, sz, sp, ustack[MAXARG+1], stackbase;</span>
+<span class='curline'><a href='../S/38.html#L76'>argc</a>               76 kernel/exec.c    for(argc = 0; argv[argc]; argc++) {</span>
+<span class='curline'><a href='../S/38.html#L77'>argc</a>               77 kernel/exec.c      if(argc &gt;= MAXARG)</span>
+<span class='curline'><a href='../S/38.html#L79'>argc</a>               79 kernel/exec.c      sp -= strlen(argv[argc]) + 1;</span>
+<span class='curline'><a href='../S/38.html#L83'>argc</a>               83 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
+<span class='curline'><a href='../S/38.html#L85'>argc</a>               85 kernel/exec.c      ustack[argc] = sp;</span>
+<span class='curline'><a href='../S/38.html#L87'>argc</a>               87 kernel/exec.c    ustack[argc] = 0;</span>
+<span class='curline'><a href='../S/38.html#L90'>argc</a>               90 kernel/exec.c    sp -= (argc+1) * sizeof(uint64);</span>
+<span class='curline'><a href='../S/38.html#L94'>argc</a>               94 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
+<span class='curline'><a href='../S/38.html#L115'>argc</a>              115 kernel/exec.c    return argc; // this ends up in a0, the first argument to main(argc, argv)</span>
 <span class='curline'><a href='../S/3.html#L68'>argc</a>               68 mkfs/mkfs.c    main(int argc, char *argv[])</span>
 <span class='curline'><a href='../S/3.html#L79'>argc</a>               79 mkfs/mkfs.c      if(argc &lt; 2){</span>
 <span class='curline'><a href='../S/3.html#L131'>argc</a>              131 mkfs/mkfs.c      for(i = 2; i &lt; argc; i++){</span>
@@ -26,18 +26,18 @@
 <span class='curline'><a href='../S/9.html#L25'>argc</a>               25 user/cat.c     main(int argc, char *argv[])</span>
 <span class='curline'><a href='../S/9.html#L29'>argc</a>               29 user/cat.c       if(argc &lt;= 1){</span>
 <span class='curline'><a href='../S/9.html#L34'>argc</a>               34 user/cat.c       for(i = 1; i &lt; argc; i++){</span>
-<span class='curline'><a href='../S/25.html#L6'>argc</a>                6 user/echo.c    main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/25.html#L10'>argc</a>               10 user/echo.c      for(i = 1; i &lt; argc; i++){</span>
-<span class='curline'><a href='../S/25.html#L12'>argc</a>               12 user/echo.c        if(i + 1 &lt; argc){</span>
-<span class='curline'><a href='../S/21.html#L37'>argc</a>               37 user/grep.c    main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/21.html#L42'>argc</a>               42 user/grep.c      if(argc &lt;= 1){</span>
-<span class='curline'><a href='../S/21.html#L48'>argc</a>               48 user/grep.c      if(argc &lt;= 2){</span>
-<span class='curline'><a href='../S/21.html#L53'>argc</a>               53 user/grep.c      for(i = 2; i &lt; argc; i++){</span>
-<span class='curline'><a href='../S/16.html#L6'>argc</a>                6 user/kill.c    main(int argc, char **argv)</span>
-<span class='curline'><a href='../S/16.html#L10'>argc</a>               10 user/kill.c      if(argc &lt; 2){</span>
-<span class='curline'><a href='../S/16.html#L14'>argc</a>               14 user/kill.c      for(i=1; i&lt;argc; i++)</span>
-<span class='curline'><a href='../S/20.html#L6'>argc</a>                6 user/ln.c      main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/20.html#L8'>argc</a>                8 user/ln.c        if(argc != 3){</span>
+<span class='curline'><a href='../S/27.html#L6'>argc</a>                6 user/echo.c    main(int argc, char *argv[])</span>
+<span class='curline'><a href='../S/27.html#L10'>argc</a>               10 user/echo.c      for(i = 1; i &lt; argc; i++){</span>
+<span class='curline'><a href='../S/27.html#L12'>argc</a>               12 user/echo.c        if(i + 1 &lt; argc){</span>
+<span class='curline'><a href='../S/22.html#L37'>argc</a>               37 user/grep.c    main(int argc, char *argv[])</span>
+<span class='curline'><a href='../S/22.html#L42'>argc</a>               42 user/grep.c      if(argc &lt;= 1){</span>
+<span class='curline'><a href='../S/22.html#L48'>argc</a>               48 user/grep.c      if(argc &lt;= 2){</span>
+<span class='curline'><a href='../S/22.html#L53'>argc</a>               53 user/grep.c      for(i = 2; i &lt; argc; i++){</span>
+<span class='curline'><a href='../S/17.html#L6'>argc</a>                6 user/kill.c    main(int argc, char **argv)</span>
+<span class='curline'><a href='../S/17.html#L10'>argc</a>               10 user/kill.c      if(argc &lt; 2){</span>
+<span class='curline'><a href='../S/17.html#L14'>argc</a>               14 user/kill.c      for(i=1; i&lt;argc; i++)</span>
+<span class='curline'><a href='../S/21.html#L6'>argc</a>                6 user/ln.c      main(int argc, char *argv[])</span>
+<span class='curline'><a href='../S/21.html#L8'>argc</a>                8 user/ln.c        if(argc != 3){</span>
 <span class='curline'><a href='../S/6.html#L74'>argc</a>               74 user/ls.c      main(int argc, char *argv[])</span>
 <span class='curline'><a href='../S/6.html#L78'>argc</a>               78 user/ls.c        if(argc &lt; 2){</span>
 <span class='curline'><a href='../S/6.html#L82'>argc</a>               82 user/ls.c        for(i=1; i&lt;argc; i++)</span>
@@ -47,16 +47,17 @@
 <span class='curline'><a href='../S/8.html#L6'>argc</a>                6 user/rm.c      main(int argc, char *argv[])</span>
 <span class='curline'><a href='../S/8.html#L10'>argc</a>               10 user/rm.c        if(argc &lt; 2){</span>
 <span class='curline'><a href='../S/8.html#L15'>argc</a>               15 user/rm.c        for(i = 1; i &lt; argc; i++){</span>
-<span class='curline'><a href='../S/17.html#L419'>argc</a>              419 user/sh.c        int tok, argc;</span>
-<span class='curline'><a href='../S/17.html#L429'>argc</a>              429 user/sh.c        argc = 0;</span>
-<span class='curline'><a href='../S/17.html#L436'>argc</a>              436 user/sh.c          cmd-&gt;argv[argc] = q;</span>
-<span class='curline'><a href='../S/17.html#L437'>argc</a>              437 user/sh.c          cmd-&gt;eargv[argc] = eq;</span>
-<span class='curline'><a href='../S/17.html#L438'>argc</a>              438 user/sh.c          argc++;</span>
-<span class='curline'><a href='../S/17.html#L439'>argc</a>              439 user/sh.c          if(argc &gt;= MAXARGS)</span>
-<span class='curline'><a href='../S/17.html#L443'>argc</a>              443 user/sh.c        cmd-&gt;argv[argc] = 0;</span>
-<span class='curline'><a href='../S/17.html#L444'>argc</a>              444 user/sh.c        cmd-&gt;eargv[argc] = 0;</span>
-<span class='curline'><a href='../S/22.html#L17'>argc</a>               17 user/stressfs.c main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/24.html#L1953'>argc</a>             1953 user/usertests.c main(int argc, char *argv[])</span>
+<span class='curline'><a href='../S/18.html#L419'>argc</a>              419 user/sh.c        int tok, argc;</span>
+<span class='curline'><a href='../S/18.html#L429'>argc</a>              429 user/sh.c        argc = 0;</span>
+<span class='curline'><a href='../S/18.html#L436'>argc</a>              436 user/sh.c          cmd-&gt;argv[argc] = q;</span>
+<span class='curline'><a href='../S/18.html#L437'>argc</a>              437 user/sh.c          cmd-&gt;eargv[argc] = eq;</span>
+<span class='curline'><a href='../S/18.html#L438'>argc</a>              438 user/sh.c          argc++;</span>
+<span class='curline'><a href='../S/18.html#L439'>argc</a>              439 user/sh.c          if(argc &gt;= MAXARGS)</span>
+<span class='curline'><a href='../S/18.html#L443'>argc</a>              443 user/sh.c        cmd-&gt;argv[argc] = 0;</span>
+<span class='curline'><a href='../S/18.html#L444'>argc</a>              444 user/sh.c        cmd-&gt;eargv[argc] = 0;</span>
+<span class='curline'><a href='../S/23.html#L17'>argc</a>               17 user/stressfs.c main(int argc, char *argv[])</span>
+<span class='curline'><a href='../S/26.html#L2116'>argc</a>             2116 user/usertests.c main(int argc, char *argv[])</span>
+<span class='curline'><a href='../S/26.html#L2119'>argc</a>             2119 user/usertests.c   if(argc &gt; 1) {</span>
 <span class='curline'><a href='../S/10.html#L36'>argc</a>               36 user/wc.c      main(int argc, char *argv[])</span>
 <span class='curline'><a href='../S/10.html#L40'>argc</a>               40 user/wc.c        if(argc &lt;= 1){</span>
 <span class='curline'><a href='../S/10.html#L45'>argc</a>               45 user/wc.c        for(i = 1; i &lt; argc; i++){</span>

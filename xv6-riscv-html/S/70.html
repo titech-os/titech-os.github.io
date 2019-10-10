@@ -1,109 +1,44 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel/start.c</title>
+<title>kernel/syscall.h</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/start.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L21'>[^]</a><a href='#L56'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/75.html'>kernel</a>/syscall.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'>DEFINITIONS</h2>
-This source file includes following definitions.
-<ol>
-<li><a href='#L21' title='Defined at 21.'>start</a></li>
-<li><a href='#L56' title='Defined at 56.'>timerinit</a></li>
-</ol>
+<h2 class='header'><a href='../J/36.html' title='Multiple included from 3 places.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='37.html'>types.h</a>"
-<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='58.html'>param.h</a>"
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='49.html'>memlayout.h</a>"
-<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='64.html'>riscv.h</a>"
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='31.html'>defs.h</a>"
-<a id='L6' name='L6'></a>   6 
-<a id='L7' name='L7'></a>   7 <strong class='reserved'>void</strong> <a href='../D/337.html' title='Multiple defined in 18 places.'>main</a>();
-<a id='L8' name='L8'></a>   8 <strong class='reserved'>void</strong> <a href='../S/70.html#L56' title='Defined at 56 in kernel/start.c.'>timerinit</a>();
-<a id='L9' name='L9'></a>   9 
-<a id='L10' name='L10'></a>  10 <em class='comment'>// entry.S needs one stack per CPU.</em>
-<a id='L11' name='L11'></a>  11 <strong class='reserved'>__attribute__</strong> ((<a href='../Y/21.html' title='Multiple used in 2 places.'>aligned</a> (16))) <strong class='reserved'>char</strong> stack0[4096 * <a href='../S/58.html#L2' title='Defined at 2 in kernel/param.h.'>NCPU</a>];
-<a id='L12' name='L12'></a>  12 
-<a id='L13' name='L13'></a>  13 <em class='comment'>// scratch area for timer interrupt, one per CPU.</em>
-<a id='L14' name='L14'></a>  14 <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/189.html' title='Multiple used in 2 places.'>mscratch0</a>[<a href='../S/58.html#L2' title='Defined at 2 in kernel/param.h.'>NCPU</a> * 32];
-<a id='L15' name='L15'></a>  15 
-<a id='L16' name='L16'></a>  16 <em class='comment'>// assembly code in kernelvec.S for machine-mode timer interrupt.</em>
-<a id='L17' name='L17'></a>  17 <strong class='reserved'>extern</strong> <strong class='reserved'>void</strong> <a href='../Y/354.html' title='Multiple used in 2 places.'>timervec</a>();
-<a id='L18' name='L18'></a>  18 
-<a id='L19' name='L19'></a>  19 <em class='comment'>// entry.S jumps here in machine mode on stack0.</em>
-<a id='L20' name='L20'></a>  20 <strong class='reserved'>void</strong>
-<a id='L21' name='L21'></a>  21 <a href='../R/418.html' title='Multiple referred from 6 places.'>start</a>()
-<a id='L22' name='L22'></a>  22 <em class='brace'>{</em>
-<a id='L23' name='L23'></a>  23   <em class='comment'>// set M Previous Privilege mode to Supervisor, for mret.</em>
-<a id='L24' name='L24'></a>  24   <strong class='reserved'>unsigned</strong> <strong class='reserved'>long</strong> <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> = <a href='../S/64.html#L19' title='Defined at 19 in kernel/riscv.h.'>r_mstatus</a>();
-<a id='L25' name='L25'></a>  25   <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> &amp;= ~<a href='../S/64.html#L12' title='Defined at 12 in kernel/riscv.h.'>MSTATUS_MPP_MASK</a>;
-<a id='L26' name='L26'></a>  26   <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> |= <a href='../S/64.html#L14' title='Defined at 14 in kernel/riscv.h.'>MSTATUS_MPP_S</a>;
-<a id='L27' name='L27'></a>  27   <a href='../S/64.html#L27' title='Defined at 27 in kernel/riscv.h.'>w_mstatus</a>(<a href='../Y/397.html' title='Multiple used in 132 places.'>x</a>);
-<a id='L28' name='L28'></a>  28 
-<a id='L29' name='L29'></a>  29   <em class='comment'>// set M Exception Program Counter to main, for mret.</em>
-<a id='L30' name='L30'></a>  30   <em class='comment'>// requires gcc -mcmodel=medany</em>
-<a id='L31' name='L31'></a>  31   <a href='../S/64.html#L36' title='Defined at 36 in kernel/riscv.h.'>w_mepc</a>((<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../D/337.html' title='Multiple defined in 18 places.'>main</a>);
-<a id='L32' name='L32'></a>  32 
-<a id='L33' name='L33'></a>  33   <em class='comment'>// disable paging for now.</em>
-<a id='L34' name='L34'></a>  34   <a href='../S/64.html#L192' title='Defined at 192 in kernel/riscv.h.'>w_satp</a>(0);
-<a id='L35' name='L35'></a>  35 
-<a id='L36' name='L36'></a>  36   <em class='comment'>// delegate all interrupts and exceptions to supervisor mode.</em>
-<a id='L37' name='L37'></a>  37   <a href='../S/64.html#L141' title='Defined at 141 in kernel/riscv.h.'>w_medeleg</a>(0xffff);
-<a id='L38' name='L38'></a>  38   <a href='../S/64.html#L156' title='Defined at 156 in kernel/riscv.h.'>w_mideleg</a>(0xffff);
-<a id='L39' name='L39'></a>  39 
-<a id='L40' name='L40'></a>  40   <em class='comment'>// ask for clock interrupts.</em>
-<a id='L41' name='L41'></a>  41   <a href='../S/70.html#L56' title='Defined at 56 in kernel/start.c.'>timerinit</a>();
-<a id='L42' name='L42'></a>  42 
-<a id='L43' name='L43'></a>  43   <em class='comment'>// keep each CPU's hartid in its tp register, for cpuid().</em>
-<a id='L44' name='L44'></a>  44   <strong class='reserved'>int</strong> <a href='../Y/134.html' title='Multiple used in 17 places.'>id</a> = <a href='../S/64.html#L3' title='Defined at 3 in kernel/riscv.h.'>r_mhartid</a>();
-<a id='L45' name='L45'></a>  45   <a href='../S/64.html#L302' title='Defined at 302 in kernel/riscv.h.'>w_tp</a>(<a href='../Y/134.html' title='Multiple used in 17 places.'>id</a>);
-<a id='L46' name='L46'></a>  46 
-<a id='L47' name='L47'></a>  47   <em class='comment'>// switch to supervisor mode and jump to main().</em>
-<a id='L48' name='L48'></a>  48   <strong class='reserved'>asm</strong> <strong class='reserved'>volatile</strong>("mret");
-<a id='L49' name='L49'></a>  49 <em class='brace'>}</em>
-<a id='L50' name='L50'></a>  50 
-<a id='L51' name='L51'></a>  51 <em class='comment'>// set up to receive timer interrupts in machine mode,</em>
-<a id='L52' name='L52'></a>  52 <em class='comment'>// which arrive at timervec in kernelvec.S,</em>
-<a id='L53' name='L53'></a>  53 <em class='comment'>// which turns them into software interrupts for</em>
-<a id='L54' name='L54'></a>  54 <em class='comment'>// devintr() in trap.c.</em>
-<a id='L55' name='L55'></a>  55 <strong class='reserved'>void</strong>
-<a id='L56' name='L56'></a>  56 <a href='../R/454.html' title='Multiple referred from 2 places.'>timerinit</a>()
-<a id='L57' name='L57'></a>  57 <em class='brace'>{</em>
-<a id='L58' name='L58'></a>  58   <em class='comment'>// each CPU has a separate source of timer interrupts.</em>
-<a id='L59' name='L59'></a>  59   <strong class='reserved'>int</strong> <a href='../Y/134.html' title='Multiple used in 17 places.'>id</a> = <a href='../S/64.html#L3' title='Defined at 3 in kernel/riscv.h.'>r_mhartid</a>();
-<a id='L60' name='L60'></a>  60 
-<a id='L61' name='L61'></a>  61   <em class='comment'>// ask the CLINT for a timer interrupt.</em>
-<a id='L62' name='L62'></a>  62   <strong class='reserved'>int</strong> <a href='../Y/144.html' title='Multiple used in 3 places.'>interval</a> = 1000000; <em class='comment'>// cycles; about 1/10th second in qemu.</em>
-<a id='L63' name='L63'></a>  63   *(<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>*)<a href='../S/49.html#L30' title='Defined at 30 in kernel/memlayout.h.'>CLINT_MTIMECMP</a>(<a href='../Y/134.html' title='Multiple used in 17 places.'>id</a>) = *(<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>*)<a href='../S/49.html#L31' title='Defined at 31 in kernel/memlayout.h.'>CLINT_MTIME</a> + <a href='../Y/144.html' title='Multiple used in 3 places.'>interval</a>;
-<a id='L64' name='L64'></a>  64 
-<a id='L65' name='L65'></a>  65   <em class='comment'>// prepare information in scratch[] for timervec.</em>
-<a id='L66' name='L66'></a>  66   <em class='comment'>// scratch[0..3] : space for timervec to save registers.</em>
-<a id='L67' name='L67'></a>  67   <em class='comment'>// scratch[4] : address of CLINT MTIMECMP register.</em>
-<a id='L68' name='L68'></a>  68   <em class='comment'>// scratch[5] : desired interval (in cycles) between timer interrupts.</em>
-<a id='L69' name='L69'></a>  69   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> *<a href='../Y/305.html' title='Multiple used in 6 places.'>scratch</a> = &amp;<a href='../Y/189.html' title='Multiple used in 2 places.'>mscratch0</a>[32 * <a href='../Y/134.html' title='Multiple used in 17 places.'>id</a>];
-<a id='L70' name='L70'></a>  70   <a href='../Y/305.html' title='Multiple used in 6 places.'>scratch</a>[4] = <a href='../S/49.html#L30' title='Defined at 30 in kernel/memlayout.h.'>CLINT_MTIMECMP</a>(<a href='../Y/134.html' title='Multiple used in 17 places.'>id</a>);
-<a id='L71' name='L71'></a>  71   <a href='../Y/305.html' title='Multiple used in 6 places.'>scratch</a>[5] = <a href='../Y/144.html' title='Multiple used in 3 places.'>interval</a>;
-<a id='L72' name='L72'></a>  72   <a href='../S/64.html#L213' title='Defined at 213 in kernel/riscv.h.'>w_mscratch</a>((<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../Y/305.html' title='Multiple used in 6 places.'>scratch</a>);
-<a id='L73' name='L73'></a>  73 
-<a id='L74' name='L74'></a>  74   <em class='comment'>// set the machine-mode trap handler.</em>
-<a id='L75' name='L75'></a>  75   <a href='../S/64.html#L179' title='Defined at 179 in kernel/riscv.h.'>w_mtvec</a>((<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../Y/354.html' title='Multiple used in 2 places.'>timervec</a>);
-<a id='L76' name='L76'></a>  76 
-<a id='L77' name='L77'></a>  77   <em class='comment'>// enable machine-mode interrupts.</em>
-<a id='L78' name='L78'></a>  78   <a href='../S/64.html#L27' title='Defined at 27 in kernel/riscv.h.'>w_mstatus</a>(<a href='../S/64.html#L19' title='Defined at 19 in kernel/riscv.h.'>r_mstatus</a>() | <a href='../S/64.html#L16' title='Defined at 16 in kernel/riscv.h.'>MSTATUS_MIE</a>);
-<a id='L79' name='L79'></a>  79 
-<a id='L80' name='L80'></a>  80   <em class='comment'>// enable machine-mode timer interrupts.</em>
-<a id='L81' name='L81'></a>  81   <a href='../S/64.html#L109' title='Defined at 109 in kernel/riscv.h.'>w_mie</a>(<a href='../S/64.html#L101' title='Defined at 101 in kernel/riscv.h.'>r_mie</a>() | <a href='../S/64.html#L98' title='Defined at 98 in kernel/riscv.h.'>MIE_MTIE</a>);
-<a id='L82' name='L82'></a>  82 <em class='brace'>}</em>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// System call numbers</em>
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#define</em> <a href='../S/53.html#L109' title='Referred from 109 in kernel/syscall.c.'>SYS_fork</a>    1
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#define</em> <a href='../S/53.html#L110' title='Referred from 110 in kernel/syscall.c.'>SYS_exit</a>    2
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#define</em> <a href='../S/53.html#L111' title='Referred from 111 in kernel/syscall.c.'>SYS_wait</a>    3
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#define</em> <a href='../S/53.html#L112' title='Referred from 112 in kernel/syscall.c.'>SYS_pipe</a>    4
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#define</em> <a href='../S/53.html#L113' title='Referred from 113 in kernel/syscall.c.'>SYS_read</a>    5
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#define</em> <a href='../S/53.html#L114' title='Referred from 114 in kernel/syscall.c.'>SYS_kill</a>    6
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#define</em> <a href='../S/53.html#L115' title='Referred from 115 in kernel/syscall.c.'>SYS_exec</a>    7
+<a id='L9' name='L9'></a>   9 <em class='sharp'>#define</em> <a href='../S/53.html#L116' title='Referred from 116 in kernel/syscall.c.'>SYS_fstat</a>   8
+<a id='L10' name='L10'></a>  10 <em class='sharp'>#define</em> <a href='../S/53.html#L117' title='Referred from 117 in kernel/syscall.c.'>SYS_chdir</a>   9
+<a id='L11' name='L11'></a>  11 <em class='sharp'>#define</em> <a href='../S/53.html#L118' title='Referred from 118 in kernel/syscall.c.'>SYS_dup</a>    10
+<a id='L12' name='L12'></a>  12 <em class='sharp'>#define</em> <a href='../S/53.html#L119' title='Referred from 119 in kernel/syscall.c.'>SYS_getpid</a> 11
+<a id='L13' name='L13'></a>  13 <em class='sharp'>#define</em> <a href='../S/53.html#L120' title='Referred from 120 in kernel/syscall.c.'>SYS_sbrk</a>   12
+<a id='L14' name='L14'></a>  14 <em class='sharp'>#define</em> <a href='../S/53.html#L121' title='Referred from 121 in kernel/syscall.c.'>SYS_sleep</a>  13
+<a id='L15' name='L15'></a>  15 <em class='sharp'>#define</em> <a href='../S/53.html#L122' title='Referred from 122 in kernel/syscall.c.'>SYS_uptime</a> 14
+<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../S/53.html#L123' title='Referred from 123 in kernel/syscall.c.'>SYS_open</a>   15
+<a id='L17' name='L17'></a>  17 <em class='sharp'>#define</em> <a href='../S/53.html#L124' title='Referred from 124 in kernel/syscall.c.'>SYS_write</a>  16
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#define</em> <a href='../S/53.html#L125' title='Referred from 125 in kernel/syscall.c.'>SYS_mknod</a>  17
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../S/53.html#L126' title='Referred from 126 in kernel/syscall.c.'>SYS_unlink</a> 18
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#define</em> <a href='../S/53.html#L127' title='Referred from 127 in kernel/syscall.c.'>SYS_link</a>   19
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#define</em> <a href='../S/53.html#L128' title='Referred from 128 in kernel/syscall.c.'>SYS_mkdir</a>  20
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/53.html#L129' title='Referred from 129 in kernel/syscall.c.'>SYS_close</a>  21
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L21'>[^]</a><a href='#L56'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

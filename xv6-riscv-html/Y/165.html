@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>len</title>
+<title>lcmd</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,34 +9,14 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L103'>len</a>               103 kernel/defs.h  int             either_copyout(int user_dst, uint64 dst, void *src, uint64 len);</span>
-<span class='curline'><a href='../S/31.html#L104'>len</a>               104 kernel/defs.h  int             either_copyin(void *dst, int user_src, uint64 src, uint64 len);</span>
-<span class='curline'><a href='../S/48.html#L599'>len</a>               599 kernel/fs.c      int len;</span>
-<span class='curline'><a href='../S/48.html#L608'>len</a>               608 kernel/fs.c      len = path - s;</span>
-<span class='curline'><a href='../S/48.html#L609'>len</a>               609 kernel/fs.c      if(len &gt;= DIRSIZ)</span>
-<span class='curline'><a href='../S/48.html#L612'>len</a>               612 kernel/fs.c        memmove(name, s, len);</span>
-<span class='curline'><a href='../S/48.html#L613'>len</a>               613 kernel/fs.c        name[len] = 0;</span>
-<span class='curline'><a href='../S/63.html#L602'>len</a>               602 kernel/proc.c  either_copyout(int user_dst, uint64 dst, void *src, uint64 len)</span>
-<span class='curline'><a href='../S/63.html#L606'>len</a>               606 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
-<span class='curline'><a href='../S/63.html#L608'>len</a>               608 kernel/proc.c      memmove((char *)dst, src, len);</span>
-<span class='curline'><a href='../S/63.html#L617'>len</a>               617 kernel/proc.c  either_copyin(void *dst, int user_src, uint64 src, uint64 len)</span>
-<span class='curline'><a href='../S/63.html#L621'>len</a>               621 kernel/proc.c      return copyin(p-&gt;pagetable, dst, src, len);</span>
-<span class='curline'><a href='../S/63.html#L623'>len</a>               623 kernel/proc.c      memmove(dst, (char*)src, len);</span>
-<span class='curline'><a href='../S/54.html#L52'>len</a>                52 kernel/virtio.h   uint32 len;</span>
-<span class='curline'><a href='../S/54.html#L61'>len</a>                61 kernel/virtio.h   uint32 len;</span>
-<span class='curline'><a href='../S/65.html#L207'>len</a>               207 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(buf0);</span>
-<span class='curline'><a href='../S/65.html#L212'>len</a>               212 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
-<span class='curline'><a href='../S/65.html#L222'>len</a>               222 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
-<span class='curline'><a href='../S/38.html#L354'>len</a>               354 kernel/vm.c    copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)</span>
-<span class='curline'><a href='../S/38.html#L358'>len</a>               358 kernel/vm.c      while(len &gt; 0){</span>
-<span class='curline'><a href='../S/38.html#L364'>len</a>               364 kernel/vm.c        if(n &gt; len)</span>
-<span class='curline'><a href='../S/38.html#L365'>len</a>               365 kernel/vm.c          n = len;</span>
-<span class='curline'><a href='../S/38.html#L368'>len</a>               368 kernel/vm.c        len -= n;</span>
-<span class='curline'><a href='../S/38.html#L379'>len</a>               379 kernel/vm.c    copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)</span>
-<span class='curline'><a href='../S/38.html#L383'>len</a>               383 kernel/vm.c      while(len &gt; 0){</span>
-<span class='curline'><a href='../S/38.html#L389'>len</a>               389 kernel/vm.c        if(n &gt; len)</span>
-<span class='curline'><a href='../S/38.html#L390'>len</a>               390 kernel/vm.c          n = len;</span>
-<span class='curline'><a href='../S/38.html#L393'>len</a>               393 kernel/vm.c        len -= n;</span>
+<span class='curline'><a href='../S/18.html#L63'>lcmd</a>               63 user/sh.c        struct listcmd *lcmd;</span>
+<span class='curline'><a href='../S/18.html#L93'>lcmd</a>               93 user/sh.c          lcmd = (struct listcmd*)cmd;</span>
+<span class='curline'><a href='../S/18.html#L95'>lcmd</a>               95 user/sh.c            runcmd(lcmd-&gt;left);</span>
+<span class='curline'><a href='../S/18.html#L97'>lcmd</a>               97 user/sh.c          runcmd(lcmd-&gt;right);</span>
+<span class='curline'><a href='../S/18.html#L455'>lcmd</a>              455 user/sh.c        struct listcmd *lcmd;</span>
+<span class='curline'><a href='../S/18.html#L482'>lcmd</a>              482 user/sh.c          lcmd = (struct listcmd*)cmd;</span>
+<span class='curline'><a href='../S/18.html#L483'>lcmd</a>              483 user/sh.c          nulterminate(lcmd-&gt;left);</span>
+<span class='curline'><a href='../S/18.html#L484'>lcmd</a>              484 user/sh.c          nulterminate(lcmd-&gt;right);</span>
 </pre>
 </body>
 </html>

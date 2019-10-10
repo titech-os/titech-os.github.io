@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>w</title>
+<title>vdisk_lock</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,15 +9,14 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/57.html#L56'>w</a>                  56 kernel/console.c   uint w;  // Write index</span>
-<span class='curline'><a href='../S/57.html#L98'>w</a>                  98 kernel/console.c     while(cons.r == cons.w){</span>
-<span class='curline'><a href='../S/57.html#L152'>w</a>                 152 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
-<span class='curline'><a href='../S/57.html#L160'>w</a>                 160 kernel/console.c     if(cons.e != cons.w){</span>
-<span class='curline'><a href='../S/57.html#L178'>w</a>                 178 kernel/console.c         cons.w = cons.e;</span>
-<span class='curline'><a href='../S/10.html#L11'>w</a>                  11 user/wc.c        int l, w, c, inword;</span>
-<span class='curline'><a href='../S/10.html#L13'>w</a>                  13 user/wc.c        l = w = c = 0;</span>
-<span class='curline'><a href='../S/10.html#L23'>w</a>                  23 user/wc.c              w++;</span>
-<span class='curline'><a href='../S/10.html#L32'>w</a>                  32 user/wc.c        printf("%d %d %d %s\n", l, w, c, name);</span>
+<span class='curline'><a href='../S/67.html#L45'>vdisk_lock</a>         45 kernel/virtio_disk.c   struct spinlock vdisk_lock;</span>
+<span class='curline'><a href='../S/67.html#L54'>vdisk_lock</a>         54 kernel/virtio_disk.c   initlock(&amp;disk.vdisk_lock, "virtio_disk");</span>
+<span class='curline'><a href='../S/67.html#L173'>vdisk_lock</a>        173 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L185'>vdisk_lock</a>        185 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L242'>vdisk_lock</a>        242 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L248'>vdisk_lock</a>        248 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L254'>vdisk_lock</a>        254 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L268'>vdisk_lock</a>        268 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
 </pre>
 </body>
 </html>

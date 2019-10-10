@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>readopen</title>
+<title>re</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,11 +9,19 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L18'>readopen</a>           18 kernel/pipe.c    int readopen;   // read fd is still open</span>
-<span class='curline'><a href='../S/34.html#L33'>readopen</a>           33 kernel/pipe.c    pi-&gt;readopen = 1;</span>
-<span class='curline'><a href='../S/34.html#L66'>readopen</a>           66 kernel/pipe.c      pi-&gt;readopen = 0;</span>
-<span class='curline'><a href='../S/34.html#L69'>readopen</a>           69 kernel/pipe.c    if(pi-&gt;readopen == 0 &amp;&amp; pi-&gt;writeopen == 0){</span>
-<span class='curline'><a href='../S/34.html#L86'>readopen</a>           86 kernel/pipe.c        if(pi-&gt;readopen == 0 || myproc()-&gt;killed){</span>
+<span class='curline'><a href='../S/22.html#L71'>re</a>                 71 user/grep.c    match(char *re, char *text)</span>
+<span class='curline'><a href='../S/22.html#L73'>re</a>                 73 user/grep.c      if(re[0] == '^')</span>
+<span class='curline'><a href='../S/22.html#L74'>re</a>                 74 user/grep.c        return matchhere(re+1, text);</span>
+<span class='curline'><a href='../S/22.html#L76'>re</a>                 76 user/grep.c        if(matchhere(re, text))</span>
+<span class='curline'><a href='../S/22.html#L83'>re</a>                 83 user/grep.c    int matchhere(char *re, char *text)</span>
+<span class='curline'><a href='../S/22.html#L85'>re</a>                 85 user/grep.c      if(re[0] == '\0')</span>
+<span class='curline'><a href='../S/22.html#L87'>re</a>                 87 user/grep.c      if(re[1] == '*')</span>
+<span class='curline'><a href='../S/22.html#L88'>re</a>                 88 user/grep.c        return matchstar(re[0], re+2, text);</span>
+<span class='curline'><a href='../S/22.html#L89'>re</a>                 89 user/grep.c      if(re[0] == '$' &amp;&amp; re[1] == '\0')</span>
+<span class='curline'><a href='../S/22.html#L91'>re</a>                 91 user/grep.c      if(*text!='\0' &amp;&amp; (re[0]=='.' || re[0]==*text))</span>
+<span class='curline'><a href='../S/22.html#L92'>re</a>                 92 user/grep.c        return matchhere(re+1, text+1);</span>
+<span class='curline'><a href='../S/22.html#L97'>re</a>                 97 user/grep.c    int matchstar(int c, char *re, char *text)</span>
+<span class='curline'><a href='../S/22.html#L100'>re</a>                100 user/grep.c        if(matchhere(re, text))</span>
 </pre>
 </body>
 </html>

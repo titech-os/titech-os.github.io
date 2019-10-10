@@ -1,164 +1,62 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel/printf.c</title>
+<title>kernel/swtch.S</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/printf.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L29'>[^]</a><a href='#L130'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
-<hr />
-<h2 class='header'>DEFINITIONS</h2>
-This source file includes following definitions.
-<ol>
-<li><a href='#L29' title='Defined at 29.'>printint</a></li>
-<li><a href='#L53' title='Defined at 53.'>printptr</a></li>
-<li><a href='#L64' title='Defined at 64.'>printf</a></li>
-<li><a href='#L118' title='Defined at 118.'>panic</a></li>
-<li><a href='#L130' title='Defined at 130.'>printfinit</a></li>
-</ol>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/75.html'>kernel</a>/swtch.S</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='comment'>//</em>
-<a id='L2' name='L2'></a>   2 <em class='comment'>// formatted console output -- printf, panic.</em>
-<a id='L3' name='L3'></a>   3 <em class='comment'>//</em>
-<a id='L4' name='L4'></a>   4 
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> &lt;stdarg.h&gt;
+<a id='L1' name='L1'></a>   1 <em class='comment'># Context switch</em>
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>#   void swtch(struct context *old, struct context *new);</em>
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#</em> 
+<a id='L5' name='L5'></a>   5 <em class='comment'># Save current registers in old. Load from new. </em>
 <a id='L6' name='L6'></a>   6 
-<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='37.html'>types.h</a>"
-<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='58.html'>param.h</a>"
-<a id='L9' name='L9'></a>   9 <em class='sharp'>#include</em> "<a href='30.html'>spinlock.h</a>"
-<a id='L10' name='L10'></a>  10 <em class='sharp'>#include</em> "<a href='66.html'>sleeplock.h</a>"
-<a id='L11' name='L11'></a>  11 <em class='sharp'>#include</em> "<a href='71.html'>fs.h</a>"
-<a id='L12' name='L12'></a>  12 <em class='sharp'>#include</em> "<a href='41.html'>file.h</a>"
-<a id='L13' name='L13'></a>  13 <em class='sharp'>#include</em> "<a href='49.html'>memlayout.h</a>"
-<a id='L14' name='L14'></a>  14 <em class='sharp'>#include</em> "<a href='64.html'>riscv.h</a>"
-<a id='L15' name='L15'></a>  15 <em class='sharp'>#include</em> "<a href='31.html'>defs.h</a>"
-<a id='L16' name='L16'></a>  16 <em class='sharp'>#include</em> "<a href='35.html'>proc.h</a>"
-<a id='L17' name='L17'></a>  17 
-<a id='L18' name='L18'></a>  18 <strong class='reserved'>volatile</strong> <strong class='reserved'>int</strong> <a href='../Y/238.html' title='Multiple used in 4 places.'>panicked</a> = 0;
-<a id='L19' name='L19'></a>  19 
-<a id='L20' name='L20'></a>  20 <em class='comment'>// lock to avoid interleaving concurrent printf's.</em>
-<a id='L21' name='L21'></a>  21 <strong class='reserved'>static</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
-<a id='L22' name='L22'></a>  22   <strong class='reserved'>struct</strong> <a href='../S/30.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>;
-<a id='L23' name='L23'></a>  23   <strong class='reserved'>int</strong> <a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a>;
-<a id='L24' name='L24'></a>  24 <em class='brace'>}</em> <a href='../Y/263.html' title='Multiple used in 11 places.'>pr</a>;
-<a id='L25' name='L25'></a>  25 
-<a id='L26' name='L26'></a>  26 <strong class='reserved'>static</strong> <strong class='reserved'>char</strong> <a href='../Y/66.html' title='Multiple used in 6 places.'>digits</a>[] = "0123456789abcdef";
-<a id='L27' name='L27'></a>  27 
-<a id='L28' name='L28'></a>  28 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L29' name='L29'></a>  29 <a href='../R/367.html' title='Multiple referred from 5 places.'>printint</a>(<strong class='reserved'>int</strong> <a href='../Y/402.html' title='Multiple used in 8 places.'>xx</a>, <strong class='reserved'>int</strong> <a href='../Y/32.html' title='Multiple used in 9 places.'>base</a>, <strong class='reserved'>int</strong> <a href='../Y/319.html' title='Multiple used in 3 places.'>sign</a>)
-<a id='L30' name='L30'></a>  30 <em class='brace'>{</em>
-<a id='L31' name='L31'></a>  31   <strong class='reserved'>char</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[16];
-<a id='L32' name='L32'></a>  32   <strong class='reserved'>int</strong> <a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>;
-<a id='L33' name='L33'></a>  33   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a>;
-<a id='L34' name='L34'></a>  34 
-<a id='L35' name='L35'></a>  35   <strong class='reserved'>if</strong>(<a href='../Y/319.html' title='Multiple used in 3 places.'>sign</a> &amp;&amp; (<a href='../Y/319.html' title='Multiple used in 3 places.'>sign</a> = <a href='../Y/402.html' title='Multiple used in 8 places.'>xx</a> &lt; 0))
-<a id='L36' name='L36'></a>  36     <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> = -<a href='../Y/402.html' title='Multiple used in 8 places.'>xx</a>;
-<a id='L37' name='L37'></a>  37   <strong class='reserved'>else</strong>
-<a id='L38' name='L38'></a>  38     <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> = <a href='../Y/402.html' title='Multiple used in 8 places.'>xx</a>;
-<a id='L39' name='L39'></a>  39 
-<a id='L40' name='L40'></a>  40   <a href='../Y/132.html' title='Multiple used in 284 places.'>i</a> = 0;
-<a id='L41' name='L41'></a>  41   <strong class='reserved'>do</strong> <em class='brace'>{</em>
-<a id='L42' name='L42'></a>  42     <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>++] = <a href='../Y/66.html' title='Multiple used in 6 places.'>digits</a>[<a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> % <a href='../Y/32.html' title='Multiple used in 9 places.'>base</a>];
-<a id='L43' name='L43'></a>  43   <em class='brace'>}</em> <strong class='reserved'>while</strong>((<a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> /= <a href='../Y/32.html' title='Multiple used in 9 places.'>base</a>) != 0);
-<a id='L44' name='L44'></a>  44 
-<a id='L45' name='L45'></a>  45   <strong class='reserved'>if</strong>(<a href='../Y/319.html' title='Multiple used in 3 places.'>sign</a>)
-<a id='L46' name='L46'></a>  46     <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>++] = '-';
-<a id='L47' name='L47'></a>  47 
-<a id='L48' name='L48'></a>  48   <strong class='reserved'>while</strong>(--<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a> &gt;= 0)
-<a id='L49' name='L49'></a>  49     <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>(<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>]);
-<a id='L50' name='L50'></a>  50 <em class='brace'>}</em>
-<a id='L51' name='L51'></a>  51 
-<a id='L52' name='L52'></a>  52 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L53' name='L53'></a>  53 <a href='../R/368.html' title='Multiple referred from 2 places.'>printptr</a>(<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a>)
-<a id='L54' name='L54'></a>  54 <em class='brace'>{</em>
-<a id='L55' name='L55'></a>  55   <strong class='reserved'>int</strong> <a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>;
-<a id='L56' name='L56'></a>  56   <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>('0');
-<a id='L57' name='L57'></a>  57   <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>('x');
-<a id='L58' name='L58'></a>  58   <strong class='reserved'>for</strong> (<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a> = 0; <a href='../Y/132.html' title='Multiple used in 284 places.'>i</a> &lt; (<strong class='reserved'>sizeof</strong>(<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>) * 2); <a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>++, <a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> &lt;&lt;= 4)
-<a id='L59' name='L59'></a>  59     <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>(<a href='../Y/66.html' title='Multiple used in 6 places.'>digits</a>[<a href='../Y/397.html' title='Multiple used in 132 places.'>x</a> &gt;&gt; (<strong class='reserved'>sizeof</strong>(<a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>) * 8 - 4)]);
-<a id='L60' name='L60'></a>  60 <em class='brace'>}</em>
-<a id='L61' name='L61'></a>  61 
-<a id='L62' name='L62'></a>  62 <em class='comment'>// Print to the console. only understands %d, %x, %p, %s.</em>
-<a id='L63' name='L63'></a>  63 <strong class='reserved'>void</strong>
-<a id='L64' name='L64'></a>  64 <a href='../R/365.html' title='Multiple referred from 327 places.'>printf</a>(<strong class='reserved'>char</strong> *<a href='../Y/107.html' title='Multiple used in 14 places.'>fmt</a>, ...)
-<a id='L65' name='L65'></a>  65 <em class='brace'>{</em>
-<a id='L66' name='L66'></a>  66   <a href='../Y/381.html' title='Multiple used in 4 places.'>va_list</a> <a href='../Y/24.html' title='Multiple used in 21 places.'>ap</a>;
-<a id='L67' name='L67'></a>  67   <strong class='reserved'>int</strong> <a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>, <a href='../Y/44.html' title='Multiple used in 93 places.'>c</a>, <a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a>;
-<a id='L68' name='L68'></a>  68   <strong class='reserved'>char</strong> *<a href='../Y/288.html' title='Multiple used in 107 places.'>s</a>;
-<a id='L69' name='L69'></a>  69 
-<a id='L70' name='L70'></a>  70   <a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a> = <a href='../Y/263.html' title='Multiple used in 11 places.'>pr</a>.<a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a>;
-<a id='L71' name='L71'></a>  71   <strong class='reserved'>if</strong>(<a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a>)
-<a id='L72' name='L72'></a>  72     <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/263.html' title='Multiple used in 11 places.'>pr</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
-<a id='L73' name='L73'></a>  73 
-<a id='L74' name='L74'></a>  74   <strong class='reserved'>if</strong> (<a href='../Y/107.html' title='Multiple used in 14 places.'>fmt</a> == 0)
-<a id='L75' name='L75'></a>  75     <a href='../D/363.html' title='Multiple defined in 2 places.'>panic</a>("null fmt");
-<a id='L76' name='L76'></a>  76 
-<a id='L77' name='L77'></a>  77   <a href='../Y/382.html' title='Multiple used in 3 places.'>va_start</a>(<a href='../Y/24.html' title='Multiple used in 21 places.'>ap</a>, <a href='../Y/107.html' title='Multiple used in 14 places.'>fmt</a>);
-<a id='L78' name='L78'></a>  78   <strong class='reserved'>for</strong>(<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a> = 0; (<a href='../Y/44.html' title='Multiple used in 93 places.'>c</a> = <a href='../Y/107.html' title='Multiple used in 14 places.'>fmt</a>[<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>] &amp; 0xff) != 0; <a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>++)<em class='brace'>{</em>
-<a id='L79' name='L79'></a>  79     <strong class='reserved'>if</strong>(<a href='../Y/44.html' title='Multiple used in 93 places.'>c</a> != '%')<em class='brace'>{</em>
-<a id='L80' name='L80'></a>  80       <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>(<a href='../Y/44.html' title='Multiple used in 93 places.'>c</a>);
-<a id='L81' name='L81'></a>  81       <strong class='reserved'>continue</strong>;
-<a id='L82' name='L82'></a>  82     <em class='brace'>}</em>
-<a id='L83' name='L83'></a>  83     <a href='../Y/44.html' title='Multiple used in 93 places.'>c</a> = <a href='../Y/107.html' title='Multiple used in 14 places.'>fmt</a>[++<a href='../Y/132.html' title='Multiple used in 284 places.'>i</a>] &amp; 0xff;
-<a id='L84' name='L84'></a>  84     <strong class='reserved'>if</strong>(<a href='../Y/44.html' title='Multiple used in 93 places.'>c</a> == 0)
-<a id='L85' name='L85'></a>  85       <strong class='reserved'>break</strong>;
-<a id='L86' name='L86'></a>  86     <strong class='reserved'>switch</strong>(<a href='../Y/44.html' title='Multiple used in 93 places.'>c</a>)<em class='brace'>{</em>
-<a id='L87' name='L87'></a>  87     <strong class='reserved'>case</strong> 'd':
-<a id='L88' name='L88'></a>  88       <a href='../D/390.html' title='Multiple defined in 2 places.'>printint</a>(<a href='../Y/380.html' title='Multiple used in 10 places.'>va_arg</a>(<a href='../Y/24.html' title='Multiple used in 21 places.'>ap</a>, <strong class='reserved'>int</strong>), 10, 1);
-<a id='L89' name='L89'></a>  89       <strong class='reserved'>break</strong>;
-<a id='L90' name='L90'></a>  90     <strong class='reserved'>case</strong> 'x':
-<a id='L91' name='L91'></a>  91       <a href='../D/390.html' title='Multiple defined in 2 places.'>printint</a>(<a href='../Y/380.html' title='Multiple used in 10 places.'>va_arg</a>(<a href='../Y/24.html' title='Multiple used in 21 places.'>ap</a>, <strong class='reserved'>int</strong>), 16, 1);
-<a id='L92' name='L92'></a>  92       <strong class='reserved'>break</strong>;
-<a id='L93' name='L93'></a>  93     <strong class='reserved'>case</strong> 'p':
-<a id='L94' name='L94'></a>  94       <a href='../D/391.html' title='Multiple defined in 2 places.'>printptr</a>(<a href='../Y/380.html' title='Multiple used in 10 places.'>va_arg</a>(<a href='../Y/24.html' title='Multiple used in 21 places.'>ap</a>, <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>));
-<a id='L95' name='L95'></a>  95       <strong class='reserved'>break</strong>;
-<a id='L96' name='L96'></a>  96     <strong class='reserved'>case</strong> 's':
-<a id='L97' name='L97'></a>  97       <strong class='reserved'>if</strong>((<a href='../Y/288.html' title='Multiple used in 107 places.'>s</a> = <a href='../Y/380.html' title='Multiple used in 10 places.'>va_arg</a>(<a href='../Y/24.html' title='Multiple used in 21 places.'>ap</a>, <strong class='reserved'>char</strong>*)) == 0)
-<a id='L98' name='L98'></a>  98         <a href='../Y/288.html' title='Multiple used in 107 places.'>s</a> = "(null)";
-<a id='L99' name='L99'></a>  99       <strong class='reserved'>for</strong>(; *<a href='../Y/288.html' title='Multiple used in 107 places.'>s</a>; <a href='../Y/288.html' title='Multiple used in 107 places.'>s</a>++)
-<a id='L100' name='L100'></a> 100         <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>(*<a href='../Y/288.html' title='Multiple used in 107 places.'>s</a>);
-<a id='L101' name='L101'></a> 101       <strong class='reserved'>break</strong>;
-<a id='L102' name='L102'></a> 102     <strong class='reserved'>case</strong> '%':
-<a id='L103' name='L103'></a> 103       <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>('%');
-<a id='L104' name='L104'></a> 104       <strong class='reserved'>break</strong>;
-<a id='L105' name='L105'></a> 105     <strong class='reserved'>default</strong>:
-<a id='L106' name='L106'></a> 106       <em class='comment'>// Print unknown % sequence to draw attention.</em>
-<a id='L107' name='L107'></a> 107       <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>('%');
-<a id='L108' name='L108'></a> 108       <a href='../S/57.html#L32' title='Defined at 32 in kernel/console.c.'>consputc</a>(<a href='../Y/44.html' title='Multiple used in 93 places.'>c</a>);
-<a id='L109' name='L109'></a> 109       <strong class='reserved'>break</strong>;
-<a id='L110' name='L110'></a> 110     <em class='brace'>}</em>
-<a id='L111' name='L111'></a> 111   <em class='brace'>}</em>
-<a id='L112' name='L112'></a> 112 
-<a id='L113' name='L113'></a> 113   <strong class='reserved'>if</strong>(<a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a>)
-<a id='L114' name='L114'></a> 114     <a href='../S/59.html#L46' title='Defined at 46 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/263.html' title='Multiple used in 11 places.'>pr</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>);
-<a id='L115' name='L115'></a> 115 <em class='brace'>}</em>
-<a id='L116' name='L116'></a> 116 
-<a id='L117' name='L117'></a> 117 <strong class='reserved'>void</strong>
-<a id='L118' name='L118'></a> 118 <a href='../R/340.html' title='Multiple referred from 86 places.'>panic</a>(<strong class='reserved'>char</strong> *<a href='../Y/288.html' title='Multiple used in 107 places.'>s</a>)
-<a id='L119' name='L119'></a> 119 <em class='brace'>{</em>
-<a id='L120' name='L120'></a> 120   <a href='../Y/263.html' title='Multiple used in 11 places.'>pr</a>.<a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a> = 0;
-<a id='L121' name='L121'></a> 121   <a href='../D/388.html' title='Multiple defined in 2 places.'>printf</a>("panic: ");
-<a id='L122' name='L122'></a> 122   <a href='../D/388.html' title='Multiple defined in 2 places.'>printf</a>(<a href='../Y/288.html' title='Multiple used in 107 places.'>s</a>);
-<a id='L123' name='L123'></a> 123   <a href='../D/388.html' title='Multiple defined in 2 places.'>printf</a>("\n");
-<a id='L124' name='L124'></a> 124   <a href='../Y/238.html' title='Multiple used in 4 places.'>panicked</a> = 1; <em class='comment'>// freeze other CPUs</em>
-<a id='L125' name='L125'></a> 125   <strong class='reserved'>for</strong>(;;)
-<a id='L126' name='L126'></a> 126     ;
-<a id='L127' name='L127'></a> 127 <em class='brace'>}</em>
-<a id='L128' name='L128'></a> 128 
-<a id='L129' name='L129'></a> 129 <strong class='reserved'>void</strong>
-<a id='L130' name='L130'></a> 130 <a href='../R/366.html' title='Multiple referred from 2 places.'>printfinit</a>(<strong class='reserved'>void</strong>)
-<a id='L131' name='L131'></a> 131 <em class='brace'>{</em>
-<a id='L132' name='L132'></a> 132   <a href='../S/59.html#L12' title='Defined at 12 in kernel/spinlock.c.'>initlock</a>(&amp;<a href='../Y/263.html' title='Multiple used in 11 places.'>pr</a>.<a href='../Y/170.html' title='Multiple used in 131 places.'>lock</a>, "pr");
-<a id='L133' name='L133'></a> 133   <a href='../Y/263.html' title='Multiple used in 11 places.'>pr</a>.<a href='../Y/172.html' title='Multiple used in 7 places.'>locking</a> = 1;
-<a id='L134' name='L134'></a> 134 <em class='brace'>}</em>
+<a id='L7' name='L7'></a>   7 
+<a id='L8' name='L8'></a>   8 .globl swtch
+<a id='L9' name='L9'></a>   9 swtch:
+<a id='L10' name='L10'></a>  10         sd ra, 0(a0)
+<a id='L11' name='L11'></a>  11         sd sp, 8(a0)
+<a id='L12' name='L12'></a>  12         sd s0, 16(a0)
+<a id='L13' name='L13'></a>  13         sd s1, 24(a0)
+<a id='L14' name='L14'></a>  14         sd s2, 32(a0)
+<a id='L15' name='L15'></a>  15         sd s3, 40(a0)
+<a id='L16' name='L16'></a>  16         sd s4, 48(a0)
+<a id='L17' name='L17'></a>  17         sd s5, 56(a0)
+<a id='L18' name='L18'></a>  18         sd s6, 64(a0)
+<a id='L19' name='L19'></a>  19         sd s7, 72(a0)
+<a id='L20' name='L20'></a>  20         sd s8, 80(a0)
+<a id='L21' name='L21'></a>  21         sd s9, 88(a0)
+<a id='L22' name='L22'></a>  22         sd s10, 96(a0)
+<a id='L23' name='L23'></a>  23         sd s11, 104(a0)
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25         ld ra, 0(a1)
+<a id='L26' name='L26'></a>  26         ld sp, 8(a1)
+<a id='L27' name='L27'></a>  27         ld s0, 16(a1)
+<a id='L28' name='L28'></a>  28         ld s1, 24(a1)
+<a id='L29' name='L29'></a>  29         ld s2, 32(a1)
+<a id='L30' name='L30'></a>  30         ld s3, 40(a1)
+<a id='L31' name='L31'></a>  31         ld s4, 48(a1)
+<a id='L32' name='L32'></a>  32         ld s5, 56(a1)
+<a id='L33' name='L33'></a>  33         ld s6, 64(a1)
+<a id='L34' name='L34'></a>  34         ld s7, 72(a1)
+<a id='L35' name='L35'></a>  35         ld s8, 80(a1)
+<a id='L36' name='L36'></a>  36         ld s9, 88(a1)
+<a id='L37' name='L37'></a>  37         ld s10, 96(a1)
+<a id='L38' name='L38'></a>  38         ld s11, 104(a1)
+<a id='L39' name='L39'></a>  39         
+<a id='L40' name='L40'></a>  40         ret
+<a id='L41' name='L41'></a>  41 
+<a id='L42' name='L42'></a>  42         
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L29'>[^]</a><a href='#L130'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

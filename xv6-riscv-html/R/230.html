@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>disk</title>
+<title>dirlookup</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,56 +9,11 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L3'>disk</a>                3 kernel/buf.h     int disk;    // does disk "own" buf?</span>
-<span class='curline'><a href='../S/65.html#L47'>disk</a>               47 kernel/virtio_disk.c } __attribute__ ((aligned (PGSIZE))) disk;</span>
-<span class='curline'><a href='../S/65.html#L54'>disk</a>               54 kernel/virtio_disk.c   initlock(&amp;disk.vdisk_lock, "virtio_disk");</span>
-<span class='curline'><a href='../S/65.html#L98'>disk</a>               98 kernel/virtio_disk.c   memset(disk.pages, 0, sizeof(disk.pages));</span>
-<span class='curline'><a href='../S/65.html#L99'>disk</a>               99 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_PFN) = ((uint64)disk.pages) &gt;&gt; PGSHIFT;</span>
-<span class='curline'><a href='../S/65.html#L105'>disk</a>              105 kernel/virtio_disk.c   disk.desc = (struct VRingDesc *) disk.pages;</span>
-<span class='curline'><a href='../S/65.html#L106'>disk</a>              106 kernel/virtio_disk.c   disk.avail = (uint16*)(((char*)disk.desc) + NUM*sizeof(struct VRingDesc));</span>
-<span class='curline'><a href='../S/65.html#L107'>disk</a>              107 kernel/virtio_disk.c   disk.used = (struct UsedArea *) (disk.pages + PGSIZE);</span>
-<span class='curline'><a href='../S/65.html#L110'>disk</a>              110 kernel/virtio_disk.c     disk.free[i] = 1;</span>
-<span class='curline'><a href='../S/65.html#L120'>disk</a>              120 kernel/virtio_disk.c     if(disk.free[i]){</span>
-<span class='curline'><a href='../S/65.html#L121'>disk</a>              121 kernel/virtio_disk.c       disk.free[i] = 0;</span>
-<span class='curline'><a href='../S/65.html#L134'>disk</a>              134 kernel/virtio_disk.c   if(disk.free[i])</span>
-<span class='curline'><a href='../S/65.html#L136'>disk</a>              136 kernel/virtio_disk.c   disk.desc[i].addr = 0;</span>
-<span class='curline'><a href='../S/65.html#L137'>disk</a>              137 kernel/virtio_disk.c   disk.free[i] = 1;</span>
-<span class='curline'><a href='../S/65.html#L138'>disk</a>              138 kernel/virtio_disk.c   wakeup(&amp;disk.free[0]);</span>
-<span class='curline'><a href='../S/65.html#L147'>disk</a>              147 kernel/virtio_disk.c     if(disk.desc[i].flags &amp; VRING_DESC_F_NEXT)</span>
-<span class='curline'><a href='../S/65.html#L148'>disk</a>              148 kernel/virtio_disk.c       i = disk.desc[i].next;</span>
-<span class='curline'><a href='../S/65.html#L173'>disk</a>              173 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L185'>disk</a>              185 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L206'>disk</a>              206 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) kvmpa((uint64) &amp;buf0);</span>
-<span class='curline'><a href='../S/65.html#L207'>disk</a>              207 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(buf0);</span>
-<span class='curline'><a href='../S/65.html#L208'>disk</a>              208 kernel/virtio_disk.c   disk.desc[idx[0]].flags = VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/65.html#L209'>disk</a>              209 kernel/virtio_disk.c   disk.desc[idx[0]].next = idx[1];</span>
-<span class='curline'><a href='../S/65.html#L211'>disk</a>              211 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
-<span class='curline'><a href='../S/65.html#L212'>disk</a>              212 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
-<span class='curline'><a href='../S/65.html#L214'>disk</a>              214 kernel/virtio_disk.c     disk.desc[idx[1]].flags = 0; // device reads b-&gt;data</span>
-<span class='curline'><a href='../S/65.html#L216'>disk</a>              216 kernel/virtio_disk.c     disk.desc[idx[1]].flags = VRING_DESC_F_WRITE; // device writes b-&gt;data</span>
-<span class='curline'><a href='../S/65.html#L217'>disk</a>              217 kernel/virtio_disk.c   disk.desc[idx[1]].flags |= VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/65.html#L218'>disk</a>              218 kernel/virtio_disk.c   disk.desc[idx[1]].next = idx[2];</span>
-<span class='curline'><a href='../S/65.html#L220'>disk</a>              220 kernel/virtio_disk.c   disk.info[idx[0]].status = 0;</span>
-<span class='curline'><a href='../S/65.html#L221'>disk</a>              221 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64) &amp;disk.info[idx[0]].status;</span>
-<span class='curline'><a href='../S/65.html#L222'>disk</a>              222 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
-<span class='curline'><a href='../S/65.html#L223'>disk</a>              223 kernel/virtio_disk.c   disk.desc[idx[2]].flags = VRING_DESC_F_WRITE; // device writes the status</span>
-<span class='curline'><a href='../S/65.html#L224'>disk</a>              224 kernel/virtio_disk.c   disk.desc[idx[2]].next = 0;</span>
-<span class='curline'><a href='../S/65.html#L227'>disk</a>              227 kernel/virtio_disk.c   b-&gt;disk = 1;</span>
-<span class='curline'><a href='../S/65.html#L228'>disk</a>              228 kernel/virtio_disk.c   disk.info[idx[0]].b = b;</span>
-<span class='curline'><a href='../S/65.html#L234'>disk</a>              234 kernel/virtio_disk.c   disk.avail[2 + (disk.avail[1] % NUM)] = idx[0];</span>
-<span class='curline'><a href='../S/65.html#L236'>disk</a>              236 kernel/virtio_disk.c   disk.avail[1] = disk.avail[1] + 1;</span>
-<span class='curline'><a href='../S/65.html#L241'>disk</a>              241 kernel/virtio_disk.c   while(b-&gt;disk == 1) {</span>
-<span class='curline'><a href='../S/65.html#L242'>disk</a>              242 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L245'>disk</a>              245 kernel/virtio_disk.c   disk.info[idx[0]].b = 0;</span>
-<span class='curline'><a href='../S/65.html#L248'>disk</a>              248 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L254'>disk</a>              254 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L256'>disk</a>              256 kernel/virtio_disk.c   while((disk.used_idx % NUM) != (disk.used-&gt;id % NUM)){</span>
-<span class='curline'><a href='../S/65.html#L257'>disk</a>              257 kernel/virtio_disk.c     int id = disk.used-&gt;elems[disk.used_idx].id;</span>
-<span class='curline'><a href='../S/65.html#L259'>disk</a>              259 kernel/virtio_disk.c     if(disk.info[id].status != 0)</span>
-<span class='curline'><a href='../S/65.html#L262'>disk</a>              262 kernel/virtio_disk.c     disk.info[id].b-&gt;disk = 0;   // disk is done with buf</span>
-<span class='curline'><a href='../S/65.html#L263'>disk</a>              263 kernel/virtio_disk.c     wakeup(disk.info[id].b);</span>
-<span class='curline'><a href='../S/65.html#L265'>disk</a>              265 kernel/virtio_disk.c     disk.used_idx = (disk.used_idx + 1) % NUM;</span>
-<span class='curline'><a href='../S/65.html#L268'>disk</a>              268 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/33.html#L40'>dirlookup</a>          40 kernel/defs.h  struct inode*   dirlookup(struct inode*, char*, uint*);</span>
+<span class='curline'><a href='../S/50.html#L565'>dirlookup</a>         565 kernel/fs.c      if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/50.html#L650'>dirlookup</a>         650 kernel/fs.c        if((next = dirlookup(ip, name, 0)) == 0){</span>
+<span class='curline'><a href='../S/45.html#L207'>dirlookup</a>         207 kernel/sysfile.c   if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
+<span class='curline'><a href='../S/45.html#L252'>dirlookup</a>         252 kernel/sysfile.c   if((ip = dirlookup(dp, name, 0)) != 0){</span>
 </pre>
 </body>
 </html>

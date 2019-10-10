@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>l</title>
+<title>kmem</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.3' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,10 +9,16 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/10.html#L11'>l</a>                  11 user/wc.c        int l, w, c, inword;</span>
-<span class='curline'><a href='../S/10.html#L13'>l</a>                  13 user/wc.c        l = w = c = 0;</span>
-<span class='curline'><a href='../S/10.html#L19'>l</a>                  19 user/wc.c              l++;</span>
-<span class='curline'><a href='../S/10.html#L32'>l</a>                  32 user/wc.c        printf("%d %d %d %s\n", l, w, c, name);</span>
+<span class='curline'><a href='../S/71.html#L24'>kmem</a>               24 kernel/kalloc.c } kmem;</span>
+<span class='curline'><a href='../S/71.html#L29'>kmem</a>               29 kernel/kalloc.c   initlock(&amp;kmem.lock, "kmem");</span>
+<span class='curline'><a href='../S/71.html#L59'>kmem</a>               59 kernel/kalloc.c   acquire(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/71.html#L60'>kmem</a>               60 kernel/kalloc.c   r-&gt;next = kmem.freelist;</span>
+<span class='curline'><a href='../S/71.html#L61'>kmem</a>               61 kernel/kalloc.c   kmem.freelist = r;</span>
+<span class='curline'><a href='../S/71.html#L62'>kmem</a>               62 kernel/kalloc.c   release(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/71.html#L73'>kmem</a>               73 kernel/kalloc.c   acquire(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/71.html#L74'>kmem</a>               74 kernel/kalloc.c   r = kmem.freelist;</span>
+<span class='curline'><a href='../S/71.html#L76'>kmem</a>               76 kernel/kalloc.c     kmem.freelist = r-&gt;next;</span>
+<span class='curline'><a href='../S/71.html#L77'>kmem</a>               77 kernel/kalloc.c   release(&amp;kmem.lock);</span>
 </pre>
 </body>
 </html>
