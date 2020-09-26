@@ -2,9 +2,13 @@
 
 ## お知らせ
 * 初回講義は10月1日(木)に行います．
-* 講義の連絡にSlackを用いますので，Slackを使えるように準備しておいてください．
-* 講義の教材として用いるxv6（教育用OS）の実行環境をDockerで提供します．
+* 遠隔講義のための準備
+  - 2020年度はZoomによる遠隔講義とします．
+  - 講義の連絡にSlackを用いますので，Slackを使えるように準備しておいてください．
+Slackワークスペースへの招待はOCW-iのメールを介して行いますので，早めに履修登録をしておいてください．
+  - 講義の教材として用いるxv6（教育用OS）の実行環境をDockerで提供します．
 あらかじめ自分のパソコンにDockerをインストールしておいてください．
+LinuxやmacOSの場合，Dockerを使わなくてもxv6のビルドに使うツール（RISC-V用コンパイラ等）をインストールすることも可能です（その方が快適だと思います）．
 
 ## 講義担当
 * [渡部卓雄 (情報工学系)](http://www.psg.c.titech.ac.jp/~takuo/)
@@ -28,10 +32,7 @@
 * CSC.T363: コンピュータアーキテクチャ
 * その他必要事項：Unixの（コマンドラインによる）操作
 
-## 成績評価（詳細は第1回スライドを参照）
-* 課題と期末試験による
-
-## 予定
+## 講義日程
 1. 10/1(木) 7-8限：導入・オペレーティングシステムの役割と機能
 2. 10/5(月) 7-8限：Unixオペレーティングシステムとxv6の概要
 3. 10/8(木) 7-8限：割り込みとシステムコール
@@ -42,15 +43,18 @@
 8. 10/29(木) 7-8限：メモリ管理(1)：メモリ管理の目的と基本概念
 9. 11/2(月) 7-8限：メモリ管理(2): 仮想記憶システムの概要とアルゴリズム
 10. 11/5(木) 7-8限：メモリ管理(3): 仮想記憶システムの実現方式
-11. 11/9(月) 9-10限：ファイルシステム(1): ファイルシステムの目的と基本概念（計算機室）
+11. 11/9(月) 9-10限：ファイルシステム(1): ファイルシステムの目的と基本概念
 12. 11/12(木) 7-8限：ファイルシステム(2): ファイル管理アルゴリズム
 13. 11/16(月) 7-8限：ファイルシステム(3): ファイルシステムの実現方式
 14. 11/19(木) 7-8限：I/Oシステムとその実現方式
 
+## 成績評価
+* 課題と期末試験による．詳細は後日掲載する．
+
 ## 期末試験
+* 日程と実施方法は後日掲載する．
 
 ### 過去の期末試験問題とその解答・解説
-* 2019年度: [問題](ex/2019.pdf) / [解答・解説](ex/2019a.pdf)
 * 2018年度: [問題](ex/2018.pdf) / [解答・解説](ex/2018a.pdf)
 * 2017年度: [問題](ex/2017.pdf) / [解答・解説](ex/2017a.pdf)
 * 2016年度: [問題](ex/2016.pdf) / [解答・解説](ex/2016a.pdf)
@@ -68,14 +72,14 @@ OCW-iで配布する予定ですが，一部の資料や例題などは本Github
 ## 関連・参考サイト
 * 本演習のGithubアカウント: [http://github.com/titech-os/](http://github.com/titech-os/)
 
-* [xv6 (2020年版 RISC-V)](https://pdos.csail.mit.edu/6.828/2020/xv6.html)
+* [xv6（2020年版 RISC-V）](https://pdos.csail.mit.edu/6.828/2020/xv6.html)
   - [ブックレット (PDF)](https://pdos.csail.mit.edu/6.828/2020/xv6/book-riscv-rev1.pdf)
-  - [Githubリポジトリ](https://github.com/titech-os/xv6-riscv/)
-  - [Githubリポジトリ(オリジナル)](https://github.com/mit-pdos/xv6-riscv/)
+  - [Githubリポジトリ（本講義）](https://github.com/titech-os/xv6-riscv/)
+  - [Githubリポジトリ（オリジナル）](https://github.com/mit-pdos/xv6-riscv/)
   - [HTML化したソースコード](https://titech-os.github.io/xv6-riscv-html/)
 * RISC-V
   - [riscv.org](https://riscv.org)
   - [Specifications](https://riscv.org/specifications/)
   - [GNU Toolchain](https://github.com/riscv/riscv-gnu-toolchain)
 * git: [https://git-scm.com](https://git-scm.com)
-  - 解説書（日本語版）: [https://git-scm.com/book/ja/v2](https://git-scm.com/book/ja/v2)
+  - 解説書（日本語版）: [https://git-scm.com/book/ja](https://git-scm.com/book/ja)
