@@ -10,7 +10,7 @@ Dockerのインストール方法および使用方法については各自調�
 
 ## Dockerイメージの取得とコンテナの起動
 
-本講義のために，xv6開発用ツールを含んだDockerイメージ(`wtakuo/xv6-env`)を用意しました．
+本講義のために，xv6開発用ツールを含んだDockerイメージ([wtakuo/xv6-env](https://hub.docker.com/r/wtakuo/xv6-env))を用意しました．
 まず以下のコマンドでこのDockerイメージを取得してください．
 ```console
 $ docker pull wtakuo/xv6-env
@@ -31,7 +31,7 @@ xv6@0c765f60374a:~$
 ```
 ### 具体例
 
-例えば以下のようにしてホームディレクトリ直下に`class/os`というサブディレクトリを作成し，そこにxv6のソースコードを取得したとします．
+以下のように，ホストOS（PCで実行しているOS）のホームディレクトリ直下に`class/os`というサブディレクトリを作成し，そこにxv6のソースコードを取得したとします．
 ```console
 $ cd
 $ mkdir -p class/os
@@ -42,7 +42,7 @@ $ git clone https://github.com/titech-os/xv6-riscv.git
 ```console
 $ docker run -it --rm -v ~/class/os/xv6-riscv:/home/xv6/xv6-riscv wtakuo/xv6-env
 ```
-上で述べたように，ホストOS（PCで実行しているOS）上のディレクトリ`~/class/os/xv6-riscv`は，コンテナ内部で`/home/xv6/xv6-riscv`というディレクトリとしてアクセスできるようになります．
+上で述べたように，ホストOS上のディレクトリ`~/class/os/xv6-riscv`は，コンテナ内部で`/home/xv6/xv6-riscv`というディレクトリとしてアクセスできるようになります．
 
 ## コンテナ内での作業
 
