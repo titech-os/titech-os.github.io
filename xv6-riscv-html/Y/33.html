@@ -1,23 +1,126 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>base</title>
+<title>b</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/29.html#L29'>base</a>               29 kernel/printf.c printint(int xx, int base, int sign)</span>
-<span class='curline'><a href='../S/29.html#L42'>base</a>               42 kernel/printf.c     buf[i++] = digits[x % base];</span>
-<span class='curline'><a href='../S/29.html#L43'>base</a>               43 kernel/printf.c   } while((x /= base) != 0);</span>
-<span class='curline'><a href='../S/4.html#L16'>base</a>               16 user/printf.c  printint(int fd, int xx, int base, int sgn)</span>
-<span class='curline'><a href='../S/4.html#L32'>base</a>               32 user/printf.c      buf[i++] = digits[x % base];</span>
-<span class='curline'><a href='../S/4.html#L33'>base</a>               33 user/printf.c    }while((x /= base) != 0);</span>
-<span class='curline'><a href='../S/12.html#L21'>base</a>               21 user/umalloc.c static Header base;</span>
-<span class='curline'><a href='../S/12.html#L71'>base</a>               71 user/umalloc.c     base.s.ptr = freep = prevp = &amp;base;</span>
-<span class='curline'><a href='../S/12.html#L72'>base</a>               72 user/umalloc.c     base.s.size = 0;</span>
+<span class='curline'><a href='../S/61.html#L39'>b</a>                  39 kernel/bio.c     struct buf *b;</span>
+<span class='curline'><a href='../S/61.html#L46'>b</a>                  46 kernel/bio.c     for(b = bcache.buf; b &lt; bcache.buf+NBUF; b++){</span>
+<span class='curline'><a href='../S/61.html#L47'>b</a>                  47 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/61.html#L48'>b</a>                  48 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/61.html#L49'>b</a>                  49 kernel/bio.c       initsleeplock(&amp;b-&gt;lock, "buffer");</span>
+<span class='curline'><a href='../S/61.html#L50'>b</a>                  50 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/61.html#L51'>b</a>                  51 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/61.html#L61'>b</a>                  61 kernel/bio.c     struct buf *b;</span>
+<span class='curline'><a href='../S/61.html#L66'>b</a>                  66 kernel/bio.c     for(b = bcache.head.next; b != &amp;bcache.head; b = b-&gt;next){</span>
+<span class='curline'><a href='../S/61.html#L67'>b</a>                  67 kernel/bio.c       if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
+<span class='curline'><a href='../S/61.html#L68'>b</a>                  68 kernel/bio.c         b-&gt;refcnt++;</span>
+<span class='curline'><a href='../S/61.html#L70'>b</a>                  70 kernel/bio.c         acquiresleep(&amp;b-&gt;lock);</span>
+<span class='curline'><a href='../S/61.html#L71'>b</a>                  71 kernel/bio.c         return b;</span>
+<span class='curline'><a href='../S/61.html#L77'>b</a>                  77 kernel/bio.c     for(b = bcache.head.prev; b != &amp;bcache.head; b = b-&gt;prev){</span>
+<span class='curline'><a href='../S/61.html#L78'>b</a>                  78 kernel/bio.c       if(b-&gt;refcnt == 0) {</span>
+<span class='curline'><a href='../S/61.html#L79'>b</a>                  79 kernel/bio.c         b-&gt;dev = dev;</span>
+<span class='curline'><a href='../S/61.html#L80'>b</a>                  80 kernel/bio.c         b-&gt;blockno = blockno;</span>
+<span class='curline'><a href='../S/61.html#L81'>b</a>                  81 kernel/bio.c         b-&gt;valid = 0;</span>
+<span class='curline'><a href='../S/61.html#L82'>b</a>                  82 kernel/bio.c         b-&gt;refcnt = 1;</span>
+<span class='curline'><a href='../S/61.html#L84'>b</a>                  84 kernel/bio.c         acquiresleep(&amp;b-&gt;lock);</span>
+<span class='curline'><a href='../S/61.html#L85'>b</a>                  85 kernel/bio.c         return b;</span>
+<span class='curline'><a href='../S/61.html#L95'>b</a>                  95 kernel/bio.c     struct buf *b;</span>
+<span class='curline'><a href='../S/61.html#L97'>b</a>                  97 kernel/bio.c     b = bget(dev, blockno);</span>
+<span class='curline'><a href='../S/61.html#L98'>b</a>                  98 kernel/bio.c     if(!b-&gt;valid) {</span>
+<span class='curline'><a href='../S/61.html#L99'>b</a>                  99 kernel/bio.c       virtio_disk_rw(b, 0);</span>
+<span class='curline'><a href='../S/61.html#L100'>b</a>                 100 kernel/bio.c       b-&gt;valid = 1;</span>
+<span class='curline'><a href='../S/61.html#L102'>b</a>                 102 kernel/bio.c     return b;</span>
+<span class='curline'><a href='../S/61.html#L107'>b</a>                 107 kernel/bio.c   bwrite(struct buf *b)</span>
+<span class='curline'><a href='../S/61.html#L109'>b</a>                 109 kernel/bio.c     if(!holdingsleep(&amp;b-&gt;lock))</span>
+<span class='curline'><a href='../S/61.html#L111'>b</a>                 111 kernel/bio.c     virtio_disk_rw(b, 1);</span>
+<span class='curline'><a href='../S/61.html#L117'>b</a>                 117 kernel/bio.c   brelse(struct buf *b)</span>
+<span class='curline'><a href='../S/61.html#L119'>b</a>                 119 kernel/bio.c     if(!holdingsleep(&amp;b-&gt;lock))</span>
+<span class='curline'><a href='../S/61.html#L122'>b</a>                 122 kernel/bio.c     releasesleep(&amp;b-&gt;lock);</span>
+<span class='curline'><a href='../S/61.html#L125'>b</a>                 125 kernel/bio.c     b-&gt;refcnt--;</span>
+<span class='curline'><a href='../S/61.html#L126'>b</a>                 126 kernel/bio.c     if (b-&gt;refcnt == 0) {</span>
+<span class='curline'><a href='../S/61.html#L128'>b</a>                 128 kernel/bio.c       b-&gt;next-&gt;prev = b-&gt;prev;</span>
+<span class='curline'><a href='../S/61.html#L129'>b</a>                 129 kernel/bio.c       b-&gt;prev-&gt;next = b-&gt;next;</span>
+<span class='curline'><a href='../S/61.html#L130'>b</a>                 130 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/61.html#L131'>b</a>                 131 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/61.html#L132'>b</a>                 132 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/61.html#L133'>b</a>                 133 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/61.html#L140'>b</a>                 140 kernel/bio.c   bpin(struct buf *b) {</span>
+<span class='curline'><a href='../S/61.html#L142'>b</a>                 142 kernel/bio.c     b-&gt;refcnt++;</span>
+<span class='curline'><a href='../S/61.html#L147'>b</a>                 147 kernel/bio.c   bunpin(struct buf *b) {</span>
+<span class='curline'><a href='../S/61.html#L149'>b</a>                 149 kernel/bio.c     b-&gt;refcnt--;</span>
+<span class='curline'><a href='../S/48.html#L24'>b</a>                  24 kernel/fs.c    #define min(a, b) ((a) &lt; (b) ? (a) : (b))</span>
+<span class='curline'><a href='../S/48.html#L67'>b</a>                  67 kernel/fs.c      int b, bi, m;</span>
+<span class='curline'><a href='../S/48.html#L71'>b</a>                  71 kernel/fs.c      for(b = 0; b &lt; sb.size; b += BPB){</span>
+<span class='curline'><a href='../S/48.html#L72'>b</a>                  72 kernel/fs.c        bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/48.html#L73'>b</a>                  73 kernel/fs.c        for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
+<span class='curline'><a href='../S/48.html#L79'>b</a>                  79 kernel/fs.c            bzero(dev, b + bi);</span>
+<span class='curline'><a href='../S/48.html#L80'>b</a>                  80 kernel/fs.c            return b + bi;</span>
+<span class='curline'><a href='../S/48.html#L90'>b</a>                  90 kernel/fs.c    bfree(int dev, uint b)</span>
+<span class='curline'><a href='../S/48.html#L95'>b</a>                  95 kernel/fs.c      bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/48.html#L96'>b</a>                  96 kernel/fs.c      bi = b % BPB;</span>
+<span class='curline'><a href='../S/71.html#L51'>b</a>                  51 kernel/fs.h    #define BBLOCK(b, sb) ((b)/BPB + sb.bmapstart)</span>
+<span class='curline'><a href='../S/28.html#L214'>b</a>                 214 kernel/log.c   log_write(struct buf *b)</span>
+<span class='curline'><a href='../S/28.html#L225'>b</a>                 225 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
+<span class='curline'><a href='../S/28.html#L228'>b</a>                 228 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
+<span class='curline'><a href='../S/28.html#L230'>b</a>                 230 kernel/log.c       bpin(b);</span>
+<span class='curline'><a href='../S/32.html#L23'>b</a>                  23 kernel/ramdisk.c ramdiskrw(struct buf *b)</span>
+<span class='curline'><a href='../S/32.html#L25'>b</a>                  25 kernel/ramdisk.c   if(!holdingsleep(&amp;b-&gt;lock))</span>
+<span class='curline'><a href='../S/32.html#L27'>b</a>                  27 kernel/ramdisk.c   if((b-&gt;flags &amp; (B_VALID|B_DIRTY)) == B_VALID)</span>
+<span class='curline'><a href='../S/32.html#L30'>b</a>                  30 kernel/ramdisk.c   if(b-&gt;blockno &gt;= FSSIZE)</span>
+<span class='curline'><a href='../S/32.html#L33'>b</a>                  33 kernel/ramdisk.c   uint64 diskaddr = b-&gt;blockno * BSIZE;</span>
+<span class='curline'><a href='../S/32.html#L36'>b</a>                  36 kernel/ramdisk.c   if(b-&gt;flags &amp; B_DIRTY){</span>
+<span class='curline'><a href='../S/32.html#L38'>b</a>                  38 kernel/ramdisk.c     memmove(addr, b-&gt;data, BSIZE);</span>
+<span class='curline'><a href='../S/32.html#L39'>b</a>                  39 kernel/ramdisk.c     b-&gt;flags &amp;= ~B_DIRTY;</span>
+<span class='curline'><a href='../S/32.html#L42'>b</a>                  42 kernel/ramdisk.c     memmove(b-&gt;data, addr, BSIZE);</span>
+<span class='curline'><a href='../S/32.html#L43'>b</a>                  43 kernel/ramdisk.c     b-&gt;flags |= B_VALID;</span>
+<span class='curline'><a href='../S/65.html#L41'>b</a>                  41 kernel/virtio_disk.c     struct buf *b;</span>
+<span class='curline'><a href='../S/65.html#L169'>b</a>                 169 kernel/virtio_disk.c virtio_disk_rw(struct buf *b, int write)</span>
+<span class='curline'><a href='../S/65.html#L171'>b</a>                 171 kernel/virtio_disk.c   uint64 sector = b-&gt;blockno * (BSIZE / 512);</span>
+<span class='curline'><a href='../S/65.html#L211'>b</a>                 211 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
+<span class='curline'><a href='../S/65.html#L227'>b</a>                 227 kernel/virtio_disk.c   b-&gt;disk = 1;</span>
+<span class='curline'><a href='../S/65.html#L228'>b</a>                 228 kernel/virtio_disk.c   disk.info[idx[0]].b = b;</span>
+<span class='curline'><a href='../S/65.html#L241'>b</a>                 241 kernel/virtio_disk.c   while(b-&gt;disk == 1) {</span>
+<span class='curline'><a href='../S/65.html#L242'>b</a>                 242 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L245'>b</a>                 245 kernel/virtio_disk.c   disk.info[idx[0]].b = 0;</span>
+<span class='curline'><a href='../S/65.html#L262'>b</a>                 262 kernel/virtio_disk.c     disk.info[id].b-&gt;disk = 0;   // disk is done with buf</span>
+<span class='curline'><a href='../S/65.html#L263'>b</a>                 263 kernel/virtio_disk.c     wakeup(disk.info[id].b);</span>
+<span class='curline'><a href='../S/3.html#L15'>b</a>                  15 mkfs/mkfs.c    #define static_assert(a, b) do { switch (0) case 0: case (a): ; } while (0)</span>
+<span class='curline'><a href='../S/3.html#L261'>b</a>                 261 mkfs/mkfs.c    #define min(a, b) ((a) &lt; (b) ? (a) : (b))</span>
+<span class='curline'><a href='../S/24.html#L134'>b</a>                 134 user/usertests.c   char b[MAXPATH+1];</span>
+<span class='curline'><a href='../S/24.html#L137'>b</a>                 137 user/usertests.c     b[i] = 'x';</span>
+<span class='curline'><a href='../S/24.html#L138'>b</a>                 138 user/usertests.c   b[MAXPATH] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L140'>b</a>                 140 user/usertests.c   int ret = unlink(b);</span>
+<span class='curline'><a href='../S/24.html#L142'>b</a>                 142 user/usertests.c     printf("unlink(%s) returned %d, not -1\n", b, ret);</span>
+<span class='curline'><a href='../S/24.html#L146'>b</a>                 146 user/usertests.c   int fd = open(b, O_CREATE | O_WRONLY);</span>
+<span class='curline'><a href='../S/24.html#L148'>b</a>                 148 user/usertests.c     printf("open(%s) returned %d, not -1\n", b, fd);</span>
+<span class='curline'><a href='../S/24.html#L152'>b</a>                 152 user/usertests.c   ret = link(b, b);</span>
+<span class='curline'><a href='../S/24.html#L154'>b</a>                 154 user/usertests.c     printf("link(%s, %s) returned %d, not -1\n", b, b, ret);</span>
+<span class='curline'><a href='../S/24.html#L159'>b</a>                 159 user/usertests.c   ret = exec(b, args);</span>
+<span class='curline'><a href='../S/24.html#L161'>b</a>                 161 user/usertests.c     printf("exec(%s) returned %d, not -1\n", b, fd);</span>
+<span class='curline'><a href='../S/24.html#L207'>b</a>                 207 user/usertests.c   char *b = (char *) (top - 1);</span>
+<span class='curline'><a href='../S/24.html#L208'>b</a>                 208 user/usertests.c   *b = 'x';</span>
+<span class='curline'><a href='../S/24.html#L210'>b</a>                 210 user/usertests.c   int ret = unlink(b);</span>
+<span class='curline'><a href='../S/24.html#L212'>b</a>                 212 user/usertests.c     printf("unlink(%s) returned %d, not -1\n", b, ret);</span>
+<span class='curline'><a href='../S/24.html#L216'>b</a>                 216 user/usertests.c   int fd = open(b, O_CREATE | O_WRONLY);</span>
+<span class='curline'><a href='../S/24.html#L218'>b</a>                 218 user/usertests.c     printf("open(%s) returned %d, not -1\n", b, fd);</span>
+<span class='curline'><a href='../S/24.html#L222'>b</a>                 222 user/usertests.c   ret = link(b, b);</span>
+<span class='curline'><a href='../S/24.html#L224'>b</a>                 224 user/usertests.c     printf("link(%s, %s) returned %d, not -1\n", b, b, ret);</span>
+<span class='curline'><a href='../S/24.html#L229'>b</a>                 229 user/usertests.c   ret = exec(b, args);</span>
+<span class='curline'><a href='../S/24.html#L231'>b</a>                 231 user/usertests.c     printf("exec(%s) returned %d, not -1\n", b, fd);</span>
+<span class='curline'><a href='../S/24.html#L1960'>b</a>                1960 user/usertests.c   char *c, *a, *b;</span>
+<span class='curline'><a href='../S/24.html#L1975'>b</a>                1975 user/usertests.c     for(b = a; b &lt; a+TOOMUCH; b += 4096){</span>
+<span class='curline'><a href='../S/24.html#L1976'>b</a>                1976 user/usertests.c       *b = 99;</span>
+<span class='curline'><a href='../S/24.html#L1994'>b</a>                1994 user/usertests.c     b = sbrk(1);</span>
+<span class='curline'><a href='../S/24.html#L1995'>b</a>                1995 user/usertests.c     if(b != a){</span>
+<span class='curline'><a href='../S/24.html#L1996'>b</a>                1996 user/usertests.c       printf("%s: sbrk test failed %d %x %x\n", i, a, b);</span>
+<span class='curline'><a href='../S/24.html#L1999'>b</a>                1999 user/usertests.c     *b = 1;</span>
+<span class='curline'><a href='../S/24.html#L2000'>b</a>                2000 user/usertests.c     a = b + 1;</span>
 </pre>
 </body>
 </html>

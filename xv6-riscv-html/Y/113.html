@@ -1,16 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>freeinode</title>
+<title>ff</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/3.html#L32'>freeinode</a>          32 mkfs/mkfs.c    uint freeinode = 1;</span>
-<span class='curline'><a href='../S/3.html#L234'>freeinode</a>         234 mkfs/mkfs.c      uint inum = freeinode++;</span>
+<span class='curline'><a href='../S/67.html#L62'>ff</a>                 62 kernel/file.c    struct file ff;</span>
+<span class='curline'><a href='../S/67.html#L71'>ff</a>                 71 kernel/file.c    ff = *f;</span>
+<span class='curline'><a href='../S/67.html#L76'>ff</a>                 76 kernel/file.c    if(ff.type == FD_PIPE){</span>
+<span class='curline'><a href='../S/67.html#L77'>ff</a>                 77 kernel/file.c      pipeclose(ff.pipe, ff.writable);</span>
+<span class='curline'><a href='../S/67.html#L78'>ff</a>                 78 kernel/file.c    } else if(ff.type == FD_INODE || ff.type == FD_DEVICE){</span>
+<span class='curline'><a href='../S/67.html#L80'>ff</a>                 80 kernel/file.c      iput(ff.ip);</span>
 </pre>
 </body>
 </html>

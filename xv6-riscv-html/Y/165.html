@@ -1,24 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>left</title>
+<title>kernel_pagetable</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L37'>left</a>               37 user/sh.c        struct cmd *left;</span>
-<span class='curline'><a href='../S/17.html#L43'>left</a>               43 user/sh.c        struct cmd *left;</span>
-<span class='curline'><a href='../S/17.html#L95'>left</a>               95 user/sh.c            runcmd(lcmd-&gt;left);</span>
-<span class='curline'><a href='../S/17.html#L109'>left</a>              109 user/sh.c            runcmd(pcmd-&gt;left);</span>
-<span class='curline'><a href='../S/17.html#L223'>left</a>              223 user/sh.c      pipecmd(struct cmd *left, struct cmd *right)</span>
-<span class='curline'><a href='../S/17.html#L230'>left</a>              230 user/sh.c        cmd-&gt;left = left;</span>
-<span class='curline'><a href='../S/17.html#L236'>left</a>              236 user/sh.c      listcmd(struct cmd *left, struct cmd *right)</span>
-<span class='curline'><a href='../S/17.html#L243'>left</a>              243 user/sh.c        cmd-&gt;left = left;</span>
-<span class='curline'><a href='../S/17.html#L477'>left</a>              477 user/sh.c          nulterminate(pcmd-&gt;left);</span>
-<span class='curline'><a href='../S/17.html#L483'>left</a>              483 user/sh.c          nulterminate(lcmd-&gt;left);</span>
+<span class='curline'><a href='../S/38.html#L12'>kernel_pagetable</a>   12 kernel/vm.c    pagetable_t kernel_pagetable;</span>
+<span class='curline'><a href='../S/38.html#L24'>kernel_pagetable</a>   24 kernel/vm.c      kernel_pagetable = (pagetable_t) kalloc();</span>
+<span class='curline'><a href='../S/38.html#L25'>kernel_pagetable</a>   25 kernel/vm.c      memset(kernel_pagetable, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L55'>kernel_pagetable</a>   55 kernel/vm.c      w_satp(MAKE_SATP(kernel_pagetable));</span>
+<span class='curline'><a href='../S/38.html#L120'>kernel_pagetable</a>  120 kernel/vm.c      if(mappages(kernel_pagetable, va, sz, pa, perm) != 0)</span>
+<span class='curline'><a href='../S/38.html#L135'>kernel_pagetable</a>  135 kernel/vm.c      pte = walk(kernel_pagetable, va, 0);</span>
 </pre>
 </body>
 </html>

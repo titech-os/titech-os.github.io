@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>uint64</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/57.html#L59'>uint64</a>             59 kernel/console.c consolewrite(int user_src, uint64 src, int n)</span>
+<span class='curline'><a href='../S/57.html#L82'>uint64</a>             82 kernel/console.c consoleread(int user_dst, uint64 dst, int n)</span>
+<span class='curline'><a href='../S/31.html#L33'>uint64</a>             33 kernel/defs.h  int             fileread(struct file*, uint64, int n);</span>
+<span class='curline'><a href='../S/31.html#L34'>uint64</a>             34 kernel/defs.h  int             filestat(struct file*, uint64 addr);</span>
+<span class='curline'><a href='../S/31.html#L35'>uint64</a>             35 kernel/defs.h  int             filewrite(struct file*, uint64, int n);</span>
+<span class='curline'><a href='../S/31.html#L52'>uint64</a>             52 kernel/defs.h  int             readi(struct inode*, int, uint64, uint, uint);</span>
+<span class='curline'><a href='../S/31.html#L54'>uint64</a>             54 kernel/defs.h  int             writei(struct inode*, int, uint64, uint, uint);</span>
+<span class='curline'><a href='../S/31.html#L76'>uint64</a>             76 kernel/defs.h  int             piperead(struct pipe*, uint64, int);</span>
+<span class='curline'><a href='../S/31.html#L77'>uint64</a>             77 kernel/defs.h  int             pipewrite(struct pipe*, uint64, int);</span>
+<span class='curline'><a href='../S/31.html#L90'>uint64</a>             90 kernel/defs.h  void            proc_freepagetable(pagetable_t, uint64);</span>
+<span class='curline'><a href='../S/31.html#L101'>uint64</a>            101 kernel/defs.h  int             wait(uint64);</span>
+<span class='curline'><a href='../S/31.html#L104'>uint64</a>            104 kernel/defs.h  int             either_copyout(int user_dst, uint64 dst, void *src, uint64 len);</span>
+<span class='curline'><a href='../S/31.html#L105'>uint64</a>            105 kernel/defs.h  int             either_copyin(void *dst, int user_src, uint64 src, uint64 len);</span>
+<span class='curline'><a href='../S/31.html#L137'>uint64</a>            137 kernel/defs.h  int             argaddr(int, uint64 *);</span>
+<span class='curline'><a href='../S/31.html#L138'>uint64</a>            138 kernel/defs.h  int             fetchstr(uint64, char*, int);</span>
+<span class='curline'><a href='../S/31.html#L139'>uint64</a>            139 kernel/defs.h  int             fetchaddr(uint64, uint64*);</span>
+<span class='curline'><a href='../S/31.html#L159'>uint64</a>            159 kernel/defs.h  uint64          kvmpa(uint64);</span>
+<span class='curline'><a href='../S/31.html#L160'>uint64</a>            160 kernel/defs.h  void            kvmmap(uint64, uint64, uint64, int);</span>
+<span class='curline'><a href='../S/31.html#L161'>uint64</a>            161 kernel/defs.h  int             mappages(pagetable_t, uint64, uint64, uint64, int);</span>
+<span class='curline'><a href='../S/31.html#L164'>uint64</a>            164 kernel/defs.h  uint64          uvmalloc(pagetable_t, uint64, uint64);</span>
+<span class='curline'><a href='../S/31.html#L165'>uint64</a>            165 kernel/defs.h  uint64          uvmdealloc(pagetable_t, uint64, uint64);</span>
+<span class='curline'><a href='../S/31.html#L166'>uint64</a>            166 kernel/defs.h  int             uvmcopy(pagetable_t, pagetable_t, uint64);</span>
+<span class='curline'><a href='../S/31.html#L167'>uint64</a>            167 kernel/defs.h  void            uvmfree(pagetable_t, uint64);</span>
+<span class='curline'><a href='../S/31.html#L168'>uint64</a>            168 kernel/defs.h  void            uvmunmap(pagetable_t, uint64, uint64, int);</span>
+<span class='curline'><a href='../S/31.html#L169'>uint64</a>            169 kernel/defs.h  void            uvmclear(pagetable_t, uint64);</span>
+<span class='curline'><a href='../S/31.html#L170'>uint64</a>            170 kernel/defs.h  uint64          walkaddr(pagetable_t, uint64);</span>
+<span class='curline'><a href='../S/31.html#L171'>uint64</a>            171 kernel/defs.h  int             copyout(pagetable_t, uint64, char *, uint64);</span>
+<span class='curline'><a href='../S/31.html#L172'>uint64</a>            172 kernel/defs.h  int             copyin(pagetable_t, char *, uint64, uint64);</span>
+<span class='curline'><a href='../S/31.html#L173'>uint64</a>            173 kernel/defs.h  int             copyinstr(pagetable_t, char *, uint64, uint64);</span>
+<span class='curline'><a href='../S/52.html#L12'>uint64</a>             12 kernel/elf.h     uint64 entry;</span>
+<span class='curline'><a href='../S/52.html#L13'>uint64</a>             13 kernel/elf.h     uint64 phoff;</span>
+<span class='curline'><a href='../S/52.html#L14'>uint64</a>             14 kernel/elf.h     uint64 shoff;</span>
+<span class='curline'><a href='../S/52.html#L28'>uint64</a>             28 kernel/elf.h     uint64 off;</span>
+<span class='curline'><a href='../S/52.html#L29'>uint64</a>             29 kernel/elf.h     uint64 vaddr;</span>
+<span class='curline'><a href='../S/52.html#L30'>uint64</a>             30 kernel/elf.h     uint64 paddr;</span>
+<span class='curline'><a href='../S/52.html#L31'>uint64</a>             31 kernel/elf.h     uint64 filesz;</span>
+<span class='curline'><a href='../S/52.html#L32'>uint64</a>             32 kernel/elf.h     uint64 memsz;</span>
+<span class='curline'><a href='../S/52.html#L33'>uint64</a>             33 kernel/elf.h     uint64 align;</span>
+<span class='curline'><a href='../S/36.html#L10'>uint64</a>             10 kernel/exec.c  static int loadseg(pde_t *pgdir, uint64 addr, struct inode *ip, uint offset, uint sz);</span>
+<span class='curline'><a href='../S/36.html#L17'>uint64</a>             17 kernel/exec.c    uint64 argc, sz = 0, sp, ustack[MAXARG+1], stackbase;</span>
+<span class='curline'><a href='../S/36.html#L33'>uint64</a>             33 kernel/exec.c    if(readi(ip, 0, (uint64)&amp;elf, 0, sizeof(elf)) != sizeof(elf))</span>
+<span class='curline'><a href='../S/36.html#L43'>uint64</a>             43 kernel/exec.c      if(readi(ip, 0, (uint64)&amp;ph, off, sizeof(ph)) != sizeof(ph))</span>
+<span class='curline'><a href='../S/36.html#L51'>uint64</a>             51 kernel/exec.c      uint64 sz1;</span>
+<span class='curline'><a href='../S/36.html#L65'>uint64</a>             65 kernel/exec.c    uint64 oldsz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/36.html#L70'>uint64</a>             70 kernel/exec.c    uint64 sz1;</span>
+<span class='curline'><a href='../S/36.html#L93'>uint64</a>             93 kernel/exec.c    sp -= (argc+1) * sizeof(uint64);</span>
+<span class='curline'><a href='../S/36.html#L97'>uint64</a>             97 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
+<span class='curline'><a href='../S/36.html#L136'>uint64</a>            136 kernel/exec.c  loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)</span>
+<span class='curline'><a href='../S/36.html#L139'>uint64</a>            139 kernel/exec.c    uint64 pa;</span>
+<span class='curline'><a href='../S/36.html#L152'>uint64</a>            152 kernel/exec.c      if(readi(ip, 0, (uint64)pa, offset+i, n) != n)</span>
+<span class='curline'><a href='../S/67.html#L88'>uint64</a>             88 kernel/file.c  filestat(struct file *f, uint64 addr)</span>
+<span class='curline'><a href='../S/67.html#L107'>uint64</a>            107 kernel/file.c  fileread(struct file *f, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/67.html#L135'>uint64</a>            135 kernel/file.c  filewrite(struct file *f, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/41.html#L34'>uint64</a>             34 kernel/file.h    int (*read)(int, uint64, int);</span>
+<span class='curline'><a href='../S/41.html#L35'>uint64</a>             35 kernel/file.h    int (*write)(int, uint64, int);</span>
+<span class='curline'><a href='../S/48.html#L456'>uint64</a>            456 kernel/fs.c    readi(struct inode *ip, int user_dst, uint64 dst, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L483'>uint64</a>            483 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L536'>uint64</a>            536 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/48.html#L568'>uint64</a>            568 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/48.html#L576'>uint64</a>            576 kernel/fs.c      if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/69.html#L37'>uint64</a>             37 kernel/kalloc.c   p = (char*)PGROUNDUP((uint64)pa_start);</span>
+<span class='curline'><a href='../S/69.html#L51'>uint64</a>             51 kernel/kalloc.c   if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)</span>
+<span class='curline'><a href='../S/34.html#L77'>uint64</a>             77 kernel/pipe.c  pipewrite(struct pipe *pi, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/34.html#L103'>uint64</a>            103 kernel/pipe.c  piperead(struct pipe *pi, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/29.html#L53'>uint64</a>             53 kernel/printf.c printptr(uint64 x)</span>
+<span class='curline'><a href='../S/29.html#L58'>uint64</a>             58 kernel/printf.c   for (i = 0; i &lt; (sizeof(uint64) * 2); i++, x &lt;&lt;= 4)</span>
+<span class='curline'><a href='../S/29.html#L59'>uint64</a>             59 kernel/printf.c     consputc(digits[x &gt;&gt; (sizeof(uint64) * 8 - 4)]);</span>
+<span class='curline'><a href='../S/29.html#L94'>uint64</a>             94 kernel/printf.c       printptr(va_arg(ap, uint64));</span>
+<span class='curline'><a href='../S/63.html#L40'>uint64</a>             40 kernel/proc.c        uint64 va = KSTACK((int) (p - proc));</span>
+<span class='curline'><a href='../S/63.html#L41'>uint64</a>             41 kernel/proc.c        kvmmap(va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/63.html#L127'>uint64</a>            127 kernel/proc.c    p-&gt;context.ra = (uint64)forkret;</span>
+<span class='curline'><a href='../S/63.html#L172'>uint64</a>            172 kernel/proc.c                (uint64)trampoline, PTE_R | PTE_X) &lt; 0){</span>
+<span class='curline'><a href='../S/63.html#L179'>uint64</a>            179 kernel/proc.c                (uint64)(p-&gt;trapframe), PTE_R | PTE_W) &lt; 0){</span>
+<span class='curline'><a href='../S/63.html#L191'>uint64</a>            191 kernel/proc.c  proc_freepagetable(pagetable_t pagetable, uint64 sz)</span>
+<span class='curline'><a href='../S/63.html#L398'>uint64</a>            398 kernel/proc.c  wait(uint64 addr)</span>
+<span class='curline'><a href='../S/63.html#L635'>uint64</a>            635 kernel/proc.c  either_copyout(int user_dst, uint64 dst, void *src, uint64 len)</span>
+<span class='curline'><a href='../S/63.html#L650'>uint64</a>            650 kernel/proc.c  either_copyin(void *dst, int user_src, uint64 src, uint64 len)</span>
+<span class='curline'><a href='../S/35.html#L3'>uint64</a>              3 kernel/proc.h    uint64 ra;</span>
+<span class='curline'><a href='../S/35.html#L4'>uint64</a>              4 kernel/proc.h    uint64 sp;</span>
+<span class='curline'><a href='../S/35.html#L7'>uint64</a>              7 kernel/proc.h    uint64 s0;</span>
+<span class='curline'><a href='../S/35.html#L8'>uint64</a>              8 kernel/proc.h    uint64 s1;</span>
+<span class='curline'><a href='../S/35.html#L9'>uint64</a>              9 kernel/proc.h    uint64 s2;</span>
+<span class='curline'><a href='../S/35.html#L10'>uint64</a>             10 kernel/proc.h    uint64 s3;</span>
+<span class='curline'><a href='../S/35.html#L11'>uint64</a>             11 kernel/proc.h    uint64 s4;</span>
+<span class='curline'><a href='../S/35.html#L12'>uint64</a>             12 kernel/proc.h    uint64 s5;</span>
+<span class='curline'><a href='../S/35.html#L13'>uint64</a>             13 kernel/proc.h    uint64 s6;</span>
+<span class='curline'><a href='../S/35.html#L14'>uint64</a>             14 kernel/proc.h    uint64 s7;</span>
+<span class='curline'><a href='../S/35.html#L15'>uint64</a>             15 kernel/proc.h    uint64 s8;</span>
+<span class='curline'><a href='../S/35.html#L16'>uint64</a>             16 kernel/proc.h    uint64 s9;</span>
+<span class='curline'><a href='../S/35.html#L17'>uint64</a>             17 kernel/proc.h    uint64 s10;</span>
+<span class='curline'><a href='../S/35.html#L18'>uint64</a>             18 kernel/proc.h    uint64 s11;</span>
+<span class='curline'><a href='../S/35.html#L45'>uint64</a>             45 kernel/proc.h    /*   0 */ uint64 kernel_satp;   // kernel page table</span>
+<span class='curline'><a href='../S/35.html#L46'>uint64</a>             46 kernel/proc.h    /*   8 */ uint64 kernel_sp;     // top of process's kernel stack</span>
+<span class='curline'><a href='../S/35.html#L47'>uint64</a>             47 kernel/proc.h    /*  16 */ uint64 kernel_trap;   // usertrap()</span>
+<span class='curline'><a href='../S/35.html#L48'>uint64</a>             48 kernel/proc.h    /*  24 */ uint64 epc;           // saved user program counter</span>
+<span class='curline'><a href='../S/35.html#L49'>uint64</a>             49 kernel/proc.h    /*  32 */ uint64 kernel_hartid; // saved kernel tp</span>
+<span class='curline'><a href='../S/35.html#L50'>uint64</a>             50 kernel/proc.h    /*  40 */ uint64 ra;</span>
+<span class='curline'><a href='../S/35.html#L51'>uint64</a>             51 kernel/proc.h    /*  48 */ uint64 sp;</span>
+<span class='curline'><a href='../S/35.html#L52'>uint64</a>             52 kernel/proc.h    /*  56 */ uint64 gp;</span>
+<span class='curline'><a href='../S/35.html#L53'>uint64</a>             53 kernel/proc.h    /*  64 */ uint64 tp;</span>
+<span class='curline'><a href='../S/35.html#L54'>uint64</a>             54 kernel/proc.h    /*  72 */ uint64 t0;</span>
+<span class='curline'><a href='../S/35.html#L55'>uint64</a>             55 kernel/proc.h    /*  80 */ uint64 t1;</span>
+<span class='curline'><a href='../S/35.html#L56'>uint64</a>             56 kernel/proc.h    /*  88 */ uint64 t2;</span>
+<span class='curline'><a href='../S/35.html#L57'>uint64</a>             57 kernel/proc.h    /*  96 */ uint64 s0;</span>
+<span class='curline'><a href='../S/35.html#L58'>uint64</a>             58 kernel/proc.h    /* 104 */ uint64 s1;</span>
+<span class='curline'><a href='../S/35.html#L59'>uint64</a>             59 kernel/proc.h    /* 112 */ uint64 a0;</span>
+<span class='curline'><a href='../S/35.html#L60'>uint64</a>             60 kernel/proc.h    /* 120 */ uint64 a1;</span>
+<span class='curline'><a href='../S/35.html#L61'>uint64</a>             61 kernel/proc.h    /* 128 */ uint64 a2;</span>
+<span class='curline'><a href='../S/35.html#L62'>uint64</a>             62 kernel/proc.h    /* 136 */ uint64 a3;</span>
+<span class='curline'><a href='../S/35.html#L63'>uint64</a>             63 kernel/proc.h    /* 144 */ uint64 a4;</span>
+<span class='curline'><a href='../S/35.html#L64'>uint64</a>             64 kernel/proc.h    /* 152 */ uint64 a5;</span>
+<span class='curline'><a href='../S/35.html#L65'>uint64</a>             65 kernel/proc.h    /* 160 */ uint64 a6;</span>
+<span class='curline'><a href='../S/35.html#L66'>uint64</a>             66 kernel/proc.h    /* 168 */ uint64 a7;</span>
+<span class='curline'><a href='../S/35.html#L67'>uint64</a>             67 kernel/proc.h    /* 176 */ uint64 s2;</span>
+<span class='curline'><a href='../S/35.html#L68'>uint64</a>             68 kernel/proc.h    /* 184 */ uint64 s3;</span>
+<span class='curline'><a href='../S/35.html#L69'>uint64</a>             69 kernel/proc.h    /* 192 */ uint64 s4;</span>
+<span class='curline'><a href='../S/35.html#L70'>uint64</a>             70 kernel/proc.h    /* 200 */ uint64 s5;</span>
+<span class='curline'><a href='../S/35.html#L71'>uint64</a>             71 kernel/proc.h    /* 208 */ uint64 s6;</span>
+<span class='curline'><a href='../S/35.html#L72'>uint64</a>             72 kernel/proc.h    /* 216 */ uint64 s7;</span>
+<span class='curline'><a href='../S/35.html#L73'>uint64</a>             73 kernel/proc.h    /* 224 */ uint64 s8;</span>
+<span class='curline'><a href='../S/35.html#L74'>uint64</a>             74 kernel/proc.h    /* 232 */ uint64 s9;</span>
+<span class='curline'><a href='../S/35.html#L75'>uint64</a>             75 kernel/proc.h    /* 240 */ uint64 s10;</span>
+<span class='curline'><a href='../S/35.html#L76'>uint64</a>             76 kernel/proc.h    /* 248 */ uint64 s11;</span>
+<span class='curline'><a href='../S/35.html#L77'>uint64</a>             77 kernel/proc.h    /* 256 */ uint64 t3;</span>
+<span class='curline'><a href='../S/35.html#L78'>uint64</a>             78 kernel/proc.h    /* 264 */ uint64 t4;</span>
+<span class='curline'><a href='../S/35.html#L79'>uint64</a>             79 kernel/proc.h    /* 272 */ uint64 t5;</span>
+<span class='curline'><a href='../S/35.html#L80'>uint64</a>             80 kernel/proc.h    /* 280 */ uint64 t6;</span>
+<span class='curline'><a href='../S/35.html#L98'>uint64</a>             98 kernel/proc.h    uint64 kstack;               // Virtual address of kernel stack</span>
+<span class='curline'><a href='../S/35.html#L99'>uint64</a>             99 kernel/proc.h    uint64 sz;                   // Size of process memory (bytes)</span>
+<span class='curline'><a href='../S/32.html#L33'>uint64</a>             33 kernel/ramdisk.c   uint64 diskaddr = b-&gt;blockno * BSIZE;</span>
+<span class='curline'><a href='../S/64.html#L2'>uint64</a>              2 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L5'>uint64</a>              5 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L18'>uint64</a>             18 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L21'>uint64</a>             21 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L27'>uint64</a>             27 kernel/riscv.h w_mstatus(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L36'>uint64</a>             36 kernel/riscv.h w_mepc(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L49'>uint64</a>             49 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L52'>uint64</a>             52 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L58'>uint64</a>             58 kernel/riscv.h w_sstatus(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L64'>uint64</a>             64 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L67'>uint64</a>             67 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L73'>uint64</a>             73 kernel/riscv.h w_sip(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L82'>uint64</a>             82 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L85'>uint64</a>             85 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L91'>uint64</a>             91 kernel/riscv.h w_sie(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L100'>uint64</a>            100 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L103'>uint64</a>            103 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L109'>uint64</a>            109 kernel/riscv.h w_mie(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L118'>uint64</a>            118 kernel/riscv.h w_sepc(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L123'>uint64</a>            123 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L126'>uint64</a>            126 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L132'>uint64</a>            132 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L135'>uint64</a>            135 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L141'>uint64</a>            141 kernel/riscv.h w_medeleg(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L147'>uint64</a>            147 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L150'>uint64</a>            150 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L156'>uint64</a>            156 kernel/riscv.h w_mideleg(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L164'>uint64</a>            164 kernel/riscv.h w_stvec(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L169'>uint64</a>            169 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L172'>uint64</a>            172 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L179'>uint64</a>            179 kernel/riscv.h w_mtvec(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L187'>uint64</a>            187 kernel/riscv.h #define MAKE_SATP(pagetable) (SATP_SV39 | (((uint64)pagetable) &gt;&gt; 12))</span>
+<span class='curline'><a href='../S/64.html#L192'>uint64</a>            192 kernel/riscv.h w_satp(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L197'>uint64</a>            197 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L200'>uint64</a>            200 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L207'>uint64</a>            207 kernel/riscv.h w_sscratch(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L213'>uint64</a>            213 kernel/riscv.h w_mscratch(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L219'>uint64</a>            219 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L222'>uint64</a>            222 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L228'>uint64</a>            228 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L231'>uint64</a>            231 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L238'>uint64</a>            238 kernel/riscv.h w_mcounteren(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L243'>uint64</a>            243 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L246'>uint64</a>            246 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L252'>uint64</a>            252 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L255'>uint64</a>            255 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L278'>uint64</a>            278 kernel/riscv.h   uint64 x = r_sstatus();</span>
+<span class='curline'><a href='../S/64.html#L282'>uint64</a>            282 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L285'>uint64</a>            285 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L292'>uint64</a>            292 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L295'>uint64</a>            295 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L301'>uint64</a>            301 kernel/riscv.h w_tp(uint64 x)</span>
+<span class='curline'><a href='../S/64.html#L306'>uint64</a>            306 kernel/riscv.h static inline uint64</span>
+<span class='curline'><a href='../S/64.html#L309'>uint64</a>            309 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/64.html#L336'>uint64</a>            336 kernel/riscv.h #define PA2PTE(pa) ((((uint64)pa) &gt;&gt; 12) &lt;&lt; 10)</span>
+<span class='curline'><a href='../S/64.html#L345'>uint64</a>            345 kernel/riscv.h #define PX(level, va) ((((uint64) (va)) &gt;&gt; PXSHIFT(level)) &amp; PXMASK)</span>
+<span class='curline'><a href='../S/64.html#L353'>uint64</a>            353 kernel/riscv.h typedef uint64 pte_t;</span>
+<span class='curline'><a href='../S/64.html#L354'>uint64</a>            354 kernel/riscv.h typedef uint64 *pagetable_t; // 512 PTEs</span>
+<span class='curline'><a href='../S/70.html#L14'>uint64</a>             14 kernel/start.c uint64 mscratch0[NCPU * 32];</span>
+<span class='curline'><a href='../S/70.html#L31'>uint64</a>             31 kernel/start.c   w_mepc((uint64)main);</span>
+<span class='curline'><a href='../S/70.html#L64'>uint64</a>             64 kernel/start.c   *(uint64*)CLINT_MTIMECMP(id) = *(uint64*)CLINT_MTIME + interval;</span>
+<span class='curline'><a href='../S/70.html#L70'>uint64</a>             70 kernel/start.c   uint64 *scratch = &amp;mscratch0[32 * id];</span>
+<span class='curline'><a href='../S/70.html#L73'>uint64</a>             73 kernel/start.c   w_mscratch((uint64)scratch);</span>
+<span class='curline'><a href='../S/70.html#L76'>uint64</a>             76 kernel/start.c   w_mtvec((uint64)timervec);</span>
+<span class='curline'><a href='../S/42.html#L10'>uint64</a>             10 kernel/stat.h    uint64 size; // Size of file in bytes</span>
+<span class='curline'><a href='../S/51.html#L12'>uint64</a>             12 kernel/syscall.c fetchaddr(uint64 addr, uint64 *ip)</span>
+<span class='curline'><a href='../S/51.html#L15'>uint64</a>             15 kernel/syscall.c   if(addr &gt;= p-&gt;sz || addr+sizeof(uint64) &gt; p-&gt;sz)</span>
+<span class='curline'><a href='../S/51.html#L25'>uint64</a>             25 kernel/syscall.c fetchstr(uint64 addr, char *buf, int max)</span>
+<span class='curline'><a href='../S/51.html#L34'>uint64</a>             34 kernel/syscall.c static uint64</span>
+<span class='curline'><a href='../S/51.html#L68'>uint64</a>             68 kernel/syscall.c argaddr(int n, uint64 *ip)</span>
+<span class='curline'><a href='../S/51.html#L80'>uint64</a>             80 kernel/syscall.c   uint64 addr;</span>
+<span class='curline'><a href='../S/51.html#L86'>uint64</a>             86 kernel/syscall.c extern uint64 sys_chdir(void);</span>
+<span class='curline'><a href='../S/51.html#L87'>uint64</a>             87 kernel/syscall.c extern uint64 sys_close(void);</span>
+<span class='curline'><a href='../S/51.html#L88'>uint64</a>             88 kernel/syscall.c extern uint64 sys_dup(void);</span>
+<span class='curline'><a href='../S/51.html#L89'>uint64</a>             89 kernel/syscall.c extern uint64 sys_exec(void);</span>
+<span class='curline'><a href='../S/51.html#L90'>uint64</a>             90 kernel/syscall.c extern uint64 sys_exit(void);</span>
+<span class='curline'><a href='../S/51.html#L91'>uint64</a>             91 kernel/syscall.c extern uint64 sys_fork(void);</span>
+<span class='curline'><a href='../S/51.html#L92'>uint64</a>             92 kernel/syscall.c extern uint64 sys_fstat(void);</span>
+<span class='curline'><a href='../S/51.html#L93'>uint64</a>             93 kernel/syscall.c extern uint64 sys_getpid(void);</span>
+<span class='curline'><a href='../S/51.html#L94'>uint64</a>             94 kernel/syscall.c extern uint64 sys_kill(void);</span>
+<span class='curline'><a href='../S/51.html#L95'>uint64</a>             95 kernel/syscall.c extern uint64 sys_link(void);</span>
+<span class='curline'><a href='../S/51.html#L96'>uint64</a>             96 kernel/syscall.c extern uint64 sys_mkdir(void);</span>
+<span class='curline'><a href='../S/51.html#L97'>uint64</a>             97 kernel/syscall.c extern uint64 sys_mknod(void);</span>
+<span class='curline'><a href='../S/51.html#L98'>uint64</a>             98 kernel/syscall.c extern uint64 sys_open(void);</span>
+<span class='curline'><a href='../S/51.html#L99'>uint64</a>             99 kernel/syscall.c extern uint64 sys_pipe(void);</span>
+<span class='curline'><a href='../S/51.html#L100'>uint64</a>            100 kernel/syscall.c extern uint64 sys_read(void);</span>
+<span class='curline'><a href='../S/51.html#L101'>uint64</a>            101 kernel/syscall.c extern uint64 sys_sbrk(void);</span>
+<span class='curline'><a href='../S/51.html#L102'>uint64</a>            102 kernel/syscall.c extern uint64 sys_sleep(void);</span>
+<span class='curline'><a href='../S/51.html#L103'>uint64</a>            103 kernel/syscall.c extern uint64 sys_unlink(void);</span>
+<span class='curline'><a href='../S/51.html#L104'>uint64</a>            104 kernel/syscall.c extern uint64 sys_wait(void);</span>
+<span class='curline'><a href='../S/51.html#L105'>uint64</a>            105 kernel/syscall.c extern uint64 sys_write(void);</span>
+<span class='curline'><a href='../S/51.html#L106'>uint64</a>            106 kernel/syscall.c extern uint64 sys_uptime(void);</span>
+<span class='curline'><a href='../S/51.html#L108'>uint64</a>            108 kernel/syscall.c static uint64 (*syscalls[])(void) = {</span>
+<span class='curline'><a href='../S/43.html#L55'>uint64</a>             55 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L69'>uint64</a>             69 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L74'>uint64</a>             74 kernel/sysfile.c   uint64 p;</span>
+<span class='curline'><a href='../S/43.html#L81'>uint64</a>             81 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L86'>uint64</a>             86 kernel/sysfile.c   uint64 p;</span>
+<span class='curline'><a href='../S/43.html#L94'>uint64</a>             94 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L107'>uint64</a>            107 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L111'>uint64</a>            111 kernel/sysfile.c   uint64 st; // user pointer to struct stat</span>
+<span class='curline'><a href='../S/43.html#L119'>uint64</a>            119 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L176'>uint64</a>            176 kernel/sysfile.c     if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/43.html#L184'>uint64</a>            184 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L219'>uint64</a>            219 kernel/sysfile.c   if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/43.html#L286'>uint64</a>            286 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L354'>uint64</a>            354 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L370'>uint64</a>            370 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L390'>uint64</a>            390 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L415'>uint64</a>            415 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L420'>uint64</a>            420 kernel/sysfile.c   uint64 uargv, uarg;</span>
+<span class='curline'><a href='../S/43.html#L430'>uint64</a>            430 kernel/sysfile.c     if(fetchaddr(uargv+sizeof(uint64)*i, (uint64*)&amp;uarg) &lt; 0){</span>
+<span class='curline'><a href='../S/43.html#L457'>uint64</a>            457 kernel/sysfile.c uint64</span>
+<span class='curline'><a href='../S/43.html#L460'>uint64</a>            460 kernel/sysfile.c   uint64 fdarray; // user pointer to array of two integers</span>
+<span class='curline'><a href='../S/33.html#L10'>uint64</a>             10 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/33.html#L20'>uint64</a>             20 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/33.html#L26'>uint64</a>             26 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/33.html#L32'>uint64</a>             32 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/33.html#L35'>uint64</a>             35 kernel/sysproc.c   uint64 p;</span>
+<span class='curline'><a href='../S/33.html#L41'>uint64</a>             41 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/33.html#L55'>uint64</a>             55 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/33.html#L76'>uint64</a>             76 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/33.html#L88'>uint64</a>             88 kernel/sysproc.c uint64</span>
+<span class='curline'><a href='../S/56.html#L29'>uint64</a>             29 kernel/trap.c    w_stvec((uint64)kernelvec);</span>
+<span class='curline'><a href='../S/56.html#L46'>uint64</a>             46 kernel/trap.c    w_stvec((uint64)kernelvec);</span>
+<span class='curline'><a href='../S/56.html#L106'>uint64</a>            106 kernel/trap.c    p-&gt;trapframe-&gt;kernel_trap = (uint64)usertrap;</span>
+<span class='curline'><a href='../S/56.html#L122'>uint64</a>            122 kernel/trap.c    uint64 satp = MAKE_SATP(p-&gt;pagetable);</span>
+<span class='curline'><a href='../S/56.html#L127'>uint64</a>            127 kernel/trap.c    uint64 fn = TRAMPOLINE + (userret - trampoline);</span>
+<span class='curline'><a href='../S/56.html#L128'>uint64</a>            128 kernel/trap.c    ((void (*)(uint64,uint64))fn)(TRAPFRAME, satp);</span>
+<span class='curline'><a href='../S/56.html#L137'>uint64</a>            137 kernel/trap.c    uint64 sepc = r_sepc();</span>
+<span class='curline'><a href='../S/56.html#L138'>uint64</a>            138 kernel/trap.c    uint64 sstatus = r_sstatus();</span>
+<span class='curline'><a href='../S/56.html#L139'>uint64</a>            139 kernel/trap.c    uint64 scause = r_scause();</span>
+<span class='curline'><a href='../S/56.html#L179'>uint64</a>            179 kernel/trap.c    uint64 scause = r_scause();</span>
+<span class='curline'><a href='../S/37.html#L10'>uint64</a>             10 kernel/types.h typedef uint64 pde_t;</span>
+<span class='curline'><a href='../S/54.html#L51'>uint64</a>             51 kernel/virtio.h   uint64 addr;</span>
+<span class='curline'><a href='../S/65.html#L70'>uint64</a>             70 kernel/virtio_disk.c   uint64 features = *R(VIRTIO_MMIO_DEVICE_FEATURES);</span>
+<span class='curline'><a href='../S/65.html#L99'>uint64</a>             99 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_PFN) = ((uint64)disk.pages) &gt;&gt; PGSHIFT;</span>
+<span class='curline'><a href='../S/65.html#L171'>uint64</a>            171 kernel/virtio_disk.c   uint64 sector = b-&gt;blockno * (BSIZE / 512);</span>
+<span class='curline'><a href='../S/65.html#L194'>uint64</a>            194 kernel/virtio_disk.c     uint64 sector;</span>
+<span class='curline'><a href='../S/65.html#L206'>uint64</a>            206 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) kvmpa((uint64) &amp;buf0);</span>
+<span class='curline'><a href='../S/65.html#L211'>uint64</a>            211 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
+<span class='curline'><a href='../S/65.html#L221'>uint64</a>            221 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64) &amp;disk.info[idx[0]].status;</span>
+<span class='curline'><a href='../S/38.html#L40'>uint64</a>             40 kernel/vm.c      kvmmap(KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/38.html#L43'>uint64</a>             43 kernel/vm.c      kvmmap((uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/38.html#L47'>uint64</a>             47 kernel/vm.c      kvmmap(TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/38.html#L72'>uint64</a>             72 kernel/vm.c    walk(pagetable_t pagetable, uint64 va, int alloc)</span>
+<span class='curline'><a href='../S/38.html#L94'>uint64</a>             94 kernel/vm.c    uint64</span>
+<span class='curline'><a href='../S/38.html#L95'>uint64</a>             95 kernel/vm.c    walkaddr(pagetable_t pagetable, uint64 va)</span>
+<span class='curline'><a href='../S/38.html#L98'>uint64</a>             98 kernel/vm.c      uint64 pa;</span>
+<span class='curline'><a href='../S/38.html#L118'>uint64</a>            118 kernel/vm.c    kvmmap(uint64 va, uint64 pa, uint64 sz, int perm)</span>
+<span class='curline'><a href='../S/38.html#L128'>uint64</a>            128 kernel/vm.c    uint64</span>
+<span class='curline'><a href='../S/38.html#L129'>uint64</a>            129 kernel/vm.c    kvmpa(uint64 va)</span>
+<span class='curline'><a href='../S/38.html#L131'>uint64</a>            131 kernel/vm.c      uint64 off = va % PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L133'>uint64</a>            133 kernel/vm.c      uint64 pa;</span>
+<span class='curline'><a href='../S/38.html#L149'>uint64</a>            149 kernel/vm.c    mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)</span>
+<span class='curline'><a href='../S/38.html#L151'>uint64</a>            151 kernel/vm.c      uint64 a, last;</span>
+<span class='curline'><a href='../S/38.html#L174'>uint64</a>            174 kernel/vm.c    uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free)</span>
+<span class='curline'><a href='../S/38.html#L176'>uint64</a>            176 kernel/vm.c      uint64 a;</span>
+<span class='curline'><a href='../S/38.html#L190'>uint64</a>            190 kernel/vm.c          uint64 pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/38.html#L222'>uint64</a>            222 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
+<span class='curline'><a href='../S/38.html#L228'>uint64</a>            228 kernel/vm.c    uint64</span>
+<span class='curline'><a href='../S/38.html#L229'>uint64</a>            229 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
+<span class='curline'><a href='../S/38.html#L232'>uint64</a>            232 kernel/vm.c      uint64 a;</span>
+<span class='curline'><a href='../S/38.html#L245'>uint64</a>            245 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_W|PTE_X|PTE_R|PTE_U) != 0){</span>
+<span class='curline'><a href='../S/38.html#L258'>uint64</a>            258 kernel/vm.c    uint64</span>
+<span class='curline'><a href='../S/38.html#L259'>uint64</a>            259 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
+<span class='curline'><a href='../S/38.html#L282'>uint64</a>            282 kernel/vm.c          uint64 child = PTE2PA(pte);</span>
+<span class='curline'><a href='../S/38.html#L295'>uint64</a>            295 kernel/vm.c    uvmfree(pagetable_t pagetable, uint64 sz)</span>
+<span class='curline'><a href='../S/38.html#L309'>uint64</a>            309 kernel/vm.c    uvmcopy(pagetable_t old, pagetable_t new, uint64 sz)</span>
+<span class='curline'><a href='../S/38.html#L312'>uint64</a>            312 kernel/vm.c      uint64 pa, i;</span>
+<span class='curline'><a href='../S/38.html#L326'>uint64</a>            326 kernel/vm.c        if(mappages(new, i, PGSIZE, (uint64)mem, flags) != 0){</span>
+<span class='curline'><a href='../S/38.html#L341'>uint64</a>            341 kernel/vm.c    uvmclear(pagetable_t pagetable, uint64 va)</span>
+<span class='curline'><a href='../S/38.html#L355'>uint64</a>            355 kernel/vm.c    copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)</span>
+<span class='curline'><a href='../S/38.html#L357'>uint64</a>            357 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L380'>uint64</a>            380 kernel/vm.c    copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)</span>
+<span class='curline'><a href='../S/38.html#L382'>uint64</a>            382 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L406'>uint64</a>            406 kernel/vm.c    copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)</span>
+<span class='curline'><a href='../S/38.html#L408'>uint64</a>            408 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/12.html#L56'>uint64</a>             56 user/grind.c     uint64 iters = 0;</span>
+<span class='curline'><a href='../S/4.html#L42'>uint64</a>             42 user/printf.c  printptr(int fd, uint64 x) {</span>
+<span class='curline'><a href='../S/4.html#L46'>uint64</a>             46 user/printf.c    for (i = 0; i &lt; (sizeof(uint64) * 2); i++, x &lt;&lt;= 4)</span>
+<span class='curline'><a href='../S/4.html#L47'>uint64</a>             47 user/printf.c      putc(fd, digits[x &gt;&gt; (sizeof(uint64) * 8 - 4)]);</span>
+<span class='curline'><a href='../S/4.html#L70'>uint64</a>             70 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L74'>uint64</a>             74 user/printf.c          printptr(fd, va_arg(ap, uint64));</span>
+<span class='curline'><a href='../S/24.html#L30'>uint64</a>             30 user/usertests.c   uint64 addrs[] = { 0x80000000LL, 0xffffffffffffffff };</span>
+<span class='curline'><a href='../S/24.html#L33'>uint64</a>             33 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/24.html#L74'>uint64</a>             74 user/usertests.c   uint64 addrs[] = { 0x80000000LL, 0xffffffffffffffff };</span>
+<span class='curline'><a href='../S/24.html#L77'>uint64</a>             77 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/24.html#L115'>uint64</a>            115 user/usertests.c   uint64 addrs[] = { 0x80000000LL, 0xffffffffffffffff };</span>
+<span class='curline'><a href='../S/24.html#L118'>uint64</a>            118 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/24.html#L197'>uint64</a>            197 user/usertests.c   uint64 top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L201'>uint64</a>            201 user/usertests.c   top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2024'>uint64</a>           2024 user/usertests.c   uint64 amt;</span>
+<span class='curline'><a href='../S/24.html#L2030'>uint64</a>           2030 user/usertests.c   amt = BIG - (uint64)a;</span>
+<span class='curline'><a href='../S/24.html#L2123'>uint64</a>           2123 user/usertests.c       sbrk(BIG - (uint64)sbrk(0));</span>
+<span class='curline'><a href='../S/24.html#L2205'>uint64</a>           2205 user/usertests.c   uint64 p;</span>
+<span class='curline'><a href='../S/24.html#L2394'>uint64</a>           2394 user/usertests.c     int sz = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2410'>uint64</a>           2410 user/usertests.c     int sz = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2426'>uint64</a>           2426 user/usertests.c     sbrk((10*4096 + 2048) - (uint64)sbrk(0));</span>
+<span class='curline'><a href='../S/24.html#L2506'>uint64</a>           2506 user/usertests.c         uint64 a = (uint64) sbrk(4096);</span>
+<span class='curline'><a href='../S/24.html#L2556'>uint64</a>           2556 user/usertests.c       uint64 a = (uint64) sbrk(4096);</span>
+</pre>
+</body>
+</html>

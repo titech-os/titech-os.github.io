@@ -1,26 +1,121 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nfiles</title>
+<title>name</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/24.html#L1871'>nfiles</a>           1871 user/usertests.c   int nfiles;</span>
-<span class='curline'><a href='../S/24.html#L1876'>nfiles</a>           1876 user/usertests.c   for(nfiles = 0; ; nfiles++){</span>
-<span class='curline'><a href='../S/24.html#L1879'>nfiles</a>           1879 user/usertests.c     name[1] = '0' + nfiles / 1000;</span>
-<span class='curline'><a href='../S/24.html#L1880'>nfiles</a>           1880 user/usertests.c     name[2] = '0' + (nfiles % 1000) / 100;</span>
-<span class='curline'><a href='../S/24.html#L1881'>nfiles</a>           1881 user/usertests.c     name[3] = '0' + (nfiles % 100) / 10;</span>
-<span class='curline'><a href='../S/24.html#L1882'>nfiles</a>           1882 user/usertests.c     name[4] = '0' + (nfiles % 10);</span>
-<span class='curline'><a href='../S/24.html#L1904'>nfiles</a>           1904 user/usertests.c   while(nfiles &gt;= 0){</span>
-<span class='curline'><a href='../S/24.html#L1907'>nfiles</a>           1907 user/usertests.c     name[1] = '0' + nfiles / 1000;</span>
-<span class='curline'><a href='../S/24.html#L1908'>nfiles</a>           1908 user/usertests.c     name[2] = '0' + (nfiles % 1000) / 100;</span>
-<span class='curline'><a href='../S/24.html#L1909'>nfiles</a>           1909 user/usertests.c     name[3] = '0' + (nfiles % 100) / 10;</span>
-<span class='curline'><a href='../S/24.html#L1910'>nfiles</a>           1910 user/usertests.c     name[4] = '0' + (nfiles % 10);</span>
-<span class='curline'><a href='../S/24.html#L1913'>nfiles</a>           1913 user/usertests.c     nfiles--;</span>
+<span class='curline'><a href='../S/36.html#L109'>name</a>              109 kernel/exec.c    safestrcpy(p-&gt;name, last, sizeof(p-&gt;name));</span>
+<span class='curline'><a href='../S/48.html#L527'>name</a>              527 kernel/fs.c    dirlookup(struct inode *dp, char *name, uint *poff)</span>
+<span class='curline'><a href='../S/48.html#L540'>name</a>              540 kernel/fs.c        if(namecmp(name, de.name) == 0){</span>
+<span class='curline'><a href='../S/48.html#L554'>name</a>              554 kernel/fs.c    dirlink(struct inode *dp, char *name, uint inum)</span>
+<span class='curline'><a href='../S/48.html#L561'>name</a>              561 kernel/fs.c      if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/48.html#L574'>name</a>              574 kernel/fs.c      strncpy(de.name, name, DIRSIZ);</span>
+<span class='curline'><a href='../S/48.html#L597'>name</a>              597 kernel/fs.c    skipelem(char *path, char *name)</span>
+<span class='curline'><a href='../S/48.html#L611'>name</a>              611 kernel/fs.c        memmove(name, s, DIRSIZ);</span>
+<span class='curline'><a href='../S/48.html#L613'>name</a>              613 kernel/fs.c        memmove(name, s, len);</span>
+<span class='curline'><a href='../S/48.html#L614'>name</a>              614 kernel/fs.c        name[len] = 0;</span>
+<span class='curline'><a href='../S/48.html#L626'>name</a>              626 kernel/fs.c    namex(char *path, int nameiparent, char *name)</span>
+<span class='curline'><a href='../S/48.html#L635'>name</a>              635 kernel/fs.c      while((path = skipelem(path, name)) != 0){</span>
+<span class='curline'><a href='../S/48.html#L646'>name</a>              646 kernel/fs.c        if((next = dirlookup(ip, name, 0)) == 0){</span>
+<span class='curline'><a href='../S/48.html#L663'>name</a>              663 kernel/fs.c      char name[DIRSIZ];</span>
+<span class='curline'><a href='../S/48.html#L664'>name</a>              664 kernel/fs.c      return namex(path, 0, name);</span>
+<span class='curline'><a href='../S/48.html#L668'>name</a>              668 kernel/fs.c    nameiparent(char *path, char *name)</span>
+<span class='curline'><a href='../S/48.html#L670'>name</a>              670 kernel/fs.c      return namex(path, 1, name);</span>
+<span class='curline'><a href='../S/71.html#L58'>name</a>               58 kernel/fs.h      char name[DIRSIZ];</span>
+<span class='curline'><a href='../S/63.html#L148'>name</a>              148 kernel/proc.c    p-&gt;name[0] = 0;</span>
+<span class='curline'><a href='../S/63.html#L228'>name</a>              228 kernel/proc.c    safestrcpy(p-&gt;name, "initcode", sizeof(p-&gt;name));</span>
+<span class='curline'><a href='../S/63.html#L292'>name</a>              292 kernel/proc.c    safestrcpy(np-&gt;name, p-&gt;name, sizeof(p-&gt;name));</span>
+<span class='curline'><a href='../S/63.html#L685'>name</a>              685 kernel/proc.c      printf("%d %s %s", p-&gt;pid, state, p-&gt;name);</span>
+<span class='curline'><a href='../S/35.html#L105'>name</a>              105 kernel/proc.h    char name[16];               // Process name (debugging)</span>
+<span class='curline'><a href='../S/44.html#L13'>name</a>               13 kernel/sleeplock.c initsleeplock(struct sleeplock *lk, char *name)</span>
+<span class='curline'><a href='../S/44.html#L16'>name</a>               16 kernel/sleeplock.c   lk-&gt;name = name;</span>
+<span class='curline'><a href='../S/66.html#L7'>name</a>                7 kernel/sleeplock.h   char *name;        // Name of lock.</span>
+<span class='curline'><a href='../S/59.html#L12'>name</a>               12 kernel/spinlock.c initlock(struct spinlock *lk, char *name)</span>
+<span class='curline'><a href='../S/59.html#L14'>name</a>               14 kernel/spinlock.c   lk-&gt;name = name;</span>
+<span class='curline'><a href='../S/30.html#L6'>name</a>                6 kernel/spinlock.h   char *name;        // Name of lock.</span>
+<span class='curline'><a href='../S/51.html#L143'>name</a>              143 kernel/syscall.c             p-&gt;pid, p-&gt;name, num);</span>
+<span class='curline'><a href='../S/43.html#L122'>name</a>              122 kernel/sysfile.c   char name[DIRSIZ], new[MAXPATH], old[MAXPATH];</span>
+<span class='curline'><a href='../S/43.html#L145'>name</a>              145 kernel/sysfile.c   if((dp = nameiparent(new, name)) == 0)</span>
+<span class='curline'><a href='../S/43.html#L148'>name</a>              148 kernel/sysfile.c   if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
+<span class='curline'><a href='../S/43.html#L189'>name</a>              189 kernel/sysfile.c   char name[DIRSIZ], path[MAXPATH];</span>
+<span class='curline'><a href='../S/43.html#L196'>name</a>              196 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0){</span>
+<span class='curline'><a href='../S/43.html#L204'>name</a>              204 kernel/sysfile.c   if(namecmp(name, ".") == 0 || namecmp(name, "..") == 0)</span>
+<span class='curline'><a href='../S/43.html#L207'>name</a>              207 kernel/sysfile.c   if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
+<span class='curline'><a href='../S/43.html#L245'>name</a>              245 kernel/sysfile.c   char name[DIRSIZ];</span>
+<span class='curline'><a href='../S/43.html#L247'>name</a>              247 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0)</span>
+<span class='curline'><a href='../S/43.html#L252'>name</a>              252 kernel/sysfile.c   if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/43.html#L278'>name</a>              278 kernel/sysfile.c   if(dirlink(dp, name, ip-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/3.html#L123'>name</a>              123 mkfs/mkfs.c      strcpy(de.name, ".");</span>
+<span class='curline'><a href='../S/3.html#L128'>name</a>              128 mkfs/mkfs.c      strcpy(de.name, "..");</span>
+<span class='curline'><a href='../S/3.html#L157'>name</a>              157 mkfs/mkfs.c        strncpy(de.name, shortname, DIRSIZ);</span>
+<span class='curline'><a href='../S/6.html#L60'>name</a>               60 user/ls.c            memmove(p, de.name, DIRSIZ);</span>
+<span class='curline'><a href='../S/24.html#L23'>name</a>               23 user/usertests.c char name[3];</span>
+<span class='curline'><a href='../S/24.html#L587'>name</a>              587 user/usertests.c   name[0] = 'a';</span>
+<span class='curline'><a href='../S/24.html#L588'>name</a>              588 user/usertests.c   name[2] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L590'>name</a>              590 user/usertests.c     name[1] = '0' + i;</span>
+<span class='curline'><a href='../S/24.html#L591'>name</a>              591 user/usertests.c     fd = open(name, O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L594'>name</a>              594 user/usertests.c   name[0] = 'a';</span>
+<span class='curline'><a href='../S/24.html#L595'>name</a>              595 user/usertests.c   name[2] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L597'>name</a>              597 user/usertests.c     name[1] = '0' + i;</span>
+<span class='curline'><a href='../S/24.html#L598'>name</a>              598 user/usertests.c     unlink(name);</span>
+<span class='curline'><a href='../S/24.html#L1141'>name</a>             1141 user/usertests.c   char name[32];</span>
+<span class='curline'><a href='../S/24.html#L1151'>name</a>             1151 user/usertests.c       name[0] = 'p' + pi;</span>
+<span class='curline'><a href='../S/24.html#L1152'>name</a>             1152 user/usertests.c       name[2] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L1154'>name</a>             1154 user/usertests.c         name[1] = '0' + i;</span>
+<span class='curline'><a href='../S/24.html#L1155'>name</a>             1155 user/usertests.c         fd = open(name, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1162'>name</a>             1162 user/usertests.c           name[1] = '0' + (i / 2);</span>
+<span class='curline'><a href='../S/24.html#L1163'>name</a>             1163 user/usertests.c           if(unlink(name) &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1180'>name</a>             1180 user/usertests.c   name[0] = name[1] = name[2] = 0;</span>
+<span class='curline'><a href='../S/24.html#L1183'>name</a>             1183 user/usertests.c       name[0] = 'p' + pi;</span>
+<span class='curline'><a href='../S/24.html#L1184'>name</a>             1184 user/usertests.c       name[1] = '0' + i;</span>
+<span class='curline'><a href='../S/24.html#L1185'>name</a>             1185 user/usertests.c       fd = open(name, 0);</span>
+<span class='curline'><a href='../S/24.html#L1187'>name</a>             1187 user/usertests.c         printf("%s: oops createdelete %s didn't exist\n", s, name);</span>
+<span class='curline'><a href='../S/24.html#L1190'>name</a>             1190 user/usertests.c         printf("%s: oops createdelete %s did exist\n", s, name);</span>
+<span class='curline'><a href='../S/24.html#L1200'>name</a>             1200 user/usertests.c       name[0] = 'p' + i;</span>
+<span class='curline'><a href='../S/24.html#L1201'>name</a>             1201 user/usertests.c       name[1] = '0' + i;</span>
+<span class='curline'><a href='../S/24.html#L1202'>name</a>             1202 user/usertests.c       unlink(name);</span>
+<span class='curline'><a href='../S/24.html#L1321'>name</a>             1321 user/usertests.c     char name[DIRSIZ];</span>
+<span class='curline'><a href='../S/24.html#L1358'>name</a>             1358 user/usertests.c     if(de.name[0] == 'C' &amp;&amp; de.name[2] == '\0'){</span>
+<span class='curline'><a href='../S/24.html#L1359'>name</a>             1359 user/usertests.c       i = de.name[1] - '0';</span>
+<span class='curline'><a href='../S/24.html#L1361'>name</a>             1361 user/usertests.c         printf("%s: concreate weird file %s\n", s, de.name);</span>
+<span class='curline'><a href='../S/24.html#L1365'>name</a>             1365 user/usertests.c         printf("%s: concreate duplicate file %s\n", s, de.name);</span>
+<span class='curline'><a href='../S/24.html#L1447'>name</a>             1447 user/usertests.c   char name[10];</span>
+<span class='curline'><a href='../S/24.html#L1459'>name</a>             1459 user/usertests.c     name[0] = 'x';</span>
+<span class='curline'><a href='../S/24.html#L1460'>name</a>             1460 user/usertests.c     name[1] = '0' + (i / 64);</span>
+<span class='curline'><a href='../S/24.html#L1461'>name</a>             1461 user/usertests.c     name[2] = '0' + (i % 64);</span>
+<span class='curline'><a href='../S/24.html#L1462'>name</a>             1462 user/usertests.c     name[3] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L1463'>name</a>             1463 user/usertests.c     if(link("bd", name) != 0){</span>
+<span class='curline'><a href='../S/24.html#L1464'>name</a>             1464 user/usertests.c       printf("%s: bigdir link(bd, %s) failed\n", s, name);</span>
+<span class='curline'><a href='../S/24.html#L1471'>name</a>             1471 user/usertests.c     name[0] = 'x';</span>
+<span class='curline'><a href='../S/24.html#L1472'>name</a>             1472 user/usertests.c     name[1] = '0' + (i / 64);</span>
+<span class='curline'><a href='../S/24.html#L1473'>name</a>             1473 user/usertests.c     name[2] = '0' + (i % 64);</span>
+<span class='curline'><a href='../S/24.html#L1474'>name</a>             1474 user/usertests.c     name[3] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L1475'>name</a>             1475 user/usertests.c     if(unlink(name) != 0){</span>
+<span class='curline'><a href='../S/24.html#L2279'>name</a>             2279 user/usertests.c     char name[64];</span>
+<span class='curline'><a href='../S/24.html#L2280'>name</a>             2280 user/usertests.c     name[0] = 'f';</span>
+<span class='curline'><a href='../S/24.html#L2281'>name</a>             2281 user/usertests.c     name[1] = '0' + nfiles / 1000;</span>
+<span class='curline'><a href='../S/24.html#L2282'>name</a>             2282 user/usertests.c     name[2] = '0' + (nfiles % 1000) / 100;</span>
+<span class='curline'><a href='../S/24.html#L2283'>name</a>             2283 user/usertests.c     name[3] = '0' + (nfiles % 100) / 10;</span>
+<span class='curline'><a href='../S/24.html#L2284'>name</a>             2284 user/usertests.c     name[4] = '0' + (nfiles % 10);</span>
+<span class='curline'><a href='../S/24.html#L2285'>name</a>             2285 user/usertests.c     name[5] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L2286'>name</a>             2286 user/usertests.c     printf("%s: writing %s\n", name);</span>
+<span class='curline'><a href='../S/24.html#L2287'>name</a>             2287 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L2289'>name</a>             2289 user/usertests.c       printf("%s: open %s failed\n", name);</span>
+<span class='curline'><a href='../S/24.html#L2307'>name</a>             2307 user/usertests.c     char name[64];</span>
+<span class='curline'><a href='../S/24.html#L2308'>name</a>             2308 user/usertests.c     name[0] = 'f';</span>
+<span class='curline'><a href='../S/24.html#L2309'>name</a>             2309 user/usertests.c     name[1] = '0' + nfiles / 1000;</span>
+<span class='curline'><a href='../S/24.html#L2310'>name</a>             2310 user/usertests.c     name[2] = '0' + (nfiles % 1000) / 100;</span>
+<span class='curline'><a href='../S/24.html#L2311'>name</a>             2311 user/usertests.c     name[3] = '0' + (nfiles % 100) / 10;</span>
+<span class='curline'><a href='../S/24.html#L2312'>name</a>             2312 user/usertests.c     name[4] = '0' + (nfiles % 10);</span>
+<span class='curline'><a href='../S/24.html#L2313'>name</a>             2313 user/usertests.c     name[5] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L2314'>name</a>             2314 user/usertests.c     unlink(name);</span>
+<span class='curline'><a href='../S/10.html#L8'>name</a>                8 user/wc.c      wc(int fd, char *name)</span>
+<span class='curline'><a href='../S/10.html#L32'>name</a>               32 user/wc.c        printf("%d %d %d %s\n", l, w, c, name);</span>
 </pre>
 </body>
 </html>

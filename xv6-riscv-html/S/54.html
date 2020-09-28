@@ -3,7 +3,7 @@
 <head>
 <title>kernel/virtio.h</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -40,9 +40,9 @@
 <a id='L24' name='L24'></a>  24 <em class='sharp'>#define</em> <a href='../S/65.html#L99' title='Referred from 99 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_PFN</a>           0x040 <em class='comment'>// physical page number for queue, read/write</em>
 <a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> VIRTIO_MMIO_QUEUE_READY         0x044 <em class='comment'>// ready bit</em>
 <a id='L26' name='L26'></a>  26 <em class='sharp'>#define</em> <a href='../S/65.html#L238' title='Referred from 238 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_NOTIFY</a>        0x050 <em class='comment'>// write-only</em>
-<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> VIRTIO_MMIO_INTERRUPT_STATUS    0x060 <em class='comment'>// read-only</em>
-<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> VIRTIO_MMIO_INTERRUPT_ACK       0x064 <em class='comment'>// write-only</em>
-<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/161.html' title='Multiple referred from 4 places.'>VIRTIO_MMIO_STATUS</a>              0x070 <em class='comment'>// read/write</em>
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> <a href='../S/65.html#L267' title='Referred from 267 in kernel/virtio_disk.c.'>VIRTIO_MMIO_INTERRUPT_STATUS</a>    0x060 <em class='comment'>// read-only</em>
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> <a href='../S/65.html#L267' title='Referred from 267 in kernel/virtio_disk.c.'>VIRTIO_MMIO_INTERRUPT_ACK</a>       0x064 <em class='comment'>// write-only</em>
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/171.html' title='Multiple referred from 4 places.'>VIRTIO_MMIO_STATUS</a>              0x070 <em class='comment'>// read/write</em>
 <a id='L30' name='L30'></a>  30 
 <a id='L31' name='L31'></a>  31 <em class='comment'>// status register bits, from qemu virtio_config.h</em>
 <a id='L32' name='L32'></a>  32 <em class='sharp'>#define</em> <a href='../S/65.html#L63' title='Referred from 63 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_ACKNOWLEDGE</a>     1
@@ -61,30 +61,30 @@
 <a id='L45' name='L45'></a>  45 
 <a id='L46' name='L46'></a>  46 <em class='comment'>// this many virtio descriptors.</em>
 <a id='L47' name='L47'></a>  47 <em class='comment'>// must be a power of two.</em>
-<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/60.html' title='Multiple referred from 12 places.'>NUM</a> 8
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/67.html' title='Multiple referred from 12 places.'>NUM</a> 8
 <a id='L49' name='L49'></a>  49 
-<a id='L50' name='L50'></a>  50 <strong class='reserved'>struct</strong> <a href='../R/168.html' title='Multiple referred from 3 places.'>VRingDesc</a> <em class='brace'>{</em>
-<a id='L51' name='L51'></a>  51   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/18.html' title='Multiple used in 47 places.'>addr</a>;
-<a id='L52' name='L52'></a>  52   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/166.html' title='Multiple used in 28 places.'>len</a>;
-<a id='L53' name='L53'></a>  53   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/107.html' title='Multiple used in 17 places.'>flags</a>;
-<a id='L54' name='L54'></a>  54   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/204.html' title='Multiple used in 22 places.'>next</a>;
+<a id='L50' name='L50'></a>  50 <strong class='reserved'>struct</strong> <a href='../R/178.html' title='Multiple referred from 3 places.'>VRingDesc</a> <em class='brace'>{</em>
+<a id='L51' name='L51'></a>  51   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/18.html' title='Multiple used in 62 places.'>addr</a>;
+<a id='L52' name='L52'></a>  52   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/179.html' title='Multiple used in 28 places.'>len</a>;
+<a id='L53' name='L53'></a>  53   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/116.html' title='Multiple used in 17 places.'>flags</a>;
+<a id='L54' name='L54'></a>  54   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/216.html' title='Multiple used in 22 places.'>next</a>;
 <a id='L55' name='L55'></a>  55 <em class='brace'>}</em>;
-<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../R/166.html' title='Multiple referred from 3 places.'>VRING_DESC_F_NEXT</a>  1 <em class='comment'>// chained with another descriptor</em>
-<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../R/167.html' title='Multiple referred from 2 places.'>VRING_DESC_F_WRITE</a> 2 <em class='comment'>// device writes (vs read)</em>
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../R/176.html' title='Multiple referred from 3 places.'>VRING_DESC_F_NEXT</a>  1 <em class='comment'>// chained with another descriptor</em>
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../R/177.html' title='Multiple referred from 2 places.'>VRING_DESC_F_WRITE</a> 2 <em class='comment'>// device writes (vs read)</em>
 <a id='L58' name='L58'></a>  58 
 <a id='L59' name='L59'></a>  59 <strong class='reserved'>struct</strong> <a href='../S/54.html#L71' title='Referred from 71 in kernel/virtio.h.'>VRingUsedElem</a> <em class='brace'>{</em>
-<a id='L60' name='L60'></a>  60   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/135.html' title='Multiple used in 17 places.'>id</a>;   <em class='comment'>// index of start of completed descriptor chain</em>
-<a id='L61' name='L61'></a>  61   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/166.html' title='Multiple used in 28 places.'>len</a>;
+<a id='L60' name='L60'></a>  60   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/146.html' title='Multiple used in 17 places.'>id</a>;   <em class='comment'>// index of start of completed descriptor chain</em>
+<a id='L61' name='L61'></a>  61   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/179.html' title='Multiple used in 28 places.'>len</a>;
 <a id='L62' name='L62'></a>  62 <em class='brace'>}</em>;
 <a id='L63' name='L63'></a>  63 
 <a id='L64' name='L64'></a>  64 <em class='comment'>// for disk ops</em>
 <a id='L65' name='L65'></a>  65 <em class='sharp'>#define</em> <a href='../S/65.html#L200' title='Referred from 200 in kernel/virtio_disk.c.'>VIRTIO_BLK_T_IN</a>  0 <em class='comment'>// read the disk</em>
 <a id='L66' name='L66'></a>  66 <em class='sharp'>#define</em> <a href='../S/65.html#L198' title='Referred from 198 in kernel/virtio_disk.c.'>VIRTIO_BLK_T_OUT</a> 1 <em class='comment'>// write the disk</em>
 <a id='L67' name='L67'></a>  67 
-<a id='L68' name='L68'></a>  68 <strong class='reserved'>struct</strong> <a href='../R/137.html' title='Multiple referred from 2 places.'>UsedArea</a> <em class='brace'>{</em>
-<a id='L69' name='L69'></a>  69   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/107.html' title='Multiple used in 17 places.'>flags</a>;
-<a id='L70' name='L70'></a>  70   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/135.html' title='Multiple used in 17 places.'>id</a>;
-<a id='L71' name='L71'></a>  71   <strong class='reserved'>struct</strong> <a href='../S/54.html#L59' title='Defined at 59 in kernel/virtio.h.'>VRingUsedElem</a> <a href='../Y/82.html' title='Multiple used in 2 places.'>elems</a>[<a href='../S/54.html#L48' title='Defined at 48 in kernel/virtio.h.'>NUM</a>];
+<a id='L68' name='L68'></a>  68 <strong class='reserved'>struct</strong> <a href='../R/145.html' title='Multiple referred from 2 places.'>UsedArea</a> <em class='brace'>{</em>
+<a id='L69' name='L69'></a>  69   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/116.html' title='Multiple used in 17 places.'>flags</a>;
+<a id='L70' name='L70'></a>  70   <a href='../S/37.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/146.html' title='Multiple used in 17 places.'>id</a>;
+<a id='L71' name='L71'></a>  71   <strong class='reserved'>struct</strong> <a href='../S/54.html#L59' title='Defined at 59 in kernel/virtio.h.'>VRingUsedElem</a> <a href='../Y/89.html' title='Multiple used in 2 places.'>elems</a>[<a href='../S/54.html#L48' title='Defined at 48 in kernel/virtio.h.'>NUM</a>];
 <a id='L72' name='L72'></a>  72 <em class='brace'>}</em>;
 </pre>
 <hr />

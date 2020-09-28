@@ -1,19 +1,83 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>scheduler</title>
+<title>release</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L95'>scheduler</a>          95 kernel/defs.h  void            scheduler(void) __attribute__((noreturn));</span>
-<span class='curline'><a href='../S/60.html#L44'>scheduler</a>          44 kernel/main.c    scheduler();        </span>
-<span class='curline'><a href='../S/63.html#L460'>scheduler</a>         460 kernel/proc.c          swtch(&amp;c-&gt;scheduler, &amp;p-&gt;context);</span>
-<span class='curline'><a href='../S/63.html#L494'>scheduler</a>         494 kernel/proc.c    swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;scheduler);</span>
-<span class='curline'><a href='../S/35.html#L24'>scheduler</a>          24 kernel/proc.h    struct context scheduler;   // swtch() here to enter scheduler().</span>
+<span class='curline'><a href='../S/61.html#L69'>release</a>            69 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L83'>release</a>            83 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L136'>release</a>           136 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L143'>release</a>           143 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L150'>release</a>           150 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/57.html#L70'>release</a>            70 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L95'>release</a>            95 kernel/console.c         release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L126'>release</a>           126 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L180'>release</a>           180 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/31.html#L115'>release</a>           115 kernel/defs.h  void            release(struct spinlock*);</span>
+<span class='curline'><a href='../S/67.html#L38'>release</a>            38 kernel/file.c        release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L42'>release</a>            42 kernel/file.c    release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L54'>release</a>            54 kernel/file.c    release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L68'>release</a>            68 kernel/file.c      release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/67.html#L74'>release</a>            74 kernel/file.c    release(&amp;ftable.lock);</span>
+<span class='curline'><a href='../S/48.html#L254'>release</a>           254 kernel/fs.c          release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/48.html#L270'>release</a>           270 kernel/fs.c      release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/48.html#L282'>release</a>           282 kernel/fs.c      release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/48.html#L344'>release</a>           344 kernel/fs.c        release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/48.html#L357'>release</a>           357 kernel/fs.c      release(&amp;icache.lock);</span>
+<span class='curline'><a href='../S/69.html#L62'>release</a>            62 kernel/kalloc.c   release(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/69.html#L77'>release</a>            77 kernel/kalloc.c   release(&amp;kmem.lock);</span>
+<span class='curline'><a href='../S/28.html#L137'>release</a>           137 kernel/log.c         release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L163'>release</a>           163 kernel/log.c     release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L172'>release</a>           172 kernel/log.c       release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L233'>release</a>           233 kernel/log.c     release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/34.html#L70'>release</a>            70 kernel/pipe.c      release(&amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L73'>release</a>            73 kernel/pipe.c      release(&amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L87'>release</a>            87 kernel/pipe.c          release(&amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L98'>release</a>            98 kernel/pipe.c    release(&amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L112'>release</a>           112 kernel/pipe.c        release(&amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L125'>release</a>           125 kernel/pipe.c    release(&amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/29.html#L114'>release</a>           114 kernel/printf.c     release(&amp;pr.lock);</span>
+<span class='curline'><a href='../S/63.html#L83'>release</a>            83 kernel/proc.c    release(&amp;pid_lock);</span>
+<span class='curline'><a href='../S/63.html#L102'>release</a>           102 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L112'>release</a>           112 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L120'>release</a>           120 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L233'>release</a>           233 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L273'>release</a>           273 kernel/proc.c      release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L298'>release</a>           298 kernel/proc.c    release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L324'>release</a>           324 kernel/proc.c        release(&amp;pp-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L361'>release</a>           361 kernel/proc.c    release(&amp;initproc-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L371'>release</a>           371 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L388'>release</a>           388 kernel/proc.c    release(&amp;original_parent-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L425'>release</a>           425 kernel/proc.c              release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L426'>release</a>           426 kernel/proc.c              release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L430'>release</a>           430 kernel/proc.c            release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L431'>release</a>           431 kernel/proc.c            release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L434'>release</a>           434 kernel/proc.c          release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L440'>release</a>           440 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L481'>release</a>           481 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L521'>release</a>           521 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L532'>release</a>           532 kernel/proc.c    release(&amp;myproc()-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L560'>release</a>           560 kernel/proc.c      release(lk);</span>
+<span class='curline'><a href='../S/63.html#L574'>release</a>           574 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L591'>release</a>           591 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L623'>release</a>           623 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L626'>release</a>           626 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/44.html#L30'>release</a>            30 kernel/sleeplock.c   release(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L40'>release</a>            40 kernel/sleeplock.c   release(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L50'>release</a>            50 kernel/sleeplock.c   release(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/33.html#L67'>release</a>            67 kernel/sysproc.c       release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L72'>release</a>            72 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L95'>release</a>            95 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/56.html#L168'>release</a>           168 kernel/trap.c    release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/72.html#L105'>release</a>           105 kernel/uart.c        release(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/72.html#L193'>release</a>           193 kernel/uart.c    release(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/65.html#L248'>release</a>           248 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L269'>release</a>           269 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
 </pre>
 </body>
 </html>

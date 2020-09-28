@@ -1,39 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>idx</title>
+<title>hart</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L155'>idx</a>               155 kernel/virtio_disk.c alloc3_desc(int *idx)</span>
-<span class='curline'><a href='../S/65.html#L158'>idx</a>               158 kernel/virtio_disk.c     idx[i] = alloc_desc();</span>
-<span class='curline'><a href='../S/65.html#L159'>idx</a>               159 kernel/virtio_disk.c     if(idx[i] &lt; 0){</span>
-<span class='curline'><a href='../S/65.html#L161'>idx</a>               161 kernel/virtio_disk.c         free_desc(idx[j]);</span>
-<span class='curline'><a href='../S/65.html#L180'>idx</a>               180 kernel/virtio_disk.c   int idx[3];</span>
-<span class='curline'><a href='../S/65.html#L182'>idx</a>               182 kernel/virtio_disk.c     if(alloc3_desc(idx) == 0) {</span>
-<span class='curline'><a href='../S/65.html#L206'>idx</a>               206 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) kvmpa((uint64) &amp;buf0);</span>
-<span class='curline'><a href='../S/65.html#L207'>idx</a>               207 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(buf0);</span>
-<span class='curline'><a href='../S/65.html#L208'>idx</a>               208 kernel/virtio_disk.c   disk.desc[idx[0]].flags = VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/65.html#L209'>idx</a>               209 kernel/virtio_disk.c   disk.desc[idx[0]].next = idx[1];</span>
-<span class='curline'><a href='../S/65.html#L211'>idx</a>               211 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
-<span class='curline'><a href='../S/65.html#L212'>idx</a>               212 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
-<span class='curline'><a href='../S/65.html#L214'>idx</a>               214 kernel/virtio_disk.c     disk.desc[idx[1]].flags = 0; // device reads b-&gt;data</span>
-<span class='curline'><a href='../S/65.html#L216'>idx</a>               216 kernel/virtio_disk.c     disk.desc[idx[1]].flags = VRING_DESC_F_WRITE; // device writes b-&gt;data</span>
-<span class='curline'><a href='../S/65.html#L217'>idx</a>               217 kernel/virtio_disk.c   disk.desc[idx[1]].flags |= VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/65.html#L218'>idx</a>               218 kernel/virtio_disk.c   disk.desc[idx[1]].next = idx[2];</span>
-<span class='curline'><a href='../S/65.html#L220'>idx</a>               220 kernel/virtio_disk.c   disk.info[idx[0]].status = 0;</span>
-<span class='curline'><a href='../S/65.html#L221'>idx</a>               221 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64) &amp;disk.info[idx[0]].status;</span>
-<span class='curline'><a href='../S/65.html#L222'>idx</a>               222 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
-<span class='curline'><a href='../S/65.html#L223'>idx</a>               223 kernel/virtio_disk.c   disk.desc[idx[2]].flags = VRING_DESC_F_WRITE; // device writes the status</span>
-<span class='curline'><a href='../S/65.html#L224'>idx</a>               224 kernel/virtio_disk.c   disk.desc[idx[2]].next = 0;</span>
-<span class='curline'><a href='../S/65.html#L228'>idx</a>               228 kernel/virtio_disk.c   disk.info[idx[0]].b = b;</span>
-<span class='curline'><a href='../S/65.html#L234'>idx</a>               234 kernel/virtio_disk.c   disk.avail[2 + (disk.avail[1] % NUM)] = idx[0];</span>
-<span class='curline'><a href='../S/65.html#L245'>idx</a>               245 kernel/virtio_disk.c   disk.info[idx[0]].b = 0;</span>
-<span class='curline'><a href='../S/65.html#L246'>idx</a>               246 kernel/virtio_disk.c   free_chain(idx[0]);</span>
+<span class='curline'><a href='../S/49.html#L37'>hart</a>               37 kernel/memlayout.h #define PLIC_MENABLE(hart) (PLIC + 0x2000 + (hart)*0x100)</span>
+<span class='curline'><a href='../S/49.html#L38'>hart</a>               38 kernel/memlayout.h #define PLIC_SENABLE(hart) (PLIC + 0x2080 + (hart)*0x100)</span>
+<span class='curline'><a href='../S/49.html#L39'>hart</a>               39 kernel/memlayout.h #define PLIC_MPRIORITY(hart) (PLIC + 0x200000 + (hart)*0x2000)</span>
+<span class='curline'><a href='../S/49.html#L40'>hart</a>               40 kernel/memlayout.h #define PLIC_SPRIORITY(hart) (PLIC + 0x201000 + (hart)*0x2000)</span>
+<span class='curline'><a href='../S/49.html#L41'>hart</a>               41 kernel/memlayout.h #define PLIC_MCLAIM(hart) (PLIC + 0x200004 + (hart)*0x2000)</span>
+<span class='curline'><a href='../S/49.html#L42'>hart</a>               42 kernel/memlayout.h #define PLIC_SCLAIM(hart) (PLIC + 0x201004 + (hart)*0x2000)</span>
+<span class='curline'><a href='../S/62.html#L22'>hart</a>               22 kernel/plic.c    int hart = cpuid();</span>
+<span class='curline'><a href='../S/62.html#L25'>hart</a>               25 kernel/plic.c    *(uint32*)PLIC_SENABLE(hart)= (1 &lt;&lt; UART0_IRQ) | (1 &lt;&lt; VIRTIO0_IRQ);</span>
+<span class='curline'><a href='../S/62.html#L28'>hart</a>               28 kernel/plic.c    *(uint32*)PLIC_SPRIORITY(hart) = 0;</span>
+<span class='curline'><a href='../S/62.html#L35'>hart</a>               35 kernel/plic.c    int hart = cpuid();</span>
+<span class='curline'><a href='../S/62.html#L36'>hart</a>               36 kernel/plic.c    int irq = *(uint32*)PLIC_SCLAIM(hart);</span>
+<span class='curline'><a href='../S/62.html#L44'>hart</a>               44 kernel/plic.c    int hart = cpuid();</span>
+<span class='curline'><a href='../S/62.html#L45'>hart</a>               45 kernel/plic.c    *(uint32*)PLIC_SCLAIM(hart) = irq;</span>
 </pre>
 </body>
 </html>

@@ -1,23 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>prev</title>
+<title>ph</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/61.html#L43'>prev</a>               43 kernel/bio.c     bcache.head.prev = &amp;bcache.head;</span>
-<span class='curline'><a href='../S/61.html#L47'>prev</a>               47 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
-<span class='curline'><a href='../S/61.html#L49'>prev</a>               49 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
-<span class='curline'><a href='../S/61.html#L75'>prev</a>               75 kernel/bio.c     for(b = bcache.head.prev; b != &amp;bcache.head; b = b-&gt;prev){</span>
-<span class='curline'><a href='../S/61.html#L126'>prev</a>              126 kernel/bio.c       b-&gt;next-&gt;prev = b-&gt;prev;</span>
-<span class='curline'><a href='../S/61.html#L127'>prev</a>              127 kernel/bio.c       b-&gt;prev-&gt;next = b-&gt;next;</span>
-<span class='curline'><a href='../S/61.html#L129'>prev</a>              129 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
-<span class='curline'><a href='../S/61.html#L130'>prev</a>              130 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
-<span class='curline'><a href='../S/47.html#L8'>prev</a>                8 kernel/buf.h     struct buf *prev; // LRU cache list</span>
+<span class='curline'><a href='../S/36.html#L20'>ph</a>                 20 kernel/exec.c    struct proghdr ph;</span>
+<span class='curline'><a href='../S/36.html#L42'>ph</a>                 42 kernel/exec.c    for(i=0, off=elf.phoff; i&lt;elf.phnum; i++, off+=sizeof(ph)){</span>
+<span class='curline'><a href='../S/36.html#L43'>ph</a>                 43 kernel/exec.c      if(readi(ip, 0, (uint64)&amp;ph, off, sizeof(ph)) != sizeof(ph))</span>
+<span class='curline'><a href='../S/36.html#L45'>ph</a>                 45 kernel/exec.c      if(ph.type != ELF_PROG_LOAD)</span>
+<span class='curline'><a href='../S/36.html#L47'>ph</a>                 47 kernel/exec.c      if(ph.memsz &lt; ph.filesz)</span>
+<span class='curline'><a href='../S/36.html#L49'>ph</a>                 49 kernel/exec.c      if(ph.vaddr + ph.memsz &lt; ph.vaddr)</span>
+<span class='curline'><a href='../S/36.html#L52'>ph</a>                 52 kernel/exec.c      if((sz1 = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz)) == 0)</span>
+<span class='curline'><a href='../S/36.html#L55'>ph</a>                 55 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
+<span class='curline'><a href='../S/36.html#L57'>ph</a>                 57 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
 </pre>
 </body>
 </html>

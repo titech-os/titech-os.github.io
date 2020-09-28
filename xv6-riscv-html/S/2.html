@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>Makefile</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/Makefile</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>K=kernel
+<a id='L2' name='L2'></a>U=user
+<a id='L3' name='L3'></a>
+<a id='L4' name='L4'></a>OBJS = \
+<a id='L5' name='L5'></a>  $K/entry.o \
+<a id='L6' name='L6'></a>  $K/start.o \
+<a id='L7' name='L7'></a>  $K/console.o \
+<a id='L8' name='L8'></a>  $K/printf.o \
+<a id='L9' name='L9'></a>  $K/uart.o \
+<a id='L10' name='L10'></a>  $K/kalloc.o \
+<a id='L11' name='L11'></a>  $K/spinlock.o \
+<a id='L12' name='L12'></a>  $K/string.o \
+<a id='L13' name='L13'></a>  $K/main.o \
+<a id='L14' name='L14'></a>  $K/vm.o \
+<a id='L15' name='L15'></a>  $K/proc.o \
+<a id='L16' name='L16'></a>  $K/swtch.o \
+<a id='L17' name='L17'></a>  $K/trampoline.o \
+<a id='L18' name='L18'></a>  $K/trap.o \
+<a id='L19' name='L19'></a>  $K/syscall.o \
+<a id='L20' name='L20'></a>  $K/sysproc.o \
+<a id='L21' name='L21'></a>  $K/bio.o \
+<a id='L22' name='L22'></a>  $K/fs.o \
+<a id='L23' name='L23'></a>  $K/log.o \
+<a id='L24' name='L24'></a>  $K/sleeplock.o \
+<a id='L25' name='L25'></a>  $K/file.o \
+<a id='L26' name='L26'></a>  $K/pipe.o \
+<a id='L27' name='L27'></a>  $K/exec.o \
+<a id='L28' name='L28'></a>  $K/sysfile.o \
+<a id='L29' name='L29'></a>  $K/kernelvec.o \
+<a id='L30' name='L30'></a>  $K/plic.o \
+<a id='L31' name='L31'></a>  $K/virtio_disk.o
+<a id='L32' name='L32'></a>
+<a id='L33' name='L33'></a># riscv64-unknown-elf- or riscv64-linux-gnu-
+<a id='L34' name='L34'></a># perhaps in /opt/riscv/bin
+<a id='L35' name='L35'></a>#TOOLPREFIX = 
+<a id='L36' name='L36'></a>
+<a id='L37' name='L37'></a># Try to infer the correct TOOLPREFIX if not set
+<a id='L38' name='L38'></a>ifndef TOOLPREFIX
+<a id='L39' name='L39'></a>TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2&gt;&amp;1 | grep 'elf64-big' &gt;/dev/null 2&gt;&amp;1; \
+<a id='L40' name='L40'></a>        then echo 'riscv64-unknown-elf-'; \
+<a id='L41' name='L41'></a>        elif riscv64-linux-gnu-objdump -i 2&gt;&amp;1 | grep 'elf64-big' &gt;/dev/null 2&gt;&amp;1; \
+<a id='L42' name='L42'></a>        then echo 'riscv64-linux-gnu-'; \
+<a id='L43' name='L43'></a>        elif riscv64-unknown-linux-gnu-objdump -i 2&gt;&amp;1 | grep 'elf64-big' &gt;/dev/null 2&gt;&amp;1; \
+<a id='L44' name='L44'></a>        then echo 'riscv64-unknown-linux-gnu-'; \
+<a id='L45' name='L45'></a>        else echo "***" 1&gt;&amp;2; \
+<a id='L46' name='L46'></a>        echo "*** Error: Couldn't find a riscv64 version of GCC/binutils." 1&gt;&amp;2; \
+<a id='L47' name='L47'></a>        echo "*** To turn off this error, run 'gmake TOOLPREFIX= ...'." 1&gt;&amp;2; \
+<a id='L48' name='L48'></a>        echo "***" 1&gt;&amp;2; exit 1; fi)
+<a id='L49' name='L49'></a>endif
+<a id='L50' name='L50'></a>
+<a id='L51' name='L51'></a>QEMU = qemu-system-riscv64
+<a id='L52' name='L52'></a>
+<a id='L53' name='L53'></a>CC = $(TOOLPREFIX)gcc
+<a id='L54' name='L54'></a>AS = $(TOOLPREFIX)gas
+<a id='L55' name='L55'></a>LD = $(TOOLPREFIX)ld
+<a id='L56' name='L56'></a>OBJCOPY = $(TOOLPREFIX)objcopy
+<a id='L57' name='L57'></a>OBJDUMP = $(TOOLPREFIX)objdump
+<a id='L58' name='L58'></a>
+<a id='L59' name='L59'></a>CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb
+<a id='L60' name='L60'></a>CFLAGS += -MD
+<a id='L61' name='L61'></a>CFLAGS += -mcmodel=medany
+<a id='L62' name='L62'></a>CFLAGS += -ffreestanding -fno-common -nostdlib -mno-relax
+<a id='L63' name='L63'></a>CFLAGS += -I.
+<a id='L64' name='L64'></a>CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo -fno-stack-protector)
+<a id='L65' name='L65'></a>
+<a id='L66' name='L66'></a># Disable PIE when possible (for Ubuntu 16.10 toolchain)
+<a id='L67' name='L67'></a>ifneq ($(shell $(CC) -dumpspecs 2&gt;/dev/null | grep -e '[^f]no-pie'),)
+<a id='L68' name='L68'></a>CFLAGS += -fno-pie -no-pie
+<a id='L69' name='L69'></a>endif
+<a id='L70' name='L70'></a>ifneq ($(shell $(CC) -dumpspecs 2&gt;/dev/null | grep -e '[^f]nopie'),)
+<a id='L71' name='L71'></a>CFLAGS += -fno-pie -nopie
+<a id='L72' name='L72'></a>endif
+<a id='L73' name='L73'></a>
+<a id='L74' name='L74'></a>LDFLAGS = -z max-page-size=4096
+<a id='L75' name='L75'></a>
+<a id='L76' name='L76'></a>$K/kernel: $(OBJS) $K/kernel.ld $U/initcode
+<a id='L77' name='L77'></a>        $(LD) $(LDFLAGS) -T $K/kernel.ld -o $K/kernel $(OBJS) 
+<a id='L78' name='L78'></a>        $(OBJDUMP) -S $K/kernel &gt; $K/kernel.asm
+<a id='L79' name='L79'></a>        $(OBJDUMP) -t $K/kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' &gt; $K/kernel.sym
+<a id='L80' name='L80'></a>
+<a id='L81' name='L81'></a>$U/initcode: $U/initcode.S
+<a id='L82' name='L82'></a>        $(CC) $(CFLAGS) -march=rv64g -nostdinc -I. -Ikernel -c $U/initcode.S -o $U/initcode.o
+<a id='L83' name='L83'></a>        $(LD) $(LDFLAGS) -N -e start -Ttext 0 -o $U/initcode.out $U/initcode.o
+<a id='L84' name='L84'></a>        $(OBJCOPY) -S -O binary $U/initcode.out $U/initcode
+<a id='L85' name='L85'></a>        $(OBJDUMP) -S $U/initcode.o &gt; $U/initcode.asm
+<a id='L86' name='L86'></a>
+<a id='L87' name='L87'></a>tags: $(OBJS) _init
+<a id='L88' name='L88'></a>        etags *.S *.c
+<a id='L89' name='L89'></a>
+<a id='L90' name='L90'></a>ULIB = $U/ulib.o $U/usys.o $U/printf.o $U/umalloc.o
+<a id='L91' name='L91'></a>
+<a id='L92' name='L92'></a>_%: %.o $(ULIB)
+<a id='L93' name='L93'></a>        $(LD) $(LDFLAGS) -N -e main -Ttext 0 -o $@ $^
+<a id='L94' name='L94'></a>        $(OBJDUMP) -S $@ &gt; $*.asm
+<a id='L95' name='L95'></a>        $(OBJDUMP) -t $@ | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' &gt; $*.sym
+<a id='L96' name='L96'></a>
+<a id='L97' name='L97'></a>$U/usys.S : $U/usys.pl
+<a id='L98' name='L98'></a>        perl $U/usys.pl &gt; $U/usys.S
+<a id='L99' name='L99'></a>
+<a id='L100' name='L100'></a>$U/usys.o : $U/usys.S
+<a id='L101' name='L101'></a>        $(CC) $(CFLAGS) -c -o $U/usys.o $U/usys.S
+<a id='L102' name='L102'></a>
+<a id='L103' name='L103'></a>$U/_forktest: $U/forktest.o $(ULIB)
+<a id='L104' name='L104'></a>        # forktest has less library code linked in - needs to be small
+<a id='L105' name='L105'></a>        # in order to be able to max out the proc table.
+<a id='L106' name='L106'></a>        $(LD) $(LDFLAGS) -N -e main -Ttext 0 -o $U/_forktest $U/forktest.o $U/ulib.o $U/usys.o
+<a id='L107' name='L107'></a>        $(OBJDUMP) -S $U/_forktest &gt; $U/forktest.asm
+<a id='L108' name='L108'></a>
+<a id='L109' name='L109'></a>mkfs/mkfs: mkfs/mkfs.c $K/fs.h $K/param.h
+<a id='L110' name='L110'></a>        gcc -Werror -Wall -I. -o mkfs/mkfs mkfs/mkfs.c
+<a id='L111' name='L111'></a>
+<a id='L112' name='L112'></a># Prevent deletion of intermediate files, e.g. cat.o, after first build, so
+<a id='L113' name='L113'></a># that disk image changes after first build are persistent until clean.  More
+<a id='L114' name='L114'></a># details:
+<a id='L115' name='L115'></a># http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
+<a id='L116' name='L116'></a>.PRECIOUS: %.o
+<a id='L117' name='L117'></a>
+<a id='L118' name='L118'></a>UPROGS=\
+<a id='L119' name='L119'></a>        $U/_cat\
+<a id='L120' name='L120'></a>        $U/_echo\
+<a id='L121' name='L121'></a>        $U/_forktest\
+<a id='L122' name='L122'></a>        $U/_grep\
+<a id='L123' name='L123'></a>        $U/_init\
+<a id='L124' name='L124'></a>        $U/_kill\
+<a id='L125' name='L125'></a>        $U/_ln\
+<a id='L126' name='L126'></a>        $U/_ls\
+<a id='L127' name='L127'></a>        $U/_mkdir\
+<a id='L128' name='L128'></a>        $U/_rm\
+<a id='L129' name='L129'></a>        $U/_sh\
+<a id='L130' name='L130'></a>        $U/_stressfs\
+<a id='L131' name='L131'></a>        $U/_usertests\
+<a id='L132' name='L132'></a>        $U/_grind\
+<a id='L133' name='L133'></a>        $U/_wc\
+<a id='L134' name='L134'></a>        $U/_zombie\
+<a id='L135' name='L135'></a>
+<a id='L136' name='L136'></a>fs.img: mkfs/mkfs README $(UPROGS)
+<a id='L137' name='L137'></a>        mkfs/mkfs fs.img README $(UPROGS)
+<a id='L138' name='L138'></a>
+<a id='L139' name='L139'></a>-include kernel/*.d user/*.d
+<a id='L140' name='L140'></a>
+<a id='L141' name='L141'></a>clean: 
+<a id='L142' name='L142'></a>        rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \
+<a id='L143' name='L143'></a>        */*.o */*.d */*.asm */*.sym \
+<a id='L144' name='L144'></a>        $U/initcode $U/initcode.out $K/kernel fs.img \
+<a id='L145' name='L145'></a>        mkfs/mkfs .gdbinit \
+<a id='L146' name='L146'></a>        $U/usys.S \
+<a id='L147' name='L147'></a>        $(UPROGS)
+<a id='L148' name='L148'></a>
+<a id='L149' name='L149'></a># try to generate a unique GDB port
+<a id='L150' name='L150'></a>GDBPORT = $(shell expr `id -u` % 5000 + 25000)
+<a id='L151' name='L151'></a># QEMU's gdb stub command line changed in 0.11
+<a id='L152' name='L152'></a>QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \
+<a id='L153' name='L153'></a>        then echo "-gdb tcp::$(GDBPORT)"; \
+<a id='L154' name='L154'></a>        else echo "-s -p $(GDBPORT)"; fi)
+<a id='L155' name='L155'></a>ifndef CPUS
+<a id='L156' name='L156'></a>CPUS := 3
+<a id='L157' name='L157'></a>endif
+<a id='L158' name='L158'></a>
+<a id='L159' name='L159'></a>QEMUOPTS = -machine virt -bios none -kernel $K/kernel -m 128M -smp $(CPUS) -nographic
+<a id='L160' name='L160'></a>QEMUOPTS += -drive file=fs.img,if=none,format=raw,id=x0
+<a id='L161' name='L161'></a>QEMUOPTS += -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
+<a id='L162' name='L162'></a>
+<a id='L163' name='L163'></a>qemu: $K/kernel fs.img
+<a id='L164' name='L164'></a>        $(QEMU) $(QEMUOPTS)
+<a id='L165' name='L165'></a>
+<a id='L166' name='L166'></a>.gdbinit: .gdbinit.tmpl-riscv
+<a id='L167' name='L167'></a>        sed "s/:1234/:$(GDBPORT)/" &lt; $^ &gt; $@
+<a id='L168' name='L168'></a>
+<a id='L169' name='L169'></a>qemu-gdb: $K/kernel .gdbinit fs.img
+<a id='L170' name='L170'></a>        @echo "*** Now run 'gdb' in another window." 1&gt;&amp;2
+<a id='L171' name='L171'></a>        $(QEMU) $(QEMUOPTS) -S $(QEMUGDB)
+<a id='L172' name='L172'></a>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

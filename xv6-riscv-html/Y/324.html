@@ -1,35 +1,17 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sp</title>
+<title>sector</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L17'>sp</a>                 17 kernel/exec.c    uint64 argc, sz, sp, ustack[MAXARG+1], stackbase;</span>
-<span class='curline'><a href='../S/36.html#L72'>sp</a>                 72 kernel/exec.c    sp = sz;</span>
-<span class='curline'><a href='../S/36.html#L73'>sp</a>                 73 kernel/exec.c    stackbase = sp - PGSIZE;</span>
-<span class='curline'><a href='../S/36.html#L79'>sp</a>                 79 kernel/exec.c      sp -= strlen(argv[argc]) + 1;</span>
-<span class='curline'><a href='../S/36.html#L80'>sp</a>                 80 kernel/exec.c      sp -= sp % 16; // riscv sp must be 16-byte aligned</span>
-<span class='curline'><a href='../S/36.html#L81'>sp</a>                 81 kernel/exec.c      if(sp &lt; stackbase)</span>
-<span class='curline'><a href='../S/36.html#L83'>sp</a>                 83 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
-<span class='curline'><a href='../S/36.html#L85'>sp</a>                 85 kernel/exec.c      ustack[argc] = sp;</span>
-<span class='curline'><a href='../S/36.html#L90'>sp</a>                 90 kernel/exec.c    sp -= (argc+1) * sizeof(uint64);</span>
-<span class='curline'><a href='../S/36.html#L91'>sp</a>                 91 kernel/exec.c    sp -= sp % 16;</span>
-<span class='curline'><a href='../S/36.html#L92'>sp</a>                 92 kernel/exec.c    if(sp &lt; stackbase)</span>
-<span class='curline'><a href='../S/36.html#L94'>sp</a>                 94 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
-<span class='curline'><a href='../S/36.html#L100'>sp</a>                100 kernel/exec.c    p-&gt;tf-&gt;a1 = sp;</span>
-<span class='curline'><a href='../S/36.html#L113'>sp</a>                113 kernel/exec.c    p-&gt;tf-&gt;sp = sp; // initial stack pointer</span>
-<span class='curline'><a href='../S/63.html#L121'>sp</a>                121 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
-<span class='curline'><a href='../S/63.html#L211'>sp</a>                211 kernel/proc.c    p-&gt;tf-&gt;sp = PGSIZE;  // user stack pointer</span>
-<span class='curline'><a href='../S/35.html#L4'>sp</a>                  4 kernel/proc.h    uint64 sp;</span>
-<span class='curline'><a href='../S/35.html#L51'>sp</a>                 51 kernel/proc.h    /*  48 */ uint64 sp;</span>
-<span class='curline'><a href='../S/24.html#L1949'>sp</a>               1949 user/usertests.c     char *sp = (char *) r_sp();</span>
-<span class='curline'><a href='../S/24.html#L1950'>sp</a>               1950 user/usertests.c     sp -= PGSIZE;</span>
-<span class='curline'><a href='../S/24.html#L1952'>sp</a>               1952 user/usertests.c     printf("%s: stacktest: read below stack %p\n", *sp);</span>
+<span class='curline'><a href='../S/65.html#L171'>sector</a>            171 kernel/virtio_disk.c   uint64 sector = b-&gt;blockno * (BSIZE / 512);</span>
+<span class='curline'><a href='../S/65.html#L194'>sector</a>            194 kernel/virtio_disk.c     uint64 sector;</span>
+<span class='curline'><a href='../S/65.html#L202'>sector</a>            202 kernel/virtio_disk.c   buf0.sector = sector;</span>
 </pre>
 </body>
 </html>

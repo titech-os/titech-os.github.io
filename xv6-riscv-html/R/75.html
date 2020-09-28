@@ -1,16 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PLIC_SCLAIM</title>
+<title>PGROUNDUP</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/62.html#L51'>PLIC_SCLAIM</a>        51 kernel/plic.c    int irq = *(uint32*)PLIC_SCLAIM(hart);</span>
-<span class='curline'><a href='../S/62.html#L61'>PLIC_SCLAIM</a>        61 kernel/plic.c    *(uint32*)PLIC_SCLAIM(hart) = irq;</span>
+<span class='curline'><a href='../S/36.html#L69'>PGROUNDUP</a>          69 kernel/exec.c    sz = PGROUNDUP(sz);</span>
+<span class='curline'><a href='../S/69.html#L37'>PGROUNDUP</a>          37 kernel/kalloc.c   p = (char*)PGROUNDUP((uint64)pa_start);</span>
+<span class='curline'><a href='../S/38.html#L237'>PGROUNDUP</a>         237 kernel/vm.c      oldsz = PGROUNDUP(oldsz);</span>
+<span class='curline'><a href='../S/38.html#L264'>PGROUNDUP</a>         264 kernel/vm.c      if(PGROUNDUP(newsz) &lt; PGROUNDUP(oldsz)){</span>
+<span class='curline'><a href='../S/38.html#L265'>PGROUNDUP</a>         265 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L266'>PGROUNDUP</a>         266 kernel/vm.c        uvmunmap(pagetable, PGROUNDUP(newsz), npages, 1);</span>
+<span class='curline'><a href='../S/38.html#L298'>PGROUNDUP</a>         298 kernel/vm.c        uvmunmap(pagetable, 0, PGROUNDUP(sz)/PGSIZE, 1);</span>
 </pre>
 </body>
 </html>

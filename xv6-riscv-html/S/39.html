@@ -3,7 +3,7 @@
 <head>
 <title>kernel/trampoline.S</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -34,7 +34,7 @@
 <a id='L20' name='L20'></a>  20 <em class='comment'>        # in supervisor mode, but with a</em>
 <a id='L21' name='L21'></a>  21 <em class='comment'>        # user page table.</em>
 <a id='L22' name='L22'></a>  22 <em class='sharp'>        #</em>
-<a id='L23' name='L23'></a>  23 <em class='comment'>        # sscratch points to where the process's p-&gt;tf is</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'>        # sscratch points to where the process's p-&gt;trapframe is</em>
 <a id='L24' name='L24'></a>  24 <em class='comment'>        # mapped into user space, at TRAPFRAME.</em>
 <a id='L25' name='L25'></a>  25 <em class='sharp'>        #</em>
 <a id='L26' name='L26'></a>  26         
@@ -74,20 +74,20 @@
 <a id='L60' name='L60'></a>  60         sd t5, 272(a0)
 <a id='L61' name='L61'></a>  61         sd t6, 280(a0)
 <a id='L62' name='L62'></a>  62 
-<a id='L63' name='L63'></a>  63 <em class='comment'>        # save the user a0 in p-&gt;tf-&gt;a0</em>
+<a id='L63' name='L63'></a>  63 <em class='comment'>        # save the user a0 in p-&gt;trapframe-&gt;a0</em>
 <a id='L64' name='L64'></a>  64         csrr t0, sscratch
 <a id='L65' name='L65'></a>  65         sd t0, 112(a0)
 <a id='L66' name='L66'></a>  66 
-<a id='L67' name='L67'></a>  67 <em class='comment'>        # restore kernel stack pointer from p-&gt;tf-&gt;kernel_sp</em>
+<a id='L67' name='L67'></a>  67 <em class='comment'>        # restore kernel stack pointer from p-&gt;trapframe-&gt;kernel_sp</em>
 <a id='L68' name='L68'></a>  68         ld sp, 8(a0)
 <a id='L69' name='L69'></a>  69 
-<a id='L70' name='L70'></a>  70 <em class='comment'>        # make tp hold the current hartid, from p-&gt;tf-&gt;kernel_hartid</em>
+<a id='L70' name='L70'></a>  70 <em class='comment'>        # make tp hold the current hartid, from p-&gt;trapframe-&gt;kernel_hartid</em>
 <a id='L71' name='L71'></a>  71         ld tp, 32(a0)
 <a id='L72' name='L72'></a>  72 
-<a id='L73' name='L73'></a>  73 <em class='comment'>        # load the address of usertrap(), p-&gt;tf-&gt;kernel_trap</em>
+<a id='L73' name='L73'></a>  73 <em class='comment'>        # load the address of usertrap(), p-&gt;trapframe-&gt;kernel_trap</em>
 <a id='L74' name='L74'></a>  74         ld t0, 16(a0)
 <a id='L75' name='L75'></a>  75 
-<a id='L76' name='L76'></a>  76 <em class='comment'>        # restore kernel page table from p-&gt;tf-&gt;kernel_satp</em>
+<a id='L76' name='L76'></a>  76 <em class='comment'>        # restore kernel page table from p-&gt;trapframe-&gt;kernel_satp</em>
 <a id='L77' name='L77'></a>  77         ld t1, 0(a0)
 <a id='L78' name='L78'></a>  78         csrw satp, t1
 <a id='L79' name='L79'></a>  79         sfence.vma zero, zero

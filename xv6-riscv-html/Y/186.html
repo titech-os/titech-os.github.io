@@ -1,33 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>mkdir</title>
+<title>locked</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/14.html#L16'>mkdir</a>              16 user/mkdir.c       if(mkdir(argv[i]) &lt; 0){</span>
-<span class='curline'><a href='../S/15.html#L19'>mkdir</a>              19 user/user.h    int mkdir(const char*);</span>
-<span class='curline'><a href='../S/24.html#L29'>mkdir</a>              29 user/usertests.c   if(mkdir("iputdir") &lt; 0){</span>
-<span class='curline'><a href='../S/24.html#L59'>mkdir</a>              59 user/usertests.c     if(mkdir("iputdir") &lt; 0){</span>
-<span class='curline'><a href='../S/24.html#L93'>mkdir</a>              93 user/usertests.c   if(mkdir("oidir") &lt; 0){</span>
-<span class='curline'><a href='../S/24.html#L260'>mkdir</a>             260 user/usertests.c   if(mkdir("dir0") &lt; 0){</span>
-<span class='curline'><a href='../S/24.html#L1133'>mkdir</a>            1133 user/usertests.c   if(mkdir("dd") != 0){</span>
-<span class='curline'><a href='../S/24.html#L1151'>mkdir</a>            1151 user/usertests.c   if(mkdir("/dd/dd") != 0){</span>
-<span class='curline'><a href='../S/24.html#L1255'>mkdir</a>            1255 user/usertests.c   if(mkdir("dd/ff/ff") == 0){</span>
-<span class='curline'><a href='../S/24.html#L1259'>mkdir</a>            1259 user/usertests.c   if(mkdir("dd/xx/ff") == 0){</span>
-<span class='curline'><a href='../S/24.html#L1263'>mkdir</a>            1263 user/usertests.c   if(mkdir("dd/dd/ffff") == 0){</span>
-<span class='curline'><a href='../S/24.html#L1392'>mkdir</a>            1392 user/usertests.c   if(mkdir("12345678901234") != 0){</span>
-<span class='curline'><a href='../S/24.html#L1396'>mkdir</a>            1396 user/usertests.c   if(mkdir("12345678901234/123456789012345") != 0){</span>
-<span class='curline'><a href='../S/24.html#L1413'>mkdir</a>            1413 user/usertests.c   if(mkdir("12345678901234/12345678901234") == 0){</span>
-<span class='curline'><a href='../S/24.html#L1417'>mkdir</a>            1417 user/usertests.c   if(mkdir("123456789012345/12345678901234") == 0){</span>
-<span class='curline'><a href='../S/24.html#L1426'>mkdir</a>            1426 user/usertests.c   if(mkdir("dots") != 0){</span>
-<span class='curline'><a href='../S/24.html#L1485'>mkdir</a>            1485 user/usertests.c   if(mkdir("dirfile/xx") == 0){</span>
-<span class='curline'><a href='../S/24.html#L1522'>mkdir</a>            1522 user/usertests.c     if(mkdir("irefd") != 0){</span>
-<span class='curline'><a href='../S/24.html#L1531'>mkdir</a>            1531 user/usertests.c     mkdir("");</span>
+<span class='curline'><a href='../S/44.html#L17'>locked</a>             17 kernel/sleeplock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/44.html#L25'>locked</a>             25 kernel/sleeplock.c   while (lk-&gt;locked) {</span>
+<span class='curline'><a href='../S/44.html#L28'>locked</a>             28 kernel/sleeplock.c   lk-&gt;locked = 1;</span>
+<span class='curline'><a href='../S/44.html#L37'>locked</a>             37 kernel/sleeplock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/44.html#L49'>locked</a>             49 kernel/sleeplock.c   r = lk-&gt;locked &amp;&amp; (lk-&gt;pid == myproc()-&gt;pid);</span>
+<span class='curline'><a href='../S/66.html#L3'>locked</a>              3 kernel/sleeplock.h   uint locked;       // Is the lock held?</span>
+<span class='curline'><a href='../S/59.html#L15'>locked</a>             15 kernel/spinlock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/59.html#L32'>locked</a>             32 kernel/spinlock.c   while(__sync_lock_test_and_set(&amp;lk-&gt;locked, 1) != 0)</span>
+<span class='curline'><a href='../S/59.html#L69'>locked</a>             69 kernel/spinlock.c   __sync_lock_release(&amp;lk-&gt;locked);</span>
+<span class='curline'><a href='../S/59.html#L80'>locked</a>             80 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
+<span class='curline'><a href='../S/30.html#L3'>locked</a>              3 kernel/spinlock.h   uint locked;       // Is the lock held?</span>
 </pre>
 </body>
 </html>

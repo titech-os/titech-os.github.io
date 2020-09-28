@@ -3,7 +3,7 @@
 <head>
 <title>kernel/fs.h</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -11,14 +11,14 @@
 <a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/fs.h</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'><a href='../J/13.html' title='Multiple included from 15 places.'>INCLUDED FROM</a></h2>
+<h2 class='header'><a href='../J/16.html' title='Multiple included from 17 places.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
 <a id='L1' name='L1'></a>   1 <em class='comment'>// On-disk file system format.</em>
 <a id='L2' name='L2'></a>   2 <em class='comment'>// Both the kernel and user programs use this header file.</em>
 <a id='L3' name='L3'></a>   3 
 <a id='L4' name='L4'></a>   4 
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#define</em> <a href='../R/92.html' title='Multiple referred from 2 places.'>ROOTINO</a>  1   <em class='comment'>// root i-number</em>
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#define</em> <a href='../R/99.html' title='Multiple referred from 2 places.'>ROOTINO</a>  1   <em class='comment'>// root i-number</em>
 <a id='L6' name='L6'></a>   6 <em class='sharp'>#define</em> <a href='../R/7.html' title='Multiple referred from 47 places.'>BSIZE</a> 1024  <em class='comment'>// block size</em>
 <a id='L7' name='L7'></a>   7 
 <a id='L8' name='L8'></a>   8 <em class='comment'>// Disk layout:</em>
@@ -27,51 +27,51 @@
 <a id='L11' name='L11'></a>  11 <em class='comment'>//</em>
 <a id='L12' name='L12'></a>  12 <em class='comment'>// mkfs computes the super block and builds an initial file system. The</em>
 <a id='L13' name='L13'></a>  13 <em class='comment'>// super block describes the disk layout:</em>
-<a id='L14' name='L14'></a>  14 <strong class='reserved'>struct</strong> <a href='../R/437.html' title='Multiple referred from 6 places.'>superblock</a> <em class='brace'>{</em>
-<a id='L15' name='L15'></a>  15   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/180.html' title='Multiple used in 5 places.'>magic</a>;        <em class='comment'>// Must be FSMAGIC</em>
-<a id='L16' name='L16'></a>  16   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/323.html' title='Multiple used in 46 places.'>size</a>;         <em class='comment'>// Size of file system image (blocks)</em>
-<a id='L17' name='L17'></a>  17   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/196.html' title='Multiple used in 5 places.'>nblocks</a>;      <em class='comment'>// Number of data blocks</em>
-<a id='L18' name='L18'></a>  18   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/208.html' title='Multiple used in 3 places.'>ninodes</a>;      <em class='comment'>// Number of inodes.</em>
-<a id='L19' name='L19'></a>  19   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/210.html' title='Multiple used in 8 places.'>nlog</a>;         <em class='comment'>// Number of log blocks</em>
-<a id='L20' name='L20'></a>  20   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/174.html' title='Multiple used in 3 places.'>logstart</a>;     <em class='comment'>// Block number of first log block</em>
-<a id='L21' name='L21'></a>  21   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/143.html' title='Multiple used in 3 places.'>inodestart</a>;   <em class='comment'>// Block number of first inode block</em>
-<a id='L22' name='L22'></a>  22   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/40.html' title='Multiple used in 5 places.'>bmapstart</a>;    <em class='comment'>// Block number of first free map block</em>
+<a id='L14' name='L14'></a>  14 <strong class='reserved'>struct</strong> <a href='../R/454.html' title='Multiple referred from 6 places.'>superblock</a> <em class='brace'>{</em>
+<a id='L15' name='L15'></a>  15   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/194.html' title='Multiple used in 5 places.'>magic</a>;        <em class='comment'>// Must be FSMAGIC</em>
+<a id='L16' name='L16'></a>  16   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/335.html' title='Multiple used in 46 places.'>size</a>;         <em class='comment'>// Size of file system image (blocks)</em>
+<a id='L17' name='L17'></a>  17   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/209.html' title='Multiple used in 5 places.'>nblocks</a>;      <em class='comment'>// Number of data blocks</em>
+<a id='L18' name='L18'></a>  18   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/220.html' title='Multiple used in 3 places.'>ninodes</a>;      <em class='comment'>// Number of inodes.</em>
+<a id='L19' name='L19'></a>  19   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/222.html' title='Multiple used in 8 places.'>nlog</a>;         <em class='comment'>// Number of log blocks</em>
+<a id='L20' name='L20'></a>  20   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/188.html' title='Multiple used in 3 places.'>logstart</a>;     <em class='comment'>// Block number of first log block</em>
+<a id='L21' name='L21'></a>  21   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/154.html' title='Multiple used in 3 places.'>inodestart</a>;   <em class='comment'>// Block number of first inode block</em>
+<a id='L22' name='L22'></a>  22   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/44.html' title='Multiple used in 5 places.'>bmapstart</a>;    <em class='comment'>// Block number of first free map block</em>
 <a id='L23' name='L23'></a>  23 <em class='brace'>}</em>;
 <a id='L24' name='L24'></a>  24 
-<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/23.html' title='Multiple referred from 2 places.'>FSMAGIC</a> 0x10203040
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/25.html' title='Multiple referred from 2 places.'>FSMAGIC</a> 0x10203040
 <a id='L26' name='L26'></a>  26 
-<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> <a href='../R/52.html' title='Multiple referred from 20 places.'>NDIRECT</a> 12
-<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> <a href='../R/55.html' title='Multiple referred from 4 places.'>NINDIRECT</a> (<a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a> / <strong class='reserved'>sizeof</strong>(<a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a>))
-<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/39.html' title='Multiple referred from 4 places.'>MAXFILE</a> (<a href='../S/71.html#L27' title='Defined at 27 in kernel/fs.h.'>NDIRECT</a> + <a href='../S/71.html#L28' title='Defined at 28 in kernel/fs.h.'>NINDIRECT</a>)
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> <a href='../R/59.html' title='Multiple referred from 20 places.'>NDIRECT</a> 12
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> <a href='../R/62.html' title='Multiple referred from 4 places.'>NINDIRECT</a> (<a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a> / <strong class='reserved'>sizeof</strong>(<a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a>))
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/46.html' title='Multiple referred from 4 places.'>MAXFILE</a> (<a href='../S/71.html#L27' title='Defined at 27 in kernel/fs.h.'>NDIRECT</a> + <a href='../S/71.html#L28' title='Defined at 28 in kernel/fs.h.'>NINDIRECT</a>)
 <a id='L30' name='L30'></a>  30 
 <a id='L31' name='L31'></a>  31 <em class='comment'>// On-disk inode structure</em>
-<a id='L32' name='L32'></a>  32 <strong class='reserved'>struct</strong> <a href='../R/226.html' title='Multiple referred from 19 places.'>dinode</a> <em class='brace'>{</em>
-<a id='L33' name='L33'></a>  33   <strong class='reserved'>short</strong> <a href='../Y/365.html' title='Multiple used in 64 places.'>type</a>;           <em class='comment'>// File type</em>
+<a id='L32' name='L32'></a>  32 <strong class='reserved'>struct</strong> <a href='../R/240.html' title='Multiple referred from 19 places.'>dinode</a> <em class='brace'>{</em>
+<a id='L33' name='L33'></a>  33   <strong class='reserved'>short</strong> <a href='../Y/380.html' title='Multiple used in 65 places.'>type</a>;           <em class='comment'>// File type</em>
 <a id='L34' name='L34'></a>  34   <strong class='reserved'>short</strong> <a href='../S/41.html#L12' title='Defined at 12 in kernel/file.h.'>major</a>;          <em class='comment'>// Major device number (T_DEVICE only)</em>
 <a id='L35' name='L35'></a>  35   <strong class='reserved'>short</strong> <a href='../S/41.html#L13' title='Defined at 13 in kernel/file.h.'>minor</a>;          <em class='comment'>// Minor device number (T_DEVICE only)</em>
-<a id='L36' name='L36'></a>  36   <strong class='reserved'>short</strong> <a href='../Y/209.html' title='Multiple used in 15 places.'>nlink</a>;          <em class='comment'>// Number of links to inode in file system</em>
-<a id='L37' name='L37'></a>  37   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/323.html' title='Multiple used in 46 places.'>size</a>;            <em class='comment'>// Size of file (bytes)</em>
-<a id='L38' name='L38'></a>  38   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/19.html' title='Multiple used in 22 places.'>addrs</a>[<a href='../S/71.html#L27' title='Defined at 27 in kernel/fs.h.'>NDIRECT</a>+1];   <em class='comment'>// Data block addresses</em>
+<a id='L36' name='L36'></a>  36   <strong class='reserved'>short</strong> <a href='../Y/221.html' title='Multiple used in 15 places.'>nlink</a>;          <em class='comment'>// Number of links to inode in file system</em>
+<a id='L37' name='L37'></a>  37   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/335.html' title='Multiple used in 46 places.'>size</a>;            <em class='comment'>// Size of file (bytes)</em>
+<a id='L38' name='L38'></a>  38   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/19.html' title='Multiple used in 28 places.'>addrs</a>[<a href='../S/71.html#L27' title='Defined at 27 in kernel/fs.h.'>NDIRECT</a>+1];   <em class='comment'>// Data block addresses</em>
 <a id='L39' name='L39'></a>  39 <em class='brace'>}</em>;
 <a id='L40' name='L40'></a>  40 
 <a id='L41' name='L41'></a>  41 <em class='comment'>// Inodes per block.</em>
-<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../R/29.html' title='Multiple referred from 7 places.'>IPB</a>           (<a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a> / <strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/71.html#L32' title='Defined at 32 in kernel/fs.h.'>dinode</a>))
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../R/33.html' title='Multiple referred from 7 places.'>IPB</a>           (<a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a> / <strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/71.html#L32' title='Defined at 32 in kernel/fs.h.'>dinode</a>))
 <a id='L43' name='L43'></a>  43 
 <a id='L44' name='L44'></a>  44 <em class='comment'>// Block containing inode i</em>
-<a id='L45' name='L45'></a>  45 <em class='sharp'>#define</em> <a href='../R/26.html' title='Multiple referred from 5 places.'>IBLOCK</a>(<a href='../Y/133.html' title='Multiple used in 290 places.'>i</a>, <a href='../Y/304.html' title='Multiple used in 33 places.'>sb</a>)     ((<a href='../Y/133.html' title='Multiple used in 290 places.'>i</a>) / <a href='../S/71.html#L42' title='Defined at 42 in kernel/fs.h.'>IPB</a> + <a href='../Y/304.html' title='Multiple used in 33 places.'>sb</a>.<a href='../Y/143.html' title='Multiple used in 3 places.'>inodestart</a>)
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#define</em> <a href='../R/28.html' title='Multiple referred from 5 places.'>IBLOCK</a>(<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>, <a href='../Y/318.html' title='Multiple used in 33 places.'>sb</a>)     ((<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>) / <a href='../S/71.html#L42' title='Defined at 42 in kernel/fs.h.'>IPB</a> + <a href='../Y/318.html' title='Multiple used in 33 places.'>sb</a>.<a href='../Y/154.html' title='Multiple used in 3 places.'>inodestart</a>)
 <a id='L46' name='L46'></a>  46 
 <a id='L47' name='L47'></a>  47 <em class='comment'>// Bitmap bits per block</em>
 <a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/6.html' title='Multiple referred from 4 places.'>BPB</a>           (<a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>*8)
 <a id='L49' name='L49'></a>  49 
 <a id='L50' name='L50'></a>  50 <em class='comment'>// Block of free map containing bit for block b</em>
-<a id='L51' name='L51'></a>  51 <em class='sharp'>#define</em> <a href='../R/4.html' title='Multiple referred from 2 places.'>BBLOCK</a>(<a href='../Y/31.html' title='Multiple used in 89 places.'>b</a>, <a href='../Y/304.html' title='Multiple used in 33 places.'>sb</a>) ((<a href='../Y/31.html' title='Multiple used in 89 places.'>b</a>)/<a href='../S/71.html#L48' title='Defined at 48 in kernel/fs.h.'>BPB</a> + <a href='../Y/304.html' title='Multiple used in 33 places.'>sb</a>.<a href='../Y/40.html' title='Multiple used in 5 places.'>bmapstart</a>)
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#define</em> <a href='../R/4.html' title='Multiple referred from 2 places.'>BBLOCK</a>(<a href='../Y/33.html' title='Multiple used in 112 places.'>b</a>, <a href='../Y/318.html' title='Multiple used in 33 places.'>sb</a>) ((<a href='../Y/33.html' title='Multiple used in 112 places.'>b</a>)/<a href='../S/71.html#L48' title='Defined at 48 in kernel/fs.h.'>BPB</a> + <a href='../Y/318.html' title='Multiple used in 33 places.'>sb</a>.<a href='../Y/44.html' title='Multiple used in 5 places.'>bmapstart</a>)
 <a id='L52' name='L52'></a>  52 
 <a id='L53' name='L53'></a>  53 <em class='comment'>// Directory is a file containing a sequence of dirent structures.</em>
 <a id='L54' name='L54'></a>  54 <em class='sharp'>#define</em> <a href='../R/14.html' title='Multiple referred from 17 places.'>DIRSIZ</a> 14
 <a id='L55' name='L55'></a>  55 
-<a id='L56' name='L56'></a>  56 <strong class='reserved'>struct</strong> <a href='../R/227.html' title='Multiple referred from 7 places.'>dirent</a> <em class='brace'>{</em>
-<a id='L57' name='L57'></a>  57   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> <a href='../Y/146.html' title='Multiple used in 50 places.'>inum</a>;
-<a id='L58' name='L58'></a>  58   <strong class='reserved'>char</strong> <a href='../Y/193.html' title='Multiple used in 106 places.'>name</a>[<a href='../S/71.html#L54' title='Defined at 54 in kernel/fs.h.'>DIRSIZ</a>];
+<a id='L56' name='L56'></a>  56 <strong class='reserved'>struct</strong> <a href='../R/241.html' title='Multiple referred from 7 places.'>dirent</a> <em class='brace'>{</em>
+<a id='L57' name='L57'></a>  57   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> <a href='../Y/157.html' title='Multiple used in 50 places.'>inum</a>;
+<a id='L58' name='L58'></a>  58   <strong class='reserved'>char</strong> <a href='../Y/206.html' title='Multiple used in 107 places.'>name</a>[<a href='../S/71.html#L54' title='Defined at 54 in kernel/fs.h.'>DIRSIZ</a>];
 <a id='L59' name='L59'></a>  59 <em class='brace'>}</em>;
 <a id='L60' name='L60'></a>  60 
 </pre>

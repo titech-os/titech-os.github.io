@@ -1,25 +1,29 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kalloc</title>
+<title>initlock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L62'>kalloc</a>             62 kernel/defs.h  void*           kalloc(void);</span>
-<span class='curline'><a href='../S/34.html#L31'>kalloc</a>             31 kernel/pipe.c    if((pi = (struct pipe*)kalloc()) == 0)</span>
-<span class='curline'><a href='../S/63.html#L35'>kalloc</a>             35 kernel/proc.c        char *pa = kalloc();</span>
-<span class='curline'><a href='../S/63.html#L109'>kalloc</a>            109 kernel/proc.c    if((p-&gt;tf = (struct trapframe *)kalloc()) == 0){</span>
-<span class='curline'><a href='../S/43.html#L433'>kalloc</a>            433 kernel/sysfile.c     argv[i] = kalloc();</span>
-<span class='curline'><a href='../S/38.html#L26'>kalloc</a>             26 kernel/vm.c      kernel_pagetable = (pagetable_t) kalloc();</span>
-<span class='curline'><a href='../S/38.html#L84'>kalloc</a>             84 kernel/vm.c          if(!alloc || (pagetable = (pde_t*)kalloc()) == 0)</span>
-<span class='curline'><a href='../S/38.html#L210'>kalloc</a>            210 kernel/vm.c      pagetable = (pagetable_t) kalloc();</span>
-<span class='curline'><a href='../S/38.html#L227'>kalloc</a>            227 kernel/vm.c      mem = kalloc();</span>
-<span class='curline'><a href='../S/38.html#L247'>kalloc</a>            247 kernel/vm.c        mem = kalloc();</span>
-<span class='curline'><a href='../S/38.html#L329'>kalloc</a>            329 kernel/vm.c        if((mem = kalloc()) == 0)</span>
+<span class='curline'><a href='../S/61.html#L41'>initlock</a>           41 kernel/bio.c     initlock(&amp;bcache.lock, "bcache");</span>
+<span class='curline'><a href='../S/57.html#L186'>initlock</a>          186 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
+<span class='curline'><a href='../S/31.html#L114'>initlock</a>          114 kernel/defs.h  void            initlock(struct spinlock*, char*);</span>
+<span class='curline'><a href='../S/67.html#L25'>initlock</a>           25 kernel/file.c    initlock(&amp;ftable.lock, "ftable");</span>
+<span class='curline'><a href='../S/48.html#L184'>initlock</a>          184 kernel/fs.c      initlock(&amp;icache.lock, "icache");</span>
+<span class='curline'><a href='../S/69.html#L29'>initlock</a>           29 kernel/kalloc.c   initlock(&amp;kmem.lock, "kmem");</span>
+<span class='curline'><a href='../S/28.html#L60'>initlock</a>           60 kernel/log.c     initlock(&amp;log.lock, "log");</span>
+<span class='curline'><a href='../S/34.html#L37'>initlock</a>           37 kernel/pipe.c    initlock(&amp;pi-&gt;lock, "pipe");</span>
+<span class='curline'><a href='../S/29.html#L132'>initlock</a>          132 kernel/printf.c   initlock(&amp;pr.lock, "pr");</span>
+<span class='curline'><a href='../S/63.html#L30'>initlock</a>           30 kernel/proc.c    initlock(&amp;pid_lock, "nextpid");</span>
+<span class='curline'><a href='../S/63.html#L32'>initlock</a>           32 kernel/proc.c        initlock(&amp;p-&gt;lock, "proc");</span>
+<span class='curline'><a href='../S/44.html#L15'>initlock</a>           15 kernel/sleeplock.c   initlock(&amp;lk-&gt;lk, "sleep lock");</span>
+<span class='curline'><a href='../S/56.html#L22'>initlock</a>           22 kernel/trap.c    initlock(&amp;tickslock, "time");</span>
+<span class='curline'><a href='../S/72.html#L77'>initlock</a>           77 kernel/uart.c    initlock(&amp;uart_tx_lock, "uart");</span>
+<span class='curline'><a href='../S/65.html#L54'>initlock</a>           54 kernel/virtio_disk.c   initlock(&amp;disk.vdisk_lock, "virtio_disk");</span>
 </pre>
 </body>
 </html>

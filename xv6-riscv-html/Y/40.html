@@ -1,19 +1,26 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bmapstart</title>
+<title>bi</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/71.html#L22'>bmapstart</a>          22 kernel/fs.h      uint bmapstart;    // Block number of first free map block</span>
-<span class='curline'><a href='../S/71.html#L51'>bmapstart</a>          51 kernel/fs.h    #define BBLOCK(b, sb) ((b)/BPB + sb.bmapstart)</span>
-<span class='curline'><a href='../S/3.html#L104'>bmapstart</a>         104 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
-<span class='curline'><a href='../S/3.html#L257'>bmapstart</a>         257 mkfs/mkfs.c      printf("balloc: write bitmap block at sector %d\n", sb.bmapstart);</span>
-<span class='curline'><a href='../S/3.html#L258'>bmapstart</a>         258 mkfs/mkfs.c      wsect(sb.bmapstart, buf);</span>
+<span class='curline'><a href='../S/48.html#L67'>bi</a>                 67 kernel/fs.c      int b, bi, m;</span>
+<span class='curline'><a href='../S/48.html#L73'>bi</a>                 73 kernel/fs.c        for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
+<span class='curline'><a href='../S/48.html#L74'>bi</a>                 74 kernel/fs.c          m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/48.html#L75'>bi</a>                 75 kernel/fs.c          if((bp-&gt;data[bi/8] &amp; m) == 0){  // Is block free?</span>
+<span class='curline'><a href='../S/48.html#L76'>bi</a>                 76 kernel/fs.c            bp-&gt;data[bi/8] |= m;  // Mark block in use.</span>
+<span class='curline'><a href='../S/48.html#L79'>bi</a>                 79 kernel/fs.c            bzero(dev, b + bi);</span>
+<span class='curline'><a href='../S/48.html#L80'>bi</a>                 80 kernel/fs.c            return b + bi;</span>
+<span class='curline'><a href='../S/48.html#L93'>bi</a>                 93 kernel/fs.c      int bi, m;</span>
+<span class='curline'><a href='../S/48.html#L96'>bi</a>                 96 kernel/fs.c      bi = b % BPB;</span>
+<span class='curline'><a href='../S/48.html#L97'>bi</a>                 97 kernel/fs.c      m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/48.html#L98'>bi</a>                 98 kernel/fs.c      if((bp-&gt;data[bi/8] &amp; m) == 0)</span>
+<span class='curline'><a href='../S/48.html#L100'>bi</a>                100 kernel/fs.c      bp-&gt;data[bi/8] &amp;= ~m;</span>
 </pre>
 </body>
 </html>

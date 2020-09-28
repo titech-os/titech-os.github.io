@@ -3,7 +3,7 @@
 <head>
 <title>user/mkdir.c</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -23,23 +23,23 @@ This source file includes following definitions.
 <a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='15.html'>user/user.h</a>"
 <a id='L4' name='L4'></a>   4 
 <a id='L5' name='L5'></a>   5 <strong class='reserved'>int</strong>
-<a id='L6' name='L6'></a>   6 <a href='../R/318.html' title='Multiple referred from 2 places.'>main</a>(<strong class='reserved'>int</strong> <a href='../Y/25.html' title='Multiple used in 52 places.'>argc</a>, <strong class='reserved'>char</strong> *<a href='../Y/27.html' title='Multiple used in 70 places.'>argv</a>[])
+<a id='L6' name='L6'></a>   6 <a href='../R/335.html' title='Multiple referred from 2 places.'>main</a>(<strong class='reserved'>int</strong> <a href='../Y/26.html' title='Multiple used in 54 places.'>argc</a>, <strong class='reserved'>char</strong> *<a href='../Y/29.html' title='Multiple used in 72 places.'>argv</a>[])
 <a id='L7' name='L7'></a>   7 <em class='brace'>{</em>
-<a id='L8' name='L8'></a>   8   <strong class='reserved'>int</strong> <a href='../Y/133.html' title='Multiple used in 290 places.'>i</a>;
+<a id='L8' name='L8'></a>   8   <strong class='reserved'>int</strong> <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>;
 <a id='L9' name='L9'></a>   9 
-<a id='L10' name='L10'></a>  10   <strong class='reserved'>if</strong>(<a href='../Y/25.html' title='Multiple used in 52 places.'>argc</a> &lt; 2)<em class='brace'>{</em>
+<a id='L10' name='L10'></a>  10   <strong class='reserved'>if</strong>(<a href='../Y/26.html' title='Multiple used in 54 places.'>argc</a> &lt; 2)<em class='brace'>{</em>
 <a id='L11' name='L11'></a>  11     <a href='../S/4.html#L98' title='Defined at 98 in user/printf.c.'>fprintf</a>(2, "Usage: mkdir files...\n");
-<a id='L12' name='L12'></a>  12     <a href='../S/63.html#L318' title='Defined at 318 in kernel/proc.c.'>exit</a>(1);
+<a id='L12' name='L12'></a>  12     <a href='../S/63.html#L333' title='Defined at 333 in kernel/proc.c.'>exit</a>(1);
 <a id='L13' name='L13'></a>  13   <em class='brace'>}</em>
 <a id='L14' name='L14'></a>  14 
-<a id='L15' name='L15'></a>  15   <strong class='reserved'>for</strong>(<a href='../Y/133.html' title='Multiple used in 290 places.'>i</a> = 1; <a href='../Y/133.html' title='Multiple used in 290 places.'>i</a> &lt; <a href='../Y/25.html' title='Multiple used in 52 places.'>argc</a>; <a href='../Y/133.html' title='Multiple used in 290 places.'>i</a>++)<em class='brace'>{</em>
-<a id='L16' name='L16'></a>  16     <strong class='reserved'>if</strong>(<a href='../Y/186.html' title='Multiple used in 19 places.'>mkdir</a>(<a href='../Y/27.html' title='Multiple used in 70 places.'>argv</a>[<a href='../Y/133.html' title='Multiple used in 290 places.'>i</a>]) &lt; 0)<em class='brace'>{</em>
-<a id='L17' name='L17'></a>  17       <a href='../S/4.html#L98' title='Defined at 98 in user/printf.c.'>fprintf</a>(2, "mkdir: %s failed to create\n", <a href='../Y/27.html' title='Multiple used in 70 places.'>argv</a>[<a href='../Y/133.html' title='Multiple used in 290 places.'>i</a>]);
+<a id='L15' name='L15'></a>  15   <strong class='reserved'>for</strong>(<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> = 1; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> &lt; <a href='../Y/26.html' title='Multiple used in 54 places.'>argc</a>; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>++)<em class='brace'>{</em>
+<a id='L16' name='L16'></a>  16     <strong class='reserved'>if</strong>(<a href='../Y/199.html' title='Multiple used in 23 places.'>mkdir</a>(<a href='../Y/29.html' title='Multiple used in 72 places.'>argv</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>]) &lt; 0)<em class='brace'>{</em>
+<a id='L17' name='L17'></a>  17       <a href='../S/4.html#L98' title='Defined at 98 in user/printf.c.'>fprintf</a>(2, "mkdir: %s failed to create\n", <a href='../Y/29.html' title='Multiple used in 72 places.'>argv</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>]);
 <a id='L18' name='L18'></a>  18       <strong class='reserved'>break</strong>;
 <a id='L19' name='L19'></a>  19     <em class='brace'>}</em>
 <a id='L20' name='L20'></a>  20   <em class='brace'>}</em>
 <a id='L21' name='L21'></a>  21 
-<a id='L22' name='L22'></a>  22   <a href='../S/63.html#L318' title='Defined at 318 in kernel/proc.c.'>exit</a>(0);
+<a id='L22' name='L22'></a>  22   <a href='../S/63.html#L333' title='Defined at 333 in kernel/proc.c.'>exit</a>(0);
 <a id='L23' name='L23'></a>  23 <em class='brace'>}</em>
 </pre>
 <hr />

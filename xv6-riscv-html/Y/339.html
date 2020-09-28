@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>syscalls</title>
+<title>sstatus</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/51.html#L108'>syscalls</a>          108 kernel/syscall.c static uint64 (*syscalls[])(void) = {</span>
-<span class='curline'><a href='../S/51.html#L139'>syscalls</a>          139 kernel/syscall.c   if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {</span>
-<span class='curline'><a href='../S/51.html#L140'>syscalls</a>          140 kernel/syscall.c     p-&gt;tf-&gt;a0 = syscalls[num]();</span>
+<span class='curline'><a href='../S/56.html#L138'>sstatus</a>           138 kernel/trap.c    uint64 sstatus = r_sstatus();</span>
+<span class='curline'><a href='../S/56.html#L141'>sstatus</a>           141 kernel/trap.c    if((sstatus &amp; SSTATUS_SPP) == 0)</span>
+<span class='curline'><a href='../S/56.html#L159'>sstatus</a>           159 kernel/trap.c    w_sstatus(sstatus);</span>
 </pre>
 </body>
 </html>

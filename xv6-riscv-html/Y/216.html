@@ -1,24 +1,36 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nread</title>
+<title>next</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L16'>nread</a>              16 kernel/pipe.c    uint nread;     // number of bytes read</span>
-<span class='curline'><a href='../S/34.html#L36'>nread</a>              36 kernel/pipe.c    pi-&gt;nread = 0;</span>
-<span class='curline'><a href='../S/34.html#L64'>nread</a>              64 kernel/pipe.c      wakeup(&amp;pi-&gt;nread);</span>
-<span class='curline'><a href='../S/34.html#L85'>nread</a>              85 kernel/pipe.c      while(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
-<span class='curline'><a href='../S/34.html#L90'>nread</a>              90 kernel/pipe.c        wakeup(&amp;pi-&gt;nread);</span>
-<span class='curline'><a href='../S/34.html#L97'>nread</a>              97 kernel/pipe.c    wakeup(&amp;pi-&gt;nread);</span>
-<span class='curline'><a href='../S/34.html#L110'>nread</a>             110 kernel/pipe.c    while(pi-&gt;nread == pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  //DOC: pipe-empty</span>
-<span class='curline'><a href='../S/34.html#L115'>nread</a>             115 kernel/pipe.c      sleep(&amp;pi-&gt;nread, &amp;pi-&gt;lock); //DOC: piperead-sleep</span>
-<span class='curline'><a href='../S/34.html#L118'>nread</a>             118 kernel/pipe.c      if(pi-&gt;nread == pi-&gt;nwrite)</span>
-<span class='curline'><a href='../S/34.html#L120'>nread</a>             120 kernel/pipe.c      ch = pi-&gt;data[pi-&gt;nread++ % PIPESIZE];</span>
+<span class='curline'><a href='../S/61.html#L45'>next</a>               45 kernel/bio.c     bcache.head.next = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/61.html#L47'>next</a>               47 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/61.html#L50'>next</a>               50 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/61.html#L51'>next</a>               51 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/61.html#L66'>next</a>               66 kernel/bio.c     for(b = bcache.head.next; b != &amp;bcache.head; b = b-&gt;next){</span>
+<span class='curline'><a href='../S/61.html#L128'>next</a>              128 kernel/bio.c       b-&gt;next-&gt;prev = b-&gt;prev;</span>
+<span class='curline'><a href='../S/61.html#L129'>next</a>              129 kernel/bio.c       b-&gt;prev-&gt;next = b-&gt;next;</span>
+<span class='curline'><a href='../S/61.html#L130'>next</a>              130 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/61.html#L132'>next</a>              132 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/61.html#L133'>next</a>              133 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/47.html#L9'>next</a>                9 kernel/buf.h     struct buf *next;</span>
+<span class='curline'><a href='../S/48.html#L628'>next</a>              628 kernel/fs.c      struct inode *ip, *next;</span>
+<span class='curline'><a href='../S/48.html#L646'>next</a>              646 kernel/fs.c        if((next = dirlookup(ip, name, 0)) == 0){</span>
+<span class='curline'><a href='../S/48.html#L651'>next</a>              651 kernel/fs.c        ip = next;</span>
+<span class='curline'><a href='../S/69.html#L18'>next</a>               18 kernel/kalloc.c   struct run *next;</span>
+<span class='curline'><a href='../S/69.html#L60'>next</a>               60 kernel/kalloc.c   r-&gt;next = kmem.freelist;</span>
+<span class='curline'><a href='../S/69.html#L76'>next</a>               76 kernel/kalloc.c     kmem.freelist = r-&gt;next;</span>
+<span class='curline'><a href='../S/54.html#L54'>next</a>               54 kernel/virtio.h   uint16 next;</span>
+<span class='curline'><a href='../S/65.html#L148'>next</a>              148 kernel/virtio_disk.c       i = disk.desc[i].next;</span>
+<span class='curline'><a href='../S/65.html#L209'>next</a>              209 kernel/virtio_disk.c   disk.desc[idx[0]].next = idx[1];</span>
+<span class='curline'><a href='../S/65.html#L218'>next</a>              218 kernel/virtio_disk.c   disk.desc[idx[1]].next = idx[2];</span>
+<span class='curline'><a href='../S/65.html#L224'>next</a>              224 kernel/virtio_disk.c   disk.desc[idx[2]].next = 0;</span>
 </pre>
 </body>
 </html>

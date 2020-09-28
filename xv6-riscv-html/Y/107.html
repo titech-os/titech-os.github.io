@@ -1,31 +1,37 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>flags</title>
+<title>fd1</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/52.html#L15'>flags</a>              15 kernel/elf.h     uint flags;</span>
-<span class='curline'><a href='../S/52.html#L27'>flags</a>              27 kernel/elf.h     uint32 flags;</span>
-<span class='curline'><a href='../S/32.html#L27'>flags</a>              27 kernel/ramdisk.c   if((b-&gt;flags &amp; (B_VALID|B_DIRTY)) == B_VALID)</span>
-<span class='curline'><a href='../S/32.html#L36'>flags</a>              36 kernel/ramdisk.c   if(b-&gt;flags &amp; B_DIRTY){</span>
-<span class='curline'><a href='../S/32.html#L39'>flags</a>              39 kernel/ramdisk.c     b-&gt;flags &amp;= ~B_DIRTY;</span>
-<span class='curline'><a href='../S/32.html#L43'>flags</a>              43 kernel/ramdisk.c     b-&gt;flags |= B_VALID;</span>
-<span class='curline'><a href='../S/54.html#L53'>flags</a>              53 kernel/virtio.h   uint16 flags;</span>
-<span class='curline'><a href='../S/54.html#L69'>flags</a>              69 kernel/virtio.h   uint16 flags;</span>
-<span class='curline'><a href='../S/65.html#L147'>flags</a>             147 kernel/virtio_disk.c     if(disk.desc[i].flags &amp; VRING_DESC_F_NEXT)</span>
-<span class='curline'><a href='../S/65.html#L208'>flags</a>             208 kernel/virtio_disk.c   disk.desc[idx[0]].flags = VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/65.html#L214'>flags</a>             214 kernel/virtio_disk.c     disk.desc[idx[1]].flags = 0; // device reads b-&gt;data</span>
-<span class='curline'><a href='../S/65.html#L216'>flags</a>             216 kernel/virtio_disk.c     disk.desc[idx[1]].flags = VRING_DESC_F_WRITE; // device writes b-&gt;data</span>
-<span class='curline'><a href='../S/65.html#L217'>flags</a>             217 kernel/virtio_disk.c   disk.desc[idx[1]].flags |= VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/65.html#L223'>flags</a>             223 kernel/virtio_disk.c   disk.desc[idx[2]].flags = VRING_DESC_F_WRITE; // device writes the status</span>
-<span class='curline'><a href='../S/38.html#L319'>flags</a>             319 kernel/vm.c      uint flags;</span>
-<span class='curline'><a href='../S/38.html#L328'>flags</a>             328 kernel/vm.c        flags = PTE_FLAGS(*pte);</span>
-<span class='curline'><a href='../S/38.html#L332'>flags</a>             332 kernel/vm.c        if(mappages(new, i, PGSIZE, (uint64)mem, flags) != 0){</span>
+<span class='curline'><a href='../S/43.html#L462'>fd1</a>               462 kernel/sysfile.c   int fd0, fd1;</span>
+<span class='curline'><a href='../S/43.html#L470'>fd1</a>               470 kernel/sysfile.c   if((fd0 = fdalloc(rf)) &lt; 0 || (fd1 = fdalloc(wf)) &lt; 0){</span>
+<span class='curline'><a href='../S/43.html#L478'>fd1</a>               478 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
+<span class='curline'><a href='../S/43.html#L480'>fd1</a>               480 kernel/sysfile.c     p-&gt;ofile[fd1] = 0;</span>
+<span class='curline'><a href='../S/12.html#L199'>fd1</a>               199 user/grind.c         int fd1 = open("c", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/12.html#L200'>fd1</a>               200 user/grind.c         if(fd1 &lt; 0){</span>
+<span class='curline'><a href='../S/12.html#L204'>fd1</a>               204 user/grind.c         if(write(fd1, "x", 1) != 1){</span>
+<span class='curline'><a href='../S/12.html#L209'>fd1</a>               209 user/grind.c         if(fstat(fd1, &amp;st) != 0){</span>
+<span class='curline'><a href='../S/12.html#L221'>fd1</a>               221 user/grind.c         close(fd1);</span>
+<span class='curline'><a href='../S/24.html#L243'>fd1</a>               243 user/usertests.c   int fd1 = open("truncfile", O_CREATE|O_WRONLY|O_TRUNC);</span>
+<span class='curline'><a href='../S/24.html#L244'>fd1</a>               244 user/usertests.c   write(fd1, "abcd", 4);</span>
+<span class='curline'><a href='../S/24.html#L245'>fd1</a>               245 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/24.html#L254'>fd1</a>               254 user/usertests.c   fd1 = open("truncfile", O_WRONLY|O_TRUNC);</span>
+<span class='curline'><a href='../S/24.html#L271'>fd1</a>               271 user/usertests.c   write(fd1, "abcdef", 6);</span>
+<span class='curline'><a href='../S/24.html#L287'>fd1</a>               287 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/24.html#L301'>fd1</a>               301 user/usertests.c   int fd1 = open("truncfile", O_CREATE|O_TRUNC|O_WRONLY);</span>
+<span class='curline'><a href='../S/24.html#L302'>fd1</a>               302 user/usertests.c   write(fd1, "abcd", 4);</span>
+<span class='curline'><a href='../S/24.html#L306'>fd1</a>               306 user/usertests.c   int n = write(fd1, "x", 1);</span>
+<span class='curline'><a href='../S/24.html#L313'>fd1</a>               313 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/24.html#L1212'>fd1</a>              1212 user/usertests.c   int fd, fd1;</span>
+<span class='curline'><a href='../S/24.html#L1232'>fd1</a>              1232 user/usertests.c   fd1 = open("unlinkread", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L1233'>fd1</a>              1233 user/usertests.c   write(fd1, "yyy", 3);</span>
+<span class='curline'><a href='../S/24.html#L1234'>fd1</a>              1234 user/usertests.c   close(fd1);</span>
 </pre>
 </body>
 </html>

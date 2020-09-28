@@ -1,67 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pi</title>
+<title>parent</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L25'>pi</a>                 25 kernel/pipe.c    struct pipe *pi;</span>
-<span class='curline'><a href='../S/34.html#L27'>pi</a>                 27 kernel/pipe.c    pi = 0;</span>
-<span class='curline'><a href='../S/34.html#L31'>pi</a>                 31 kernel/pipe.c    if((pi = (struct pipe*)kalloc()) == 0)</span>
-<span class='curline'><a href='../S/34.html#L33'>pi</a>                 33 kernel/pipe.c    pi-&gt;readopen = 1;</span>
-<span class='curline'><a href='../S/34.html#L34'>pi</a>                 34 kernel/pipe.c    pi-&gt;writeopen = 1;</span>
-<span class='curline'><a href='../S/34.html#L35'>pi</a>                 35 kernel/pipe.c    pi-&gt;nwrite = 0;</span>
-<span class='curline'><a href='../S/34.html#L36'>pi</a>                 36 kernel/pipe.c    pi-&gt;nread = 0;</span>
-<span class='curline'><a href='../S/34.html#L37'>pi</a>                 37 kernel/pipe.c    initlock(&amp;pi-&gt;lock, "pipe");</span>
-<span class='curline'><a href='../S/34.html#L41'>pi</a>                 41 kernel/pipe.c    (*f0)-&gt;pipe = pi;</span>
-<span class='curline'><a href='../S/34.html#L45'>pi</a>                 45 kernel/pipe.c    (*f1)-&gt;pipe = pi;</span>
-<span class='curline'><a href='../S/34.html#L49'>pi</a>                 49 kernel/pipe.c    if(pi)</span>
-<span class='curline'><a href='../S/34.html#L50'>pi</a>                 50 kernel/pipe.c      kfree((char*)pi);</span>
-<span class='curline'><a href='../S/34.html#L59'>pi</a>                 59 kernel/pipe.c  pipeclose(struct pipe *pi, int writable)</span>
-<span class='curline'><a href='../S/34.html#L61'>pi</a>                 61 kernel/pipe.c    acquire(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L63'>pi</a>                 63 kernel/pipe.c      pi-&gt;writeopen = 0;</span>
-<span class='curline'><a href='../S/34.html#L64'>pi</a>                 64 kernel/pipe.c      wakeup(&amp;pi-&gt;nread);</span>
-<span class='curline'><a href='../S/34.html#L66'>pi</a>                 66 kernel/pipe.c      pi-&gt;readopen = 0;</span>
-<span class='curline'><a href='../S/34.html#L67'>pi</a>                 67 kernel/pipe.c      wakeup(&amp;pi-&gt;nwrite);</span>
-<span class='curline'><a href='../S/34.html#L69'>pi</a>                 69 kernel/pipe.c    if(pi-&gt;readopen == 0 &amp;&amp; pi-&gt;writeopen == 0){</span>
-<span class='curline'><a href='../S/34.html#L70'>pi</a>                 70 kernel/pipe.c      release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L71'>pi</a>                 71 kernel/pipe.c      kfree((char*)pi);</span>
-<span class='curline'><a href='../S/34.html#L73'>pi</a>                 73 kernel/pipe.c      release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L77'>pi</a>                 77 kernel/pipe.c  pipewrite(struct pipe *pi, uint64 addr, int n)</span>
-<span class='curline'><a href='../S/34.html#L83'>pi</a>                 83 kernel/pipe.c    acquire(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L85'>pi</a>                 85 kernel/pipe.c      while(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
-<span class='curline'><a href='../S/34.html#L86'>pi</a>                 86 kernel/pipe.c        if(pi-&gt;readopen == 0 || myproc()-&gt;killed){</span>
-<span class='curline'><a href='../S/34.html#L87'>pi</a>                 87 kernel/pipe.c          release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L90'>pi</a>                 90 kernel/pipe.c        wakeup(&amp;pi-&gt;nread);</span>
-<span class='curline'><a href='../S/34.html#L91'>pi</a>                 91 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L95'>pi</a>                 95 kernel/pipe.c      pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
-<span class='curline'><a href='../S/34.html#L97'>pi</a>                 97 kernel/pipe.c    wakeup(&amp;pi-&gt;nread);</span>
-<span class='curline'><a href='../S/34.html#L98'>pi</a>                 98 kernel/pipe.c    release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L103'>pi</a>                103 kernel/pipe.c  piperead(struct pipe *pi, uint64 addr, int n)</span>
-<span class='curline'><a href='../S/34.html#L109'>pi</a>                109 kernel/pipe.c    acquire(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L110'>pi</a>                110 kernel/pipe.c    while(pi-&gt;nread == pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  //DOC: pipe-empty</span>
-<span class='curline'><a href='../S/34.html#L112'>pi</a>                112 kernel/pipe.c        release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L115'>pi</a>                115 kernel/pipe.c      sleep(&amp;pi-&gt;nread, &amp;pi-&gt;lock); //DOC: piperead-sleep</span>
-<span class='curline'><a href='../S/34.html#L118'>pi</a>                118 kernel/pipe.c      if(pi-&gt;nread == pi-&gt;nwrite)</span>
-<span class='curline'><a href='../S/34.html#L120'>pi</a>                120 kernel/pipe.c      ch = pi-&gt;data[pi-&gt;nread++ % PIPESIZE];</span>
-<span class='curline'><a href='../S/34.html#L124'>pi</a>                124 kernel/pipe.c    wakeup(&amp;pi-&gt;nwrite);  //DOC: piperead-wakeup</span>
-<span class='curline'><a href='../S/34.html#L125'>pi</a>                125 kernel/pipe.c    release(&amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/24.html#L722'>pi</a>                722 user/usertests.c   int fd, pid, i, j, n, total, pi;</span>
-<span class='curline'><a href='../S/24.html#L727'>pi</a>                727 user/usertests.c   for(pi = 0; pi &lt; NCHILD; pi++){</span>
-<span class='curline'><a href='../S/24.html#L728'>pi</a>                728 user/usertests.c     fname = names[pi];</span>
-<span class='curline'><a href='../S/24.html#L744'>pi</a>                744 user/usertests.c       memset(buf, '0'+pi, SZ);</span>
-<span class='curline'><a href='../S/24.html#L756'>pi</a>                756 user/usertests.c   for(pi = 0; pi &lt; NCHILD; pi++){</span>
-<span class='curline'><a href='../S/24.html#L789'>pi</a>                789 user/usertests.c   int pid, i, fd, pi;</span>
-<span class='curline'><a href='../S/24.html#L792'>pi</a>                792 user/usertests.c   for(pi = 0; pi &lt; NCHILD; pi++){</span>
-<span class='curline'><a href='../S/24.html#L800'>pi</a>                800 user/usertests.c       name[0] = 'p' + pi;</span>
-<span class='curline'><a href='../S/24.html#L823'>pi</a>                823 user/usertests.c   for(pi = 0; pi &lt; NCHILD; pi++){</span>
-<span class='curline'><a href='../S/24.html#L831'>pi</a>                831 user/usertests.c     for(pi = 0; pi &lt; NCHILD; pi++){</span>
-<span class='curline'><a href='../S/24.html#L832'>pi</a>                832 user/usertests.c       name[0] = 'p' + pi;</span>
-<span class='curline'><a href='../S/24.html#L848'>pi</a>                848 user/usertests.c     for(pi = 0; pi &lt; NCHILD; pi++){</span>
+<span class='curline'><a href='../S/63.html#L147'>parent</a>            147 kernel/proc.c    p-&gt;parent = 0;</span>
+<span class='curline'><a href='../S/63.html#L278'>parent</a>            278 kernel/proc.c    np-&gt;parent = p;</span>
+<span class='curline'><a href='../S/63.html#L315'>parent</a>            315 kernel/proc.c      if(pp-&gt;parent == p){</span>
+<span class='curline'><a href='../S/63.html#L319'>parent</a>            319 kernel/proc.c        pp-&gt;parent = initproc;</span>
+<span class='curline'><a href='../S/63.html#L370'>parent</a>            370 kernel/proc.c    struct proc *original_parent = p-&gt;parent;</span>
+<span class='curline'><a href='../S/63.html#L415'>parent</a>            415 kernel/proc.c        if(np-&gt;parent == p){</span>
+<span class='curline'><a href='../S/35.html#L91'>parent</a>             91 kernel/proc.h    struct proc *parent;         // Parent process</span>
 </pre>
 </body>
 </html>

@@ -1,16 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>userret</title>
+<title>top</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L12'>userret</a>            12 kernel/trap.c  extern char trampoline[], uservec[], userret[];</span>
-<span class='curline'><a href='../S/56.html#L126'>userret</a>           126 kernel/trap.c    uint64 fn = TRAMPOLINE + (userret - trampoline);</span>
+<span class='curline'><a href='../S/24.html#L197'>top</a>               197 user/usertests.c   uint64 top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L198'>top</a>               198 user/usertests.c   if((top % PGSIZE) != 0){</span>
+<span class='curline'><a href='../S/24.html#L199'>top</a>               199 user/usertests.c     sbrk(PGSIZE - (top % PGSIZE));</span>
+<span class='curline'><a href='../S/24.html#L201'>top</a>               201 user/usertests.c   top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L202'>top</a>               202 user/usertests.c   if(top % PGSIZE){</span>
+<span class='curline'><a href='../S/24.html#L207'>top</a>               207 user/usertests.c   char *b = (char *) (top - 1);</span>
 </pre>
 </body>
 </html>

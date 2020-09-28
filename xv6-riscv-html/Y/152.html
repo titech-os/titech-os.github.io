@@ -1,20 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel_pagetable</title>
+<title>initproc</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L12'>kernel_pagetable</a>   12 kernel/vm.c    pagetable_t kernel_pagetable;</span>
-<span class='curline'><a href='../S/38.html#L26'>kernel_pagetable</a>   26 kernel/vm.c      kernel_pagetable = (pagetable_t) kalloc();</span>
-<span class='curline'><a href='../S/38.html#L27'>kernel_pagetable</a>   27 kernel/vm.c      memset(kernel_pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L57'>kernel_pagetable</a>   57 kernel/vm.c      w_satp(MAKE_SATP(kernel_pagetable));</span>
-<span class='curline'><a href='../S/38.html#L122'>kernel_pagetable</a>  122 kernel/vm.c      if(mappages(kernel_pagetable, va, sz, pa, perm) != 0)</span>
-<span class='curline'><a href='../S/38.html#L137'>kernel_pagetable</a>  137 kernel/vm.c      pte = walk(kernel_pagetable, va, 0);</span>
+<span class='curline'><a href='../S/63.html#L13'>initproc</a>           13 kernel/proc.c  struct proc *initproc;</span>
+<span class='curline'><a href='../S/63.html#L217'>initproc</a>          217 kernel/proc.c    initproc = p;</span>
+<span class='curline'><a href='../S/63.html#L319'>initproc</a>          319 kernel/proc.c        pp-&gt;parent = initproc;</span>
+<span class='curline'><a href='../S/63.html#L337'>initproc</a>          337 kernel/proc.c    if(p == initproc)</span>
+<span class='curline'><a href='../S/63.html#L359'>initproc</a>          359 kernel/proc.c    acquire(&amp;initproc-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L360'>initproc</a>          360 kernel/proc.c    wakeup1(initproc);</span>
+<span class='curline'><a href='../S/63.html#L361'>initproc</a>          361 kernel/proc.c    release(&amp;initproc-&gt;lock);</span>
 </pre>
 </body>
 </html>

@@ -1,26 +1,38 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bi</title>
+<title>bcache</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/48.html#L68'>bi</a>                 68 kernel/fs.c      int b, bi, m;</span>
-<span class='curline'><a href='../S/48.html#L74'>bi</a>                 74 kernel/fs.c        for(bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){</span>
-<span class='curline'><a href='../S/48.html#L75'>bi</a>                 75 kernel/fs.c          m = 1 &lt;&lt; (bi % 8);</span>
-<span class='curline'><a href='../S/48.html#L76'>bi</a>                 76 kernel/fs.c          if((bp-&gt;data[bi/8] &amp; m) == 0){  // Is block free?</span>
-<span class='curline'><a href='../S/48.html#L77'>bi</a>                 77 kernel/fs.c            bp-&gt;data[bi/8] |= m;  // Mark block in use.</span>
-<span class='curline'><a href='../S/48.html#L80'>bi</a>                 80 kernel/fs.c            bzero(dev, b + bi);</span>
-<span class='curline'><a href='../S/48.html#L81'>bi</a>                 81 kernel/fs.c            return b + bi;</span>
-<span class='curline'><a href='../S/48.html#L94'>bi</a>                 94 kernel/fs.c      int bi, m;</span>
-<span class='curline'><a href='../S/48.html#L97'>bi</a>                 97 kernel/fs.c      bi = b % BPB;</span>
-<span class='curline'><a href='../S/48.html#L98'>bi</a>                 98 kernel/fs.c      m = 1 &lt;&lt; (bi % 8);</span>
-<span class='curline'><a href='../S/48.html#L99'>bi</a>                 99 kernel/fs.c      if((bp-&gt;data[bi/8] &amp; m) == 0)</span>
-<span class='curline'><a href='../S/48.html#L101'>bi</a>                101 kernel/fs.c      bp-&gt;data[bi/8] &amp;= ~m;</span>
+<span class='curline'><a href='../S/61.html#L34'>bcache</a>             34 kernel/bio.c   } bcache;</span>
+<span class='curline'><a href='../S/61.html#L41'>bcache</a>             41 kernel/bio.c     initlock(&amp;bcache.lock, "bcache");</span>
+<span class='curline'><a href='../S/61.html#L44'>bcache</a>             44 kernel/bio.c     bcache.head.prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/61.html#L45'>bcache</a>             45 kernel/bio.c     bcache.head.next = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/61.html#L46'>bcache</a>             46 kernel/bio.c     for(b = bcache.buf; b &lt; bcache.buf+NBUF; b++){</span>
+<span class='curline'><a href='../S/61.html#L47'>bcache</a>             47 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/61.html#L48'>bcache</a>             48 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/61.html#L50'>bcache</a>             50 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/61.html#L51'>bcache</a>             51 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/61.html#L63'>bcache</a>             63 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L66'>bcache</a>             66 kernel/bio.c     for(b = bcache.head.next; b != &amp;bcache.head; b = b-&gt;next){</span>
+<span class='curline'><a href='../S/61.html#L69'>bcache</a>             69 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L77'>bcache</a>             77 kernel/bio.c     for(b = bcache.head.prev; b != &amp;bcache.head; b = b-&gt;prev){</span>
+<span class='curline'><a href='../S/61.html#L83'>bcache</a>             83 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L124'>bcache</a>            124 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L130'>bcache</a>            130 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/61.html#L131'>bcache</a>            131 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/61.html#L132'>bcache</a>            132 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/61.html#L133'>bcache</a>            133 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/61.html#L136'>bcache</a>            136 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L141'>bcache</a>            141 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L143'>bcache</a>            143 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L148'>bcache</a>            148 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/61.html#L150'>bcache</a>            150 kernel/bio.c     release(&amp;bcache.lock);</span>
 </pre>
 </body>
 </html>

@@ -1,19 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>magic</title>
+<title>level</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/52.html#L7'>magic</a>               7 kernel/elf.h     uint magic;  // must equal ELF_MAGIC</span>
-<span class='curline'><a href='../S/36.html#L35'>magic</a>              35 kernel/exec.c    if(elf.magic != ELF_MAGIC)</span>
-<span class='curline'><a href='../S/48.html#L45'>magic</a>              45 kernel/fs.c      if(sb.magic != FSMAGIC)</span>
-<span class='curline'><a href='../S/71.html#L15'>magic</a>              15 kernel/fs.h      uint magic;        // Must be FSMAGIC</span>
-<span class='curline'><a href='../S/3.html#L97'>magic</a>              97 mkfs/mkfs.c      sb.magic = FSMAGIC;</span>
+<span class='curline'><a href='../S/64.html#L344'>level</a>             344 kernel/riscv.h #define PXSHIFT(level)  (PGSHIFT+(9*(level)))</span>
+<span class='curline'><a href='../S/64.html#L345'>level</a>             345 kernel/riscv.h #define PX(level, va) ((((uint64) (va)) &gt;&gt; PXSHIFT(level)) &amp; PXMASK)</span>
+<span class='curline'><a href='../S/38.html#L77'>level</a>              77 kernel/vm.c      for(int level = 2; level &gt; 0; level--) {</span>
+<span class='curline'><a href='../S/38.html#L78'>level</a>              78 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
 </pre>
 </body>
 </html>

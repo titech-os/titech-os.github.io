@@ -1,20 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pp</title>
+<title>pfds</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/63.html#L293'>pp</a>                293 kernel/proc.c    struct proc *pp;</span>
-<span class='curline'><a href='../S/63.html#L295'>pp</a>                295 kernel/proc.c    for(pp = proc; pp &lt; &amp;proc[NPROC]; pp++){</span>
-<span class='curline'><a href='../S/63.html#L300'>pp</a>                300 kernel/proc.c      if(pp-&gt;parent == p){</span>
-<span class='curline'><a href='../S/63.html#L303'>pp</a>                303 kernel/proc.c        acquire(&amp;pp-&gt;lock);</span>
-<span class='curline'><a href='../S/63.html#L304'>pp</a>                304 kernel/proc.c        pp-&gt;parent = initproc;</span>
-<span class='curline'><a href='../S/63.html#L309'>pp</a>                309 kernel/proc.c        release(&amp;pp-&gt;lock);</span>
+<span class='curline'><a href='../S/24.html#L743'>pfds</a>              743 user/usertests.c   int pfds[2];</span>
+<span class='curline'><a href='../S/24.html#L763'>pfds</a>              763 user/usertests.c   pipe(pfds);</span>
+<span class='curline'><a href='../S/24.html#L770'>pfds</a>              770 user/usertests.c     close(pfds[0]);</span>
+<span class='curline'><a href='../S/24.html#L771'>pfds</a>              771 user/usertests.c     if(write(pfds[1], "x", 1) != 1)</span>
+<span class='curline'><a href='../S/24.html#L773'>pfds</a>              773 user/usertests.c     close(pfds[1]);</span>
+<span class='curline'><a href='../S/24.html#L778'>pfds</a>              778 user/usertests.c   close(pfds[1]);</span>
+<span class='curline'><a href='../S/24.html#L779'>pfds</a>              779 user/usertests.c   if(read(pfds[0], buf, sizeof(buf)) != 1){</span>
+<span class='curline'><a href='../S/24.html#L783'>pfds</a>              783 user/usertests.c   close(pfds[0]);</span>
 </pre>
 </body>
 </html>

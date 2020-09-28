@@ -1,22 +1,106 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vdisk_lock</title>
+<title>unlink</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.3' />
+<meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L45'>vdisk_lock</a>         45 kernel/virtio_disk.c   struct spinlock vdisk_lock;</span>
-<span class='curline'><a href='../S/65.html#L54'>vdisk_lock</a>         54 kernel/virtio_disk.c   initlock(&amp;disk.vdisk_lock, "virtio_disk");</span>
-<span class='curline'><a href='../S/65.html#L173'>vdisk_lock</a>        173 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L185'>vdisk_lock</a>        185 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L242'>vdisk_lock</a>        242 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L248'>vdisk_lock</a>        248 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L254'>vdisk_lock</a>        254 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/65.html#L268'>vdisk_lock</a>        268 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/12.html#L75'>unlink</a>             75 user/grind.c         unlink("grindir/../a");</span>
+<span class='curline'><a href='../S/12.html#L81'>unlink</a>             81 user/grind.c         unlink("../b");</span>
+<span class='curline'><a href='../S/12.html#L96'>unlink</a>             96 user/grind.c         unlink("a/a");</span>
+<span class='curline'><a href='../S/12.html#L100'>unlink</a>            100 user/grind.c         unlink("b/b");</span>
+<span class='curline'><a href='../S/12.html#L102'>unlink</a>            102 user/grind.c         unlink("b");</span>
+<span class='curline'><a href='../S/12.html#L105'>unlink</a>            105 user/grind.c         unlink("../grindir/../a");</span>
+<span class='curline'><a href='../S/12.html#L183'>unlink</a>            183 user/grind.c           unlink("a");</span>
+<span class='curline'><a href='../S/12.html#L186'>unlink</a>            186 user/grind.c           unlink("../a");</span>
+<span class='curline'><a href='../S/12.html#L188'>unlink</a>            188 user/grind.c           unlink("x");</span>
+<span class='curline'><a href='../S/12.html#L196'>unlink</a>            196 user/grind.c         unlink("c");</span>
+<span class='curline'><a href='../S/12.html#L222'>unlink</a>            222 user/grind.c         unlink("c");</span>
+<span class='curline'><a href='../S/12.html#L298'>unlink</a>            298 user/grind.c     unlink("a");</span>
+<span class='curline'><a href='../S/12.html#L299'>unlink</a>            299 user/grind.c     unlink("b");</span>
+<span class='curline'><a href='../S/8.html#L16'>unlink</a>             16 user/rm.c          if(unlink(argv[i]) &lt; 0){</span>
+<span class='curline'><a href='../S/15.html#L16'>unlink</a>             16 user/user.h    int unlink(const char*);</span>
+<span class='curline'><a href='../S/24.html#L46'>unlink</a>             46 user/usertests.c     unlink("copyin1");</span>
+<span class='curline'><a href='../S/24.html#L140'>unlink</a>            140 user/usertests.c   int ret = unlink(b);</span>
+<span class='curline'><a href='../S/24.html#L210'>unlink</a>            210 user/usertests.c   int ret = unlink(b);</span>
+<span class='curline'><a href='../S/24.html#L242'>unlink</a>            242 user/usertests.c   unlink("truncfile");</span>
+<span class='curline'><a href='../S/24.html#L285'>unlink</a>            285 user/usertests.c   unlink("truncfile");</span>
+<span class='curline'><a href='../S/24.html#L299'>unlink</a>            299 user/usertests.c   unlink("truncfile");</span>
+<span class='curline'><a href='../S/24.html#L312'>unlink</a>            312 user/usertests.c   unlink("truncfile");</span>
+<span class='curline'><a href='../S/24.html#L366'>unlink</a>            366 user/usertests.c   unlink("truncfile");</span>
+<span class='curline'><a href='../S/24.html#L383'>unlink</a>            383 user/usertests.c   if(unlink("../iputdir") &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L413'>unlink</a>            413 user/usertests.c     if(unlink("../iputdir") &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L457'>unlink</a>            457 user/usertests.c   if(unlink("oidir") != 0){</span>
+<span class='curline'><a href='../S/24.html#L520'>unlink</a>            520 user/usertests.c   if(unlink("small") &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L574'>unlink</a>            574 user/usertests.c   if(unlink("big") &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L598'>unlink</a>            598 user/usertests.c     unlink(name);</span>
+<span class='curline'><a href='../S/24.html#L621'>unlink</a>            621 user/usertests.c   if(unlink("dir0") &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L635'>unlink</a>            635 user/usertests.c   unlink("echo-ok");</span>
+<span class='curline'><a href='../S/24.html#L673'>unlink</a>            673 user/usertests.c   unlink("echo-ok");</span>
+<span class='curline'><a href='../S/24.html#L920'>unlink</a>            920 user/usertests.c   unlink("stopforking");</span>
+<span class='curline'><a href='../S/24.html#L1020'>unlink</a>           1020 user/usertests.c   unlink("sharedfd");</span>
+<span class='curline'><a href='../S/24.html#L1059'>unlink</a>           1059 user/usertests.c   unlink("sharedfd");</span>
+<span class='curline'><a href='../S/24.html#L1080'>unlink</a>           1080 user/usertests.c     unlink(fname);</span>
+<span class='curline'><a href='../S/24.html#L1131'>unlink</a>           1131 user/usertests.c     unlink(fname);</span>
+<span class='curline'><a href='../S/24.html#L1163'>unlink</a>           1163 user/usertests.c           if(unlink(name) &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1202'>unlink</a>           1202 user/usertests.c       unlink(name);</span>
+<span class='curline'><a href='../S/24.html#L1227'>unlink</a>           1227 user/usertests.c   if(unlink("unlinkread") != 0){</span>
+<span class='curline'><a href='../S/24.html#L1249'>unlink</a>           1249 user/usertests.c   unlink("unlinkread");</span>
+<span class='curline'><a href='../S/24.html#L1258'>unlink</a>           1258 user/usertests.c   unlink("lf1");</span>
+<span class='curline'><a href='../S/24.html#L1259'>unlink</a>           1259 user/usertests.c   unlink("lf2");</span>
+<span class='curline'><a href='../S/24.html#L1276'>unlink</a>           1276 user/usertests.c   unlink("lf1");</span>
+<span class='curline'><a href='../S/24.html#L1299'>unlink</a>           1299 user/usertests.c   unlink("lf2");</span>
+<span class='curline'><a href='../S/24.html#L1328'>unlink</a>           1328 user/usertests.c     unlink(file);</span>
+<span class='curline'><a href='../S/24.html#L1395'>unlink</a>           1395 user/usertests.c       unlink(file);</span>
+<span class='curline'><a href='../S/24.html#L1396'>unlink</a>           1396 user/usertests.c       unlink(file);</span>
+<span class='curline'><a href='../S/24.html#L1397'>unlink</a>           1397 user/usertests.c       unlink(file);</span>
+<span class='curline'><a href='../S/24.html#L1398'>unlink</a>           1398 user/usertests.c       unlink(file);</span>
+<span class='curline'><a href='../S/24.html#L1399'>unlink</a>           1399 user/usertests.c       unlink(file);</span>
+<span class='curline'><a href='../S/24.html#L1400'>unlink</a>           1400 user/usertests.c       unlink(file);</span>
+<span class='curline'><a href='../S/24.html#L1416'>unlink</a>           1416 user/usertests.c   unlink("x");</span>
+<span class='curline'><a href='../S/24.html#L1431'>unlink</a>           1431 user/usertests.c       unlink("x");</span>
+<span class='curline'><a href='../S/24.html#L1449'>unlink</a>           1449 user/usertests.c   unlink("bd");</span>
+<span class='curline'><a href='../S/24.html#L1469'>unlink</a>           1469 user/usertests.c   unlink("bd");</span>
+<span class='curline'><a href='../S/24.html#L1475'>unlink</a>           1475 user/usertests.c     if(unlink(name) != 0){</span>
+<span class='curline'><a href='../S/24.html#L1487'>unlink</a>           1487 user/usertests.c   unlink("ff");</span>
+<span class='curline'><a href='../S/24.html#L1501'>unlink</a>           1501 user/usertests.c   if(unlink("dd") &gt;= 0){</span>
+<span class='curline'><a href='../S/24.html#L1536'>unlink</a>           1536 user/usertests.c   if(unlink("dd/dd/ff") != 0){</span>
+<span class='curline'><a href='../S/24.html#L1622'>unlink</a>           1622 user/usertests.c   if(unlink("dd/xx/ff") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1626'>unlink</a>           1626 user/usertests.c   if(unlink("dd/ff/ff") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1639'>unlink</a>           1639 user/usertests.c   if(unlink("dd/dd/ffff") != 0){</span>
+<span class='curline'><a href='../S/24.html#L1643'>unlink</a>           1643 user/usertests.c   if(unlink("dd/ff") != 0){</span>
+<span class='curline'><a href='../S/24.html#L1647'>unlink</a>           1647 user/usertests.c   if(unlink("dd") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1651'>unlink</a>           1651 user/usertests.c   if(unlink("dd/dd") &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1655'>unlink</a>           1655 user/usertests.c   if(unlink("dd") &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1667'>unlink</a>           1667 user/usertests.c   unlink("bigwrite");</span>
+<span class='curline'><a href='../S/24.html#L1683'>unlink</a>           1683 user/usertests.c     unlink("bigwrite");</span>
+<span class='curline'><a href='../S/24.html#L1693'>unlink</a>           1693 user/usertests.c   unlink("bigfile.dat");</span>
+<span class='curline'><a href='../S/24.html#L1737'>unlink</a>           1737 user/usertests.c   unlink("bigfile.dat");</span>
+<span class='curline'><a href='../S/24.html#L1778'>unlink</a>           1778 user/usertests.c   unlink("123456789012345/12345678901234");</span>
+<span class='curline'><a href='../S/24.html#L1779'>unlink</a>           1779 user/usertests.c   unlink("12345678901234/12345678901234");</span>
+<span class='curline'><a href='../S/24.html#L1780'>unlink</a>           1780 user/usertests.c   unlink("12345678901234/12345678901234/12345678901234");</span>
+<span class='curline'><a href='../S/24.html#L1781'>unlink</a>           1781 user/usertests.c   unlink("123456789012345/123456789012345/123456789012345");</span>
+<span class='curline'><a href='../S/24.html#L1782'>unlink</a>           1782 user/usertests.c   unlink("12345678901234/123456789012345");</span>
+<span class='curline'><a href='../S/24.html#L1783'>unlink</a>           1783 user/usertests.c   unlink("12345678901234");</span>
+<span class='curline'><a href='../S/24.html#L1797'>unlink</a>           1797 user/usertests.c   if(unlink(".") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1801'>unlink</a>           1801 user/usertests.c   if(unlink("..") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1809'>unlink</a>           1809 user/usertests.c   if(unlink("dots/.") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1813'>unlink</a>           1813 user/usertests.c   if(unlink("dots/..") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1817'>unlink</a>           1817 user/usertests.c   if(unlink("dots") != 0){</span>
+<span class='curline'><a href='../S/24.html#L1852'>unlink</a>           1852 user/usertests.c   if(unlink("dirfile/xx") == 0){</span>
+<span class='curline'><a href='../S/24.html#L1860'>unlink</a>           1860 user/usertests.c   if(unlink("dirfile") != 0){</span>
+<span class='curline'><a href='../S/24.html#L1903'>unlink</a>           1903 user/usertests.c     unlink("xx");</span>
+<span class='curline'><a href='../S/24.html#L1909'>unlink</a>           1909 user/usertests.c     unlink("irefd");</span>
+<span class='curline'><a href='../S/24.html#L2182'>unlink</a>           2182 user/usertests.c   unlink("sbrk");</span>
+<span class='curline'><a href='../S/24.html#L2240'>unlink</a>           2240 user/usertests.c   unlink("bigarg-ok");</span>
+<span class='curline'><a href='../S/24.html#L2314'>unlink</a>           2314 user/usertests.c     unlink(name);</span>
+<span class='curline'><a href='../S/24.html#L2450'>unlink</a>           2450 user/usertests.c   unlink("junk");</span>
+<span class='curline'><a href='../S/24.html#L2459'>unlink</a>           2459 user/usertests.c     unlink("junk");</span>
+<span class='curline'><a href='../S/24.html#L2472'>unlink</a>           2472 user/usertests.c   unlink("junk");</span>
 </pre>
 </body>
 </html>
