@@ -31,7 +31,17 @@ $ brew tap riscv/riscv
 $ brew install riscv-tools qemu
 ```
 以上でxv6の開発用ツールのインストールは完了です．
-[MITのサイト](https://pdos.csail.mit.edu/6.828/2020/tools.html)にはコマンドサーチパスを設定するように書かれていますが，現在はこの作業は不要です．
+
+次にコマンドサーチパスの設定の確認をします．
+Homebrewでインストールされるプログラムは多くの場合 `/usr/local/bin` という場所にインストールされます（正確にはリンクが作られる）．その場合特にこれ以上設定することはありません．
+ただし今回インストールするRISC-V関連のツールの場合，少なくとも私のところでは `/usr/local/bin` に入っているのですが，そうならなかったケースが講義Slackで報告されています．もし
+```
+which riscv64-unknown-elf-gcc
+```
+を実行して何も出力されない場合は，シェルの設定ファイル（`~/.zshrc`, `~/.bashrc` 等）に以下のような行を追加してください．
+```
+PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
+```
 
 ## インストール後の作業
 
