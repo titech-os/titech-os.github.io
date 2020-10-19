@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>listcmd</title>
+<title>log</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,12 +9,55 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L63'>listcmd</a>            63 user/sh.c        struct listcmd *lcmd;</span>
-<span class='curline'><a href='../S/17.html#L93'>listcmd</a>            93 user/sh.c          lcmd = (struct listcmd*)cmd;</span>
-<span class='curline'><a href='../S/17.html#L238'>listcmd</a>           238 user/sh.c        struct listcmd *cmd;</span>
-<span class='curline'><a href='../S/17.html#L356'>listcmd</a>           356 user/sh.c          cmd = listcmd(cmd, parseline(ps, es));</span>
-<span class='curline'><a href='../S/17.html#L455'>listcmd</a>           455 user/sh.c        struct listcmd *lcmd;</span>
-<span class='curline'><a href='../S/17.html#L482'>listcmd</a>           482 user/sh.c          lcmd = (struct listcmd*)cmd;</span>
+<span class='curline'><a href='../S/28.html#L49'>log</a>                49 kernel/log.c   struct log log;</span>
+<span class='curline'><a href='../S/28.html#L60'>log</a>                60 kernel/log.c     initlock(&amp;log.lock, "log");</span>
+<span class='curline'><a href='../S/28.html#L61'>log</a>                61 kernel/log.c     log.start = sb-&gt;logstart;</span>
+<span class='curline'><a href='../S/28.html#L62'>log</a>                62 kernel/log.c     log.size = sb-&gt;nlog;</span>
+<span class='curline'><a href='../S/28.html#L63'>log</a>                63 kernel/log.c     log.dev = dev;</span>
+<span class='curline'><a href='../S/28.html#L73'>log</a>                73 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/28.html#L74'>log</a>                74 kernel/log.c       struct buf *lbuf = bread(log.dev, log.start+tail+1); // read log block</span>
+<span class='curline'><a href='../S/28.html#L75'>log</a>                75 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/28.html#L89'>log</a>                89 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/28.html#L92'>log</a>                92 kernel/log.c     log.lh.n = lh-&gt;n;</span>
+<span class='curline'><a href='../S/28.html#L93'>log</a>                93 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
+<span class='curline'><a href='../S/28.html#L94'>log</a>                94 kernel/log.c       log.lh.block[i] = lh-&gt;block[i];</span>
+<span class='curline'><a href='../S/28.html#L105'>log</a>               105 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/28.html#L108'>log</a>               108 kernel/log.c     hb-&gt;n = log.lh.n;</span>
+<span class='curline'><a href='../S/28.html#L109'>log</a>               109 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
+<span class='curline'><a href='../S/28.html#L110'>log</a>               110 kernel/log.c       hb-&gt;block[i] = log.lh.block[i];</span>
+<span class='curline'><a href='../S/28.html#L121'>log</a>               121 kernel/log.c     log.lh.n = 0;</span>
+<span class='curline'><a href='../S/28.html#L129'>log</a>               129 kernel/log.c     acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L131'>log</a>               131 kernel/log.c       if(log.committing){</span>
+<span class='curline'><a href='../S/28.html#L132'>log</a>               132 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L133'>log</a>               133 kernel/log.c       } else if(log.lh.n + (log.outstanding+1)*MAXOPBLOCKS &gt; LOGSIZE){</span>
+<span class='curline'><a href='../S/28.html#L135'>log</a>               135 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L137'>log</a>               137 kernel/log.c         log.outstanding += 1;</span>
+<span class='curline'><a href='../S/28.html#L138'>log</a>               138 kernel/log.c         release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L151'>log</a>               151 kernel/log.c     acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L152'>log</a>               152 kernel/log.c     log.outstanding -= 1;</span>
+<span class='curline'><a href='../S/28.html#L153'>log</a>               153 kernel/log.c     if(log.committing)</span>
+<span class='curline'><a href='../S/28.html#L155'>log</a>               155 kernel/log.c     if(log.outstanding == 0){</span>
+<span class='curline'><a href='../S/28.html#L157'>log</a>               157 kernel/log.c       log.committing = 1;</span>
+<span class='curline'><a href='../S/28.html#L162'>log</a>               162 kernel/log.c       wakeup(&amp;log);</span>
+<span class='curline'><a href='../S/28.html#L164'>log</a>               164 kernel/log.c     release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L170'>log</a>               170 kernel/log.c       acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L171'>log</a>               171 kernel/log.c       log.committing = 0;</span>
+<span class='curline'><a href='../S/28.html#L172'>log</a>               172 kernel/log.c       wakeup(&amp;log);</span>
+<span class='curline'><a href='../S/28.html#L173'>log</a>               173 kernel/log.c       release(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L183'>log</a>               183 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/28.html#L184'>log</a>               184 kernel/log.c       struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
+<span class='curline'><a href='../S/28.html#L185'>log</a>               185 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/28.html#L196'>log</a>               196 kernel/log.c     if (log.lh.n &gt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L200'>log</a>               200 kernel/log.c       log.lh.n = 0;</span>
+<span class='curline'><a href='../S/28.html#L219'>log</a>               219 kernel/log.c     if (log.lh.n &gt;= LOGSIZE || log.lh.n &gt;= log.size - 1)</span>
+<span class='curline'><a href='../S/28.html#L221'>log</a>               221 kernel/log.c     if (log.outstanding &lt; 1)</span>
+<span class='curline'><a href='../S/28.html#L224'>log</a>               224 kernel/log.c     acquire(&amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L225'>log</a>               225 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
+<span class='curline'><a href='../S/28.html#L226'>log</a>               226 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorbtion</span>
+<span class='curline'><a href='../S/28.html#L229'>log</a>               229 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
+<span class='curline'><a href='../S/28.html#L230'>log</a>               230 kernel/log.c     if (i == log.lh.n) {  // Add new block to log?</span>
+<span class='curline'><a href='../S/28.html#L232'>log</a>               232 kernel/log.c       log.lh.n++;</span>
+<span class='curline'><a href='../S/28.html#L234'>log</a>               234 kernel/log.c     release(&amp;log.lock);</span>
 </pre>
 </body>
 </html>

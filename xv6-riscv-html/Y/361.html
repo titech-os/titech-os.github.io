@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>sz</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/36.html#L10'>sz</a>                 10 kernel/exec.c  static int loadseg(pde_t *pgdir, uint64 addr, struct inode *ip, uint offset, uint sz);</span>
+<span class='curline'><a href='../S/36.html#L17'>sz</a>                 17 kernel/exec.c    uint64 argc, sz = 0, sp, ustack[MAXARG+1], stackbase;</span>
+<span class='curline'><a href='../S/36.html#L52'>sz</a>                 52 kernel/exec.c      if((sz1 = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz)) == 0)</span>
+<span class='curline'><a href='../S/36.html#L54'>sz</a>                 54 kernel/exec.c      sz = sz1;</span>
+<span class='curline'><a href='../S/36.html#L65'>sz</a>                 65 kernel/exec.c    uint64 oldsz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/36.html#L69'>sz</a>                 69 kernel/exec.c    sz = PGROUNDUP(sz);</span>
+<span class='curline'><a href='../S/36.html#L71'>sz</a>                 71 kernel/exec.c    if((sz1 = uvmalloc(pagetable, sz, sz + 2*PGSIZE)) == 0)</span>
+<span class='curline'><a href='../S/36.html#L73'>sz</a>                 73 kernel/exec.c    sz = sz1;</span>
+<span class='curline'><a href='../S/36.html#L74'>sz</a>                 74 kernel/exec.c    uvmclear(pagetable, sz-2*PGSIZE);</span>
+<span class='curline'><a href='../S/36.html#L75'>sz</a>                 75 kernel/exec.c    sp = sz;</span>
+<span class='curline'><a href='../S/36.html#L114'>sz</a>                114 kernel/exec.c    p-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/36.html#L123'>sz</a>                123 kernel/exec.c      proc_freepagetable(pagetable, sz);</span>
+<span class='curline'><a href='../S/36.html#L136'>sz</a>                136 kernel/exec.c  loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)</span>
+<span class='curline'><a href='../S/36.html#L144'>sz</a>                144 kernel/exec.c    for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/36.html#L148'>sz</a>                148 kernel/exec.c      if(sz - i &lt; PGSIZE)</span>
+<span class='curline'><a href='../S/36.html#L149'>sz</a>                149 kernel/exec.c        n = sz - i;</span>
+<span class='curline'><a href='../S/63.html#L150'>sz</a>                150 kernel/proc.c      proc_freepagetable(p-&gt;pagetable, p-&gt;sz);</span>
+<span class='curline'><a href='../S/63.html#L152'>sz</a>                152 kernel/proc.c    p-&gt;sz = 0;</span>
+<span class='curline'><a href='../S/63.html#L198'>sz</a>                198 kernel/proc.c  proc_freepagetable(pagetable_t pagetable, uint64 sz)</span>
+<span class='curline'><a href='../S/63.html#L202'>sz</a>                202 kernel/proc.c    uvmfree(pagetable, sz);</span>
+<span class='curline'><a href='../S/63.html#L229'>sz</a>                229 kernel/proc.c    p-&gt;sz = PGSIZE;</span>
+<span class='curline'><a href='../S/63.html#L248'>sz</a>                248 kernel/proc.c    uint sz;</span>
+<span class='curline'><a href='../S/63.html#L251'>sz</a>                251 kernel/proc.c    sz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/63.html#L253'>sz</a>                253 kernel/proc.c      if((sz = uvmalloc(p-&gt;pagetable, sz, sz + n)) == 0) {</span>
+<span class='curline'><a href='../S/63.html#L257'>sz</a>                257 kernel/proc.c      sz = uvmdealloc(p-&gt;pagetable, sz, sz + n);</span>
+<span class='curline'><a href='../S/63.html#L259'>sz</a>                259 kernel/proc.c    p-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/63.html#L278'>sz</a>                278 kernel/proc.c    if(uvmcopy(p-&gt;pagetable, np-&gt;pagetable, p-&gt;sz) &lt; 0){</span>
+<span class='curline'><a href='../S/63.html#L283'>sz</a>                283 kernel/proc.c    np-&gt;sz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/35.html#L99'>sz</a>                 99 kernel/proc.h    uint64 sz;                   // Size of process memory (bytes)</span>
+<span class='curline'><a href='../S/64.html#L326'>sz</a>                326 kernel/riscv.h #define PGROUNDUP(sz)  (((sz)+PGSIZE-1) &amp; ~(PGSIZE-1))</span>
+<span class='curline'><a href='../S/51.html#L15'>sz</a>                 15 kernel/syscall.c   if(addr &gt;= p-&gt;sz || addr+sizeof(uint64) &gt; p-&gt;sz)</span>
+<span class='curline'><a href='../S/33.html#L49'>sz</a>                 49 kernel/sysproc.c   addr = myproc()-&gt;sz;</span>
+<span class='curline'><a href='../S/38.html#L127'>sz</a>                127 kernel/vm.c    kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)</span>
+<span class='curline'><a href='../S/38.html#L129'>sz</a>                129 kernel/vm.c      if(mappages(kpgtbl, va, sz, pa, perm) != 0)</span>
+<span class='curline'><a href='../S/38.html#L203'>sz</a>                203 kernel/vm.c    uvminit(pagetable_t pagetable, uchar *src, uint sz)</span>
+<span class='curline'><a href='../S/38.html#L207'>sz</a>                207 kernel/vm.c      if(sz &gt;= PGSIZE)</span>
+<span class='curline'><a href='../S/38.html#L212'>sz</a>                212 kernel/vm.c      memmove(mem, src, sz);</span>
+<span class='curline'><a href='../S/38.html#L284'>sz</a>                284 kernel/vm.c    uvmfree(pagetable_t pagetable, uint64 sz)</span>
+<span class='curline'><a href='../S/38.html#L286'>sz</a>                286 kernel/vm.c      if(sz &gt; 0)</span>
+<span class='curline'><a href='../S/38.html#L287'>sz</a>                287 kernel/vm.c        uvmunmap(pagetable, 0, PGROUNDUP(sz)/PGSIZE, 1);</span>
+<span class='curline'><a href='../S/38.html#L298'>sz</a>                298 kernel/vm.c    uvmcopy(pagetable_t old, pagetable_t new, uint64 sz)</span>
+<span class='curline'><a href='../S/38.html#L305'>sz</a>                305 kernel/vm.c      for(i = 0; i &lt; sz; i += PGSIZE){</span>
+<span class='curline'><a href='../S/24.html#L1709'>sz</a>               1709 user/usertests.c   int fd, sz;</span>
+<span class='curline'><a href='../S/24.html#L1712'>sz</a>               1712 user/usertests.c   for(sz = 499; sz &lt; (MAXOPBLOCKS+2)*BSIZE; sz += 471){</span>
+<span class='curline'><a href='../S/24.html#L1720'>sz</a>               1720 user/usertests.c       int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/24.html#L1721'>sz</a>               1721 user/usertests.c       if(cc != sz){</span>
+<span class='curline'><a href='../S/24.html#L1722'>sz</a>               1722 user/usertests.c         printf("%s: write(%d) ret %d\n", s, sz, cc);</span>
+<span class='curline'><a href='../S/24.html#L1760'>sz</a>               1760 user/usertests.c           int sz = sizeof(buf);</span>
+<span class='curline'><a href='../S/24.html#L1761'>sz</a>               1761 user/usertests.c           int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/24.html#L1762'>sz</a>               1762 user/usertests.c           if(cc != sz){</span>
+<span class='curline'><a href='../S/24.html#L1763'>sz</a>               1763 user/usertests.c             printf("%s: write(%d) ret %d\n", s, sz, cc);</span>
+<span class='curline'><a href='../S/24.html#L2492'>sz</a>               2492 user/usertests.c     int sz = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2496'>sz</a>               2496 user/usertests.c     sbrk(-sz);</span>
+<span class='curline'><a href='../S/24.html#L2508'>sz</a>               2508 user/usertests.c     int sz = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2512'>sz</a>               2512 user/usertests.c     sbrk(-(sz - 3500));</span>
+</pre>
+</body>
+</html>

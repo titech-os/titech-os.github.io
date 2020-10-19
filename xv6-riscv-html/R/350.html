@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>mycpu</title>
+<title>myproc</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,19 +9,41 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L92'>mycpu</a>              92 kernel/defs.h  struct cpu*     mycpu(void);</span>
-<span class='curline'><a href='../S/63.html#L70'>mycpu</a>              70 kernel/proc.c    struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/63.html#L460'>mycpu</a>             460 kernel/proc.c    struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/63.html#L501'>mycpu</a>             501 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
-<span class='curline'><a href='../S/63.html#L508'>mycpu</a>             508 kernel/proc.c    intena = mycpu()-&gt;intena;</span>
-<span class='curline'><a href='../S/63.html#L509'>mycpu</a>             509 kernel/proc.c    swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;context);</span>
-<span class='curline'><a href='../S/63.html#L510'>mycpu</a>             510 kernel/proc.c    mycpu()-&gt;intena = intena;</span>
-<span class='curline'><a href='../S/59.html#L42'>mycpu</a>              42 kernel/spinlock.c   lk-&gt;cpu = mycpu();</span>
-<span class='curline'><a href='../S/59.html#L80'>mycpu</a>              80 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
-<span class='curline'><a href='../S/59.html#L94'>mycpu</a>              94 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
-<span class='curline'><a href='../S/59.html#L95'>mycpu</a>              95 kernel/spinlock.c     mycpu()-&gt;intena = old;</span>
-<span class='curline'><a href='../S/59.html#L96'>mycpu</a>              96 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
-<span class='curline'><a href='../S/59.html#L102'>mycpu</a>             102 kernel/spinlock.c   struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/57.html#L94'>myproc</a>             94 kernel/console.c       if(myproc()-&gt;killed){</span>
+<span class='curline'><a href='../S/31.html#L95'>myproc</a>             95 kernel/defs.h  struct proc*    myproc();</span>
+<span class='curline'><a href='../S/36.html#L22'>myproc</a>             22 kernel/exec.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/36.html#L64'>myproc</a>             64 kernel/exec.c    p = myproc();</span>
+<span class='curline'><a href='../S/67.html#L90'>myproc</a>             90 kernel/file.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/48.html#L635'>myproc</a>            635 kernel/fs.c        ip = idup(myproc()-&gt;cwd);</span>
+<span class='curline'><a href='../S/34.html#L81'>myproc</a>             81 kernel/pipe.c    struct proc *pr = myproc();</span>
+<span class='curline'><a href='../S/34.html#L106'>myproc</a>            106 kernel/pipe.c    struct proc *pr = myproc();</span>
+<span class='curline'><a href='../S/63.html#L249'>myproc</a>            249 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L270'>myproc</a>            270 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L342'>myproc</a>            342 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L409'>myproc</a>            409 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L504'>myproc</a>            504 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L524'>myproc</a>            524 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L539'>myproc</a>            539 kernel/proc.c    release(&amp;myproc()-&gt;lock);</span>
+<span class='curline'><a href='../S/63.html#L557'>myproc</a>            557 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L644'>myproc</a>            644 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/63.html#L659'>myproc</a>            659 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/44.html#L29'>myproc</a>             29 kernel/sleeplock.c   lk-&gt;pid = myproc()-&gt;pid;</span>
+<span class='curline'><a href='../S/44.html#L49'>myproc</a>             49 kernel/sleeplock.c   r = lk-&gt;locked &amp;&amp; (lk-&gt;pid == myproc()-&gt;pid);</span>
+<span class='curline'><a href='../S/51.html#L14'>myproc</a>             14 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/51.html#L27'>myproc</a>             27 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/51.html#L37'>myproc</a>             37 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/51.html#L136'>myproc</a>            136 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/43.html#L29'>myproc</a>             29 kernel/sysfile.c   if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/43.html#L44'>myproc</a>             44 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/43.html#L102'>myproc</a>            102 kernel/sysfile.c   myproc()-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/43.html#L395'>myproc</a>            395 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/43.html#L463'>myproc</a>            463 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/33.html#L23'>myproc</a>             23 kernel/sysproc.c   return myproc()-&gt;pid;</span>
+<span class='curline'><a href='../S/33.html#L49'>myproc</a>             49 kernel/sysproc.c   addr = myproc()-&gt;sz;</span>
+<span class='curline'><a href='../S/33.html#L66'>myproc</a>             66 kernel/sysproc.c     if(myproc()-&gt;killed){</span>
+<span class='curline'><a href='../S/56.html#L48'>myproc</a>             48 kernel/trap.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/56.html#L92'>myproc</a>             92 kernel/trap.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/56.html#L153'>myproc</a>            153 kernel/trap.c    if(which_dev == 2 &amp;&amp; myproc() != 0 &amp;&amp; myproc()-&gt;state == RUNNING)</span>
 </pre>
 </body>
 </html>

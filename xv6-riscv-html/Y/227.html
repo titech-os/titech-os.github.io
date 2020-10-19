@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>npages</title>
+<title>noff</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,10 +9,13 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L174'>npages</a>            174 kernel/vm.c    uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free)</span>
-<span class='curline'><a href='../S/38.html#L182'>npages</a>            182 kernel/vm.c      for(a = va; a &lt; va + npages*PGSIZE; a += PGSIZE){</span>
-<span class='curline'><a href='../S/38.html#L265'>npages</a>            265 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
-<span class='curline'><a href='../S/38.html#L266'>npages</a>            266 kernel/vm.c        uvmunmap(pagetable, PGROUNDUP(newsz), npages, 1);</span>
+<span class='curline'><a href='../S/63.html#L508'>noff</a>              508 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
+<span class='curline'><a href='../S/35.html#L25'>noff</a>               25 kernel/proc.h    int noff;                   // Depth of push_off() nesting.</span>
+<span class='curline'><a href='../S/59.html#L94'>noff</a>               94 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
+<span class='curline'><a href='../S/59.html#L96'>noff</a>               96 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
+<span class='curline'><a href='../S/59.html#L105'>noff</a>              105 kernel/spinlock.c   if(c-&gt;noff &lt; 1)</span>
+<span class='curline'><a href='../S/59.html#L107'>noff</a>              107 kernel/spinlock.c   c-&gt;noff -= 1;</span>
+<span class='curline'><a href='../S/59.html#L108'>noff</a>              108 kernel/spinlock.c   if(c-&gt;noff == 0 &amp;&amp; c-&gt;intena)</span>
 </pre>
 </body>
 </html>

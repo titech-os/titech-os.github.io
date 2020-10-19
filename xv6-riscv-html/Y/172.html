@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kstack</title>
+<title>killed</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,10 +9,17 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/63.html#L42'>kstack</a>             42 kernel/proc.c        p-&gt;kstack = va;</span>
-<span class='curline'><a href='../S/63.html#L128'>kstack</a>            128 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
-<span class='curline'><a href='../S/35.html#L98'>kstack</a>             98 kernel/proc.h    uint64 kstack;               // Virtual address of kernel stack</span>
-<span class='curline'><a href='../S/56.html#L105'>kstack</a>            105 kernel/trap.c    p-&gt;trapframe-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
+<span class='curline'><a href='../S/57.html#L94'>killed</a>             94 kernel/console.c       if(myproc()-&gt;killed){</span>
+<span class='curline'><a href='../S/34.html#L86'>killed</a>             86 kernel/pipe.c        if(pi-&gt;readopen == 0 || pr-&gt;killed){</span>
+<span class='curline'><a href='../S/34.html#L111'>killed</a>            111 kernel/pipe.c      if(pr-&gt;killed){</span>
+<span class='curline'><a href='../S/63.html#L157'>killed</a>            157 kernel/proc.c    p-&gt;killed = 0;</span>
+<span class='curline'><a href='../S/63.html#L446'>killed</a>            446 kernel/proc.c      if(!havekids || p-&gt;killed){</span>
+<span class='curline'><a href='../S/63.html#L625'>killed</a>            625 kernel/proc.c        p-&gt;killed = 1;</span>
+<span class='curline'><a href='../S/35.html#L93'>killed</a>             93 kernel/proc.h    int killed;                  // If non-zero, have been killed</span>
+<span class='curline'><a href='../S/33.html#L66'>killed</a>             66 kernel/sysproc.c     if(myproc()-&gt;killed){</span>
+<span class='curline'><a href='../S/56.html#L56'>killed</a>             56 kernel/trap.c      if(p-&gt;killed)</span>
+<span class='curline'><a href='../S/56.html#L73'>killed</a>             73 kernel/trap.c      p-&gt;killed = 1;</span>
+<span class='curline'><a href='../S/56.html#L76'>killed</a>             76 kernel/trap.c    if(p-&gt;killed)</span>
 </pre>
 </body>
 </html>

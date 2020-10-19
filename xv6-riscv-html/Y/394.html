@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>userret</title>
+<title>uart_tx_w</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,11 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L12'>userret</a>            12 kernel/trap.c  extern char trampoline[], uservec[], userret[];</span>
-<span class='curline'><a href='../S/56.html#L127'>userret</a>           127 kernel/trap.c    uint64 fn = TRAMPOLINE + (userret - trampoline);</span>
+<span class='curline'><a href='../S/72.html#L45'>uart_tx_w</a>          45 kernel/uart.c  int uart_tx_w; // write next to uart_tx_buf[uart_tx_w++]</span>
+<span class='curline'><a href='../S/72.html#L97'>uart_tx_w</a>          97 kernel/uart.c      if(((uart_tx_w + 1) % UART_TX_BUF_SIZE) == uart_tx_r){</span>
+<span class='curline'><a href='../S/72.html#L102'>uart_tx_w</a>         102 kernel/uart.c        uart_tx_buf[uart_tx_w] = c;</span>
+<span class='curline'><a href='../S/72.html#L103'>uart_tx_w</a>         103 kernel/uart.c        uart_tx_w = (uart_tx_w + 1) % UART_TX_BUF_SIZE;</span>
+<span class='curline'><a href='../S/72.html#L141'>uart_tx_w</a>         141 kernel/uart.c      if(uart_tx_w == uart_tx_r){</span>
 </pre>
 </body>
 </html>

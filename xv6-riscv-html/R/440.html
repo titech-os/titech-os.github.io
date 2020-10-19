@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sleeplock</title>
+<title>sleep</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,17 +9,25 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L6'>sleeplock</a>           6 kernel/buf.h     struct sleeplock lock;</span>
-<span class='curline'><a href='../S/31.html#L8'>sleeplock</a>           8 kernel/defs.h  struct sleeplock;</span>
-<span class='curline'><a href='../S/31.html#L120'>sleeplock</a>         120 kernel/defs.h  void            acquiresleep(struct sleeplock*);</span>
-<span class='curline'><a href='../S/31.html#L121'>sleeplock</a>         121 kernel/defs.h  void            releasesleep(struct sleeplock*);</span>
-<span class='curline'><a href='../S/31.html#L122'>sleeplock</a>         122 kernel/defs.h  int             holdingsleep(struct sleeplock*);</span>
-<span class='curline'><a href='../S/31.html#L123'>sleeplock</a>         123 kernel/defs.h  void            initsleeplock(struct sleeplock*, char*);</span>
-<span class='curline'><a href='../S/41.html#L21'>sleeplock</a>          21 kernel/file.h    struct sleeplock lock; // protects everything below here</span>
-<span class='curline'><a href='../S/44.html#L13'>sleeplock</a>          13 kernel/sleeplock.c initsleeplock(struct sleeplock *lk, char *name)</span>
-<span class='curline'><a href='../S/44.html#L22'>sleeplock</a>          22 kernel/sleeplock.c acquiresleep(struct sleeplock *lk)</span>
-<span class='curline'><a href='../S/44.html#L34'>sleeplock</a>          34 kernel/sleeplock.c releasesleep(struct sleeplock *lk)</span>
-<span class='curline'><a href='../S/44.html#L44'>sleeplock</a>          44 kernel/sleeplock.c holdingsleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/57.html#L98'>sleep</a>              98 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
+<span class='curline'><a href='../S/31.html#L100'>sleep</a>             100 kernel/defs.h  void            sleep(void*, struct spinlock*);</span>
+<span class='curline'><a href='../S/28.html#L132'>sleep</a>             132 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
+<span class='curline'><a href='../S/28.html#L135'>sleep</a>             135 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
+<span class='curline'><a href='../S/34.html#L91'>sleep</a>              91 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L115'>sleep</a>             115 kernel/pipe.c      sleep(&amp;pi-&gt;nread, &amp;pi-&gt;lock); //DOC: piperead-sleep</span>
+<span class='curline'><a href='../S/63.html#L452'>sleep</a>             452 kernel/proc.c      sleep(p, &amp;p-&gt;lock);  //DOC: wait-sleep</span>
+<span class='curline'><a href='../S/44.html#L26'>sleep</a>              26 kernel/sleeplock.c     sleep(lk, &amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/33.html#L70'>sleep</a>              70 kernel/sysproc.c     sleep(&amp;ticks, &amp;tickslock);</span>
+<span class='curline'><a href='../S/72.html#L100'>sleep</a>             100 kernel/uart.c        sleep(&amp;uart_tx_r, &amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/65.html#L220'>sleep</a>             220 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L273'>sleep</a>             273 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/12.html#L347'>sleep</a>             347 user/grind.c       sleep(20);</span>
+<span class='curline'><a href='../S/15.html#L24'>sleep</a>              24 user/user.h    int sleep(int);</span>
+<span class='curline'><a href='../S/24.html#L502'>sleep</a>             502 user/usertests.c   sleep(1);</span>
+<span class='curline'><a href='../S/24.html#L985'>sleep</a>             985 user/usertests.c   sleep(20); // two seconds</span>
+<span class='curline'><a href='../S/24.html#L988'>sleep</a>             988 user/usertests.c   sleep(10); // one second</span>
+<span class='curline'><a href='../S/24.html#L2224'>sleep</a>            2224 user/usertests.c       for(;;) sleep(1000);</span>
+<span class='curline'><a href='../S/13.html#L12'>sleep</a>              12 user/zombie.c      sleep(5);  // Let child exit before parent.</span>
 </pre>
 </body>
 </html>

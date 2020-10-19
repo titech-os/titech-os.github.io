@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>rootino</title>
+<title>refcnt</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,16 +9,14 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/3.html#L71'>rootino</a>            71 mkfs/mkfs.c      uint rootino, inum, off;</span>
-<span class='curline'><a href='../S/3.html#L118'>rootino</a>           118 mkfs/mkfs.c      rootino = ialloc(T_DIR);</span>
-<span class='curline'><a href='../S/3.html#L119'>rootino</a>           119 mkfs/mkfs.c      assert(rootino == ROOTINO);</span>
-<span class='curline'><a href='../S/3.html#L122'>rootino</a>           122 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
-<span class='curline'><a href='../S/3.html#L124'>rootino</a>           124 mkfs/mkfs.c      iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/3.html#L127'>rootino</a>           127 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
-<span class='curline'><a href='../S/3.html#L129'>rootino</a>           129 mkfs/mkfs.c      iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/3.html#L158'>rootino</a>           158 mkfs/mkfs.c        iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/3.html#L167'>rootino</a>           167 mkfs/mkfs.c      rinode(rootino, &amp;din);</span>
-<span class='curline'><a href='../S/3.html#L171'>rootino</a>           171 mkfs/mkfs.c      winode(rootino, &amp;din);</span>
+<span class='curline'><a href='../S/61.html#L68'>refcnt</a>             68 kernel/bio.c         b-&gt;refcnt++;</span>
+<span class='curline'><a href='../S/61.html#L78'>refcnt</a>             78 kernel/bio.c       if(b-&gt;refcnt == 0) {</span>
+<span class='curline'><a href='../S/61.html#L82'>refcnt</a>             82 kernel/bio.c         b-&gt;refcnt = 1;</span>
+<span class='curline'><a href='../S/61.html#L125'>refcnt</a>            125 kernel/bio.c     b-&gt;refcnt--;</span>
+<span class='curline'><a href='../S/61.html#L126'>refcnt</a>            126 kernel/bio.c     if (b-&gt;refcnt == 0) {</span>
+<span class='curline'><a href='../S/61.html#L142'>refcnt</a>            142 kernel/bio.c     b-&gt;refcnt++;</span>
+<span class='curline'><a href='../S/61.html#L149'>refcnt</a>            149 kernel/bio.c     b-&gt;refcnt--;</span>
+<span class='curline'><a href='../S/47.html#L7'>refcnt</a>              7 kernel/buf.h     uint refcnt;</span>
 </pre>
 </body>
 </html>

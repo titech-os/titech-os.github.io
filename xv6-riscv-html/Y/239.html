@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>oldsz</title>
+<title>ofile</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,20 +9,19 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L65'>oldsz</a>              65 kernel/exec.c    uint64 oldsz = p-&gt;sz;</span>
-<span class='curline'><a href='../S/36.html#L117'>oldsz</a>             117 kernel/exec.c    proc_freepagetable(oldpagetable, oldsz);</span>
-<span class='curline'><a href='../S/38.html#L229'>oldsz</a>             229 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
-<span class='curline'><a href='../S/38.html#L234'>oldsz</a>             234 kernel/vm.c      if(newsz &lt; oldsz)</span>
-<span class='curline'><a href='../S/38.html#L235'>oldsz</a>             235 kernel/vm.c        return oldsz;</span>
-<span class='curline'><a href='../S/38.html#L237'>oldsz</a>             237 kernel/vm.c      oldsz = PGROUNDUP(oldsz);</span>
-<span class='curline'><a href='../S/38.html#L238'>oldsz</a>             238 kernel/vm.c      for(a = oldsz; a &lt; newsz; a += PGSIZE){</span>
-<span class='curline'><a href='../S/38.html#L241'>oldsz</a>             241 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
-<span class='curline'><a href='../S/38.html#L247'>oldsz</a>             247 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
-<span class='curline'><a href='../S/38.html#L259'>oldsz</a>             259 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
-<span class='curline'><a href='../S/38.html#L261'>oldsz</a>             261 kernel/vm.c      if(newsz &gt;= oldsz)</span>
-<span class='curline'><a href='../S/38.html#L262'>oldsz</a>             262 kernel/vm.c        return oldsz;</span>
-<span class='curline'><a href='../S/38.html#L264'>oldsz</a>             264 kernel/vm.c      if(PGROUNDUP(newsz) &lt; PGROUNDUP(oldsz)){</span>
-<span class='curline'><a href='../S/38.html#L265'>oldsz</a>             265 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
+<span class='curline'><a href='../S/63.html#L295'>ofile</a>             295 kernel/proc.c      if(p-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/63.html#L296'>ofile</a>             296 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/63.html#L349'>ofile</a>             349 kernel/proc.c      if(p-&gt;ofile[fd]){</span>
+<span class='curline'><a href='../S/63.html#L350'>ofile</a>             350 kernel/proc.c        struct file *f = p-&gt;ofile[fd];</span>
+<span class='curline'><a href='../S/63.html#L352'>ofile</a>             352 kernel/proc.c        p-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/35.html#L103'>ofile</a>             103 kernel/proc.h    struct file *ofile[NOFILE];  // Open files</span>
+<span class='curline'><a href='../S/43.html#L29'>ofile</a>              29 kernel/sysfile.c   if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/43.html#L47'>ofile</a>              47 kernel/sysfile.c     if(p-&gt;ofile[fd] == 0){</span>
+<span class='curline'><a href='../S/43.html#L48'>ofile</a>              48 kernel/sysfile.c       p-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/43.html#L102'>ofile</a>             102 kernel/sysfile.c   myproc()-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/43.html#L472'>ofile</a>             472 kernel/sysfile.c       p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/43.html#L479'>ofile</a>             479 kernel/sysfile.c     p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/43.html#L480'>ofile</a>             480 kernel/sysfile.c     p-&gt;ofile[fd1] = 0;</span>
 </pre>
 </body>
 </html>

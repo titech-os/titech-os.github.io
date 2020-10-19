@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vaddr</title>
+<title>ustack</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,11 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/52.html#L29'>vaddr</a>              29 kernel/elf.h     uint64 vaddr;</span>
-<span class='curline'><a href='../S/36.html#L49'>vaddr</a>              49 kernel/exec.c      if(ph.vaddr + ph.memsz &lt; ph.vaddr)</span>
-<span class='curline'><a href='../S/36.html#L52'>vaddr</a>              52 kernel/exec.c      if((sz1 = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz)) == 0)</span>
-<span class='curline'><a href='../S/36.html#L55'>vaddr</a>              55 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
-<span class='curline'><a href='../S/36.html#L57'>vaddr</a>              57 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/36.html#L17'>ustack</a>             17 kernel/exec.c    uint64 argc, sz = 0, sp, ustack[MAXARG+1], stackbase;</span>
+<span class='curline'><a href='../S/36.html#L88'>ustack</a>             88 kernel/exec.c      ustack[argc] = sp;</span>
+<span class='curline'><a href='../S/36.html#L90'>ustack</a>             90 kernel/exec.c    ustack[argc] = 0;</span>
+<span class='curline'><a href='../S/36.html#L97'>ustack</a>             97 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
 </pre>
 </body>
 </html>

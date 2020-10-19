@@ -9,13 +9,12 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L195'>buf0</a>              195 kernel/virtio_disk.c   } buf0;</span>
-<span class='curline'><a href='../S/65.html#L198'>buf0</a>              198 kernel/virtio_disk.c     buf0.type = VIRTIO_BLK_T_OUT; // write the disk</span>
-<span class='curline'><a href='../S/65.html#L200'>buf0</a>              200 kernel/virtio_disk.c     buf0.type = VIRTIO_BLK_T_IN; // read the disk</span>
-<span class='curline'><a href='../S/65.html#L201'>buf0</a>              201 kernel/virtio_disk.c   buf0.reserved = 0;</span>
-<span class='curline'><a href='../S/65.html#L202'>buf0</a>              202 kernel/virtio_disk.c   buf0.sector = sector;</span>
-<span class='curline'><a href='../S/65.html#L206'>buf0</a>              206 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) kvmpa((uint64) &amp;buf0);</span>
-<span class='curline'><a href='../S/65.html#L207'>buf0</a>              207 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(buf0);</span>
+<span class='curline'><a href='../S/65.html#L226'>buf0</a>              226 kernel/virtio_disk.c   struct virtio_blk_req *buf0 = &amp;disk.ops[idx[0]];</span>
+<span class='curline'><a href='../S/65.html#L229'>buf0</a>              229 kernel/virtio_disk.c     buf0-&gt;type = VIRTIO_BLK_T_OUT; // write the disk</span>
+<span class='curline'><a href='../S/65.html#L231'>buf0</a>              231 kernel/virtio_disk.c     buf0-&gt;type = VIRTIO_BLK_T_IN; // read the disk</span>
+<span class='curline'><a href='../S/65.html#L232'>buf0</a>              232 kernel/virtio_disk.c   buf0-&gt;reserved = 0;</span>
+<span class='curline'><a href='../S/65.html#L233'>buf0</a>              233 kernel/virtio_disk.c   buf0-&gt;sector = sector;</span>
+<span class='curline'><a href='../S/65.html#L235'>buf0</a>              235 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) buf0;</span>
 </pre>
 </body>
 </html>

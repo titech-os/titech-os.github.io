@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>timervec</title>
+<title>tail</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,14 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/70.html#L17'>timervec</a>           17 kernel/start.c extern void timervec();</span>
-<span class='curline'><a href='../S/70.html#L76'>timervec</a>           76 kernel/start.c   w_mtvec((uint64)timervec);</span>
+<span class='curline'><a href='../S/28.html#L71'>tail</a>               71 kernel/log.c     int tail;</span>
+<span class='curline'><a href='../S/28.html#L73'>tail</a>               73 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/28.html#L74'>tail</a>               74 kernel/log.c       struct buf *lbuf = bread(log.dev, log.start+tail+1); // read log block</span>
+<span class='curline'><a href='../S/28.html#L75'>tail</a>               75 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/28.html#L181'>tail</a>              181 kernel/log.c     int tail;</span>
+<span class='curline'><a href='../S/28.html#L183'>tail</a>              183 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/28.html#L184'>tail</a>              184 kernel/log.c       struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
+<span class='curline'><a href='../S/28.html#L185'>tail</a>              185 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
 </pre>
 </body>
 </html>

@@ -9,262 +9,263 @@
 </head>
 <body>
 <a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/73.html'>kernel</a>/log.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L55'>[^]</a><a href='#L214'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L55'>[^]</a><a href='#L215'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <h2 class='header'>DEFINITIONS</h2>
 This source file includes following definitions.
 <ol>
 <li><a href='#L55' title='Defined at 55.'>initlog</a></li>
 <li><a href='#L69' title='Defined at 69.'>install_trans</a></li>
-<li><a href='#L86' title='Defined at 86.'>read_head</a></li>
-<li><a href='#L102' title='Defined at 102.'>write_head</a></li>
-<li><a href='#L116' title='Defined at 116.'>recover_from_log</a></li>
-<li><a href='#L126' title='Defined at 126.'>begin_op</a></li>
-<li><a href='#L146' title='Defined at 146.'>end_op</a></li>
-<li><a href='#L178' title='Defined at 178.'>write_log</a></li>
-<li><a href='#L193' title='Defined at 193.'>commit</a></li>
-<li><a href='#L214' title='Defined at 214.'>log_write</a></li>
+<li><a href='#L87' title='Defined at 87.'>read_head</a></li>
+<li><a href='#L103' title='Defined at 103.'>write_head</a></li>
+<li><a href='#L117' title='Defined at 117.'>recover_from_log</a></li>
+<li><a href='#L127' title='Defined at 127.'>begin_op</a></li>
+<li><a href='#L147' title='Defined at 147.'>end_op</a></li>
+<li><a href='#L179' title='Defined at 179.'>write_log</a></li>
+<li><a href='#L194' title='Defined at 194.'>commit</a></li>
+<li><a href='#L215' title='Defined at 215.'>log_write</a></li>
 </ol>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='37.html'>types.h</a>"
-<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='64.html'>riscv.h</a>"
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='31.html'>defs.h</a>"
-<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='58.html'>param.h</a>"
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='30.html'>spinlock.h</a>"
-<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='66.html'>sleeplock.h</a>"
-<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='71.html'>fs.h</a>"
-<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='47.html'>buf.h</a>"
-<a id='L9' name='L9'></a>   9 
-<a id='L10' name='L10'></a>  10 <em class='comment'>// Simple logging that allows concurrent FS system calls.</em>
-<a id='L11' name='L11'></a>  11 <em class='comment'>//</em>
-<a id='L12' name='L12'></a>  12 <em class='comment'>// A log transaction contains the updates of multiple FS system</em>
-<a id='L13' name='L13'></a>  13 <em class='comment'>// calls. The logging system only commits when there are</em>
-<a id='L14' name='L14'></a>  14 <em class='comment'>// no FS system calls active. Thus there is never</em>
-<a id='L15' name='L15'></a>  15 <em class='comment'>// any reasoning required about whether a commit might</em>
-<a id='L16' name='L16'></a>  16 <em class='comment'>// write an uncommitted system call's updates to disk.</em>
-<a id='L17' name='L17'></a>  17 <em class='comment'>//</em>
-<a id='L18' name='L18'></a>  18 <em class='comment'>// A system call should call begin_op()/end_op() to mark</em>
-<a id='L19' name='L19'></a>  19 <em class='comment'>// its start and end. Usually begin_op() just increments</em>
-<a id='L20' name='L20'></a>  20 <em class='comment'>// the count of in-progress FS system calls and returns.</em>
-<a id='L21' name='L21'></a>  21 <em class='comment'>// But if it thinks the log is close to running out, it</em>
-<a id='L22' name='L22'></a>  22 <em class='comment'>// sleeps until the last outstanding end_op() commits.</em>
-<a id='L23' name='L23'></a>  23 <em class='comment'>//</em>
-<a id='L24' name='L24'></a>  24 <em class='comment'>// The log is a physical re-do log containing disk blocks.</em>
-<a id='L25' name='L25'></a>  25 <em class='comment'>// The on-disk log format:</em>
-<a id='L26' name='L26'></a>  26 <em class='comment'>//   header block, containing block #s for block A, B, C, ...</em>
-<a id='L27' name='L27'></a>  27 <em class='comment'>//   block A</em>
-<a id='L28' name='L28'></a>  28 <em class='comment'>//   block B</em>
-<a id='L29' name='L29'></a>  29 <em class='comment'>//   block C</em>
-<a id='L30' name='L30'></a>  30 <em class='comment'>//   ...</em>
-<a id='L31' name='L31'></a>  31 <em class='comment'>// Log appends are synchronous.</em>
-<a id='L32' name='L32'></a>  32 
-<a id='L33' name='L33'></a>  33 <em class='comment'>// Contents of the header block, used for both the on-disk header block</em>
-<a id='L34' name='L34'></a>  34 <em class='comment'>// and to keep track in memory of logged block# before commit.</em>
-<a id='L35' name='L35'></a>  35 <strong class='reserved'>struct</strong> <a href='../R/333.html' title='Multiple referred from 4 places.'>logheader</a> <em class='brace'>{</em>
-<a id='L36' name='L36'></a>  36   <strong class='reserved'>int</strong> <a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>;
-<a id='L37' name='L37'></a>  37   <strong class='reserved'>int</strong> <a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../S/58.html#L10' title='Defined at 10 in kernel/param.h.'>LOGSIZE</a>];
-<a id='L38' name='L38'></a>  38 <em class='brace'>}</em>;
-<a id='L39' name='L39'></a>  39 
-<a id='L40' name='L40'></a>  40 <strong class='reserved'>struct</strong> <a href='../R/331.html' title='Multiple referred from 49 places.'>log</a> <em class='brace'>{</em>
-<a id='L41' name='L41'></a>  41   <strong class='reserved'>struct</strong> <a href='../S/30.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>;
-<a id='L42' name='L42'></a>  42   <strong class='reserved'>int</strong> <a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>;
-<a id='L43' name='L43'></a>  43   <strong class='reserved'>int</strong> <a href='../Y/335.html' title='Multiple used in 46 places.'>size</a>;
-<a id='L44' name='L44'></a>  44   <strong class='reserved'>int</strong> <a href='../Y/244.html' title='Multiple used in 6 places.'>outstanding</a>; <em class='comment'>// how many FS sys calls are executing.</em>
-<a id='L45' name='L45'></a>  45   <strong class='reserved'>int</strong> <a href='../Y/59.html' title='Multiple used in 5 places.'>committing</a>;  <em class='comment'>// in commit(), please wait.</em>
-<a id='L46' name='L46'></a>  46   <strong class='reserved'>int</strong> <a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>;
-<a id='L47' name='L47'></a>  47   <strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> <a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>;
-<a id='L48' name='L48'></a>  48 <em class='brace'>}</em>;
-<a id='L49' name='L49'></a>  49 <strong class='reserved'>struct</strong> <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a> <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>;
-<a id='L50' name='L50'></a>  50 
-<a id='L51' name='L51'></a>  51 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/28.html#L116' title='Defined at 116 in kernel/log.c.'>recover_from_log</a>(<strong class='reserved'>void</strong>);
-<a id='L52' name='L52'></a>  52 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/28.html#L193' title='Defined at 193 in kernel/log.c.'>commit</a>();
-<a id='L53' name='L53'></a>  53 
-<a id='L54' name='L54'></a>  54 <strong class='reserved'>void</strong>
-<a id='L55' name='L55'></a>  55 <a href='../R/302.html' title='Multiple referred from 2 places.'>initlog</a>(<strong class='reserved'>int</strong> <a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>, <strong class='reserved'>struct</strong> <a href='../S/71.html#L14' title='Defined at 14 in kernel/fs.h.'>superblock</a> *<a href='../Y/318.html' title='Multiple used in 33 places.'>sb</a>)
-<a id='L56' name='L56'></a>  56 <em class='brace'>{</em>
-<a id='L57' name='L57'></a>  57   <strong class='reserved'>if</strong> (<strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a>) &gt;= <a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>)
-<a id='L58' name='L58'></a>  58     <a href='../D/383.html' title='Multiple defined in 2 places.'>panic</a>("initlog: too big logheader");
-<a id='L59' name='L59'></a>  59 
-<a id='L60' name='L60'></a>  60   <a href='../S/59.html#L12' title='Defined at 12 in kernel/spinlock.c.'>initlock</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>, "log");
-<a id='L61' name='L61'></a>  61   <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a> = <a href='../Y/318.html' title='Multiple used in 33 places.'>sb</a>-&gt;<a href='../Y/188.html' title='Multiple used in 3 places.'>logstart</a>;
-<a id='L62' name='L62'></a>  62   <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/335.html' title='Multiple used in 46 places.'>size</a> = <a href='../Y/318.html' title='Multiple used in 33 places.'>sb</a>-&gt;<a href='../Y/222.html' title='Multiple used in 8 places.'>nlog</a>;
-<a id='L63' name='L63'></a>  63   <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a> = <a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>;
-<a id='L64' name='L64'></a>  64   <a href='../S/28.html#L116' title='Defined at 116 in kernel/log.c.'>recover_from_log</a>();
-<a id='L65' name='L65'></a>  65 <em class='brace'>}</em>
-<a id='L66' name='L66'></a>  66 
-<a id='L67' name='L67'></a>  67 <em class='comment'>// Copy committed blocks from log to their home location</em>
-<a id='L68' name='L68'></a>  68 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L69' name='L69'></a>  69 <a href='../R/305.html' title='Multiple referred from 2 places.'>install_trans</a>(<strong class='reserved'>void</strong>)
-<a id='L70' name='L70'></a>  70 <em class='brace'>{</em>
-<a id='L71' name='L71'></a>  71   <strong class='reserved'>int</strong> <a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>;
-<a id='L72' name='L72'></a>  72 
-<a id='L73' name='L73'></a>  73   <strong class='reserved'>for</strong> (<a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>; <a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
-<a id='L74' name='L74'></a>  74     <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/176.html' title='Multiple used in 3 places.'>lbuf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>+<a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// read log block</em>
-<a id='L75' name='L75'></a>  75     <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/68.html' title='Multiple used in 5 places.'>dbuf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// read dst</em>
-<a id='L76' name='L76'></a>  76     <a href='../D/367.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/68.html' title='Multiple used in 5 places.'>dbuf</a>-&gt;<a href='../Y/66.html' title='Multiple used in 28 places.'>data</a>, <a href='../Y/176.html' title='Multiple used in 3 places.'>lbuf</a>-&gt;<a href='../Y/66.html' title='Multiple used in 28 places.'>data</a>, <a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>);  <em class='comment'>// copy block to dst</em>
-<a id='L77' name='L77'></a>  77     <a href='../S/61.html#L107' title='Defined at 107 in kernel/bio.c.'>bwrite</a>(<a href='../Y/68.html' title='Multiple used in 5 places.'>dbuf</a>);  <em class='comment'>// write dst to disk</em>
-<a id='L78' name='L78'></a>  78     <a href='../S/61.html#L147' title='Defined at 147 in kernel/bio.c.'>bunpin</a>(<a href='../Y/68.html' title='Multiple used in 5 places.'>dbuf</a>);
-<a id='L79' name='L79'></a>  79     <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/176.html' title='Multiple used in 3 places.'>lbuf</a>);
-<a id='L80' name='L80'></a>  80     <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/68.html' title='Multiple used in 5 places.'>dbuf</a>);
-<a id='L81' name='L81'></a>  81   <em class='brace'>}</em>
-<a id='L82' name='L82'></a>  82 <em class='brace'>}</em>
-<a id='L83' name='L83'></a>  83 
-<a id='L84' name='L84'></a>  84 <em class='comment'>// Read the log header from disk into the in-memory log header</em>
-<a id='L85' name='L85'></a>  85 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L86' name='L86'></a>  86 <a href='../S/28.html#L118' title='Referred from 118 in kernel/log.c.'>read_head</a>(<strong class='reserved'>void</strong>)
-<a id='L87' name='L87'></a>  87 <em class='brace'>{</em>
-<a id='L88' name='L88'></a>  88   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>);
-<a id='L89' name='L89'></a>  89   <strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a> = (<strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *) (<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>-&gt;<a href='../Y/66.html' title='Multiple used in 28 places.'>data</a>);
-<a id='L90' name='L90'></a>  90   <strong class='reserved'>int</strong> <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>;
-<a id='L91' name='L91'></a>  91   <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> = <a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>;
-<a id='L92' name='L92'></a>  92   <strong class='reserved'>for</strong> (<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> = 0; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>++) <em class='brace'>{</em>
-<a id='L93' name='L93'></a>  93     <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>] = <a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>];
-<a id='L94' name='L94'></a>  94   <em class='brace'>}</em>
-<a id='L95' name='L95'></a>  95   <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>);
-<a id='L96' name='L96'></a>  96 <em class='brace'>}</em>
-<a id='L97' name='L97'></a>  97 
-<a id='L98' name='L98'></a>  98 <em class='comment'>// Write in-memory log header to disk.</em>
-<a id='L99' name='L99'></a>  99 <em class='comment'>// This is the true point at which the</em>
-<a id='L100' name='L100'></a> 100 <em class='comment'>// current transaction commits.</em>
-<a id='L101' name='L101'></a> 101 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L102' name='L102'></a> 102 <a href='../R/536.html' title='Multiple referred from 3 places.'>write_head</a>(<strong class='reserved'>void</strong>)
-<a id='L103' name='L103'></a> 103 <em class='brace'>{</em>
-<a id='L104' name='L104'></a> 104   <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>);
-<a id='L105' name='L105'></a> 105   <strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *<a href='../Y/139.html' title='Multiple used in 3 places.'>hb</a> = (<strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *) (<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>-&gt;<a href='../Y/66.html' title='Multiple used in 28 places.'>data</a>);
-<a id='L106' name='L106'></a> 106   <strong class='reserved'>int</strong> <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>;
-<a id='L107' name='L107'></a> 107   <a href='../Y/139.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> = <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>;
-<a id='L108' name='L108'></a> 108   <strong class='reserved'>for</strong> (<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> = 0; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>++) <em class='brace'>{</em>
-<a id='L109' name='L109'></a> 109     <a href='../Y/139.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>] = <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>];
-<a id='L110' name='L110'></a> 110   <em class='brace'>}</em>
-<a id='L111' name='L111'></a> 111   <a href='../S/61.html#L107' title='Defined at 107 in kernel/bio.c.'>bwrite</a>(<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>);
-<a id='L112' name='L112'></a> 112   <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>);
-<a id='L113' name='L113'></a> 113 <em class='brace'>}</em>
-<a id='L114' name='L114'></a> 114 
-<a id='L115' name='L115'></a> 115 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L116' name='L116'></a> 116 <a href='../R/416.html' title='Multiple referred from 2 places.'>recover_from_log</a>(<strong class='reserved'>void</strong>)
-<a id='L117' name='L117'></a> 117 <em class='brace'>{</em>
-<a id='L118' name='L118'></a> 118   <a href='../S/28.html#L86' title='Defined at 86 in kernel/log.c.'>read_head</a>();
-<a id='L119' name='L119'></a> 119   <a href='../S/28.html#L69' title='Defined at 69 in kernel/log.c.'>install_trans</a>(); <em class='comment'>// if committed, copy from log to disk</em>
-<a id='L120' name='L120'></a> 120   <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> = 0;
-<a id='L121' name='L121'></a> 121   <a href='../S/28.html#L102' title='Defined at 102 in kernel/log.c.'>write_head</a>(); <em class='comment'>// clear the log</em>
-<a id='L122' name='L122'></a> 122 <em class='brace'>}</em>
-<a id='L123' name='L123'></a> 123 
-<a id='L124' name='L124'></a> 124 <em class='comment'>// called at the start of each FS system call.</em>
-<a id='L125' name='L125'></a> 125 <strong class='reserved'>void</strong>
-<a id='L126' name='L126'></a> 126 <a href='../R/198.html' title='Multiple referred from 11 places.'>begin_op</a>(<strong class='reserved'>void</strong>)
-<a id='L127' name='L127'></a> 127 <em class='brace'>{</em>
-<a id='L128' name='L128'></a> 128   <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L129' name='L129'></a> 129   <strong class='reserved'>while</strong>(1)<em class='brace'>{</em>
-<a id='L130' name='L130'></a> 130     <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/59.html' title='Multiple used in 5 places.'>committing</a>)<em class='brace'>{</em>
-<a id='L131' name='L131'></a> 131       <a href='../S/63.html#L548' title='Defined at 548 in kernel/proc.c.'>sleep</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>, &amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L132' name='L132'></a> 132     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> + (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/244.html' title='Multiple used in 6 places.'>outstanding</a>+1)*<a href='../S/58.html#L9' title='Defined at 9 in kernel/param.h.'>MAXOPBLOCKS</a> &gt; <a href='../S/58.html#L10' title='Defined at 10 in kernel/param.h.'>LOGSIZE</a>)<em class='brace'>{</em>
-<a id='L133' name='L133'></a> 133       <em class='comment'>// this op might exhaust log space; wait for commit.</em>
-<a id='L134' name='L134'></a> 134       <a href='../S/63.html#L548' title='Defined at 548 in kernel/proc.c.'>sleep</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>, &amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L135' name='L135'></a> 135     <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
-<a id='L136' name='L136'></a> 136       <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/244.html' title='Multiple used in 6 places.'>outstanding</a> += 1;
-<a id='L137' name='L137'></a> 137       <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L138' name='L138'></a> 138       <strong class='reserved'>break</strong>;
-<a id='L139' name='L139'></a> 139     <em class='brace'>}</em>
-<a id='L140' name='L140'></a> 140   <em class='brace'>}</em>
-<a id='L141' name='L141'></a> 141 <em class='brace'>}</em>
-<a id='L142' name='L142'></a> 142 
-<a id='L143' name='L143'></a> 143 <em class='comment'>// called at the end of each FS system call.</em>
-<a id='L144' name='L144'></a> 144 <em class='comment'>// commits if this was the last outstanding operation.</em>
-<a id='L145' name='L145'></a> 145 <strong class='reserved'>void</strong>
-<a id='L146' name='L146'></a> 146 <a href='../R/250.html' title='Multiple referred from 27 places.'>end_op</a>(<strong class='reserved'>void</strong>)
-<a id='L147' name='L147'></a> 147 <em class='brace'>{</em>
-<a id='L148' name='L148'></a> 148   <strong class='reserved'>int</strong> <a href='../Y/76.html' title='Multiple used in 3 places.'>do_commit</a> = 0;
-<a id='L149' name='L149'></a> 149 
-<a id='L150' name='L150'></a> 150   <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L151' name='L151'></a> 151   <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/244.html' title='Multiple used in 6 places.'>outstanding</a> -= 1;
-<a id='L152' name='L152'></a> 152   <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/59.html' title='Multiple used in 5 places.'>committing</a>)
-<a id='L153' name='L153'></a> 153     <a href='../D/383.html' title='Multiple defined in 2 places.'>panic</a>("log.committing");
-<a id='L154' name='L154'></a> 154   <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/244.html' title='Multiple used in 6 places.'>outstanding</a> == 0)<em class='brace'>{</em>
-<a id='L155' name='L155'></a> 155     <a href='../Y/76.html' title='Multiple used in 3 places.'>do_commit</a> = 1;
-<a id='L156' name='L156'></a> 156     <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/59.html' title='Multiple used in 5 places.'>committing</a> = 1;
-<a id='L157' name='L157'></a> 157   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
-<a id='L158' name='L158'></a> 158     <em class='comment'>// begin_op() may be waiting for log space,</em>
-<a id='L159' name='L159'></a> 159     <em class='comment'>// and decrementing log.outstanding has decreased</em>
-<a id='L160' name='L160'></a> 160     <em class='comment'>// the amount of reserved space.</em>
-<a id='L161' name='L161'></a> 161     <a href='../S/63.html#L582' title='Defined at 582 in kernel/proc.c.'>wakeup</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>);
-<a id='L162' name='L162'></a> 162   <em class='brace'>}</em>
-<a id='L163' name='L163'></a> 163   <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L164' name='L164'></a> 164 
-<a id='L165' name='L165'></a> 165   <strong class='reserved'>if</strong>(<a href='../Y/76.html' title='Multiple used in 3 places.'>do_commit</a>)<em class='brace'>{</em>
-<a id='L166' name='L166'></a> 166     <em class='comment'>// call commit w/o holding locks, since not allowed</em>
-<a id='L167' name='L167'></a> 167     <em class='comment'>// to sleep with locks.</em>
-<a id='L168' name='L168'></a> 168     <a href='../S/28.html#L193' title='Defined at 193 in kernel/log.c.'>commit</a>();
-<a id='L169' name='L169'></a> 169     <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L170' name='L170'></a> 170     <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/59.html' title='Multiple used in 5 places.'>committing</a> = 0;
-<a id='L171' name='L171'></a> 171     <a href='../S/63.html#L582' title='Defined at 582 in kernel/proc.c.'>wakeup</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>);
-<a id='L172' name='L172'></a> 172     <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L173' name='L173'></a> 173   <em class='brace'>}</em>
-<a id='L174' name='L174'></a> 174 <em class='brace'>}</em>
-<a id='L175' name='L175'></a> 175 
-<a id='L176' name='L176'></a> 176 <em class='comment'>// Copy modified blocks from cache to log.</em>
-<a id='L177' name='L177'></a> 177 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L178' name='L178'></a> 178 <a href='../S/28.html#L196' title='Referred from 196 in kernel/log.c.'>write_log</a>(<strong class='reserved'>void</strong>)
-<a id='L179' name='L179'></a> 179 <em class='brace'>{</em>
-<a id='L180' name='L180'></a> 180   <strong class='reserved'>int</strong> <a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>;
-<a id='L181' name='L181'></a> 181 
-<a id='L182' name='L182'></a> 182   <strong class='reserved'>for</strong> (<a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>; <a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
-<a id='L183' name='L183'></a> 183     <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/372.html' title='Multiple used in 4 places.'>to</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>+<a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// log block</em>
-<a id='L184' name='L184'></a> 184     <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/127.html' title='Multiple used in 3 places.'>from</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/71.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/364.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// cache block</em>
-<a id='L185' name='L185'></a> 185     <a href='../D/367.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/372.html' title='Multiple used in 4 places.'>to</a>-&gt;<a href='../Y/66.html' title='Multiple used in 28 places.'>data</a>, <a href='../Y/127.html' title='Multiple used in 3 places.'>from</a>-&gt;<a href='../Y/66.html' title='Multiple used in 28 places.'>data</a>, <a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>);
-<a id='L186' name='L186'></a> 186     <a href='../S/61.html#L107' title='Defined at 107 in kernel/bio.c.'>bwrite</a>(<a href='../Y/372.html' title='Multiple used in 4 places.'>to</a>);  <em class='comment'>// write the log</em>
-<a id='L187' name='L187'></a> 187     <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/127.html' title='Multiple used in 3 places.'>from</a>);
-<a id='L188' name='L188'></a> 188     <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/372.html' title='Multiple used in 4 places.'>to</a>);
-<a id='L189' name='L189'></a> 189   <em class='brace'>}</em>
-<a id='L190' name='L190'></a> 190 <em class='brace'>}</em>
-<a id='L191' name='L191'></a> 191 
-<a id='L192' name='L192'></a> 192 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
-<a id='L193' name='L193'></a> 193 <a href='../R/218.html' title='Multiple referred from 2 places.'>commit</a>()
-<a id='L194' name='L194'></a> 194 <em class='brace'>{</em>
-<a id='L195' name='L195'></a> 195   <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> &gt; 0) <em class='brace'>{</em>
-<a id='L196' name='L196'></a> 196     <a href='../S/28.html#L178' title='Defined at 178 in kernel/log.c.'>write_log</a>();     <em class='comment'>// Write modified blocks from cache to log</em>
-<a id='L197' name='L197'></a> 197     <a href='../S/28.html#L102' title='Defined at 102 in kernel/log.c.'>write_head</a>();    <em class='comment'>// Write header to disk -- the real commit</em>
-<a id='L198' name='L198'></a> 198     <a href='../S/28.html#L69' title='Defined at 69 in kernel/log.c.'>install_trans</a>(); <em class='comment'>// Now install writes to home locations</em>
-<a id='L199' name='L199'></a> 199     <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> = 0;
-<a id='L200' name='L200'></a> 200     <a href='../S/28.html#L102' title='Defined at 102 in kernel/log.c.'>write_head</a>();    <em class='comment'>// Erase the transaction from the log</em>
-<a id='L201' name='L201'></a> 201   <em class='brace'>}</em>
-<a id='L202' name='L202'></a> 202 <em class='brace'>}</em>
-<a id='L203' name='L203'></a> 203 
-<a id='L204' name='L204'></a> 204 <em class='comment'>// Caller has modified b-&gt;data and is done with the buffer.</em>
-<a id='L205' name='L205'></a> 205 <em class='comment'>// Record the block number and pin in the cache by increasing refcnt.</em>
-<a id='L206' name='L206'></a> 206 <em class='comment'>// commit()/write_log() will do the disk write.</em>
-<a id='L207' name='L207'></a> 207 <em class='comment'>//</em>
-<a id='L208' name='L208'></a> 208 <em class='comment'>// log_write() replaces bwrite(); a typical use is:</em>
-<a id='L209' name='L209'></a> 209 <em class='comment'>//   bp = bread(...)</em>
-<a id='L210' name='L210'></a> 210 <em class='comment'>//   modify bp-&gt;data[]</em>
-<a id='L211' name='L211'></a> 211 <em class='comment'>//   log_write(bp)</em>
-<a id='L212' name='L212'></a> 212 <em class='comment'>//   brelse(bp)</em>
-<a id='L213' name='L213'></a> 213 <strong class='reserved'>void</strong>
-<a id='L214' name='L214'></a> 214 <a href='../R/332.html' title='Multiple referred from 8 places.'>log_write</a>(<strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/33.html' title='Multiple used in 112 places.'>b</a>)
-<a id='L215' name='L215'></a> 215 <em class='brace'>{</em>
-<a id='L216' name='L216'></a> 216   <strong class='reserved'>int</strong> <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>;
-<a id='L217' name='L217'></a> 217 
-<a id='L218' name='L218'></a> 218   <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> &gt;= <a href='../S/58.html#L10' title='Defined at 10 in kernel/param.h.'>LOGSIZE</a> || <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a> &gt;= <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/335.html' title='Multiple used in 46 places.'>size</a> - 1)
-<a id='L219' name='L219'></a> 219     <a href='../D/383.html' title='Multiple defined in 2 places.'>panic</a>("too big a transaction");
-<a id='L220' name='L220'></a> 220   <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/244.html' title='Multiple used in 6 places.'>outstanding</a> &lt; 1)
-<a id='L221' name='L221'></a> 221     <a href='../D/383.html' title='Multiple defined in 2 places.'>panic</a>("log_write outside of trans");
-<a id='L222' name='L222'></a> 222 
-<a id='L223' name='L223'></a> 223   <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L224' name='L224'></a> 224   <strong class='reserved'>for</strong> (<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> = 0; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>; <a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>++) <em class='brace'>{</em>
-<a id='L225' name='L225'></a> 225     <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>] == <a href='../Y/33.html' title='Multiple used in 112 places.'>b</a>-&gt;<a href='../Y/43.html' title='Multiple used in 11 places.'>blockno</a>)   <em class='comment'>// log absorbtion</em>
-<a id='L226' name='L226'></a> 226       <strong class='reserved'>break</strong>;
-<a id='L227' name='L227'></a> 227   <em class='brace'>}</em>
-<a id='L228' name='L228'></a> 228   <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a>] = <a href='../Y/33.html' title='Multiple used in 112 places.'>b</a>-&gt;<a href='../Y/43.html' title='Multiple used in 11 places.'>blockno</a>;
-<a id='L229' name='L229'></a> 229   <strong class='reserved'>if</strong> (<a href='../Y/144.html' title='Multiple used in 291 places.'>i</a> == <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>) <em class='brace'>{</em>  <em class='comment'>// Add new block to log?</em>
-<a id='L230' name='L230'></a> 230     <a href='../S/61.html#L140' title='Defined at 140 in kernel/bio.c.'>bpin</a>(<a href='../Y/33.html' title='Multiple used in 112 places.'>b</a>);
-<a id='L231' name='L231'></a> 231     <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/181.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/204.html' title='Multiple used in 252 places.'>n</a>++;
-<a id='L232' name='L232'></a> 232   <em class='brace'>}</em>
-<a id='L233' name='L233'></a> 233   <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/185.html' title='Multiple used in 135 places.'>lock</a>);
-<a id='L234' name='L234'></a> 234 <em class='brace'>}</em>
-<a id='L235' name='L235'></a> 235 
+<a id='L1' name='L1'></a><em class='sharp'>#include</em> "<a href='37.html'>types.h</a>"
+<a id='L2' name='L2'></a><em class='sharp'>#include</em> "<a href='64.html'>riscv.h</a>"
+<a id='L3' name='L3'></a><em class='sharp'>#include</em> "<a href='31.html'>defs.h</a>"
+<a id='L4' name='L4'></a><em class='sharp'>#include</em> "<a href='58.html'>param.h</a>"
+<a id='L5' name='L5'></a><em class='sharp'>#include</em> "<a href='30.html'>spinlock.h</a>"
+<a id='L6' name='L6'></a><em class='sharp'>#include</em> "<a href='66.html'>sleeplock.h</a>"
+<a id='L7' name='L7'></a><em class='sharp'>#include</em> "<a href='71.html'>fs.h</a>"
+<a id='L8' name='L8'></a><em class='sharp'>#include</em> "<a href='47.html'>buf.h</a>"
+<a id='L9' name='L9'></a>
+<a id='L10' name='L10'></a><em class='comment'>// Simple logging that allows concurrent FS system calls.</em>
+<a id='L11' name='L11'></a><em class='comment'>//</em>
+<a id='L12' name='L12'></a><em class='comment'>// A log transaction contains the updates of multiple FS system</em>
+<a id='L13' name='L13'></a><em class='comment'>// calls. The logging system only commits when there are</em>
+<a id='L14' name='L14'></a><em class='comment'>// no FS system calls active. Thus there is never</em>
+<a id='L15' name='L15'></a><em class='comment'>// any reasoning required about whether a commit might</em>
+<a id='L16' name='L16'></a><em class='comment'>// write an uncommitted system call's updates to disk.</em>
+<a id='L17' name='L17'></a><em class='comment'>//</em>
+<a id='L18' name='L18'></a><em class='comment'>// A system call should call begin_op()/end_op() to mark</em>
+<a id='L19' name='L19'></a><em class='comment'>// its start and end. Usually begin_op() just increments</em>
+<a id='L20' name='L20'></a><em class='comment'>// the count of in-progress FS system calls and returns.</em>
+<a id='L21' name='L21'></a><em class='comment'>// But if it thinks the log is close to running out, it</em>
+<a id='L22' name='L22'></a><em class='comment'>// sleeps until the last outstanding end_op() commits.</em>
+<a id='L23' name='L23'></a><em class='comment'>//</em>
+<a id='L24' name='L24'></a><em class='comment'>// The log is a physical re-do log containing disk blocks.</em>
+<a id='L25' name='L25'></a><em class='comment'>// The on-disk log format:</em>
+<a id='L26' name='L26'></a><em class='comment'>//   header block, containing block #s for block A, B, C, ...</em>
+<a id='L27' name='L27'></a><em class='comment'>//   block A</em>
+<a id='L28' name='L28'></a><em class='comment'>//   block B</em>
+<a id='L29' name='L29'></a><em class='comment'>//   block C</em>
+<a id='L30' name='L30'></a><em class='comment'>//   ...</em>
+<a id='L31' name='L31'></a><em class='comment'>// Log appends are synchronous.</em>
+<a id='L32' name='L32'></a>
+<a id='L33' name='L33'></a><em class='comment'>// Contents of the header block, used for both the on-disk header block</em>
+<a id='L34' name='L34'></a><em class='comment'>// and to keep track in memory of logged block# before commit.</em>
+<a id='L35' name='L35'></a><strong class='reserved'>struct</strong> <a href='../R/331.html' title='Multiple referred from 4 places.'>logheader</a> <em class='brace'>{</em>
+<a id='L36' name='L36'></a>  <strong class='reserved'>int</strong> <a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>;
+<a id='L37' name='L37'></a>  <strong class='reserved'>int</strong> <a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../S/58.html#L10' title='Defined at 10 in kernel/param.h.'>LOGSIZE</a>];
+<a id='L38' name='L38'></a><em class='brace'>}</em>;
+<a id='L39' name='L39'></a>
+<a id='L40' name='L40'></a><strong class='reserved'>struct</strong> <a href='../R/329.html' title='Multiple referred from 49 places.'>log</a> <em class='brace'>{</em>
+<a id='L41' name='L41'></a>  <strong class='reserved'>struct</strong> <a href='../S/30.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>;
+<a id='L42' name='L42'></a>  <strong class='reserved'>int</strong> <a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>;
+<a id='L43' name='L43'></a>  <strong class='reserved'>int</strong> <a href='../Y/342.html' title='Multiple used in 46 places.'>size</a>;
+<a id='L44' name='L44'></a>  <strong class='reserved'>int</strong> <a href='../Y/249.html' title='Multiple used in 6 places.'>outstanding</a>; <em class='comment'>// how many FS sys calls are executing.</em>
+<a id='L45' name='L45'></a>  <strong class='reserved'>int</strong> <a href='../Y/60.html' title='Multiple used in 5 places.'>committing</a>;  <em class='comment'>// in commit(), please wait.</em>
+<a id='L46' name='L46'></a>  <strong class='reserved'>int</strong> <a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>;
+<a id='L47' name='L47'></a>  <strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> <a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>;
+<a id='L48' name='L48'></a><em class='brace'>}</em>;
+<a id='L49' name='L49'></a><strong class='reserved'>struct</strong> <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a> <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>;
+<a id='L50' name='L50'></a>
+<a id='L51' name='L51'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/28.html#L117' title='Defined at 117 in kernel/log.c.'>recover_from_log</a>(<strong class='reserved'>void</strong>);
+<a id='L52' name='L52'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/28.html#L194' title='Defined at 194 in kernel/log.c.'>commit</a>();
+<a id='L53' name='L53'></a>
+<a id='L54' name='L54'></a><strong class='reserved'>void</strong>
+<a id='L55' name='L55'></a><a href='../R/300.html' title='Multiple referred from 2 places.'>initlog</a>(<strong class='reserved'>int</strong> <a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>, <strong class='reserved'>struct</strong> <a href='../S/71.html#L14' title='Defined at 14 in kernel/fs.h.'>superblock</a> *<a href='../Y/325.html' title='Multiple used in 33 places.'>sb</a>)
+<a id='L56' name='L56'></a><em class='brace'>{</em>
+<a id='L57' name='L57'></a>  <strong class='reserved'>if</strong> (<strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a>) &gt;= <a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>)
+<a id='L58' name='L58'></a>    <a href='../D/381.html' title='Multiple defined in 2 places.'>panic</a>("initlog: too big logheader");
+<a id='L59' name='L59'></a>
+<a id='L60' name='L60'></a>  <a href='../S/59.html#L12' title='Defined at 12 in kernel/spinlock.c.'>initlock</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>, "log");
+<a id='L61' name='L61'></a>  <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a> = <a href='../Y/325.html' title='Multiple used in 33 places.'>sb</a>-&gt;<a href='../Y/191.html' title='Multiple used in 3 places.'>logstart</a>;
+<a id='L62' name='L62'></a>  <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/342.html' title='Multiple used in 46 places.'>size</a> = <a href='../Y/325.html' title='Multiple used in 33 places.'>sb</a>-&gt;<a href='../Y/225.html' title='Multiple used in 8 places.'>nlog</a>;
+<a id='L63' name='L63'></a>  <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a> = <a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>;
+<a id='L64' name='L64'></a>  <a href='../S/28.html#L117' title='Defined at 117 in kernel/log.c.'>recover_from_log</a>();
+<a id='L65' name='L65'></a><em class='brace'>}</em>
+<a id='L66' name='L66'></a>
+<a id='L67' name='L67'></a><em class='comment'>// Copy committed blocks from log to their home location</em>
+<a id='L68' name='L68'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L69' name='L69'></a><a href='../R/303.html' title='Multiple referred from 2 places.'>install_trans</a>(<strong class='reserved'>int</strong> <a href='../Y/301.html' title='Multiple used in 2 places.'>recovering</a>)
+<a id='L70' name='L70'></a><em class='brace'>{</em>
+<a id='L71' name='L71'></a>  <strong class='reserved'>int</strong> <a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>;
+<a id='L72' name='L72'></a>
+<a id='L73' name='L73'></a>  <strong class='reserved'>for</strong> (<a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>; <a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
+<a id='L74' name='L74'></a>    <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/179.html' title='Multiple used in 3 places.'>lbuf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>+<a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// read log block</em>
+<a id='L75' name='L75'></a>    <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/69.html' title='Multiple used in 5 places.'>dbuf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// read dst</em>
+<a id='L76' name='L76'></a>    <a href='../D/365.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/69.html' title='Multiple used in 5 places.'>dbuf</a>-&gt;<a href='../Y/67.html' title='Multiple used in 28 places.'>data</a>, <a href='../Y/179.html' title='Multiple used in 3 places.'>lbuf</a>-&gt;<a href='../Y/67.html' title='Multiple used in 28 places.'>data</a>, <a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>);  <em class='comment'>// copy block to dst</em>
+<a id='L77' name='L77'></a>    <a href='../S/61.html#L107' title='Defined at 107 in kernel/bio.c.'>bwrite</a>(<a href='../Y/69.html' title='Multiple used in 5 places.'>dbuf</a>);  <em class='comment'>// write dst to disk</em>
+<a id='L78' name='L78'></a>    <strong class='reserved'>if</strong>(<a href='../Y/301.html' title='Multiple used in 2 places.'>recovering</a> == 0)
+<a id='L79' name='L79'></a>      <a href='../S/61.html#L147' title='Defined at 147 in kernel/bio.c.'>bunpin</a>(<a href='../Y/69.html' title='Multiple used in 5 places.'>dbuf</a>);
+<a id='L80' name='L80'></a>    <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/179.html' title='Multiple used in 3 places.'>lbuf</a>);
+<a id='L81' name='L81'></a>    <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/69.html' title='Multiple used in 5 places.'>dbuf</a>);
+<a id='L82' name='L82'></a>  <em class='brace'>}</em>
+<a id='L83' name='L83'></a><em class='brace'>}</em>
+<a id='L84' name='L84'></a>
+<a id='L85' name='L85'></a><em class='comment'>// Read the log header from disk into the in-memory log header</em>
+<a id='L86' name='L86'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L87' name='L87'></a><a href='../S/28.html#L119' title='Referred from 119 in kernel/log.c.'>read_head</a>(<strong class='reserved'>void</strong>)
+<a id='L88' name='L88'></a><em class='brace'>{</em>
+<a id='L89' name='L89'></a>  <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>);
+<a id='L90' name='L90'></a>  <strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a> = (<strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *) (<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>-&gt;<a href='../Y/67.html' title='Multiple used in 28 places.'>data</a>);
+<a id='L91' name='L91'></a>  <strong class='reserved'>int</strong> <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>;
+<a id='L92' name='L92'></a>  <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> = <a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>;
+<a id='L93' name='L93'></a>  <strong class='reserved'>for</strong> (<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a> = 0; <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>; <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L94' name='L94'></a>    <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>] = <a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>-&gt;<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>];
+<a id='L95' name='L95'></a>  <em class='brace'>}</em>
+<a id='L96' name='L96'></a>  <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>);
+<a id='L97' name='L97'></a><em class='brace'>}</em>
+<a id='L98' name='L98'></a>
+<a id='L99' name='L99'></a><em class='comment'>// Write in-memory log header to disk.</em>
+<a id='L100' name='L100'></a><em class='comment'>// This is the true point at which the</em>
+<a id='L101' name='L101'></a><em class='comment'>// current transaction commits.</em>
+<a id='L102' name='L102'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L103' name='L103'></a><a href='../R/542.html' title='Multiple referred from 3 places.'>write_head</a>(<strong class='reserved'>void</strong>)
+<a id='L104' name='L104'></a><em class='brace'>{</em>
+<a id='L105' name='L105'></a>  <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>);
+<a id='L106' name='L106'></a>  <strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *<a href='../Y/140.html' title='Multiple used in 3 places.'>hb</a> = (<strong class='reserved'>struct</strong> <a href='../S/28.html#L35' title='Defined at 35 in kernel/log.c.'>logheader</a> *) (<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>-&gt;<a href='../Y/67.html' title='Multiple used in 28 places.'>data</a>);
+<a id='L107' name='L107'></a>  <strong class='reserved'>int</strong> <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>;
+<a id='L108' name='L108'></a>  <a href='../Y/140.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> = <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>;
+<a id='L109' name='L109'></a>  <strong class='reserved'>for</strong> (<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a> = 0; <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>; <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L110' name='L110'></a>    <a href='../Y/140.html' title='Multiple used in 3 places.'>hb</a>-&gt;<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>] = <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>];
+<a id='L111' name='L111'></a>  <em class='brace'>}</em>
+<a id='L112' name='L112'></a>  <a href='../S/61.html#L107' title='Defined at 107 in kernel/bio.c.'>bwrite</a>(<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>);
+<a id='L113' name='L113'></a>  <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>);
+<a id='L114' name='L114'></a><em class='brace'>}</em>
+<a id='L115' name='L115'></a>
+<a id='L116' name='L116'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L117' name='L117'></a><a href='../R/416.html' title='Multiple referred from 2 places.'>recover_from_log</a>(<strong class='reserved'>void</strong>)
+<a id='L118' name='L118'></a><em class='brace'>{</em>
+<a id='L119' name='L119'></a>  <a href='../S/28.html#L87' title='Defined at 87 in kernel/log.c.'>read_head</a>();
+<a id='L120' name='L120'></a>  <a href='../S/28.html#L69' title='Defined at 69 in kernel/log.c.'>install_trans</a>(1); <em class='comment'>// if committed, copy from log to disk</em>
+<a id='L121' name='L121'></a>  <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> = 0;
+<a id='L122' name='L122'></a>  <a href='../S/28.html#L103' title='Defined at 103 in kernel/log.c.'>write_head</a>(); <em class='comment'>// clear the log</em>
+<a id='L123' name='L123'></a><em class='brace'>}</em>
+<a id='L124' name='L124'></a>
+<a id='L125' name='L125'></a><em class='comment'>// called at the start of each FS system call.</em>
+<a id='L126' name='L126'></a><strong class='reserved'>void</strong>
+<a id='L127' name='L127'></a><a href='../R/195.html' title='Multiple referred from 11 places.'>begin_op</a>(<strong class='reserved'>void</strong>)
+<a id='L128' name='L128'></a><em class='brace'>{</em>
+<a id='L129' name='L129'></a>  <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L130' name='L130'></a>  <strong class='reserved'>while</strong>(1)<em class='brace'>{</em>
+<a id='L131' name='L131'></a>    <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/60.html' title='Multiple used in 5 places.'>committing</a>)<em class='brace'>{</em>
+<a id='L132' name='L132'></a>      <a href='../S/63.html#L555' title='Defined at 555 in kernel/proc.c.'>sleep</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>, &amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L133' name='L133'></a>    <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> + (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/249.html' title='Multiple used in 6 places.'>outstanding</a>+1)*<a href='../S/58.html#L9' title='Defined at 9 in kernel/param.h.'>MAXOPBLOCKS</a> &gt; <a href='../S/58.html#L10' title='Defined at 10 in kernel/param.h.'>LOGSIZE</a>)<em class='brace'>{</em>
+<a id='L134' name='L134'></a>      <em class='comment'>// this op might exhaust log space; wait for commit.</em>
+<a id='L135' name='L135'></a>      <a href='../S/63.html#L555' title='Defined at 555 in kernel/proc.c.'>sleep</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>, &amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L136' name='L136'></a>    <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L137' name='L137'></a>      <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/249.html' title='Multiple used in 6 places.'>outstanding</a> += 1;
+<a id='L138' name='L138'></a>      <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L139' name='L139'></a>      <strong class='reserved'>break</strong>;
+<a id='L140' name='L140'></a>    <em class='brace'>}</em>
+<a id='L141' name='L141'></a>  <em class='brace'>}</em>
+<a id='L142' name='L142'></a><em class='brace'>}</em>
+<a id='L143' name='L143'></a>
+<a id='L144' name='L144'></a><em class='comment'>// called at the end of each FS system call.</em>
+<a id='L145' name='L145'></a><em class='comment'>// commits if this was the last outstanding operation.</em>
+<a id='L146' name='L146'></a><strong class='reserved'>void</strong>
+<a id='L147' name='L147'></a><a href='../R/248.html' title='Multiple referred from 27 places.'>end_op</a>(<strong class='reserved'>void</strong>)
+<a id='L148' name='L148'></a><em class='brace'>{</em>
+<a id='L149' name='L149'></a>  <strong class='reserved'>int</strong> <a href='../Y/77.html' title='Multiple used in 3 places.'>do_commit</a> = 0;
+<a id='L150' name='L150'></a>
+<a id='L151' name='L151'></a>  <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L152' name='L152'></a>  <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/249.html' title='Multiple used in 6 places.'>outstanding</a> -= 1;
+<a id='L153' name='L153'></a>  <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/60.html' title='Multiple used in 5 places.'>committing</a>)
+<a id='L154' name='L154'></a>    <a href='../D/381.html' title='Multiple defined in 2 places.'>panic</a>("log.committing");
+<a id='L155' name='L155'></a>  <strong class='reserved'>if</strong>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/249.html' title='Multiple used in 6 places.'>outstanding</a> == 0)<em class='brace'>{</em>
+<a id='L156' name='L156'></a>    <a href='../Y/77.html' title='Multiple used in 3 places.'>do_commit</a> = 1;
+<a id='L157' name='L157'></a>    <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/60.html' title='Multiple used in 5 places.'>committing</a> = 1;
+<a id='L158' name='L158'></a>  <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L159' name='L159'></a>    <em class='comment'>// begin_op() may be waiting for log space,</em>
+<a id='L160' name='L160'></a>    <em class='comment'>// and decrementing log.outstanding has decreased</em>
+<a id='L161' name='L161'></a>    <em class='comment'>// the amount of reserved space.</em>
+<a id='L162' name='L162'></a>    <a href='../S/63.html#L589' title='Defined at 589 in kernel/proc.c.'>wakeup</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>);
+<a id='L163' name='L163'></a>  <em class='brace'>}</em>
+<a id='L164' name='L164'></a>  <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L165' name='L165'></a>
+<a id='L166' name='L166'></a>  <strong class='reserved'>if</strong>(<a href='../Y/77.html' title='Multiple used in 3 places.'>do_commit</a>)<em class='brace'>{</em>
+<a id='L167' name='L167'></a>    <em class='comment'>// call commit w/o holding locks, since not allowed</em>
+<a id='L168' name='L168'></a>    <em class='comment'>// to sleep with locks.</em>
+<a id='L169' name='L169'></a>    <a href='../S/28.html#L194' title='Defined at 194 in kernel/log.c.'>commit</a>();
+<a id='L170' name='L170'></a>    <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L171' name='L171'></a>    <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/60.html' title='Multiple used in 5 places.'>committing</a> = 0;
+<a id='L172' name='L172'></a>    <a href='../S/63.html#L589' title='Defined at 589 in kernel/proc.c.'>wakeup</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>);
+<a id='L173' name='L173'></a>    <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L174' name='L174'></a>  <em class='brace'>}</em>
+<a id='L175' name='L175'></a><em class='brace'>}</em>
+<a id='L176' name='L176'></a>
+<a id='L177' name='L177'></a><em class='comment'>// Copy modified blocks from cache to log.</em>
+<a id='L178' name='L178'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L179' name='L179'></a><a href='../S/28.html#L197' title='Referred from 197 in kernel/log.c.'>write_log</a>(<strong class='reserved'>void</strong>)
+<a id='L180' name='L180'></a><em class='brace'>{</em>
+<a id='L181' name='L181'></a>  <strong class='reserved'>int</strong> <a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>;
+<a id='L182' name='L182'></a>
+<a id='L183' name='L183'></a>  <strong class='reserved'>for</strong> (<a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a> = 0; <a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>; <a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>++) <em class='brace'>{</em>
+<a id='L184' name='L184'></a>    <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/380.html' title='Multiple used in 4 places.'>to</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../S/70.html#L21' title='Defined at 21 in kernel/start.c.'>start</a>+<a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>+1); <em class='comment'>// log block</em>
+<a id='L185' name='L185'></a>    <strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/128.html' title='Multiple used in 3 places.'>from</a> = <a href='../S/61.html#L93' title='Defined at 93 in kernel/bio.c.'>bread</a>(<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/72.html' title='Multiple used in 54 places.'>dev</a>, <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/371.html' title='Multiple used in 8 places.'>tail</a>]); <em class='comment'>// cache block</em>
+<a id='L186' name='L186'></a>    <a href='../D/365.html' title='Multiple defined in 2 places.'>memmove</a>(<a href='../Y/380.html' title='Multiple used in 4 places.'>to</a>-&gt;<a href='../Y/67.html' title='Multiple used in 28 places.'>data</a>, <a href='../Y/128.html' title='Multiple used in 3 places.'>from</a>-&gt;<a href='../Y/67.html' title='Multiple used in 28 places.'>data</a>, <a href='../S/71.html#L6' title='Defined at 6 in kernel/fs.h.'>BSIZE</a>);
+<a id='L187' name='L187'></a>    <a href='../S/61.html#L107' title='Defined at 107 in kernel/bio.c.'>bwrite</a>(<a href='../Y/380.html' title='Multiple used in 4 places.'>to</a>);  <em class='comment'>// write the log</em>
+<a id='L188' name='L188'></a>    <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/128.html' title='Multiple used in 3 places.'>from</a>);
+<a id='L189' name='L189'></a>    <a href='../S/61.html#L117' title='Defined at 117 in kernel/bio.c.'>brelse</a>(<a href='../Y/380.html' title='Multiple used in 4 places.'>to</a>);
+<a id='L190' name='L190'></a>  <em class='brace'>}</em>
+<a id='L191' name='L191'></a><em class='brace'>}</em>
+<a id='L192' name='L192'></a>
+<a id='L193' name='L193'></a><strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L194' name='L194'></a><a href='../R/215.html' title='Multiple referred from 2 places.'>commit</a>()
+<a id='L195' name='L195'></a><em class='brace'>{</em>
+<a id='L196' name='L196'></a>  <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> &gt; 0) <em class='brace'>{</em>
+<a id='L197' name='L197'></a>    <a href='../S/28.html#L179' title='Defined at 179 in kernel/log.c.'>write_log</a>();     <em class='comment'>// Write modified blocks from cache to log</em>
+<a id='L198' name='L198'></a>    <a href='../S/28.html#L103' title='Defined at 103 in kernel/log.c.'>write_head</a>();    <em class='comment'>// Write header to disk -- the real commit</em>
+<a id='L199' name='L199'></a>    <a href='../S/28.html#L69' title='Defined at 69 in kernel/log.c.'>install_trans</a>(0); <em class='comment'>// Now install writes to home locations</em>
+<a id='L200' name='L200'></a>    <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> = 0;
+<a id='L201' name='L201'></a>    <a href='../S/28.html#L103' title='Defined at 103 in kernel/log.c.'>write_head</a>();    <em class='comment'>// Erase the transaction from the log</em>
+<a id='L202' name='L202'></a>  <em class='brace'>}</em>
+<a id='L203' name='L203'></a><em class='brace'>}</em>
+<a id='L204' name='L204'></a>
+<a id='L205' name='L205'></a><em class='comment'>// Caller has modified b-&gt;data and is done with the buffer.</em>
+<a id='L206' name='L206'></a><em class='comment'>// Record the block number and pin in the cache by increasing refcnt.</em>
+<a id='L207' name='L207'></a><em class='comment'>// commit()/write_log() will do the disk write.</em>
+<a id='L208' name='L208'></a><em class='comment'>//</em>
+<a id='L209' name='L209'></a><em class='comment'>// log_write() replaces bwrite(); a typical use is:</em>
+<a id='L210' name='L210'></a><em class='comment'>//   bp = bread(...)</em>
+<a id='L211' name='L211'></a><em class='comment'>//   modify bp-&gt;data[]</em>
+<a id='L212' name='L212'></a><em class='comment'>//   log_write(bp)</em>
+<a id='L213' name='L213'></a><em class='comment'>//   brelse(bp)</em>
+<a id='L214' name='L214'></a><strong class='reserved'>void</strong>
+<a id='L215' name='L215'></a><a href='../R/330.html' title='Multiple referred from 8 places.'>log_write</a>(<strong class='reserved'>struct</strong> <a href='../S/47.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a> *<a href='../Y/33.html' title='Multiple used in 113 places.'>b</a>)
+<a id='L216' name='L216'></a><em class='brace'>{</em>
+<a id='L217' name='L217'></a>  <strong class='reserved'>int</strong> <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>;
+<a id='L218' name='L218'></a>
+<a id='L219' name='L219'></a>  <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> &gt;= <a href='../S/58.html#L10' title='Defined at 10 in kernel/param.h.'>LOGSIZE</a> || <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a> &gt;= <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/342.html' title='Multiple used in 46 places.'>size</a> - 1)
+<a id='L220' name='L220'></a>    <a href='../D/381.html' title='Multiple defined in 2 places.'>panic</a>("too big a transaction");
+<a id='L221' name='L221'></a>  <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/249.html' title='Multiple used in 6 places.'>outstanding</a> &lt; 1)
+<a id='L222' name='L222'></a>    <a href='../D/381.html' title='Multiple defined in 2 places.'>panic</a>("log_write outside of trans");
+<a id='L223' name='L223'></a>
+<a id='L224' name='L224'></a>  <a href='../S/59.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L225' name='L225'></a>  <strong class='reserved'>for</strong> (<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a> = 0; <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a> &lt; <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>; <a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L226' name='L226'></a>    <strong class='reserved'>if</strong> (<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>] == <a href='../Y/33.html' title='Multiple used in 113 places.'>b</a>-&gt;<a href='../Y/43.html' title='Multiple used in 11 places.'>blockno</a>)   <em class='comment'>// log absorbtion</em>
+<a id='L227' name='L227'></a>      <strong class='reserved'>break</strong>;
+<a id='L228' name='L228'></a>  <em class='brace'>}</em>
+<a id='L229' name='L229'></a>  <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/42.html' title='Multiple used in 7 places.'>block</a>[<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a>] = <a href='../Y/33.html' title='Multiple used in 113 places.'>b</a>-&gt;<a href='../Y/43.html' title='Multiple used in 11 places.'>blockno</a>;
+<a id='L230' name='L230'></a>  <strong class='reserved'>if</strong> (<a href='../Y/146.html' title='Multiple used in 296 places.'>i</a> == <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>) <em class='brace'>{</em>  <em class='comment'>// Add new block to log?</em>
+<a id='L231' name='L231'></a>    <a href='../S/61.html#L140' title='Defined at 140 in kernel/bio.c.'>bpin</a>(<a href='../Y/33.html' title='Multiple used in 113 places.'>b</a>);
+<a id='L232' name='L232'></a>    <a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/184.html' title='Multiple used in 22 places.'>lh</a>.<a href='../Y/206.html' title='Multiple used in 260 places.'>n</a>++;
+<a id='L233' name='L233'></a>  <em class='brace'>}</em>
+<a id='L234' name='L234'></a>  <a href='../S/59.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../S/28.html#L40' title='Defined at 40 in kernel/log.c.'>log</a>.<a href='../Y/188.html' title='Multiple used in 135 places.'>lock</a>);
+<a id='L235' name='L235'></a><em class='brace'>}</em>
+<a id='L236' name='L236'></a>
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L55'>[^]</a><a href='#L214'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L55'>[^]</a><a href='#L215'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

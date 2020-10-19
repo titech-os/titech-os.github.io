@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>user_dst</title>
+<title>uart_tx_lock</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,13 +9,13 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/57.html#L82'>user_dst</a>           82 kernel/console.c consoleread(int user_dst, uint64 dst, int n)</span>
-<span class='curline'><a href='../S/57.html#L114'>user_dst</a>          114 kernel/console.c     if(either_copyout(user_dst, dst, &amp;cbuf, 1) == -1)</span>
-<span class='curline'><a href='../S/31.html#L104'>user_dst</a>          104 kernel/defs.h  int             either_copyout(int user_dst, uint64 dst, void *src, uint64 len);</span>
-<span class='curline'><a href='../S/48.html#L456'>user_dst</a>          456 kernel/fs.c    readi(struct inode *ip, int user_dst, uint64 dst, uint off, uint n)</span>
-<span class='curline'><a href='../S/48.html#L469'>user_dst</a>          469 kernel/fs.c        if(either_copyout(user_dst, dst, bp-&gt;data + (off % BSIZE), m) == -1) {</span>
-<span class='curline'><a href='../S/63.html#L635'>user_dst</a>          635 kernel/proc.c  either_copyout(int user_dst, uint64 dst, void *src, uint64 len)</span>
-<span class='curline'><a href='../S/63.html#L638'>user_dst</a>          638 kernel/proc.c    if(user_dst){</span>
+<span class='curline'><a href='../S/72.html#L42'>uart_tx_lock</a>       42 kernel/uart.c  struct spinlock uart_tx_lock;</span>
+<span class='curline'><a href='../S/72.html#L77'>uart_tx_lock</a>       77 kernel/uart.c    initlock(&amp;uart_tx_lock, "uart");</span>
+<span class='curline'><a href='../S/72.html#L89'>uart_tx_lock</a>       89 kernel/uart.c    acquire(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/72.html#L100'>uart_tx_lock</a>      100 kernel/uart.c        sleep(&amp;uart_tx_r, &amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/72.html#L105'>uart_tx_lock</a>      105 kernel/uart.c        release(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/72.html#L191'>uart_tx_lock</a>      191 kernel/uart.c    acquire(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/72.html#L193'>uart_tx_lock</a>      193 kernel/uart.c    release(&amp;uart_tx_lock);</span>
 </pre>
 </body>
 </html>

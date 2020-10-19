@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>continuous</title>
+<title>cons</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,12 +9,29 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/24.html#L2623'>continuous</a>       2623 user/usertests.c   int continuous = 0;</span>
-<span class='curline'><a href='../S/24.html#L2627'>continuous</a>       2627 user/usertests.c     continuous = 1;</span>
-<span class='curline'><a href='../S/24.html#L2629'>continuous</a>       2629 user/usertests.c     continuous = 2;</span>
-<span class='curline'><a href='../S/24.html#L2700'>continuous</a>       2700 user/usertests.c   if(continuous){</span>
-<span class='curline'><a href='../S/24.html#L2713'>continuous</a>       2713 user/usertests.c         if(continuous != 2)</span>
-<span class='curline'><a href='../S/24.html#L2719'>continuous</a>       2719 user/usertests.c         if(continuous != 2)</span>
+<span class='curline'><a href='../S/57.html#L53'>cons</a>               53 kernel/console.c } cons;</span>
+<span class='curline'><a href='../S/57.html#L63'>cons</a>               63 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L70'>cons</a>               70 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L89'>cons</a>               89 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L93'>cons</a>               93 kernel/console.c     while(cons.r == cons.w){</span>
+<span class='curline'><a href='../S/57.html#L95'>cons</a>               95 kernel/console.c         release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L98'>cons</a>               98 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L101'>cons</a>              101 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF];</span>
+<span class='curline'><a href='../S/57.html#L107'>cons</a>              107 kernel/console.c         cons.r--;</span>
+<span class='curline'><a href='../S/57.html#L126'>cons</a>              126 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L140'>cons</a>              140 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L147'>cons</a>              147 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
+<span class='curline'><a href='../S/57.html#L148'>cons</a>              148 kernel/console.c           cons.buf[(cons.e-1) % INPUT_BUF] != '\n'){</span>
+<span class='curline'><a href='../S/57.html#L149'>cons</a>              149 kernel/console.c       cons.e--;</span>
+<span class='curline'><a href='../S/57.html#L155'>cons</a>              155 kernel/console.c     if(cons.e != cons.w){</span>
+<span class='curline'><a href='../S/57.html#L156'>cons</a>              156 kernel/console.c       cons.e--;</span>
+<span class='curline'><a href='../S/57.html#L161'>cons</a>              161 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF){</span>
+<span class='curline'><a href='../S/57.html#L168'>cons</a>              168 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF] = c;</span>
+<span class='curline'><a href='../S/57.html#L170'>cons</a>              170 kernel/console.c       if(c == '\n' || c == C('D') || cons.e == cons.r+INPUT_BUF){</span>
+<span class='curline'><a href='../S/57.html#L173'>cons</a>              173 kernel/console.c         cons.w = cons.e;</span>
+<span class='curline'><a href='../S/57.html#L174'>cons</a>              174 kernel/console.c         wakeup(&amp;cons.r);</span>
+<span class='curline'><a href='../S/57.html#L180'>cons</a>              180 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/57.html#L186'>cons</a>              186 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
 </pre>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ofile</title>
+<title>nwrite</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,19 +9,15 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/63.html#L288'>ofile</a>             288 kernel/proc.c      if(p-&gt;ofile[i])</span>
-<span class='curline'><a href='../S/63.html#L289'>ofile</a>             289 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
-<span class='curline'><a href='../S/63.html#L342'>ofile</a>             342 kernel/proc.c      if(p-&gt;ofile[fd]){</span>
-<span class='curline'><a href='../S/63.html#L343'>ofile</a>             343 kernel/proc.c        struct file *f = p-&gt;ofile[fd];</span>
-<span class='curline'><a href='../S/63.html#L345'>ofile</a>             345 kernel/proc.c        p-&gt;ofile[fd] = 0;</span>
-<span class='curline'><a href='../S/35.html#L103'>ofile</a>             103 kernel/proc.h    struct file *ofile[NOFILE];  // Open files</span>
-<span class='curline'><a href='../S/43.html#L29'>ofile</a>              29 kernel/sysfile.c   if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
-<span class='curline'><a href='../S/43.html#L47'>ofile</a>              47 kernel/sysfile.c     if(p-&gt;ofile[fd] == 0){</span>
-<span class='curline'><a href='../S/43.html#L48'>ofile</a>              48 kernel/sysfile.c       p-&gt;ofile[fd] = f;</span>
-<span class='curline'><a href='../S/43.html#L102'>ofile</a>             102 kernel/sysfile.c   myproc()-&gt;ofile[fd] = 0;</span>
-<span class='curline'><a href='../S/43.html#L472'>ofile</a>             472 kernel/sysfile.c       p-&gt;ofile[fd0] = 0;</span>
-<span class='curline'><a href='../S/43.html#L479'>ofile</a>             479 kernel/sysfile.c     p-&gt;ofile[fd0] = 0;</span>
-<span class='curline'><a href='../S/43.html#L480'>ofile</a>             480 kernel/sysfile.c     p-&gt;ofile[fd1] = 0;</span>
+<span class='curline'><a href='../S/34.html#L17'>nwrite</a>             17 kernel/pipe.c    uint nwrite;    // number of bytes written</span>
+<span class='curline'><a href='../S/34.html#L35'>nwrite</a>             35 kernel/pipe.c    pi-&gt;nwrite = 0;</span>
+<span class='curline'><a href='../S/34.html#L67'>nwrite</a>             67 kernel/pipe.c      wakeup(&amp;pi-&gt;nwrite);</span>
+<span class='curline'><a href='../S/34.html#L85'>nwrite</a>             85 kernel/pipe.c      while(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){  //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/34.html#L91'>nwrite</a>             91 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/34.html#L95'>nwrite</a>             95 kernel/pipe.c      pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
+<span class='curline'><a href='../S/34.html#L110'>nwrite</a>            110 kernel/pipe.c    while(pi-&gt;nread == pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  //DOC: pipe-empty</span>
+<span class='curline'><a href='../S/34.html#L118'>nwrite</a>            118 kernel/pipe.c      if(pi-&gt;nread == pi-&gt;nwrite)</span>
+<span class='curline'><a href='../S/34.html#L124'>nwrite</a>            124 kernel/pipe.c    wakeup(&amp;pi-&gt;nwrite);  //DOC: piperead-wakeup</span>
 </pre>
 </body>
 </html>

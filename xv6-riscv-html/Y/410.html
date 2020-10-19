@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vsrc</title>
+<title>va0</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.4' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,24 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/19.html#L99'>vsrc</a>               99 user/ulib.c    memmove(void *vdst, const void *vsrc, int n)</span>
-<span class='curline'><a href='../S/19.html#L105'>vsrc</a>              105 user/ulib.c      src = vsrc;</span>
+<span class='curline'><a href='../S/38.html#L346'>va0</a>               346 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L349'>va0</a>               349 kernel/vm.c        va0 = PGROUNDDOWN(dstva);</span>
+<span class='curline'><a href='../S/38.html#L350'>va0</a>               350 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/38.html#L353'>va0</a>               353 kernel/vm.c        n = PGSIZE - (dstva - va0);</span>
+<span class='curline'><a href='../S/38.html#L356'>va0</a>               356 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
+<span class='curline'><a href='../S/38.html#L360'>va0</a>               360 kernel/vm.c        dstva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L371'>va0</a>               371 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L374'>va0</a>               374 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/38.html#L375'>va0</a>               375 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/38.html#L378'>va0</a>               378 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/38.html#L381'>va0</a>               381 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
+<span class='curline'><a href='../S/38.html#L385'>va0</a>               385 kernel/vm.c        srcva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L397'>va0</a>               397 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L401'>va0</a>               401 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/38.html#L402'>va0</a>               402 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/38.html#L405'>va0</a>               405 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/38.html#L409'>va0</a>               409 kernel/vm.c        char *p = (char *) (pa0 + (srcva - va0));</span>
+<span class='curline'><a href='../S/38.html#L424'>va0</a>               424 kernel/vm.c        srcva = va0 + PGSIZE;</span>
 </pre>
 </body>
 </html>
