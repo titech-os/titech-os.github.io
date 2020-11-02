@@ -25,6 +25,12 @@ $ docker run -it --rm -v full-path-to-xv6:/home/xv6/xv6-riscv wtakuo/xv6-env
 このようにしてコンテナを起動することで，
 ホストOS（PCで実行しているOS）上の`full-path-to-xv6`で表されるディレクトリが，コンテナ内部で`/home/xv6/xv6-riscv`というディレクトリとしてアクセスできるようになります．
 
+コンテナ起動時にフルパスを指定する代わりに以下のようにすると簡単です．
+```console
+$ cd path-to-xv6
+$ docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
+```
+
 **Macの場合の注意**: xv6のソースコードの場所（`full-path-to-xv6`）がiCloud Driveに含まれないようにしてください（下記の**Macの場合の注意事項**を参照のこと）．
 
 コンテナが無事起動すると以下のようにシェル(bash)のプロンプトが現れます（プロンプトに含まれる`0c765f60374a`は起動したコンテナのIDで，実際にはコンテナ毎に違う値となります）．
@@ -42,7 +48,8 @@ $ git clone https://github.com/titech-os/xv6-riscv.git
 ```
 この場合，コンテナの起動は以下のようにして行います．
 ```console
-$ docker run -it --rm -v ~/class/os/xv6-riscv:/home/xv6/xv6-riscv wtakuo/xv6-env
+$ cd ~/class/os/xv6-riscv
+$ docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
 ```
 上で述べたように，ホストOS上のディレクトリ`~/class/os/xv6-riscv`は，コンテナ内部で`/home/xv6/xv6-riscv`というディレクトリとしてアクセスできるようになります．
 
