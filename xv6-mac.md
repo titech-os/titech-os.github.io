@@ -70,6 +70,16 @@ xv6上でいくつかプログラムを動かして動作を確認してみて�
 xv6から抜けるには，`ctrl-A`に続けて`x`をタイプします．
 
 ## 問題点
-2020年9月28日時点で上記の方法でインストールされるRISC-V用ツールのうち，デバッガ(`riscv64-unknown-elf-gdb`)の設定にやや問題があることがわかっています．
-具体的には，Python用のGDBライブラリがインストールされないため，（Pythonによる支援が必要な）一部のコマンドの実行ができません．
-GDBを使ってxv6カーネルのデバッグをしたい場合は，Dockerによる方法に切り替えるとよいかもしれません．
+2020年12月29日時点で上記の方法でインストールされるRISC-V用ツールのうち，デバッガ(`riscv64-unknown-elf-gdb`)の設定にやや問題があることがわかっています．
+具体的には，Python用のGDBライブラリがインストールされないため，（Pythonによる支援が必要な）一部のコマンドの実行に問題が生じます．
+これを回避するには，まずHomebrewでgdbをインストールします．
+```console
+$ brew install gdb
+```
+そしてRISC-V用のgdbを起動する際に `--data-directory` オプションでPythonライブラリの位置を指定します．
+```console
+$ riscv64-unknown-elf-gdb --data-directory=/usr/local/Cellar/gdb/10.1/share/gdb/python
+```
+これでxv6-riscvカーネルのデバッグはできるようになります．
+
+面倒な場合はDockerによる方法に切り替えるとよいかもしれません．
