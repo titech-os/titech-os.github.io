@@ -19,7 +19,7 @@ xv6のビルドに必要な
 そしてUbuntu等のLinuxディクトリビューションをインストールして，[開発用ツールをインストール](xv6-linux.html)します．
 現在，WSL2上のUbuntu 20.04に開発用ツールをインストールし，問題なくxv6をビルド・実行できることは確認しています．
 
-## WSL仮想マシンを使う方法
+## 仮想機械アプリケーションを使う方法
 
 [VirtualBox](https://www.virtualbox.org)や[VMware Workstation Player](https://www.vmware.com/jp/products/workstation-player.html)などの仮想機械アプリケーションを用いてUbuntu等のLinuxをゲストOSとして実行し，その上に[開発用ツールをインストール](xv6-linux.html)します．
 
