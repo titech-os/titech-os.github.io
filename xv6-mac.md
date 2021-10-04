@@ -18,6 +18,40 @@ $ xcode-select --install
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
+### Apple Silicon搭載のMac (M1 Mac)を使う場合
+
+現在HomebrewはM1 Macに対応していますが，Homebrewでインストールされるソフトウェアには，まだApple Siliconに対応していないものもあります．そういったソフトウェアを使いたい場合，x86用のHomebrewもインストールして併用します．x86用のバイナリはRosetta2によってApple Silicon上で実行可能になります．本講義で使うツールのいくつかはx86用Homebrewが必要です．以下のようにして問題なく動作することを確認しています．
+
+まず，x86用のHomebrewをインストールします．ターミナルで以下のコマンドを実行してください．
+```console
+$ arch -x86_64 -e PATH= /bin/zsh --login
+```
+zshではなくbashを使っている場合は以下のようにします．
+```console
+$ arch -x86_64 -e PATH= /bin/bash --login
+```
+ここで `PATH=` と `/bin/zsh`（あるいは`/bin/bash`の間に空白が入っていることに注意してください．
+
+以上のようにすることで，シェルがx86のプロセスとして（Rosetta2を使って）動作します．
+この状態で上に述べた方法と同様にしてHomebrewをインストールします．
+あとは下の「開発用ツールのインストール」で述べているようにして必要なツール （`riscv-tools` と `qemu`）をインストールしてください．
+
+Apple Silicon搭載のMacでは，普通にHomebrewをインストールするとHomebrew関連のファイルは `/opt/homebrew` に格納されますが，上記のようにしてx86用にインストールした場合は `/usr/local/` に格納されます．これらは併用できますので，普段はApple Silicon用を使い，x86のみに対応したプログラムのみx86用Homebrewを使ってインストールするとよいでしょう．
+
+x86用Homebrewでインストールしたプログラム（実行可能形式）は `/usr/local/bin` に入ります．通常このディレクトリは `PATH` に含まれているので，特になにもしなくてもシェルから実行可能になります．シェルがApple Siliconのプロセスとして動いている場合（普通にターミナルを起動した場合）も，Rosetta2により問題なく実行できます．
+
+`PATH`については以下に注意してください．
+* シェルがApple Siliconのプロセスとして動いている場合（通常の場合）：`PATH`内で`/opt/homebrew/bin` は `/usr/local/bin` より前にあること．
+* シェルがx86のプロセスとして動いている場合： `PATH` 内に `/opt/homebrew/bin` がないこと．
+
+`~/.zshrc`（あるいは `~/.bashrc`）等で `PATH` を設定する際に以下のようにするとよいでしょう．
+
+```sh
+if [ "$(uname -m)" = "arm64" ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+```
+
 ## 開発用ツールのインストール
 
 Homebrewがあれば比較的容易です．
@@ -82,4 +116,3 @@ $ riscv64-unknown-elf-gdb --data-directory=/usr/local/Cellar/gdb/10.1/share/gdb/
 ```
 これでxv6-riscvカーネルのデバッグはできるようになります．
 
-面倒な場合はDockerによる方法に切り替えるとよいかもしれません．

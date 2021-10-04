@@ -33,6 +33,8 @@ $ docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
 
 **Macの場合の注意**: xv6のソースコードの場所（`full-path-to-xv6`）がiCloud Driveに含まれないようにしてください（下記の**Macの場合の注意事項**を参照のこと）．
 
+**Apple Silicon搭載のMac　(M1 Mac)を使う場合**: ARM版のDockerイメージ([wtakuo/xv6-env-arm64](https://hub.docker.com/r/wtakuo/xv6-env-arm64))を用意しましたの．上記の説明で，`wtakuo/xv6-env` となっているところを `wtakuo/xv6-env-arm64` に置き換えてください．
+
 コンテナが無事起動すると以下のようにシェル(bash)のプロンプトが現れます（プロンプトに含まれる`0c765f60374a`は起動したコンテナのIDで，実際にはコンテナ毎に違う値となります）．
 ```console
 xv6@0c765f60374a:~$ 

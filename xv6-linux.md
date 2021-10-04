@@ -5,7 +5,7 @@ Linuxにクロスコンパイラ等の開発用ツールをインストールし
 対象とするPCのアーキテクチャは64ビット版x86(X86_64)です．
 以下では[Ubuntu Desktop](https://ubuntu.com/download/desktop)20.04LTSでテストしていますが，18.04.5LTS等の他のバージョンや，
 Debian等のaptコマンドを使ってパッケージ管理をしているLinuxディストリビューションでもおそらく同様に作業できると思います．
-それ以外のディストリビューションについては[MITのサイト](https://pdos.csail.mit.edu/6.828/2020/tools.html)を参考にしてください．
+それ以外のディストリビューションについては[MITのサイト](https://pdos.csail.mit.edu/6.828/2021/tools.html)を参考にしてください．
 
 ## 開発用ツールのインストール
 
