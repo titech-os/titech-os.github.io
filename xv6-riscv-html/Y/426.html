@@ -1,18 +1,70 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>wpid</title>
+<title>write</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/7.html#L17'>wpid</a>               17 user/init.c      int pid, wpid;</span>
-<span class='curline'><a href='../S/7.html#L42'>wpid</a>               42 user/init.c          wpid = wait((int *) 0);</span>
-<span class='curline'><a href='../S/7.html#L43'>wpid</a>               43 user/init.c          if(wpid == pid){</span>
-<span class='curline'><a href='../S/7.html#L46'>wpid</a>               46 user/init.c          } else if(wpid &lt; 0){</span>
+<span class='curline'><a href='../S/57.html#L191'>write</a>             191 kernel/console.c   devsw[CONSOLE].write = consolewrite;</span>
+<span class='curline'><a href='../S/67.html#L145'>write</a>             145 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].write)</span>
+<span class='curline'><a href='../S/67.html#L147'>write</a>             147 kernel/file.c      ret = devsw[f-&gt;major].write(1, addr, n);</span>
+<span class='curline'><a href='../S/41.html#L35'>write</a>              35 kernel/file.h    int (*write)(int, uint64, int);</span>
+<span class='curline'><a href='../S/65.html#L204'>write</a>             204 kernel/virtio_disk.c virtio_disk_rw(struct buf *b, int write)</span>
+<span class='curline'><a href='../S/65.html#L228'>write</a>             228 kernel/virtio_disk.c   if(write)</span>
+<span class='curline'><a href='../S/65.html#L242'>write</a>             242 kernel/virtio_disk.c   if(write)</span>
+<span class='curline'><a href='../S/3.html#L180'>write</a>             180 mkfs/mkfs.c      if(write(fsfd, buf, BSIZE) != BSIZE)</span>
+<span class='curline'><a href='../S/9.html#L13'>write</a>              13 user/cat.c         if (write(1, buf, n) != n) {</span>
+<span class='curline'><a href='../S/25.html#L11'>write</a>              11 user/echo.c        write(1, argv[i], strlen(argv[i]));</span>
+<span class='curline'><a href='../S/25.html#L13'>write</a>              13 user/echo.c          write(1, " ", 1);</span>
+<span class='curline'><a href='../S/25.html#L15'>write</a>              15 user/echo.c          write(1, "\n", 1);</span>
+<span class='curline'><a href='../S/5.html#L13'>write</a>              13 user/forktest.c   write(1, s, strlen(s));</span>
+<span class='curline'><a href='../S/21.html#L25'>write</a>              25 user/grep.c            write(1, p, q+1 - p);</span>
+<span class='curline'><a href='../S/12.html#L68'>write</a>              68 user/grind.c         write(1, which_child?"B":"A", 1);</span>
+<span class='curline'><a href='../S/12.html#L90'>write</a>              90 user/grind.c         write(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/12.html#L167'>write</a>             167 user/grind.c           if(write(fds[1], "x", 1) != 1)</span>
+<span class='curline'><a href='../S/12.html#L204'>write</a>             204 user/grind.c         if(write(fd1, "x", 1) != 1){</span>
+<span class='curline'><a href='../S/4.html#L12'>write</a>              12 user/printf.c    write(fd, &amp;c, 1);</span>
+<span class='curline'><a href='../S/22.html#L36'>write</a>              36 user/stressfs.c     write(fd, data, sizeof(data));</span>
+<span class='curline'><a href='../S/15.html#L9'>write</a>               9 user/user.h    int write(int, const void*, int);</span>
+<span class='curline'><a href='../S/24.html#L39'>write</a>              39 user/usertests.c     int n = write(fd, (void*)addr, 8192);</span>
+<span class='curline'><a href='../S/24.html#L47'>write</a>              47 user/usertests.c     n = write(1, (char*)addr, 8192);</span>
+<span class='curline'><a href='../S/24.html#L58'>write</a>              58 user/usertests.c     n = write(fds[1], (char*)addr, 8192);</span>
+<span class='curline'><a href='../S/24.html#L95'>write</a>              95 user/usertests.c     n = write(fds[1], "x", 1);</span>
+<span class='curline'><a href='../S/24.html#L259'>write</a>             259 user/usertests.c   n = write(fd, (void*)(a+4096), 1024);</span>
+<span class='curline'><a href='../S/24.html#L290'>write</a>             290 user/usertests.c   write(fd1, "abcd", 4);</span>
+<span class='curline'><a href='../S/24.html#L317'>write</a>             317 user/usertests.c   write(fd1, "abcdef", 6);</span>
+<span class='curline'><a href='../S/24.html#L348'>write</a>             348 user/usertests.c   write(fd1, "abcd", 4);</span>
+<span class='curline'><a href='../S/24.html#L352'>write</a>             352 user/usertests.c   int n = write(fd1, "x", 1);</span>
+<span class='curline'><a href='../S/24.html#L384'>write</a>             384 user/usertests.c       int n = write(fd, "1234567890", 10);</span>
+<span class='curline'><a href='../S/24.html#L403'>write</a>             403 user/usertests.c     int n = write(fd, "xxx", 3);</span>
+<span class='curline'><a href='../S/24.html#L544'>write</a>             544 user/usertests.c     if(write(fd, "aaaaaaaaaa", SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L548'>write</a>             548 user/usertests.c     if(write(fd, "bbbbbbbbbb", SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L585'>write</a>             585 user/usertests.c     if(write(fd, buf, BSIZE) != BSIZE){</span>
+<span class='curline'><a href='../S/24.html#L747'>write</a>             747 user/usertests.c       if(write(fds[1], buf, SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L845'>write</a>             845 user/usertests.c     if(write(pfds[1], "x", 1) != 1)</span>
+<span class='curline'><a href='../S/24.html#L1103'>write</a>            1103 user/usertests.c     if(write(fd, buf, sizeof(buf)) != sizeof(buf)){</span>
+<span class='curline'><a href='../S/24.html#L1171'>write</a>            1171 user/usertests.c         if((n = write(fd, buf, SZ)) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L1293'>write</a>            1293 user/usertests.c   write(fd, "hello", SZ);</span>
+<span class='curline'><a href='../S/24.html#L1307'>write</a>            1307 user/usertests.c   write(fd1, "yyy", 3);</span>
+<span class='curline'><a href='../S/24.html#L1318'>write</a>            1318 user/usertests.c   if(write(fd, buf, 10) != 10){</span>
+<span class='curline'><a href='../S/24.html#L1340'>write</a>            1340 user/usertests.c   if(write(fd, "hello", SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L1572'>write</a>            1572 user/usertests.c   write(fd, "ff", 2);</span>
+<span class='curline'><a href='../S/24.html#L1590'>write</a>            1590 user/usertests.c   write(fd, "FF", 2);</span>
+<span class='curline'><a href='../S/24.html#L1750'>write</a>            1750 user/usertests.c       int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/24.html#L1791'>write</a>            1791 user/usertests.c           int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/24.html#L1829'>write</a>            1829 user/usertests.c     if(write(fd, buf, SZ) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L1999'>write</a>            1999 user/usertests.c   if(write(fd, "x", 1) &gt; 0){</span>
+<span class='curline'><a href='../S/24.html#L2276'>write</a>            2276 user/usertests.c       write(fds[1], "x", 1);</span>
+<span class='curline'><a href='../S/24.html#L2339'>write</a>            2339 user/usertests.c   if ((n = write(fd, a, PGSIZE)) &lt; 0) {</span>
+<span class='curline'><a href='../S/24.html#L2446'>write</a>            2446 user/usertests.c       int cc = write(fd, buf, BSIZE);</span>
+<span class='curline'><a href='../S/24.html#L2601'>write</a>            2601 user/usertests.c   write(fd, p, 1);</span>
+<span class='curline'><a href='../S/24.html#L2637'>write</a>            2637 user/usertests.c     write(fd, (char*)0xffffffffffL, 1);</span>
+<span class='curline'><a href='../S/24.html#L2647'>write</a>            2647 user/usertests.c   if(write(fd, "x", 1) != 1){</span>
+<span class='curline'><a href='../S/24.html#L2745'>write</a>            2745 user/usertests.c       if(write(fds[1], "x", 1) != 1){</span>
 </pre>
 </body>
 </html>

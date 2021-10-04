@@ -1,17 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uargv</title>
+<title>uart_tx_r</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/43.html#L420'>uargv</a>             420 kernel/sysfile.c   uint64 uargv, uarg;</span>
-<span class='curline'><a href='../S/43.html#L422'>uargv</a>             422 kernel/sysfile.c   if(argstr(0, path, MAXPATH) &lt; 0 || argaddr(1, &amp;uargv) &lt; 0){</span>
-<span class='curline'><a href='../S/43.html#L430'>uargv</a>             430 kernel/sysfile.c     if(fetchaddr(uargv+sizeof(uint64)*i, (uint64*)&amp;uarg) &lt; 0){</span>
+<span class='curline'><a href='../S/72.html#L46'>uart_tx_r</a>          46 kernel/uart.c  uint64 uart_tx_r; // read next from uart_tx_buf[uart_tx_r % UART_TX_BUF_SIZE]</span>
+<span class='curline'><a href='../S/72.html#L97'>uart_tx_r</a>          97 kernel/uart.c      if(uart_tx_w == uart_tx_r + UART_TX_BUF_SIZE){</span>
+<span class='curline'><a href='../S/72.html#L100'>uart_tx_r</a>         100 kernel/uart.c        sleep(&amp;uart_tx_r, &amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/72.html#L141'>uart_tx_r</a>         141 kernel/uart.c      if(uart_tx_w == uart_tx_r){</span>
+<span class='curline'><a href='../S/72.html#L153'>uart_tx_r</a>         153 kernel/uart.c      int c = uart_tx_buf[uart_tx_r % UART_TX_BUF_SIZE];</span>
+<span class='curline'><a href='../S/72.html#L154'>uart_tx_r</a>         154 kernel/uart.c      uart_tx_r += 1;</span>
+<span class='curline'><a href='../S/72.html#L157'>uart_tx_r</a>         157 kernel/uart.c      wakeup(&amp;uart_tx_r);</span>
 </pre>
 </body>
 </html>

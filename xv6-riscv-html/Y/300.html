@@ -1,19 +1,32 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>readopen</title>
+<title>ref</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L18'>readopen</a>           18 kernel/pipe.c    int readopen;   // read fd is still open</span>
-<span class='curline'><a href='../S/34.html#L33'>readopen</a>           33 kernel/pipe.c    pi-&gt;readopen = 1;</span>
-<span class='curline'><a href='../S/34.html#L66'>readopen</a>           66 kernel/pipe.c      pi-&gt;readopen = 0;</span>
-<span class='curline'><a href='../S/34.html#L69'>readopen</a>           69 kernel/pipe.c    if(pi-&gt;readopen == 0 &amp;&amp; pi-&gt;writeopen == 0){</span>
-<span class='curline'><a href='../S/34.html#L86'>readopen</a>           86 kernel/pipe.c        if(pi-&gt;readopen == 0 || pr-&gt;killed){</span>
+<span class='curline'><a href='../S/67.html#L36'>ref</a>                36 kernel/file.c      if(f-&gt;ref == 0){</span>
+<span class='curline'><a href='../S/67.html#L37'>ref</a>                37 kernel/file.c        f-&gt;ref = 1;</span>
+<span class='curline'><a href='../S/67.html#L51'>ref</a>                51 kernel/file.c    if(f-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/67.html#L53'>ref</a>                53 kernel/file.c    f-&gt;ref++;</span>
+<span class='curline'><a href='../S/67.html#L65'>ref</a>                65 kernel/file.c    if(f-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/67.html#L67'>ref</a>                67 kernel/file.c    if(--f-&gt;ref &gt; 0){</span>
+<span class='curline'><a href='../S/67.html#L72'>ref</a>                72 kernel/file.c    f-&gt;ref = 0;</span>
+<span class='curline'><a href='../S/41.html#L3'>ref</a>                 3 kernel/file.h    int ref; // reference count</span>
+<span class='curline'><a href='../S/41.html#L20'>ref</a>                20 kernel/file.h    int ref;            // Reference count</span>
+<span class='curline'><a href='../S/48.html#L252'>ref</a>               252 kernel/fs.c        if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum){</span>
+<span class='curline'><a href='../S/48.html#L253'>ref</a>               253 kernel/fs.c          ip-&gt;ref++;</span>
+<span class='curline'><a href='../S/48.html#L257'>ref</a>               257 kernel/fs.c        if(empty == 0 &amp;&amp; ip-&gt;ref == 0)    // Remember empty slot.</span>
+<span class='curline'><a href='../S/48.html#L268'>ref</a>               268 kernel/fs.c      ip-&gt;ref = 1;</span>
+<span class='curline'><a href='../S/48.html#L281'>ref</a>               281 kernel/fs.c      ip-&gt;ref++;</span>
+<span class='curline'><a href='../S/48.html#L294'>ref</a>               294 kernel/fs.c      if(ip == 0 || ip-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/48.html#L319'>ref</a>               319 kernel/fs.c      if(ip == 0 || !holdingsleep(&amp;ip-&gt;lock) || ip-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/48.html#L337'>ref</a>               337 kernel/fs.c      if(ip-&gt;ref == 1 &amp;&amp; ip-&gt;valid &amp;&amp; ip-&gt;nlink == 0){</span>
+<span class='curline'><a href='../S/48.html#L356'>ref</a>               356 kernel/fs.c      ip-&gt;ref--;</span>
 </pre>
 </body>
 </html>

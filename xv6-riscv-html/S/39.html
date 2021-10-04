@@ -3,7 +3,7 @@
 <head>
 <title>kernel/trampoline.S</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -12,147 +12,147 @@
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <pre>
-<a id='L1' name='L1'></a><em class='sharp'>        #</em>
-<a id='L2' name='L2'></a><em class='comment'>        # code to switch between user and kernel space.</em>
-<a id='L3' name='L3'></a><em class='sharp'>        #</em>
-<a id='L4' name='L4'></a><em class='comment'>        # this code is mapped at the same virtual address</em>
-<a id='L5' name='L5'></a><em class='sharp'>        #</em> (TRAMPOLINE) in user and kernel space so that
-<a id='L6' name='L6'></a><em class='comment'>        # it continues to work when it switches page tables.</em>
-<a id='L7' name='L7'></a><em class='sharp'>        #</em>
-<a id='L8' name='L8'></a><em class='comment'>        # kernel.ld causes this to be aligned</em>
-<a id='L9' name='L9'></a><em class='comment'>        # to a page boundary.</em>
-<a id='L10' name='L10'></a><em class='sharp'>        #</em>
-<a id='L11' name='L11'></a>        .section trampsec
-<a id='L12' name='L12'></a>.globl trampoline
-<a id='L13' name='L13'></a>trampoline:
-<a id='L14' name='L14'></a>.align 4
-<a id='L15' name='L15'></a>.globl uservec
-<a id='L16' name='L16'></a>uservec:    
-<a id='L17' name='L17'></a><em class='sharp'>        #</em>
-<a id='L18' name='L18'></a><em class='comment'>        # trap.c sets stvec to point here, so</em>
-<a id='L19' name='L19'></a><em class='comment'>        # traps from user space start here,</em>
-<a id='L20' name='L20'></a><em class='comment'>        # in supervisor mode, but with a</em>
-<a id='L21' name='L21'></a><em class='comment'>        # user page table.</em>
-<a id='L22' name='L22'></a><em class='sharp'>        #</em>
-<a id='L23' name='L23'></a><em class='comment'>        # sscratch points to where the process's p-&gt;trapframe is</em>
-<a id='L24' name='L24'></a><em class='comment'>        # mapped into user space, at TRAPFRAME.</em>
-<a id='L25' name='L25'></a><em class='sharp'>        #</em>
-<a id='L26' name='L26'></a>        
-<a id='L27' name='L27'></a><em class='comment'>        # swap a0 and sscratch</em>
-<a id='L28' name='L28'></a><em class='comment'>        # so that a0 is TRAPFRAME</em>
-<a id='L29' name='L29'></a>        csrrw a0, sscratch, a0
-<a id='L30' name='L30'></a>
-<a id='L31' name='L31'></a><em class='comment'>        # save the user registers in TRAPFRAME</em>
-<a id='L32' name='L32'></a>        sd ra, 40(a0)
-<a id='L33' name='L33'></a>        sd sp, 48(a0)
-<a id='L34' name='L34'></a>        sd gp, 56(a0)
-<a id='L35' name='L35'></a>        sd tp, 64(a0)
-<a id='L36' name='L36'></a>        sd t0, 72(a0)
-<a id='L37' name='L37'></a>        sd t1, 80(a0)
-<a id='L38' name='L38'></a>        sd t2, 88(a0)
-<a id='L39' name='L39'></a>        sd s0, 96(a0)
-<a id='L40' name='L40'></a>        sd s1, 104(a0)
-<a id='L41' name='L41'></a>        sd a1, 120(a0)
-<a id='L42' name='L42'></a>        sd a2, 128(a0)
-<a id='L43' name='L43'></a>        sd a3, 136(a0)
-<a id='L44' name='L44'></a>        sd a4, 144(a0)
-<a id='L45' name='L45'></a>        sd a5, 152(a0)
-<a id='L46' name='L46'></a>        sd a6, 160(a0)
-<a id='L47' name='L47'></a>        sd a7, 168(a0)
-<a id='L48' name='L48'></a>        sd s2, 176(a0)
-<a id='L49' name='L49'></a>        sd s3, 184(a0)
-<a id='L50' name='L50'></a>        sd s4, 192(a0)
-<a id='L51' name='L51'></a>        sd s5, 200(a0)
-<a id='L52' name='L52'></a>        sd s6, 208(a0)
-<a id='L53' name='L53'></a>        sd s7, 216(a0)
-<a id='L54' name='L54'></a>        sd s8, 224(a0)
-<a id='L55' name='L55'></a>        sd s9, 232(a0)
-<a id='L56' name='L56'></a>        sd s10, 240(a0)
-<a id='L57' name='L57'></a>        sd s11, 248(a0)
-<a id='L58' name='L58'></a>        sd t3, 256(a0)
-<a id='L59' name='L59'></a>        sd t4, 264(a0)
-<a id='L60' name='L60'></a>        sd t5, 272(a0)
-<a id='L61' name='L61'></a>        sd t6, 280(a0)
-<a id='L62' name='L62'></a>
-<a id='L63' name='L63'></a><em class='comment'>        # save the user a0 in p-&gt;trapframe-&gt;a0</em>
-<a id='L64' name='L64'></a>        csrr t0, sscratch
-<a id='L65' name='L65'></a>        sd t0, 112(a0)
-<a id='L66' name='L66'></a>
-<a id='L67' name='L67'></a><em class='comment'>        # restore kernel stack pointer from p-&gt;trapframe-&gt;kernel_sp</em>
-<a id='L68' name='L68'></a>        ld sp, 8(a0)
-<a id='L69' name='L69'></a>
-<a id='L70' name='L70'></a><em class='comment'>        # make tp hold the current hartid, from p-&gt;trapframe-&gt;kernel_hartid</em>
-<a id='L71' name='L71'></a>        ld tp, 32(a0)
-<a id='L72' name='L72'></a>
-<a id='L73' name='L73'></a><em class='comment'>        # load the address of usertrap(), p-&gt;trapframe-&gt;kernel_trap</em>
-<a id='L74' name='L74'></a>        ld t0, 16(a0)
-<a id='L75' name='L75'></a>
-<a id='L76' name='L76'></a><em class='comment'>        # restore kernel page table from p-&gt;trapframe-&gt;kernel_satp</em>
-<a id='L77' name='L77'></a>        ld t1, 0(a0)
-<a id='L78' name='L78'></a>        csrw satp, t1
-<a id='L79' name='L79'></a>        sfence.vma zero, zero
-<a id='L80' name='L80'></a>
-<a id='L81' name='L81'></a><em class='comment'>        # a0 is no longer valid, since the kernel page</em>
-<a id='L82' name='L82'></a><em class='comment'>        # table does not specially map p-&gt;tf.</em>
-<a id='L83' name='L83'></a>
-<a id='L84' name='L84'></a><em class='comment'>        # jump to usertrap(), which does not return</em>
-<a id='L85' name='L85'></a>        jr t0
-<a id='L86' name='L86'></a>
-<a id='L87' name='L87'></a>.globl userret
-<a id='L88' name='L88'></a>userret:
-<a id='L89' name='L89'></a><em class='comment'>        # userret(TRAPFRAME, pagetable)</em>
-<a id='L90' name='L90'></a><em class='comment'>        # switch from kernel to user.</em>
-<a id='L91' name='L91'></a><em class='comment'>        # usertrapret() calls here.</em>
-<a id='L92' name='L92'></a><em class='comment'>        # a0: TRAPFRAME, in user page table.</em>
-<a id='L93' name='L93'></a><em class='comment'>        # a1: user page table, for satp.</em>
-<a id='L94' name='L94'></a>
-<a id='L95' name='L95'></a><em class='comment'>        # switch to the user page table.</em>
-<a id='L96' name='L96'></a>        csrw satp, a1
-<a id='L97' name='L97'></a>        sfence.vma zero, zero
-<a id='L98' name='L98'></a>
-<a id='L99' name='L99'></a><em class='comment'>        # put the saved user a0 in sscratch, so we</em>
-<a id='L100' name='L100'></a><em class='comment'>        # can swap it with our a0 (TRAPFRAME) in the last step.</em>
-<a id='L101' name='L101'></a>        ld t0, 112(a0)
-<a id='L102' name='L102'></a>        csrw sscratch, t0
-<a id='L103' name='L103'></a>
-<a id='L104' name='L104'></a><em class='comment'>        # restore all but a0 from TRAPFRAME</em>
-<a id='L105' name='L105'></a>        ld ra, 40(a0)
-<a id='L106' name='L106'></a>        ld sp, 48(a0)
-<a id='L107' name='L107'></a>        ld gp, 56(a0)
-<a id='L108' name='L108'></a>        ld tp, 64(a0)
-<a id='L109' name='L109'></a>        ld t0, 72(a0)
-<a id='L110' name='L110'></a>        ld t1, 80(a0)
-<a id='L111' name='L111'></a>        ld t2, 88(a0)
-<a id='L112' name='L112'></a>        ld s0, 96(a0)
-<a id='L113' name='L113'></a>        ld s1, 104(a0)
-<a id='L114' name='L114'></a>        ld a1, 120(a0)
-<a id='L115' name='L115'></a>        ld a2, 128(a0)
-<a id='L116' name='L116'></a>        ld a3, 136(a0)
-<a id='L117' name='L117'></a>        ld a4, 144(a0)
-<a id='L118' name='L118'></a>        ld a5, 152(a0)
-<a id='L119' name='L119'></a>        ld a6, 160(a0)
-<a id='L120' name='L120'></a>        ld a7, 168(a0)
-<a id='L121' name='L121'></a>        ld s2, 176(a0)
-<a id='L122' name='L122'></a>        ld s3, 184(a0)
-<a id='L123' name='L123'></a>        ld s4, 192(a0)
-<a id='L124' name='L124'></a>        ld s5, 200(a0)
-<a id='L125' name='L125'></a>        ld s6, 208(a0)
-<a id='L126' name='L126'></a>        ld s7, 216(a0)
-<a id='L127' name='L127'></a>        ld s8, 224(a0)
-<a id='L128' name='L128'></a>        ld s9, 232(a0)
-<a id='L129' name='L129'></a>        ld s10, 240(a0)
-<a id='L130' name='L130'></a>        ld s11, 248(a0)
-<a id='L131' name='L131'></a>        ld t3, 256(a0)
-<a id='L132' name='L132'></a>        ld t4, 264(a0)
-<a id='L133' name='L133'></a>        ld t5, 272(a0)
-<a id='L134' name='L134'></a>        ld t6, 280(a0)
-<a id='L135' name='L135'></a>
-<a id='L136' name='L136'></a><em class='comment'>        # restore user a0, and save TRAPFRAME in sscratch</em>
-<a id='L137' name='L137'></a>        csrrw a0, sscratch, a0
-<a id='L138' name='L138'></a>        
-<a id='L139' name='L139'></a><em class='comment'>        # return to user mode and user pc.</em>
-<a id='L140' name='L140'></a><em class='comment'>        # usertrapret() set up sstatus and sepc.</em>
-<a id='L141' name='L141'></a>        sret
+<a id='L1' name='L1'></a>   1 <em class='sharp'>        #</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>        # code to switch between user and kernel space.</em>
+<a id='L3' name='L3'></a>   3 <em class='sharp'>        #</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>        # this code is mapped at the same virtual address</em>
+<a id='L5' name='L5'></a>   5 <em class='sharp'>        #</em> (TRAMPOLINE) in user and kernel space so that
+<a id='L6' name='L6'></a>   6 <em class='comment'>        # it continues to work when it switches page tables.</em>
+<a id='L7' name='L7'></a>   7 <em class='sharp'>        #</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>        # kernel.ld causes this to be aligned</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>        # to a page boundary.</em>
+<a id='L10' name='L10'></a>  10 <em class='sharp'>        #</em>
+<a id='L11' name='L11'></a>  11         .section trampsec
+<a id='L12' name='L12'></a>  12 .globl trampoline
+<a id='L13' name='L13'></a>  13 trampoline:
+<a id='L14' name='L14'></a>  14 .align 4
+<a id='L15' name='L15'></a>  15 .globl uservec
+<a id='L16' name='L16'></a>  16 uservec:    
+<a id='L17' name='L17'></a>  17 <em class='sharp'>        #</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'>        # trap.c sets stvec to point here, so</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'>        # traps from user space start here,</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'>        # in supervisor mode, but with a</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'>        # user page table.</em>
+<a id='L22' name='L22'></a>  22 <em class='sharp'>        #</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'>        # sscratch points to where the process's p-&gt;trapframe is</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'>        # mapped into user space, at TRAPFRAME.</em>
+<a id='L25' name='L25'></a>  25 <em class='sharp'>        #</em>
+<a id='L26' name='L26'></a>  26         
+<a id='L27' name='L27'></a>  27 <em class='comment'>        # swap a0 and sscratch</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'>        # so that a0 is TRAPFRAME</em>
+<a id='L29' name='L29'></a>  29         csrrw a0, sscratch, a0
+<a id='L30' name='L30'></a>  30 
+<a id='L31' name='L31'></a>  31 <em class='comment'>        # save the user registers in TRAPFRAME</em>
+<a id='L32' name='L32'></a>  32         sd ra, 40(a0)
+<a id='L33' name='L33'></a>  33         sd sp, 48(a0)
+<a id='L34' name='L34'></a>  34         sd gp, 56(a0)
+<a id='L35' name='L35'></a>  35         sd tp, 64(a0)
+<a id='L36' name='L36'></a>  36         sd t0, 72(a0)
+<a id='L37' name='L37'></a>  37         sd t1, 80(a0)
+<a id='L38' name='L38'></a>  38         sd t2, 88(a0)
+<a id='L39' name='L39'></a>  39         sd s0, 96(a0)
+<a id='L40' name='L40'></a>  40         sd s1, 104(a0)
+<a id='L41' name='L41'></a>  41         sd a1, 120(a0)
+<a id='L42' name='L42'></a>  42         sd a2, 128(a0)
+<a id='L43' name='L43'></a>  43         sd a3, 136(a0)
+<a id='L44' name='L44'></a>  44         sd a4, 144(a0)
+<a id='L45' name='L45'></a>  45         sd a5, 152(a0)
+<a id='L46' name='L46'></a>  46         sd a6, 160(a0)
+<a id='L47' name='L47'></a>  47         sd a7, 168(a0)
+<a id='L48' name='L48'></a>  48         sd s2, 176(a0)
+<a id='L49' name='L49'></a>  49         sd s3, 184(a0)
+<a id='L50' name='L50'></a>  50         sd s4, 192(a0)
+<a id='L51' name='L51'></a>  51         sd s5, 200(a0)
+<a id='L52' name='L52'></a>  52         sd s6, 208(a0)
+<a id='L53' name='L53'></a>  53         sd s7, 216(a0)
+<a id='L54' name='L54'></a>  54         sd s8, 224(a0)
+<a id='L55' name='L55'></a>  55         sd s9, 232(a0)
+<a id='L56' name='L56'></a>  56         sd s10, 240(a0)
+<a id='L57' name='L57'></a>  57         sd s11, 248(a0)
+<a id='L58' name='L58'></a>  58         sd t3, 256(a0)
+<a id='L59' name='L59'></a>  59         sd t4, 264(a0)
+<a id='L60' name='L60'></a>  60         sd t5, 272(a0)
+<a id='L61' name='L61'></a>  61         sd t6, 280(a0)
+<a id='L62' name='L62'></a>  62 
+<a id='L63' name='L63'></a>  63 <em class='comment'>        # save the user a0 in p-&gt;trapframe-&gt;a0</em>
+<a id='L64' name='L64'></a>  64         csrr t0, sscratch
+<a id='L65' name='L65'></a>  65         sd t0, 112(a0)
+<a id='L66' name='L66'></a>  66 
+<a id='L67' name='L67'></a>  67 <em class='comment'>        # restore kernel stack pointer from p-&gt;trapframe-&gt;kernel_sp</em>
+<a id='L68' name='L68'></a>  68         ld sp, 8(a0)
+<a id='L69' name='L69'></a>  69 
+<a id='L70' name='L70'></a>  70 <em class='comment'>        # make tp hold the current hartid, from p-&gt;trapframe-&gt;kernel_hartid</em>
+<a id='L71' name='L71'></a>  71         ld tp, 32(a0)
+<a id='L72' name='L72'></a>  72 
+<a id='L73' name='L73'></a>  73 <em class='comment'>        # load the address of usertrap(), p-&gt;trapframe-&gt;kernel_trap</em>
+<a id='L74' name='L74'></a>  74         ld t0, 16(a0)
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <em class='comment'>        # restore kernel page table from p-&gt;trapframe-&gt;kernel_satp</em>
+<a id='L77' name='L77'></a>  77         ld t1, 0(a0)
+<a id='L78' name='L78'></a>  78         csrw satp, t1
+<a id='L79' name='L79'></a>  79         sfence.vma zero, zero
+<a id='L80' name='L80'></a>  80 
+<a id='L81' name='L81'></a>  81 <em class='comment'>        # a0 is no longer valid, since the kernel page</em>
+<a id='L82' name='L82'></a>  82 <em class='comment'>        # table does not specially map p-&gt;tf.</em>
+<a id='L83' name='L83'></a>  83 
+<a id='L84' name='L84'></a>  84 <em class='comment'>        # jump to usertrap(), which does not return</em>
+<a id='L85' name='L85'></a>  85         jr t0
+<a id='L86' name='L86'></a>  86 
+<a id='L87' name='L87'></a>  87 .globl userret
+<a id='L88' name='L88'></a>  88 userret:
+<a id='L89' name='L89'></a>  89 <em class='comment'>        # userret(TRAPFRAME, pagetable)</em>
+<a id='L90' name='L90'></a>  90 <em class='comment'>        # switch from kernel to user.</em>
+<a id='L91' name='L91'></a>  91 <em class='comment'>        # usertrapret() calls here.</em>
+<a id='L92' name='L92'></a>  92 <em class='comment'>        # a0: TRAPFRAME, in user page table.</em>
+<a id='L93' name='L93'></a>  93 <em class='comment'>        # a1: user page table, for satp.</em>
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95 <em class='comment'>        # switch to the user page table.</em>
+<a id='L96' name='L96'></a>  96         csrw satp, a1
+<a id='L97' name='L97'></a>  97         sfence.vma zero, zero
+<a id='L98' name='L98'></a>  98 
+<a id='L99' name='L99'></a>  99 <em class='comment'>        # put the saved user a0 in sscratch, so we</em>
+<a id='L100' name='L100'></a> 100 <em class='comment'>        # can swap it with our a0 (TRAPFRAME) in the last step.</em>
+<a id='L101' name='L101'></a> 101         ld t0, 112(a0)
+<a id='L102' name='L102'></a> 102         csrw sscratch, t0
+<a id='L103' name='L103'></a> 103 
+<a id='L104' name='L104'></a> 104 <em class='comment'>        # restore all but a0 from TRAPFRAME</em>
+<a id='L105' name='L105'></a> 105         ld ra, 40(a0)
+<a id='L106' name='L106'></a> 106         ld sp, 48(a0)
+<a id='L107' name='L107'></a> 107         ld gp, 56(a0)
+<a id='L108' name='L108'></a> 108         ld tp, 64(a0)
+<a id='L109' name='L109'></a> 109         ld t0, 72(a0)
+<a id='L110' name='L110'></a> 110         ld t1, 80(a0)
+<a id='L111' name='L111'></a> 111         ld t2, 88(a0)
+<a id='L112' name='L112'></a> 112         ld s0, 96(a0)
+<a id='L113' name='L113'></a> 113         ld s1, 104(a0)
+<a id='L114' name='L114'></a> 114         ld a1, 120(a0)
+<a id='L115' name='L115'></a> 115         ld a2, 128(a0)
+<a id='L116' name='L116'></a> 116         ld a3, 136(a0)
+<a id='L117' name='L117'></a> 117         ld a4, 144(a0)
+<a id='L118' name='L118'></a> 118         ld a5, 152(a0)
+<a id='L119' name='L119'></a> 119         ld a6, 160(a0)
+<a id='L120' name='L120'></a> 120         ld a7, 168(a0)
+<a id='L121' name='L121'></a> 121         ld s2, 176(a0)
+<a id='L122' name='L122'></a> 122         ld s3, 184(a0)
+<a id='L123' name='L123'></a> 123         ld s4, 192(a0)
+<a id='L124' name='L124'></a> 124         ld s5, 200(a0)
+<a id='L125' name='L125'></a> 125         ld s6, 208(a0)
+<a id='L126' name='L126'></a> 126         ld s7, 216(a0)
+<a id='L127' name='L127'></a> 127         ld s8, 224(a0)
+<a id='L128' name='L128'></a> 128         ld s9, 232(a0)
+<a id='L129' name='L129'></a> 129         ld s10, 240(a0)
+<a id='L130' name='L130'></a> 130         ld s11, 248(a0)
+<a id='L131' name='L131'></a> 131         ld t3, 256(a0)
+<a id='L132' name='L132'></a> 132         ld t4, 264(a0)
+<a id='L133' name='L133'></a> 133         ld t5, 272(a0)
+<a id='L134' name='L134'></a> 134         ld t6, 280(a0)
+<a id='L135' name='L135'></a> 135 
+<a id='L136' name='L136'></a> 136 <em class='comment'>        # restore user a0, and save TRAPFRAME in sscratch</em>
+<a id='L137' name='L137'></a> 137         csrrw a0, sscratch, a0
+<a id='L138' name='L138'></a> 138         
+<a id='L139' name='L139'></a> 139 <em class='comment'>        # return to user mode and user pc.</em>
+<a id='L140' name='L140'></a> 140 <em class='comment'>        # usertrapret() set up sstatus and sepc.</em>
+<a id='L141' name='L141'></a> 141         sret
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

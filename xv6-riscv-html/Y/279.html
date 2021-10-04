@@ -1,19 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pid3</title>
+<title>pid_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/24.html#L786'>pid3</a>              786 user/usertests.c   int pid1, pid2, pid3;</span>
-<span class='curline'><a href='../S/24.html#L808'>pid3</a>              808 user/usertests.c   pid3 = fork();</span>
-<span class='curline'><a href='../S/24.html#L809'>pid3</a>              809 user/usertests.c   if(pid3 &lt; 0) {</span>
-<span class='curline'><a href='../S/24.html#L813'>pid3</a>              813 user/usertests.c   if(pid3 == 0){</span>
-<span class='curline'><a href='../S/24.html#L831'>pid3</a>              831 user/usertests.c   kill(pid3);</span>
+<span class='curline'><a href='../S/63.html#L16'>pid_lock</a>           16 kernel/proc.c  struct spinlock pid_lock;</span>
+<span class='curline'><a href='../S/63.html#L51'>pid_lock</a>           51 kernel/proc.c    initlock(&amp;pid_lock, "nextpid");</span>
+<span class='curline'><a href='../S/63.html#L92'>pid_lock</a>           92 kernel/proc.c    acquire(&amp;pid_lock);</span>
+<span class='curline'><a href='../S/63.html#L95'>pid_lock</a>           95 kernel/proc.c    release(&amp;pid_lock);</span>
 </pre>
 </body>
 </html>

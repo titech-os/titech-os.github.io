@@ -1,25 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PLIC</title>
+<title>PIPESIZE</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/49.html#L35'>PLIC</a>               35 kernel/memlayout.h #define PLIC_PRIORITY (PLIC + 0x0)</span>
-<span class='curline'><a href='../S/49.html#L36'>PLIC</a>               36 kernel/memlayout.h #define PLIC_PENDING (PLIC + 0x1000)</span>
-<span class='curline'><a href='../S/49.html#L37'>PLIC</a>               37 kernel/memlayout.h #define PLIC_MENABLE(hart) (PLIC + 0x2000 + (hart)*0x100)</span>
-<span class='curline'><a href='../S/49.html#L38'>PLIC</a>               38 kernel/memlayout.h #define PLIC_SENABLE(hart) (PLIC + 0x2080 + (hart)*0x100)</span>
-<span class='curline'><a href='../S/49.html#L39'>PLIC</a>               39 kernel/memlayout.h #define PLIC_MPRIORITY(hart) (PLIC + 0x200000 + (hart)*0x2000)</span>
-<span class='curline'><a href='../S/49.html#L40'>PLIC</a>               40 kernel/memlayout.h #define PLIC_SPRIORITY(hart) (PLIC + 0x201000 + (hart)*0x2000)</span>
-<span class='curline'><a href='../S/49.html#L41'>PLIC</a>               41 kernel/memlayout.h #define PLIC_MCLAIM(hart) (PLIC + 0x200004 + (hart)*0x2000)</span>
-<span class='curline'><a href='../S/49.html#L42'>PLIC</a>               42 kernel/memlayout.h #define PLIC_SCLAIM(hart) (PLIC + 0x201004 + (hart)*0x2000)</span>
-<span class='curline'><a href='../S/62.html#L15'>PLIC</a>               15 kernel/plic.c    *(uint32*)(PLIC + UART0_IRQ*4) = 1;</span>
-<span class='curline'><a href='../S/62.html#L16'>PLIC</a>               16 kernel/plic.c    *(uint32*)(PLIC + VIRTIO0_IRQ*4) = 1;</span>
-<span class='curline'><a href='../S/38.html#L34'>PLIC</a>               34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x400000, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/34.html#L15'>PIPESIZE</a>           15 kernel/pipe.c    char data[PIPESIZE];</span>
+<span class='curline'><a href='../S/34.html#L88'>PIPESIZE</a>           88 kernel/pipe.c      if(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){ //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/34.html#L95'>PIPESIZE</a>           95 kernel/pipe.c        pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
+<span class='curline'><a href='../S/34.html#L123'>PIPESIZE</a>          123 kernel/pipe.c      ch = pi-&gt;data[pi-&gt;nread++ % PIPESIZE];</span>
 </pre>
 </body>
 </html>

@@ -1,19 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>panicked</title>
+<title>parent</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/29.html#L18'>panicked</a>           18 kernel/printf.c volatile int panicked = 0;</span>
-<span class='curline'><a href='../S/29.html#L124'>panicked</a>          124 kernel/printf.c   panicked = 1; // freeze uart output from other CPUs</span>
-<span class='curline'><a href='../S/72.html#L48'>panicked</a>           48 kernel/uart.c  extern volatile int panicked; // from printf.c</span>
-<span class='curline'><a href='../S/72.html#L91'>panicked</a>           91 kernel/uart.c    if(panicked){</span>
-<span class='curline'><a href='../S/72.html#L120'>panicked</a>          120 kernel/uart.c    if(panicked){</span>
+<span class='curline'><a href='../S/63.html#L161'>parent</a>            161 kernel/proc.c    p-&gt;parent = 0;</span>
+<span class='curline'><a href='../S/63.html#L311'>parent</a>            311 kernel/proc.c    np-&gt;parent = p;</span>
+<span class='curline'><a href='../S/63.html#L329'>parent</a>            329 kernel/proc.c      if(pp-&gt;parent == p){</span>
+<span class='curline'><a href='../S/63.html#L330'>parent</a>            330 kernel/proc.c        pp-&gt;parent = initproc;</span>
+<span class='curline'><a href='../S/63.html#L367'>parent</a>            367 kernel/proc.c    wakeup(p-&gt;parent);</span>
+<span class='curline'><a href='../S/63.html#L396'>parent</a>            396 kernel/proc.c        if(np-&gt;parent == p){</span>
+<span class='curline'><a href='../S/35.html#L97'>parent</a>             97 kernel/proc.h    struct proc *parent;         // Parent process</span>
 </pre>
 </body>
 </html>

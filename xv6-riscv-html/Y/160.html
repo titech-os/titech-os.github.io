@@ -1,19 +1,223 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>inword</title>
+<title>ip</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/10.html#L11'>inword</a>             11 user/wc.c        int l, w, c, inword;</span>
-<span class='curline'><a href='../S/10.html#L14'>inword</a>             14 user/wc.c        inword = 0;</span>
-<span class='curline'><a href='../S/10.html#L21'>inword</a>             21 user/wc.c              inword = 0;</span>
-<span class='curline'><a href='../S/10.html#L22'>inword</a>             22 user/wc.c            else if(!inword){</span>
-<span class='curline'><a href='../S/10.html#L24'>inword</a>             24 user/wc.c              inword = 1;</span>
+<span class='curline'><a href='../S/36.html#L10'>ip</a>                 10 kernel/exec.c  static int loadseg(pde_t *pgdir, uint64 addr, struct inode *ip, uint offset, uint sz);</span>
+<span class='curline'><a href='../S/36.html#L19'>ip</a>                 19 kernel/exec.c    struct inode *ip;</span>
+<span class='curline'><a href='../S/36.html#L26'>ip</a>                 26 kernel/exec.c    if((ip = namei(path)) == 0){</span>
+<span class='curline'><a href='../S/36.html#L30'>ip</a>                 30 kernel/exec.c    ilock(ip);</span>
+<span class='curline'><a href='../S/36.html#L33'>ip</a>                 33 kernel/exec.c    if(readi(ip, 0, (uint64)&amp;elf, 0, sizeof(elf)) != sizeof(elf))</span>
+<span class='curline'><a href='../S/36.html#L43'>ip</a>                 43 kernel/exec.c      if(readi(ip, 0, (uint64)&amp;ph, off, sizeof(ph)) != sizeof(ph))</span>
+<span class='curline'><a href='../S/36.html#L57'>ip</a>                 57 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/36.html#L60'>ip</a>                 60 kernel/exec.c    iunlockput(ip);</span>
+<span class='curline'><a href='../S/36.html#L62'>ip</a>                 62 kernel/exec.c    ip = 0;</span>
+<span class='curline'><a href='../S/36.html#L124'>ip</a>                124 kernel/exec.c    if(ip){</span>
+<span class='curline'><a href='../S/36.html#L125'>ip</a>                125 kernel/exec.c      iunlockput(ip);</span>
+<span class='curline'><a href='../S/36.html#L136'>ip</a>                136 kernel/exec.c  loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)</span>
+<span class='curline'><a href='../S/36.html#L149'>ip</a>                149 kernel/exec.c      if(readi(ip, 0, (uint64)pa, offset+i, n) != n)</span>
+<span class='curline'><a href='../S/67.html#L80'>ip</a>                 80 kernel/file.c      iput(ff.ip);</span>
+<span class='curline'><a href='../S/67.html#L94'>ip</a>                 94 kernel/file.c      ilock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/67.html#L95'>ip</a>                 95 kernel/file.c      stati(f-&gt;ip, &amp;st);</span>
+<span class='curline'><a href='../S/67.html#L96'>ip</a>                 96 kernel/file.c      iunlock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/67.html#L121'>ip</a>                121 kernel/file.c      ilock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/67.html#L122'>ip</a>                122 kernel/file.c      if((r = readi(f-&gt;ip, 1, addr, f-&gt;off, n)) &gt; 0)</span>
+<span class='curline'><a href='../S/67.html#L124'>ip</a>                124 kernel/file.c      iunlock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/67.html#L163'>ip</a>                163 kernel/file.c        ilock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/67.html#L164'>ip</a>                164 kernel/file.c        if ((r = writei(f-&gt;ip, 1, addr + i, f-&gt;off, n1)) &gt; 0)</span>
+<span class='curline'><a href='../S/67.html#L166'>ip</a>                166 kernel/file.c        iunlock(f-&gt;ip);</span>
+<span class='curline'><a href='../S/41.html#L7'>ip</a>                  7 kernel/file.h    struct inode *ip;  // FD_INODE and FD_DEVICE</span>
+<span class='curline'><a href='../S/48.html#L222'>ip</a>                222 kernel/fs.c    iupdate(struct inode *ip)</span>
+<span class='curline'><a href='../S/48.html#L227'>ip</a>                227 kernel/fs.c      bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/48.html#L228'>ip</a>                228 kernel/fs.c      dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/48.html#L229'>ip</a>                229 kernel/fs.c      dip-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/48.html#L230'>ip</a>                230 kernel/fs.c      dip-&gt;major = ip-&gt;major;</span>
+<span class='curline'><a href='../S/48.html#L231'>ip</a>                231 kernel/fs.c      dip-&gt;minor = ip-&gt;minor;</span>
+<span class='curline'><a href='../S/48.html#L232'>ip</a>                232 kernel/fs.c      dip-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/48.html#L233'>ip</a>                233 kernel/fs.c      dip-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/48.html#L234'>ip</a>                234 kernel/fs.c      memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/48.html#L245'>ip</a>                245 kernel/fs.c      struct inode *ip, *empty;</span>
+<span class='curline'><a href='../S/48.html#L251'>ip</a>                251 kernel/fs.c      for(ip = &amp;itable.inode[0]; ip &lt; &amp;itable.inode[NINODE]; ip++){</span>
+<span class='curline'><a href='../S/48.html#L252'>ip</a>                252 kernel/fs.c        if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum){</span>
+<span class='curline'><a href='../S/48.html#L253'>ip</a>                253 kernel/fs.c          ip-&gt;ref++;</span>
+<span class='curline'><a href='../S/48.html#L255'>ip</a>                255 kernel/fs.c          return ip;</span>
+<span class='curline'><a href='../S/48.html#L257'>ip</a>                257 kernel/fs.c        if(empty == 0 &amp;&amp; ip-&gt;ref == 0)    // Remember empty slot.</span>
+<span class='curline'><a href='../S/48.html#L258'>ip</a>                258 kernel/fs.c          empty = ip;</span>
+<span class='curline'><a href='../S/48.html#L265'>ip</a>                265 kernel/fs.c      ip = empty;</span>
+<span class='curline'><a href='../S/48.html#L266'>ip</a>                266 kernel/fs.c      ip-&gt;dev = dev;</span>
+<span class='curline'><a href='../S/48.html#L267'>ip</a>                267 kernel/fs.c      ip-&gt;inum = inum;</span>
+<span class='curline'><a href='../S/48.html#L268'>ip</a>                268 kernel/fs.c      ip-&gt;ref = 1;</span>
+<span class='curline'><a href='../S/48.html#L269'>ip</a>                269 kernel/fs.c      ip-&gt;valid = 0;</span>
+<span class='curline'><a href='../S/48.html#L272'>ip</a>                272 kernel/fs.c      return ip;</span>
+<span class='curline'><a href='../S/48.html#L278'>ip</a>                278 kernel/fs.c    idup(struct inode *ip)</span>
+<span class='curline'><a href='../S/48.html#L281'>ip</a>                281 kernel/fs.c      ip-&gt;ref++;</span>
+<span class='curline'><a href='../S/48.html#L283'>ip</a>                283 kernel/fs.c      return ip;</span>
+<span class='curline'><a href='../S/48.html#L289'>ip</a>                289 kernel/fs.c    ilock(struct inode *ip)</span>
+<span class='curline'><a href='../S/48.html#L294'>ip</a>                294 kernel/fs.c      if(ip == 0 || ip-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/48.html#L297'>ip</a>                297 kernel/fs.c      acquiresleep(&amp;ip-&gt;lock);</span>
+<span class='curline'><a href='../S/48.html#L299'>ip</a>                299 kernel/fs.c      if(ip-&gt;valid == 0){</span>
+<span class='curline'><a href='../S/48.html#L300'>ip</a>                300 kernel/fs.c        bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/48.html#L301'>ip</a>                301 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/48.html#L302'>ip</a>                302 kernel/fs.c        ip-&gt;type = dip-&gt;type;</span>
+<span class='curline'><a href='../S/48.html#L303'>ip</a>                303 kernel/fs.c        ip-&gt;major = dip-&gt;major;</span>
+<span class='curline'><a href='../S/48.html#L304'>ip</a>                304 kernel/fs.c        ip-&gt;minor = dip-&gt;minor;</span>
+<span class='curline'><a href='../S/48.html#L305'>ip</a>                305 kernel/fs.c        ip-&gt;nlink = dip-&gt;nlink;</span>
+<span class='curline'><a href='../S/48.html#L306'>ip</a>                306 kernel/fs.c        ip-&gt;size = dip-&gt;size;</span>
+<span class='curline'><a href='../S/48.html#L307'>ip</a>                307 kernel/fs.c        memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/48.html#L309'>ip</a>                309 kernel/fs.c        ip-&gt;valid = 1;</span>
+<span class='curline'><a href='../S/48.html#L310'>ip</a>                310 kernel/fs.c        if(ip-&gt;type == 0)</span>
+<span class='curline'><a href='../S/48.html#L317'>ip</a>                317 kernel/fs.c    iunlock(struct inode *ip)</span>
+<span class='curline'><a href='../S/48.html#L319'>ip</a>                319 kernel/fs.c      if(ip == 0 || !holdingsleep(&amp;ip-&gt;lock) || ip-&gt;ref &lt; 1)</span>
+<span class='curline'><a href='../S/48.html#L322'>ip</a>                322 kernel/fs.c      releasesleep(&amp;ip-&gt;lock);</span>
+<span class='curline'><a href='../S/48.html#L333'>ip</a>                333 kernel/fs.c    iput(struct inode *ip)</span>
+<span class='curline'><a href='../S/48.html#L337'>ip</a>                337 kernel/fs.c      if(ip-&gt;ref == 1 &amp;&amp; ip-&gt;valid &amp;&amp; ip-&gt;nlink == 0){</span>
+<span class='curline'><a href='../S/48.html#L342'>ip</a>                342 kernel/fs.c        acquiresleep(&amp;ip-&gt;lock);</span>
+<span class='curline'><a href='../S/48.html#L346'>ip</a>                346 kernel/fs.c        itrunc(ip);</span>
+<span class='curline'><a href='../S/48.html#L347'>ip</a>                347 kernel/fs.c        ip-&gt;type = 0;</span>
+<span class='curline'><a href='../S/48.html#L348'>ip</a>                348 kernel/fs.c        iupdate(ip);</span>
+<span class='curline'><a href='../S/48.html#L349'>ip</a>                349 kernel/fs.c        ip-&gt;valid = 0;</span>
+<span class='curline'><a href='../S/48.html#L351'>ip</a>                351 kernel/fs.c        releasesleep(&amp;ip-&gt;lock);</span>
+<span class='curline'><a href='../S/48.html#L356'>ip</a>                356 kernel/fs.c      ip-&gt;ref--;</span>
+<span class='curline'><a href='../S/48.html#L362'>ip</a>                362 kernel/fs.c    iunlockput(struct inode *ip)</span>
+<span class='curline'><a href='../S/48.html#L364'>ip</a>                364 kernel/fs.c      iunlock(ip);</span>
+<span class='curline'><a href='../S/48.html#L365'>ip</a>                365 kernel/fs.c      iput(ip);</span>
+<span class='curline'><a href='../S/48.html#L378'>ip</a>                378 kernel/fs.c    bmap(struct inode *ip, uint bn)</span>
+<span class='curline'><a href='../S/48.html#L384'>ip</a>                384 kernel/fs.c        if((addr = ip-&gt;addrs[bn]) == 0)</span>
+<span class='curline'><a href='../S/48.html#L385'>ip</a>                385 kernel/fs.c          ip-&gt;addrs[bn] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/48.html#L392'>ip</a>                392 kernel/fs.c        if((addr = ip-&gt;addrs[NDIRECT]) == 0)</span>
+<span class='curline'><a href='../S/48.html#L393'>ip</a>                393 kernel/fs.c          ip-&gt;addrs[NDIRECT] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/48.html#L394'>ip</a>                394 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/48.html#L397'>ip</a>                397 kernel/fs.c          a[bn] = addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/48.html#L410'>ip</a>                410 kernel/fs.c    itrunc(struct inode *ip)</span>
+<span class='curline'><a href='../S/48.html#L417'>ip</a>                417 kernel/fs.c        if(ip-&gt;addrs[i]){</span>
+<span class='curline'><a href='../S/48.html#L418'>ip</a>                418 kernel/fs.c          bfree(ip-&gt;dev, ip-&gt;addrs[i]);</span>
+<span class='curline'><a href='../S/48.html#L419'>ip</a>                419 kernel/fs.c          ip-&gt;addrs[i] = 0;</span>
+<span class='curline'><a href='../S/48.html#L423'>ip</a>                423 kernel/fs.c      if(ip-&gt;addrs[NDIRECT]){</span>
+<span class='curline'><a href='../S/48.html#L424'>ip</a>                424 kernel/fs.c        bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/48.html#L428'>ip</a>                428 kernel/fs.c            bfree(ip-&gt;dev, a[j]);</span>
+<span class='curline'><a href='../S/48.html#L431'>ip</a>                431 kernel/fs.c        bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/48.html#L432'>ip</a>                432 kernel/fs.c        ip-&gt;addrs[NDIRECT] = 0;</span>
+<span class='curline'><a href='../S/48.html#L435'>ip</a>                435 kernel/fs.c      ip-&gt;size = 0;</span>
+<span class='curline'><a href='../S/48.html#L436'>ip</a>                436 kernel/fs.c      iupdate(ip);</span>
+<span class='curline'><a href='../S/48.html#L442'>ip</a>                442 kernel/fs.c    stati(struct inode *ip, struct stat *st)</span>
+<span class='curline'><a href='../S/48.html#L444'>ip</a>                444 kernel/fs.c      st-&gt;dev = ip-&gt;dev;</span>
+<span class='curline'><a href='../S/48.html#L445'>ip</a>                445 kernel/fs.c      st-&gt;ino = ip-&gt;inum;</span>
+<span class='curline'><a href='../S/48.html#L446'>ip</a>                446 kernel/fs.c      st-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/48.html#L447'>ip</a>                447 kernel/fs.c      st-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/48.html#L448'>ip</a>                448 kernel/fs.c      st-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/48.html#L456'>ip</a>                456 kernel/fs.c    readi(struct inode *ip, int user_dst, uint64 dst, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L461'>ip</a>                461 kernel/fs.c      if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/48.html#L463'>ip</a>                463 kernel/fs.c      if(off + n &gt; ip-&gt;size)</span>
+<span class='curline'><a href='../S/48.html#L464'>ip</a>                464 kernel/fs.c        n = ip-&gt;size - off;</span>
+<span class='curline'><a href='../S/48.html#L467'>ip</a>                467 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/48.html#L487'>ip</a>                487 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L492'>ip</a>                492 kernel/fs.c      if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/48.html#L498'>ip</a>                498 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/48.html#L508'>ip</a>                508 kernel/fs.c      if(off &gt; ip-&gt;size)</span>
+<span class='curline'><a href='../S/48.html#L509'>ip</a>                509 kernel/fs.c        ip-&gt;size = off;</span>
+<span class='curline'><a href='../S/48.html#L514'>ip</a>                514 kernel/fs.c      iupdate(ip);</span>
+<span class='curline'><a href='../S/48.html#L561'>ip</a>                561 kernel/fs.c      struct inode *ip;</span>
+<span class='curline'><a href='../S/48.html#L564'>ip</a>                564 kernel/fs.c      if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/48.html#L565'>ip</a>                565 kernel/fs.c        iput(ip);</span>
+<span class='curline'><a href='../S/48.html#L631'>ip</a>                631 kernel/fs.c      struct inode *ip, *next;</span>
+<span class='curline'><a href='../S/48.html#L634'>ip</a>                634 kernel/fs.c        ip = iget(ROOTDEV, ROOTINO);</span>
+<span class='curline'><a href='../S/48.html#L636'>ip</a>                636 kernel/fs.c        ip = idup(myproc()-&gt;cwd);</span>
+<span class='curline'><a href='../S/48.html#L639'>ip</a>                639 kernel/fs.c        ilock(ip);</span>
+<span class='curline'><a href='../S/48.html#L640'>ip</a>                640 kernel/fs.c        if(ip-&gt;type != T_DIR){</span>
+<span class='curline'><a href='../S/48.html#L641'>ip</a>                641 kernel/fs.c          iunlockput(ip);</span>
+<span class='curline'><a href='../S/48.html#L646'>ip</a>                646 kernel/fs.c          iunlock(ip);</span>
+<span class='curline'><a href='../S/48.html#L647'>ip</a>                647 kernel/fs.c          return ip;</span>
+<span class='curline'><a href='../S/48.html#L649'>ip</a>                649 kernel/fs.c        if((next = dirlookup(ip, name, 0)) == 0){</span>
+<span class='curline'><a href='../S/48.html#L650'>ip</a>                650 kernel/fs.c          iunlockput(ip);</span>
+<span class='curline'><a href='../S/48.html#L653'>ip</a>                653 kernel/fs.c        iunlockput(ip);</span>
+<span class='curline'><a href='../S/48.html#L654'>ip</a>                654 kernel/fs.c        ip = next;</span>
+<span class='curline'><a href='../S/48.html#L657'>ip</a>                657 kernel/fs.c        iput(ip);</span>
+<span class='curline'><a href='../S/48.html#L660'>ip</a>                660 kernel/fs.c      return ip;</span>
+<span class='curline'><a href='../S/51.html#L12'>ip</a>                 12 kernel/syscall.c fetchaddr(uint64 addr, uint64 *ip)</span>
+<span class='curline'><a href='../S/51.html#L17'>ip</a>                 17 kernel/syscall.c   if(copyin(p-&gt;pagetable, (char *)ip, addr, sizeof(*ip)) != 0)</span>
+<span class='curline'><a href='../S/51.html#L58'>ip</a>                 58 kernel/syscall.c argint(int n, int *ip)</span>
+<span class='curline'><a href='../S/51.html#L60'>ip</a>                 60 kernel/syscall.c   *ip = argraw(n);</span>
+<span class='curline'><a href='../S/51.html#L68'>ip</a>                 68 kernel/syscall.c argaddr(int n, uint64 *ip)</span>
+<span class='curline'><a href='../S/51.html#L70'>ip</a>                 70 kernel/syscall.c   *ip = argraw(n);</span>
+<span class='curline'><a href='../S/43.html#L123'>ip</a>                123 kernel/sysfile.c   struct inode *dp, *ip;</span>
+<span class='curline'><a href='../S/43.html#L129'>ip</a>                129 kernel/sysfile.c   if((ip = namei(old)) == 0){</span>
+<span class='curline'><a href='../S/43.html#L134'>ip</a>                134 kernel/sysfile.c   ilock(ip);</span>
+<span class='curline'><a href='../S/43.html#L135'>ip</a>                135 kernel/sysfile.c   if(ip-&gt;type == T_DIR){</span>
+<span class='curline'><a href='../S/43.html#L136'>ip</a>                136 kernel/sysfile.c     iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L141'>ip</a>                141 kernel/sysfile.c   ip-&gt;nlink++;</span>
+<span class='curline'><a href='../S/43.html#L142'>ip</a>                142 kernel/sysfile.c   iupdate(ip);</span>
+<span class='curline'><a href='../S/43.html#L143'>ip</a>                143 kernel/sysfile.c   iunlock(ip);</span>
+<span class='curline'><a href='../S/43.html#L148'>ip</a>                148 kernel/sysfile.c   if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
+<span class='curline'><a href='../S/43.html#L153'>ip</a>                153 kernel/sysfile.c   iput(ip);</span>
+<span class='curline'><a href='../S/43.html#L160'>ip</a>                160 kernel/sysfile.c   ilock(ip);</span>
+<span class='curline'><a href='../S/43.html#L161'>ip</a>                161 kernel/sysfile.c   ip-&gt;nlink--;</span>
+<span class='curline'><a href='../S/43.html#L162'>ip</a>                162 kernel/sysfile.c   iupdate(ip);</span>
+<span class='curline'><a href='../S/43.html#L163'>ip</a>                163 kernel/sysfile.c   iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L187'>ip</a>                187 kernel/sysfile.c   struct inode *ip, *dp;</span>
+<span class='curline'><a href='../S/43.html#L207'>ip</a>                207 kernel/sysfile.c   if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
+<span class='curline'><a href='../S/43.html#L209'>ip</a>                209 kernel/sysfile.c   ilock(ip);</span>
+<span class='curline'><a href='../S/43.html#L211'>ip</a>                211 kernel/sysfile.c   if(ip-&gt;nlink &lt; 1)</span>
+<span class='curline'><a href='../S/43.html#L213'>ip</a>                213 kernel/sysfile.c   if(ip-&gt;type == T_DIR &amp;&amp; !isdirempty(ip)){</span>
+<span class='curline'><a href='../S/43.html#L214'>ip</a>                214 kernel/sysfile.c     iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L221'>ip</a>                221 kernel/sysfile.c   if(ip-&gt;type == T_DIR){</span>
+<span class='curline'><a href='../S/43.html#L227'>ip</a>                227 kernel/sysfile.c   ip-&gt;nlink--;</span>
+<span class='curline'><a href='../S/43.html#L228'>ip</a>                228 kernel/sysfile.c   iupdate(ip);</span>
+<span class='curline'><a href='../S/43.html#L229'>ip</a>                229 kernel/sysfile.c   iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L244'>ip</a>                244 kernel/sysfile.c   struct inode *ip, *dp;</span>
+<span class='curline'><a href='../S/43.html#L252'>ip</a>                252 kernel/sysfile.c   if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/43.html#L254'>ip</a>                254 kernel/sysfile.c     ilock(ip);</span>
+<span class='curline'><a href='../S/43.html#L255'>ip</a>                255 kernel/sysfile.c     if(type == T_FILE &amp;&amp; (ip-&gt;type == T_FILE || ip-&gt;type == T_DEVICE))</span>
+<span class='curline'><a href='../S/43.html#L256'>ip</a>                256 kernel/sysfile.c       return ip;</span>
+<span class='curline'><a href='../S/43.html#L257'>ip</a>                257 kernel/sysfile.c     iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L261'>ip</a>                261 kernel/sysfile.c   if((ip = ialloc(dp-&gt;dev, type)) == 0)</span>
+<span class='curline'><a href='../S/43.html#L264'>ip</a>                264 kernel/sysfile.c   ilock(ip);</span>
+<span class='curline'><a href='../S/43.html#L265'>ip</a>                265 kernel/sysfile.c   ip-&gt;major = major;</span>
+<span class='curline'><a href='../S/43.html#L266'>ip</a>                266 kernel/sysfile.c   ip-&gt;minor = minor;</span>
+<span class='curline'><a href='../S/43.html#L267'>ip</a>                267 kernel/sysfile.c   ip-&gt;nlink = 1;</span>
+<span class='curline'><a href='../S/43.html#L268'>ip</a>                268 kernel/sysfile.c   iupdate(ip);</span>
+<span class='curline'><a href='../S/43.html#L274'>ip</a>                274 kernel/sysfile.c     if(dirlink(ip, ".", ip-&gt;inum) &lt; 0 || dirlink(ip, "..", dp-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/43.html#L278'>ip</a>                278 kernel/sysfile.c   if(dirlink(dp, name, ip-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/43.html#L283'>ip</a>                283 kernel/sysfile.c   return ip;</span>
+<span class='curline'><a href='../S/43.html#L292'>ip</a>                292 kernel/sysfile.c   struct inode *ip;</span>
+<span class='curline'><a href='../S/43.html#L301'>ip</a>                301 kernel/sysfile.c     ip = create(path, T_FILE, 0, 0);</span>
+<span class='curline'><a href='../S/43.html#L302'>ip</a>                302 kernel/sysfile.c     if(ip == 0){</span>
+<span class='curline'><a href='../S/43.html#L307'>ip</a>                307 kernel/sysfile.c     if((ip = namei(path)) == 0){</span>
+<span class='curline'><a href='../S/43.html#L311'>ip</a>                311 kernel/sysfile.c     ilock(ip);</span>
+<span class='curline'><a href='../S/43.html#L312'>ip</a>                312 kernel/sysfile.c     if(ip-&gt;type == T_DIR &amp;&amp; omode != O_RDONLY){</span>
+<span class='curline'><a href='../S/43.html#L313'>ip</a>                313 kernel/sysfile.c       iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L319'>ip</a>                319 kernel/sysfile.c   if(ip-&gt;type == T_DEVICE &amp;&amp; (ip-&gt;major &lt; 0 || ip-&gt;major &gt;= NDEV)){</span>
+<span class='curline'><a href='../S/43.html#L320'>ip</a>                320 kernel/sysfile.c     iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L328'>ip</a>                328 kernel/sysfile.c     iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L333'>ip</a>                333 kernel/sysfile.c   if(ip-&gt;type == T_DEVICE){</span>
+<span class='curline'><a href='../S/43.html#L335'>ip</a>                335 kernel/sysfile.c     f-&gt;major = ip-&gt;major;</span>
+<span class='curline'><a href='../S/43.html#L340'>ip</a>                340 kernel/sysfile.c   f-&gt;ip = ip;</span>
+<span class='curline'><a href='../S/43.html#L344'>ip</a>                344 kernel/sysfile.c   if((omode &amp; O_TRUNC) &amp;&amp; ip-&gt;type == T_FILE){</span>
+<span class='curline'><a href='../S/43.html#L345'>ip</a>                345 kernel/sysfile.c     itrunc(ip);</span>
+<span class='curline'><a href='../S/43.html#L348'>ip</a>                348 kernel/sysfile.c   iunlock(ip);</span>
+<span class='curline'><a href='../S/43.html#L358'>ip</a>                358 kernel/sysfile.c   struct inode *ip;</span>
+<span class='curline'><a href='../S/43.html#L361'>ip</a>                361 kernel/sysfile.c   if(argstr(0, path, MAXPATH) &lt; 0 || (ip = create(path, T_DIR, 0, 0)) == 0){</span>
+<span class='curline'><a href='../S/43.html#L365'>ip</a>                365 kernel/sysfile.c   iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L373'>ip</a>                373 kernel/sysfile.c   struct inode *ip;</span>
+<span class='curline'><a href='../S/43.html#L381'>ip</a>                381 kernel/sysfile.c      (ip = create(path, T_DEVICE, major, minor)) == 0){</span>
+<span class='curline'><a href='../S/43.html#L385'>ip</a>                385 kernel/sysfile.c   iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L394'>ip</a>                394 kernel/sysfile.c   struct inode *ip;</span>
+<span class='curline'><a href='../S/43.html#L398'>ip</a>                398 kernel/sysfile.c   if(argstr(0, path, MAXPATH) &lt; 0 || (ip = namei(path)) == 0){</span>
+<span class='curline'><a href='../S/43.html#L402'>ip</a>                402 kernel/sysfile.c   ilock(ip);</span>
+<span class='curline'><a href='../S/43.html#L403'>ip</a>                403 kernel/sysfile.c   if(ip-&gt;type != T_DIR){</span>
+<span class='curline'><a href='../S/43.html#L404'>ip</a>                404 kernel/sysfile.c     iunlockput(ip);</span>
+<span class='curline'><a href='../S/43.html#L408'>ip</a>                408 kernel/sysfile.c   iunlock(ip);</span>
+<span class='curline'><a href='../S/43.html#L411'>ip</a>                411 kernel/sysfile.c   p-&gt;cwd = ip;</span>
+<span class='curline'><a href='../S/3.html#L39'>ip</a>                 39 mkfs/mkfs.c    void rinode(uint inum, struct dinode *ip);</span>
+<span class='curline'><a href='../S/3.html#L185'>ip</a>                185 mkfs/mkfs.c    winode(uint inum, struct dinode *ip)</span>
+<span class='curline'><a href='../S/3.html#L194'>ip</a>                194 mkfs/mkfs.c      *dip = *ip;</span>
+<span class='curline'><a href='../S/3.html#L199'>ip</a>                199 mkfs/mkfs.c    rinode(uint inum, struct dinode *ip)</span>
+<span class='curline'><a href='../S/3.html#L208'>ip</a>                208 mkfs/mkfs.c      *ip = *dip;</span>
 </pre>
 </body>
 </html>

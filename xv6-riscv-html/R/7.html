@@ -3,7 +3,7 @@
 <head>
 <title>BSIZE</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -15,10 +15,10 @@
 <span class='curline'><a href='../S/48.html#L467'>BSIZE</a>             467 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
 <span class='curline'><a href='../S/48.html#L468'>BSIZE</a>             468 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
 <span class='curline'><a href='../S/48.html#L469'>BSIZE</a>             469 kernel/fs.c        if(either_copyout(user_dst, dst, bp-&gt;data + (off % BSIZE), m) == -1) {</span>
-<span class='curline'><a href='../S/48.html#L491'>BSIZE</a>             491 kernel/fs.c      if(off + n &gt; MAXFILE*BSIZE)</span>
-<span class='curline'><a href='../S/48.html#L495'>BSIZE</a>             495 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
-<span class='curline'><a href='../S/48.html#L496'>BSIZE</a>             496 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
-<span class='curline'><a href='../S/48.html#L497'>BSIZE</a>             497 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
+<span class='curline'><a href='../S/48.html#L494'>BSIZE</a>             494 kernel/fs.c      if(off + n &gt; MAXFILE*BSIZE)</span>
+<span class='curline'><a href='../S/48.html#L498'>BSIZE</a>             498 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/48.html#L499'>BSIZE</a>             499 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/48.html#L500'>BSIZE</a>             500 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
 <span class='curline'><a href='../S/71.html#L28'>BSIZE</a>              28 kernel/fs.h    #define NINDIRECT (BSIZE / sizeof(uint))</span>
 <span class='curline'><a href='../S/71.html#L42'>BSIZE</a>              42 kernel/fs.h    #define IPB           (BSIZE / sizeof(struct dinode))</span>
 <span class='curline'><a href='../S/71.html#L48'>BSIZE</a>              48 kernel/fs.h    #define BPB           (BSIZE*8)</span>
@@ -32,30 +32,30 @@
 <span class='curline'><a href='../S/65.html#L241'>BSIZE</a>             241 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
 <span class='curline'><a href='../S/3.html#L23'>BSIZE</a>              23 mkfs/mkfs.c    int nbitmap = FSSIZE/(BSIZE*8) + 1;</span>
 <span class='curline'><a href='../S/3.html#L31'>BSIZE</a>              31 mkfs/mkfs.c    char zeroes[BSIZE];</span>
-<span class='curline'><a href='../S/3.html#L73'>BSIZE</a>              73 mkfs/mkfs.c      char buf[BSIZE];</span>
-<span class='curline'><a href='../S/3.html#L84'>BSIZE</a>              84 mkfs/mkfs.c      assert((BSIZE % sizeof(struct dinode)) == 0);</span>
-<span class='curline'><a href='../S/3.html#L85'>BSIZE</a>              85 mkfs/mkfs.c      assert((BSIZE % sizeof(struct dirent)) == 0);</span>
-<span class='curline'><a href='../S/3.html#L169'>BSIZE</a>             169 mkfs/mkfs.c      off = ((off/BSIZE) + 1) * BSIZE;</span>
-<span class='curline'><a href='../S/3.html#L181'>BSIZE</a>             181 mkfs/mkfs.c      if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE){</span>
-<span class='curline'><a href='../S/3.html#L185'>BSIZE</a>             185 mkfs/mkfs.c      if(write(fsfd, buf, BSIZE) != BSIZE){</span>
-<span class='curline'><a href='../S/3.html#L194'>BSIZE</a>             194 mkfs/mkfs.c      char buf[BSIZE];</span>
-<span class='curline'><a href='../S/3.html#L208'>BSIZE</a>             208 mkfs/mkfs.c      char buf[BSIZE];</span>
-<span class='curline'><a href='../S/3.html#L221'>BSIZE</a>             221 mkfs/mkfs.c      if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE){</span>
-<span class='curline'><a href='../S/3.html#L225'>BSIZE</a>             225 mkfs/mkfs.c      if(read(fsfd, buf, BSIZE) != BSIZE){</span>
-<span class='curline'><a href='../S/3.html#L248'>BSIZE</a>             248 mkfs/mkfs.c      uchar buf[BSIZE];</span>
-<span class='curline'><a href='../S/3.html#L252'>BSIZE</a>             252 mkfs/mkfs.c      assert(used &lt; BSIZE*8);</span>
-<span class='curline'><a href='../S/3.html#L253'>BSIZE</a>             253 mkfs/mkfs.c      bzero(buf, BSIZE);</span>
-<span class='curline'><a href='../S/3.html#L269'>BSIZE</a>             269 mkfs/mkfs.c      char buf[BSIZE];</span>
-<span class='curline'><a href='../S/3.html#L277'>BSIZE</a>             277 mkfs/mkfs.c        fbn = off / BSIZE;</span>
-<span class='curline'><a href='../S/3.html#L295'>BSIZE</a>             295 mkfs/mkfs.c        n1 = min(n, (fbn + 1) * BSIZE - off);</span>
-<span class='curline'><a href='../S/3.html#L297'>BSIZE</a>             297 mkfs/mkfs.c        bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
+<span class='curline'><a href='../S/3.html#L74'>BSIZE</a>              74 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L85'>BSIZE</a>              85 mkfs/mkfs.c      assert((BSIZE % sizeof(struct dinode)) == 0);</span>
+<span class='curline'><a href='../S/3.html#L86'>BSIZE</a>              86 mkfs/mkfs.c      assert((BSIZE % sizeof(struct dirent)) == 0);</span>
+<span class='curline'><a href='../S/3.html#L166'>BSIZE</a>             166 mkfs/mkfs.c      off = ((off/BSIZE) + 1) * BSIZE;</span>
+<span class='curline'><a href='../S/3.html#L178'>BSIZE</a>             178 mkfs/mkfs.c      if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE)</span>
+<span class='curline'><a href='../S/3.html#L180'>BSIZE</a>             180 mkfs/mkfs.c      if(write(fsfd, buf, BSIZE) != BSIZE)</span>
+<span class='curline'><a href='../S/3.html#L187'>BSIZE</a>             187 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L201'>BSIZE</a>             201 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L214'>BSIZE</a>             214 mkfs/mkfs.c      if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE)</span>
+<span class='curline'><a href='../S/3.html#L216'>BSIZE</a>             216 mkfs/mkfs.c      if(read(fsfd, buf, BSIZE) != BSIZE)</span>
+<span class='curline'><a href='../S/3.html#L237'>BSIZE</a>             237 mkfs/mkfs.c      uchar buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L241'>BSIZE</a>             241 mkfs/mkfs.c      assert(used &lt; BSIZE*8);</span>
+<span class='curline'><a href='../S/3.html#L242'>BSIZE</a>             242 mkfs/mkfs.c      bzero(buf, BSIZE);</span>
+<span class='curline'><a href='../S/3.html#L258'>BSIZE</a>             258 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L266'>BSIZE</a>             266 mkfs/mkfs.c        fbn = off / BSIZE;</span>
+<span class='curline'><a href='../S/3.html#L284'>BSIZE</a>             284 mkfs/mkfs.c        n1 = min(n, (fbn + 1) * BSIZE - off);</span>
+<span class='curline'><a href='../S/3.html#L286'>BSIZE</a>             286 mkfs/mkfs.c        bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
 <span class='curline'><a href='../S/24.html#L20'>BSIZE</a>              20 user/usertests.c #define BUFSZ  ((MAXOPBLOCKS+2)*BSIZE)</span>
 <span class='curline'><a href='../S/24.html#L585'>BSIZE</a>             585 user/usertests.c     if(write(fd, buf, BSIZE) != BSIZE){</span>
 <span class='curline'><a href='../S/24.html#L601'>BSIZE</a>             601 user/usertests.c     i = read(fd, buf, BSIZE);</span>
 <span class='curline'><a href='../S/24.html#L608'>BSIZE</a>             608 user/usertests.c     } else if(i != BSIZE){</span>
-<span class='curline'><a href='../S/24.html#L1712'>BSIZE</a>            1712 user/usertests.c   for(sz = 499; sz &lt; (MAXOPBLOCKS+2)*BSIZE; sz += 471){</span>
-<span class='curline'><a href='../S/24.html#L2392'>BSIZE</a>            2392 user/usertests.c       int cc = write(fd, buf, BSIZE);</span>
-<span class='curline'><a href='../S/24.html#L2393'>BSIZE</a>            2393 user/usertests.c       if(cc &lt; BSIZE)</span>
+<span class='curline'><a href='../S/24.html#L1742'>BSIZE</a>            1742 user/usertests.c   for(sz = 499; sz &lt; (MAXOPBLOCKS+2)*BSIZE; sz += 471){</span>
+<span class='curline'><a href='../S/24.html#L2446'>BSIZE</a>            2446 user/usertests.c       int cc = write(fd, buf, BSIZE);</span>
+<span class='curline'><a href='../S/24.html#L2447'>BSIZE</a>            2447 user/usertests.c       if(cc &lt; BSIZE)</span>
 </pre>
 </body>
 </html>

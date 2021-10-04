@@ -1,20 +1,42 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pipecmd</title>
+<title>pipe</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L64'>pipecmd</a>            64 user/sh.c        struct pipecmd *pcmd;</span>
-<span class='curline'><a href='../S/17.html#L101'>pipecmd</a>           101 user/sh.c          pcmd = (struct pipecmd*)cmd;</span>
-<span class='curline'><a href='../S/17.html#L225'>pipecmd</a>           225 user/sh.c        struct pipecmd *cmd;</span>
-<span class='curline'><a href='../S/17.html#L369'>pipecmd</a>           369 user/sh.c          cmd = pipecmd(cmd, parsepipe(ps, es));</span>
-<span class='curline'><a href='../S/17.html#L456'>pipecmd</a>           456 user/sh.c        struct pipecmd *pcmd;</span>
-<span class='curline'><a href='../S/17.html#L476'>pipecmd</a>           476 user/sh.c          pcmd = (struct pipecmd*)cmd;</span>
+<span class='curline'><a href='../S/31.html#L5'>pipe</a>                5 kernel/defs.h  struct pipe;</span>
+<span class='curline'><a href='../S/31.html#L75'>pipe</a>               75 kernel/defs.h  void            pipeclose(struct pipe*, int);</span>
+<span class='curline'><a href='../S/31.html#L76'>pipe</a>               76 kernel/defs.h  int             piperead(struct pipe*, uint64, int);</span>
+<span class='curline'><a href='../S/31.html#L77'>pipe</a>               77 kernel/defs.h  int             pipewrite(struct pipe*, uint64, int);</span>
+<span class='curline'><a href='../S/67.html#L77'>pipe</a>               77 kernel/file.c      pipeclose(ff.pipe, ff.writable);</span>
+<span class='curline'><a href='../S/67.html#L115'>pipe</a>              115 kernel/file.c      r = piperead(f-&gt;pipe, addr, n);</span>
+<span class='curline'><a href='../S/67.html#L143'>pipe</a>              143 kernel/file.c      ret = pipewrite(f-&gt;pipe, addr, n);</span>
+<span class='curline'><a href='../S/41.html#L6'>pipe</a>                6 kernel/file.h    struct pipe *pipe; // FD_PIPE</span>
+<span class='curline'><a href='../S/34.html#L25'>pipe</a>               25 kernel/pipe.c    struct pipe *pi;</span>
+<span class='curline'><a href='../S/34.html#L31'>pipe</a>               31 kernel/pipe.c    if((pi = (struct pipe*)kalloc()) == 0)</span>
+<span class='curline'><a href='../S/34.html#L41'>pipe</a>               41 kernel/pipe.c    (*f0)-&gt;pipe = pi;</span>
+<span class='curline'><a href='../S/34.html#L45'>pipe</a>               45 kernel/pipe.c    (*f1)-&gt;pipe = pi;</span>
+<span class='curline'><a href='../S/34.html#L59'>pipe</a>               59 kernel/pipe.c  pipeclose(struct pipe *pi, int writable)</span>
+<span class='curline'><a href='../S/34.html#L77'>pipe</a>               77 kernel/pipe.c  pipewrite(struct pipe *pi, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/34.html#L106'>pipe</a>              106 kernel/pipe.c  piperead(struct pipe *pi, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/12.html#L159'>pipe</a>              159 user/grind.c         if(pipe(fds) &lt; 0){</span>
+<span class='curline'><a href='../S/12.html#L226'>pipe</a>              226 user/grind.c         if(pipe(aa) &lt; 0){</span>
+<span class='curline'><a href='../S/12.html#L230'>pipe</a>              230 user/grind.c         if(pipe(bb) &lt; 0){</span>
+<span class='curline'><a href='../S/17.html#L102'>pipe</a>              102 user/sh.c          if(pipe(p) &lt; 0)</span>
+<span class='curline'><a href='../S/15.html#L8'>pipe</a>                8 user/user.h    int pipe(int*);</span>
+<span class='curline'><a href='../S/24.html#L54'>pipe</a>               54 user/usertests.c     if(pipe(fds) &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L91'>pipe</a>               91 user/usertests.c     if(pipe(fds) &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L736'>pipe</a>              736 user/usertests.c   if(pipe(fds) != 0){</span>
+<span class='curline'><a href='../S/24.html#L837'>pipe</a>              837 user/usertests.c   pipe(pfds);</span>
+<span class='curline'><a href='../S/24.html#L2268'>pipe</a>             2268 user/usertests.c   if(pipe(fds) != 0){</span>
+<span class='curline'><a href='../S/24.html#L2347'>pipe</a>             2347 user/usertests.c   if(pipe((int *) a) != 0){</span>
+<span class='curline'><a href='../S/24.html#L2521'>pipe</a>             2521 user/usertests.c   pipe((int*)0xeaeb0b5b00002f5e);</span>
+<span class='curline'><a href='../S/24.html#L2720'>pipe</a>             2720 user/usertests.c   if(pipe(fds) &lt; 0){</span>
 </pre>
 </body>
 </html>

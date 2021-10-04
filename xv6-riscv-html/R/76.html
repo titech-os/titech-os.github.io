@@ -1,16 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PGSHIFT</title>
+<title>PGROUNDUP</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/64.html#L344'>PGSHIFT</a>           344 kernel/riscv.h #define PXSHIFT(level)  (PGSHIFT+(9*(level)))</span>
-<span class='curline'><a href='../S/65.html#L126'>PGSHIFT</a>           126 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_PFN) = ((uint64)disk.pages) &gt;&gt; PGSHIFT;</span>
+<span class='curline'><a href='../S/36.html#L69'>PGROUNDUP</a>          69 kernel/exec.c    sz = PGROUNDUP(sz);</span>
+<span class='curline'><a href='../S/69.html#L37'>PGROUNDUP</a>          37 kernel/kalloc.c   p = (char*)PGROUNDUP((uint64)pa_start);</span>
+<span class='curline'><a href='../S/38.html#L229'>PGROUNDUP</a>         229 kernel/vm.c      oldsz = PGROUNDUP(oldsz);</span>
+<span class='curline'><a href='../S/38.html#L256'>PGROUNDUP</a>         256 kernel/vm.c      if(PGROUNDUP(newsz) &lt; PGROUNDUP(oldsz)){</span>
+<span class='curline'><a href='../S/38.html#L257'>PGROUNDUP</a>         257 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L258'>PGROUNDUP</a>         258 kernel/vm.c        uvmunmap(pagetable, PGROUNDUP(newsz), npages, 1);</span>
+<span class='curline'><a href='../S/38.html#L290'>PGROUNDUP</a>         290 kernel/vm.c        uvmunmap(pagetable, 0, PGROUNDUP(sz)/PGSIZE, 1);</span>
 </pre>
 </body>
 </html>

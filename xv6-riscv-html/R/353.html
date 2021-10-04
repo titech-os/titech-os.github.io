@@ -1,21 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nameiparent</title>
+<title>mycpu</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L51'>nameiparent</a>        51 kernel/defs.h  struct inode*   nameiparent(char*, char*);</span>
-<span class='curline'><a href='../S/48.html#L628'>nameiparent</a>       628 kernel/fs.c    namex(char *path, int nameiparent, char *name)</span>
-<span class='curline'><a href='../S/48.html#L643'>nameiparent</a>       643 kernel/fs.c        if(nameiparent &amp;&amp; *path == '\0'){</span>
-<span class='curline'><a href='../S/48.html#L655'>nameiparent</a>       655 kernel/fs.c      if(nameiparent){</span>
-<span class='curline'><a href='../S/43.html#L145'>nameiparent</a>       145 kernel/sysfile.c   if((dp = nameiparent(new, name)) == 0)</span>
-<span class='curline'><a href='../S/43.html#L196'>nameiparent</a>       196 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0){</span>
-<span class='curline'><a href='../S/43.html#L247'>nameiparent</a>       247 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0)</span>
+<span class='curline'><a href='../S/31.html#L93'>mycpu</a>              93 kernel/defs.h  struct cpu*     mycpu(void);</span>
+<span class='curline'><a href='../S/63.html#L82'>mycpu</a>              82 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/63.html#L441'>mycpu</a>             441 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/63.html#L482'>mycpu</a>             482 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
+<span class='curline'><a href='../S/63.html#L489'>mycpu</a>             489 kernel/proc.c    intena = mycpu()-&gt;intena;</span>
+<span class='curline'><a href='../S/63.html#L490'>mycpu</a>             490 kernel/proc.c    swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;context);</span>
+<span class='curline'><a href='../S/63.html#L491'>mycpu</a>             491 kernel/proc.c    mycpu()-&gt;intena = intena;</span>
+<span class='curline'><a href='../S/59.html#L42'>mycpu</a>              42 kernel/spinlock.c   lk-&gt;cpu = mycpu();</span>
+<span class='curline'><a href='../S/59.html#L80'>mycpu</a>              80 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
+<span class='curline'><a href='../S/59.html#L94'>mycpu</a>              94 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
+<span class='curline'><a href='../S/59.html#L95'>mycpu</a>              95 kernel/spinlock.c     mycpu()-&gt;intena = old;</span>
+<span class='curline'><a href='../S/59.html#L96'>mycpu</a>              96 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
+<span class='curline'><a href='../S/59.html#L102'>mycpu</a>             102 kernel/spinlock.c   struct cpu *c = mycpu();</span>
 </pre>
 </body>
 </html>

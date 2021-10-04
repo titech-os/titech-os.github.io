@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>cmd</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.7' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/17.html#L28'>cmd</a>                28 user/sh.c        struct cmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L37'>cmd</a>                37 user/sh.c        struct cmd *left;</span>
+<span class='curline'><a href='../S/17.html#L38'>cmd</a>                38 user/sh.c        struct cmd *right;</span>
+<span class='curline'><a href='../S/17.html#L43'>cmd</a>                43 user/sh.c        struct cmd *left;</span>
+<span class='curline'><a href='../S/17.html#L44'>cmd</a>                44 user/sh.c        struct cmd *right;</span>
+<span class='curline'><a href='../S/17.html#L49'>cmd</a>                49 user/sh.c        struct cmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L54'>cmd</a>                54 user/sh.c      struct cmd *parsecmd(char*);</span>
+<span class='curline'><a href='../S/17.html#L58'>cmd</a>                58 user/sh.c      runcmd(struct cmd *cmd)</span>
+<span class='curline'><a href='../S/17.html#L67'>cmd</a>                67 user/sh.c        if(cmd == 0)</span>
+<span class='curline'><a href='../S/17.html#L70'>cmd</a>                70 user/sh.c        switch(cmd-&gt;type){</span>
+<span class='curline'><a href='../S/17.html#L75'>cmd</a>                75 user/sh.c          ecmd = (struct execcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L83'>cmd</a>                83 user/sh.c          rcmd = (struct redircmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L89'>cmd</a>                89 user/sh.c          runcmd(rcmd-&gt;cmd);</span>
+<span class='curline'><a href='../S/17.html#L93'>cmd</a>                93 user/sh.c          lcmd = (struct listcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L101'>cmd</a>               101 user/sh.c          pcmd = (struct pipecmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L125'>cmd</a>               125 user/sh.c          bcmd = (struct backcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L127'>cmd</a>               127 user/sh.c            runcmd(bcmd-&gt;cmd);</span>
+<span class='curline'><a href='../S/17.html#L195'>cmd</a>               195 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L198'>cmd</a>               198 user/sh.c        struct execcmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L200'>cmd</a>               200 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L201'>cmd</a>               201 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L202'>cmd</a>               202 user/sh.c        cmd-&gt;type = EXEC;</span>
+<span class='curline'><a href='../S/17.html#L203'>cmd</a>               203 user/sh.c        return (struct cmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L206'>cmd</a>               206 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L207'>cmd</a>               207 user/sh.c      redircmd(struct cmd *subcmd, char *file, char *efile, int mode, int fd)</span>
+<span class='curline'><a href='../S/17.html#L209'>cmd</a>               209 user/sh.c        struct redircmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L211'>cmd</a>               211 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L212'>cmd</a>               212 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L213'>cmd</a>               213 user/sh.c        cmd-&gt;type = REDIR;</span>
+<span class='curline'><a href='../S/17.html#L214'>cmd</a>               214 user/sh.c        cmd-&gt;cmd = subcmd;</span>
+<span class='curline'><a href='../S/17.html#L215'>cmd</a>               215 user/sh.c        cmd-&gt;file = file;</span>
+<span class='curline'><a href='../S/17.html#L216'>cmd</a>               216 user/sh.c        cmd-&gt;efile = efile;</span>
+<span class='curline'><a href='../S/17.html#L217'>cmd</a>               217 user/sh.c        cmd-&gt;mode = mode;</span>
+<span class='curline'><a href='../S/17.html#L218'>cmd</a>               218 user/sh.c        cmd-&gt;fd = fd;</span>
+<span class='curline'><a href='../S/17.html#L219'>cmd</a>               219 user/sh.c        return (struct cmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L222'>cmd</a>               222 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L223'>cmd</a>               223 user/sh.c      pipecmd(struct cmd *left, struct cmd *right)</span>
+<span class='curline'><a href='../S/17.html#L225'>cmd</a>               225 user/sh.c        struct pipecmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L227'>cmd</a>               227 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L228'>cmd</a>               228 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L229'>cmd</a>               229 user/sh.c        cmd-&gt;type = PIPE;</span>
+<span class='curline'><a href='../S/17.html#L230'>cmd</a>               230 user/sh.c        cmd-&gt;left = left;</span>
+<span class='curline'><a href='../S/17.html#L231'>cmd</a>               231 user/sh.c        cmd-&gt;right = right;</span>
+<span class='curline'><a href='../S/17.html#L232'>cmd</a>               232 user/sh.c        return (struct cmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L235'>cmd</a>               235 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L236'>cmd</a>               236 user/sh.c      listcmd(struct cmd *left, struct cmd *right)</span>
+<span class='curline'><a href='../S/17.html#L238'>cmd</a>               238 user/sh.c        struct listcmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L240'>cmd</a>               240 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L241'>cmd</a>               241 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L242'>cmd</a>               242 user/sh.c        cmd-&gt;type = LIST;</span>
+<span class='curline'><a href='../S/17.html#L243'>cmd</a>               243 user/sh.c        cmd-&gt;left = left;</span>
+<span class='curline'><a href='../S/17.html#L244'>cmd</a>               244 user/sh.c        cmd-&gt;right = right;</span>
+<span class='curline'><a href='../S/17.html#L245'>cmd</a>               245 user/sh.c        return (struct cmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L248'>cmd</a>               248 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L249'>cmd</a>               249 user/sh.c      backcmd(struct cmd *subcmd)</span>
+<span class='curline'><a href='../S/17.html#L251'>cmd</a>               251 user/sh.c        struct backcmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L253'>cmd</a>               253 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L254'>cmd</a>               254 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
+<span class='curline'><a href='../S/17.html#L255'>cmd</a>               255 user/sh.c        cmd-&gt;type = BACK;</span>
+<span class='curline'><a href='../S/17.html#L256'>cmd</a>               256 user/sh.c        cmd-&gt;cmd = subcmd;</span>
+<span class='curline'><a href='../S/17.html#L257'>cmd</a>               257 user/sh.c        return (struct cmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L322'>cmd</a>               322 user/sh.c      struct cmd *parseline(char**, char*);</span>
+<span class='curline'><a href='../S/17.html#L323'>cmd</a>               323 user/sh.c      struct cmd *parsepipe(char**, char*);</span>
+<span class='curline'><a href='../S/17.html#L324'>cmd</a>               324 user/sh.c      struct cmd *parseexec(char**, char*);</span>
+<span class='curline'><a href='../S/17.html#L325'>cmd</a>               325 user/sh.c      struct cmd *nulterminate(struct cmd*);</span>
+<span class='curline'><a href='../S/17.html#L327'>cmd</a>               327 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L331'>cmd</a>               331 user/sh.c        struct cmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L334'>cmd</a>               334 user/sh.c        cmd = parseline(&amp;s, es);</span>
+<span class='curline'><a href='../S/17.html#L340'>cmd</a>               340 user/sh.c        nulterminate(cmd);</span>
+<span class='curline'><a href='../S/17.html#L341'>cmd</a>               341 user/sh.c        return cmd;</span>
+<span class='curline'><a href='../S/17.html#L344'>cmd</a>               344 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L347'>cmd</a>               347 user/sh.c        struct cmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L349'>cmd</a>               349 user/sh.c        cmd = parsepipe(ps, es);</span>
+<span class='curline'><a href='../S/17.html#L352'>cmd</a>               352 user/sh.c          cmd = backcmd(cmd);</span>
+<span class='curline'><a href='../S/17.html#L356'>cmd</a>               356 user/sh.c          cmd = listcmd(cmd, parseline(ps, es));</span>
+<span class='curline'><a href='../S/17.html#L358'>cmd</a>               358 user/sh.c        return cmd;</span>
+<span class='curline'><a href='../S/17.html#L361'>cmd</a>               361 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L364'>cmd</a>               364 user/sh.c        struct cmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L366'>cmd</a>               366 user/sh.c        cmd = parseexec(ps, es);</span>
+<span class='curline'><a href='../S/17.html#L369'>cmd</a>               369 user/sh.c          cmd = pipecmd(cmd, parsepipe(ps, es));</span>
+<span class='curline'><a href='../S/17.html#L371'>cmd</a>               371 user/sh.c        return cmd;</span>
+<span class='curline'><a href='../S/17.html#L374'>cmd</a>               374 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L375'>cmd</a>               375 user/sh.c      parseredirs(struct cmd *cmd, char **ps, char *es)</span>
+<span class='curline'><a href='../S/17.html#L386'>cmd</a>               386 user/sh.c            cmd = redircmd(cmd, q, eq, O_RDONLY, 0);</span>
+<span class='curline'><a href='../S/17.html#L389'>cmd</a>               389 user/sh.c            cmd = redircmd(cmd, q, eq, O_WRONLY|O_CREATE|O_TRUNC, 1);</span>
+<span class='curline'><a href='../S/17.html#L392'>cmd</a>               392 user/sh.c            cmd = redircmd(cmd, q, eq, O_WRONLY|O_CREATE, 1);</span>
+<span class='curline'><a href='../S/17.html#L396'>cmd</a>               396 user/sh.c        return cmd;</span>
+<span class='curline'><a href='../S/17.html#L399'>cmd</a>               399 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L402'>cmd</a>               402 user/sh.c        struct cmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L407'>cmd</a>               407 user/sh.c        cmd = parseline(ps, es);</span>
+<span class='curline'><a href='../S/17.html#L411'>cmd</a>               411 user/sh.c        cmd = parseredirs(cmd, ps, es);</span>
+<span class='curline'><a href='../S/17.html#L412'>cmd</a>               412 user/sh.c        return cmd;</span>
+<span class='curline'><a href='../S/17.html#L415'>cmd</a>               415 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L420'>cmd</a>               420 user/sh.c        struct execcmd *cmd;</span>
+<span class='curline'><a href='../S/17.html#L421'>cmd</a>               421 user/sh.c        struct cmd *ret;</span>
+<span class='curline'><a href='../S/17.html#L427'>cmd</a>               427 user/sh.c        cmd = (struct execcmd*)ret;</span>
+<span class='curline'><a href='../S/17.html#L436'>cmd</a>               436 user/sh.c          cmd-&gt;argv[argc] = q;</span>
+<span class='curline'><a href='../S/17.html#L437'>cmd</a>               437 user/sh.c          cmd-&gt;eargv[argc] = eq;</span>
+<span class='curline'><a href='../S/17.html#L443'>cmd</a>               443 user/sh.c        cmd-&gt;argv[argc] = 0;</span>
+<span class='curline'><a href='../S/17.html#L444'>cmd</a>               444 user/sh.c        cmd-&gt;eargv[argc] = 0;</span>
+<span class='curline'><a href='../S/17.html#L449'>cmd</a>               449 user/sh.c      struct cmd*</span>
+<span class='curline'><a href='../S/17.html#L450'>cmd</a>               450 user/sh.c      nulterminate(struct cmd *cmd)</span>
+<span class='curline'><a href='../S/17.html#L459'>cmd</a>               459 user/sh.c        if(cmd == 0)</span>
+<span class='curline'><a href='../S/17.html#L462'>cmd</a>               462 user/sh.c        switch(cmd-&gt;type){</span>
+<span class='curline'><a href='../S/17.html#L464'>cmd</a>               464 user/sh.c          ecmd = (struct execcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L470'>cmd</a>               470 user/sh.c          rcmd = (struct redircmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L471'>cmd</a>               471 user/sh.c          nulterminate(rcmd-&gt;cmd);</span>
+<span class='curline'><a href='../S/17.html#L476'>cmd</a>               476 user/sh.c          pcmd = (struct pipecmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L482'>cmd</a>               482 user/sh.c          lcmd = (struct listcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L488'>cmd</a>               488 user/sh.c          bcmd = (struct backcmd*)cmd;</span>
+<span class='curline'><a href='../S/17.html#L489'>cmd</a>               489 user/sh.c          nulterminate(bcmd-&gt;cmd);</span>
+<span class='curline'><a href='../S/17.html#L492'>cmd</a>               492 user/sh.c        return cmd;</span>
+</pre>
+</body>
+</html>

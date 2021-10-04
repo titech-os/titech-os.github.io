@@ -1,34 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>NDIRECT</title>
+<title>NDEV</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/41.html#L29'>NDIRECT</a>            29 kernel/file.h    uint addrs[NDIRECT+1];</span>
-<span class='curline'><a href='../S/48.html#L383'>NDIRECT</a>           383 kernel/fs.c      if(bn &lt; NDIRECT){</span>
-<span class='curline'><a href='../S/48.html#L388'>NDIRECT</a>           388 kernel/fs.c      bn -= NDIRECT;</span>
-<span class='curline'><a href='../S/48.html#L392'>NDIRECT</a>           392 kernel/fs.c        if((addr = ip-&gt;addrs[NDIRECT]) == 0)</span>
-<span class='curline'><a href='../S/48.html#L393'>NDIRECT</a>           393 kernel/fs.c          ip-&gt;addrs[NDIRECT] = addr = balloc(ip-&gt;dev);</span>
-<span class='curline'><a href='../S/48.html#L416'>NDIRECT</a>           416 kernel/fs.c      for(i = 0; i &lt; NDIRECT; i++){</span>
-<span class='curline'><a href='../S/48.html#L423'>NDIRECT</a>           423 kernel/fs.c      if(ip-&gt;addrs[NDIRECT]){</span>
-<span class='curline'><a href='../S/48.html#L424'>NDIRECT</a>           424 kernel/fs.c        bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
-<span class='curline'><a href='../S/48.html#L431'>NDIRECT</a>           431 kernel/fs.c        bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
-<span class='curline'><a href='../S/48.html#L432'>NDIRECT</a>           432 kernel/fs.c        ip-&gt;addrs[NDIRECT] = 0;</span>
-<span class='curline'><a href='../S/71.html#L29'>NDIRECT</a>            29 kernel/fs.h    #define MAXFILE (NDIRECT + NINDIRECT)</span>
-<span class='curline'><a href='../S/71.html#L38'>NDIRECT</a>            38 kernel/fs.h      uint addrs[NDIRECT+1];   // Data block addresses</span>
-<span class='curline'><a href='../S/3.html#L279'>NDIRECT</a>           279 mkfs/mkfs.c        if(fbn &lt; NDIRECT){</span>
-<span class='curline'><a href='../S/3.html#L285'>NDIRECT</a>           285 mkfs/mkfs.c          if(xint(din.addrs[NDIRECT]) == 0){</span>
-<span class='curline'><a href='../S/3.html#L286'>NDIRECT</a>           286 mkfs/mkfs.c            din.addrs[NDIRECT] = xint(freeblock++);</span>
-<span class='curline'><a href='../S/3.html#L288'>NDIRECT</a>           288 mkfs/mkfs.c          rsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
-<span class='curline'><a href='../S/3.html#L289'>NDIRECT</a>           289 mkfs/mkfs.c          if(indirect[fbn - NDIRECT] == 0){</span>
-<span class='curline'><a href='../S/3.html#L290'>NDIRECT</a>           290 mkfs/mkfs.c            indirect[fbn - NDIRECT] = xint(freeblock++);</span>
-<span class='curline'><a href='../S/3.html#L291'>NDIRECT</a>           291 mkfs/mkfs.c            wsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
-<span class='curline'><a href='../S/3.html#L293'>NDIRECT</a>           293 mkfs/mkfs.c          x = xint(indirect[fbn-NDIRECT]);</span>
+<span class='curline'><a href='../S/67.html#L16'>NDEV</a>               16 kernel/file.c  struct devsw devsw[NDEV];</span>
+<span class='curline'><a href='../S/67.html#L117'>NDEV</a>              117 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].read)</span>
+<span class='curline'><a href='../S/67.html#L145'>NDEV</a>              145 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].write)</span>
+<span class='curline'><a href='../S/43.html#L319'>NDEV</a>              319 kernel/sysfile.c   if(ip-&gt;type == T_DEVICE &amp;&amp; (ip-&gt;major &lt; 0 || ip-&gt;major &gt;= NDEV)){</span>
 </pre>
 </body>
 </html>

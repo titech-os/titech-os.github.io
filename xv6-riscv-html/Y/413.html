@@ -1,17 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>va_start</title>
+<title>vdisk_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/29.html#L77'>va_start</a>           77 kernel/printf.c   va_start(ap, fmt);</span>
-<span class='curline'><a href='../S/4.html#L102'>va_start</a>          102 user/printf.c    va_start(ap, fmt);</span>
-<span class='curline'><a href='../S/4.html#L111'>va_start</a>          111 user/printf.c    va_start(ap, fmt);</span>
+<span class='curline'><a href='../S/65.html#L72'>vdisk_lock</a>         72 kernel/virtio_disk.c   struct spinlock vdisk_lock;</span>
+<span class='curline'><a href='../S/65.html#L81'>vdisk_lock</a>         81 kernel/virtio_disk.c   initlock(&amp;disk.vdisk_lock, "virtio_disk");</span>
+<span class='curline'><a href='../S/65.html#L208'>vdisk_lock</a>        208 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L220'>vdisk_lock</a>        220 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L273'>vdisk_lock</a>        273 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L279'>vdisk_lock</a>        279 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L285'>vdisk_lock</a>        285 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/65.html#L314'>vdisk_lock</a>        314 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
 </pre>
 </body>
 </html>

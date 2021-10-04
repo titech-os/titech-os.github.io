@@ -1,37 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>va</title>
+<title>va_list</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L136'>va</a>                136 kernel/exec.c  loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)</span>
-<span class='curline'><a href='../S/36.html#L141'>va</a>                141 kernel/exec.c    if((va % PGSIZE) != 0)</span>
-<span class='curline'><a href='../S/36.html#L145'>va</a>                145 kernel/exec.c      pa = walkaddr(pagetable, va + i);</span>
-<span class='curline'><a href='../S/63.html#L36'>va</a>                 36 kernel/proc.c      uint64 va = KSTACK((int) (p - proc));</span>
-<span class='curline'><a href='../S/63.html#L37'>va</a>                 37 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/64.html#L345'>va</a>                345 kernel/riscv.h #define PX(level, va) ((((uint64) (va)) &gt;&gt; PXSHIFT(level)) &amp; PXMASK)</span>
-<span class='curline'><a href='../S/38.html#L81'>va</a>                 81 kernel/vm.c    walk(pagetable_t pagetable, uint64 va, int alloc)</span>
-<span class='curline'><a href='../S/38.html#L83'>va</a>                 83 kernel/vm.c      if(va &gt;= MAXVA)</span>
-<span class='curline'><a href='../S/38.html#L87'>va</a>                 87 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
-<span class='curline'><a href='../S/38.html#L97'>va</a>                 97 kernel/vm.c      return &amp;pagetable[PX(0, va)];</span>
-<span class='curline'><a href='../S/38.html#L104'>va</a>                104 kernel/vm.c    walkaddr(pagetable_t pagetable, uint64 va)</span>
-<span class='curline'><a href='../S/38.html#L109'>va</a>                109 kernel/vm.c      if(va &gt;= MAXVA)</span>
-<span class='curline'><a href='../S/38.html#L112'>va</a>                112 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
-<span class='curline'><a href='../S/38.html#L127'>va</a>                127 kernel/vm.c    kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)</span>
-<span class='curline'><a href='../S/38.html#L129'>va</a>                129 kernel/vm.c      if(mappages(kpgtbl, va, sz, pa, perm) != 0)</span>
-<span class='curline'><a href='../S/38.html#L138'>va</a>                138 kernel/vm.c    mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)</span>
-<span class='curline'><a href='../S/38.html#L143'>va</a>                143 kernel/vm.c      a = PGROUNDDOWN(va);</span>
-<span class='curline'><a href='../S/38.html#L144'>va</a>                144 kernel/vm.c      last = PGROUNDDOWN(va + size - 1);</span>
-<span class='curline'><a href='../S/38.html#L163'>va</a>                163 kernel/vm.c    uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free)</span>
-<span class='curline'><a href='../S/38.html#L168'>va</a>                168 kernel/vm.c      if((va % PGSIZE) != 0)</span>
-<span class='curline'><a href='../S/38.html#L171'>va</a>                171 kernel/vm.c      for(a = va; a &lt; va + npages*PGSIZE; a += PGSIZE){</span>
-<span class='curline'><a href='../S/38.html#L330'>va</a>                330 kernel/vm.c    uvmclear(pagetable_t pagetable, uint64 va)</span>
-<span class='curline'><a href='../S/38.html#L334'>va</a>                334 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
+<span class='curline'><a href='../S/29.html#L66'>va_list</a>            66 kernel/printf.c   va_list ap;</span>
+<span class='curline'><a href='../S/4.html#L52'>va_list</a>            52 user/printf.c  vprintf(int fd, const char *fmt, va_list ap)</span>
+<span class='curline'><a href='../S/4.html#L100'>va_list</a>           100 user/printf.c    va_list ap;</span>
+<span class='curline'><a href='../S/4.html#L109'>va_list</a>           109 user/printf.c    va_list ap;</span>
 </pre>
 </body>
 </html>

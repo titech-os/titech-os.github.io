@@ -3,7 +3,7 @@
 <head>
 <title>off</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
@@ -27,23 +27,23 @@
 <span class='curline'><a href='../S/48.html#L467'>off</a>               467 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
 <span class='curline'><a href='../S/48.html#L468'>off</a>               468 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
 <span class='curline'><a href='../S/48.html#L469'>off</a>               469 kernel/fs.c        if(either_copyout(user_dst, dst, bp-&gt;data + (off % BSIZE), m) == -1) {</span>
-<span class='curline'><a href='../S/48.html#L484'>off</a>               484 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
-<span class='curline'><a href='../S/48.html#L489'>off</a>               489 kernel/fs.c      if(off &gt; ip-&gt;size || off + n &lt; off)</span>
-<span class='curline'><a href='../S/48.html#L491'>off</a>               491 kernel/fs.c      if(off + n &gt; MAXFILE*BSIZE)</span>
-<span class='curline'><a href='../S/48.html#L494'>off</a>               494 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
-<span class='curline'><a href='../S/48.html#L495'>off</a>               495 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
-<span class='curline'><a href='../S/48.html#L496'>off</a>               496 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
-<span class='curline'><a href='../S/48.html#L497'>off</a>               497 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
-<span class='curline'><a href='../S/48.html#L507'>off</a>               507 kernel/fs.c        if(off &gt; ip-&gt;size)</span>
-<span class='curline'><a href='../S/48.html#L508'>off</a>               508 kernel/fs.c          ip-&gt;size = off;</span>
-<span class='curline'><a href='../S/48.html#L531'>off</a>               531 kernel/fs.c      uint off, inum;</span>
-<span class='curline'><a href='../S/48.html#L537'>off</a>               537 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
-<span class='curline'><a href='../S/48.html#L538'>off</a>               538 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/48.html#L545'>off</a>               545 kernel/fs.c            *poff = off;</span>
-<span class='curline'><a href='../S/48.html#L558'>off</a>               558 kernel/fs.c      int off;</span>
-<span class='curline'><a href='../S/48.html#L569'>off</a>               569 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
-<span class='curline'><a href='../S/48.html#L570'>off</a>               570 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/48.html#L578'>off</a>               578 kernel/fs.c      if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/48.html#L487'>off</a>               487 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L492'>off</a>               492 kernel/fs.c      if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/48.html#L494'>off</a>               494 kernel/fs.c      if(off + n &gt; MAXFILE*BSIZE)</span>
+<span class='curline'><a href='../S/48.html#L497'>off</a>               497 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
+<span class='curline'><a href='../S/48.html#L498'>off</a>               498 kernel/fs.c        bp = bread(ip-&gt;dev, bmap(ip, off/BSIZE));</span>
+<span class='curline'><a href='../S/48.html#L499'>off</a>               499 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/48.html#L500'>off</a>               500 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
+<span class='curline'><a href='../S/48.html#L508'>off</a>               508 kernel/fs.c      if(off &gt; ip-&gt;size)</span>
+<span class='curline'><a href='../S/48.html#L509'>off</a>               509 kernel/fs.c        ip-&gt;size = off;</span>
+<span class='curline'><a href='../S/48.html#L532'>off</a>               532 kernel/fs.c      uint off, inum;</span>
+<span class='curline'><a href='../S/48.html#L538'>off</a>               538 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/48.html#L539'>off</a>               539 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/48.html#L546'>off</a>               546 kernel/fs.c            *poff = off;</span>
+<span class='curline'><a href='../S/48.html#L559'>off</a>               559 kernel/fs.c      int off;</span>
+<span class='curline'><a href='../S/48.html#L570'>off</a>               570 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/48.html#L571'>off</a>               571 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/48.html#L579'>off</a>               579 kernel/fs.c      if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
 <span class='curline'><a href='../S/43.html#L172'>off</a>               172 kernel/sysfile.c   int off;</span>
 <span class='curline'><a href='../S/43.html#L175'>off</a>               175 kernel/sysfile.c   for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
 <span class='curline'><a href='../S/43.html#L176'>off</a>               176 kernel/sysfile.c     if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
@@ -51,17 +51,17 @@
 <span class='curline'><a href='../S/43.html#L207'>off</a>               207 kernel/sysfile.c   if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
 <span class='curline'><a href='../S/43.html#L219'>off</a>               219 kernel/sysfile.c   if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
 <span class='curline'><a href='../S/43.html#L338'>off</a>               338 kernel/sysfile.c     f-&gt;off = 0;</span>
-<span class='curline'><a href='../S/3.html#L71'>off</a>                71 mkfs/mkfs.c      uint rootino, inum, off;</span>
-<span class='curline'><a href='../S/3.html#L168'>off</a>               168 mkfs/mkfs.c      off = xint(din.size);</span>
-<span class='curline'><a href='../S/3.html#L169'>off</a>               169 mkfs/mkfs.c      off = ((off/BSIZE) + 1) * BSIZE;</span>
-<span class='curline'><a href='../S/3.html#L170'>off</a>               170 mkfs/mkfs.c      din.size = xint(off);</span>
-<span class='curline'><a href='../S/3.html#L267'>off</a>               267 mkfs/mkfs.c      uint fbn, off, n1;</span>
-<span class='curline'><a href='../S/3.html#L274'>off</a>               274 mkfs/mkfs.c      off = xint(din.size);</span>
-<span class='curline'><a href='../S/3.html#L277'>off</a>               277 mkfs/mkfs.c        fbn = off / BSIZE;</span>
-<span class='curline'><a href='../S/3.html#L295'>off</a>               295 mkfs/mkfs.c        n1 = min(n, (fbn + 1) * BSIZE - off);</span>
-<span class='curline'><a href='../S/3.html#L297'>off</a>               297 mkfs/mkfs.c        bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
-<span class='curline'><a href='../S/3.html#L300'>off</a>               300 mkfs/mkfs.c        off += n1;</span>
-<span class='curline'><a href='../S/3.html#L303'>off</a>               303 mkfs/mkfs.c      din.size = xint(off);</span>
+<span class='curline'><a href='../S/3.html#L72'>off</a>                72 mkfs/mkfs.c      uint rootino, inum, off;</span>
+<span class='curline'><a href='../S/3.html#L165'>off</a>               165 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L166'>off</a>               166 mkfs/mkfs.c      off = ((off/BSIZE) + 1) * BSIZE;</span>
+<span class='curline'><a href='../S/3.html#L167'>off</a>               167 mkfs/mkfs.c      din.size = xint(off);</span>
+<span class='curline'><a href='../S/3.html#L256'>off</a>               256 mkfs/mkfs.c      uint fbn, off, n1;</span>
+<span class='curline'><a href='../S/3.html#L263'>off</a>               263 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L266'>off</a>               266 mkfs/mkfs.c        fbn = off / BSIZE;</span>
+<span class='curline'><a href='../S/3.html#L284'>off</a>               284 mkfs/mkfs.c        n1 = min(n, (fbn + 1) * BSIZE - off);</span>
+<span class='curline'><a href='../S/3.html#L286'>off</a>               286 mkfs/mkfs.c        bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
+<span class='curline'><a href='../S/3.html#L289'>off</a>               289 mkfs/mkfs.c        off += n1;</span>
+<span class='curline'><a href='../S/3.html#L292'>off</a>               292 mkfs/mkfs.c      din.size = xint(off);</span>
 </pre>
 </body>
 </html>

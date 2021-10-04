@@ -1,42 +1,31 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>memset</title>
+<title>mem</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L129'>memset</a>            129 kernel/defs.h  void*           memset(void*, int, uint);</span>
-<span class='curline'><a href='../S/48.html#L56'>memset</a>             56 kernel/fs.c      memset(bp-&gt;data, 0, BSIZE);</span>
-<span class='curline'><a href='../S/48.html#L206'>memset</a>            206 kernel/fs.c          memset(dip, 0, sizeof(*dip));</span>
-<span class='curline'><a href='../S/69.html#L55'>memset</a>             55 kernel/kalloc.c   memset(pa, 1, PGSIZE);</span>
-<span class='curline'><a href='../S/69.html#L80'>memset</a>             80 kernel/kalloc.c     memset((char*)r, 5, PGSIZE); // fill with junk</span>
-<span class='curline'><a href='../S/63.html#L133'>memset</a>            133 kernel/proc.c    memset(&amp;p-&gt;context, 0, sizeof(p-&gt;context));</span>
-<span class='curline'><a href='../S/43.html#L218'>memset</a>            218 kernel/sysfile.c   memset(&amp;de, 0, sizeof(de));</span>
-<span class='curline'><a href='../S/43.html#L425'>memset</a>            425 kernel/sysfile.c   memset(argv, 0, sizeof(argv));</span>
-<span class='curline'><a href='../S/65.html#L125'>memset</a>            125 kernel/virtio_disk.c   memset(disk.pages, 0, sizeof(disk.pages));</span>
-<span class='curline'><a href='../S/38.html#L25'>memset</a>             25 kernel/vm.c      memset(kpgtbl, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L93'>memset</a>             93 kernel/vm.c          memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L195'>memset</a>            195 kernel/vm.c      memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L210'>memset</a>            210 kernel/vm.c      memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L233'>memset</a>            233 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/3.html#L114'>memset</a>            114 mkfs/mkfs.c      memset(buf, 0, sizeof(buf));</span>
-<span class='curline'><a href='../S/6.html#L21'>memset</a>             21 user/ls.c        memset(buf+strlen(p), ' ', DIRSIZ-strlen(p));</span>
-<span class='curline'><a href='../S/17.html#L137'>memset</a>            137 user/sh.c        memset(buf, 0, nbuf);</span>
-<span class='curline'><a href='../S/17.html#L201'>memset</a>            201 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L212'>memset</a>            212 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L228'>memset</a>            228 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L241'>memset</a>            241 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L254'>memset</a>            254 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/22.html#L24'>memset</a>             24 user/stressfs.c   memset(data, 'a', sizeof(data));</span>
-<span class='curline'><a href='../S/15.html#L37'>memset</a>             37 user/user.h    void* memset(void*, int, uint);</span>
-<span class='curline'><a href='../S/24.html#L1071'>memset</a>           1071 user/usertests.c   memset(buf, pid==0?'c':'p', sizeof(buf));</span>
-<span class='curline'><a href='../S/24.html#L1139'>memset</a>           1139 user/usertests.c       memset(buf, '0'+pi, SZ);</span>
-<span class='curline'><a href='../S/24.html#L1396'>memset</a>           1396 user/usertests.c   memset(fa, 0, sizeof(fa));</span>
-<span class='curline'><a href='../S/24.html#L1798'>memset</a>           1798 user/usertests.c     memset(buf, i, SZ);</span>
+<span class='curline'><a href='../S/38.html#L208'>mem</a>               208 kernel/vm.c      char *mem;</span>
+<span class='curline'><a href='../S/38.html#L212'>mem</a>               212 kernel/vm.c      mem = kalloc();</span>
+<span class='curline'><a href='../S/38.html#L213'>mem</a>               213 kernel/vm.c      memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L214'>mem</a>               214 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
+<span class='curline'><a href='../S/38.html#L215'>mem</a>               215 kernel/vm.c      memmove(mem, src, sz);</span>
+<span class='curline'><a href='../S/38.html#L223'>mem</a>               223 kernel/vm.c      char *mem;</span>
+<span class='curline'><a href='../S/38.html#L231'>mem</a>               231 kernel/vm.c        mem = kalloc();</span>
+<span class='curline'><a href='../S/38.html#L232'>mem</a>               232 kernel/vm.c        if(mem == 0){</span>
+<span class='curline'><a href='../S/38.html#L236'>mem</a>               236 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L237'>mem</a>               237 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_W|PTE_X|PTE_R|PTE_U) != 0){</span>
+<span class='curline'><a href='../S/38.html#L238'>mem</a>               238 kernel/vm.c          kfree(mem);</span>
+<span class='curline'><a href='../S/38.html#L306'>mem</a>               306 kernel/vm.c      char *mem;</span>
+<span class='curline'><a href='../S/38.html#L315'>mem</a>               315 kernel/vm.c        if((mem = kalloc()) == 0)</span>
+<span class='curline'><a href='../S/38.html#L317'>mem</a>               317 kernel/vm.c        memmove(mem, (char*)pa, PGSIZE);</span>
+<span class='curline'><a href='../S/38.html#L318'>mem</a>               318 kernel/vm.c        if(mappages(new, i, PGSIZE, (uint64)mem, flags) != 0){</span>
+<span class='curline'><a href='../S/38.html#L319'>mem</a>               319 kernel/vm.c          kfree(mem);</span>
+<span class='curline'><a href='../S/24.html#L2872'>mem</a>              2872 user/usertests.c     {mem, "mem"},</span>
 </pre>
 </body>
 </html>

@@ -1,16 +1,67 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>satp</title>
+<title>sbrk</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L122'>satp</a>              122 kernel/trap.c    uint64 satp = MAKE_SATP(p-&gt;pagetable);</span>
-<span class='curline'><a href='../S/56.html#L128'>satp</a>              128 kernel/trap.c    ((void (*)(uint64,uint64))fn)(TRAPFRAME, satp);</span>
+<span class='curline'><a href='../S/12.html#L55'>sbrk</a>               55 user/grind.c     char *break0 = sbrk(0);</span>
+<span class='curline'><a href='../S/12.html#L128'>sbrk</a>              128 user/grind.c         sbrk(6011);</span>
+<span class='curline'><a href='../S/12.html#L130'>sbrk</a>              130 user/grind.c         if(sbrk(0) &gt; break0)</span>
+<span class='curline'><a href='../S/12.html#L131'>sbrk</a>              131 user/grind.c           sbrk(-(sbrk(0) - break0));</span>
+<span class='curline'><a href='../S/11.html#L54'>sbrk</a>               54 user/umalloc.c   p = sbrk(nu * sizeof(Header));</span>
+<span class='curline'><a href='../S/15.html#L23'>sbrk</a>               23 user/user.h    char* sbrk(int);</span>
+<span class='curline'><a href='../S/24.html#L195'>sbrk</a>              195 user/usertests.c   sbrk(8192);</span>
+<span class='curline'><a href='../S/24.html#L196'>sbrk</a>              196 user/usertests.c   uint64 top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L198'>sbrk</a>              198 user/usertests.c     sbrk(PGSIZE - (top % PGSIZE));</span>
+<span class='curline'><a href='../S/24.html#L200'>sbrk</a>              200 user/usertests.c   top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L242'>sbrk</a>              242 user/usertests.c   uint64 a = (uint64) sbrk(8192);</span>
+<span class='curline'><a href='../S/24.html#L249'>sbrk</a>              249 user/usertests.c   if ((uint64) sbrk(-8192) ==  0xffffffffffffffffLL) {</span>
+<span class='curline'><a href='../S/24.html#L2097'>sbrk</a>             2097 user/usertests.c     a = sbrk(TOOMUCH);</span>
+<span class='curline'><a href='../S/24.html#L2120'>sbrk</a>             2120 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2122'>sbrk</a>             2122 user/usertests.c     b = sbrk(1);</span>
+<span class='curline'><a href='../S/24.html#L2135'>sbrk</a>             2135 user/usertests.c   c = sbrk(1);</span>
+<span class='curline'><a href='../S/24.html#L2136'>sbrk</a>             2136 user/usertests.c   c = sbrk(1);</span>
+<span class='curline'><a href='../S/24.html#L2154'>sbrk</a>             2154 user/usertests.c   oldbrk = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2157'>sbrk</a>             2157 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2159'>sbrk</a>             2159 user/usertests.c   p = sbrk(amt);</span>
+<span class='curline'><a href='../S/24.html#L2166'>sbrk</a>             2166 user/usertests.c   char *eee = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2174'>sbrk</a>             2174 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2175'>sbrk</a>             2175 user/usertests.c   c = sbrk(-PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L2180'>sbrk</a>             2180 user/usertests.c   c = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2187'>sbrk</a>             2187 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2188'>sbrk</a>             2188 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L2189'>sbrk</a>             2189 user/usertests.c   if(c != a || sbrk(0) != a + PGSIZE){</span>
+<span class='curline'><a href='../S/24.html#L2199'>sbrk</a>             2199 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2200'>sbrk</a>             2200 user/usertests.c   c = sbrk(-(sbrk(0) - oldbrk));</span>
+<span class='curline'><a href='../S/24.html#L2275'>sbrk</a>             2275 user/usertests.c       sbrk(BIG - (uint64)sbrk(0));</span>
+<span class='curline'><a href='../S/24.html#L2286'>sbrk</a>             2286 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L2308'>sbrk</a>             2308 user/usertests.c     a = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2309'>sbrk</a>             2309 user/usertests.c     sbrk(10*BIG);</span>
+<span class='curline'><a href='../S/24.html#L2332'>sbrk</a>             2332 user/usertests.c   a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L2346'>sbrk</a>             2346 user/usertests.c   a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/24.html#L2481'>sbrk</a>             2481 user/usertests.c   read(fd, sbrk(0) - 1, -1);</span>
+<span class='curline'><a href='../S/24.html#L2538'>sbrk</a>             2538 user/usertests.c     int sz = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2542'>sbrk</a>             2542 user/usertests.c     sbrk(-sz);</span>
+<span class='curline'><a href='../S/24.html#L2554'>sbrk</a>             2554 user/usertests.c     int sz = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2558'>sbrk</a>             2558 user/usertests.c     sbrk(-(sz - 3500));</span>
+<span class='curline'><a href='../S/24.html#L2570'>sbrk</a>             2570 user/usertests.c     sbrk((10*4096 + 2048) - (uint64)sbrk(0));</span>
+<span class='curline'><a href='../S/24.html#L2575'>sbrk</a>             2575 user/usertests.c     sbrk(-10);</span>
+<span class='curline'><a href='../S/24.html#L2590'>sbrk</a>             2590 user/usertests.c   uint64 top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2592'>sbrk</a>             2592 user/usertests.c     sbrk(4096 - (top % 4096));</span>
+<span class='curline'><a href='../S/24.html#L2593'>sbrk</a>             2593 user/usertests.c   sbrk(4096);</span>
+<span class='curline'><a href='../S/24.html#L2594'>sbrk</a>             2594 user/usertests.c   sbrk(10);</span>
+<span class='curline'><a href='../S/24.html#L2595'>sbrk</a>             2595 user/usertests.c   sbrk(-20);</span>
+<span class='curline'><a href='../S/24.html#L2596'>sbrk</a>             2596 user/usertests.c   top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2615'>sbrk</a>             2615 user/usertests.c   sbrk(0x80000004);</span>
+<span class='curline'><a href='../S/24.html#L2616'>sbrk</a>             2616 user/usertests.c   volatile char *top = sbrk(0);</span>
+<span class='curline'><a href='../S/24.html#L2686'>sbrk</a>             2686 user/usertests.c         uint64 a = (uint64) sbrk(4096);</span>
+<span class='curline'><a href='../S/24.html#L2695'>sbrk</a>             2695 user/usertests.c         sbrk(-4096);</span>
+<span class='curline'><a href='../S/24.html#L2736'>sbrk</a>             2736 user/usertests.c       uint64 a = (uint64) sbrk(4096);</span>
 </pre>
 </body>
 </html>

@@ -3,26 +3,26 @@
 <head>
 <title>n</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
 <span class='curline'><a href='../S/57.html#L59'>n</a>                  59 kernel/console.c consolewrite(int user_src, uint64 src, int n)</span>
-<span class='curline'><a href='../S/57.html#L64'>n</a>                  64 kernel/console.c   for(i = 0; i &lt; n; i++){</span>
-<span class='curline'><a href='../S/57.html#L82'>n</a>                  82 kernel/console.c consoleread(int user_dst, uint64 dst, int n)</span>
-<span class='curline'><a href='../S/57.html#L88'>n</a>                  88 kernel/console.c   target = n;</span>
-<span class='curline'><a href='../S/57.html#L90'>n</a>                  90 kernel/console.c   while(n &gt; 0){</span>
-<span class='curline'><a href='../S/57.html#L104'>n</a>                 104 kernel/console.c       if(n &lt; target){</span>
-<span class='curline'><a href='../S/57.html#L118'>n</a>                 118 kernel/console.c     --n;</span>
-<span class='curline'><a href='../S/57.html#L128'>n</a>                 128 kernel/console.c   return target - n;</span>
+<span class='curline'><a href='../S/57.html#L63'>n</a>                  63 kernel/console.c   for(i = 0; i &lt; n; i++){</span>
+<span class='curline'><a href='../S/57.html#L80'>n</a>                  80 kernel/console.c consoleread(int user_dst, uint64 dst, int n)</span>
+<span class='curline'><a href='../S/57.html#L86'>n</a>                  86 kernel/console.c   target = n;</span>
+<span class='curline'><a href='../S/57.html#L88'>n</a>                  88 kernel/console.c   while(n &gt; 0){</span>
+<span class='curline'><a href='../S/57.html#L102'>n</a>                 102 kernel/console.c       if(n &lt; target){</span>
+<span class='curline'><a href='../S/57.html#L116'>n</a>                 116 kernel/console.c     --n;</span>
+<span class='curline'><a href='../S/57.html#L126'>n</a>                 126 kernel/console.c   return target - n;</span>
 <span class='curline'><a href='../S/31.html#L33'>n</a>                  33 kernel/defs.h  int             fileread(struct file*, uint64, int n);</span>
 <span class='curline'><a href='../S/31.html#L35'>n</a>                  35 kernel/defs.h  int             filewrite(struct file*, uint64, int n);</span>
 <span class='curline'><a href='../S/36.html#L138'>n</a>                 138 kernel/exec.c    uint i, n;</span>
-<span class='curline'><a href='../S/36.html#L149'>n</a>                 149 kernel/exec.c        n = sz - i;</span>
-<span class='curline'><a href='../S/36.html#L151'>n</a>                 151 kernel/exec.c        n = PGSIZE;</span>
-<span class='curline'><a href='../S/36.html#L152'>n</a>                 152 kernel/exec.c      if(readi(ip, 0, (uint64)pa, offset+i, n) != n)</span>
+<span class='curline'><a href='../S/36.html#L146'>n</a>                 146 kernel/exec.c        n = sz - i;</span>
+<span class='curline'><a href='../S/36.html#L148'>n</a>                 148 kernel/exec.c        n = PGSIZE;</span>
+<span class='curline'><a href='../S/36.html#L149'>n</a>                 149 kernel/exec.c      if(readi(ip, 0, (uint64)pa, offset+i, n) != n)</span>
 <span class='curline'><a href='../S/67.html#L107'>n</a>                 107 kernel/file.c  fileread(struct file *f, uint64 addr, int n)</span>
 <span class='curline'><a href='../S/67.html#L115'>n</a>                 115 kernel/file.c      r = piperead(f-&gt;pipe, addr, n);</span>
 <span class='curline'><a href='../S/67.html#L119'>n</a>                 119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
@@ -40,14 +40,11 @@
 <span class='curline'><a href='../S/48.html#L464'>n</a>                 464 kernel/fs.c        n = ip-&gt;size - off;</span>
 <span class='curline'><a href='../S/48.html#L466'>n</a>                 466 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, dst+=m){</span>
 <span class='curline'><a href='../S/48.html#L468'>n</a>                 468 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
-<span class='curline'><a href='../S/48.html#L484'>n</a>                 484 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
-<span class='curline'><a href='../S/48.html#L489'>n</a>                 489 kernel/fs.c      if(off &gt; ip-&gt;size || off + n &lt; off)</span>
-<span class='curline'><a href='../S/48.html#L491'>n</a>                 491 kernel/fs.c      if(off + n &gt; MAXFILE*BSIZE)</span>
-<span class='curline'><a href='../S/48.html#L494'>n</a>                 494 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
-<span class='curline'><a href='../S/48.html#L496'>n</a>                 496 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
-<span class='curline'><a href='../S/48.html#L499'>n</a>                 499 kernel/fs.c          n = -1;</span>
-<span class='curline'><a href='../S/48.html#L506'>n</a>                 506 kernel/fs.c      if(n &gt; 0){</span>
-<span class='curline'><a href='../S/48.html#L515'>n</a>                 515 kernel/fs.c      return n;</span>
+<span class='curline'><a href='../S/48.html#L487'>n</a>                 487 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
+<span class='curline'><a href='../S/48.html#L492'>n</a>                 492 kernel/fs.c      if(off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/48.html#L494'>n</a>                 494 kernel/fs.c      if(off + n &gt; MAXFILE*BSIZE)</span>
+<span class='curline'><a href='../S/48.html#L497'>n</a>                 497 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
+<span class='curline'><a href='../S/48.html#L499'>n</a>                 499 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
 <span class='curline'><a href='../S/28.html#L36'>n</a>                  36 kernel/log.c     int n;</span>
 <span class='curline'><a href='../S/28.html#L73'>n</a>                  73 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
 <span class='curline'><a href='../S/28.html#L92'>n</a>                  92 kernel/log.c     log.lh.n = lh-&gt;n;</span>
@@ -59,44 +56,45 @@
 <span class='curline'><a href='../S/28.html#L183'>n</a>                 183 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
 <span class='curline'><a href='../S/28.html#L196'>n</a>                 196 kernel/log.c     if (log.lh.n &gt; 0) {</span>
 <span class='curline'><a href='../S/28.html#L200'>n</a>                 200 kernel/log.c       log.lh.n = 0;</span>
-<span class='curline'><a href='../S/28.html#L219'>n</a>                 219 kernel/log.c     if (log.lh.n &gt;= LOGSIZE || log.lh.n &gt;= log.size - 1)</span>
+<span class='curline'><a href='../S/28.html#L220'>n</a>                 220 kernel/log.c     if (log.lh.n &gt;= LOGSIZE || log.lh.n &gt;= log.size - 1)</span>
 <span class='curline'><a href='../S/28.html#L225'>n</a>                 225 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
 <span class='curline'><a href='../S/28.html#L230'>n</a>                 230 kernel/log.c     if (i == log.lh.n) {  // Add new block to log?</span>
 <span class='curline'><a href='../S/28.html#L232'>n</a>                 232 kernel/log.c       log.lh.n++;</span>
 <span class='curline'><a href='../S/34.html#L77'>n</a>                  77 kernel/pipe.c  pipewrite(struct pipe *pi, uint64 addr, int n)</span>
-<span class='curline'><a href='../S/34.html#L84'>n</a>                  84 kernel/pipe.c    for(i = 0; i &lt; n; i++){</span>
-<span class='curline'><a href='../S/34.html#L103'>n</a>                 103 kernel/pipe.c  piperead(struct pipe *pi, uint64 addr, int n)</span>
-<span class='curline'><a href='../S/34.html#L117'>n</a>                 117 kernel/pipe.c    for(i = 0; i &lt; n; i++){  //DOC: piperead-copy</span>
-<span class='curline'><a href='../S/63.html#L246'>n</a>                 246 kernel/proc.c  growproc(int n)</span>
-<span class='curline'><a href='../S/63.html#L252'>n</a>                 252 kernel/proc.c    if(n &gt; 0){</span>
-<span class='curline'><a href='../S/63.html#L253'>n</a>                 253 kernel/proc.c      if((sz = uvmalloc(p-&gt;pagetable, sz, sz + n)) == 0) {</span>
-<span class='curline'><a href='../S/63.html#L256'>n</a>                 256 kernel/proc.c    } else if(n &lt; 0){</span>
-<span class='curline'><a href='../S/63.html#L257'>n</a>                 257 kernel/proc.c      sz = uvmdealloc(p-&gt;pagetable, sz, sz + n);</span>
+<span class='curline'><a href='../S/34.html#L83'>n</a>                  83 kernel/pipe.c    while(i &lt; n){</span>
+<span class='curline'><a href='../S/34.html#L106'>n</a>                 106 kernel/pipe.c  piperead(struct pipe *pi, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/34.html#L120'>n</a>                 120 kernel/pipe.c    for(i = 0; i &lt; n; i++){  //DOC: piperead-copy</span>
+<span class='curline'><a href='../S/63.html#L253'>n</a>                 253 kernel/proc.c  growproc(int n)</span>
+<span class='curline'><a href='../S/63.html#L259'>n</a>                 259 kernel/proc.c    if(n &gt; 0){</span>
+<span class='curline'><a href='../S/63.html#L260'>n</a>                 260 kernel/proc.c      if((sz = uvmalloc(p-&gt;pagetable, sz, sz + n)) == 0) {</span>
+<span class='curline'><a href='../S/63.html#L263'>n</a>                 263 kernel/proc.c    } else if(n &lt; 0){</span>
+<span class='curline'><a href='../S/63.html#L264'>n</a>                 264 kernel/proc.c      sz = uvmdealloc(p-&gt;pagetable, sz, sz + n);</span>
 <span class='curline'><a href='../S/46.html#L4'>n</a>                   4 kernel/string.c memset(void *dst, int c, uint n)</span>
 <span class='curline'><a href='../S/46.html#L8'>n</a>                   8 kernel/string.c   for(i = 0; i &lt; n; i++){</span>
 <span class='curline'><a href='../S/46.html#L15'>n</a>                  15 kernel/string.c memcmp(const void *v1, const void *v2, uint n)</span>
 <span class='curline'><a href='../S/46.html#L21'>n</a>                  21 kernel/string.c   while(n-- &gt; 0){</span>
 <span class='curline'><a href='../S/46.html#L31'>n</a>                  31 kernel/string.c memmove(void *dst, const void *src, uint n)</span>
-<span class='curline'><a href='../S/46.html#L38'>n</a>                  38 kernel/string.c   if(s &lt; d &amp;&amp; s + n &gt; d){</span>
-<span class='curline'><a href='../S/46.html#L39'>n</a>                  39 kernel/string.c     s += n;</span>
-<span class='curline'><a href='../S/46.html#L40'>n</a>                  40 kernel/string.c     d += n;</span>
-<span class='curline'><a href='../S/46.html#L41'>n</a>                  41 kernel/string.c     while(n-- &gt; 0)</span>
+<span class='curline'><a href='../S/46.html#L36'>n</a>                  36 kernel/string.c   if(n == 0)</span>
+<span class='curline'><a href='../S/46.html#L41'>n</a>                  41 kernel/string.c   if(s &lt; d &amp;&amp; s + n &gt; d){</span>
+<span class='curline'><a href='../S/46.html#L42'>n</a>                  42 kernel/string.c     s += n;</span>
+<span class='curline'><a href='../S/46.html#L43'>n</a>                  43 kernel/string.c     d += n;</span>
 <span class='curline'><a href='../S/46.html#L44'>n</a>                  44 kernel/string.c     while(n-- &gt; 0)</span>
-<span class='curline'><a href='../S/46.html#L52'>n</a>                  52 kernel/string.c memcpy(void *dst, const void *src, uint n)</span>
-<span class='curline'><a href='../S/46.html#L54'>n</a>                  54 kernel/string.c   return memmove(dst, src, n);</span>
-<span class='curline'><a href='../S/46.html#L58'>n</a>                  58 kernel/string.c strncmp(const char *p, const char *q, uint n)</span>
-<span class='curline'><a href='../S/46.html#L60'>n</a>                  60 kernel/string.c   while(n &gt; 0 &amp;&amp; *p &amp;&amp; *p == *q)</span>
-<span class='curline'><a href='../S/46.html#L61'>n</a>                  61 kernel/string.c     n--, p++, q++;</span>
-<span class='curline'><a href='../S/46.html#L62'>n</a>                  62 kernel/string.c   if(n == 0)</span>
-<span class='curline'><a href='../S/46.html#L68'>n</a>                  68 kernel/string.c strncpy(char *s, const char *t, int n)</span>
-<span class='curline'><a href='../S/46.html#L73'>n</a>                  73 kernel/string.c   while(n-- &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
-<span class='curline'><a href='../S/46.html#L75'>n</a>                  75 kernel/string.c   while(n-- &gt; 0)</span>
-<span class='curline'><a href='../S/46.html#L82'>n</a>                  82 kernel/string.c safestrcpy(char *s, const char *t, int n)</span>
-<span class='curline'><a href='../S/46.html#L87'>n</a>                  87 kernel/string.c   if(n &lt;= 0)</span>
-<span class='curline'><a href='../S/46.html#L89'>n</a>                  89 kernel/string.c   while(--n &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
-<span class='curline'><a href='../S/46.html#L98'>n</a>                  98 kernel/string.c   int n;</span>
-<span class='curline'><a href='../S/46.html#L100'>n</a>                 100 kernel/string.c   for(n = 0; s[n]; n++)</span>
-<span class='curline'><a href='../S/46.html#L102'>n</a>                 102 kernel/string.c   return n;</span>
+<span class='curline'><a href='../S/46.html#L47'>n</a>                  47 kernel/string.c     while(n-- &gt; 0)</span>
+<span class='curline'><a href='../S/46.html#L55'>n</a>                  55 kernel/string.c memcpy(void *dst, const void *src, uint n)</span>
+<span class='curline'><a href='../S/46.html#L57'>n</a>                  57 kernel/string.c   return memmove(dst, src, n);</span>
+<span class='curline'><a href='../S/46.html#L61'>n</a>                  61 kernel/string.c strncmp(const char *p, const char *q, uint n)</span>
+<span class='curline'><a href='../S/46.html#L63'>n</a>                  63 kernel/string.c   while(n &gt; 0 &amp;&amp; *p &amp;&amp; *p == *q)</span>
+<span class='curline'><a href='../S/46.html#L64'>n</a>                  64 kernel/string.c     n--, p++, q++;</span>
+<span class='curline'><a href='../S/46.html#L65'>n</a>                  65 kernel/string.c   if(n == 0)</span>
+<span class='curline'><a href='../S/46.html#L71'>n</a>                  71 kernel/string.c strncpy(char *s, const char *t, int n)</span>
+<span class='curline'><a href='../S/46.html#L76'>n</a>                  76 kernel/string.c   while(n-- &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
+<span class='curline'><a href='../S/46.html#L78'>n</a>                  78 kernel/string.c   while(n-- &gt; 0)</span>
+<span class='curline'><a href='../S/46.html#L85'>n</a>                  85 kernel/string.c safestrcpy(char *s, const char *t, int n)</span>
+<span class='curline'><a href='../S/46.html#L90'>n</a>                  90 kernel/string.c   if(n &lt;= 0)</span>
+<span class='curline'><a href='../S/46.html#L92'>n</a>                  92 kernel/string.c   while(--n &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
+<span class='curline'><a href='../S/46.html#L101'>n</a>                 101 kernel/string.c   int n;</span>
+<span class='curline'><a href='../S/46.html#L103'>n</a>                 103 kernel/string.c   for(n = 0; s[n]; n++)</span>
+<span class='curline'><a href='../S/46.html#L105'>n</a>                 105 kernel/string.c   return n;</span>
 <span class='curline'><a href='../S/51.html#L35'>n</a>                  35 kernel/syscall.c argraw(int n)</span>
 <span class='curline'><a href='../S/51.html#L38'>n</a>                  38 kernel/syscall.c   switch (n) {</span>
 <span class='curline'><a href='../S/51.html#L58'>n</a>                  58 kernel/syscall.c argint(int n, int *ip)</span>
@@ -124,31 +122,31 @@
 <span class='curline'><a href='../S/33.html#L58'>n</a>                  58 kernel/sysproc.c   int n;</span>
 <span class='curline'><a href='../S/33.html#L61'>n</a>                  61 kernel/sysproc.c   if(argint(0, &amp;n) &lt; 0)</span>
 <span class='curline'><a href='../S/33.html#L65'>n</a>                  65 kernel/sysproc.c   while(ticks - ticks0 &lt; n){</span>
-<span class='curline'><a href='../S/38.html#L346'>n</a>                 346 kernel/vm.c      uint64 n, va0, pa0;</span>
-<span class='curline'><a href='../S/38.html#L353'>n</a>                 353 kernel/vm.c        n = PGSIZE - (dstva - va0);</span>
-<span class='curline'><a href='../S/38.html#L354'>n</a>                 354 kernel/vm.c        if(n &gt; len)</span>
-<span class='curline'><a href='../S/38.html#L355'>n</a>                 355 kernel/vm.c          n = len;</span>
-<span class='curline'><a href='../S/38.html#L356'>n</a>                 356 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
-<span class='curline'><a href='../S/38.html#L358'>n</a>                 358 kernel/vm.c        len -= n;</span>
-<span class='curline'><a href='../S/38.html#L359'>n</a>                 359 kernel/vm.c        src += n;</span>
-<span class='curline'><a href='../S/38.html#L371'>n</a>                 371 kernel/vm.c      uint64 n, va0, pa0;</span>
-<span class='curline'><a href='../S/38.html#L378'>n</a>                 378 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
-<span class='curline'><a href='../S/38.html#L379'>n</a>                 379 kernel/vm.c        if(n &gt; len)</span>
-<span class='curline'><a href='../S/38.html#L380'>n</a>                 380 kernel/vm.c          n = len;</span>
-<span class='curline'><a href='../S/38.html#L381'>n</a>                 381 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
-<span class='curline'><a href='../S/38.html#L383'>n</a>                 383 kernel/vm.c        len -= n;</span>
-<span class='curline'><a href='../S/38.html#L384'>n</a>                 384 kernel/vm.c        dst += n;</span>
-<span class='curline'><a href='../S/38.html#L397'>n</a>                 397 kernel/vm.c      uint64 n, va0, pa0;</span>
-<span class='curline'><a href='../S/38.html#L405'>n</a>                 405 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
-<span class='curline'><a href='../S/38.html#L406'>n</a>                 406 kernel/vm.c        if(n &gt; max)</span>
-<span class='curline'><a href='../S/38.html#L407'>n</a>                 407 kernel/vm.c          n = max;</span>
-<span class='curline'><a href='../S/38.html#L410'>n</a>                 410 kernel/vm.c        while(n &gt; 0){</span>
-<span class='curline'><a href='../S/38.html#L418'>n</a>                 418 kernel/vm.c          --n;</span>
+<span class='curline'><a href='../S/38.html#L349'>n</a>                 349 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L356'>n</a>                 356 kernel/vm.c        n = PGSIZE - (dstva - va0);</span>
+<span class='curline'><a href='../S/38.html#L357'>n</a>                 357 kernel/vm.c        if(n &gt; len)</span>
+<span class='curline'><a href='../S/38.html#L358'>n</a>                 358 kernel/vm.c          n = len;</span>
+<span class='curline'><a href='../S/38.html#L359'>n</a>                 359 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
+<span class='curline'><a href='../S/38.html#L361'>n</a>                 361 kernel/vm.c        len -= n;</span>
+<span class='curline'><a href='../S/38.html#L362'>n</a>                 362 kernel/vm.c        src += n;</span>
+<span class='curline'><a href='../S/38.html#L374'>n</a>                 374 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L381'>n</a>                 381 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/38.html#L382'>n</a>                 382 kernel/vm.c        if(n &gt; len)</span>
+<span class='curline'><a href='../S/38.html#L383'>n</a>                 383 kernel/vm.c          n = len;</span>
+<span class='curline'><a href='../S/38.html#L384'>n</a>                 384 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
+<span class='curline'><a href='../S/38.html#L386'>n</a>                 386 kernel/vm.c        len -= n;</span>
+<span class='curline'><a href='../S/38.html#L387'>n</a>                 387 kernel/vm.c        dst += n;</span>
+<span class='curline'><a href='../S/38.html#L400'>n</a>                 400 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/38.html#L408'>n</a>                 408 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/38.html#L409'>n</a>                 409 kernel/vm.c        if(n &gt; max)</span>
+<span class='curline'><a href='../S/38.html#L410'>n</a>                 410 kernel/vm.c          n = max;</span>
+<span class='curline'><a href='../S/38.html#L413'>n</a>                 413 kernel/vm.c        while(n &gt; 0){</span>
+<span class='curline'><a href='../S/38.html#L421'>n</a>                 421 kernel/vm.c          --n;</span>
 <span class='curline'><a href='../S/3.html#L42'>n</a>                  42 mkfs/mkfs.c    void iappend(uint inum, void *p, int n);</span>
-<span class='curline'><a href='../S/3.html#L264'>n</a>                 264 mkfs/mkfs.c    iappend(uint inum, void *xp, int n)</span>
-<span class='curline'><a href='../S/3.html#L276'>n</a>                 276 mkfs/mkfs.c      while(n &gt; 0){</span>
-<span class='curline'><a href='../S/3.html#L295'>n</a>                 295 mkfs/mkfs.c        n1 = min(n, (fbn + 1) * BSIZE - off);</span>
-<span class='curline'><a href='../S/3.html#L299'>n</a>                 299 mkfs/mkfs.c        n -= n1;</span>
+<span class='curline'><a href='../S/3.html#L253'>n</a>                 253 mkfs/mkfs.c    iappend(uint inum, void *xp, int n)</span>
+<span class='curline'><a href='../S/3.html#L265'>n</a>                 265 mkfs/mkfs.c      while(n &gt; 0){</span>
+<span class='curline'><a href='../S/3.html#L284'>n</a>                 284 mkfs/mkfs.c        n1 = min(n, (fbn + 1) * BSIZE - off);</span>
+<span class='curline'><a href='../S/3.html#L288'>n</a>                 288 mkfs/mkfs.c        n -= n1;</span>
 <span class='curline'><a href='../S/9.html#L10'>n</a>                  10 user/cat.c       int n;</span>
 <span class='curline'><a href='../S/9.html#L12'>n</a>                  12 user/cat.c       while((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
 <span class='curline'><a href='../S/9.html#L13'>n</a>                  13 user/cat.c         if (write(1, buf, n) != n) {</span>
@@ -240,31 +238,31 @@
 <span class='curline'><a href='../S/24.html#L757'>n</a>                 757 user/usertests.c     while((n = read(fds[0], buf, cc)) &gt; 0){</span>
 <span class='curline'><a href='../S/24.html#L758'>n</a>                 758 user/usertests.c       for(i = 0; i &lt; n; i++){</span>
 <span class='curline'><a href='../S/24.html#L764'>n</a>                 764 user/usertests.c       total += n;</span>
-<span class='curline'><a href='../S/24.html#L1060'>n</a>                1060 user/usertests.c   int fd, pid, i, n, nc, np;</span>
-<span class='curline'><a href='../S/24.html#L1094'>n</a>                1094 user/usertests.c   while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
-<span class='curline'><a href='../S/24.html#L1117'>n</a>                1117 user/usertests.c   int fd, pid, i, j, n, total, pi;</span>
-<span class='curline'><a href='../S/24.html#L1141'>n</a>                1141 user/usertests.c         if((n = write(fd, buf, SZ)) != SZ){</span>
-<span class='curline'><a href='../S/24.html#L1142'>n</a>                1142 user/usertests.c           printf("write failed %d\n", n);</span>
-<span class='curline'><a href='../S/24.html#L1161'>n</a>                1161 user/usertests.c     while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
-<span class='curline'><a href='../S/24.html#L1162'>n</a>                1162 user/usertests.c       for(j = 0; j &lt; n; j++){</span>
-<span class='curline'><a href='../S/24.html#L1168'>n</a>                1168 user/usertests.c       total += n;</span>
-<span class='curline'><a href='../S/24.html#L1361'>n</a>                1361 user/usertests.c   int i, pid, n, fd;</span>
-<span class='curline'><a href='../S/24.html#L1398'>n</a>                1398 user/usertests.c   n = 0;</span>
-<span class='curline'><a href='../S/24.html#L1413'>n</a>                1413 user/usertests.c       n++;</span>
-<span class='curline'><a href='../S/24.html#L1418'>n</a>                1418 user/usertests.c   if(n != N){</span>
-<span class='curline'><a href='../S/24.html#L2020'>n</a>                2020 user/usertests.c   int n, pid;</span>
-<span class='curline'><a href='../S/24.html#L2022'>n</a>                2022 user/usertests.c   for(n=0; n&lt;N; n++){</span>
-<span class='curline'><a href='../S/24.html#L2030'>n</a>                2030 user/usertests.c   if (n == 0) {</span>
-<span class='curline'><a href='../S/24.html#L2035'>n</a>                2035 user/usertests.c   if(n == N){</span>
-<span class='curline'><a href='../S/24.html#L2040'>n</a>                2040 user/usertests.c   for(; n &gt; 0; n--){</span>
-<span class='curline'><a href='../S/24.html#L2256'>n</a>                2256 user/usertests.c     int n = 0;</span>
-<span class='curline'><a href='../S/24.html#L2258'>n</a>                2258 user/usertests.c       n += *(a+i);</span>
-<span class='curline'><a href='../S/24.html#L2262'>n</a>                2262 user/usertests.c     printf("%s: allocate a lot of memory succeeded %d\n", s, n);</span>
-<span class='curline'><a href='../S/24.html#L2276'>n</a>                2276 user/usertests.c   int fd, n;</span>
-<span class='curline'><a href='../S/24.html#L2285'>n</a>                2285 user/usertests.c   if ((n = write(fd, a, PGSIZE)) &lt; 0) {</span>
-<span class='curline'><a href='../S/24.html#L2674'>n</a>                2674 user/usertests.c   int n = 0;</span>
-<span class='curline'><a href='../S/24.html#L2684'>n</a>                2684 user/usertests.c     n += 1;</span>
-<span class='curline'><a href='../S/24.html#L2690'>n</a>                2690 user/usertests.c   return n;</span>
+<span class='curline'><a href='../S/24.html#L1090'>n</a>                1090 user/usertests.c   int fd, pid, i, n, nc, np;</span>
+<span class='curline'><a href='../S/24.html#L1124'>n</a>                1124 user/usertests.c   while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1147'>n</a>                1147 user/usertests.c   int fd, pid, i, j, n, total, pi;</span>
+<span class='curline'><a href='../S/24.html#L1171'>n</a>                1171 user/usertests.c         if((n = write(fd, buf, SZ)) != SZ){</span>
+<span class='curline'><a href='../S/24.html#L1172'>n</a>                1172 user/usertests.c           printf("write failed %d\n", n);</span>
+<span class='curline'><a href='../S/24.html#L1191'>n</a>                1191 user/usertests.c     while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
+<span class='curline'><a href='../S/24.html#L1192'>n</a>                1192 user/usertests.c       for(j = 0; j &lt; n; j++){</span>
+<span class='curline'><a href='../S/24.html#L1198'>n</a>                1198 user/usertests.c       total += n;</span>
+<span class='curline'><a href='../S/24.html#L1391'>n</a>                1391 user/usertests.c   int i, pid, n, fd;</span>
+<span class='curline'><a href='../S/24.html#L1428'>n</a>                1428 user/usertests.c   n = 0;</span>
+<span class='curline'><a href='../S/24.html#L1443'>n</a>                1443 user/usertests.c       n++;</span>
+<span class='curline'><a href='../S/24.html#L1448'>n</a>                1448 user/usertests.c   if(n != N){</span>
+<span class='curline'><a href='../S/24.html#L2050'>n</a>                2050 user/usertests.c   int n, pid;</span>
+<span class='curline'><a href='../S/24.html#L2052'>n</a>                2052 user/usertests.c   for(n=0; n&lt;N; n++){</span>
+<span class='curline'><a href='../S/24.html#L2060'>n</a>                2060 user/usertests.c   if (n == 0) {</span>
+<span class='curline'><a href='../S/24.html#L2065'>n</a>                2065 user/usertests.c   if(n == N){</span>
+<span class='curline'><a href='../S/24.html#L2070'>n</a>                2070 user/usertests.c   for(; n &gt; 0; n--){</span>
+<span class='curline'><a href='../S/24.html#L2310'>n</a>                2310 user/usertests.c     int n = 0;</span>
+<span class='curline'><a href='../S/24.html#L2312'>n</a>                2312 user/usertests.c       n += *(a+i);</span>
+<span class='curline'><a href='../S/24.html#L2316'>n</a>                2316 user/usertests.c     printf("%s: allocate a lot of memory succeeded %d\n", s, n);</span>
+<span class='curline'><a href='../S/24.html#L2330'>n</a>                2330 user/usertests.c   int fd, n;</span>
+<span class='curline'><a href='../S/24.html#L2339'>n</a>                2339 user/usertests.c   if ((n = write(fd, a, PGSIZE)) &lt; 0) {</span>
+<span class='curline'><a href='../S/24.html#L2756'>n</a>                2756 user/usertests.c   int n = 0;</span>
+<span class='curline'><a href='../S/24.html#L2766'>n</a>                2766 user/usertests.c     n += 1;</span>
+<span class='curline'><a href='../S/24.html#L2772'>n</a>                2772 user/usertests.c   return n;</span>
 <span class='curline'><a href='../S/10.html#L10'>n</a>                  10 user/wc.c        int i, n;</span>
 <span class='curline'><a href='../S/10.html#L15'>n</a>                  15 user/wc.c        while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
 <span class='curline'><a href='../S/10.html#L16'>n</a>                  16 user/wc.c          for(i=0; i&lt;n; i++){</span>

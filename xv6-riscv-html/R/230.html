@@ -1,28 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>cpu</title>
+<title>copyout</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L93'>cpu</a>                93 kernel/defs.h  struct cpu*     mycpu(void);</span>
-<span class='curline'><a href='../S/31.html#L94'>cpu</a>                94 kernel/defs.h  struct cpu*     getmycpu(void);</span>
-<span class='curline'><a href='../S/63.html#L9'>cpu</a>                 9 kernel/proc.c  struct cpu cpus[NCPU];</span>
-<span class='curline'><a href='../S/63.html#L66'>cpu</a>                66 kernel/proc.c  struct cpu*</span>
-<span class='curline'><a href='../S/63.html#L69'>cpu</a>                69 kernel/proc.c    struct cpu *c = &amp;cpus[id];</span>
-<span class='curline'><a href='../S/63.html#L77'>cpu</a>                77 kernel/proc.c    struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/63.html#L467'>cpu</a>               467 kernel/proc.c    struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/35.html#L29'>cpu</a>                29 kernel/proc.h  extern struct cpu cpus[NCPU];</span>
-<span class='curline'><a href='../S/59.html#L16'>cpu</a>                16 kernel/spinlock.c   lk-&gt;cpu = 0;</span>
-<span class='curline'><a href='../S/59.html#L42'>cpu</a>                42 kernel/spinlock.c   lk-&gt;cpu = mycpu();</span>
-<span class='curline'><a href='../S/59.html#L52'>cpu</a>                52 kernel/spinlock.c   lk-&gt;cpu = 0;</span>
-<span class='curline'><a href='../S/59.html#L80'>cpu</a>                80 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
-<span class='curline'><a href='../S/59.html#L102'>cpu</a>               102 kernel/spinlock.c   struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/30.html#L7'>cpu</a>                 7 kernel/spinlock.h   struct cpu *cpu;   // The cpu holding the lock.</span>
+<span class='curline'><a href='../S/31.html#L170'>copyout</a>           170 kernel/defs.h  int             copyout(pagetable_t, uint64, char *, uint64);</span>
+<span class='curline'><a href='../S/36.html#L86'>copyout</a>            86 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
+<span class='curline'><a href='../S/36.html#L97'>copyout</a>            97 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
+<span class='curline'><a href='../S/67.html#L97'>copyout</a>            97 kernel/file.c      if(copyout(p-&gt;pagetable, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
+<span class='curline'><a href='../S/34.html#L124'>copyout</a>           124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
+<span class='curline'><a href='../S/63.html#L404'>copyout</a>           404 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;np-&gt;xstate,</span>
+<span class='curline'><a href='../S/63.html#L607'>copyout</a>           607 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/43.html#L477'>copyout</a>           477 kernel/sysfile.c   if(copyout(p-&gt;pagetable, fdarray, (char*)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
+<span class='curline'><a href='../S/43.html#L478'>copyout</a>           478 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
+<span class='curline'><a href='../S/24.html#L2825'>copyout</a>          2825 user/usertests.c     {copyout, "copyout"},</span>
 </pre>
 </body>
 </html>

@@ -1,26 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>text</title>
+<title>tickslock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.4' />
+<meta name='generator' content='GLOBAL-6.6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/21.html#L71'>text</a>               71 user/grep.c    match(char *re, char *text)</span>
-<span class='curline'><a href='../S/21.html#L74'>text</a>               74 user/grep.c        return matchhere(re+1, text);</span>
-<span class='curline'><a href='../S/21.html#L76'>text</a>               76 user/grep.c        if(matchhere(re, text))</span>
-<span class='curline'><a href='../S/21.html#L78'>text</a>               78 user/grep.c      }while(*text++ != '\0');</span>
-<span class='curline'><a href='../S/21.html#L83'>text</a>               83 user/grep.c    int matchhere(char *re, char *text)</span>
-<span class='curline'><a href='../S/21.html#L88'>text</a>               88 user/grep.c        return matchstar(re[0], re+2, text);</span>
-<span class='curline'><a href='../S/21.html#L90'>text</a>               90 user/grep.c        return *text == '\0';</span>
-<span class='curline'><a href='../S/21.html#L91'>text</a>               91 user/grep.c      if(*text!='\0' &amp;&amp; (re[0]=='.' || re[0]==*text))</span>
-<span class='curline'><a href='../S/21.html#L92'>text</a>               92 user/grep.c        return matchhere(re+1, text+1);</span>
-<span class='curline'><a href='../S/21.html#L97'>text</a>               97 user/grep.c    int matchstar(int c, char *re, char *text)</span>
-<span class='curline'><a href='../S/21.html#L100'>text</a>              100 user/grep.c        if(matchhere(re, text))</span>
-<span class='curline'><a href='../S/21.html#L102'>text</a>              102 user/grep.c      }while(*text!='\0' &amp;&amp; (*text++==c || c=='.'));</span>
+<span class='curline'><a href='../S/31.html#L146'>tickslock</a>         146 kernel/defs.h  extern struct spinlock tickslock;</span>
+<span class='curline'><a href='../S/33.html#L63'>tickslock</a>          63 kernel/sysproc.c   acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L67'>tickslock</a>          67 kernel/sysproc.c       release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L70'>tickslock</a>          70 kernel/sysproc.c     sleep(&amp;ticks, &amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L72'>tickslock</a>          72 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L93'>tickslock</a>          93 kernel/sysproc.c   acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L95'>tickslock</a>          95 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/56.html#L9'>tickslock</a>           9 kernel/trap.c  struct spinlock tickslock;</span>
+<span class='curline'><a href='../S/56.html#L22'>tickslock</a>          22 kernel/trap.c    initlock(&amp;tickslock, "time");</span>
+<span class='curline'><a href='../S/56.html#L165'>tickslock</a>         165 kernel/trap.c    acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/56.html#L168'>tickslock</a>         168 kernel/trap.c    release(&amp;tickslock);</span>
 </pre>
 </body>
 </html>
