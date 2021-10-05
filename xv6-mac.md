@@ -101,18 +101,17 @@ xv6上でいくつかプログラムを動かして動作を確認してみて�
 `usertests`というプログラムを実行すると，多少時間はかかりますがxv6カーネル全体のテストを行うことができます．
 このプログラムの実行後は，いったんxv6から抜けて`fs.img`というファイルを削除しておいてください．
 
-xv6から抜けるには，`ctrl-A`に続けて`x`をタイプします．
+xv6から抜けるには`ctrl-A`に続けて`x`をタイプします．
 
 ## 問題点
-2020年12月29日時点で上記の方法でインストールされるRISC-V用ツールのうち，デバッガ(`riscv64-unknown-elf-gdb`)の設定にやや問題があることがわかっています．
+2021年10月5日時点で上記の方法でインストールされるRISC-V用ツールのうち，デバッガ(`riscv64-unknown-elf-gdb`)の設定にやや問題があることがわかっています．
 具体的には，Python用のGDBライブラリがインストールされないため，（Pythonによる支援が必要な）一部のコマンドの実行に問題が生じます．
-これを回避するには，まずHomebrewでgdbをインストールします．
+これを簡単に回避するには，まずHomebrewでgdbをインストールします．
 ```console
 $ brew install gdb
 ```
 そしてRISC-V用のgdbを起動する際に `--data-directory` オプションでPythonライブラリの位置を指定します．
 ```console
-$ riscv64-unknown-elf-gdb --data-directory=/usr/local/Cellar/gdb/10.1/share/gdb/python
+$ riscv64-unknown-elf-gdb --data-directory=/usr/local/Cellar/gdb/11.1/share/gdb
 ```
-これでxv6-riscvカーネルのデバッグはできるようになります．
-
+これでxv6-riscvカーネルのデバッグができるようになります．
