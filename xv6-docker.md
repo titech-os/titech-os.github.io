@@ -11,10 +11,11 @@ Dockerのインストール方法および使用方法については各自調�
 ## Dockerイメージの取得とコンテナの起動
 
 本講義のために，xv6開発用ツールを含んだDockerイメージ([wtakuo/xv6-env](https://hub.docker.com/r/wtakuo/xv6-env))を用意しました．
-まず以下のコマンドでこのDockerイメージを取得してください．
+まず以下のコマンドでこのDockerイメージをDocker Hubより取得してください．
 ```console
 $ docker pull wtakuo/xv6-env
 ```
+このイメージはマルチアーキテクチャ（ARM64とAMD64）に対応していますので，M1 Macを含む多くの環境でそのまま使うことができます．
 
 これで開発用ツールの実行に必要なものが揃いました．
 あとは以下のようにしてコンテナ（ホストOSから隔離された実行環境）を起動してください．
@@ -33,7 +34,8 @@ $ docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
 
 **Macの場合の注意**: xv6のソースコードの場所（`full-path-to-xv6`）がiCloud Driveに含まれないようにしてください（下記の**Macの場合の注意事項**を参照のこと）．
 
-**Apple Silicon搭載のMac　(M1 Mac)を使う場合**: ARM版のDockerイメージ([wtakuo/xv6-env-arm64](https://hub.docker.com/r/wtakuo/xv6-env-arm64))を用意しましたの．上記の説明で，`wtakuo/xv6-env` となっているところを `wtakuo/xv6-env-arm64` に置き換えてください．
+**Apple Silicon搭載のMac　(M1 Mac)を使う場合**: ~~ARM版のDockerイメージ([wtakuo/xv6-env-arm64](https://hub.docker.com/r/wtakuo/xv6-env-arm64))を用意しました．上記の説明で，`wtakuo/xv6-env` となっているところを `wtakuo/xv6-env-arm64` に置き換えてください．~~
+Docker Hub上のイメージ `wtakuo/xv6-env` をマルチアーキテクチャ対応にしましたので，上記の説明通りにすればARM版のコンテナが起動します．
 
 コンテナが無事起動すると以下のようにシェル(bash)のプロンプトが現れます（プロンプトに含まれる`0c765f60374a`は起動したコンテナのIDで，実際にはコンテナ毎に違う値となります）．
 ```console
