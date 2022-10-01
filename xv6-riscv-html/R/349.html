@@ -1,42 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>memset</title>
+<title>malloc</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L128'>memset</a>            128 kernel/defs.h  void*           memset(void*, int, uint);</span>
-<span class='curline'><a href='../S/48.html#L56'>memset</a>             56 kernel/fs.c      memset(bp-&gt;data, 0, BSIZE);</span>
-<span class='curline'><a href='../S/48.html#L206'>memset</a>            206 kernel/fs.c          memset(dip, 0, sizeof(*dip));</span>
-<span class='curline'><a href='../S/69.html#L55'>memset</a>             55 kernel/kalloc.c   memset(pa, 1, PGSIZE);</span>
-<span class='curline'><a href='../S/69.html#L80'>memset</a>             80 kernel/kalloc.c     memset((char*)r, 5, PGSIZE); // fill with junk</span>
-<span class='curline'><a href='../S/63.html#L140'>memset</a>            140 kernel/proc.c    memset(&amp;p-&gt;context, 0, sizeof(p-&gt;context));</span>
-<span class='curline'><a href='../S/43.html#L218'>memset</a>            218 kernel/sysfile.c   memset(&amp;de, 0, sizeof(de));</span>
-<span class='curline'><a href='../S/43.html#L425'>memset</a>            425 kernel/sysfile.c   memset(argv, 0, sizeof(argv));</span>
-<span class='curline'><a href='../S/65.html#L125'>memset</a>            125 kernel/virtio_disk.c   memset(disk.pages, 0, sizeof(disk.pages));</span>
-<span class='curline'><a href='../S/38.html#L25'>memset</a>             25 kernel/vm.c      memset(kpgtbl, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L93'>memset</a>             93 kernel/vm.c          memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L198'>memset</a>            198 kernel/vm.c      memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L213'>memset</a>            213 kernel/vm.c      memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L236'>memset</a>            236 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/3.html#L113'>memset</a>            113 mkfs/mkfs.c      memset(buf, 0, sizeof(buf));</span>
-<span class='curline'><a href='../S/6.html#L21'>memset</a>             21 user/ls.c        memset(buf+strlen(p), ' ', DIRSIZ-strlen(p));</span>
-<span class='curline'><a href='../S/17.html#L137'>memset</a>            137 user/sh.c        memset(buf, 0, nbuf);</span>
-<span class='curline'><a href='../S/17.html#L201'>memset</a>            201 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L212'>memset</a>            212 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L228'>memset</a>            228 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L241'>memset</a>            241 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/17.html#L254'>memset</a>            254 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/22.html#L24'>memset</a>             24 user/stressfs.c   memset(data, 'a', sizeof(data));</span>
-<span class='curline'><a href='../S/15.html#L37'>memset</a>             37 user/user.h    void* memset(void*, int, uint);</span>
-<span class='curline'><a href='../S/24.html#L1101'>memset</a>           1101 user/usertests.c   memset(buf, pid==0?'c':'p', sizeof(buf));</span>
-<span class='curline'><a href='../S/24.html#L1169'>memset</a>           1169 user/usertests.c       memset(buf, '0'+pi, SZ);</span>
-<span class='curline'><a href='../S/24.html#L1426'>memset</a>           1426 user/usertests.c   memset(fa, 0, sizeof(fa));</span>
-<span class='curline'><a href='../S/24.html#L1828'>memset</a>           1828 user/usertests.c     memset(buf, i, SZ);</span>
+<span class='curline'><a href='../S/51.html#L201'>malloc</a>            201 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/51.html#L212'>malloc</a>            212 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/51.html#L228'>malloc</a>            228 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/51.html#L241'>malloc</a>            241 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/51.html#L254'>malloc</a>            254 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
+<span class='curline'><a href='../S/46.html#L37'>malloc</a>             37 user/user.h    void* malloc(uint);</span>
+<span class='curline'><a href='../S/78.html#L1061'>malloc</a>           1061 user/usertests.c     while((m2 = malloc(10001)) != 0){</span>
+<span class='curline'><a href='../S/78.html#L1070'>malloc</a>           1070 user/usertests.c     m1 = malloc(1024*20);</span>
 </pre>
 </body>
 </html>

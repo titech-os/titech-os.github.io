@@ -1,18 +1,26 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>used_idx</title>
+<title>used</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L58'>used_idx</a>           58 kernel/virtio_disk.c   uint16 used_idx; // we've looked this far in used[2..NUM].</span>
-<span class='curline'><a href='../S/65.html#L300'>used_idx</a>          300 kernel/virtio_disk.c   while(disk.used_idx != disk.used-&gt;idx){</span>
-<span class='curline'><a href='../S/65.html#L302'>used_idx</a>          302 kernel/virtio_disk.c     int id = disk.used-&gt;ring[disk.used_idx % NUM].id;</span>
-<span class='curline'><a href='../S/65.html#L311'>used_idx</a>          311 kernel/virtio_disk.c     disk.used_idx += 1;</span>
+<span class='curline'><a href='../S/141.html#L39'>used</a>               39 kernel/virtio_disk.c   struct virtq_used *used;</span>
+<span class='curline'><a href='../S/141.html#L123'>used</a>              123 kernel/virtio_disk.c   disk.used = kalloc();</span>
+<span class='curline'><a href='../S/141.html#L124'>used</a>              124 kernel/virtio_disk.c   if(!disk.desc || !disk.avail || !disk.used)</span>
+<span class='curline'><a href='../S/141.html#L128'>used</a>              128 kernel/virtio_disk.c   memset(disk.used, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/141.html#L138'>used</a>              138 kernel/virtio_disk.c   *R(VIRTIO_MMIO_DEVICE_DESC_LOW) = (uint64)disk.used;</span>
+<span class='curline'><a href='../S/141.html#L139'>used</a>              139 kernel/virtio_disk.c   *R(VIRTIO_MMIO_DEVICE_DESC_HIGH) = (uint64)disk.used &gt;&gt; 32;</span>
+<span class='curline'><a href='../S/141.html#L312'>used</a>              312 kernel/virtio_disk.c   while(disk.used_idx != disk.used-&gt;idx){</span>
+<span class='curline'><a href='../S/141.html#L314'>used</a>              314 kernel/virtio_disk.c     int id = disk.used-&gt;ring[disk.used_idx % NUM].id;</span>
+<span class='curline'><a href='../S/3.html#L235'>used</a>              235 mkfs/mkfs.c    balloc(int used)</span>
+<span class='curline'><a href='../S/3.html#L240'>used</a>              240 mkfs/mkfs.c      printf("balloc: first %d blocks have been allocated\n", used);</span>
+<span class='curline'><a href='../S/3.html#L241'>used</a>              241 mkfs/mkfs.c      assert(used &lt; BSIZE*8);</span>
+<span class='curline'><a href='../S/3.html#L243'>used</a>              243 mkfs/mkfs.c      for(i = 0; i &lt; used; i++){</span>
 </pre>
 </body>
 </html>

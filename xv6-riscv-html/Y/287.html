@@ -1,49 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pte</title>
+<title>quick</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/64.html#L350'>pte</a>               350 kernel/riscv.h #define PTE2PA(pte) (((pte) &gt;&gt; 10) &lt;&lt; 12)</span>
-<span class='curline'><a href='../S/64.html#L352'>pte</a>               352 kernel/riscv.h #define PTE_FLAGS(pte) ((pte) &amp; 0x3FF)</span>
-<span class='curline'><a href='../S/38.html#L87'>pte</a>                87 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
-<span class='curline'><a href='../S/38.html#L88'>pte</a>                88 kernel/vm.c        if(*pte &amp; PTE_V) {</span>
-<span class='curline'><a href='../S/38.html#L89'>pte</a>                89 kernel/vm.c          pagetable = (pagetable_t)PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/38.html#L94'>pte</a>                94 kernel/vm.c          *pte = PA2PTE(pagetable) | PTE_V;</span>
-<span class='curline'><a href='../S/38.html#L106'>pte</a>               106 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/38.html#L112'>pte</a>               112 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
-<span class='curline'><a href='../S/38.html#L113'>pte</a>               113 kernel/vm.c      if(pte == 0)</span>
-<span class='curline'><a href='../S/38.html#L115'>pte</a>               115 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/38.html#L117'>pte</a>               117 kernel/vm.c      if((*pte &amp; PTE_U) == 0)</span>
-<span class='curline'><a href='../S/38.html#L119'>pte</a>               119 kernel/vm.c      pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/38.html#L141'>pte</a>               141 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/38.html#L149'>pte</a>               149 kernel/vm.c        if((pte = walk(pagetable, a, 1)) == 0)</span>
-<span class='curline'><a href='../S/38.html#L151'>pte</a>               151 kernel/vm.c        if(*pte &amp; PTE_V)</span>
-<span class='curline'><a href='../S/38.html#L153'>pte</a>               153 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
-<span class='curline'><a href='../S/38.html#L169'>pte</a>               169 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/38.html#L175'>pte</a>               175 kernel/vm.c        if((pte = walk(pagetable, a, 0)) == 0)</span>
-<span class='curline'><a href='../S/38.html#L177'>pte</a>               177 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/38.html#L179'>pte</a>               179 kernel/vm.c        if(PTE_FLAGS(*pte) == PTE_V)</span>
-<span class='curline'><a href='../S/38.html#L182'>pte</a>               182 kernel/vm.c          uint64 pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/38.html#L185'>pte</a>               185 kernel/vm.c        *pte = 0;</span>
-<span class='curline'><a href='../S/38.html#L271'>pte</a>               271 kernel/vm.c        pte_t pte = pagetable[i];</span>
-<span class='curline'><a href='../S/38.html#L272'>pte</a>               272 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
-<span class='curline'><a href='../S/38.html#L274'>pte</a>               274 kernel/vm.c          uint64 child = PTE2PA(pte);</span>
-<span class='curline'><a href='../S/38.html#L277'>pte</a>               277 kernel/vm.c        } else if(pte &amp; PTE_V){</span>
-<span class='curline'><a href='../S/38.html#L303'>pte</a>               303 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/38.html#L309'>pte</a>               309 kernel/vm.c        if((pte = walk(old, i, 0)) == 0)</span>
-<span class='curline'><a href='../S/38.html#L311'>pte</a>               311 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/38.html#L313'>pte</a>               313 kernel/vm.c        pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/38.html#L314'>pte</a>               314 kernel/vm.c        flags = PTE_FLAGS(*pte);</span>
-<span class='curline'><a href='../S/38.html#L335'>pte</a>               335 kernel/vm.c      pte_t *pte;</span>
-<span class='curline'><a href='../S/38.html#L337'>pte</a>               337 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
-<span class='curline'><a href='../S/38.html#L338'>pte</a>               338 kernel/vm.c      if(pte == 0)</span>
-<span class='curline'><a href='../S/38.html#L340'>pte</a>               340 kernel/vm.c      *pte &amp;= ~PTE_U;</span>
+<span class='curline'><a href='../S/78.html#L3048'>quick</a>            3048 user/usertests.c drivetests(int quick, int continuous, char *justone) {</span>
+<span class='curline'><a href='../S/78.html#L3058'>quick</a>            3058 user/usertests.c     if(!quick) {</span>
+<span class='curline'><a href='../S/78.html#L3081'>quick</a>            3081 user/usertests.c   int quick = 0;</span>
+<span class='curline'><a href='../S/78.html#L3085'>quick</a>            3085 user/usertests.c     quick = 1;</span>
+<span class='curline'><a href='../S/78.html#L3096'>quick</a>            3096 user/usertests.c   if (drivetests(quick, continuous, justone)) {</span>
 </pre>
 </body>
 </html>

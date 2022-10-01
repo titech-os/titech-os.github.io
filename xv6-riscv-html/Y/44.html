@@ -1,19 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bmapstart</title>
+<title>blockno</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/71.html#L22'>bmapstart</a>          22 kernel/fs.h      uint bmapstart;    // Block number of first free map block</span>
-<span class='curline'><a href='../S/71.html#L51'>bmapstart</a>          51 kernel/fs.h    #define BBLOCK(b, sb) ((b)/BPB + sb.bmapstart)</span>
-<span class='curline'><a href='../S/3.html#L103'>bmapstart</a>         103 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
-<span class='curline'><a href='../S/3.html#L246'>bmapstart</a>         246 mkfs/mkfs.c      printf("balloc: write bitmap block at sector %d\n", sb.bmapstart);</span>
-<span class='curline'><a href='../S/3.html#L247'>bmapstart</a>         247 mkfs/mkfs.c      wsect(sb.bmapstart, buf);</span>
+<span class='curline'><a href='../S/132.html#L59'>blockno</a>            59 kernel/bio.c   bget(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/132.html#L67'>blockno</a>            67 kernel/bio.c       if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
+<span class='curline'><a href='../S/132.html#L80'>blockno</a>            80 kernel/bio.c         b-&gt;blockno = blockno;</span>
+<span class='curline'><a href='../S/132.html#L93'>blockno</a>            93 kernel/bio.c   bread(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/132.html#L97'>blockno</a>            97 kernel/bio.c     b = bget(dev, blockno);</span>
+<span class='curline'><a href='../S/111.html#L5'>blockno</a>             5 kernel/buf.h     uint blockno;</span>
+<span class='curline'><a href='../S/85.html#L226'>blockno</a>           226 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorption</span>
+<span class='curline'><a href='../S/85.html#L229'>blockno</a>           229 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
+<span class='curline'><a href='../S/90.html#L30'>blockno</a>            30 kernel/ramdisk.c   if(b-&gt;blockno &gt;= FSSIZE)</span>
+<span class='curline'><a href='../S/90.html#L33'>blockno</a>            33 kernel/ramdisk.c   uint64 diskaddr = b-&gt;blockno * BSIZE;</span>
+<span class='curline'><a href='../S/141.html#L218'>blockno</a>           218 kernel/virtio_disk.c   uint64 sector = b-&gt;blockno * (BSIZE / 512);</span>
 </pre>
 </body>
 </html>

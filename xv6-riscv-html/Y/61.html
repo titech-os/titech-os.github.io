@@ -1,35 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>cons</title>
+<title>committing</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/57.html#L53'>cons</a>               53 kernel/console.c } cons;</span>
-<span class='curline'><a href='../S/57.html#L87'>cons</a>               87 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L91'>cons</a>               91 kernel/console.c     while(cons.r == cons.w){</span>
-<span class='curline'><a href='../S/57.html#L93'>cons</a>               93 kernel/console.c         release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L96'>cons</a>               96 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L99'>cons</a>               99 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF];</span>
-<span class='curline'><a href='../S/57.html#L105'>cons</a>              105 kernel/console.c         cons.r--;</span>
-<span class='curline'><a href='../S/57.html#L124'>cons</a>              124 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L138'>cons</a>              138 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L145'>cons</a>              145 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
-<span class='curline'><a href='../S/57.html#L146'>cons</a>              146 kernel/console.c           cons.buf[(cons.e-1) % INPUT_BUF] != '\n'){</span>
-<span class='curline'><a href='../S/57.html#L147'>cons</a>              147 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/57.html#L153'>cons</a>              153 kernel/console.c     if(cons.e != cons.w){</span>
-<span class='curline'><a href='../S/57.html#L154'>cons</a>              154 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/57.html#L159'>cons</a>              159 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF){</span>
-<span class='curline'><a href='../S/57.html#L166'>cons</a>              166 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF] = c;</span>
-<span class='curline'><a href='../S/57.html#L168'>cons</a>              168 kernel/console.c       if(c == '\n' || c == C('D') || cons.e == cons.r+INPUT_BUF){</span>
-<span class='curline'><a href='../S/57.html#L171'>cons</a>              171 kernel/console.c         cons.w = cons.e;</span>
-<span class='curline'><a href='../S/57.html#L172'>cons</a>              172 kernel/console.c         wakeup(&amp;cons.r);</span>
-<span class='curline'><a href='../S/57.html#L178'>cons</a>              178 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/57.html#L184'>cons</a>              184 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
+<span class='curline'><a href='../S/85.html#L45'>committing</a>         45 kernel/log.c     int committing;  // in commit(), please wait.</span>
+<span class='curline'><a href='../S/85.html#L131'>committing</a>        131 kernel/log.c       if(log.committing){</span>
+<span class='curline'><a href='../S/85.html#L153'>committing</a>        153 kernel/log.c     if(log.committing)</span>
+<span class='curline'><a href='../S/85.html#L157'>committing</a>        157 kernel/log.c       log.committing = 1;</span>
+<span class='curline'><a href='../S/85.html#L171'>committing</a>        171 kernel/log.c       log.committing = 0;</span>
 </pre>
 </body>
 </html>

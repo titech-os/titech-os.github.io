@@ -1,31 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>mem</title>
+<title>logheader</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L208'>mem</a>               208 kernel/vm.c      char *mem;</span>
-<span class='curline'><a href='../S/38.html#L212'>mem</a>               212 kernel/vm.c      mem = kalloc();</span>
-<span class='curline'><a href='../S/38.html#L213'>mem</a>               213 kernel/vm.c      memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L214'>mem</a>               214 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
-<span class='curline'><a href='../S/38.html#L215'>mem</a>               215 kernel/vm.c      memmove(mem, src, sz);</span>
-<span class='curline'><a href='../S/38.html#L223'>mem</a>               223 kernel/vm.c      char *mem;</span>
-<span class='curline'><a href='../S/38.html#L231'>mem</a>               231 kernel/vm.c        mem = kalloc();</span>
-<span class='curline'><a href='../S/38.html#L232'>mem</a>               232 kernel/vm.c        if(mem == 0){</span>
-<span class='curline'><a href='../S/38.html#L236'>mem</a>               236 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L237'>mem</a>               237 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_W|PTE_X|PTE_R|PTE_U) != 0){</span>
-<span class='curline'><a href='../S/38.html#L238'>mem</a>               238 kernel/vm.c          kfree(mem);</span>
-<span class='curline'><a href='../S/38.html#L306'>mem</a>               306 kernel/vm.c      char *mem;</span>
-<span class='curline'><a href='../S/38.html#L315'>mem</a>               315 kernel/vm.c        if((mem = kalloc()) == 0)</span>
-<span class='curline'><a href='../S/38.html#L317'>mem</a>               317 kernel/vm.c        memmove(mem, (char*)pa, PGSIZE);</span>
-<span class='curline'><a href='../S/38.html#L318'>mem</a>               318 kernel/vm.c        if(mappages(new, i, PGSIZE, (uint64)mem, flags) != 0){</span>
-<span class='curline'><a href='../S/38.html#L319'>mem</a>               319 kernel/vm.c          kfree(mem);</span>
-<span class='curline'><a href='../S/24.html#L2872'>mem</a>              2872 user/usertests.c     {mem, "mem"},</span>
+<span class='curline'><a href='../S/85.html#L47'>logheader</a>          47 kernel/log.c     struct logheader lh;</span>
+<span class='curline'><a href='../S/85.html#L57'>logheader</a>          57 kernel/log.c     if (sizeof(struct logheader) &gt;= BSIZE)</span>
+<span class='curline'><a href='../S/85.html#L90'>logheader</a>          90 kernel/log.c     struct logheader *lh = (struct logheader *) (buf-&gt;data);</span>
+<span class='curline'><a href='../S/85.html#L106'>logheader</a>         106 kernel/log.c     struct logheader *hb = (struct logheader *) (buf-&gt;data);</span>
 </pre>
 </body>
 </html>

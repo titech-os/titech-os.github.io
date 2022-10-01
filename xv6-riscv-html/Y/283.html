@@ -1,27 +1,50 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pr</title>
+<title>ps</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L80'>pr</a>                 80 kernel/pipe.c    struct proc *pr = myproc();</span>
-<span class='curline'><a href='../S/34.html#L84'>pr</a>                 84 kernel/pipe.c      if(pi-&gt;readopen == 0 || pr-&gt;killed){</span>
-<span class='curline'><a href='../S/34.html#L93'>pr</a>                 93 kernel/pipe.c        if(copyin(pr-&gt;pagetable, &amp;ch, addr + i, 1) == -1)</span>
-<span class='curline'><a href='../S/34.html#L109'>pr</a>                109 kernel/pipe.c    struct proc *pr = myproc();</span>
-<span class='curline'><a href='../S/34.html#L114'>pr</a>                114 kernel/pipe.c      if(pr-&gt;killed){</span>
-<span class='curline'><a href='../S/34.html#L124'>pr</a>                124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
-<span class='curline'><a href='../S/29.html#L24'>pr</a>                 24 kernel/printf.c } pr;</span>
-<span class='curline'><a href='../S/29.html#L70'>pr</a>                 70 kernel/printf.c   locking = pr.locking;</span>
-<span class='curline'><a href='../S/29.html#L72'>pr</a>                 72 kernel/printf.c     acquire(&amp;pr.lock);</span>
-<span class='curline'><a href='../S/29.html#L114'>pr</a>                114 kernel/printf.c     release(&amp;pr.lock);</span>
-<span class='curline'><a href='../S/29.html#L120'>pr</a>                120 kernel/printf.c   pr.locking = 0;</span>
-<span class='curline'><a href='../S/29.html#L132'>pr</a>                132 kernel/printf.c   initlock(&amp;pr.lock, "pr");</span>
-<span class='curline'><a href='../S/29.html#L133'>pr</a>                133 kernel/printf.c   pr.locking = 1;</span>
+<span class='curline'><a href='../S/51.html#L267'>ps</a>                267 user/sh.c      gettoken(char **ps, char *es, char **q, char **eq)</span>
+<span class='curline'><a href='../S/51.html#L272'>ps</a>                272 user/sh.c        s = *ps;</span>
+<span class='curline'><a href='../S/51.html#L307'>ps</a>                307 user/sh.c        *ps = s;</span>
+<span class='curline'><a href='../S/51.html#L312'>ps</a>                312 user/sh.c      peek(char **ps, char *es, char *toks)</span>
+<span class='curline'><a href='../S/51.html#L316'>ps</a>                316 user/sh.c        s = *ps;</span>
+<span class='curline'><a href='../S/51.html#L319'>ps</a>                319 user/sh.c        *ps = s;</span>
+<span class='curline'><a href='../S/51.html#L346'>ps</a>                346 user/sh.c      parseline(char **ps, char *es)</span>
+<span class='curline'><a href='../S/51.html#L350'>ps</a>                350 user/sh.c        cmd = parsepipe(ps, es);</span>
+<span class='curline'><a href='../S/51.html#L351'>ps</a>                351 user/sh.c        while(peek(ps, es, "&amp;")){</span>
+<span class='curline'><a href='../S/51.html#L352'>ps</a>                352 user/sh.c          gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/51.html#L355'>ps</a>                355 user/sh.c        if(peek(ps, es, ";")){</span>
+<span class='curline'><a href='../S/51.html#L356'>ps</a>                356 user/sh.c          gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/51.html#L357'>ps</a>                357 user/sh.c          cmd = listcmd(cmd, parseline(ps, es));</span>
+<span class='curline'><a href='../S/51.html#L363'>ps</a>                363 user/sh.c      parsepipe(char **ps, char *es)</span>
+<span class='curline'><a href='../S/51.html#L367'>ps</a>                367 user/sh.c        cmd = parseexec(ps, es);</span>
+<span class='curline'><a href='../S/51.html#L368'>ps</a>                368 user/sh.c        if(peek(ps, es, "|")){</span>
+<span class='curline'><a href='../S/51.html#L369'>ps</a>                369 user/sh.c          gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/51.html#L370'>ps</a>                370 user/sh.c          cmd = pipecmd(cmd, parsepipe(ps, es));</span>
+<span class='curline'><a href='../S/51.html#L376'>ps</a>                376 user/sh.c      parseredirs(struct cmd *cmd, char **ps, char *es)</span>
+<span class='curline'><a href='../S/51.html#L381'>ps</a>                381 user/sh.c        while(peek(ps, es, "&lt;&gt;")){</span>
+<span class='curline'><a href='../S/51.html#L382'>ps</a>                382 user/sh.c          tok = gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/51.html#L383'>ps</a>                383 user/sh.c          if(gettoken(ps, es, &amp;q, &amp;eq) != 'a')</span>
+<span class='curline'><a href='../S/51.html#L401'>ps</a>                401 user/sh.c      parseblock(char **ps, char *es)</span>
+<span class='curline'><a href='../S/51.html#L405'>ps</a>                405 user/sh.c        if(!peek(ps, es, "("))</span>
+<span class='curline'><a href='../S/51.html#L407'>ps</a>                407 user/sh.c        gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/51.html#L408'>ps</a>                408 user/sh.c        cmd = parseline(ps, es);</span>
+<span class='curline'><a href='../S/51.html#L409'>ps</a>                409 user/sh.c        if(!peek(ps, es, ")"))</span>
+<span class='curline'><a href='../S/51.html#L411'>ps</a>                411 user/sh.c        gettoken(ps, es, 0, 0);</span>
+<span class='curline'><a href='../S/51.html#L412'>ps</a>                412 user/sh.c        cmd = parseredirs(cmd, ps, es);</span>
+<span class='curline'><a href='../S/51.html#L417'>ps</a>                417 user/sh.c      parseexec(char **ps, char *es)</span>
+<span class='curline'><a href='../S/51.html#L424'>ps</a>                424 user/sh.c        if(peek(ps, es, "("))</span>
+<span class='curline'><a href='../S/51.html#L425'>ps</a>                425 user/sh.c          return parseblock(ps, es);</span>
+<span class='curline'><a href='../S/51.html#L431'>ps</a>                431 user/sh.c        ret = parseredirs(ret, ps, es);</span>
+<span class='curline'><a href='../S/51.html#L432'>ps</a>                432 user/sh.c        while(!peek(ps, es, "|)&amp;;")){</span>
+<span class='curline'><a href='../S/51.html#L433'>ps</a>                433 user/sh.c          if((tok=gettoken(ps, es, &amp;q, &amp;eq)) == 0)</span>
+<span class='curline'><a href='../S/51.html#L442'>ps</a>                442 user/sh.c          ret = parseredirs(ret, ps, es);</span>
 </pre>
 </body>
 </html>

@@ -1,22 +1,28 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kvmmap</title>
+<title>kalloc</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/31.html#L159'>kvmmap</a>            159 kernel/defs.h  void            kvmmap(pagetable_t, uint64, uint64, uint64, int);</span>
-<span class='curline'><a href='../S/63.html#L41'>kvmmap</a>             41 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L28'>kvmmap</a>             28 kernel/vm.c      kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L31'>kvmmap</a>             31 kernel/vm.c      kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L34'>kvmmap</a>             34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x400000, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L37'>kvmmap</a>             37 kernel/vm.c      kvmmap(kpgtbl, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);</span>
-<span class='curline'><a href='../S/38.html#L40'>kvmmap</a>             40 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L44'>kvmmap</a>             44 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/89.html#L63'>kalloc</a>             63 kernel/defs.h  void*           kalloc(void);</span>
+<span class='curline'><a href='../S/94.html#L31'>kalloc</a>             31 kernel/pipe.c    if((pi = (struct pipe*)kalloc()) == 0)</span>
+<span class='curline'><a href='../S/138.html#L38'>kalloc</a>             38 kernel/proc.c      char *pa = kalloc();</span>
+<span class='curline'><a href='../S/138.html#L129'>kalloc</a>            129 kernel/proc.c    if((p-&gt;trapframe = (struct trapframe *)kalloc()) == 0){</span>
+<span class='curline'><a href='../S/106.html#L457'>kalloc</a>            457 kernel/sysfile.c     argv[i] = kalloc();</span>
+<span class='curline'><a href='../S/141.html#L121'>kalloc</a>            121 kernel/virtio_disk.c   disk.desc = kalloc();</span>
+<span class='curline'><a href='../S/141.html#L122'>kalloc</a>            122 kernel/virtio_disk.c   disk.avail = kalloc();</span>
+<span class='curline'><a href='../S/141.html#L123'>kalloc</a>            123 kernel/virtio_disk.c   disk.used = kalloc();</span>
+<span class='curline'><a href='../S/99.html#L24'>kalloc</a>             24 kernel/vm.c      kpgtbl = (pagetable_t) kalloc();</span>
+<span class='curline'><a href='../S/99.html#L96'>kalloc</a>             96 kernel/vm.c          if(!alloc || (pagetable = (pde_t*)kalloc()) == 0)</span>
+<span class='curline'><a href='../S/99.html#L200'>kalloc</a>            200 kernel/vm.c      pagetable = (pagetable_t) kalloc();</span>
+<span class='curline'><a href='../S/99.html#L217'>kalloc</a>            217 kernel/vm.c      mem = kalloc();</span>
+<span class='curline'><a href='../S/99.html#L236'>kalloc</a>            236 kernel/vm.c        mem = kalloc();</span>
+<span class='curline'><a href='../S/99.html#L320'>kalloc</a>            320 kernel/vm.c        if((mem = kalloc()) == 0)</span>
 </pre>
 </body>
 </html>

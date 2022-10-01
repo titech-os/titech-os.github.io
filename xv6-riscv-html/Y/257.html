@@ -1,20 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pages</title>
+<title>panicked</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L28'>pages</a>              28 kernel/virtio_disk.c   char pages[2*PGSIZE];</span>
-<span class='curline'><a href='../S/65.html#L125'>pages</a>             125 kernel/virtio_disk.c   memset(disk.pages, 0, sizeof(disk.pages));</span>
-<span class='curline'><a href='../S/65.html#L126'>pages</a>             126 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_PFN) = ((uint64)disk.pages) &gt;&gt; PGSHIFT;</span>
-<span class='curline'><a href='../S/65.html#L132'>pages</a>             132 kernel/virtio_disk.c   disk.desc = (struct virtq_desc *) disk.pages;</span>
-<span class='curline'><a href='../S/65.html#L133'>pages</a>             133 kernel/virtio_disk.c   disk.avail = (struct virtq_avail *)(disk.pages + NUM*sizeof(struct virtq_desc));</span>
-<span class='curline'><a href='../S/65.html#L134'>pages</a>             134 kernel/virtio_disk.c   disk.used = (struct virtq_used *) (disk.pages + PGSIZE);</span>
+<span class='curline'><a href='../S/87.html#L18'>panicked</a>           18 kernel/printf.c volatile int panicked = 0;</span>
+<span class='curline'><a href='../S/87.html#L125'>panicked</a>          125 kernel/printf.c   panicked = 1; // freeze uart output from other CPUs</span>
+<span class='curline'><a href='../S/151.html#L48'>panicked</a>           48 kernel/uart.c  extern volatile int panicked; // from printf.c</span>
+<span class='curline'><a href='../S/151.html#L91'>panicked</a>           91 kernel/uart.c    if(panicked){</span>
+<span class='curline'><a href='../S/151.html#L116'>panicked</a>          116 kernel/uart.c    if(panicked){</span>
 </pre>
 </body>
 </html>

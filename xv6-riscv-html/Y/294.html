@@ -1,24 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>rcmd</title>
+<title>re</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L65'>rcmd</a>               65 user/sh.c        struct redircmd *rcmd;</span>
-<span class='curline'><a href='../S/17.html#L83'>rcmd</a>               83 user/sh.c          rcmd = (struct redircmd*)cmd;</span>
-<span class='curline'><a href='../S/17.html#L84'>rcmd</a>               84 user/sh.c          close(rcmd-&gt;fd);</span>
-<span class='curline'><a href='../S/17.html#L85'>rcmd</a>               85 user/sh.c          if(open(rcmd-&gt;file, rcmd-&gt;mode) &lt; 0){</span>
-<span class='curline'><a href='../S/17.html#L86'>rcmd</a>               86 user/sh.c            fprintf(2, "open %s failed\n", rcmd-&gt;file);</span>
-<span class='curline'><a href='../S/17.html#L89'>rcmd</a>               89 user/sh.c          runcmd(rcmd-&gt;cmd);</span>
-<span class='curline'><a href='../S/17.html#L457'>rcmd</a>              457 user/sh.c        struct redircmd *rcmd;</span>
-<span class='curline'><a href='../S/17.html#L470'>rcmd</a>              470 user/sh.c          rcmd = (struct redircmd*)cmd;</span>
-<span class='curline'><a href='../S/17.html#L471'>rcmd</a>              471 user/sh.c          nulterminate(rcmd-&gt;cmd);</span>
-<span class='curline'><a href='../S/17.html#L472'>rcmd</a>              472 user/sh.c          *rcmd-&gt;efile = 0;</span>
+<span class='curline'><a href='../S/67.html#L72'>re</a>                 72 user/grep.c    match(char *re, char *text)</span>
+<span class='curline'><a href='../S/67.html#L74'>re</a>                 74 user/grep.c      if(re[0] == '^')</span>
+<span class='curline'><a href='../S/67.html#L75'>re</a>                 75 user/grep.c        return matchhere(re+1, text);</span>
+<span class='curline'><a href='../S/67.html#L77'>re</a>                 77 user/grep.c        if(matchhere(re, text))</span>
+<span class='curline'><a href='../S/67.html#L84'>re</a>                 84 user/grep.c    int matchhere(char *re, char *text)</span>
+<span class='curline'><a href='../S/67.html#L86'>re</a>                 86 user/grep.c      if(re[0] == '\0')</span>
+<span class='curline'><a href='../S/67.html#L88'>re</a>                 88 user/grep.c      if(re[1] == '*')</span>
+<span class='curline'><a href='../S/67.html#L89'>re</a>                 89 user/grep.c        return matchstar(re[0], re+2, text);</span>
+<span class='curline'><a href='../S/67.html#L90'>re</a>                 90 user/grep.c      if(re[0] == '$' &amp;&amp; re[1] == '\0')</span>
+<span class='curline'><a href='../S/67.html#L92'>re</a>                 92 user/grep.c      if(*text!='\0' &amp;&amp; (re[0]=='.' || re[0]==*text))</span>
+<span class='curline'><a href='../S/67.html#L93'>re</a>                 93 user/grep.c        return matchhere(re+1, text+1);</span>
+<span class='curline'><a href='../S/67.html#L98'>re</a>                 98 user/grep.c    int matchstar(int c, char *re, char *text)</span>
+<span class='curline'><a href='../S/67.html#L101'>re</a>                101 user/grep.c        if(matchhere(re, text))</span>
 </pre>
 </body>
 </html>

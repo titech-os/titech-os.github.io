@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel/sleeplock.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.8' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/153.html'>kernel</a>/sleeplock.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/27.html' title='Multiple included from 12 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Long-term locks for processes</em>
+<a id='L2' name='L2'></a>   2 <strong class='reserved'>struct</strong> <a href='../R/459.html' title='Multiple referred from 11 places.'>sleeplock</a> <em class='brace'>{</em>
+<a id='L3' name='L3'></a>   3   <a href='../S/98.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/189.html' title='Multiple used in 11 places.'>locked</a>;       <em class='comment'>// Is the lock held?</em>
+<a id='L4' name='L4'></a>   4   <strong class='reserved'>struct</strong> <a href='../S/88.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/186.html' title='Multiple used in 40 places.'>lk</a>; <em class='comment'>// spinlock protecting this sleep lock</em>
+<a id='L5' name='L5'></a>   5   
+<a id='L6' name='L6'></a>   6   <em class='comment'>// For debugging:</em>
+<a id='L7' name='L7'></a>   7   <strong class='reserved'>char</strong> *<a href='../Y/206.html' title='Multiple used in 162 places.'>name</a>;        <em class='comment'>// Name of lock.</em>
+<a id='L8' name='L8'></a>   8   <strong class='reserved'>int</strong> <a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a>;           <em class='comment'>// Process holding lock</em>
+<a id='L9' name='L9'></a>   9 <em class='brace'>}</em>;
+<a id='L10' name='L10'></a>  10 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

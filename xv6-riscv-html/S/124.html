@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel/trap.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.8' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/153.html'>kernel</a>/trap.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L20'>[^]</a><a href='#L178'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L20' title='Defined at 20.'>trapinit</a></li>
+<li><a href='#L27' title='Defined at 27.'>trapinithart</a></li>
+<li><a href='#L37' title='Defined at 37.'>usertrap</a></li>
+<li><a href='#L90' title='Defined at 90.'>usertrapret</a></li>
+<li><a href='#L135' title='Defined at 135.'>kerneltrap</a></li>
+<li><a href='#L164' title='Defined at 164.'>clockintr</a></li>
+<li><a href='#L178' title='Defined at 178.'>devintr</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='98.html'>types.h</a>"
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='128.html'>param.h</a>"
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='114.html'>memlayout.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='139.html'>riscv.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='88.html'>spinlock.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='95.html'>proc.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='89.html'>defs.h</a>"
+<a id='L8' name='L8'></a>   8 
+<a id='L9' name='L9'></a>   9 <strong class='reserved'>struct</strong> <a href='../S/88.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/373.html' title='Multiple used in 11 places.'>tickslock</a>;
+<a id='L10' name='L10'></a>  10 <a href='../S/98.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/371.html' title='Multiple used in 8 places.'>ticks</a>;
+<a id='L11' name='L11'></a>  11 
+<a id='L12' name='L12'></a>  12 <strong class='reserved'>extern</strong> <strong class='reserved'>char</strong> <a href='../Y/383.html' title='Multiple used in 7 places.'>trampoline</a>[], <a href='../Y/402.html' title='Multiple used in 2 places.'>uservec</a>[], <a href='../Y/401.html' title='Multiple used in 2 places.'>userret</a>[];
+<a id='L13' name='L13'></a>  13 
+<a id='L14' name='L14'></a>  14 <em class='comment'>// in kernelvec.S, calls kerneltrap().</em>
+<a id='L15' name='L15'></a>  15 <strong class='reserved'>void</strong> <a href='../Y/172.html' title='Multiple used in 3 places.'>kernelvec</a>();
+<a id='L16' name='L16'></a>  16 
+<a id='L17' name='L17'></a>  17 <strong class='reserved'>extern</strong> <strong class='reserved'>int</strong> <a href='../S/124.html#L178' title='Defined at 178 in kernel/trap.c.'>devintr</a>();
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <strong class='reserved'>void</strong>
+<a id='L20' name='L20'></a>  20 <a href='../R/500.html' title='Multiple referred from 2 places.'>trapinit</a>(<strong class='reserved'>void</strong>)
+<a id='L21' name='L21'></a>  21 <em class='brace'>{</em>
+<a id='L22' name='L22'></a>  22   <a href='../S/129.html#L12' title='Defined at 12 in kernel/spinlock.c.'>initlock</a>(&amp;<a href='../Y/373.html' title='Multiple used in 11 places.'>tickslock</a>, "time");
+<a id='L23' name='L23'></a>  23 <em class='brace'>}</em>
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25 <em class='comment'>// set up to take exceptions and traps while in the kernel.</em>
+<a id='L26' name='L26'></a>  26 <strong class='reserved'>void</strong>
+<a id='L27' name='L27'></a>  27 <a href='../R/501.html' title='Multiple referred from 3 places.'>trapinithart</a>(<strong class='reserved'>void</strong>)
+<a id='L28' name='L28'></a>  28 <em class='brace'>{</em>
+<a id='L29' name='L29'></a>  29   <a href='../S/139.html#L166' title='Defined at 166 in kernel/riscv.h.'>w_stvec</a>((<a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../Y/172.html' title='Multiple used in 3 places.'>kernelvec</a>);
+<a id='L30' name='L30'></a>  30 <em class='brace'>}</em>
+<a id='L31' name='L31'></a>  31 
+<a id='L32' name='L32'></a>  32 <em class='comment'>//</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'>// handle an interrupt, exception, or system call from user space.</em>
+<a id='L34' name='L34'></a>  34 <em class='comment'>// called from trampoline.S</em>
+<a id='L35' name='L35'></a>  35 <em class='comment'>//</em>
+<a id='L36' name='L36'></a>  36 <strong class='reserved'>void</strong>
+<a id='L37' name='L37'></a>  37 <a href='../S/124.html#L107' title='Referred from 107 in kernel/trap.c.'>usertrap</a>(<strong class='reserved'>void</strong>)
+<a id='L38' name='L38'></a>  38 <em class='brace'>{</em>
+<a id='L39' name='L39'></a>  39   <strong class='reserved'>int</strong> <a href='../Y/424.html' title='Multiple used in 6 places.'>which_dev</a> = 0;
+<a id='L40' name='L40'></a>  40 
+<a id='L41' name='L41'></a>  41   <strong class='reserved'>if</strong>((<a href='../S/139.html#L52' title='Defined at 52 in kernel/riscv.h.'>r_sstatus</a>() &amp; <a href='../S/139.html#L45' title='Defined at 45 in kernel/riscv.h.'>SSTATUS_SPP</a>) != 0)
+<a id='L42' name='L42'></a>  42     <a href='../D/394.html' title='Multiple defined in 2 places.'>panic</a>("usertrap: not from user mode");
+<a id='L43' name='L43'></a>  43 
+<a id='L44' name='L44'></a>  44   <em class='comment'>// send interrupts and exceptions to kerneltrap(),</em>
+<a id='L45' name='L45'></a>  45   <em class='comment'>// since we're now in the kernel.</em>
+<a id='L46' name='L46'></a>  46   <a href='../S/139.html#L166' title='Defined at 166 in kernel/riscv.h.'>w_stvec</a>((<a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../Y/172.html' title='Multiple used in 3 places.'>kernelvec</a>);
+<a id='L47' name='L47'></a>  47 
+<a id='L48' name='L48'></a>  48   <strong class='reserved'>struct</strong> <a href='../S/95.html#L85' title='Defined at 85 in kernel/proc.h.'>proc</a> *<a href='../Y/248.html' title='Multiple used in 304 places.'>p</a> = <a href='../S/138.html#L83' title='Defined at 83 in kernel/proc.c.'>myproc</a>();
+<a id='L49' name='L49'></a>  49   
+<a id='L50' name='L50'></a>  50   <em class='comment'>// save user program counter.</em>
+<a id='L51' name='L51'></a>  51   <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>-&gt;<a href='../Y/95.html' title='Multiple used in 6 places.'>epc</a> = <a href='../S/139.html#L126' title='Defined at 126 in kernel/riscv.h.'>r_sepc</a>();
+<a id='L52' name='L52'></a>  52   
+<a id='L53' name='L53'></a>  53   <strong class='reserved'>if</strong>(<a href='../S/139.html#L228' title='Defined at 228 in kernel/riscv.h.'>r_scause</a>() == 8)<em class='brace'>{</em>
+<a id='L54' name='L54'></a>  54     <em class='comment'>// system call</em>
+<a id='L55' name='L55'></a>  55 
+<a id='L56' name='L56'></a>  56     <strong class='reserved'>if</strong>(<a href='../S/138.html#L615' title='Defined at 615 in kernel/proc.c.'>killed</a>(<a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>))
+<a id='L57' name='L57'></a>  57       <a href='../S/138.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(-1);
+<a id='L58' name='L58'></a>  58 
+<a id='L59' name='L59'></a>  59     <em class='comment'>// sepc points to the ecall instruction,</em>
+<a id='L60' name='L60'></a>  60     <em class='comment'>// but we want to return to the next instruction.</em>
+<a id='L61' name='L61'></a>  61     <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>-&gt;<a href='../Y/95.html' title='Multiple used in 6 places.'>epc</a> += 4;
+<a id='L62' name='L62'></a>  62 
+<a id='L63' name='L63'></a>  63     <em class='comment'>// an interrupt will change sepc, scause, and sstatus,</em>
+<a id='L64' name='L64'></a>  64     <em class='comment'>// so enable only now that we're done with those registers.</em>
+<a id='L65' name='L65'></a>  65     <a href='../S/139.html#L270' title='Defined at 270 in kernel/riscv.h.'>intr_on</a>();
+<a id='L66' name='L66'></a>  66 
+<a id='L67' name='L67'></a>  67     <a href='../S/116.html#L132' title='Defined at 132 in kernel/syscall.c.'>syscall</a>();
+<a id='L68' name='L68'></a>  68   <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>((<a href='../Y/424.html' title='Multiple used in 6 places.'>which_dev</a> = <a href='../S/124.html#L178' title='Defined at 178 in kernel/trap.c.'>devintr</a>()) != 0)<em class='brace'>{</em>
+<a id='L69' name='L69'></a>  69     <em class='comment'>// ok</em>
+<a id='L70' name='L70'></a>  70   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L71' name='L71'></a>  71     <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("usertrap(): unexpected scause %p pid=%d\n", <a href='../S/139.html#L228' title='Defined at 228 in kernel/riscv.h.'>r_scause</a>(), <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a>);
+<a id='L72' name='L72'></a>  72     <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("            sepc=%p stval=%p\n", <a href='../S/139.html#L126' title='Defined at 126 in kernel/riscv.h.'>r_sepc</a>(), <a href='../S/139.html#L237' title='Defined at 237 in kernel/riscv.h.'>r_stval</a>());
+<a id='L73' name='L73'></a>  73     <a href='../S/138.html#L607' title='Defined at 607 in kernel/proc.c.'>setkilled</a>(<a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>);
+<a id='L74' name='L74'></a>  74   <em class='brace'>}</em>
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76   <strong class='reserved'>if</strong>(<a href='../S/138.html#L615' title='Defined at 615 in kernel/proc.c.'>killed</a>(<a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>))
+<a id='L77' name='L77'></a>  77     <a href='../S/138.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(-1);
+<a id='L78' name='L78'></a>  78 
+<a id='L79' name='L79'></a>  79   <em class='comment'>// give up the CPU if this is a timer interrupt.</em>
+<a id='L80' name='L80'></a>  80   <strong class='reserved'>if</strong>(<a href='../Y/424.html' title='Multiple used in 6 places.'>which_dev</a> == 2)
+<a id='L81' name='L81'></a>  81     <a href='../S/138.html#L503' title='Defined at 503 in kernel/proc.c.'>yield</a>();
+<a id='L82' name='L82'></a>  82 
+<a id='L83' name='L83'></a>  83   <a href='../S/124.html#L90' title='Defined at 90 in kernel/trap.c.'>usertrapret</a>();
+<a id='L84' name='L84'></a>  84 <em class='brace'>}</em>
+<a id='L85' name='L85'></a>  85 
+<a id='L86' name='L86'></a>  86 <em class='comment'>//</em>
+<a id='L87' name='L87'></a>  87 <em class='comment'>// return to user space</em>
+<a id='L88' name='L88'></a>  88 <em class='comment'>//</em>
+<a id='L89' name='L89'></a>  89 <strong class='reserved'>void</strong>
+<a id='L90' name='L90'></a>  90 <a href='../R/520.html' title='Multiple referred from 3 places.'>usertrapret</a>(<strong class='reserved'>void</strong>)
+<a id='L91' name='L91'></a>  91 <em class='brace'>{</em>
+<a id='L92' name='L92'></a>  92   <strong class='reserved'>struct</strong> <a href='../S/95.html#L85' title='Defined at 85 in kernel/proc.h.'>proc</a> *<a href='../Y/248.html' title='Multiple used in 304 places.'>p</a> = <a href='../S/138.html#L83' title='Defined at 83 in kernel/proc.c.'>myproc</a>();
+<a id='L93' name='L93'></a>  93 
+<a id='L94' name='L94'></a>  94   <em class='comment'>// we're about to switch the destination of traps from</em>
+<a id='L95' name='L95'></a>  95   <em class='comment'>// kerneltrap() to usertrap(), so turn off interrupts until</em>
+<a id='L96' name='L96'></a>  96   <em class='comment'>// we're back in user space, where usertrap() is correct.</em>
+<a id='L97' name='L97'></a>  97   <a href='../S/139.html#L277' title='Defined at 277 in kernel/riscv.h.'>intr_off</a>();
+<a id='L98' name='L98'></a>  98 
+<a id='L99' name='L99'></a>  99   <em class='comment'>// send syscalls, interrupts, and exceptions to uservec in trampoline.S</em>
+<a id='L100' name='L100'></a> 100   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/385.html' title='Multiple used in 2 places.'>trampoline_uservec</a> = <a href='../S/114.html#L52' title='Defined at 52 in kernel/memlayout.h.'>TRAMPOLINE</a> + (<a href='../Y/402.html' title='Multiple used in 2 places.'>uservec</a> - <a href='../Y/383.html' title='Multiple used in 7 places.'>trampoline</a>);
+<a id='L101' name='L101'></a> 101   <a href='../S/139.html#L166' title='Defined at 166 in kernel/riscv.h.'>w_stvec</a>(<a href='../Y/385.html' title='Multiple used in 2 places.'>trampoline_uservec</a>);
+<a id='L102' name='L102'></a> 102 
+<a id='L103' name='L103'></a> 103   <em class='comment'>// set up trapframe values that uservec will need when</em>
+<a id='L104' name='L104'></a> 104   <em class='comment'>// the process next traps into the kernel.</em>
+<a id='L105' name='L105'></a> 105   <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>-&gt;<a href='../Y/169.html' title='Multiple used in 2 places.'>kernel_satp</a> = <a href='../S/139.html#L213' title='Defined at 213 in kernel/riscv.h.'>r_satp</a>();         <em class='comment'>// kernel page table</em>
+<a id='L106' name='L106'></a> 106   <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>-&gt;<a href='../Y/170.html' title='Multiple used in 2 places.'>kernel_sp</a> = <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../Y/175.html' title='Multiple used in 4 places.'>kstack</a> + <a href='../S/139.html#L335' title='Defined at 335 in kernel/riscv.h.'>PGSIZE</a>; <em class='comment'>// process's kernel stack</em>
+<a id='L107' name='L107'></a> 107   <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>-&gt;<a href='../Y/171.html' title='Multiple used in 2 places.'>kernel_trap</a> = (<a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../S/124.html#L37' title='Defined at 37 in kernel/trap.c.'>usertrap</a>;
+<a id='L108' name='L108'></a> 108   <a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>-&gt;<a href='../Y/167.html' title='Multiple used in 2 places.'>kernel_hartid</a> = <a href='../S/139.html#L301' title='Defined at 301 in kernel/riscv.h.'>r_tp</a>();         <em class='comment'>// hartid for cpuid()</em>
+<a id='L109' name='L109'></a> 109 
+<a id='L110' name='L110'></a> 110   <em class='comment'>// set up the registers that trampoline.S's sret will use</em>
+<a id='L111' name='L111'></a> 111   <em class='comment'>// to get to user space.</em>
+<a id='L112' name='L112'></a> 112   
+<a id='L113' name='L113'></a> 113   <em class='comment'>// set S Previous Privilege mode to User.</em>
+<a id='L114' name='L114'></a> 114   <strong class='reserved'>unsigned</strong> <strong class='reserved'>long</strong> <a href='../Y/430.html' title='Multiple used in 144 places.'>x</a> = <a href='../S/139.html#L52' title='Defined at 52 in kernel/riscv.h.'>r_sstatus</a>();
+<a id='L115' name='L115'></a> 115   <a href='../Y/430.html' title='Multiple used in 144 places.'>x</a> &amp;= ~<a href='../S/139.html#L45' title='Defined at 45 in kernel/riscv.h.'>SSTATUS_SPP</a>; <em class='comment'>// clear SPP to 0 for user mode</em>
+<a id='L116' name='L116'></a> 116   <a href='../Y/430.html' title='Multiple used in 144 places.'>x</a> |= <a href='../S/139.html#L46' title='Defined at 46 in kernel/riscv.h.'>SSTATUS_SPIE</a>; <em class='comment'>// enable interrupts in user mode</em>
+<a id='L117' name='L117'></a> 117   <a href='../S/139.html#L60' title='Defined at 60 in kernel/riscv.h.'>w_sstatus</a>(<a href='../Y/430.html' title='Multiple used in 144 places.'>x</a>);
+<a id='L118' name='L118'></a> 118 
+<a id='L119' name='L119'></a> 119   <em class='comment'>// set S Exception Program Counter to the saved user pc.</em>
+<a id='L120' name='L120'></a> 120   <a href='../S/139.html#L120' title='Defined at 120 in kernel/riscv.h.'>w_sepc</a>(<a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>-&gt;<a href='../Y/95.html' title='Multiple used in 6 places.'>epc</a>);
+<a id='L121' name='L121'></a> 121 
+<a id='L122' name='L122'></a> 122   <em class='comment'>// tell trampoline.S the user page table to switch to.</em>
+<a id='L123' name='L123'></a> 123   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/321.html' title='Multiple used in 2 places.'>satp</a> = <a href='../S/139.html#L202' title='Defined at 202 in kernel/riscv.h.'>MAKE_SATP</a>(<a href='../Y/248.html' title='Multiple used in 304 places.'>p</a>-&gt;<a href='../Y/256.html' title='Multiple used in 90 places.'>pagetable</a>);
+<a id='L124' name='L124'></a> 124 
+<a id='L125' name='L125'></a> 125   <em class='comment'>// jump to userret in trampoline.S at the top of memory, which </em>
+<a id='L126' name='L126'></a> 126   <em class='comment'>// switches to the user page table, restores user registers,</em>
+<a id='L127' name='L127'></a> 127   <em class='comment'>// and switches to user mode with sret.</em>
+<a id='L128' name='L128'></a> 128   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/384.html' title='Multiple used in 2 places.'>trampoline_userret</a> = <a href='../S/114.html#L52' title='Defined at 52 in kernel/memlayout.h.'>TRAMPOLINE</a> + (<a href='../Y/401.html' title='Multiple used in 2 places.'>userret</a> - <a href='../Y/383.html' title='Multiple used in 7 places.'>trampoline</a>);
+<a id='L129' name='L129'></a> 129   ((<strong class='reserved'>void</strong> (*)(<a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>))<a href='../Y/384.html' title='Multiple used in 2 places.'>trampoline_userret</a>)(<a href='../Y/321.html' title='Multiple used in 2 places.'>satp</a>);
+<a id='L130' name='L130'></a> 130 <em class='brace'>}</em>
+<a id='L131' name='L131'></a> 131 
+<a id='L132' name='L132'></a> 132 <em class='comment'>// interrupts and exceptions from kernel code go here via kernelvec,</em>
+<a id='L133' name='L133'></a> 133 <em class='comment'>// on whatever the current kernel stack is.</em>
+<a id='L134' name='L134'></a> 134 <strong class='reserved'>void</strong> 
+<a id='L135' name='L135'></a> 135 kerneltrap()
+<a id='L136' name='L136'></a> 136 <em class='brace'>{</em>
+<a id='L137' name='L137'></a> 137   <strong class='reserved'>int</strong> <a href='../Y/424.html' title='Multiple used in 6 places.'>which_dev</a> = 0;
+<a id='L138' name='L138'></a> 138   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/328.html' title='Multiple used in 2 places.'>sepc</a> = <a href='../S/139.html#L126' title='Defined at 126 in kernel/riscv.h.'>r_sepc</a>();
+<a id='L139' name='L139'></a> 139   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/342.html' title='Multiple used in 3 places.'>sstatus</a> = <a href='../S/139.html#L52' title='Defined at 52 in kernel/riscv.h.'>r_sstatus</a>();
+<a id='L140' name='L140'></a> 140   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/324.html' title='Multiple used in 6 places.'>scause</a> = <a href='../S/139.html#L228' title='Defined at 228 in kernel/riscv.h.'>r_scause</a>();
+<a id='L141' name='L141'></a> 141   
+<a id='L142' name='L142'></a> 142   <strong class='reserved'>if</strong>((<a href='../Y/342.html' title='Multiple used in 3 places.'>sstatus</a> &amp; <a href='../S/139.html#L45' title='Defined at 45 in kernel/riscv.h.'>SSTATUS_SPP</a>) == 0)
+<a id='L143' name='L143'></a> 143     <a href='../D/394.html' title='Multiple defined in 2 places.'>panic</a>("kerneltrap: not from supervisor mode");
+<a id='L144' name='L144'></a> 144   <strong class='reserved'>if</strong>(<a href='../S/139.html#L284' title='Defined at 284 in kernel/riscv.h.'>intr_get</a>() != 0)
+<a id='L145' name='L145'></a> 145     <a href='../D/394.html' title='Multiple defined in 2 places.'>panic</a>("kerneltrap: interrupts enabled");
+<a id='L146' name='L146'></a> 146 
+<a id='L147' name='L147'></a> 147   <strong class='reserved'>if</strong>((<a href='../Y/424.html' title='Multiple used in 6 places.'>which_dev</a> = <a href='../S/124.html#L178' title='Defined at 178 in kernel/trap.c.'>devintr</a>()) == 0)<em class='brace'>{</em>
+<a id='L148' name='L148'></a> 148     <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("scause %p\n", <a href='../Y/324.html' title='Multiple used in 6 places.'>scause</a>);
+<a id='L149' name='L149'></a> 149     <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("sepc=%p stval=%p\n", <a href='../S/139.html#L126' title='Defined at 126 in kernel/riscv.h.'>r_sepc</a>(), <a href='../S/139.html#L237' title='Defined at 237 in kernel/riscv.h.'>r_stval</a>());
+<a id='L150' name='L150'></a> 150     <a href='../D/394.html' title='Multiple defined in 2 places.'>panic</a>("kerneltrap");
+<a id='L151' name='L151'></a> 151   <em class='brace'>}</em>
+<a id='L152' name='L152'></a> 152 
+<a id='L153' name='L153'></a> 153   <em class='comment'>// give up the CPU if this is a timer interrupt.</em>
+<a id='L154' name='L154'></a> 154   <strong class='reserved'>if</strong>(<a href='../Y/424.html' title='Multiple used in 6 places.'>which_dev</a> == 2 &amp;&amp; <a href='../S/138.html#L83' title='Defined at 83 in kernel/proc.c.'>myproc</a>() != 0 &amp;&amp; <a href='../S/138.html#L83' title='Defined at 83 in kernel/proc.c.'>myproc</a>()-&gt;<a href='../Y/349.html' title='Multiple used in 31 places.'>state</a> == <a href='../S/95.html#L82' title='Defined at 82 in kernel/proc.h.'>RUNNING</a>)
+<a id='L155' name='L155'></a> 155     <a href='../S/138.html#L503' title='Defined at 503 in kernel/proc.c.'>yield</a>();
+<a id='L156' name='L156'></a> 156 
+<a id='L157' name='L157'></a> 157   <em class='comment'>// the yield() may have caused some traps to occur,</em>
+<a id='L158' name='L158'></a> 158   <em class='comment'>// so restore trap registers for use by kernelvec.S's sepc instruction.</em>
+<a id='L159' name='L159'></a> 159   <a href='../S/139.html#L120' title='Defined at 120 in kernel/riscv.h.'>w_sepc</a>(<a href='../Y/328.html' title='Multiple used in 2 places.'>sepc</a>);
+<a id='L160' name='L160'></a> 160   <a href='../S/139.html#L60' title='Defined at 60 in kernel/riscv.h.'>w_sstatus</a>(<a href='../Y/342.html' title='Multiple used in 3 places.'>sstatus</a>);
+<a id='L161' name='L161'></a> 161 <em class='brace'>}</em>
+<a id='L162' name='L162'></a> 162 
+<a id='L163' name='L163'></a> 163 <strong class='reserved'>void</strong>
+<a id='L164' name='L164'></a> 164 <a href='../S/124.html#L209' title='Referred from 209 in kernel/trap.c.'>clockintr</a>()
+<a id='L165' name='L165'></a> 165 <em class='brace'>{</em>
+<a id='L166' name='L166'></a> 166   <a href='../S/129.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/373.html' title='Multiple used in 11 places.'>tickslock</a>);
+<a id='L167' name='L167'></a> 167   <a href='../Y/371.html' title='Multiple used in 8 places.'>ticks</a>++;
+<a id='L168' name='L168'></a> 168   <a href='../S/138.html#L567' title='Defined at 567 in kernel/proc.c.'>wakeup</a>(&amp;<a href='../Y/371.html' title='Multiple used in 8 places.'>ticks</a>);
+<a id='L169' name='L169'></a> 169   <a href='../S/129.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/373.html' title='Multiple used in 11 places.'>tickslock</a>);
+<a id='L170' name='L170'></a> 170 <em class='brace'>}</em>
+<a id='L171' name='L171'></a> 171 
+<a id='L172' name='L172'></a> 172 <em class='comment'>// check if it's an external interrupt or software interrupt,</em>
+<a id='L173' name='L173'></a> 173 <em class='comment'>// and handle it.</em>
+<a id='L174' name='L174'></a> 174 <em class='comment'>// returns 2 if timer interrupt,</em>
+<a id='L175' name='L175'></a> 175 <em class='comment'>// 1 if other device,</em>
+<a id='L176' name='L176'></a> 176 <em class='comment'>// 0 if not recognized.</em>
+<a id='L177' name='L177'></a> 177 <strong class='reserved'>int</strong>
+<a id='L178' name='L178'></a> 178 <a href='../R/243.html' title='Multiple referred from 3 places.'>devintr</a>()
+<a id='L179' name='L179'></a> 179 <em class='brace'>{</em>
+<a id='L180' name='L180'></a> 180   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/324.html' title='Multiple used in 6 places.'>scause</a> = <a href='../S/139.html#L228' title='Defined at 228 in kernel/riscv.h.'>r_scause</a>();
+<a id='L181' name='L181'></a> 181 
+<a id='L182' name='L182'></a> 182   <strong class='reserved'>if</strong>((<a href='../Y/324.html' title='Multiple used in 6 places.'>scause</a> &amp; 0x8000000000000000L) &amp;&amp;
+<a id='L183' name='L183'></a> 183      (<a href='../Y/324.html' title='Multiple used in 6 places.'>scause</a> &amp; 0xff) == 9)<em class='brace'>{</em>
+<a id='L184' name='L184'></a> 184     <em class='comment'>// this is a supervisor external interrupt, via PLIC.</em>
+<a id='L185' name='L185'></a> 185 
+<a id='L186' name='L186'></a> 186     <em class='comment'>// irq indicates which device interrupted.</em>
+<a id='L187' name='L187'></a> 187     <strong class='reserved'>int</strong> <a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a> = <a href='../S/135.html#L34' title='Defined at 34 in kernel/plic.c.'>plic_claim</a>();
+<a id='L188' name='L188'></a> 188 
+<a id='L189' name='L189'></a> 189     <strong class='reserved'>if</strong>(<a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a> == <a href='../S/114.html#L22' title='Defined at 22 in kernel/memlayout.h.'>UART0_IRQ</a>)<em class='brace'>{</em>
+<a id='L190' name='L190'></a> 190       <a href='../S/151.html#L176' title='Defined at 176 in kernel/uart.c.'>uartintr</a>();
+<a id='L191' name='L191'></a> 191     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a> == <a href='../S/114.html#L26' title='Defined at 26 in kernel/memlayout.h.'>VIRTIO0_IRQ</a>)<em class='brace'>{</em>
+<a id='L192' name='L192'></a> 192       <a href='../S/141.html#L295' title='Defined at 295 in kernel/virtio_disk.c.'>virtio_disk_intr</a>();
+<a id='L193' name='L193'></a> 193     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a>)<em class='brace'>{</em>
+<a id='L194' name='L194'></a> 194       <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("unexpected interrupt irq=%d\n", <a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a>);
+<a id='L195' name='L195'></a> 195     <em class='brace'>}</em>
+<a id='L196' name='L196'></a> 196 
+<a id='L197' name='L197'></a> 197     <em class='comment'>// the PLIC allows each device to raise at most one</em>
+<a id='L198' name='L198'></a> 198     <em class='comment'>// interrupt at a time; tell the PLIC the device is</em>
+<a id='L199' name='L199'></a> 199     <em class='comment'>// now allowed to interrupt again.</em>
+<a id='L200' name='L200'></a> 200     <strong class='reserved'>if</strong>(<a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a>)
+<a id='L201' name='L201'></a> 201       <a href='../S/135.html#L43' title='Defined at 43 in kernel/plic.c.'>plic_complete</a>(<a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a>);
+<a id='L202' name='L202'></a> 202 
+<a id='L203' name='L203'></a> 203     <strong class='reserved'>return</strong> 1;
+<a id='L204' name='L204'></a> 204   <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/324.html' title='Multiple used in 6 places.'>scause</a> == 0x8000000000000001L)<em class='brace'>{</em>
+<a id='L205' name='L205'></a> 205     <em class='comment'>// software interrupt from a machine-mode timer interrupt,</em>
+<a id='L206' name='L206'></a> 206     <em class='comment'>// forwarded by timervec in kernelvec.S.</em>
+<a id='L207' name='L207'></a> 207 
+<a id='L208' name='L208'></a> 208     <strong class='reserved'>if</strong>(<a href='../S/138.html#L65' title='Defined at 65 in kernel/proc.c.'>cpuid</a>() == 0)<em class='brace'>{</em>
+<a id='L209' name='L209'></a> 209       <a href='../S/124.html#L164' title='Defined at 164 in kernel/trap.c.'>clockintr</a>();
+<a id='L210' name='L210'></a> 210     <em class='brace'>}</em>
+<a id='L211' name='L211'></a> 211     
+<a id='L212' name='L212'></a> 212     <em class='comment'>// acknowledge the software interrupt by clearing</em>
+<a id='L213' name='L213'></a> 213     <em class='comment'>// the SSIP bit in sip.</em>
+<a id='L214' name='L214'></a> 214     <a href='../S/139.html#L75' title='Defined at 75 in kernel/riscv.h.'>w_sip</a>(<a href='../S/139.html#L67' title='Defined at 67 in kernel/riscv.h.'>r_sip</a>() &amp; ~2);
+<a id='L215' name='L215'></a> 215 
+<a id='L216' name='L216'></a> 216     <strong class='reserved'>return</strong> 2;
+<a id='L217' name='L217'></a> 217   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L218' name='L218'></a> 218     <strong class='reserved'>return</strong> 0;
+<a id='L219' name='L219'></a> 219   <em class='brace'>}</em>
+<a id='L220' name='L220'></a> 220 <em class='brace'>}</em>
+<a id='L221' name='L221'></a> 221 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L20'>[^]</a><a href='#L178'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

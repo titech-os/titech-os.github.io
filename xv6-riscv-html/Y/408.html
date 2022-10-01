@@ -1,24 +1,32 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>va_arg</title>
+<title>va0</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/29.html#L88'>va_arg</a>             88 kernel/printf.c       printint(va_arg(ap, int), 10, 1);</span>
-<span class='curline'><a href='../S/29.html#L91'>va_arg</a>             91 kernel/printf.c       printint(va_arg(ap, int), 16, 1);</span>
-<span class='curline'><a href='../S/29.html#L94'>va_arg</a>             94 kernel/printf.c       printptr(va_arg(ap, uint64));</span>
-<span class='curline'><a href='../S/29.html#L97'>va_arg</a>             97 kernel/printf.c       if((s = va_arg(ap, char*)) == 0)</span>
-<span class='curline'><a href='../S/4.html#L68'>va_arg</a>             68 user/printf.c          printint(fd, va_arg(ap, int), 10, 1);</span>
-<span class='curline'><a href='../S/4.html#L70'>va_arg</a>             70 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
-<span class='curline'><a href='../S/4.html#L72'>va_arg</a>             72 user/printf.c          printint(fd, va_arg(ap, int), 16, 0);</span>
-<span class='curline'><a href='../S/4.html#L74'>va_arg</a>             74 user/printf.c          printptr(fd, va_arg(ap, uint64));</span>
-<span class='curline'><a href='../S/4.html#L76'>va_arg</a>             76 user/printf.c          s = va_arg(ap, char*);</span>
-<span class='curline'><a href='../S/4.html#L84'>va_arg</a>             84 user/printf.c          putc(fd, va_arg(ap, uint));</span>
+<span class='curline'><a href='../S/99.html#L354'>va0</a>               354 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/99.html#L357'>va0</a>               357 kernel/vm.c        va0 = PGROUNDDOWN(dstva);</span>
+<span class='curline'><a href='../S/99.html#L358'>va0</a>               358 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/99.html#L361'>va0</a>               361 kernel/vm.c        n = PGSIZE - (dstva - va0);</span>
+<span class='curline'><a href='../S/99.html#L364'>va0</a>               364 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
+<span class='curline'><a href='../S/99.html#L368'>va0</a>               368 kernel/vm.c        dstva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/99.html#L379'>va0</a>               379 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/99.html#L382'>va0</a>               382 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/99.html#L383'>va0</a>               383 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/99.html#L386'>va0</a>               386 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/99.html#L389'>va0</a>               389 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
+<span class='curline'><a href='../S/99.html#L393'>va0</a>               393 kernel/vm.c        srcva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/99.html#L405'>va0</a>               405 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/99.html#L409'>va0</a>               409 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/99.html#L410'>va0</a>               410 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/99.html#L413'>va0</a>               413 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/99.html#L417'>va0</a>               417 kernel/vm.c        char *p = (char *) (pa0 + (srcva - va0));</span>
+<span class='curline'><a href='../S/99.html#L432'>va0</a>               432 kernel/vm.c        srcva = va0 + PGSIZE;</span>
 </pre>
 </body>
 </html>

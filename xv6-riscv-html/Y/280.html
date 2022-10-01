@@ -1,21 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pids</title>
+<title>pr</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/24.html#L2265'>pids</a>             2265 user/usertests.c   int pids[10];</span>
-<span class='curline'><a href='../S/24.html#L2272'>pids</a>             2272 user/usertests.c   for(i = 0; i &lt; sizeof(pids)/sizeof(pids[0]); i++){</span>
-<span class='curline'><a href='../S/24.html#L2273'>pids</a>             2273 user/usertests.c     if((pids[i] = fork()) == 0){</span>
-<span class='curline'><a href='../S/24.html#L2280'>pids</a>             2280 user/usertests.c     if(pids[i] != -1)</span>
-<span class='curline'><a href='../S/24.html#L2287'>pids</a>             2287 user/usertests.c   for(i = 0; i &lt; sizeof(pids)/sizeof(pids[0]); i++){</span>
-<span class='curline'><a href='../S/24.html#L2288'>pids</a>             2288 user/usertests.c     if(pids[i] == -1)</span>
-<span class='curline'><a href='../S/24.html#L2290'>pids</a>             2290 user/usertests.c     kill(pids[i]);</span>
+<span class='curline'><a href='../S/94.html#L80'>pr</a>                 80 kernel/pipe.c    struct proc *pr = myproc();</span>
+<span class='curline'><a href='../S/94.html#L84'>pr</a>                 84 kernel/pipe.c      if(pi-&gt;readopen == 0 || killed(pr)){</span>
+<span class='curline'><a href='../S/94.html#L93'>pr</a>                 93 kernel/pipe.c        if(copyin(pr-&gt;pagetable, &amp;ch, addr + i, 1) == -1)</span>
+<span class='curline'><a href='../S/94.html#L109'>pr</a>                109 kernel/pipe.c    struct proc *pr = myproc();</span>
+<span class='curline'><a href='../S/94.html#L114'>pr</a>                114 kernel/pipe.c      if(killed(pr)){</span>
+<span class='curline'><a href='../S/94.html#L124'>pr</a>                124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
+<span class='curline'><a href='../S/87.html#L24'>pr</a>                 24 kernel/printf.c } pr;</span>
+<span class='curline'><a href='../S/87.html#L70'>pr</a>                 70 kernel/printf.c   locking = pr.locking;</span>
+<span class='curline'><a href='../S/87.html#L72'>pr</a>                 72 kernel/printf.c     acquire(&amp;pr.lock);</span>
+<span class='curline'><a href='../S/87.html#L115'>pr</a>                115 kernel/printf.c     release(&amp;pr.lock);</span>
+<span class='curline'><a href='../S/87.html#L121'>pr</a>                121 kernel/printf.c   pr.locking = 0;</span>
+<span class='curline'><a href='../S/87.html#L133'>pr</a>                133 kernel/printf.c   initlock(&amp;pr.lock, "pr");</span>
+<span class='curline'><a href='../S/87.html#L134'>pr</a>                134 kernel/printf.c   pr.locking = 1;</span>
 </pre>
 </body>
 </html>

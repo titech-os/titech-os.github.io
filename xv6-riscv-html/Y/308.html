@@ -1,24 +1,410 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>rootino</title>
+<title>s</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/3.html#L72'>rootino</a>            72 mkfs/mkfs.c      uint rootino, inum, off;</span>
-<span class='curline'><a href='../S/3.html#L117'>rootino</a>           117 mkfs/mkfs.c      rootino = ialloc(T_DIR);</span>
-<span class='curline'><a href='../S/3.html#L118'>rootino</a>           118 mkfs/mkfs.c      assert(rootino == ROOTINO);</span>
-<span class='curline'><a href='../S/3.html#L121'>rootino</a>           121 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
-<span class='curline'><a href='../S/3.html#L123'>rootino</a>           123 mkfs/mkfs.c      iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/3.html#L126'>rootino</a>           126 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
-<span class='curline'><a href='../S/3.html#L128'>rootino</a>           128 mkfs/mkfs.c      iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/3.html#L155'>rootino</a>           155 mkfs/mkfs.c        iappend(rootino, &amp;de, sizeof(de));</span>
-<span class='curline'><a href='../S/3.html#L164'>rootino</a>           164 mkfs/mkfs.c      rinode(rootino, &amp;din);</span>
-<span class='curline'><a href='../S/3.html#L168'>rootino</a>           168 mkfs/mkfs.c      winode(rootino, &amp;din);</span>
+<span class='curline'><a href='../S/97.html#L25'>s</a>                  25 kernel/exec.c    char *s, *last;</span>
+<span class='curline'><a href='../S/97.html#L118'>s</a>                 118 kernel/exec.c    for(last=s=path; *s; s++)</span>
+<span class='curline'><a href='../S/97.html#L119'>s</a>                 119 kernel/exec.c      if(*s == '/')</span>
+<span class='curline'><a href='../S/97.html#L120'>s</a>                 120 kernel/exec.c        last = s+1;</span>
+<span class='curline'><a href='../S/113.html#L544'>s</a>                 544 kernel/fs.c    namecmp(const char *s, const char *t)</span>
+<span class='curline'><a href='../S/113.html#L546'>s</a>                 546 kernel/fs.c      return strncmp(s, t, DIRSIZ);</span>
+<span class='curline'><a href='../S/113.html#L625'>s</a>                 625 kernel/fs.c      char *s;</span>
+<span class='curline'><a href='../S/113.html#L632'>s</a>                 632 kernel/fs.c      s = path;</span>
+<span class='curline'><a href='../S/113.html#L635'>s</a>                 635 kernel/fs.c      len = path - s;</span>
+<span class='curline'><a href='../S/113.html#L637'>s</a>                 637 kernel/fs.c        memmove(name, s, DIRSIZ);</span>
+<span class='curline'><a href='../S/113.html#L639'>s</a>                 639 kernel/fs.c        memmove(name, s, len);</span>
+<span class='curline'><a href='../S/87.html#L68'>s</a>                  68 kernel/printf.c   char *s;</span>
+<span class='curline'><a href='../S/87.html#L97'>s</a>                  97 kernel/printf.c       if((s = va_arg(ap, char*)) == 0)</span>
+<span class='curline'><a href='../S/87.html#L98'>s</a>                  98 kernel/printf.c         s = "(null)";</span>
+<span class='curline'><a href='../S/87.html#L99'>s</a>                  99 kernel/printf.c       for(; *s; s++)</span>
+<span class='curline'><a href='../S/87.html#L100'>s</a>                 100 kernel/printf.c         consputc(*s);</span>
+<span class='curline'><a href='../S/87.html#L119'>s</a>                 119 kernel/printf.c panic(char *s)</span>
+<span class='curline'><a href='../S/87.html#L123'>s</a>                 123 kernel/printf.c   printf(s);</span>
+<span class='curline'><a href='../S/110.html#L33'>s</a>                  33 kernel/string.c   const char *s;</span>
+<span class='curline'><a href='../S/110.html#L39'>s</a>                  39 kernel/string.c   s = src;</span>
+<span class='curline'><a href='../S/110.html#L41'>s</a>                  41 kernel/string.c   if(s &lt; d &amp;&amp; s + n &gt; d){</span>
+<span class='curline'><a href='../S/110.html#L42'>s</a>                  42 kernel/string.c     s += n;</span>
+<span class='curline'><a href='../S/110.html#L45'>s</a>                  45 kernel/string.c       *--d = *--s;</span>
+<span class='curline'><a href='../S/110.html#L48'>s</a>                  48 kernel/string.c       *d++ = *s++;</span>
+<span class='curline'><a href='../S/110.html#L71'>s</a>                  71 kernel/string.c strncpy(char *s, const char *t, int n)</span>
+<span class='curline'><a href='../S/110.html#L75'>s</a>                  75 kernel/string.c   os = s;</span>
+<span class='curline'><a href='../S/110.html#L76'>s</a>                  76 kernel/string.c   while(n-- &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
+<span class='curline'><a href='../S/110.html#L79'>s</a>                  79 kernel/string.c     *s++ = 0;</span>
+<span class='curline'><a href='../S/110.html#L85'>s</a>                  85 kernel/string.c safestrcpy(char *s, const char *t, int n)</span>
+<span class='curline'><a href='../S/110.html#L89'>s</a>                  89 kernel/string.c   os = s;</span>
+<span class='curline'><a href='../S/110.html#L92'>s</a>                  92 kernel/string.c   while(--n &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
+<span class='curline'><a href='../S/110.html#L94'>s</a>                  94 kernel/string.c   *s = 0;</span>
+<span class='curline'><a href='../S/110.html#L99'>s</a>                  99 kernel/string.c strlen(const char *s)</span>
+<span class='curline'><a href='../S/110.html#L103'>s</a>                 103 kernel/string.c   for(n = 0; s[n]; n++)</span>
+<span class='curline'><a href='../S/3.html#L297'>s</a>                 297 mkfs/mkfs.c    die(const char *s)</span>
+<span class='curline'><a href='../S/3.html#L299'>s</a>                 299 mkfs/mkfs.c      perror(s);</span>
+<span class='curline'><a href='../S/8.html#L11'>s</a>                  11 user/forktest.c print(const char *s)</span>
+<span class='curline'><a href='../S/8.html#L13'>s</a>                  13 user/forktest.c   write(1, s, strlen(s));</span>
+<span class='curline'><a href='../S/6.html#L54'>s</a>                  54 user/printf.c    char *s;</span>
+<span class='curline'><a href='../S/6.html#L76'>s</a>                  76 user/printf.c          s = va_arg(ap, char*);</span>
+<span class='curline'><a href='../S/6.html#L77'>s</a>                  77 user/printf.c          if(s == 0)</span>
+<span class='curline'><a href='../S/6.html#L78'>s</a>                  78 user/printf.c            s = "(null)";</span>
+<span class='curline'><a href='../S/6.html#L79'>s</a>                  79 user/printf.c          while(*s != 0){</span>
+<span class='curline'><a href='../S/6.html#L80'>s</a>                  80 user/printf.c            putc(fd, *s);</span>
+<span class='curline'><a href='../S/6.html#L81'>s</a>                  81 user/printf.c            s++;</span>
+<span class='curline'><a href='../S/51.html#L176'>s</a>                 176 user/sh.c      panic(char *s)</span>
+<span class='curline'><a href='../S/51.html#L178'>s</a>                 178 user/sh.c        fprintf(2, "%s\n", s);</span>
+<span class='curline'><a href='../S/51.html#L269'>s</a>                 269 user/sh.c        char *s;</span>
+<span class='curline'><a href='../S/51.html#L272'>s</a>                 272 user/sh.c        s = *ps;</span>
+<span class='curline'><a href='../S/51.html#L273'>s</a>                 273 user/sh.c        while(s &lt; es &amp;&amp; strchr(whitespace, *s))</span>
+<span class='curline'><a href='../S/51.html#L274'>s</a>                 274 user/sh.c          s++;</span>
+<span class='curline'><a href='../S/51.html#L276'>s</a>                 276 user/sh.c          *q = s;</span>
+<span class='curline'><a href='../S/51.html#L277'>s</a>                 277 user/sh.c        ret = *s;</span>
+<span class='curline'><a href='../S/51.html#L278'>s</a>                 278 user/sh.c        switch(*s){</span>
+<span class='curline'><a href='../S/51.html#L287'>s</a>                 287 user/sh.c          s++;</span>
+<span class='curline'><a href='../S/51.html#L290'>s</a>                 290 user/sh.c          s++;</span>
+<span class='curline'><a href='../S/51.html#L291'>s</a>                 291 user/sh.c          if(*s == '&gt;'){</span>
+<span class='curline'><a href='../S/51.html#L293'>s</a>                 293 user/sh.c            s++;</span>
+<span class='curline'><a href='../S/51.html#L298'>s</a>                 298 user/sh.c          while(s &lt; es &amp;&amp; !strchr(whitespace, *s) &amp;&amp; !strchr(symbols, *s))</span>
+<span class='curline'><a href='../S/51.html#L299'>s</a>                 299 user/sh.c            s++;</span>
+<span class='curline'><a href='../S/51.html#L303'>s</a>                 303 user/sh.c          *eq = s;</span>
+<span class='curline'><a href='../S/51.html#L305'>s</a>                 305 user/sh.c        while(s &lt; es &amp;&amp; strchr(whitespace, *s))</span>
+<span class='curline'><a href='../S/51.html#L306'>s</a>                 306 user/sh.c          s++;</span>
+<span class='curline'><a href='../S/51.html#L307'>s</a>                 307 user/sh.c        *ps = s;</span>
+<span class='curline'><a href='../S/51.html#L314'>s</a>                 314 user/sh.c        char *s;</span>
+<span class='curline'><a href='../S/51.html#L316'>s</a>                 316 user/sh.c        s = *ps;</span>
+<span class='curline'><a href='../S/51.html#L317'>s</a>                 317 user/sh.c        while(s &lt; es &amp;&amp; strchr(whitespace, *s))</span>
+<span class='curline'><a href='../S/51.html#L318'>s</a>                 318 user/sh.c          s++;</span>
+<span class='curline'><a href='../S/51.html#L319'>s</a>                 319 user/sh.c        *ps = s;</span>
+<span class='curline'><a href='../S/51.html#L320'>s</a>                 320 user/sh.c        return *s &amp;&amp; strchr(toks, *s);</span>
+<span class='curline'><a href='../S/51.html#L329'>s</a>                 329 user/sh.c      parsecmd(char *s)</span>
+<span class='curline'><a href='../S/51.html#L334'>s</a>                 334 user/sh.c        es = s + strlen(s);</span>
+<span class='curline'><a href='../S/51.html#L335'>s</a>                 335 user/sh.c        cmd = parseline(&amp;s, es);</span>
+<span class='curline'><a href='../S/51.html#L336'>s</a>                 336 user/sh.c        peek(&amp;s, es, "");</span>
+<span class='curline'><a href='../S/51.html#L337'>s</a>                 337 user/sh.c        if(s != es){</span>
+<span class='curline'><a href='../S/51.html#L338'>s</a>                 338 user/sh.c          fprintf(2, "leftovers: %s\n", s);</span>
+<span class='curline'><a href='../S/60.html#L18'>s</a>                  18 user/ulib.c    strcpy(char *s, const char *t)</span>
+<span class='curline'><a href='../S/60.html#L22'>s</a>                  22 user/ulib.c      os = s;</span>
+<span class='curline'><a href='../S/60.html#L23'>s</a>                  23 user/ulib.c      while((*s++ = *t++) != 0)</span>
+<span class='curline'><a href='../S/60.html#L37'>s</a>                  37 user/ulib.c    strlen(const char *s)</span>
+<span class='curline'><a href='../S/60.html#L41'>s</a>                  41 user/ulib.c      for(n = 0; s[n]; n++)</span>
+<span class='curline'><a href='../S/60.html#L58'>s</a>                  58 user/ulib.c    strchr(const char *s, char c)</span>
+<span class='curline'><a href='../S/60.html#L60'>s</a>                  60 user/ulib.c      for(; *s; s++)</span>
+<span class='curline'><a href='../S/60.html#L61'>s</a>                  61 user/ulib.c        if(*s == c)</span>
+<span class='curline'><a href='../S/60.html#L62'>s</a>                  62 user/ulib.c          return (char*)s;</span>
+<span class='curline'><a href='../S/60.html#L99'>s</a>                  99 user/ulib.c    atoi(const char *s)</span>
+<span class='curline'><a href='../S/60.html#L104'>s</a>                 104 user/ulib.c      while('0' &lt;= *s &amp;&amp; *s &lt;= '9')</span>
+<span class='curline'><a href='../S/60.html#L105'>s</a>                 105 user/ulib.c        n = n*10 + *s++ - '0';</span>
+<span class='curline'><a href='../S/32.html#L15'>s</a>                  15 user/umalloc.c   } s;</span>
+<span class='curline'><a href='../S/32.html#L30'>s</a>                  30 user/umalloc.c   for(p = freep; !(bp &gt; p &amp;&amp; bp &lt; p-&gt;s.ptr); p = p-&gt;s.ptr)</span>
+<span class='curline'><a href='../S/32.html#L31'>s</a>                  31 user/umalloc.c     if(p &gt;= p-&gt;s.ptr &amp;&amp; (bp &gt; p || bp &lt; p-&gt;s.ptr))</span>
+<span class='curline'><a href='../S/32.html#L33'>s</a>                  33 user/umalloc.c   if(bp + bp-&gt;s.size == p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/32.html#L34'>s</a>                  34 user/umalloc.c     bp-&gt;s.size += p-&gt;s.ptr-&gt;s.size;</span>
+<span class='curline'><a href='../S/32.html#L35'>s</a>                  35 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/32.html#L37'>s</a>                  37 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/32.html#L38'>s</a>                  38 user/umalloc.c   if(p + p-&gt;s.size == bp){</span>
+<span class='curline'><a href='../S/32.html#L39'>s</a>                  39 user/umalloc.c     p-&gt;s.size += bp-&gt;s.size;</span>
+<span class='curline'><a href='../S/32.html#L40'>s</a>                  40 user/umalloc.c     p-&gt;s.ptr = bp-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/32.html#L42'>s</a>                  42 user/umalloc.c     p-&gt;s.ptr = bp;</span>
+<span class='curline'><a href='../S/32.html#L58'>s</a>                  58 user/umalloc.c   hp-&gt;s.size = nu;</span>
+<span class='curline'><a href='../S/32.html#L71'>s</a>                  71 user/umalloc.c     base.s.ptr = freep = prevp = &amp;base;</span>
+<span class='curline'><a href='../S/32.html#L72'>s</a>                  72 user/umalloc.c     base.s.size = 0;</span>
+<span class='curline'><a href='../S/32.html#L74'>s</a>                  74 user/umalloc.c   for(p = prevp-&gt;s.ptr; ; prevp = p, p = p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/32.html#L75'>s</a>                  75 user/umalloc.c     if(p-&gt;s.size &gt;= nunits){</span>
+<span class='curline'><a href='../S/32.html#L76'>s</a>                  76 user/umalloc.c       if(p-&gt;s.size == nunits)</span>
+<span class='curline'><a href='../S/32.html#L77'>s</a>                  77 user/umalloc.c         prevp-&gt;s.ptr = p-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/32.html#L79'>s</a>                  79 user/umalloc.c         p-&gt;s.size -= nunits;</span>
+<span class='curline'><a href='../S/32.html#L80'>s</a>                  80 user/umalloc.c         p += p-&gt;s.size;</span>
+<span class='curline'><a href='../S/32.html#L81'>s</a>                  81 user/umalloc.c         p-&gt;s.size = nunits;</span>
+<span class='curline'><a href='../S/78.html#L33'>s</a>                  33 user/usertests.c copyin(char *s)</span>
+<span class='curline'><a href='../S/78.html#L77'>s</a>                  77 user/usertests.c copyout(char *s)</span>
+<span class='curline'><a href='../S/78.html#L118'>s</a>                 118 user/usertests.c copyinstr1(char *s)</span>
+<span class='curline'><a href='../S/78.html#L137'>s</a>                 137 user/usertests.c copyinstr2(char *s)</span>
+<span class='curline'><a href='../S/78.html#L199'>s</a>                 199 user/usertests.c copyinstr3(char *s)</span>
+<span class='curline'><a href='../S/78.html#L290'>s</a>                 290 user/usertests.c truncate1(char *s)</span>
+<span class='curline'><a href='../S/78.html#L302'>s</a>                 302 user/usertests.c     printf("%s: read %d bytes, wanted 4\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L312'>s</a>                 312 user/usertests.c     printf("%s: read %d bytes, wanted 0\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L319'>s</a>                 319 user/usertests.c     printf("%s: read %d bytes, wanted 0\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L327'>s</a>                 327 user/usertests.c     printf("%s: read %d bytes, wanted 6\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L333'>s</a>                 333 user/usertests.c     printf("%s: read %d bytes, wanted 2\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L349'>s</a>                 349 user/usertests.c truncate2(char *s)</span>
+<span class='curline'><a href='../S/78.html#L360'>s</a>                 360 user/usertests.c     printf("%s: write returned %d, expected -1\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L370'>s</a>                 370 user/usertests.c truncate3(char *s)</span>
+<span class='curline'><a href='../S/78.html#L378'>s</a>                 378 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L387'>s</a>                 387 user/usertests.c         printf("%s: open failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L392'>s</a>                 392 user/usertests.c         printf("%s: write got %d, expected 10\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L406'>s</a>                 406 user/usertests.c       printf("%s: open failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L411'>s</a>                 411 user/usertests.c       printf("%s: write got %d, expected 3\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L425'>s</a>                 425 user/usertests.c iputtest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L428'>s</a>                 428 user/usertests.c     printf("%s: mkdir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L432'>s</a>                 432 user/usertests.c     printf("%s: chdir iputdir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L436'>s</a>                 436 user/usertests.c     printf("%s: unlink ../iputdir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L440'>s</a>                 440 user/usertests.c     printf("%s: chdir / failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L447'>s</a>                 447 user/usertests.c exitiputtest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L453'>s</a>                 453 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L458'>s</a>                 458 user/usertests.c       printf("%s: mkdir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L462'>s</a>                 462 user/usertests.c       printf("%s: child chdir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L466'>s</a>                 466 user/usertests.c       printf("%s: unlink ../iputdir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L487'>s</a>                 487 user/usertests.c openiputtest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L492'>s</a>                 492 user/usertests.c     printf("%s: mkdir oidir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L497'>s</a>                 497 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L503'>s</a>                 503 user/usertests.c       printf("%s: open directory for write succeeded\n", s);</span>
+<span class='curline'><a href='../S/78.html#L510'>s</a>                 510 user/usertests.c     printf("%s: unlink failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L520'>s</a>                 520 user/usertests.c opentest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L526'>s</a>                 526 user/usertests.c     printf("%s: open echo failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L532'>s</a>                 532 user/usertests.c     printf("%s: open doesnotexist succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L538'>s</a>                 538 user/usertests.c writetest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L546'>s</a>                 546 user/usertests.c     printf("%s: error: creat small failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L551'>s</a>                 551 user/usertests.c       printf("%s: error: write aa %d new file failed\n", s, i);</span>
+<span class='curline'><a href='../S/78.html#L555'>s</a>                 555 user/usertests.c       printf("%s: error: write bb %d new file failed\n", s, i);</span>
+<span class='curline'><a href='../S/78.html#L562'>s</a>                 562 user/usertests.c     printf("%s: error: open small failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L567'>s</a>                 567 user/usertests.c     printf("%s: read failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L573'>s</a>                 573 user/usertests.c     printf("%s: unlink small failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L579'>s</a>                 579 user/usertests.c writebig(char *s)</span>
+<span class='curline'><a href='../S/78.html#L585'>s</a>                 585 user/usertests.c     printf("%s: error: creat big failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L592'>s</a>                 592 user/usertests.c       printf("%s: error: write big file failed\n", s, i);</span>
+<span class='curline'><a href='../S/78.html#L601'>s</a>                 601 user/usertests.c     printf("%s: error: open big failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L610'>s</a>                 610 user/usertests.c         printf("%s: read only %d blocks from big", s, n);</span>
+<span class='curline'><a href='../S/78.html#L615'>s</a>                 615 user/usertests.c       printf("%s: read failed %d\n", s, i);</span>
+<span class='curline'><a href='../S/78.html#L619'>s</a>                 619 user/usertests.c       printf("%s: read content of block %d is %d\n", s,</span>
+<span class='curline'><a href='../S/78.html#L627'>s</a>                 627 user/usertests.c     printf("%s: unlink big failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L634'>s</a>                 634 user/usertests.c createtest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L655'>s</a>                 655 user/usertests.c void dirtest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L658'>s</a>                 658 user/usertests.c     printf("%s: mkdir failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L663'>s</a>                 663 user/usertests.c     printf("%s: chdir dir0 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L668'>s</a>                 668 user/usertests.c     printf("%s: chdir .. failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L673'>s</a>                 673 user/usertests.c     printf("%s: unlink dir0 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L679'>s</a>                 679 user/usertests.c exectest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L688'>s</a>                 688 user/usertests.c      printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L695'>s</a>                 695 user/usertests.c       printf("%s: create failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L699'>s</a>                 699 user/usertests.c       printf("%s: wrong fd\n", s);</span>
+<span class='curline'><a href='../S/78.html#L703'>s</a>                 703 user/usertests.c       printf("%s: exec echo failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L709'>s</a>                 709 user/usertests.c     printf("%s: wait failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L716'>s</a>                 716 user/usertests.c     printf("%s: open failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L720'>s</a>                 720 user/usertests.c     printf("%s: read failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L727'>s</a>                 727 user/usertests.c     printf("%s: wrong output\n", s);</span>
+<span class='curline'><a href='../S/78.html#L736'>s</a>                 736 user/usertests.c pipe1(char *s)</span>
+<span class='curline'><a href='../S/78.html#L743'>s</a>                 743 user/usertests.c     printf("%s: pipe() failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L754'>s</a>                 754 user/usertests.c         printf("%s: pipe1 oops 1\n", s);</span>
+<span class='curline'><a href='../S/78.html#L766'>s</a>                 766 user/usertests.c           printf("%s: pipe1 oops 2\n", s);</span>
+<span class='curline'><a href='../S/78.html#L783'>s</a>                 783 user/usertests.c     printf("%s: fork() failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L791'>s</a>                 791 user/usertests.c killstatus(char *s)</span>
+<span class='curline'><a href='../S/78.html#L798'>s</a>                 798 user/usertests.c       printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L811'>s</a>                 811 user/usertests.c        printf("%s: status should be -1\n", s);</span>
+<span class='curline'><a href='../S/78.html#L820'>s</a>                 820 user/usertests.c preempt(char *s)</span>
+<span class='curline'><a href='../S/78.html#L827'>s</a>                 827 user/usertests.c     printf("%s: fork failed", s);</span>
+<span class='curline'><a href='../S/78.html#L836'>s</a>                 836 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L846'>s</a>                 846 user/usertests.c      printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L852'>s</a>                 852 user/usertests.c       printf("%s: preempt write error", s);</span>
+<span class='curline'><a href='../S/78.html#L860'>s</a>                 860 user/usertests.c     printf("%s: preempt read error", s);</span>
+<span class='curline'><a href='../S/78.html#L876'>s</a>                 876 user/usertests.c exitwait(char *s)</span>
+<span class='curline'><a href='../S/78.html#L883'>s</a>                 883 user/usertests.c       printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L889'>s</a>                 889 user/usertests.c         printf("%s: wait wrong pid\n", s);</span>
+<span class='curline'><a href='../S/78.html#L893'>s</a>                 893 user/usertests.c         printf("%s: wait wrong exit status\n", s);</span>
+<span class='curline'><a href='../S/78.html#L906'>s</a>                 906 user/usertests.c reparent(char *s)</span>
+<span class='curline'><a href='../S/78.html#L912'>s</a>                 912 user/usertests.c       printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L917'>s</a>                 917 user/usertests.c         printf("%s: wait wrong pid\n", s);</span>
+<span class='curline'><a href='../S/78.html#L934'>s</a>                 934 user/usertests.c twochildren(char *s)</span>
+<span class='curline'><a href='../S/78.html#L939'>s</a>                 939 user/usertests.c       printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L947'>s</a>                 947 user/usertests.c         printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L962'>s</a>                 962 user/usertests.c forkfork(char *s)</span>
+<span class='curline'><a href='../S/78.html#L969'>s</a>                 969 user/usertests.c       printf("%s: fork failed", s);</span>
+<span class='curline'><a href='../S/78.html#L991'>s</a>                 991 user/usertests.c       printf("%s: fork in child failed", s);</span>
+<span class='curline'><a href='../S/78.html#L998'>s</a>                 998 user/usertests.c forkforkfork(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1004'>s</a>                1004 user/usertests.c     printf("%s: fork failed", s);</span>
+<span class='curline'><a href='../S/78.html#L1033'>s</a>                1033 user/usertests.c reparent2(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1054'>s</a>                1054 user/usertests.c mem(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1072'>s</a>                1072 user/usertests.c       printf("couldn't allocate mem?!!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1094'>s</a>                1094 user/usertests.c sharedfd(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1103'>s</a>                1103 user/usertests.c     printf("%s: cannot open sharedfd for writing", s);</span>
+<span class='curline'><a href='../S/78.html#L1110'>s</a>                1110 user/usertests.c       printf("%s: write sharedfd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1126'>s</a>                1126 user/usertests.c     printf("%s: cannot open sharedfd for reading\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1143'>s</a>                1143 user/usertests.c     printf("%s: nc/np test fails\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1151'>s</a>                1151 user/usertests.c fourfiles(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1164'>s</a>                1164 user/usertests.c       printf("fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1171'>s</a>                1171 user/usertests.c         printf("create failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1200'>s</a>                1200 user/usertests.c           printf("wrong char\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1217'>s</a>                1217 user/usertests.c createdelete(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1226'>s</a>                1226 user/usertests.c       printf("fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1237'>s</a>                1237 user/usertests.c           printf("%s: create failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1244'>s</a>                1244 user/usertests.c             printf("%s: unlink failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1267'>s</a>                1267 user/usertests.c         printf("%s: oops createdelete %s didn't exist\n", s, name);</span>
+<span class='curline'><a href='../S/78.html#L1270'>s</a>                1270 user/usertests.c         printf("%s: oops createdelete %s did exist\n", s, name);</span>
+<span class='curline'><a href='../S/78.html#L1289'>s</a>                1289 user/usertests.c unlinkread(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1296'>s</a>                1296 user/usertests.c     printf("%s: create unlinkread failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1304'>s</a>                1304 user/usertests.c     printf("%s: open unlinkread failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1308'>s</a>                1308 user/usertests.c     printf("%s: unlink unlinkread failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1317'>s</a>                1317 user/usertests.c     printf("%s: unlinkread read failed", s);</span>
+<span class='curline'><a href='../S/78.html#L1321'>s</a>                1321 user/usertests.c     printf("%s: unlinkread wrong data\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1325'>s</a>                1325 user/usertests.c     printf("%s: unlinkread write failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1333'>s</a>                1333 user/usertests.c linktest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1343'>s</a>                1343 user/usertests.c     printf("%s: create lf1 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1347'>s</a>                1347 user/usertests.c     printf("%s: write lf1 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1353'>s</a>                1353 user/usertests.c     printf("%s: link lf1 lf2 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1359'>s</a>                1359 user/usertests.c     printf("%s: unlinked lf1 but it is still there!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1365'>s</a>                1365 user/usertests.c     printf("%s: open lf2 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1369'>s</a>                1369 user/usertests.c     printf("%s: read lf2 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1375'>s</a>                1375 user/usertests.c     printf("%s: link lf2 lf2 succeeded! oops\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1381'>s</a>                1381 user/usertests.c     printf("%s: link non-existent succeeded! oops\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1386'>s</a>                1386 user/usertests.c     printf("%s: link . lf1 succeeded! oops\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1393'>s</a>                1393 user/usertests.c concreate(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1441'>s</a>                1441 user/usertests.c         printf("%s: concreate weird file %s\n", s, de.name);</span>
+<span class='curline'><a href='../S/78.html#L1445'>s</a>                1445 user/usertests.c         printf("%s: concreate duplicate file %s\n", s, de.name);</span>
+<span class='curline'><a href='../S/78.html#L1455'>s</a>                1455 user/usertests.c     printf("%s: concreate not enough files in directory listing\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1463'>s</a>                1463 user/usertests.c       printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1492'>s</a>                1492 user/usertests.c linkunlink(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1499'>s</a>                1499 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1523'>s</a>                1523 user/usertests.c subdir(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1529'>s</a>                1529 user/usertests.c     printf("%s: mkdir dd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1535'>s</a>                1535 user/usertests.c     printf("%s: create dd/ff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1542'>s</a>                1542 user/usertests.c     printf("%s: unlink dd (non-empty dir) succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1547'>s</a>                1547 user/usertests.c     printf("subdir mkdir dd/dd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1553'>s</a>                1553 user/usertests.c     printf("%s: create dd/dd/ff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1561'>s</a>                1561 user/usertests.c     printf("%s: open dd/dd/../ff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1566'>s</a>                1566 user/usertests.c     printf("%s: dd/dd/../ff wrong content\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1572'>s</a>                1572 user/usertests.c     printf("link dd/dd/ff dd/dd/ffff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1577'>s</a>                1577 user/usertests.c     printf("%s: unlink dd/dd/ff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1581'>s</a>                1581 user/usertests.c     printf("%s: open (unlinked) dd/dd/ff succeeded\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1586'>s</a>                1586 user/usertests.c     printf("%s: chdir dd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1590'>s</a>                1590 user/usertests.c     printf("%s: chdir dd/../../dd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1594'>s</a>                1594 user/usertests.c     printf("chdir dd/../../dd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1598'>s</a>                1598 user/usertests.c     printf("%s: chdir ./.. failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1604'>s</a>                1604 user/usertests.c     printf("%s: open dd/dd/ffff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1608'>s</a>                1608 user/usertests.c     printf("%s: read dd/dd/ffff wrong len\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1614'>s</a>                1614 user/usertests.c     printf("%s: open (unlinked) dd/dd/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1619'>s</a>                1619 user/usertests.c     printf("%s: create dd/ff/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1623'>s</a>                1623 user/usertests.c     printf("%s: create dd/xx/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1627'>s</a>                1627 user/usertests.c     printf("%s: create dd succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1631'>s</a>                1631 user/usertests.c     printf("%s: open dd rdwr succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1635'>s</a>                1635 user/usertests.c     printf("%s: open dd wronly succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1639'>s</a>                1639 user/usertests.c     printf("%s: link dd/ff/ff dd/dd/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1643'>s</a>                1643 user/usertests.c     printf("%s: link dd/xx/ff dd/dd/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1647'>s</a>                1647 user/usertests.c     printf("%s: link dd/ff dd/dd/ffff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1651'>s</a>                1651 user/usertests.c     printf("%s: mkdir dd/ff/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1655'>s</a>                1655 user/usertests.c     printf("%s: mkdir dd/xx/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1659'>s</a>                1659 user/usertests.c     printf("%s: mkdir dd/dd/ffff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1663'>s</a>                1663 user/usertests.c     printf("%s: unlink dd/xx/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1667'>s</a>                1667 user/usertests.c     printf("%s: unlink dd/ff/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1671'>s</a>                1671 user/usertests.c     printf("%s: chdir dd/ff succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1675'>s</a>                1675 user/usertests.c     printf("%s: chdir dd/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1680'>s</a>                1680 user/usertests.c     printf("%s: unlink dd/dd/ff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1684'>s</a>                1684 user/usertests.c     printf("%s: unlink dd/ff failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1688'>s</a>                1688 user/usertests.c     printf("%s: unlink non-empty dd succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1692'>s</a>                1692 user/usertests.c     printf("%s: unlink dd/dd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1696'>s</a>                1696 user/usertests.c     printf("%s: unlink dd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1703'>s</a>                1703 user/usertests.c bigwrite(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1711'>s</a>                1711 user/usertests.c       printf("%s: cannot create bigwrite\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1718'>s</a>                1718 user/usertests.c         printf("%s: write(%d) ret %d\n", s, sz, cc);</span>
+<span class='curline'><a href='../S/78.html#L1729'>s</a>                1729 user/usertests.c bigfile(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1737'>s</a>                1737 user/usertests.c     printf("%s: cannot create bigfile", s);</span>
+<span class='curline'><a href='../S/78.html#L1743'>s</a>                1743 user/usertests.c       printf("%s: write bigfile failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1751'>s</a>                1751 user/usertests.c     printf("%s: cannot open bigfile\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1758'>s</a>                1758 user/usertests.c       printf("%s: read bigfile failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1764'>s</a>                1764 user/usertests.c       printf("%s: short read bigfile\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1768'>s</a>                1768 user/usertests.c       printf("%s: read bigfile wrong data\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1775'>s</a>                1775 user/usertests.c     printf("%s: read bigfile wrong total\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1782'>s</a>                1782 user/usertests.c fourteen(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1789'>s</a>                1789 user/usertests.c     printf("%s: mkdir 12345678901234 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1793'>s</a>                1793 user/usertests.c     printf("%s: mkdir 12345678901234/123456789012345 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1798'>s</a>                1798 user/usertests.c     printf("%s: create 123456789012345/123456789012345/123456789012345 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1804'>s</a>                1804 user/usertests.c     printf("%s: open 12345678901234/12345678901234/12345678901234 failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1810'>s</a>                1810 user/usertests.c     printf("%s: mkdir 12345678901234/12345678901234 succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1814'>s</a>                1814 user/usertests.c     printf("%s: mkdir 12345678901234/123456789012345 succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1828'>s</a>                1828 user/usertests.c rmdot(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1831'>s</a>                1831 user/usertests.c     printf("%s: mkdir dots failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1835'>s</a>                1835 user/usertests.c     printf("%s: chdir dots failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1839'>s</a>                1839 user/usertests.c     printf("%s: rm . worked!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1843'>s</a>                1843 user/usertests.c     printf("%s: rm .. worked!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1847'>s</a>                1847 user/usertests.c     printf("%s: chdir / failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1851'>s</a>                1851 user/usertests.c     printf("%s: unlink dots/. worked!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1855'>s</a>                1855 user/usertests.c     printf("%s: unlink dots/.. worked!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1859'>s</a>                1859 user/usertests.c     printf("%s: unlink dots failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1865'>s</a>                1865 user/usertests.c dirfile(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1871'>s</a>                1871 user/usertests.c     printf("%s: create dirfile failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1876'>s</a>                1876 user/usertests.c     printf("%s: chdir dirfile succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1881'>s</a>                1881 user/usertests.c     printf("%s: create dirfile/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1886'>s</a>                1886 user/usertests.c     printf("%s: create dirfile/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1890'>s</a>                1890 user/usertests.c     printf("%s: mkdir dirfile/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1894'>s</a>                1894 user/usertests.c     printf("%s: unlink dirfile/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1898'>s</a>                1898 user/usertests.c     printf("%s: link to dirfile/xx succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1902'>s</a>                1902 user/usertests.c     printf("%s: unlink dirfile failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1908'>s</a>                1908 user/usertests.c     printf("%s: open . for writing succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1913'>s</a>                1913 user/usertests.c     printf("%s: write . succeeded!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1922'>s</a>                1922 user/usertests.c iref(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1928'>s</a>                1928 user/usertests.c       printf("%s: mkdir irefd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1932'>s</a>                1932 user/usertests.c       printf("%s: chdir irefd failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1960'>s</a>                1960 user/usertests.c forktest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L1974'>s</a>                1974 user/usertests.c     printf("%s: no fork at all!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1979'>s</a>                1979 user/usertests.c     printf("%s: fork claimed to work 1000 times!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1985'>s</a>                1985 user/usertests.c       printf("%s: wait stopped early\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1991'>s</a>                1991 user/usertests.c     printf("%s: wait got too many\n", s);</span>
+<span class='curline'><a href='../S/78.html#L1997'>s</a>                1997 user/usertests.c sbrkbasic(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2028'>s</a>                2028 user/usertests.c     printf("%s: too much memory allocated!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2037'>s</a>                2037 user/usertests.c       printf("%s: sbrk test failed %d %x %x\n", s, i, a, b);</span>
+<span class='curline'><a href='../S/78.html#L2045'>s</a>                2045 user/usertests.c     printf("%s: sbrk test fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2051'>s</a>                2051 user/usertests.c     printf("%s: sbrk test failed post-fork\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2061'>s</a>                2061 user/usertests.c sbrkmuch(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2074'>s</a>                2074 user/usertests.c     printf("%s: sbrk test failed to grow big address space; enough phys mem?\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2090'>s</a>                2090 user/usertests.c     printf("%s: sbrk could not deallocate\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2095'>s</a>                2095 user/usertests.c     printf("%s: sbrk deallocation produced wrong address, a %x c %x\n", s, a, c);</span>
+<span class='curline'><a href='../S/78.html#L2103'>s</a>                2103 user/usertests.c     printf("%s: sbrk re-allocation failed, a %x c %x\n", s, a, c);</span>
+<span class='curline'><a href='../S/78.html#L2108'>s</a>                2108 user/usertests.c     printf("%s: sbrk de-allocation didn't really deallocate\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2115'>s</a>                2115 user/usertests.c     printf("%s: sbrk downsize failed, a %x c %x\n", s, a, c);</span>
+<span class='curline'><a href='../S/78.html#L2122'>s</a>                2122 user/usertests.c kernmem(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2130'>s</a>                2130 user/usertests.c       printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2134'>s</a>                2134 user/usertests.c       printf("%s: oops could read %x = %x\n", s, a, *a);</span>
+<span class='curline'><a href='../S/78.html#L2146'>s</a>                2146 user/usertests.c MAXVAplus(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2153'>s</a>                2153 user/usertests.c       printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2158'>s</a>                2158 user/usertests.c       printf("%s: oops wrote %x\n", s, a);</span>
+<span class='curline'><a href='../S/78.html#L2171'>s</a>                2171 user/usertests.c sbrkfail(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2182'>s</a>                2182 user/usertests.c     printf("%s: pipe() failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2207'>s</a>                2207 user/usertests.c     printf("%s: failed sbrk leaked memory\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2214'>s</a>                2214 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2229'>s</a>                2229 user/usertests.c     printf("%s: allocate a lot of memory succeeded %d\n", s, n);</span>
+<span class='curline'><a href='../S/78.html#L2240'>s</a>                2240 user/usertests.c sbrkarg(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2249'>s</a>                2249 user/usertests.c     printf("%s: open sbrk failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2253'>s</a>                2253 user/usertests.c     printf("%s: write sbrk failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2261'>s</a>                2261 user/usertests.c     printf("%s: pipe() failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2267'>s</a>                2267 user/usertests.c validatetest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2276'>s</a>                2276 user/usertests.c       printf("%s: link should not succeed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2285'>s</a>                2285 user/usertests.c bsstest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2291'>s</a>                2291 user/usertests.c       printf("%s: bss test failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2301'>s</a>                2301 user/usertests.c bigargtest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2318'>s</a>                2318 user/usertests.c     printf("%s: bigargtest: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2327'>s</a>                2327 user/usertests.c     printf("%s: bigarg test failed!\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2386'>s</a>                2386 user/usertests.c void argptest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2391'>s</a>                2391 user/usertests.c     printf("%s: open failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2401'>s</a>                2401 user/usertests.c stacktest(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2411'>s</a>                2411 user/usertests.c     printf("%s: stacktest: read below stack %p\n", s, *sp);</span>
+<span class='curline'><a href='../S/78.html#L2414'>s</a>                2414 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2426'>s</a>                2426 user/usertests.c textwrite(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2437'>s</a>                2437 user/usertests.c     printf("%s: fork failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2452'>s</a>                2452 user/usertests.c pgbug(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2466'>s</a>                2466 user/usertests.c sbrkbugs(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2524'>s</a>                2524 user/usertests.c sbrklast(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2550'>s</a>                2550 user/usertests.c sbrk8000(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2562'>s</a>                2562 user/usertests.c badarg(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2576'>s</a>                2576 user/usertests.c   char *s;</span>
+<span class='curline'><a href='../S/78.html#L2648'>s</a>                2648 user/usertests.c bigdir(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2658'>s</a>                2658 user/usertests.c     printf("%s: bigdir create failed\n", s);</span>
+<span class='curline'><a href='../S/78.html#L2669'>s</a>                2669 user/usertests.c       printf("%s: bigdir link(bd, %s) failed\n", s, name);</span>
+<span class='curline'><a href='../S/78.html#L2681'>s</a>                2681 user/usertests.c       printf("%s: bigdir unlink failed", s);</span>
+<span class='curline'><a href='../S/78.html#L2690'>s</a>                2690 user/usertests.c manywrites(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2713'>s</a>                2713 user/usertests.c             printf("%s: cannot create %s\n", s, name);</span>
+<span class='curline'><a href='../S/78.html#L2719'>s</a>                2719 user/usertests.c             printf("%s: write(%d) ret %d\n", s, sz, cc);</span>
+<span class='curline'><a href='../S/78.html#L2747'>s</a>                2747 user/usertests.c badwrite(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2782'>s</a>                2782 user/usertests.c execout(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2817'>s</a>                2817 user/usertests.c diskfull(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2835'>s</a>                2835 user/usertests.c       printf("%s: could not create file %s\n", s, name);</span>
+<span class='curline'><a href='../S/78.html#L2897'>s</a>                2897 user/usertests.c outofinodes(char *s)</span>
+<span class='curline'><a href='../S/78.html#L2945'>s</a>                2945 user/usertests.c run(void f(char *), char *s) {</span>
+<span class='curline'><a href='../S/78.html#L2949'>s</a>                2949 user/usertests.c   printf("test %s: ", s);</span>
+<span class='curline'><a href='../S/78.html#L2955'>s</a>                2955 user/usertests.c     f(s);</span>
+<span class='curline'><a href='../S/78.html#L2969'>s</a>                2969 user/usertests.c   for (struct test *t = tests; t-&gt;s != 0; t++) {</span>
+<span class='curline'><a href='../S/78.html#L2970'>s</a>                2970 user/usertests.c     if((justone == 0) || strcmp(t-&gt;s, justone) == 0) {</span>
+<span class='curline'><a href='../S/78.html#L2971'>s</a>                2971 user/usertests.c       if(!run(t-&gt;f, t-&gt;s)){</span>
 </pre>
 </body>
 </html>

@@ -1,19 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>num</title>
+<title>nwrite</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/51.html#L135'>num</a>               135 kernel/syscall.c   int num;</span>
-<span class='curline'><a href='../S/51.html#L138'>num</a>               138 kernel/syscall.c   num = p-&gt;trapframe-&gt;a7;</span>
-<span class='curline'><a href='../S/51.html#L139'>num</a>               139 kernel/syscall.c   if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {</span>
-<span class='curline'><a href='../S/51.html#L140'>num</a>               140 kernel/syscall.c     p-&gt;trapframe-&gt;a0 = syscalls[num]();</span>
-<span class='curline'><a href='../S/51.html#L143'>num</a>               143 kernel/syscall.c             p-&gt;pid, p-&gt;name, num);</span>
+<span class='curline'><a href='../S/94.html#L17'>nwrite</a>             17 kernel/pipe.c    uint nwrite;    // number of bytes written</span>
+<span class='curline'><a href='../S/94.html#L35'>nwrite</a>             35 kernel/pipe.c    pi-&gt;nwrite = 0;</span>
+<span class='curline'><a href='../S/94.html#L67'>nwrite</a>             67 kernel/pipe.c      wakeup(&amp;pi-&gt;nwrite);</span>
+<span class='curline'><a href='../S/94.html#L88'>nwrite</a>             88 kernel/pipe.c      if(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){ //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/94.html#L90'>nwrite</a>             90 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
+<span class='curline'><a href='../S/94.html#L95'>nwrite</a>             95 kernel/pipe.c        pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
+<span class='curline'><a href='../S/94.html#L113'>nwrite</a>            113 kernel/pipe.c    while(pi-&gt;nread == pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  //DOC: pipe-empty</span>
+<span class='curline'><a href='../S/94.html#L121'>nwrite</a>            121 kernel/pipe.c      if(pi-&gt;nread == pi-&gt;nwrite)</span>
+<span class='curline'><a href='../S/94.html#L127'>nwrite</a>            127 kernel/pipe.c    wakeup(&amp;pi-&gt;nwrite);  //DOC: piperead-wakeup</span>
 </pre>
 </body>
 </html>

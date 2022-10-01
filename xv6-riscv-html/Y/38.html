@@ -1,20 +1,38 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bcmd</title>
+<title>bcache</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/17.html#L61'>bcmd</a>               61 user/sh.c        struct backcmd *bcmd;</span>
-<span class='curline'><a href='../S/17.html#L125'>bcmd</a>              125 user/sh.c          bcmd = (struct backcmd*)cmd;</span>
-<span class='curline'><a href='../S/17.html#L127'>bcmd</a>              127 user/sh.c            runcmd(bcmd-&gt;cmd);</span>
-<span class='curline'><a href='../S/17.html#L453'>bcmd</a>              453 user/sh.c        struct backcmd *bcmd;</span>
-<span class='curline'><a href='../S/17.html#L488'>bcmd</a>              488 user/sh.c          bcmd = (struct backcmd*)cmd;</span>
-<span class='curline'><a href='../S/17.html#L489'>bcmd</a>              489 user/sh.c          nulterminate(bcmd-&gt;cmd);</span>
+<span class='curline'><a href='../S/132.html#L34'>bcache</a>             34 kernel/bio.c   } bcache;</span>
+<span class='curline'><a href='../S/132.html#L41'>bcache</a>             41 kernel/bio.c     initlock(&amp;bcache.lock, "bcache");</span>
+<span class='curline'><a href='../S/132.html#L44'>bcache</a>             44 kernel/bio.c     bcache.head.prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/132.html#L45'>bcache</a>             45 kernel/bio.c     bcache.head.next = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/132.html#L46'>bcache</a>             46 kernel/bio.c     for(b = bcache.buf; b &lt; bcache.buf+NBUF; b++){</span>
+<span class='curline'><a href='../S/132.html#L47'>bcache</a>             47 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/132.html#L48'>bcache</a>             48 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/132.html#L50'>bcache</a>             50 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/132.html#L51'>bcache</a>             51 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/132.html#L63'>bcache</a>             63 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L66'>bcache</a>             66 kernel/bio.c     for(b = bcache.head.next; b != &amp;bcache.head; b = b-&gt;next){</span>
+<span class='curline'><a href='../S/132.html#L69'>bcache</a>             69 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L77'>bcache</a>             77 kernel/bio.c     for(b = bcache.head.prev; b != &amp;bcache.head; b = b-&gt;prev){</span>
+<span class='curline'><a href='../S/132.html#L83'>bcache</a>             83 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L124'>bcache</a>            124 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L130'>bcache</a>            130 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/132.html#L131'>bcache</a>            131 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/132.html#L132'>bcache</a>            132 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/132.html#L133'>bcache</a>            133 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/132.html#L136'>bcache</a>            136 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L141'>bcache</a>            141 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L143'>bcache</a>            143 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L148'>bcache</a>            148 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/132.html#L150'>bcache</a>            150 kernel/bio.c     release(&amp;bcache.lock);</span>
 </pre>
 </body>
 </html>

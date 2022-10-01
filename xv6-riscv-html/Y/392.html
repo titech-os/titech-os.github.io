@@ -1,17 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uninit</title>
+<title>uart_tx_w</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/24.html#L2370'>uninit</a>           2370 user/usertests.c char uninit[10000];</span>
-<span class='curline'><a href='../S/24.html#L2376'>uninit</a>           2376 user/usertests.c   for(i = 0; i &lt; sizeof(uninit); i++){</span>
-<span class='curline'><a href='../S/24.html#L2377'>uninit</a>           2377 user/usertests.c     if(uninit[i] != '\0'){</span>
+<span class='curline'><a href='../S/151.html#L45'>uart_tx_w</a>          45 kernel/uart.c  uint64 uart_tx_w; // write next to uart_tx_buf[uart_tx_w % UART_TX_BUF_SIZE]</span>
+<span class='curline'><a href='../S/151.html#L95'>uart_tx_w</a>          95 kernel/uart.c    while(uart_tx_w == uart_tx_r + UART_TX_BUF_SIZE){</span>
+<span class='curline'><a href='../S/151.html#L100'>uart_tx_w</a>         100 kernel/uart.c    uart_tx_buf[uart_tx_w % UART_TX_BUF_SIZE] = c;</span>
+<span class='curline'><a href='../S/151.html#L101'>uart_tx_w</a>         101 kernel/uart.c    uart_tx_w += 1;</span>
+<span class='curline'><a href='../S/151.html#L137'>uart_tx_w</a>         137 kernel/uart.c      if(uart_tx_w == uart_tx_r){</span>
 </pre>
 </body>
 </html>

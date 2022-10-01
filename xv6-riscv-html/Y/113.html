@@ -1,20 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ff</title>
+<title>features</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/67.html#L62'>ff</a>                 62 kernel/file.c    struct file ff;</span>
-<span class='curline'><a href='../S/67.html#L71'>ff</a>                 71 kernel/file.c    ff = *f;</span>
-<span class='curline'><a href='../S/67.html#L76'>ff</a>                 76 kernel/file.c    if(ff.type == FD_PIPE){</span>
-<span class='curline'><a href='../S/67.html#L77'>ff</a>                 77 kernel/file.c      pipeclose(ff.pipe, ff.writable);</span>
-<span class='curline'><a href='../S/67.html#L78'>ff</a>                 78 kernel/file.c    } else if(ff.type == FD_INODE || ff.type == FD_DEVICE){</span>
-<span class='curline'><a href='../S/67.html#L80'>ff</a>                 80 kernel/file.c      iput(ff.ip);</span>
+<span class='curline'><a href='../S/141.html#L87'>features</a>           87 kernel/virtio_disk.c   uint64 features = *R(VIRTIO_MMIO_DEVICE_FEATURES);</span>
+<span class='curline'><a href='../S/141.html#L88'>features</a>           88 kernel/virtio_disk.c   features &amp;= ~(1 &lt;&lt; VIRTIO_BLK_F_RO);</span>
+<span class='curline'><a href='../S/141.html#L89'>features</a>           89 kernel/virtio_disk.c   features &amp;= ~(1 &lt;&lt; VIRTIO_BLK_F_SCSI);</span>
+<span class='curline'><a href='../S/141.html#L90'>features</a>           90 kernel/virtio_disk.c   features &amp;= ~(1 &lt;&lt; VIRTIO_BLK_F_CONFIG_WCE);</span>
+<span class='curline'><a href='../S/141.html#L91'>features</a>           91 kernel/virtio_disk.c   features &amp;= ~(1 &lt;&lt; VIRTIO_BLK_F_MQ);</span>
+<span class='curline'><a href='../S/141.html#L92'>features</a>           92 kernel/virtio_disk.c   features &amp;= ~(1 &lt;&lt; VIRTIO_F_ANY_LAYOUT);</span>
+<span class='curline'><a href='../S/141.html#L93'>features</a>           93 kernel/virtio_disk.c   features &amp;= ~(1 &lt;&lt; VIRTIO_RING_F_EVENT_IDX);</span>
+<span class='curline'><a href='../S/141.html#L94'>features</a>           94 kernel/virtio_disk.c   features &amp;= ~(1 &lt;&lt; VIRTIO_RING_F_INDIRECT_DESC);</span>
+<span class='curline'><a href='../S/141.html#L95'>features</a>           95 kernel/virtio_disk.c   *R(VIRTIO_MMIO_DRIVER_FEATURES) = features;</span>
 </pre>
 </body>
 </html>

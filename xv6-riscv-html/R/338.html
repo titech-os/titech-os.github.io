@@ -1,30 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>major</title>
+<title>kvmmap</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/67.html#L117'>major</a>             117 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].read)</span>
-<span class='curline'><a href='../S/67.html#L119'>major</a>             119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
-<span class='curline'><a href='../S/67.html#L145'>major</a>             145 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].write)</span>
-<span class='curline'><a href='../S/67.html#L147'>major</a>             147 kernel/file.c      ret = devsw[f-&gt;major].write(1, addr, n);</span>
-<span class='curline'><a href='../S/41.html#L9'>major</a>               9 kernel/file.h    short major;       // FD_DEVICE</span>
-<span class='curline'><a href='../S/41.html#L25'>major</a>              25 kernel/file.h    short major;</span>
-<span class='curline'><a href='../S/48.html#L230'>major</a>             230 kernel/fs.c      dip-&gt;major = ip-&gt;major;</span>
-<span class='curline'><a href='../S/48.html#L303'>major</a>             303 kernel/fs.c        ip-&gt;major = dip-&gt;major;</span>
-<span class='curline'><a href='../S/71.html#L34'>major</a>              34 kernel/fs.h      short major;          // Major device number (T_DEVICE only)</span>
-<span class='curline'><a href='../S/43.html#L242'>major</a>             242 kernel/sysfile.c create(char *path, short type, short major, short minor)</span>
-<span class='curline'><a href='../S/43.html#L265'>major</a>             265 kernel/sysfile.c   ip-&gt;major = major;</span>
-<span class='curline'><a href='../S/43.html#L319'>major</a>             319 kernel/sysfile.c   if(ip-&gt;type == T_DEVICE &amp;&amp; (ip-&gt;major &lt; 0 || ip-&gt;major &gt;= NDEV)){</span>
-<span class='curline'><a href='../S/43.html#L335'>major</a>             335 kernel/sysfile.c     f-&gt;major = ip-&gt;major;</span>
-<span class='curline'><a href='../S/43.html#L375'>major</a>             375 kernel/sysfile.c   int major, minor;</span>
-<span class='curline'><a href='../S/43.html#L379'>major</a>             379 kernel/sysfile.c      argint(1, &amp;major) &lt; 0 ||</span>
-<span class='curline'><a href='../S/43.html#L381'>major</a>             381 kernel/sysfile.c      (ip = create(path, T_DEVICE, major, minor)) == 0){</span>
+<span class='curline'><a href='../S/89.html#L161'>kvmmap</a>            161 kernel/defs.h  void            kvmmap(pagetable_t, uint64, uint64, uint64, int);</span>
+<span class='curline'><a href='../S/138.html#L42'>kvmmap</a>             42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/99.html#L28'>kvmmap</a>             28 kernel/vm.c      kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/99.html#L31'>kvmmap</a>             31 kernel/vm.c      kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/99.html#L34'>kvmmap</a>             34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x400000, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/99.html#L37'>kvmmap</a>             37 kernel/vm.c      kvmmap(kpgtbl, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/99.html#L40'>kvmmap</a>             40 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/99.html#L44'>kvmmap</a>             44 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
 </pre>
 </body>
 </html>

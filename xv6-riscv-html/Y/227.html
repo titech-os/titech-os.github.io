@@ -1,21 +1,35 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>noff</title>
+<title>np</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/63.html#L482'>noff</a>              482 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
-<span class='curline'><a href='../S/35.html#L25'>noff</a>               25 kernel/proc.h    int noff;                   // Depth of push_off() nesting.</span>
-<span class='curline'><a href='../S/59.html#L94'>noff</a>               94 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
-<span class='curline'><a href='../S/59.html#L96'>noff</a>               96 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
-<span class='curline'><a href='../S/59.html#L105'>noff</a>              105 kernel/spinlock.c   if(c-&gt;noff &lt; 1)</span>
-<span class='curline'><a href='../S/59.html#L107'>noff</a>              107 kernel/spinlock.c   c-&gt;noff -= 1;</span>
-<span class='curline'><a href='../S/59.html#L108'>noff</a>              108 kernel/spinlock.c   if(c-&gt;noff == 0 &amp;&amp; c-&gt;intena)</span>
+<span class='curline'><a href='../S/138.html#L283'>np</a>                283 kernel/proc.c    struct proc *np;</span>
+<span class='curline'><a href='../S/138.html#L287'>np</a>                287 kernel/proc.c    if((np = allocproc()) == 0){</span>
+<span class='curline'><a href='../S/138.html#L292'>np</a>                292 kernel/proc.c    if(uvmcopy(p-&gt;pagetable, np-&gt;pagetable, p-&gt;sz) &lt; 0){</span>
+<span class='curline'><a href='../S/138.html#L293'>np</a>                293 kernel/proc.c      freeproc(np);</span>
+<span class='curline'><a href='../S/138.html#L294'>np</a>                294 kernel/proc.c      release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/138.html#L297'>np</a>                297 kernel/proc.c    np-&gt;sz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/138.html#L300'>np</a>                300 kernel/proc.c    *(np-&gt;trapframe) = *(p-&gt;trapframe);</span>
+<span class='curline'><a href='../S/138.html#L303'>np</a>                303 kernel/proc.c    np-&gt;trapframe-&gt;a0 = 0;</span>
+<span class='curline'><a href='../S/138.html#L308'>np</a>                308 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/138.html#L309'>np</a>                309 kernel/proc.c    np-&gt;cwd = idup(p-&gt;cwd);</span>
+<span class='curline'><a href='../S/138.html#L311'>np</a>                311 kernel/proc.c    safestrcpy(np-&gt;name, p-&gt;name, sizeof(p-&gt;name));</span>
+<span class='curline'><a href='../S/138.html#L313'>np</a>                313 kernel/proc.c    pid = np-&gt;pid;</span>
+<span class='curline'><a href='../S/138.html#L315'>np</a>                315 kernel/proc.c    release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/138.html#L318'>np</a>                318 kernel/proc.c    np-&gt;parent = p;</span>
+<span class='curline'><a href='../S/138.html#L321'>np</a>                321 kernel/proc.c    acquire(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/138.html#L322'>np</a>                322 kernel/proc.c    np-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/138.html#L323'>np</a>                323 kernel/proc.c    release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/78.html#L1096'>np</a>               1096 user/usertests.c   int fd, pid, i, n, nc, np;</span>
+<span class='curline'><a href='../S/78.html#L1129'>np</a>               1129 user/usertests.c   nc = np = 0;</span>
+<span class='curline'><a href='../S/78.html#L1135'>np</a>               1135 user/usertests.c         np++;</span>
+<span class='curline'><a href='../S/78.html#L1140'>np</a>               1140 user/usertests.c   if(nc == N*SZ &amp;&amp; np == N*SZ){</span>
 </pre>
 </body>
 </html>

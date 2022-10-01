@@ -1,17 +1,45 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>started</title>
+<title>state</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.7' />
+<meta name='generator' content='GLOBAL-6.6.8' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/60.html#L7'>started</a>             7 kernel/main.c  volatile static int started = 0;</span>
-<span class='curline'><a href='../S/60.html#L33'>started</a>            33 kernel/main.c      started = 1;</span>
-<span class='curline'><a href='../S/60.html#L35'>started</a>            35 kernel/main.c      while(started == 0)</span>
+<span class='curline'><a href='../S/138.html#L56'>state</a>              56 kernel/proc.c        p-&gt;state = UNUSED;</span>
+<span class='curline'><a href='../S/138.html#L116'>state</a>             116 kernel/proc.c      if(p-&gt;state == UNUSED) {</span>
+<span class='curline'><a href='../S/138.html#L126'>state</a>             126 kernel/proc.c    p-&gt;state = USED;</span>
+<span class='curline'><a href='../S/138.html#L171'>state</a>             171 kernel/proc.c    p-&gt;state = UNUSED;</span>
+<span class='curline'><a href='../S/138.html#L252'>state</a>             252 kernel/proc.c    p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/138.html#L322'>state</a>             322 kernel/proc.c    np-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/138.html#L379'>state</a>             379 kernel/proc.c    p-&gt;state = ZOMBIE;</span>
+<span class='curline'><a href='../S/138.html#L408'>state</a>             408 kernel/proc.c          if(pp-&gt;state == ZOMBIE){</span>
+<span class='curline'><a href='../S/138.html#L457'>state</a>             457 kernel/proc.c        if(p-&gt;state == RUNNABLE) {</span>
+<span class='curline'><a href='../S/138.html#L461'>state</a>             461 kernel/proc.c          p-&gt;state = RUNNING;</span>
+<span class='curline'><a href='../S/138.html#L491'>state</a>             491 kernel/proc.c    if(p-&gt;state == RUNNING)</span>
+<span class='curline'><a href='../S/138.html#L507'>state</a>             507 kernel/proc.c    p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/138.html#L552'>state</a>             552 kernel/proc.c    p-&gt;state = SLEEPING;</span>
+<span class='curline'><a href='../S/138.html#L574'>state</a>             574 kernel/proc.c        if(p-&gt;state == SLEEPING &amp;&amp; p-&gt;chan == chan) {</span>
+<span class='curline'><a href='../S/138.html#L575'>state</a>             575 kernel/proc.c          p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/138.html#L594'>state</a>             594 kernel/proc.c        if(p-&gt;state == SLEEPING){</span>
+<span class='curline'><a href='../S/138.html#L596'>state</a>             596 kernel/proc.c          p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/138.html#L670'>state</a>             670 kernel/proc.c    char *state;</span>
+<span class='curline'><a href='../S/138.html#L674'>state</a>             674 kernel/proc.c      if(p-&gt;state == UNUSED)</span>
+<span class='curline'><a href='../S/138.html#L676'>state</a>             676 kernel/proc.c      if(p-&gt;state &gt;= 0 &amp;&amp; p-&gt;state &lt; NELEM(states) &amp;&amp; states[p-&gt;state])</span>
+<span class='curline'><a href='../S/138.html#L677'>state</a>             677 kernel/proc.c        state = states[p-&gt;state];</span>
+<span class='curline'><a href='../S/138.html#L679'>state</a>             679 kernel/proc.c        state = "???";</span>
+<span class='curline'><a href='../S/138.html#L680'>state</a>             680 kernel/proc.c      printf("%d %s %s", p-&gt;pid, state, p-&gt;name);</span>
+<span class='curline'><a href='../S/95.html#L89'>state</a>              89 kernel/proc.h    enum procstate state;        // Process state</span>
+<span class='curline'><a href='../S/124.html#L154'>state</a>             154 kernel/trap.c    if(which_dev == 2 &amp;&amp; myproc() != 0 &amp;&amp; myproc()-&gt;state == RUNNING)</span>
+<span class='curline'><a href='../S/6.html#L55'>state</a>              55 user/printf.c    int c, i, state;</span>
+<span class='curline'><a href='../S/6.html#L57'>state</a>              57 user/printf.c    state = 0;</span>
+<span class='curline'><a href='../S/6.html#L60'>state</a>              60 user/printf.c      if(state == 0){</span>
+<span class='curline'><a href='../S/6.html#L62'>state</a>              62 user/printf.c          state = '%';</span>
+<span class='curline'><a href='../S/6.html#L66'>state</a>              66 user/printf.c      } else if(state == '%'){</span>
+<span class='curline'><a href='../S/6.html#L92'>state</a>              92 user/printf.c        state = 0;</span>
 </pre>
 </body>
 </html>

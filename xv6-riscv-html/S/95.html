@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel/proc.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.8' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/153.html'>kernel</a>/proc.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/23.html' title='Multiple included from 14 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Saved registers for kernel context switches.</em>
+<a id='L2' name='L2'></a>   2 <strong class='reserved'>struct</strong> <a href='../R/230.html' title='Multiple referred from 9 places.'>context</a> <em class='brace'>{</em>
+<a id='L3' name='L3'></a>   3   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/290.html' title='Multiple used in 3 places.'>ra</a>;
+<a id='L4' name='L4'></a>   4   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/339.html' title='Multiple used in 21 places.'>sp</a>;
+<a id='L5' name='L5'></a>   5 
+<a id='L6' name='L6'></a>   6   <em class='comment'>// callee-saved</em>
+<a id='L7' name='L7'></a>   7   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/309.html' title='Multiple used in 2 places.'>s0</a>;
+<a id='L8' name='L8'></a>   8   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/310.html' title='Multiple used in 9 places.'>s1</a>;
+<a id='L9' name='L9'></a>   9   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/313.html' title='Multiple used in 9 places.'>s2</a>;
+<a id='L10' name='L10'></a>  10   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/314.html' title='Multiple used in 2 places.'>s3</a>;
+<a id='L11' name='L11'></a>  11   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/315.html' title='Multiple used in 2 places.'>s4</a>;
+<a id='L12' name='L12'></a>  12   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/316.html' title='Multiple used in 2 places.'>s5</a>;
+<a id='L13' name='L13'></a>  13   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/317.html' title='Multiple used in 2 places.'>s6</a>;
+<a id='L14' name='L14'></a>  14   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/318.html' title='Multiple used in 2 places.'>s7</a>;
+<a id='L15' name='L15'></a>  15   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/319.html' title='Multiple used in 2 places.'>s8</a>;
+<a id='L16' name='L16'></a>  16   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/320.html' title='Multiple used in 2 places.'>s9</a>;
+<a id='L17' name='L17'></a>  17   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/311.html' title='Multiple used in 2 places.'>s10</a>;
+<a id='L18' name='L18'></a>  18   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/312.html' title='Multiple used in 2 places.'>s11</a>;
+<a id='L19' name='L19'></a>  19 <em class='brace'>}</em>;
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <em class='comment'>// Per-CPU state.</em>
+<a id='L22' name='L22'></a>  22 <strong class='reserved'>struct</strong> <a href='../R/238.html' title='Multiple referred from 14 places.'>cpu</a> <em class='brace'>{</em>
+<a id='L23' name='L23'></a>  23   <strong class='reserved'>struct</strong> <a href='../S/95.html#L85' title='Defined at 85 in kernel/proc.h.'>proc</a> *<a href='../S/95.html#L85' title='Defined at 85 in kernel/proc.h.'>proc</a>;          <em class='comment'>// The process running on this cpu, or null.</em>
+<a id='L24' name='L24'></a>  24   <strong class='reserved'>struct</strong> <a href='../S/95.html#L2' title='Defined at 2 in kernel/proc.h.'>context</a> <a href='../S/95.html#L2' title='Defined at 2 in kernel/proc.h.'>context</a>;     <em class='comment'>// swtch() here to enter scheduler().</em>
+<a id='L25' name='L25'></a>  25   <strong class='reserved'>int</strong> <a href='../Y/225.html' title='Multiple used in 7 places.'>noff</a>;                   <em class='comment'>// Depth of push_off() nesting.</em>
+<a id='L26' name='L26'></a>  26   <strong class='reserved'>int</strong> <a href='../Y/156.html' title='Multiple used in 6 places.'>intena</a>;                 <em class='comment'>// Were interrupts enabled before push_off()?</em>
+<a id='L27' name='L27'></a>  27 <em class='brace'>}</em>;
+<a id='L28' name='L28'></a>  28 
+<a id='L29' name='L29'></a>  29 <strong class='reserved'>extern</strong> <strong class='reserved'>struct</strong> <a href='../S/95.html#L22' title='Defined at 22 in kernel/proc.h.'>cpu</a> <a href='../Y/64.html' title='Multiple used in 3 places.'>cpus</a>[<a href='../S/128.html#L2' title='Defined at 2 in kernel/param.h.'>NCPU</a>];
+<a id='L30' name='L30'></a>  30 
+<a id='L31' name='L31'></a>  31 <em class='comment'>// per-process data for the trap handling code in trampoline.S.</em>
+<a id='L32' name='L32'></a>  32 <em class='comment'>// sits in a page by itself just under the trampoline page in the</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'>// user page table. not specially mapped in the kernel page table.</em>
+<a id='L34' name='L34'></a>  34 <em class='comment'>// uservec in trampoline.S saves user registers in the trapframe,</em>
+<a id='L35' name='L35'></a>  35 <em class='comment'>// then initializes registers from the trapframe's</em>
+<a id='L36' name='L36'></a>  36 <em class='comment'>// kernel_sp, kernel_hartid, kernel_satp, and jumps to kernel_trap.</em>
+<a id='L37' name='L37'></a>  37 <em class='comment'>// usertrapret() and userret in trampoline.S set up</em>
+<a id='L38' name='L38'></a>  38 <em class='comment'>// the trapframe's kernel_*, restore user registers from the</em>
+<a id='L39' name='L39'></a>  39 <em class='comment'>// trapframe, switch to the user page table, and enter user space.</em>
+<a id='L40' name='L40'></a>  40 <em class='comment'>// the trapframe includes callee-saved user registers like s0-s11 because the</em>
+<a id='L41' name='L41'></a>  41 <em class='comment'>// return-to-user path via usertrapret() doesn't return through</em>
+<a id='L42' name='L42'></a>  42 <em class='comment'>// the entire kernel call stack.</em>
+<a id='L43' name='L43'></a>  43 <strong class='reserved'>struct</strong> <a href='../R/499.html' title='Multiple referred from 29 places.'>trapframe</a> <em class='brace'>{</em>
+<a id='L44' name='L44'></a>  44   <em class='comment'>/*   0 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/169.html' title='Multiple used in 2 places.'>kernel_satp</a>;   <em class='comment'>// kernel page table</em>
+<a id='L45' name='L45'></a>  45   <em class='comment'>/*   8 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/170.html' title='Multiple used in 2 places.'>kernel_sp</a>;     <em class='comment'>// top of process's kernel stack</em>
+<a id='L46' name='L46'></a>  46   <em class='comment'>/*  16 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/171.html' title='Multiple used in 2 places.'>kernel_trap</a>;   <em class='comment'>// usertrap()</em>
+<a id='L47' name='L47'></a>  47   <em class='comment'>/*  24 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/95.html' title='Multiple used in 6 places.'>epc</a>;           <em class='comment'>// saved user program counter</em>
+<a id='L48' name='L48'></a>  48   <em class='comment'>/*  32 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/167.html' title='Multiple used in 2 places.'>kernel_hartid</a>; <em class='comment'>// saved kernel tp</em>
+<a id='L49' name='L49'></a>  49   <em class='comment'>/*  40 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/290.html' title='Multiple used in 3 places.'>ra</a>;
+<a id='L50' name='L50'></a>  50   <em class='comment'>/*  48 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/339.html' title='Multiple used in 21 places.'>sp</a>;
+<a id='L51' name='L51'></a>  51   <em class='comment'>/*  56 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> gp;
+<a id='L52' name='L52'></a>  52   <em class='comment'>/*  64 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> tp;
+<a id='L53' name='L53'></a>  53   <em class='comment'>/*  72 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> t0;
+<a id='L54' name='L54'></a>  54   <em class='comment'>/*  80 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> t1;
+<a id='L55' name='L55'></a>  55   <em class='comment'>/*  88 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> t2;
+<a id='L56' name='L56'></a>  56   <em class='comment'>/*  96 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/309.html' title='Multiple used in 2 places.'>s0</a>;
+<a id='L57' name='L57'></a>  57   <em class='comment'>/* 104 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/310.html' title='Multiple used in 9 places.'>s1</a>;
+<a id='L58' name='L58'></a>  58   <em class='comment'>/* 112 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/10.html' title='Multiple used in 5 places.'>a0</a>;
+<a id='L59' name='L59'></a>  59   <em class='comment'>/* 120 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/11.html' title='Multiple used in 3 places.'>a1</a>;
+<a id='L60' name='L60'></a>  60   <em class='comment'>/* 128 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/12.html' title='Multiple used in 2 places.'>a2</a>;
+<a id='L61' name='L61'></a>  61   <em class='comment'>/* 136 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/13.html' title='Multiple used in 2 places.'>a3</a>;
+<a id='L62' name='L62'></a>  62   <em class='comment'>/* 144 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/14.html' title='Multiple used in 2 places.'>a4</a>;
+<a id='L63' name='L63'></a>  63   <em class='comment'>/* 152 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/15.html' title='Multiple used in 2 places.'>a5</a>;
+<a id='L64' name='L64'></a>  64   <em class='comment'>/* 160 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> a6;
+<a id='L65' name='L65'></a>  65   <em class='comment'>/* 168 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/17.html' title='Multiple used in 2 places.'>a7</a>;
+<a id='L66' name='L66'></a>  66   <em class='comment'>/* 176 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/313.html' title='Multiple used in 9 places.'>s2</a>;
+<a id='L67' name='L67'></a>  67   <em class='comment'>/* 184 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/314.html' title='Multiple used in 2 places.'>s3</a>;
+<a id='L68' name='L68'></a>  68   <em class='comment'>/* 192 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/315.html' title='Multiple used in 2 places.'>s4</a>;
+<a id='L69' name='L69'></a>  69   <em class='comment'>/* 200 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/316.html' title='Multiple used in 2 places.'>s5</a>;
+<a id='L70' name='L70'></a>  70   <em class='comment'>/* 208 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/317.html' title='Multiple used in 2 places.'>s6</a>;
+<a id='L71' name='L71'></a>  71   <em class='comment'>/* 216 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/318.html' title='Multiple used in 2 places.'>s7</a>;
+<a id='L72' name='L72'></a>  72   <em class='comment'>/* 224 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/319.html' title='Multiple used in 2 places.'>s8</a>;
+<a id='L73' name='L73'></a>  73   <em class='comment'>/* 232 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/320.html' title='Multiple used in 2 places.'>s9</a>;
+<a id='L74' name='L74'></a>  74   <em class='comment'>/* 240 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/311.html' title='Multiple used in 2 places.'>s10</a>;
+<a id='L75' name='L75'></a>  75   <em class='comment'>/* 248 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/312.html' title='Multiple used in 2 places.'>s11</a>;
+<a id='L76' name='L76'></a>  76   <em class='comment'>/* 256 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> t3;
+<a id='L77' name='L77'></a>  77   <em class='comment'>/* 264 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> t4;
+<a id='L78' name='L78'></a>  78   <em class='comment'>/* 272 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> t5;
+<a id='L79' name='L79'></a>  79   <em class='comment'>/* 280 */</em> <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> t6;
+<a id='L80' name='L80'></a>  80 <em class='brace'>}</em>;
+<a id='L81' name='L81'></a>  81 
+<a id='L82' name='L82'></a>  82 <strong class='reserved'>enum</strong> <a href='../S/95.html#L89' title='Referred from 89 in kernel/proc.h.'>procstate</a> <em class='brace'>{</em> <a href='../R/145.html' title='Multiple referred from 5 places.'>UNUSED</a>, <a href='../R/146.html' title='Multiple referred from 2 places.'>USED</a>, <a href='../R/109.html' title='Multiple referred from 4 places.'>SLEEPING</a>, <a href='../R/101.html' title='Multiple referred from 7 places.'>RUNNABLE</a>, <a href='../R/102.html' title='Multiple referred from 4 places.'>RUNNING</a>, <a href='../R/185.html' title='Multiple referred from 3 places.'>ZOMBIE</a> <em class='brace'>}</em>;
+<a id='L83' name='L83'></a>  83 
+<a id='L84' name='L84'></a>  84 <em class='comment'>// Per-process state</em>
+<a id='L85' name='L85'></a>  85 <strong class='reserved'>struct</strong> <a href='../R/402.html' title='Multiple referred from 65 places.'>proc</a> <em class='brace'>{</em>
+<a id='L86' name='L86'></a>  86   <strong class='reserved'>struct</strong> <a href='../S/88.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/188.html' title='Multiple used in 123 places.'>lock</a>;
+<a id='L87' name='L87'></a>  87 
+<a id='L88' name='L88'></a>  88   <em class='comment'>// p-&gt;lock must be held when using these:</em>
+<a id='L89' name='L89'></a>  89   <strong class='reserved'>enum</strong> <a href='../S/95.html#L82' title='Defined at 82 in kernel/proc.h.'>procstate</a> <a href='../Y/349.html' title='Multiple used in 31 places.'>state</a>;        <em class='comment'>// Process state</em>
+<a id='L90' name='L90'></a>  90   <strong class='reserved'>void</strong> *<a href='../Y/56.html' title='Multiple used in 7 places.'>chan</a>;                  <em class='comment'>// If non-zero, sleeping on chan</em>
+<a id='L91' name='L91'></a>  91   <strong class='reserved'>int</strong> <a href='../S/138.html#L615' title='Defined at 615 in kernel/proc.c.'>killed</a>;                  <em class='comment'>// If non-zero, have been killed</em>
+<a id='L92' name='L92'></a>  92   <strong class='reserved'>int</strong> <a href='../Y/434.html' title='Multiple used in 8 places.'>xstate</a>;                  <em class='comment'>// Exit status to be returned to parent's wait</em>
+<a id='L93' name='L93'></a>  93   <strong class='reserved'>int</strong> <a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a>;                     <em class='comment'>// Process ID</em>
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95   <em class='comment'>// wait_lock must be held when using this:</em>
+<a id='L96' name='L96'></a>  96   <strong class='reserved'>struct</strong> <a href='../S/95.html#L85' title='Defined at 85 in kernel/proc.h.'>proc</a> *<a href='../Y/258.html' title='Multiple used in 7 places.'>parent</a>;         <em class='comment'>// Parent process</em>
+<a id='L97' name='L97'></a>  97 
+<a id='L98' name='L98'></a>  98   <em class='comment'>// these are private to the process, so p-&gt;lock need not be held.</em>
+<a id='L99' name='L99'></a>  99   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/175.html' title='Multiple used in 4 places.'>kstack</a>;               <em class='comment'>// Virtual address of kernel stack</em>
+<a id='L100' name='L100'></a> 100   <a href='../S/98.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/357.html' title='Multiple used in 54 places.'>sz</a>;                   <em class='comment'>// Size of process memory (bytes)</em>
+<a id='L101' name='L101'></a> 101   <a href='../S/139.html#L331' title='Defined at 331 in kernel/riscv.h.'>pagetable_t</a> <a href='../Y/256.html' title='Multiple used in 90 places.'>pagetable</a>;       <em class='comment'>// User page table</em>
+<a id='L102' name='L102'></a> 102   <strong class='reserved'>struct</strong> <a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a> *<a href='../S/95.html#L43' title='Defined at 43 in kernel/proc.h.'>trapframe</a>; <em class='comment'>// data page for trampoline.S</em>
+<a id='L103' name='L103'></a> 103   <strong class='reserved'>struct</strong> <a href='../S/95.html#L2' title='Defined at 2 in kernel/proc.h.'>context</a> <a href='../S/95.html#L2' title='Defined at 2 in kernel/proc.h.'>context</a>;      <em class='comment'>// swtch() here to run process</em>
+<a id='L104' name='L104'></a> 104   <strong class='reserved'>struct</strong> <a href='../S/103.html#L1' title='Defined at 1 in kernel/file.h.'>file</a> *<a href='../Y/238.html' title='Multiple used in 13 places.'>ofile</a>[<a href='../S/128.html#L3' title='Defined at 3 in kernel/param.h.'>NOFILE</a>];  <em class='comment'>// Open files</em>
+<a id='L105' name='L105'></a> 105   <strong class='reserved'>struct</strong> <a href='../S/103.html#L17' title='Defined at 17 in kernel/file.h.'>inode</a> *<a href='../Y/66.html' title='Multiple used in 8 places.'>cwd</a>;           <em class='comment'>// Current directory</em>
+<a id='L106' name='L106'></a> 106   <strong class='reserved'>char</strong> <a href='../Y/206.html' title='Multiple used in 162 places.'>name</a>[16];               <em class='comment'>// Process name (debugging)</em>
+<a id='L107' name='L107'></a> 107 <em class='brace'>}</em>;
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>
