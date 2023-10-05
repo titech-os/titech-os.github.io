@@ -2,7 +2,7 @@
 
 macOSにクロスコンパイラ等の開発用ツールをインストールして，xv6のビルドと実行を行う方法について説明します．
 
-以下は macOS Big Monterey (12.6) および Big Sur (11.7) でテストしていますが，それ以前のバージョンでもHomebrewが対応していれば問題ないと思います．
+以下は macOS Ventura (13.6) でテストしていますが，それ以前のバージョンでもHomebrewが対応していれば問題ないと思います．
 
 ## Homebrewの準備
 
@@ -11,14 +11,14 @@ macOSにクロスコンパイラ等の開発用ツールをインストールし
 
 まず，Appleが提供しているMac用の各種開発用コマンドラインツールが必要ですので，以下のようにしてインストールしておきます（XCodeをすでにインストールしてある場合はこの作業は不要です）．
 ```console
-$ xcode-select --install
+% xcode-select --install
 ```
 次に以下のコマンドを実行してHomebrewをインストールします．．
 ```console
-$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+% /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-x86用Homebrewでインストールしたプログラム（実行可能形式）は `/usr/local/bin` に入ります．通常このディレクトリは `PATH` に含まれているので，特になにもしなくてもシェルから実行可能になります．
+x86の場合，上記でインストールしたプログラム（実行可能形式）は `/usr/local/bin` に入ります．通常このディレクトリは `PATH` に含まれているので，特になにもしなくてもシェルから実行可能になります．
 Apple Silicon搭載のMacの場合，Homebrew関連のプログラム（実行可能形式）は `/opt/homebrew/bin` に格納されます．ターミナルで `which brew` を実行して以下のように出力されれば問題ありません．
 ```
 /opt/homebrew/bin/brew
@@ -36,9 +36,9 @@ fi
 ## 開発用ツールのインストール
 
 Homebrewがあれば比較的容易です．
-最初にHomebrewでRISC-V関連ツールのインストールができるように設定します．
+最初にHomebrewで[RISC-V関連ツール](https://github.com/riscv-software-src/homebrew-riscv)のインストールができるように設定します．
 ```console
-$ brew tap riscv/riscv
+$ brew tap riscv-software-src/riscv
 ```
 
 次にRISC-V用各種ツールとQEMUをインストールします．
@@ -48,15 +48,14 @@ $ brew install riscv-tools qemu
 以上でxv6の開発用ツールのインストールは完了です．
 
 次にコマンドサーチパスの設定の確認をします．
-Homebrewでインストールされるプログラムは多くの場合 `/usr/local/bin` という場所にインストールされます（正確にはリンクが作られる）．その場合特にこれ以上設定することはありません．
-ただし今回インストールするRISC-V関連のツールの場合，少なくとも私のところでは `/usr/local/bin` に入っているのですが，そうならなかったケースが講義Slackで報告されています．もし
+開発用ツールはHomebrewでインストールされる他のプログラムと同様に，`/usr/local/bin`（x86の場合）あるいは `/opt/homebrew/bin`（Apple Siliconの場合）にインストールされます．
+これらのディレクトリが `PATH` に入っていれば問題ありません．
+もし
 ```
 which riscv64-unknown-elf-gcc
 ```
-を実行して何も出力されない場合は，シェルの設定ファイル（`~/.zshrc`, `~/.bashrc` 等）に以下のような行を追加してください．
-```
-PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
-```
+を実行して何も出力されない場合は，上述のようにシェルの設定ファイル（`~/.zshrc`, `~/.bashrc` 等）を編集して `PATH` を設定してください．
+
 
 ## インストール後の作業
 
@@ -64,9 +63,9 @@ PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
 カレントディレクトリ直下にgitで取得したRISC-V版xv6のソースコードのディレクトリ`xv6-riscv`があるものとします．
 
 ```console
-$ cd xv6-riscv
-$ make
-$ make qemu
+% cd xv6-riscv
+% make
+% make qemu
 ...
 xv6 kernel is booting
 
@@ -80,6 +79,6 @@ macOS上（RISC-Vをエミュレートする）仮想マシンアプリケーシ
 動作しています．
 xv6上でいくつかプログラムを動かして動作を確認してみてください．
 `usertests`というプログラムを実行すると，多少時間はかかりますがxv6カーネル全体のテストを行うことができます．
-このプログラムの実行後は，いったんxv6から抜けて`fs.img`というファイルを削除しておいてください．
+このプログラムの実行後は，いったんxv6から抜けて`make clean`を実行し，続けて`make`を実行しておいてください．
 
 xv6から抜けるには`ctrl-A`に続けて`x`をタイプします．

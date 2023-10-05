@@ -6,21 +6,22 @@ xv6にしか使わない開発用ツールを自分のPCに直接インストー
 
 この方法を用いるためには各自のPCにDockerをインストールする必要がありますが，Docker自体は汎用性の高いツールなので，今後も利用する機会は多いと考えられます．
 Dockerのインストール方法および使用方法については各自調べてください（MacやWindowsの場合はDocker Desktopのインストーラをダウンロードして実行するだけです）．
-以下，Dockerがインストールされているとして説明します．
+Docker Desktopは教育用途では無償で使えます．
+以下，Docker Desktopがインストールされているとして説明します．
 
 ## Dockerイメージの取得とコンテナの起動
 
 本講義のために，xv6開発用ツールを含んだDockerイメージ([wtakuo/xv6-env](https://hub.docker.com/r/wtakuo/xv6-env))を用意しました．
 まず以下のコマンドでこのDockerイメージをDocker Hubより取得してください．
 ```console
-$ docker pull wtakuo/xv6-env
+% docker pull wtakuo/xv6-env
 ```
 このイメージはマルチアーキテクチャ（現在はARM64とAMD64）に対応していますので，M1 Macを含む多くの環境でそのまま使うことができます．
 
 これで開発用ツールの実行に必要なものが揃いました．
 あとは以下のようにしてコンテナ（ホストOSから隔離された実行環境）を起動してください．
 ```console
-$ docker run -it --rm -v path-to-xv6:/home/xv6/xv6-riscv wtakuo/xv6-env
+% docker run -it --rm -v path-to-xv6:/home/xv6/xv6-riscv wtakuo/xv6-env
 ```
 ここで`path-to-xv6`はRISC-V版xv6のソースコードのディレクトリへのパス名に置き換えてください．
 このようにしてコンテナを起動することで，
@@ -28,14 +29,11 @@ $ docker run -it --rm -v path-to-xv6:/home/xv6/xv6-riscv wtakuo/xv6-env
 
 コンテナ起動時にパスを指定する代わりに以下のようにすると簡単です．
 ```console
-$ cd path-to-xv6
-$ docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
+% cd path-to-xv6
+% docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
 ```
 
 **Macの場合の注意**: xv6のソースコードの場所（`path-to-xv6`）がiCloud Driveに含まれないようにしてください（下記の**Macの場合の注意事項**を参照のこと）．
-
-**Apple Silicon搭載のMac　(M1 Mac)を使う場合**: ~~ARM版のDockerイメージ([wtakuo/xv6-env-arm64](https://hub.docker.com/r/wtakuo/xv6-env-arm64))を用意しました．上記の説明で，`wtakuo/xv6-env` となっているところを `wtakuo/xv6-env-arm64` に置き換えてください．~~
-Docker Hub上のイメージ `wtakuo/xv6-env` をマルチアーキテクチャ対応にしましたので，上記の説明通りにすればARM版のコンテナが起動します．
 
 コンテナが無事起動すると以下のようにシェル(bash)のプロンプトが現れます（プロンプトに含まれる`0c765f60374a`は起動したコンテナのIDで，実際にはコンテナ毎に違う値となります）．
 ```console
@@ -45,15 +43,15 @@ xv6@0c765f60374a:~/xv6-riscv$
 
 以下のように，ホストOS（PCで実行しているOS）のホームディレクトリ直下に`class/os`というサブディレクトリを作成し，そこにxv6のソースコードを取得したとします．
 ```console
-$ cd
-$ mkdir -p class/os
-$ cd class/os
-$ git clone https://github.com/titech-os/xv6-riscv.git
+% cd
+% mkdir -p class/os
+% cd class/os
+% git clone https://github.com/titech-os/xv6-riscv.git
 ```
 この場合，コンテナの起動は以下のようにして行います．
 ```console
-$ cd ~/class/os/xv6-riscv
-$ docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
+% cd ~/class/os/xv6-riscv
+% docker run -it --rm -v $(pwd):/home/xv6/xv6-riscv wtakuo/xv6-env
 ```
 上で述べたように，ホストOS上のディレクトリ`~/class/os/xv6-riscv`は，コンテナ内部で`/home/xv6/xv6-riscv`というディレクトリとしてアクセスできるようになります．
 
@@ -77,7 +75,7 @@ $
 コンテナ内で（RISC-Vをエミュレートする）仮想マシンアプリケーションQEMUが動作し，その上でxv6が動作しています．
 xv6上でいくつかプログラムを動かして動作を確認してみてください．
 `usertests`というプログラムを実行すると，多少時間はかかりますがxv6カーネル全体のテストを行うことができます．
-このプログラムの実行後は，いったんxv6から抜けて`fs.img`というファイルを削除しておいてください．
+このプログラムの実行後は，いったんxv6から抜けて`make clean`を実行し，続けて`make`を実行しておいてください．
 
 xv6から抜けるには，`ctrl-A`に続けて`x`をタイプします．
 
