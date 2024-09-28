@@ -1,16 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PTE_FLAGS</title>
+<title>PTE_V</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/99.html#L184'>PTE_FLAGS</a>         184 kernel/vm.c        if(PTE_FLAGS(*pte) == PTE_V)</span>
-<span class='curline'><a href='../S/99.html#L319'>PTE_FLAGS</a>         319 kernel/vm.c        flags = PTE_FLAGS(*pte);</span>
+<span class='curline'><a href='../S/38.html#L93'>PTE_V</a>              93 kernel/vm.c        if(*pte &amp; PTE_V) {</span>
+<span class='curline'><a href='../S/38.html#L99'>PTE_V</a>              99 kernel/vm.c          *pte = PA2PTE(pagetable) | PTE_V;</span>
+<span class='curline'><a href='../S/38.html#L120'>PTE_V</a>             120 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/38.html#L163'>PTE_V</a>             163 kernel/vm.c        if(*pte &amp; PTE_V)</span>
+<span class='curline'><a href='../S/38.html#L165'>PTE_V</a>             165 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
+<span class='curline'><a href='../S/38.html#L189'>PTE_V</a>             189 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/38.html#L191'>PTE_V</a>             191 kernel/vm.c        if(PTE_FLAGS(*pte) == PTE_V)</span>
+<span class='curline'><a href='../S/38.html#L284'>PTE_V</a>             284 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
+<span class='curline'><a href='../S/38.html#L289'>PTE_V</a>             289 kernel/vm.c        } else if(pte &amp; PTE_V){</span>
+<span class='curline'><a href='../S/38.html#L323'>PTE_V</a>             323 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/38.html#L369'>PTE_V</a>             369 kernel/vm.c        if(pte == 0 || (*pte &amp; PTE_V) == 0 || (*pte &amp; PTE_U) == 0 ||</span>
 </pre>
 </body>
 </html>

@@ -1,45 +1,38 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bad</title>
+<title>bcache</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/97.html#L44'>bad</a>                44 kernel/exec.c      goto bad;</span>
-<span class='curline'><a href='../S/97.html#L47'>bad</a>                47 kernel/exec.c      goto bad;</span>
-<span class='curline'><a href='../S/97.html#L50'>bad</a>                50 kernel/exec.c      goto bad;</span>
-<span class='curline'><a href='../S/97.html#L55'>bad</a>                55 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L59'>bad</a>                59 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L61'>bad</a>                61 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L63'>bad</a>                63 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L66'>bad</a>                66 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L69'>bad</a>                69 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L84'>bad</a>                84 kernel/exec.c      goto bad;</span>
-<span class='curline'><a href='../S/97.html#L93'>bad</a>                93 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L97'>bad</a>                97 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L99'>bad</a>                99 kernel/exec.c        goto bad;</span>
-<span class='curline'><a href='../S/97.html#L108'>bad</a>               108 kernel/exec.c      goto bad;</span>
-<span class='curline'><a href='../S/97.html#L110'>bad</a>               110 kernel/exec.c      goto bad;</span>
-<span class='curline'><a href='../S/97.html#L133'>bad</a>               133 kernel/exec.c   bad:</span>
-<span class='curline'><a href='../S/94.html#L30'>bad</a>                30 kernel/pipe.c      goto bad;</span>
-<span class='curline'><a href='../S/94.html#L32'>bad</a>                32 kernel/pipe.c      goto bad;</span>
-<span class='curline'><a href='../S/94.html#L48'>bad</a>                48 kernel/pipe.c   bad:</span>
-<span class='curline'><a href='../S/106.html#L150'>bad</a>               150 kernel/sysfile.c     goto bad;</span>
-<span class='curline'><a href='../S/106.html#L154'>bad</a>               154 kernel/sysfile.c     goto bad;</span>
-<span class='curline'><a href='../S/106.html#L163'>bad</a>               163 kernel/sysfile.c bad:</span>
-<span class='curline'><a href='../S/106.html#L209'>bad</a>               209 kernel/sysfile.c     goto bad;</span>
-<span class='curline'><a href='../S/106.html#L212'>bad</a>               212 kernel/sysfile.c     goto bad;</span>
-<span class='curline'><a href='../S/106.html#L219'>bad</a>               219 kernel/sysfile.c     goto bad;</span>
-<span class='curline'><a href='../S/106.html#L239'>bad</a>               239 kernel/sysfile.c bad:</span>
-<span class='curline'><a href='../S/106.html#L448'>bad</a>               448 kernel/sysfile.c       goto bad;</span>
-<span class='curline'><a href='../S/106.html#L451'>bad</a>               451 kernel/sysfile.c       goto bad;</span>
-<span class='curline'><a href='../S/106.html#L459'>bad</a>               459 kernel/sysfile.c       goto bad;</span>
-<span class='curline'><a href='../S/106.html#L461'>bad</a>               461 kernel/sysfile.c       goto bad;</span>
-<span class='curline'><a href='../S/106.html#L471'>bad</a>               471 kernel/sysfile.c  bad:</span>
+<span class='curline'><a href='../S/60.html#L34'>bcache</a>             34 kernel/bio.c   } bcache;</span>
+<span class='curline'><a href='../S/60.html#L41'>bcache</a>             41 kernel/bio.c     initlock(&amp;bcache.lock, "bcache");</span>
+<span class='curline'><a href='../S/60.html#L44'>bcache</a>             44 kernel/bio.c     bcache.head.prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/60.html#L45'>bcache</a>             45 kernel/bio.c     bcache.head.next = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/60.html#L46'>bcache</a>             46 kernel/bio.c     for(b = bcache.buf; b &lt; bcache.buf+NBUF; b++){</span>
+<span class='curline'><a href='../S/60.html#L47'>bcache</a>             47 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/60.html#L48'>bcache</a>             48 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/60.html#L50'>bcache</a>             50 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/60.html#L51'>bcache</a>             51 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/60.html#L63'>bcache</a>             63 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L66'>bcache</a>             66 kernel/bio.c     for(b = bcache.head.next; b != &amp;bcache.head; b = b-&gt;next){</span>
+<span class='curline'><a href='../S/60.html#L69'>bcache</a>             69 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L77'>bcache</a>             77 kernel/bio.c     for(b = bcache.head.prev; b != &amp;bcache.head; b = b-&gt;prev){</span>
+<span class='curline'><a href='../S/60.html#L83'>bcache</a>             83 kernel/bio.c         release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L124'>bcache</a>            124 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L130'>bcache</a>            130 kernel/bio.c       b-&gt;next = bcache.head.next;</span>
+<span class='curline'><a href='../S/60.html#L131'>bcache</a>            131 kernel/bio.c       b-&gt;prev = &amp;bcache.head;</span>
+<span class='curline'><a href='../S/60.html#L132'>bcache</a>            132 kernel/bio.c       bcache.head.next-&gt;prev = b;</span>
+<span class='curline'><a href='../S/60.html#L133'>bcache</a>            133 kernel/bio.c       bcache.head.next = b;</span>
+<span class='curline'><a href='../S/60.html#L136'>bcache</a>            136 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L141'>bcache</a>            141 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L143'>bcache</a>            143 kernel/bio.c     release(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L148'>bcache</a>            148 kernel/bio.c     acquire(&amp;bcache.lock);</span>
+<span class='curline'><a href='../S/60.html#L150'>bcache</a>            150 kernel/bio.c     release(&amp;bcache.lock);</span>
 </pre>
 </body>
 </html>

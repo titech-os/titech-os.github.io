@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>xint</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.13' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/3.html#L97'>xint</a>               97 mkfs/mkfs.c      sb.size = xint(FSSIZE);</span>
+<span class='curline'><a href='../S/3.html#L98'>xint</a>               98 mkfs/mkfs.c      sb.nblocks = xint(nblocks);</span>
+<span class='curline'><a href='../S/3.html#L99'>xint</a>               99 mkfs/mkfs.c      sb.ninodes = xint(NINODES);</span>
+<span class='curline'><a href='../S/3.html#L100'>xint</a>              100 mkfs/mkfs.c      sb.nlog = xint(nlog);</span>
+<span class='curline'><a href='../S/3.html#L101'>xint</a>              101 mkfs/mkfs.c      sb.logstart = xint(2);</span>
+<span class='curline'><a href='../S/3.html#L102'>xint</a>              102 mkfs/mkfs.c      sb.inodestart = xint(2+nlog);</span>
+<span class='curline'><a href='../S/3.html#L103'>xint</a>              103 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
+<span class='curline'><a href='../S/3.html#L167'>xint</a>              167 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L169'>xint</a>              169 mkfs/mkfs.c      din.size = xint(off);</span>
+<span class='curline'><a href='../S/3.html#L231'>xint</a>              231 mkfs/mkfs.c      din.size = xint(0);</span>
+<span class='curline'><a href='../S/3.html#L265'>xint</a>              265 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L271'>xint</a>              271 mkfs/mkfs.c          if(xint(din.addrs[fbn]) == 0){</span>
+<span class='curline'><a href='../S/3.html#L272'>xint</a>              272 mkfs/mkfs.c            din.addrs[fbn] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L274'>xint</a>              274 mkfs/mkfs.c          x = xint(din.addrs[fbn]);</span>
+<span class='curline'><a href='../S/3.html#L276'>xint</a>              276 mkfs/mkfs.c          if(xint(din.addrs[NDIRECT]) == 0){</span>
+<span class='curline'><a href='../S/3.html#L277'>xint</a>              277 mkfs/mkfs.c            din.addrs[NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L279'>xint</a>              279 mkfs/mkfs.c          rsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/3.html#L281'>xint</a>              281 mkfs/mkfs.c            indirect[fbn - NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L282'>xint</a>              282 mkfs/mkfs.c            wsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/3.html#L284'>xint</a>              284 mkfs/mkfs.c          x = xint(indirect[fbn-NDIRECT]);</span>
+<span class='curline'><a href='../S/3.html#L294'>xint</a>              294 mkfs/mkfs.c      din.size = xint(off);</span>
+</pre>
+</body>
+</html>

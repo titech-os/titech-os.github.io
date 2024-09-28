@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PTE2PA</title>
+<title>PTE_U</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/99.html#L94'>PTE2PA</a>             94 kernel/vm.c          pagetable = (pagetable_t)PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/99.html#L124'>PTE2PA</a>            124 kernel/vm.c      pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/99.html#L187'>PTE2PA</a>            187 kernel/vm.c          uint64 pa = PTE2PA(*pte);</span>
-<span class='curline'><a href='../S/99.html#L279'>PTE2PA</a>            279 kernel/vm.c          uint64 child = PTE2PA(pte);</span>
-<span class='curline'><a href='../S/99.html#L318'>PTE2PA</a>            318 kernel/vm.c        pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/38.html#L122'>PTE_U</a>             122 kernel/vm.c      if((*pte &amp; PTE_U) == 0)</span>
+<span class='curline'><a href='../S/38.html#L226'>PTE_U</a>             226 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
+<span class='curline'><a href='../S/38.html#L249'>PTE_U</a>             249 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_R|PTE_U|xperm) != 0){</span>
+<span class='curline'><a href='../S/38.html#L352'>PTE_U</a>             352 kernel/vm.c      *pte &amp;= ~PTE_U;</span>
+<span class='curline'><a href='../S/38.html#L369'>PTE_U</a>             369 kernel/vm.c        if(pte == 0 || (*pte &amp; PTE_V) == 0 || (*pte &amp; PTE_U) == 0 ||</span>
 </pre>
 </body>
 </html>

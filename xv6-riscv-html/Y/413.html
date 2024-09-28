@@ -1,19 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vaddr</title>
+<title>valid</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/118.html#L29'>vaddr</a>              29 kernel/elf.h     uint64 vaddr;</span>
-<span class='curline'><a href='../S/97.html#L60'>vaddr</a>              60 kernel/exec.c      if(ph.vaddr + ph.memsz &lt; ph.vaddr)</span>
-<span class='curline'><a href='../S/97.html#L62'>vaddr</a>              62 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
-<span class='curline'><a href='../S/97.html#L65'>vaddr</a>              65 kernel/exec.c      if((sz1 = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz, flags2perm(ph.flags))) == 0)</span>
-<span class='curline'><a href='../S/97.html#L68'>vaddr</a>              68 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/60.html#L81'>valid</a>              81 kernel/bio.c         b-&gt;valid = 0;</span>
+<span class='curline'><a href='../S/60.html#L98'>valid</a>              98 kernel/bio.c     if(!b-&gt;valid) {</span>
+<span class='curline'><a href='../S/60.html#L100'>valid</a>             100 kernel/bio.c       b-&gt;valid = 1;</span>
+<span class='curline'><a href='../S/46.html#L2'>valid</a>               2 kernel/buf.h     int valid;   // has data been read from disk?</span>
+<span class='curline'><a href='../S/41.html#L22'>valid</a>              22 kernel/file.h    int valid;          // inode has been read from disk?</span>
+<span class='curline'><a href='../S/47.html#L273'>valid</a>             273 kernel/fs.c      ip-&gt;valid = 0;</span>
+<span class='curline'><a href='../S/47.html#L303'>valid</a>             303 kernel/fs.c      if(ip-&gt;valid == 0){</span>
+<span class='curline'><a href='../S/47.html#L313'>valid</a>             313 kernel/fs.c        ip-&gt;valid = 1;</span>
+<span class='curline'><a href='../S/47.html#L341'>valid</a>             341 kernel/fs.c      if(ip-&gt;ref == 1 &amp;&amp; ip-&gt;valid &amp;&amp; ip-&gt;nlink == 0){</span>
+<span class='curline'><a href='../S/47.html#L353'>valid</a>             353 kernel/fs.c        ip-&gt;valid = 0;</span>
 </pre>
 </body>
 </html>

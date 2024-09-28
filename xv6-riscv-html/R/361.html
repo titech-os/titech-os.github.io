@@ -1,23 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>minor</title>
+<title>mycpu</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/103.html#L26'>minor</a>              26 kernel/file.h    short minor;</span>
-<span class='curline'><a href='../S/113.html#L235'>minor</a>             235 kernel/fs.c      dip-&gt;minor = ip-&gt;minor;</span>
-<span class='curline'><a href='../S/113.html#L308'>minor</a>             308 kernel/fs.c        ip-&gt;minor = dip-&gt;minor;</span>
-<span class='curline'><a href='../S/150.html#L35'>minor</a>              35 kernel/fs.h      short minor;          // Minor device number (T_DEVICE only)</span>
-<span class='curline'><a href='../S/106.html#L246'>minor</a>             246 kernel/sysfile.c create(char *path, short type, short major, short minor)</span>
-<span class='curline'><a href='../S/106.html#L272'>minor</a>             272 kernel/sysfile.c   ip-&gt;minor = minor;</span>
-<span class='curline'><a href='../S/106.html#L394'>minor</a>             394 kernel/sysfile.c   int major, minor;</span>
-<span class='curline'><a href='../S/106.html#L398'>minor</a>             398 kernel/sysfile.c   argint(2, &amp;minor);</span>
-<span class='curline'><a href='../S/106.html#L400'>minor</a>             400 kernel/sysfile.c      (ip = create(path, T_DEVICE, major, minor)) == 0){</span>
+<span class='curline'><a href='../S/32.html#L95'>mycpu</a>              95 kernel/defs.h  struct cpu*     mycpu(void);</span>
+<span class='curline'><a href='../S/62.html#L86'>mycpu</a>              86 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/62.html#L448'>mycpu</a>             448 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/62.html#L498'>mycpu</a>             498 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
+<span class='curline'><a href='../S/62.html#L505'>mycpu</a>             505 kernel/proc.c    intena = mycpu()-&gt;intena;</span>
+<span class='curline'><a href='../S/62.html#L506'>mycpu</a>             506 kernel/proc.c    swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;context);</span>
+<span class='curline'><a href='../S/62.html#L507'>mycpu</a>             507 kernel/proc.c    mycpu()-&gt;intena = intena;</span>
+<span class='curline'><a href='../S/58.html#L42'>mycpu</a>              42 kernel/spinlock.c   lk-&gt;cpu = mycpu();</span>
+<span class='curline'><a href='../S/58.html#L80'>mycpu</a>              80 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
+<span class='curline'><a href='../S/58.html#L94'>mycpu</a>              94 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
+<span class='curline'><a href='../S/58.html#L95'>mycpu</a>              95 kernel/spinlock.c     mycpu()-&gt;intena = old;</span>
+<span class='curline'><a href='../S/58.html#L96'>mycpu</a>              96 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
+<span class='curline'><a href='../S/58.html#L102'>mycpu</a>             102 kernel/spinlock.c   struct cpu *c = mycpu();</span>
 </pre>
 </body>
 </html>

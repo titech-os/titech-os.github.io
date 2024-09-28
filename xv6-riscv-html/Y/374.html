@@ -1,16 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>timer_scratch</title>
+<title>tickslock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/149.html#L14'>timer_scratch</a>      14 kernel/start.c uint64 timer_scratch[NCPU][5];</span>
-<span class='curline'><a href='../S/149.html#L76'>timer_scratch</a>      76 kernel/start.c   uint64 *scratch = &amp;timer_scratch[id][0];</span>
+<span class='curline'><a href='../S/32.html#L148'>tickslock</a>         148 kernel/defs.h  extern struct spinlock tickslock;</span>
+<span class='curline'><a href='../S/33.html#L60'>tickslock</a>          60 kernel/sysproc.c   acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L64'>tickslock</a>          64 kernel/sysproc.c       release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L67'>tickslock</a>          67 kernel/sysproc.c     sleep(&amp;ticks, &amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L69'>tickslock</a>          69 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L89'>tickslock</a>          89 kernel/sysproc.c   acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/33.html#L91'>tickslock</a>          91 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/55.html#L9'>tickslock</a>           9 kernel/trap.c  struct spinlock tickslock;</span>
+<span class='curline'><a href='../S/55.html#L22'>tickslock</a>          22 kernel/trap.c    initlock(&amp;tickslock, "time");</span>
+<span class='curline'><a href='../S/55.html#L167'>tickslock</a>         167 kernel/trap.c      acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/55.html#L170'>tickslock</a>         170 kernel/trap.c      release(&amp;tickslock);</span>
 </pre>
 </body>
 </html>

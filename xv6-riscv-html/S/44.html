@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>kernel/sleeplock.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.6.13' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/72.html'>kernel</a>/sleeplock.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L13'>[^]</a><a href='#L44'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L13' title='Defined at 13.'>initsleeplock</a></li>
+<li><a href='#L22' title='Defined at 22.'>acquiresleep</a></li>
+<li><a href='#L34' title='Defined at 34.'>releasesleep</a></li>
+<li><a href='#L44' title='Defined at 44.'>holdingsleep</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Sleeping locks</em>
+<a id='L2' name='L2'></a>   2 
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='37.html'>types.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='63.html'>riscv.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='32.html'>defs.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='57.html'>param.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='48.html'>memlayout.h</a>"
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='31.html'>spinlock.h</a>"
+<a id='L9' name='L9'></a>   9 <em class='sharp'>#include</em> "<a href='35.html'>proc.h</a>"
+<a id='L10' name='L10'></a>  10 <em class='sharp'>#include</em> "<a href='65.html'>sleeplock.h</a>"
+<a id='L11' name='L11'></a>  11 
+<a id='L12' name='L12'></a>  12 <strong class='reserved'>void</strong>
+<a id='L13' name='L13'></a>  13 <a href='../R/311.html' title='Multiple referred from 3 places.'>initsleeplock</a>(<strong class='reserved'>struct</strong> <a href='../S/65.html#L2' title='Defined at 2 in kernel/sleeplock.h.'>sleeplock</a> *<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>, <strong class='reserved'>char</strong> *<a href='../Y/205.html' title='Multiple used in 162 places.'>name</a>)
+<a id='L14' name='L14'></a>  14 <em class='brace'>{</em>
+<a id='L15' name='L15'></a>  15   <a href='../S/58.html#L12' title='Defined at 12 in kernel/spinlock.c.'>initlock</a>(&amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>, "sleep lock");
+<a id='L16' name='L16'></a>  16   <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/205.html' title='Multiple used in 162 places.'>name</a> = <a href='../Y/205.html' title='Multiple used in 162 places.'>name</a>;
+<a id='L17' name='L17'></a>  17   <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/188.html' title='Multiple used in 11 places.'>locked</a> = 0;
+<a id='L18' name='L18'></a>  18   <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/271.html' title='Multiple used in 185 places.'>pid</a> = 0;
+<a id='L19' name='L19'></a>  19 <em class='brace'>}</em>
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <strong class='reserved'>void</strong>
+<a id='L22' name='L22'></a>  22 <a href='../R/185.html' title='Multiple referred from 5 places.'>acquiresleep</a>(<strong class='reserved'>struct</strong> <a href='../S/65.html#L2' title='Defined at 2 in kernel/sleeplock.h.'>sleeplock</a> *<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>)
+<a id='L23' name='L23'></a>  23 <em class='brace'>{</em>
+<a id='L24' name='L24'></a>  24   <a href='../S/58.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L25' name='L25'></a>  25   <strong class='reserved'>while</strong> (<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/188.html' title='Multiple used in 11 places.'>locked</a>) <em class='brace'>{</em>
+<a id='L26' name='L26'></a>  26     <a href='../S/62.html#L548' title='Defined at 548 in kernel/proc.c.'>sleep</a>(<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>, &amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L27' name='L27'></a>  27   <em class='brace'>}</em>
+<a id='L28' name='L28'></a>  28   <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/188.html' title='Multiple used in 11 places.'>locked</a> = 1;
+<a id='L29' name='L29'></a>  29   <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/271.html' title='Multiple used in 185 places.'>pid</a> = <a href='../S/62.html#L83' title='Defined at 83 in kernel/proc.c.'>myproc</a>()-&gt;<a href='../Y/271.html' title='Multiple used in 185 places.'>pid</a>;
+<a id='L30' name='L30'></a>  30   <a href='../S/58.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L31' name='L31'></a>  31 <em class='brace'>}</em>
+<a id='L32' name='L32'></a>  32 
+<a id='L33' name='L33'></a>  33 <strong class='reserved'>void</strong>
+<a id='L34' name='L34'></a>  34 <a href='../R/433.html' title='Multiple referred from 4 places.'>releasesleep</a>(<strong class='reserved'>struct</strong> <a href='../S/65.html#L2' title='Defined at 2 in kernel/sleeplock.h.'>sleeplock</a> *<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>)
+<a id='L35' name='L35'></a>  35 <em class='brace'>{</em>
+<a id='L36' name='L36'></a>  36   <a href='../S/58.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L37' name='L37'></a>  37   <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/188.html' title='Multiple used in 11 places.'>locked</a> = 0;
+<a id='L38' name='L38'></a>  38   <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/271.html' title='Multiple used in 185 places.'>pid</a> = 0;
+<a id='L39' name='L39'></a>  39   <a href='../S/62.html#L579' title='Defined at 579 in kernel/proc.c.'>wakeup</a>(<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L40' name='L40'></a>  40   <a href='../S/58.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L41' name='L41'></a>  41 <em class='brace'>}</em>
+<a id='L42' name='L42'></a>  42 
+<a id='L43' name='L43'></a>  43 <strong class='reserved'>int</strong>
+<a id='L44' name='L44'></a>  44 <a href='../R/302.html' title='Multiple referred from 4 places.'>holdingsleep</a>(<strong class='reserved'>struct</strong> <a href='../S/65.html#L2' title='Defined at 2 in kernel/sleeplock.h.'>sleeplock</a> *<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>)
+<a id='L45' name='L45'></a>  45 <em class='brace'>{</em>
+<a id='L46' name='L46'></a>  46   <strong class='reserved'>int</strong> <a href='../Y/288.html' title='Multiple used in 40 places.'>r</a>;
+<a id='L47' name='L47'></a>  47   
+<a id='L48' name='L48'></a>  48   <a href='../S/58.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L49' name='L49'></a>  49   <a href='../Y/288.html' title='Multiple used in 40 places.'>r</a> = <a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/188.html' title='Multiple used in 11 places.'>locked</a> &amp;&amp; (<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/271.html' title='Multiple used in 185 places.'>pid</a> == <a href='../S/62.html#L83' title='Defined at 83 in kernel/proc.c.'>myproc</a>()-&gt;<a href='../Y/271.html' title='Multiple used in 185 places.'>pid</a>);
+<a id='L50' name='L50'></a>  50   <a href='../S/58.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>-&gt;<a href='../Y/185.html' title='Multiple used in 40 places.'>lk</a>);
+<a id='L51' name='L51'></a>  51   <strong class='reserved'>return</strong> <a href='../Y/288.html' title='Multiple used in 40 places.'>r</a>;
+<a id='L52' name='L52'></a>  52 <em class='brace'>}</em>
+<a id='L53' name='L53'></a>  53 
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L13'>[^]</a><a href='#L44'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

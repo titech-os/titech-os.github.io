@@ -1,71 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>inode</title>
+<title>intr_get</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/89.html#L4'>inode</a>               4 kernel/defs.h  struct inode;</span>
-<span class='curline'><a href='../S/89.html#L39'>inode</a>              39 kernel/defs.h  int             dirlink(struct inode*, char*, uint);</span>
-<span class='curline'><a href='../S/89.html#L40'>inode</a>              40 kernel/defs.h  struct inode*   dirlookup(struct inode*, char*, uint*);</span>
-<span class='curline'><a href='../S/89.html#L41'>inode</a>              41 kernel/defs.h  struct inode*   ialloc(uint, short);</span>
-<span class='curline'><a href='../S/89.html#L42'>inode</a>              42 kernel/defs.h  struct inode*   idup(struct inode*);</span>
-<span class='curline'><a href='../S/89.html#L44'>inode</a>              44 kernel/defs.h  void            ilock(struct inode*);</span>
-<span class='curline'><a href='../S/89.html#L45'>inode</a>              45 kernel/defs.h  void            iput(struct inode*);</span>
-<span class='curline'><a href='../S/89.html#L46'>inode</a>              46 kernel/defs.h  void            iunlock(struct inode*);</span>
-<span class='curline'><a href='../S/89.html#L47'>inode</a>              47 kernel/defs.h  void            iunlockput(struct inode*);</span>
-<span class='curline'><a href='../S/89.html#L48'>inode</a>              48 kernel/defs.h  void            iupdate(struct inode*);</span>
-<span class='curline'><a href='../S/89.html#L50'>inode</a>              50 kernel/defs.h  struct inode*   namei(char*);</span>
-<span class='curline'><a href='../S/89.html#L51'>inode</a>              51 kernel/defs.h  struct inode*   nameiparent(char*, char*);</span>
-<span class='curline'><a href='../S/89.html#L52'>inode</a>              52 kernel/defs.h  int             readi(struct inode*, int, uint64, uint, uint);</span>
-<span class='curline'><a href='../S/89.html#L53'>inode</a>              53 kernel/defs.h  void            stati(struct inode*, struct stat*);</span>
-<span class='curline'><a href='../S/89.html#L54'>inode</a>              54 kernel/defs.h  int             writei(struct inode*, int, uint64, uint, uint);</span>
-<span class='curline'><a href='../S/89.html#L55'>inode</a>              55 kernel/defs.h  void            itrunc(struct inode*);</span>
-<span class='curline'><a href='../S/97.html#L10'>inode</a>              10 kernel/exec.c  static int loadseg(pde_t *, uint64, struct inode *, uint, uint);</span>
-<span class='curline'><a href='../S/97.html#L29'>inode</a>              29 kernel/exec.c    struct inode *ip;</span>
-<span class='curline'><a href='../S/97.html#L148'>inode</a>             148 kernel/exec.c  loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)</span>
-<span class='curline'><a href='../S/103.html#L7'>inode</a>               7 kernel/file.h    struct inode *ip;  // FD_INODE and FD_DEVICE</span>
-<span class='curline'><a href='../S/113.html#L178'>inode</a>             178 kernel/fs.c      struct inode inode[NINODE];</span>
-<span class='curline'><a href='../S/113.html#L188'>inode</a>             188 kernel/fs.c        initsleeplock(&amp;itable.inode[i].lock, "inode");</span>
-<span class='curline'><a href='../S/113.html#L192'>inode</a>             192 kernel/fs.c    static struct inode* iget(uint dev, uint inum);</span>
-<span class='curline'><a href='../S/113.html#L198'>inode</a>             198 kernel/fs.c    struct inode*</span>
-<span class='curline'><a href='../S/113.html#L226'>inode</a>             226 kernel/fs.c    iupdate(struct inode *ip)</span>
-<span class='curline'><a href='../S/113.html#L246'>inode</a>             246 kernel/fs.c    static struct inode*</span>
-<span class='curline'><a href='../S/113.html#L249'>inode</a>             249 kernel/fs.c      struct inode *ip, *empty;</span>
-<span class='curline'><a href='../S/113.html#L255'>inode</a>             255 kernel/fs.c      for(ip = &amp;itable.inode[0]; ip &lt; &amp;itable.inode[NINODE]; ip++){</span>
-<span class='curline'><a href='../S/113.html#L281'>inode</a>             281 kernel/fs.c    struct inode*</span>
-<span class='curline'><a href='../S/113.html#L282'>inode</a>             282 kernel/fs.c    idup(struct inode *ip)</span>
-<span class='curline'><a href='../S/113.html#L293'>inode</a>             293 kernel/fs.c    ilock(struct inode *ip)</span>
-<span class='curline'><a href='../S/113.html#L321'>inode</a>             321 kernel/fs.c    iunlock(struct inode *ip)</span>
-<span class='curline'><a href='../S/113.html#L337'>inode</a>             337 kernel/fs.c    iput(struct inode *ip)</span>
-<span class='curline'><a href='../S/113.html#L366'>inode</a>             366 kernel/fs.c    iunlockput(struct inode *ip)</span>
-<span class='curline'><a href='../S/113.html#L383'>inode</a>             383 kernel/fs.c    bmap(struct inode *ip, uint bn)</span>
-<span class='curline'><a href='../S/113.html#L426'>inode</a>             426 kernel/fs.c    itrunc(struct inode *ip)</span>
-<span class='curline'><a href='../S/113.html#L458'>inode</a>             458 kernel/fs.c    stati(struct inode *ip, struct stat *st)</span>
-<span class='curline'><a href='../S/113.html#L472'>inode</a>             472 kernel/fs.c    readi(struct inode *ip, int user_dst, uint64 dst, uint off, uint n)</span>
-<span class='curline'><a href='../S/113.html#L506'>inode</a>             506 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
-<span class='curline'><a href='../S/113.html#L551'>inode</a>             551 kernel/fs.c    struct inode*</span>
-<span class='curline'><a href='../S/113.html#L552'>inode</a>             552 kernel/fs.c    dirlookup(struct inode *dp, char *name, uint *poff)</span>
-<span class='curline'><a href='../S/113.html#L580'>inode</a>             580 kernel/fs.c    dirlink(struct inode *dp, char *name, uint inum)</span>
-<span class='curline'><a href='../S/113.html#L584'>inode</a>             584 kernel/fs.c      struct inode *ip;</span>
-<span class='curline'><a href='../S/113.html#L651'>inode</a>             651 kernel/fs.c    static struct inode*</span>
-<span class='curline'><a href='../S/113.html#L654'>inode</a>             654 kernel/fs.c      struct inode *ip, *next;</span>
-<span class='curline'><a href='../S/113.html#L686'>inode</a>             686 kernel/fs.c    struct inode*</span>
-<span class='curline'><a href='../S/113.html#L693'>inode</a>             693 kernel/fs.c    struct inode*</span>
-<span class='curline'><a href='../S/95.html#L105'>inode</a>             105 kernel/proc.h    struct inode *cwd;           // Current directory</span>
-<span class='curline'><a href='../S/106.html#L127'>inode</a>             127 kernel/sysfile.c   struct inode *dp, *ip;</span>
-<span class='curline'><a href='../S/106.html#L174'>inode</a>             174 kernel/sysfile.c isdirempty(struct inode *dp)</span>
-<span class='curline'><a href='../S/106.html#L191'>inode</a>             191 kernel/sysfile.c   struct inode *ip, *dp;</span>
-<span class='curline'><a href='../S/106.html#L245'>inode</a>             245 kernel/sysfile.c static struct inode*</span>
-<span class='curline'><a href='../S/106.html#L248'>inode</a>             248 kernel/sysfile.c   struct inode *ip, *dp;</span>
-<span class='curline'><a href='../S/106.html#L310'>inode</a>             310 kernel/sysfile.c   struct inode *ip;</span>
-<span class='curline'><a href='../S/106.html#L377'>inode</a>             377 kernel/sysfile.c   struct inode *ip;</span>
-<span class='curline'><a href='../S/106.html#L392'>inode</a>             392 kernel/sysfile.c   struct inode *ip;</span>
-<span class='curline'><a href='../S/106.html#L413'>inode</a>             413 kernel/sysfile.c   struct inode *ip;</span>
+<span class='curline'><a href='../S/62.html#L502'>intr_get</a>          502 kernel/proc.c    if(intr_get())</span>
+<span class='curline'><a href='../S/58.html#L91'>intr_get</a>           91 kernel/spinlock.c   int old = intr_get();</span>
+<span class='curline'><a href='../S/58.html#L103'>intr_get</a>          103 kernel/spinlock.c   if(intr_get())</span>
+<span class='curline'><a href='../S/55.html#L144'>intr_get</a>          144 kernel/trap.c    if(intr_get() != 0)</span>
 </pre>
 </body>
 </html>

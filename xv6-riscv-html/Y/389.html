@@ -1,17 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uart_tx_buf</title>
+<title>uart_tx_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/151.html#L44'>uart_tx_buf</a>        44 kernel/uart.c  char uart_tx_buf[UART_TX_BUF_SIZE];</span>
-<span class='curline'><a href='../S/151.html#L100'>uart_tx_buf</a>       100 kernel/uart.c    uart_tx_buf[uart_tx_w % UART_TX_BUF_SIZE] = c;</span>
-<span class='curline'><a href='../S/151.html#L149'>uart_tx_buf</a>       149 kernel/uart.c      int c = uart_tx_buf[uart_tx_r % UART_TX_BUF_SIZE];</span>
+<span class='curline'><a href='../S/71.html#L42'>uart_tx_lock</a>       42 kernel/uart.c  struct spinlock uart_tx_lock;</span>
+<span class='curline'><a href='../S/71.html#L77'>uart_tx_lock</a>       77 kernel/uart.c    initlock(&amp;uart_tx_lock, "uart");</span>
+<span class='curline'><a href='../S/71.html#L89'>uart_tx_lock</a>       89 kernel/uart.c    acquire(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/71.html#L98'>uart_tx_lock</a>       98 kernel/uart.c      sleep(&amp;uart_tx_r, &amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/71.html#L103'>uart_tx_lock</a>      103 kernel/uart.c    release(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/71.html#L188'>uart_tx_lock</a>      188 kernel/uart.c    acquire(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/71.html#L190'>uart_tx_lock</a>      190 kernel/uart.c    release(&amp;uart_tx_lock);</span>
 </pre>
 </body>
 </html>

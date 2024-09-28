@@ -1,21 +1,47 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>st1</title>
+<title>st</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L285'>st1</a>               285 user/grind.c         int st1, st2;</span>
-<span class='curline'><a href='../S/34.html#L286'>st1</a>               286 user/grind.c         wait(&amp;st1);</span>
-<span class='curline'><a href='../S/34.html#L288'>st1</a>               288 user/grind.c         if(st1 != 0 || st2 != 0 || strcmp(buf, "hi\n") != 0){</span>
-<span class='curline'><a href='../S/34.html#L289'>st1</a>               289 user/grind.c           printf("grind: exec pipeline failed %d %d \"%s\"\n", st1, st2, buf);</span>
-<span class='curline'><a href='../S/34.html#L324'>st1</a>               324 user/grind.c     int st1 = -1;</span>
-<span class='curline'><a href='../S/34.html#L325'>st1</a>               325 user/grind.c     wait(&amp;st1);</span>
-<span class='curline'><a href='../S/34.html#L326'>st1</a>               326 user/grind.c     if(st1 != 0){</span>
+<span class='curline'><a href='../S/66.html#L91'>st</a>                 91 kernel/file.c    struct stat st;</span>
+<span class='curline'><a href='../S/66.html#L95'>st</a>                 95 kernel/file.c      stati(f-&gt;ip, &amp;st);</span>
+<span class='curline'><a href='../S/66.html#L97'>st</a>                 97 kernel/file.c      if(copyout(p-&gt;pagetable, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
+<span class='curline'><a href='../S/47.html#L458'>st</a>                458 kernel/fs.c    stati(struct inode *ip, struct stat *st)</span>
+<span class='curline'><a href='../S/47.html#L460'>st</a>                460 kernel/fs.c      st-&gt;dev = ip-&gt;dev;</span>
+<span class='curline'><a href='../S/47.html#L461'>st</a>                461 kernel/fs.c      st-&gt;ino = ip-&gt;inum;</span>
+<span class='curline'><a href='../S/47.html#L462'>st</a>                462 kernel/fs.c      st-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/47.html#L463'>st</a>                463 kernel/fs.c      st-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/47.html#L464'>st</a>                464 kernel/fs.c      st-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/43.html#L114'>st</a>                114 kernel/sysfile.c   uint64 st; // user pointer to struct stat</span>
+<span class='curline'><a href='../S/43.html#L116'>st</a>                116 kernel/sysfile.c   argaddr(1, &amp;st);</span>
+<span class='curline'><a href='../S/43.html#L119'>st</a>                119 kernel/sysfile.c   return filestat(f, st);</span>
+<span class='curline'><a href='../S/13.html#L208'>st</a>                208 user/grind.c         struct stat st;</span>
+<span class='curline'><a href='../S/13.html#L209'>st</a>                209 user/grind.c         if(fstat(fd1, &amp;st) != 0){</span>
+<span class='curline'><a href='../S/13.html#L213'>st</a>                213 user/grind.c         if(st.size != 1){</span>
+<span class='curline'><a href='../S/13.html#L214'>st</a>                214 user/grind.c           printf("grind: fstat reports wrong size %d\n", (int)st.size);</span>
+<span class='curline'><a href='../S/13.html#L217'>st</a>                217 user/grind.c         if(st.ino &gt; 200){</span>
+<span class='curline'><a href='../S/13.html#L218'>st</a>                218 user/grind.c           printf("grind: fstat reports crazy i-number %d\n", st.ino);</span>
+<span class='curline'><a href='../S/6.html#L32'>st</a>                 32 user/ls.c        struct stat st;</span>
+<span class='curline'><a href='../S/6.html#L39'>st</a>                 39 user/ls.c        if(fstat(fd, &amp;st) &lt; 0){</span>
+<span class='curline'><a href='../S/6.html#L45'>st</a>                 45 user/ls.c        switch(st.type){</span>
+<span class='curline'><a href='../S/6.html#L48'>st</a>                 48 user/ls.c          printf("%s %d %d %d\n", fmtname(path), st.type, st.ino, (int) st.size);</span>
+<span class='curline'><a href='../S/6.html#L64'>st</a>                 64 user/ls.c            if(stat(buf, &amp;st) &lt; 0){</span>
+<span class='curline'><a href='../S/6.html#L68'>st</a>                 68 user/ls.c            printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, (int) st.size);</span>
+<span class='curline'><a href='../S/20.html#L85'>st</a>                 85 user/ulib.c    stat(const char *n, struct stat *st)</span>
+<span class='curline'><a href='../S/20.html#L93'>st</a>                 93 user/ulib.c      r = fstat(fd, st);</span>
+<span class='curline'><a href='../S/25.html#L192'>st</a>                192 user/usertests.c   int st = 0;</span>
+<span class='curline'><a href='../S/25.html#L193'>st</a>                193 user/usertests.c   wait(&amp;st);</span>
+<span class='curline'><a href='../S/25.html#L194'>st</a>                194 user/usertests.c   if(st != 747){</span>
+<span class='curline'><a href='../S/25.html#L2748'>st</a>               2748 user/usertests.c     int st = 0;</span>
+<span class='curline'><a href='../S/25.html#L2749'>st</a>               2749 user/usertests.c     wait(&amp;st);</span>
+<span class='curline'><a href='../S/25.html#L2750'>st</a>               2750 user/usertests.c     if(st != 0)</span>
+<span class='curline'><a href='../S/25.html#L2751'>st</a>               2751 user/usertests.c       exit(st);</span>
 </pre>
 </body>
 </html>

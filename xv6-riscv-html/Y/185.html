@@ -1,35 +1,54 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>link</title>
+<title>lk</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L103'>link</a>              103 user/grind.c         link("../grindir/./../a", "../b");</span>
-<span class='curline'><a href='../S/34.html#L106'>link</a>              106 user/grind.c         link(".././b", "/grindir/../a");</span>
-<span class='curline'><a href='../S/63.html#L12'>link</a>               12 user/ln.c        if(link(argv[1], argv[2]) &lt; 0)</span>
-<span class='curline'><a href='../S/46.html#L17'>link</a>               17 user/user.h    int link(const char*, const char*);</span>
-<span class='curline'><a href='../S/78.html#L157'>link</a>              157 user/usertests.c   ret = link(b, b);</span>
-<span class='curline'><a href='../S/78.html#L227'>link</a>              227 user/usertests.c   ret = link(b, b);</span>
-<span class='curline'><a href='../S/78.html#L1352'>link</a>             1352 user/usertests.c   if(link("lf1", "lf2") &lt; 0){</span>
-<span class='curline'><a href='../S/78.html#L1374'>link</a>             1374 user/usertests.c   if(link("lf2", "lf2") &gt;= 0){</span>
-<span class='curline'><a href='../S/78.html#L1380'>link</a>             1380 user/usertests.c   if(link("lf2", "lf1") &gt;= 0){</span>
-<span class='curline'><a href='../S/78.html#L1385'>link</a>             1385 user/usertests.c   if(link(".", "lf1") &gt;= 0){</span>
-<span class='curline'><a href='../S/78.html#L1411'>link</a>             1411 user/usertests.c       link("C0", file);</span>
-<span class='curline'><a href='../S/78.html#L1413'>link</a>             1413 user/usertests.c       link("C0", file);</span>
-<span class='curline'><a href='../S/78.html#L1509'>link</a>             1509 user/usertests.c       link("cat", "x");</span>
-<span class='curline'><a href='../S/78.html#L1571'>link</a>             1571 user/usertests.c   if(link("dd/dd/ff", "dd/dd/ffff") != 0){</span>
-<span class='curline'><a href='../S/78.html#L1638'>link</a>             1638 user/usertests.c   if(link("dd/ff/ff", "dd/dd/xx") == 0){</span>
-<span class='curline'><a href='../S/78.html#L1642'>link</a>             1642 user/usertests.c   if(link("dd/xx/ff", "dd/dd/xx") == 0){</span>
-<span class='curline'><a href='../S/78.html#L1646'>link</a>             1646 user/usertests.c   if(link("dd/ff", "dd/dd/ffff") == 0){</span>
-<span class='curline'><a href='../S/78.html#L1897'>link</a>             1897 user/usertests.c   if(link("README", "dirfile/xx") == 0){</span>
-<span class='curline'><a href='../S/78.html#L1937'>link</a>             1937 user/usertests.c     link("README", "");</span>
-<span class='curline'><a href='../S/78.html#L2275'>link</a>             2275 user/usertests.c     if(link("nosuchfile", (char*)p) != -1){</span>
-<span class='curline'><a href='../S/78.html#L2668'>link</a>             2668 user/usertests.c     if(link("bd", name) != 0){</span>
+<span class='curline'><a href='../S/62.html#L548'>lk</a>                548 kernel/proc.c  sleep(void *chan, struct spinlock *lk)</span>
+<span class='curline'><a href='../S/62.html#L560'>lk</a>                560 kernel/proc.c    release(lk);</span>
+<span class='curline'><a href='../S/62.html#L573'>lk</a>                573 kernel/proc.c    acquire(lk);</span>
+<span class='curline'><a href='../S/44.html#L13'>lk</a>                 13 kernel/sleeplock.c initsleeplock(struct sleeplock *lk, char *name)</span>
+<span class='curline'><a href='../S/44.html#L15'>lk</a>                 15 kernel/sleeplock.c   initlock(&amp;lk-&gt;lk, "sleep lock");</span>
+<span class='curline'><a href='../S/44.html#L16'>lk</a>                 16 kernel/sleeplock.c   lk-&gt;name = name;</span>
+<span class='curline'><a href='../S/44.html#L17'>lk</a>                 17 kernel/sleeplock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/44.html#L18'>lk</a>                 18 kernel/sleeplock.c   lk-&gt;pid = 0;</span>
+<span class='curline'><a href='../S/44.html#L22'>lk</a>                 22 kernel/sleeplock.c acquiresleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/44.html#L24'>lk</a>                 24 kernel/sleeplock.c   acquire(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L25'>lk</a>                 25 kernel/sleeplock.c   while (lk-&gt;locked) {</span>
+<span class='curline'><a href='../S/44.html#L26'>lk</a>                 26 kernel/sleeplock.c     sleep(lk, &amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L28'>lk</a>                 28 kernel/sleeplock.c   lk-&gt;locked = 1;</span>
+<span class='curline'><a href='../S/44.html#L29'>lk</a>                 29 kernel/sleeplock.c   lk-&gt;pid = myproc()-&gt;pid;</span>
+<span class='curline'><a href='../S/44.html#L30'>lk</a>                 30 kernel/sleeplock.c   release(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L34'>lk</a>                 34 kernel/sleeplock.c releasesleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/44.html#L36'>lk</a>                 36 kernel/sleeplock.c   acquire(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L37'>lk</a>                 37 kernel/sleeplock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/44.html#L38'>lk</a>                 38 kernel/sleeplock.c   lk-&gt;pid = 0;</span>
+<span class='curline'><a href='../S/44.html#L39'>lk</a>                 39 kernel/sleeplock.c   wakeup(lk);</span>
+<span class='curline'><a href='../S/44.html#L40'>lk</a>                 40 kernel/sleeplock.c   release(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L44'>lk</a>                 44 kernel/sleeplock.c holdingsleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/44.html#L48'>lk</a>                 48 kernel/sleeplock.c   acquire(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/44.html#L49'>lk</a>                 49 kernel/sleeplock.c   r = lk-&gt;locked &amp;&amp; (lk-&gt;pid == myproc()-&gt;pid);</span>
+<span class='curline'><a href='../S/44.html#L50'>lk</a>                 50 kernel/sleeplock.c   release(&amp;lk-&gt;lk);</span>
+<span class='curline'><a href='../S/65.html#L4'>lk</a>                  4 kernel/sleeplock.h   struct spinlock lk; // spinlock protecting this sleep lock</span>
+<span class='curline'><a href='../S/58.html#L12'>lk</a>                 12 kernel/spinlock.c initlock(struct spinlock *lk, char *name)</span>
+<span class='curline'><a href='../S/58.html#L14'>lk</a>                 14 kernel/spinlock.c   lk-&gt;name = name;</span>
+<span class='curline'><a href='../S/58.html#L15'>lk</a>                 15 kernel/spinlock.c   lk-&gt;locked = 0;</span>
+<span class='curline'><a href='../S/58.html#L16'>lk</a>                 16 kernel/spinlock.c   lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/58.html#L22'>lk</a>                 22 kernel/spinlock.c acquire(struct spinlock *lk)</span>
+<span class='curline'><a href='../S/58.html#L25'>lk</a>                 25 kernel/spinlock.c   if(holding(lk))</span>
+<span class='curline'><a href='../S/58.html#L32'>lk</a>                 32 kernel/spinlock.c   while(__sync_lock_test_and_set(&amp;lk-&gt;locked, 1) != 0)</span>
+<span class='curline'><a href='../S/58.html#L42'>lk</a>                 42 kernel/spinlock.c   lk-&gt;cpu = mycpu();</span>
+<span class='curline'><a href='../S/58.html#L47'>lk</a>                 47 kernel/spinlock.c release(struct spinlock *lk)</span>
+<span class='curline'><a href='../S/58.html#L49'>lk</a>                 49 kernel/spinlock.c   if(!holding(lk))</span>
+<span class='curline'><a href='../S/58.html#L52'>lk</a>                 52 kernel/spinlock.c   lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/58.html#L69'>lk</a>                 69 kernel/spinlock.c   __sync_lock_release(&amp;lk-&gt;locked);</span>
+<span class='curline'><a href='../S/58.html#L77'>lk</a>                 77 kernel/spinlock.c holding(struct spinlock *lk)</span>
+<span class='curline'><a href='../S/58.html#L80'>lk</a>                 80 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
 </pre>
 </body>
 </html>

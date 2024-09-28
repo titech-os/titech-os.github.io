@@ -1,16 +1,39 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>lseek</title>
+<title>m</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/3.html#L178'>lseek</a>             178 mkfs/mkfs.c      if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE)</span>
-<span class='curline'><a href='../S/3.html#L214'>lseek</a>             214 mkfs/mkfs.c      if(lseek(fsfd, sec * BSIZE, 0) != sec * BSIZE)</span>
+<span class='curline'><a href='../S/41.html#L14'>m</a>                  14 kernel/file.h  #define	mkdev(m,n)  ((uint)((m)&lt;&lt;16| (n)))</span>
+<span class='curline'><a href='../S/47.html#L68'>m</a>                  68 kernel/fs.c      int b, bi, m;</span>
+<span class='curline'><a href='../S/47.html#L75'>m</a>                  75 kernel/fs.c          m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/47.html#L76'>m</a>                  76 kernel/fs.c          if((bp-&gt;data[bi/8] &amp; m) == 0){  // Is block free?</span>
+<span class='curline'><a href='../S/47.html#L77'>m</a>                  77 kernel/fs.c            bp-&gt;data[bi/8] |= m;  // Mark block in use.</span>
+<span class='curline'><a href='../S/47.html#L95'>m</a>                  95 kernel/fs.c      int bi, m;</span>
+<span class='curline'><a href='../S/47.html#L99'>m</a>                  99 kernel/fs.c      m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/47.html#L100'>m</a>                 100 kernel/fs.c      if((bp-&gt;data[bi/8] &amp; m) == 0)</span>
+<span class='curline'><a href='../S/47.html#L102'>m</a>                 102 kernel/fs.c      bp-&gt;data[bi/8] &amp;= ~m;</span>
+<span class='curline'><a href='../S/47.html#L474'>m</a>                 474 kernel/fs.c      uint tot, m;</span>
+<span class='curline'><a href='../S/47.html#L482'>m</a>                 482 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, dst+=m){</span>
+<span class='curline'><a href='../S/47.html#L487'>m</a>                 487 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/47.html#L488'>m</a>                 488 kernel/fs.c        if(either_copyout(user_dst, dst, bp-&gt;data + (off % BSIZE), m) == -1) {</span>
+<span class='curline'><a href='../S/47.html#L508'>m</a>                 508 kernel/fs.c      uint tot, m;</span>
+<span class='curline'><a href='../S/47.html#L516'>m</a>                 516 kernel/fs.c      for(tot=0; tot&lt;n; tot+=m, off+=m, src+=m){</span>
+<span class='curline'><a href='../S/47.html#L521'>m</a>                 521 kernel/fs.c        m = min(n - tot, BSIZE - off%BSIZE);</span>
+<span class='curline'><a href='../S/47.html#L522'>m</a>                 522 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
+<span class='curline'><a href='../S/22.html#L14'>m</a>                  14 user/grep.c      int n, m;</span>
+<span class='curline'><a href='../S/22.html#L17'>m</a>                  17 user/grep.c      m = 0;</span>
+<span class='curline'><a href='../S/22.html#L18'>m</a>                  18 user/grep.c      while((n = read(fd, buf+m, sizeof(buf)-m-1)) &gt; 0){</span>
+<span class='curline'><a href='../S/22.html#L19'>m</a>                  19 user/grep.c        m += n;</span>
+<span class='curline'><a href='../S/22.html#L20'>m</a>                  20 user/grep.c        buf[m] = '\0';</span>
+<span class='curline'><a href='../S/22.html#L30'>m</a>                  30 user/grep.c        if(m &gt; 0){</span>
+<span class='curline'><a href='../S/22.html#L31'>m</a>                  31 user/grep.c          m -= p - buf;</span>
+<span class='curline'><a href='../S/22.html#L32'>m</a>                  32 user/grep.c          memmove(buf, p, m);</span>
 </pre>
 </body>
 </html>

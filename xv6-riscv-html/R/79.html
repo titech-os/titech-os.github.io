@@ -1,17 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PHYSTOP</title>
+<title>PLIC</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/148.html#L30'>PHYSTOP</a>            30 kernel/kalloc.c   freerange(end, (void*)PHYSTOP);</span>
-<span class='curline'><a href='../S/148.html#L51'>PHYSTOP</a>            51 kernel/kalloc.c   if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)</span>
-<span class='curline'><a href='../S/99.html#L40'>PHYSTOP</a>            40 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/48.html#L30'>PLIC</a>               30 kernel/memlayout.h #define PLIC_PRIORITY (PLIC + 0x0)</span>
+<span class='curline'><a href='../S/48.html#L31'>PLIC</a>               31 kernel/memlayout.h #define PLIC_PENDING (PLIC + 0x1000)</span>
+<span class='curline'><a href='../S/48.html#L32'>PLIC</a>               32 kernel/memlayout.h #define PLIC_SENABLE(hart) (PLIC + 0x2080 + (hart)*0x100)</span>
+<span class='curline'><a href='../S/48.html#L33'>PLIC</a>               33 kernel/memlayout.h #define PLIC_SPRIORITY(hart) (PLIC + 0x201000 + (hart)*0x2000)</span>
+<span class='curline'><a href='../S/48.html#L34'>PLIC</a>               34 kernel/memlayout.h #define PLIC_SCLAIM(hart) (PLIC + 0x201004 + (hart)*0x2000)</span>
+<span class='curline'><a href='../S/61.html#L15'>PLIC</a>               15 kernel/plic.c    *(uint32*)(PLIC + UART0_IRQ*4) = 1;</span>
+<span class='curline'><a href='../S/61.html#L16'>PLIC</a>               16 kernel/plic.c    *(uint32*)(PLIC + VIRTIO0_IRQ*4) = 1;</span>
+<span class='curline'><a href='../S/38.html#L34'>PLIC</a>               34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x4000000, PTE_R | PTE_W);</span>
 </pre>
 </body>
 </html>

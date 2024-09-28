@@ -1,44 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>memset</title>
+<title>minor</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/89.html#L130'>memset</a>            130 kernel/defs.h  void*           memset(void*, int, uint);</span>
-<span class='curline'><a href='../S/113.html#L56'>memset</a>             56 kernel/fs.c      memset(bp-&gt;data, 0, BSIZE);</span>
-<span class='curline'><a href='../S/113.html#L209'>memset</a>            209 kernel/fs.c          memset(dip, 0, sizeof(*dip));</span>
-<span class='curline'><a href='../S/148.html#L55'>memset</a>             55 kernel/kalloc.c   memset(pa, 1, PGSIZE);</span>
-<span class='curline'><a href='../S/148.html#L80'>memset</a>             80 kernel/kalloc.c     memset((char*)r, 5, PGSIZE); // fill with junk</span>
-<span class='curline'><a href='../S/138.html#L145'>memset</a>            145 kernel/proc.c    memset(&amp;p-&gt;context, 0, sizeof(p-&gt;context));</span>
-<span class='curline'><a href='../S/106.html#L222'>memset</a>            222 kernel/sysfile.c   memset(&amp;de, 0, sizeof(de));</span>
-<span class='curline'><a href='../S/106.html#L445'>memset</a>            445 kernel/sysfile.c   memset(argv, 0, sizeof(argv));</span>
-<span class='curline'><a href='../S/141.html#L126'>memset</a>            126 kernel/virtio_disk.c   memset(disk.desc, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/141.html#L127'>memset</a>            127 kernel/virtio_disk.c   memset(disk.avail, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/141.html#L128'>memset</a>            128 kernel/virtio_disk.c   memset(disk.used, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/99.html#L25'>memset</a>             25 kernel/vm.c      memset(kpgtbl, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/99.html#L98'>memset</a>             98 kernel/vm.c          memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/99.html#L203'>memset</a>            203 kernel/vm.c      memset(pagetable, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/99.html#L218'>memset</a>            218 kernel/vm.c      memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/99.html#L241'>memset</a>            241 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/3.html#L113'>memset</a>            113 mkfs/mkfs.c      memset(buf, 0, sizeof(buf));</span>
-<span class='curline'><a href='../S/12.html#L21'>memset</a>             21 user/ls.c        memset(buf+strlen(p), ' ', DIRSIZ-strlen(p));</span>
-<span class='curline'><a href='../S/51.html#L138'>memset</a>            138 user/sh.c        memset(buf, 0, nbuf);</span>
-<span class='curline'><a href='../S/51.html#L202'>memset</a>            202 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/51.html#L213'>memset</a>            213 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/51.html#L229'>memset</a>            229 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/51.html#L242'>memset</a>            242 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/51.html#L255'>memset</a>            255 user/sh.c        memset(cmd, 0, sizeof(*cmd));</span>
-<span class='curline'><a href='../S/70.html#L24'>memset</a>             24 user/stressfs.c   memset(data, 'a', sizeof(data));</span>
-<span class='curline'><a href='../S/46.html#L36'>memset</a>             36 user/user.h    void* memset(void*, int, uint);</span>
-<span class='curline'><a href='../S/78.html#L1107'>memset</a>           1107 user/usertests.c   memset(buf, pid==0?'c':'p', sizeof(buf));</span>
-<span class='curline'><a href='../S/78.html#L1175'>memset</a>           1175 user/usertests.c       memset(buf, '0'+pi, SZ);</span>
-<span class='curline'><a href='../S/78.html#L1432'>memset</a>           1432 user/usertests.c   memset(fa, 0, sizeof(fa));</span>
-<span class='curline'><a href='../S/78.html#L1741'>memset</a>           1741 user/usertests.c     memset(buf, i, SZ);</span>
+<span class='curline'><a href='../S/41.html#L26'>minor</a>              26 kernel/file.h    short minor;</span>
+<span class='curline'><a href='../S/47.html#L235'>minor</a>             235 kernel/fs.c      dip-&gt;minor = ip-&gt;minor;</span>
+<span class='curline'><a href='../S/47.html#L308'>minor</a>             308 kernel/fs.c        ip-&gt;minor = dip-&gt;minor;</span>
+<span class='curline'><a href='../S/70.html#L35'>minor</a>              35 kernel/fs.h      short minor;          // Minor device number (T_DEVICE only)</span>
+<span class='curline'><a href='../S/43.html#L246'>minor</a>             246 kernel/sysfile.c create(char *path, short type, short major, short minor)</span>
+<span class='curline'><a href='../S/43.html#L272'>minor</a>             272 kernel/sysfile.c   ip-&gt;minor = minor;</span>
+<span class='curline'><a href='../S/43.html#L394'>minor</a>             394 kernel/sysfile.c   int major, minor;</span>
+<span class='curline'><a href='../S/43.html#L398'>minor</a>             398 kernel/sysfile.c   argint(2, &amp;minor);</span>
+<span class='curline'><a href='../S/43.html#L400'>minor</a>             400 kernel/sysfile.c      (ip = create(path, T_DEVICE, major, minor)) == 0){</span>
 </pre>
 </body>
 </html>

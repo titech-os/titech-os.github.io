@@ -1,26 +1,26 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PTE_R</title>
+<title>PTE_W</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/138.html#L42'>PTE_R</a>              42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/138.html#L191'>PTE_R</a>             191 kernel/proc.c                (uint64)trampoline, PTE_R | PTE_X) &lt; 0){</span>
-<span class='curline'><a href='../S/138.html#L199'>PTE_R</a>             199 kernel/proc.c                (uint64)(p-&gt;trapframe), PTE_R | PTE_W) &lt; 0){</span>
-<span class='curline'><a href='../S/99.html#L28'>PTE_R</a>              28 kernel/vm.c      kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/99.html#L31'>PTE_R</a>              31 kernel/vm.c      kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/99.html#L34'>PTE_R</a>              34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x400000, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/99.html#L37'>PTE_R</a>              37 kernel/vm.c      kvmmap(kpgtbl, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);</span>
-<span class='curline'><a href='../S/99.html#L40'>PTE_R</a>              40 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/99.html#L44'>PTE_R</a>              44 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
-<span class='curline'><a href='../S/99.html#L219'>PTE_R</a>             219 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
-<span class='curline'><a href='../S/99.html#L242'>PTE_R</a>             242 kernel/vm.c        if(mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_R|PTE_U|xperm) != 0){</span>
-<span class='curline'><a href='../S/99.html#L277'>PTE_R</a>             277 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
+<span class='curline'><a href='../S/36.html#L18'>PTE_W</a>              18 kernel/exec.c        perm |= PTE_W;</span>
+<span class='curline'><a href='../S/36.html#L83'>PTE_W</a>              83 kernel/exec.c    if((sz1 = uvmalloc(pagetable, sz, sz + (USERSTACK+1)*PGSIZE, PTE_W)) == 0)</span>
+<span class='curline'><a href='../S/62.html#L42'>PTE_W</a>              42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/62.html#L199'>PTE_W</a>             199 kernel/proc.c                (uint64)(p-&gt;trapframe), PTE_R | PTE_W) &lt; 0){</span>
+<span class='curline'><a href='../S/62.html#L267'>PTE_W</a>             267 kernel/proc.c      if((sz = uvmalloc(p-&gt;pagetable, sz, sz + n, PTE_W)) == 0) {</span>
+<span class='curline'><a href='../S/38.html#L28'>PTE_W</a>              28 kernel/vm.c      kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/38.html#L31'>PTE_W</a>              31 kernel/vm.c      kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/38.html#L34'>PTE_W</a>              34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x4000000, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/38.html#L40'>PTE_W</a>              40 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/38.html#L226'>PTE_W</a>             226 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
+<span class='curline'><a href='../S/38.html#L284'>PTE_W</a>             284 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
+<span class='curline'><a href='../S/38.html#L370'>PTE_W</a>             370 kernel/vm.c           (*pte &amp; PTE_W) == 0)</span>
 </pre>
 </body>
 </html>

@@ -1,41 +1,37 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>dip</title>
+<title>din</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/113.html#L203'>dip</a>               203 kernel/fs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/113.html#L207'>dip</a>               207 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + inum%IPB;</span>
-<span class='curline'><a href='../S/113.html#L208'>dip</a>               208 kernel/fs.c        if(dip-&gt;type == 0){  // a free inode</span>
-<span class='curline'><a href='../S/113.html#L209'>dip</a>               209 kernel/fs.c          memset(dip, 0, sizeof(*dip));</span>
-<span class='curline'><a href='../S/113.html#L210'>dip</a>               210 kernel/fs.c          dip-&gt;type = type;</span>
-<span class='curline'><a href='../S/113.html#L229'>dip</a>               229 kernel/fs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/113.html#L232'>dip</a>               232 kernel/fs.c      dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
-<span class='curline'><a href='../S/113.html#L233'>dip</a>               233 kernel/fs.c      dip-&gt;type = ip-&gt;type;</span>
-<span class='curline'><a href='../S/113.html#L234'>dip</a>               234 kernel/fs.c      dip-&gt;major = ip-&gt;major;</span>
-<span class='curline'><a href='../S/113.html#L235'>dip</a>               235 kernel/fs.c      dip-&gt;minor = ip-&gt;minor;</span>
-<span class='curline'><a href='../S/113.html#L236'>dip</a>               236 kernel/fs.c      dip-&gt;nlink = ip-&gt;nlink;</span>
-<span class='curline'><a href='../S/113.html#L237'>dip</a>               237 kernel/fs.c      dip-&gt;size = ip-&gt;size;</span>
-<span class='curline'><a href='../S/113.html#L238'>dip</a>               238 kernel/fs.c      memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
-<span class='curline'><a href='../S/113.html#L296'>dip</a>               296 kernel/fs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/113.html#L305'>dip</a>               305 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
-<span class='curline'><a href='../S/113.html#L306'>dip</a>               306 kernel/fs.c        ip-&gt;type = dip-&gt;type;</span>
-<span class='curline'><a href='../S/113.html#L307'>dip</a>               307 kernel/fs.c        ip-&gt;major = dip-&gt;major;</span>
-<span class='curline'><a href='../S/113.html#L308'>dip</a>               308 kernel/fs.c        ip-&gt;minor = dip-&gt;minor;</span>
-<span class='curline'><a href='../S/113.html#L309'>dip</a>               309 kernel/fs.c        ip-&gt;nlink = dip-&gt;nlink;</span>
-<span class='curline'><a href='../S/113.html#L310'>dip</a>               310 kernel/fs.c        ip-&gt;size = dip-&gt;size;</span>
-<span class='curline'><a href='../S/113.html#L311'>dip</a>               311 kernel/fs.c        memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
-<span class='curline'><a href='../S/3.html#L189'>dip</a>               189 mkfs/mkfs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/3.html#L193'>dip</a>               193 mkfs/mkfs.c      dip = ((struct dinode*)buf) + (inum % IPB);</span>
-<span class='curline'><a href='../S/3.html#L194'>dip</a>               194 mkfs/mkfs.c      *dip = *ip;</span>
-<span class='curline'><a href='../S/3.html#L203'>dip</a>               203 mkfs/mkfs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/3.html#L207'>dip</a>               207 mkfs/mkfs.c      dip = ((struct dinode*)buf) + (inum % IPB);</span>
-<span class='curline'><a href='../S/3.html#L208'>dip</a>               208 mkfs/mkfs.c      *ip = *dip;</span>
+<span class='curline'><a href='../S/3.html#L75'>din</a>                75 mkfs/mkfs.c      struct dinode din;</span>
+<span class='curline'><a href='../S/3.html#L166'>din</a>               166 mkfs/mkfs.c      rinode(rootino, &amp;din);</span>
+<span class='curline'><a href='../S/3.html#L167'>din</a>               167 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L169'>din</a>               169 mkfs/mkfs.c      din.size = xint(off);</span>
+<span class='curline'><a href='../S/3.html#L170'>din</a>               170 mkfs/mkfs.c      winode(rootino, &amp;din);</span>
+<span class='curline'><a href='../S/3.html#L226'>din</a>               226 mkfs/mkfs.c      struct dinode din;</span>
+<span class='curline'><a href='../S/3.html#L228'>din</a>               228 mkfs/mkfs.c      bzero(&amp;din, sizeof(din));</span>
+<span class='curline'><a href='../S/3.html#L229'>din</a>               229 mkfs/mkfs.c      din.type = xshort(type);</span>
+<span class='curline'><a href='../S/3.html#L230'>din</a>               230 mkfs/mkfs.c      din.nlink = xshort(1);</span>
+<span class='curline'><a href='../S/3.html#L231'>din</a>               231 mkfs/mkfs.c      din.size = xint(0);</span>
+<span class='curline'><a href='../S/3.html#L232'>din</a>               232 mkfs/mkfs.c      winode(inum, &amp;din);</span>
+<span class='curline'><a href='../S/3.html#L259'>din</a>               259 mkfs/mkfs.c      struct dinode din;</span>
+<span class='curline'><a href='../S/3.html#L264'>din</a>               264 mkfs/mkfs.c      rinode(inum, &amp;din);</span>
+<span class='curline'><a href='../S/3.html#L265'>din</a>               265 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L271'>din</a>               271 mkfs/mkfs.c          if(xint(din.addrs[fbn]) == 0){</span>
+<span class='curline'><a href='../S/3.html#L272'>din</a>               272 mkfs/mkfs.c            din.addrs[fbn] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L274'>din</a>               274 mkfs/mkfs.c          x = xint(din.addrs[fbn]);</span>
+<span class='curline'><a href='../S/3.html#L276'>din</a>               276 mkfs/mkfs.c          if(xint(din.addrs[NDIRECT]) == 0){</span>
+<span class='curline'><a href='../S/3.html#L277'>din</a>               277 mkfs/mkfs.c            din.addrs[NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L279'>din</a>               279 mkfs/mkfs.c          rsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/3.html#L282'>din</a>               282 mkfs/mkfs.c            wsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/3.html#L294'>din</a>               294 mkfs/mkfs.c      din.size = xint(off);</span>
+<span class='curline'><a href='../S/3.html#L295'>din</a>               295 mkfs/mkfs.c      winode(inum, &amp;din);</span>
 </pre>
 </body>
 </html>

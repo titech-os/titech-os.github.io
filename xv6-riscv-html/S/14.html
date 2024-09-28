@@ -1,80 +1,40 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>user/init.c</title>
+<title>user/zombie.c</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/155.html'>user</a>/init.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L15'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/74.html'>user</a>/zombie.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L9'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <h2 class='header'>DEFINITIONS</h2>
 This source file includes following definitions.
 <ol>
-<li><a href='#L15' title='Defined at 15.'>main</a></li>
+<li><a href='#L9' title='Defined at 9.'>main</a></li>
 </ol>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='comment'>// init: The initial user-level program</em>
-<a id='L2' name='L2'></a>   2 
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='98.html'>kernel/types.h</a>"
-<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='104.html'>kernel/stat.h</a>"
-<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='88.html'>kernel/spinlock.h</a>"
-<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='142.html'>kernel/sleeplock.h</a>"
-<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='150.html'>kernel/fs.h</a>"
-<a id='L8' name='L8'></a>   8 <em class='sharp'>#include</em> "<a href='103.html'>kernel/file.h</a>"
-<a id='L9' name='L9'></a>   9 <em class='sharp'>#include</em> "<a href='46.html'>user/user.h</a>"
-<a id='L10' name='L10'></a>  10 <em class='sharp'>#include</em> "<a href='102.html'>kernel/fcntl.h</a>"
-<a id='L11' name='L11'></a>  11 
-<a id='L12' name='L12'></a>  12 <strong class='reserved'>char</strong> *<a href='../Y/30.html' title='Multiple used in 73 places.'>argv</a>[] = <em class='brace'>{</em> "sh", 0 <em class='brace'>}</em>;
-<a id='L13' name='L13'></a>  13 
-<a id='L14' name='L14'></a>  14 <strong class='reserved'>int</strong>
-<a id='L15' name='L15'></a>  15 <a href='../R/347.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>void</strong>)
-<a id='L16' name='L16'></a>  16 <em class='brace'>{</em>
-<a id='L17' name='L17'></a>  17   <strong class='reserved'>int</strong> <a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a>, <a href='../Y/426.html' title='Multiple used in 4 places.'>wpid</a>;
-<a id='L18' name='L18'></a>  18 
-<a id='L19' name='L19'></a>  19   <strong class='reserved'>if</strong>(<a href='../Y/244.html' title='Multiple used in 111 places.'>open</a>("console", <a href='../S/102.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>) &lt; 0)<em class='brace'>{</em>
-<a id='L20' name='L20'></a>  20     <a href='../Y/202.html' title='Multiple used in 2 places.'>mknod</a>("console", <a href='../S/103.html#L40' title='Defined at 40 in kernel/file.h.'>CONSOLE</a>, 0);
-<a id='L21' name='L21'></a>  21     <a href='../Y/244.html' title='Multiple used in 111 places.'>open</a>("console", <a href='../S/102.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>);
-<a id='L22' name='L22'></a>  22   <em class='brace'>}</em>
-<a id='L23' name='L23'></a>  23   <a href='../Y/83.html' title='Multiple used in 8 places.'>dup</a>(0);  <em class='comment'>// stdout</em>
-<a id='L24' name='L24'></a>  24   <a href='../Y/83.html' title='Multiple used in 8 places.'>dup</a>(0);  <em class='comment'>// stderr</em>
-<a id='L25' name='L25'></a>  25 
-<a id='L26' name='L26'></a>  26   <strong class='reserved'>for</strong>(;;)<em class='brace'>{</em>
-<a id='L27' name='L27'></a>  27     <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("init: starting sh\n");
-<a id='L28' name='L28'></a>  28     <a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a> = <a href='../S/138.html#L280' title='Defined at 280 in kernel/proc.c.'>fork</a>();
-<a id='L29' name='L29'></a>  29     <strong class='reserved'>if</strong>(<a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a> &lt; 0)<em class='brace'>{</em>
-<a id='L30' name='L30'></a>  30       <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("init: fork failed\n");
-<a id='L31' name='L31'></a>  31       <a href='../S/138.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(1);
-<a id='L32' name='L32'></a>  32     <em class='brace'>}</em>
-<a id='L33' name='L33'></a>  33     <strong class='reserved'>if</strong>(<a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a> == 0)<em class='brace'>{</em>
-<a id='L34' name='L34'></a>  34       <a href='../S/97.html#L23' title='Defined at 23 in kernel/exec.c.'>exec</a>("sh", <a href='../Y/30.html' title='Multiple used in 73 places.'>argv</a>);
-<a id='L35' name='L35'></a>  35       <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("init: exec sh failed\n");
-<a id='L36' name='L36'></a>  36       <a href='../S/138.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(1);
-<a id='L37' name='L37'></a>  37     <em class='brace'>}</em>
-<a id='L38' name='L38'></a>  38 
-<a id='L39' name='L39'></a>  39     <strong class='reserved'>for</strong>(;;)<em class='brace'>{</em>
-<a id='L40' name='L40'></a>  40       <em class='comment'>// this call to wait() returns if the shell exits,</em>
-<a id='L41' name='L41'></a>  41       <em class='comment'>// or if a parentless process exits.</em>
-<a id='L42' name='L42'></a>  42       <a href='../Y/426.html' title='Multiple used in 4 places.'>wpid</a> = <a href='../S/138.html#L391' title='Defined at 391 in kernel/proc.c.'>wait</a>((<strong class='reserved'>int</strong> *) 0);
-<a id='L43' name='L43'></a>  43       <strong class='reserved'>if</strong>(<a href='../Y/426.html' title='Multiple used in 4 places.'>wpid</a> == <a href='../Y/272.html' title='Multiple used in 185 places.'>pid</a>)<em class='brace'>{</em>
-<a id='L44' name='L44'></a>  44         <em class='comment'>// the shell exited; restart it.</em>
-<a id='L45' name='L45'></a>  45         <strong class='reserved'>break</strong>;
-<a id='L46' name='L46'></a>  46       <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/426.html' title='Multiple used in 4 places.'>wpid</a> &lt; 0)<em class='brace'>{</em>
-<a id='L47' name='L47'></a>  47         <a href='../D/418.html' title='Multiple defined in 2 places.'>printf</a>("init: wait returned an error\n");
-<a id='L48' name='L48'></a>  48         <a href='../S/138.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(1);
-<a id='L49' name='L49'></a>  49       <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
-<a id='L50' name='L50'></a>  50         <em class='comment'>// it was a parentless process; do nothing.</em>
-<a id='L51' name='L51'></a>  51       <em class='brace'>}</em>
-<a id='L52' name='L52'></a>  52     <em class='brace'>}</em>
-<a id='L53' name='L53'></a>  53   <em class='brace'>}</em>
-<a id='L54' name='L54'></a>  54 <em class='brace'>}</em>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Create a zombie process that</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>// must be reparented at exit.</em>
+<a id='L3' name='L3'></a>   3 
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='37.html'>kernel/types.h</a>"
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='42.html'>kernel/stat.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='16.html'>user/user.h</a>"
+<a id='L7' name='L7'></a>   7 
+<a id='L8' name='L8'></a>   8 <strong class='reserved'>int</strong>
+<a id='L9' name='L9'></a>   9 <a href='../R/345.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>void</strong>)
+<a id='L10' name='L10'></a>  10 <em class='brace'>{</em>
+<a id='L11' name='L11'></a>  11   <strong class='reserved'>if</strong>(<a href='../S/62.html#L280' title='Defined at 280 in kernel/proc.c.'>fork</a>() &gt; 0)
+<a id='L12' name='L12'></a>  12     <a href='../S/62.html#L548' title='Defined at 548 in kernel/proc.c.'>sleep</a>(5);  <em class='comment'>// Let child exit before parent.</em>
+<a id='L13' name='L13'></a>  13   <a href='../S/62.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(0);
+<a id='L14' name='L14'></a>  14 <em class='brace'>}</em>
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;][^]<a href='#L15'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;][^]<a href='#L9'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

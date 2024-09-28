@@ -1,19 +1,84 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bmapstart</title>
+<title>bp</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/150.html#L22'>bmapstart</a>          22 kernel/fs.h      uint bmapstart;    // Block number of first free map block</span>
-<span class='curline'><a href='../S/150.html#L51'>bmapstart</a>          51 kernel/fs.h    #define BBLOCK(b, sb) ((b)/BPB + sb.bmapstart)</span>
-<span class='curline'><a href='../S/3.html#L103'>bmapstart</a>         103 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
-<span class='curline'><a href='../S/3.html#L246'>bmapstart</a>         246 mkfs/mkfs.c      printf("balloc: write bitmap block at sector %d\n", sb.bmapstart);</span>
-<span class='curline'><a href='../S/3.html#L247'>bmapstart</a>         247 mkfs/mkfs.c      wsect(sb.bmapstart, buf);</span>
+<span class='curline'><a href='../S/47.html#L33'>bp</a>                 33 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L35'>bp</a>                 35 kernel/fs.c      bp = bread(dev, 1);</span>
+<span class='curline'><a href='../S/47.html#L36'>bp</a>                 36 kernel/fs.c      memmove(sb, bp-&gt;data, sizeof(*sb));</span>
+<span class='curline'><a href='../S/47.html#L37'>bp</a>                 37 kernel/fs.c      brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L53'>bp</a>                 53 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L55'>bp</a>                 55 kernel/fs.c      bp = bread(dev, bno);</span>
+<span class='curline'><a href='../S/47.html#L56'>bp</a>                 56 kernel/fs.c      memset(bp-&gt;data, 0, BSIZE);</span>
+<span class='curline'><a href='../S/47.html#L57'>bp</a>                 57 kernel/fs.c      log_write(bp);</span>
+<span class='curline'><a href='../S/47.html#L58'>bp</a>                 58 kernel/fs.c      brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L69'>bp</a>                 69 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L71'>bp</a>                 71 kernel/fs.c      bp = 0;</span>
+<span class='curline'><a href='../S/47.html#L73'>bp</a>                 73 kernel/fs.c        bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/47.html#L76'>bp</a>                 76 kernel/fs.c          if((bp-&gt;data[bi/8] &amp; m) == 0){  // Is block free?</span>
+<span class='curline'><a href='../S/47.html#L77'>bp</a>                 77 kernel/fs.c            bp-&gt;data[bi/8] |= m;  // Mark block in use.</span>
+<span class='curline'><a href='../S/47.html#L78'>bp</a>                 78 kernel/fs.c            log_write(bp);</span>
+<span class='curline'><a href='../S/47.html#L79'>bp</a>                 79 kernel/fs.c            brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L84'>bp</a>                 84 kernel/fs.c        brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L94'>bp</a>                 94 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L97'>bp</a>                 97 kernel/fs.c      bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/47.html#L100'>bp</a>                100 kernel/fs.c      if((bp-&gt;data[bi/8] &amp; m) == 0)</span>
+<span class='curline'><a href='../S/47.html#L102'>bp</a>                102 kernel/fs.c      bp-&gt;data[bi/8] &amp;= ~m;</span>
+<span class='curline'><a href='../S/47.html#L103'>bp</a>                103 kernel/fs.c      log_write(bp);</span>
+<span class='curline'><a href='../S/47.html#L104'>bp</a>                104 kernel/fs.c      brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L202'>bp</a>                202 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L206'>bp</a>                206 kernel/fs.c        bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/47.html#L207'>bp</a>                207 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + inum%IPB;</span>
+<span class='curline'><a href='../S/47.html#L211'>bp</a>                211 kernel/fs.c          log_write(bp);   // mark it allocated on the disk</span>
+<span class='curline'><a href='../S/47.html#L212'>bp</a>                212 kernel/fs.c          brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L215'>bp</a>                215 kernel/fs.c        brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L228'>bp</a>                228 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L231'>bp</a>                231 kernel/fs.c      bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/47.html#L232'>bp</a>                232 kernel/fs.c      dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/47.html#L239'>bp</a>                239 kernel/fs.c      log_write(bp);</span>
+<span class='curline'><a href='../S/47.html#L240'>bp</a>                240 kernel/fs.c      brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L295'>bp</a>                295 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L304'>bp</a>                304 kernel/fs.c        bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/47.html#L305'>bp</a>                305 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/47.html#L312'>bp</a>                312 kernel/fs.c        brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L386'>bp</a>                386 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L407'>bp</a>                407 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/47.html#L408'>bp</a>                408 kernel/fs.c        a = (uint*)bp-&gt;data;</span>
+<span class='curline'><a href='../S/47.html#L413'>bp</a>                413 kernel/fs.c            log_write(bp);</span>
+<span class='curline'><a href='../S/47.html#L416'>bp</a>                416 kernel/fs.c        brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L429'>bp</a>                429 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L440'>bp</a>                440 kernel/fs.c        bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/47.html#L441'>bp</a>                441 kernel/fs.c        a = (uint*)bp-&gt;data;</span>
+<span class='curline'><a href='../S/47.html#L446'>bp</a>                446 kernel/fs.c        brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L475'>bp</a>                475 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L486'>bp</a>                486 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/47.html#L488'>bp</a>                488 kernel/fs.c        if(either_copyout(user_dst, dst, bp-&gt;data + (off % BSIZE), m) == -1) {</span>
+<span class='curline'><a href='../S/47.html#L489'>bp</a>                489 kernel/fs.c          brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L493'>bp</a>                493 kernel/fs.c        brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L509'>bp</a>                509 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/47.html#L520'>bp</a>                520 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/47.html#L522'>bp</a>                522 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
+<span class='curline'><a href='../S/47.html#L523'>bp</a>                523 kernel/fs.c          brelse(bp);</span>
+<span class='curline'><a href='../S/47.html#L526'>bp</a>                526 kernel/fs.c        log_write(bp);</span>
+<span class='curline'><a href='../S/47.html#L527'>bp</a>                527 kernel/fs.c        brelse(bp);</span>
+<span class='curline'><a href='../S/12.html#L27'>bp</a>                 27 user/umalloc.c   Header *bp, *p;</span>
+<span class='curline'><a href='../S/12.html#L29'>bp</a>                 29 user/umalloc.c   bp = (Header*)ap - 1;</span>
+<span class='curline'><a href='../S/12.html#L30'>bp</a>                 30 user/umalloc.c   for(p = freep; !(bp &gt; p &amp;&amp; bp &lt; p-&gt;s.ptr); p = p-&gt;s.ptr)</span>
+<span class='curline'><a href='../S/12.html#L31'>bp</a>                 31 user/umalloc.c     if(p &gt;= p-&gt;s.ptr &amp;&amp; (bp &gt; p || bp &lt; p-&gt;s.ptr))</span>
+<span class='curline'><a href='../S/12.html#L33'>bp</a>                 33 user/umalloc.c   if(bp + bp-&gt;s.size == p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/12.html#L34'>bp</a>                 34 user/umalloc.c     bp-&gt;s.size += p-&gt;s.ptr-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L35'>bp</a>                 35 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L37'>bp</a>                 37 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L38'>bp</a>                 38 user/umalloc.c   if(p + p-&gt;s.size == bp){</span>
+<span class='curline'><a href='../S/12.html#L39'>bp</a>                 39 user/umalloc.c     p-&gt;s.size += bp-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L40'>bp</a>                 40 user/umalloc.c     p-&gt;s.ptr = bp-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L42'>bp</a>                 42 user/umalloc.c     p-&gt;s.ptr = bp;</span>
 </pre>
 </body>
 </html>

@@ -1,18 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pid_lock</title>
+<title>pids</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/138.html#L16'>pid_lock</a>           16 kernel/proc.c  struct spinlock pid_lock;</span>
-<span class='curline'><a href='../S/138.html#L52'>pid_lock</a>           52 kernel/proc.c    initlock(&amp;pid_lock, "nextpid");</span>
-<span class='curline'><a href='../S/138.html#L97'>pid_lock</a>           97 kernel/proc.c    acquire(&amp;pid_lock);</span>
-<span class='curline'><a href='../S/138.html#L100'>pid_lock</a>          100 kernel/proc.c    release(&amp;pid_lock);</span>
+<span class='curline'><a href='../S/25.html#L2181'>pids</a>             2181 user/usertests.c   int pids[10];</span>
+<span class='curline'><a href='../S/25.html#L2188'>pids</a>             2188 user/usertests.c   for(i = 0; i &lt; sizeof(pids)/sizeof(pids[0]); i++){</span>
+<span class='curline'><a href='../S/25.html#L2189'>pids</a>             2189 user/usertests.c     if((pids[i] = fork()) == 0){</span>
+<span class='curline'><a href='../S/25.html#L2196'>pids</a>             2196 user/usertests.c     if(pids[i] != -1)</span>
+<span class='curline'><a href='../S/25.html#L2203'>pids</a>             2203 user/usertests.c   for(i = 0; i &lt; sizeof(pids)/sizeof(pids[0]); i++){</span>
+<span class='curline'><a href='../S/25.html#L2204'>pids</a>             2204 user/usertests.c     if(pids[i] == -1)</span>
+<span class='curline'><a href='../S/25.html#L2206'>pids</a>             2206 user/usertests.c     kill(pids[i]);</span>
 </pre>
 </body>
 </html>

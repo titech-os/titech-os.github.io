@@ -1,18 +1,36 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>level</title>
+<title>lh</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/139.html#L356'>level</a>             356 kernel/riscv.h #define PXSHIFT(level)  (PGSHIFT+(9*(level)))</span>
-<span class='curline'><a href='../S/139.html#L357'>level</a>             357 kernel/riscv.h #define PX(level, va) ((((uint64) (va)) &gt;&gt; PXSHIFT(level)) &amp; PXMASK)</span>
-<span class='curline'><a href='../S/99.html#L91'>level</a>              91 kernel/vm.c      for(int level = 2; level &gt; 0; level--) {</span>
-<span class='curline'><a href='../S/99.html#L92'>level</a>              92 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
+<span class='curline'><a href='../S/29.html#L47'>lh</a>                 47 kernel/log.c     struct logheader lh;</span>
+<span class='curline'><a href='../S/29.html#L73'>lh</a>                 73 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/29.html#L75'>lh</a>                 75 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/29.html#L90'>lh</a>                 90 kernel/log.c     struct logheader *lh = (struct logheader *) (buf-&gt;data);</span>
+<span class='curline'><a href='../S/29.html#L92'>lh</a>                 92 kernel/log.c     log.lh.n = lh-&gt;n;</span>
+<span class='curline'><a href='../S/29.html#L93'>lh</a>                 93 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
+<span class='curline'><a href='../S/29.html#L94'>lh</a>                 94 kernel/log.c       log.lh.block[i] = lh-&gt;block[i];</span>
+<span class='curline'><a href='../S/29.html#L108'>lh</a>                108 kernel/log.c     hb-&gt;n = log.lh.n;</span>
+<span class='curline'><a href='../S/29.html#L109'>lh</a>                109 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
+<span class='curline'><a href='../S/29.html#L110'>lh</a>                110 kernel/log.c       hb-&gt;block[i] = log.lh.block[i];</span>
+<span class='curline'><a href='../S/29.html#L121'>lh</a>                121 kernel/log.c     log.lh.n = 0;</span>
+<span class='curline'><a href='../S/29.html#L133'>lh</a>                133 kernel/log.c       } else if(log.lh.n + (log.outstanding+1)*MAXOPBLOCKS &gt; LOGSIZE){</span>
+<span class='curline'><a href='../S/29.html#L183'>lh</a>                183 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/29.html#L185'>lh</a>                185 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/29.html#L196'>lh</a>                196 kernel/log.c     if (log.lh.n &gt; 0) {</span>
+<span class='curline'><a href='../S/29.html#L200'>lh</a>                200 kernel/log.c       log.lh.n = 0;</span>
+<span class='curline'><a href='../S/29.html#L220'>lh</a>                220 kernel/log.c     if (log.lh.n &gt;= LOGSIZE || log.lh.n &gt;= log.size - 1)</span>
+<span class='curline'><a href='../S/29.html#L225'>lh</a>                225 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
+<span class='curline'><a href='../S/29.html#L226'>lh</a>                226 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorption</span>
+<span class='curline'><a href='../S/29.html#L229'>lh</a>                229 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
+<span class='curline'><a href='../S/29.html#L230'>lh</a>                230 kernel/log.c     if (i == log.lh.n) {  // Add new block to log?</span>
+<span class='curline'><a href='../S/29.html#L232'>lh</a>                232 kernel/log.c       log.lh.n++;</span>
 </pre>
 </body>
 </html>

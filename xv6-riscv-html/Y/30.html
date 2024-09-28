@@ -1,87 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>argv</title>
+<title>avail</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/97.html#L23'>argv</a>               23 kernel/exec.c  exec(char *path, char **argv)</span>
-<span class='curline'><a href='../S/97.html#L91'>argv</a>               91 kernel/exec.c    for(argc = 0; argv[argc]; argc++) {</span>
-<span class='curline'><a href='../S/97.html#L94'>argv</a>               94 kernel/exec.c      sp -= strlen(argv[argc]) + 1;</span>
-<span class='curline'><a href='../S/97.html#L98'>argv</a>               98 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
-<span class='curline'><a href='../S/106.html#L437'>argv</a>              437 kernel/sysfile.c   char path[MAXPATH], *argv[MAXARG];</span>
-<span class='curline'><a href='../S/106.html#L445'>argv</a>              445 kernel/sysfile.c   memset(argv, 0, sizeof(argv));</span>
-<span class='curline'><a href='../S/106.html#L447'>argv</a>              447 kernel/sysfile.c     if(i &gt;= NELEM(argv)){</span>
-<span class='curline'><a href='../S/106.html#L454'>argv</a>              454 kernel/sysfile.c       argv[i] = 0;</span>
-<span class='curline'><a href='../S/106.html#L457'>argv</a>              457 kernel/sysfile.c     argv[i] = kalloc();</span>
-<span class='curline'><a href='../S/106.html#L458'>argv</a>              458 kernel/sysfile.c     if(argv[i] == 0)</span>
-<span class='curline'><a href='../S/106.html#L460'>argv</a>              460 kernel/sysfile.c     if(fetchstr(uarg, argv[i], PGSIZE) &lt; 0)</span>
-<span class='curline'><a href='../S/106.html#L464'>argv</a>              464 kernel/sysfile.c   int ret = exec(path, argv);</span>
-<span class='curline'><a href='../S/106.html#L466'>argv</a>              466 kernel/sysfile.c   for(i = 0; i &lt; NELEM(argv) &amp;&amp; argv[i] != 0; i++)</span>
-<span class='curline'><a href='../S/106.html#L467'>argv</a>              467 kernel/sysfile.c     kfree(argv[i]);</span>
-<span class='curline'><a href='../S/106.html#L472'>argv</a>              472 kernel/sysfile.c   for(i = 0; i &lt; NELEM(argv) &amp;&amp; argv[i] != 0; i++)</span>
-<span class='curline'><a href='../S/106.html#L473'>argv</a>              473 kernel/sysfile.c     kfree(argv[i]);</span>
-<span class='curline'><a href='../S/3.html#L69'>argv</a>               69 mkfs/mkfs.c    main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/3.html#L88'>argv</a>               88 mkfs/mkfs.c      fsfd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);</span>
-<span class='curline'><a href='../S/3.html#L90'>argv</a>               90 mkfs/mkfs.c        die(argv[1]);</span>
-<span class='curline'><a href='../S/3.html#L133'>argv</a>              133 mkfs/mkfs.c        if(strncmp(argv[i], "user/", 5) == 0)</span>
-<span class='curline'><a href='../S/3.html#L134'>argv</a>              134 mkfs/mkfs.c          shortname = argv[i] + 5;</span>
-<span class='curline'><a href='../S/3.html#L136'>argv</a>              136 mkfs/mkfs.c          shortname = argv[i];</span>
-<span class='curline'><a href='../S/3.html#L140'>argv</a>              140 mkfs/mkfs.c        if((fd = open(argv[i], 0)) &lt; 0)</span>
-<span class='curline'><a href='../S/3.html#L141'>argv</a>              141 mkfs/mkfs.c          die(argv[i]);</span>
-<span class='curline'><a href='../S/25.html#L25'>argv</a>               25 user/cat.c     main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/25.html#L35'>argv</a>               35 user/cat.c         if((fd = open(argv[i], 0)) &lt; 0){</span>
-<span class='curline'><a href='../S/25.html#L36'>argv</a>               36 user/cat.c           fprintf(2, "cat: cannot open %s\n", argv[i]);</span>
-<span class='curline'><a href='../S/80.html#L6'>argv</a>                6 user/echo.c    main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/80.html#L11'>argv</a>               11 user/echo.c        write(1, argv[i], strlen(argv[i]));</span>
-<span class='curline'><a href='../S/67.html#L37'>argv</a>               37 user/grep.c    main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/67.html#L46'>argv</a>               46 user/grep.c      pattern = argv[1];</span>
-<span class='curline'><a href='../S/67.html#L54'>argv</a>               54 user/grep.c        if((fd = open(argv[i], 0)) &lt; 0){</span>
-<span class='curline'><a href='../S/67.html#L55'>argv</a>               55 user/grep.c          printf("grep: cannot open %s\n", argv[i]);</span>
-<span class='curline'><a href='../S/14.html#L12'>argv</a>               12 user/init.c    char *argv[] = { "sh", 0 };</span>
-<span class='curline'><a href='../S/14.html#L34'>argv</a>               34 user/init.c          exec("sh", argv);</span>
-<span class='curline'><a href='../S/49.html#L6'>argv</a>                6 user/kill.c    main(int argc, char **argv)</span>
-<span class='curline'><a href='../S/49.html#L15'>argv</a>               15 user/kill.c        kill(atoi(argv[i]));</span>
-<span class='curline'><a href='../S/63.html#L6'>argv</a>                6 user/ln.c      main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/63.html#L12'>argv</a>               12 user/ln.c        if(link(argv[1], argv[2]) &lt; 0)</span>
-<span class='curline'><a href='../S/63.html#L13'>argv</a>               13 user/ln.c          fprintf(2, "link %s %s: failed\n", argv[1], argv[2]);</span>
-<span class='curline'><a href='../S/12.html#L75'>argv</a>               75 user/ls.c      main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/12.html#L84'>argv</a>               84 user/ls.c          ls(argv[i]);</span>
-<span class='curline'><a href='../S/42.html#L6'>argv</a>                6 user/mkdir.c   main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/42.html#L16'>argv</a>               16 user/mkdir.c       if(mkdir(argv[i]) &lt; 0){</span>
-<span class='curline'><a href='../S/42.html#L17'>argv</a>               17 user/mkdir.c         fprintf(2, "mkdir: %s failed to create\n", argv[i]);</span>
-<span class='curline'><a href='../S/23.html#L6'>argv</a>                6 user/rm.c      main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/23.html#L16'>argv</a>               16 user/rm.c          if(unlink(argv[i]) &lt; 0){</span>
-<span class='curline'><a href='../S/23.html#L17'>argv</a>               17 user/rm.c            fprintf(2, "rm: %s failed to delete\n", argv[i]);</span>
-<span class='curline'><a href='../S/51.html#L22'>argv</a>               22 user/sh.c        char *argv[MAXARGS];</span>
-<span class='curline'><a href='../S/51.html#L77'>argv</a>               77 user/sh.c          if(ecmd-&gt;argv[0] == 0)</span>
-<span class='curline'><a href='../S/51.html#L79'>argv</a>               79 user/sh.c          exec(ecmd-&gt;argv[0], ecmd-&gt;argv);</span>
-<span class='curline'><a href='../S/51.html#L80'>argv</a>               80 user/sh.c          fprintf(2, "exec %s failed\n", ecmd-&gt;argv[0]);</span>
-<span class='curline'><a href='../S/51.html#L437'>argv</a>              437 user/sh.c          cmd-&gt;argv[argc] = q;</span>
-<span class='curline'><a href='../S/51.html#L444'>argv</a>              444 user/sh.c        cmd-&gt;argv[argc] = 0;</span>
-<span class='curline'><a href='../S/51.html#L466'>argv</a>              466 user/sh.c          for(i=0; ecmd-&gt;argv[i]; i++)</span>
-<span class='curline'><a href='../S/70.html#L17'>argv</a>               17 user/stressfs.c main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/78.html#L2454'>argv</a>             2454 user/usertests.c   char *argv[1];</span>
-<span class='curline'><a href='../S/78.html#L2455'>argv</a>             2455 user/usertests.c   argv[0] = 0;</span>
-<span class='curline'><a href='../S/78.html#L2456'>argv</a>             2456 user/usertests.c   exec(big, argv);</span>
-<span class='curline'><a href='../S/78.html#L2565'>argv</a>             2565 user/usertests.c     char *argv[2];</span>
-<span class='curline'><a href='../S/78.html#L2566'>argv</a>             2566 user/usertests.c     argv[0] = (char*)0xffffffff;</span>
-<span class='curline'><a href='../S/78.html#L2567'>argv</a>             2567 user/usertests.c     argv[1] = 0;</span>
-<span class='curline'><a href='../S/78.html#L2568'>argv</a>             2568 user/usertests.c     exec("echo", argv);</span>
-<span class='curline'><a href='../S/78.html#L3078'>argv</a>             3078 user/usertests.c main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/78.html#L3084'>argv</a>             3084 user/usertests.c   if(argc == 2 &amp;&amp; strcmp(argv[1], "-q") == 0){</span>
-<span class='curline'><a href='../S/78.html#L3086'>argv</a>             3086 user/usertests.c   } else if(argc == 2 &amp;&amp; strcmp(argv[1], "-c") == 0){</span>
-<span class='curline'><a href='../S/78.html#L3088'>argv</a>             3088 user/usertests.c   } else if(argc == 2 &amp;&amp; strcmp(argv[1], "-C") == 0){</span>
-<span class='curline'><a href='../S/78.html#L3090'>argv</a>             3090 user/usertests.c   } else if(argc == 2 &amp;&amp; argv[1][0] != '-'){</span>
-<span class='curline'><a href='../S/78.html#L3091'>argv</a>             3091 user/usertests.c     justone = argv[1];</span>
-<span class='curline'><a href='../S/26.html#L36'>argv</a>               36 user/wc.c      main(int argc, char *argv[])</span>
-<span class='curline'><a href='../S/26.html#L46'>argv</a>               46 user/wc.c          if((fd = open(argv[i], 0)) &lt; 0){</span>
-<span class='curline'><a href='../S/26.html#L47'>argv</a>               47 user/wc.c            printf("wc: cannot open %s\n", argv[i]);</span>
-<span class='curline'><a href='../S/26.html#L50'>argv</a>               50 user/wc.c          wc(fd, argv[i]);</span>
+<span class='curline'><a href='../S/64.html#L34'>avail</a>              34 kernel/virtio_disk.c   struct virtq_avail *avail;</span>
+<span class='curline'><a href='../S/64.html#L122'>avail</a>             122 kernel/virtio_disk.c   disk.avail = kalloc();</span>
+<span class='curline'><a href='../S/64.html#L124'>avail</a>             124 kernel/virtio_disk.c   if(!disk.desc || !disk.avail || !disk.used)</span>
+<span class='curline'><a href='../S/64.html#L127'>avail</a>             127 kernel/virtio_disk.c   memset(disk.avail, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/64.html#L136'>avail</a>             136 kernel/virtio_disk.c   *R(VIRTIO_MMIO_DRIVER_DESC_LOW) = (uint64)disk.avail;</span>
+<span class='curline'><a href='../S/64.html#L137'>avail</a>             137 kernel/virtio_disk.c   *R(VIRTIO_MMIO_DRIVER_DESC_HIGH) = (uint64)disk.avail &gt;&gt; 32;</span>
+<span class='curline'><a href='../S/64.html#L272'>avail</a>             272 kernel/virtio_disk.c   disk.avail-&gt;ring[disk.avail-&gt;idx % NUM] = idx[0];</span>
+<span class='curline'><a href='../S/64.html#L277'>avail</a>             277 kernel/virtio_disk.c   disk.avail-&gt;idx += 1; // not % NUM ...</span>
+<span class='curline'><a href='../S/25.html#L2799'>avail</a>            2799 user/usertests.c   for(int avail = 0; avail &lt; 15; avail++){</span>
+<span class='curline'><a href='../S/25.html#L2815'>avail</a>            2815 user/usertests.c       for(int i = 0; i &lt; avail; i++)</span>
 </pre>
 </body>
 </html>

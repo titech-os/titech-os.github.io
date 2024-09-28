@@ -1,16 +1,41 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>diskaddr</title>
+<title>dip</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/90.html#L33'>diskaddr</a>           33 kernel/ramdisk.c   uint64 diskaddr = b-&gt;blockno * BSIZE;</span>
-<span class='curline'><a href='../S/90.html#L34'>diskaddr</a>           34 kernel/ramdisk.c   char *addr = (char *)RAMDISK + diskaddr;</span>
+<span class='curline'><a href='../S/47.html#L203'>dip</a>               203 kernel/fs.c      struct dinode *dip;</span>
+<span class='curline'><a href='../S/47.html#L207'>dip</a>               207 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + inum%IPB;</span>
+<span class='curline'><a href='../S/47.html#L208'>dip</a>               208 kernel/fs.c        if(dip-&gt;type == 0){  // a free inode</span>
+<span class='curline'><a href='../S/47.html#L209'>dip</a>               209 kernel/fs.c          memset(dip, 0, sizeof(*dip));</span>
+<span class='curline'><a href='../S/47.html#L210'>dip</a>               210 kernel/fs.c          dip-&gt;type = type;</span>
+<span class='curline'><a href='../S/47.html#L229'>dip</a>               229 kernel/fs.c      struct dinode *dip;</span>
+<span class='curline'><a href='../S/47.html#L232'>dip</a>               232 kernel/fs.c      dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/47.html#L233'>dip</a>               233 kernel/fs.c      dip-&gt;type = ip-&gt;type;</span>
+<span class='curline'><a href='../S/47.html#L234'>dip</a>               234 kernel/fs.c      dip-&gt;major = ip-&gt;major;</span>
+<span class='curline'><a href='../S/47.html#L235'>dip</a>               235 kernel/fs.c      dip-&gt;minor = ip-&gt;minor;</span>
+<span class='curline'><a href='../S/47.html#L236'>dip</a>               236 kernel/fs.c      dip-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/47.html#L237'>dip</a>               237 kernel/fs.c      dip-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/47.html#L238'>dip</a>               238 kernel/fs.c      memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/47.html#L296'>dip</a>               296 kernel/fs.c      struct dinode *dip;</span>
+<span class='curline'><a href='../S/47.html#L305'>dip</a>               305 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
+<span class='curline'><a href='../S/47.html#L306'>dip</a>               306 kernel/fs.c        ip-&gt;type = dip-&gt;type;</span>
+<span class='curline'><a href='../S/47.html#L307'>dip</a>               307 kernel/fs.c        ip-&gt;major = dip-&gt;major;</span>
+<span class='curline'><a href='../S/47.html#L308'>dip</a>               308 kernel/fs.c        ip-&gt;minor = dip-&gt;minor;</span>
+<span class='curline'><a href='../S/47.html#L309'>dip</a>               309 kernel/fs.c        ip-&gt;nlink = dip-&gt;nlink;</span>
+<span class='curline'><a href='../S/47.html#L310'>dip</a>               310 kernel/fs.c        ip-&gt;size = dip-&gt;size;</span>
+<span class='curline'><a href='../S/47.html#L311'>dip</a>               311 kernel/fs.c        memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/3.html#L191'>dip</a>               191 mkfs/mkfs.c      struct dinode *dip;</span>
+<span class='curline'><a href='../S/3.html#L195'>dip</a>               195 mkfs/mkfs.c      dip = ((struct dinode*)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/3.html#L196'>dip</a>               196 mkfs/mkfs.c      *dip = *ip;</span>
+<span class='curline'><a href='../S/3.html#L205'>dip</a>               205 mkfs/mkfs.c      struct dinode *dip;</span>
+<span class='curline'><a href='../S/3.html#L209'>dip</a>               209 mkfs/mkfs.c      dip = ((struct dinode*)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/3.html#L210'>dip</a>               210 mkfs/mkfs.c      *ip = *dip;</span>
 </pre>
 </body>
 </html>

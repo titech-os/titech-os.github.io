@@ -1,40 +1,58 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>desc</title>
+<title>de</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/141.html#L28'>desc</a>               28 kernel/virtio_disk.c   struct virtq_desc *desc;</span>
-<span class='curline'><a href='../S/141.html#L121'>desc</a>              121 kernel/virtio_disk.c   disk.desc = kalloc();</span>
-<span class='curline'><a href='../S/141.html#L124'>desc</a>              124 kernel/virtio_disk.c   if(!disk.desc || !disk.avail || !disk.used)</span>
-<span class='curline'><a href='../S/141.html#L126'>desc</a>              126 kernel/virtio_disk.c   memset(disk.desc, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/141.html#L134'>desc</a>              134 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_DESC_LOW) = (uint64)disk.desc;</span>
-<span class='curline'><a href='../S/141.html#L135'>desc</a>              135 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_DESC_HIGH) = (uint64)disk.desc &gt;&gt; 32;</span>
-<span class='curline'><a href='../S/141.html#L176'>desc</a>              176 kernel/virtio_disk.c   disk.desc[i].addr = 0;</span>
-<span class='curline'><a href='../S/141.html#L177'>desc</a>              177 kernel/virtio_disk.c   disk.desc[i].len = 0;</span>
-<span class='curline'><a href='../S/141.html#L178'>desc</a>              178 kernel/virtio_disk.c   disk.desc[i].flags = 0;</span>
-<span class='curline'><a href='../S/141.html#L179'>desc</a>              179 kernel/virtio_disk.c   disk.desc[i].next = 0;</span>
-<span class='curline'><a href='../S/141.html#L189'>desc</a>              189 kernel/virtio_disk.c     int flag = disk.desc[i].flags;</span>
-<span class='curline'><a href='../S/141.html#L190'>desc</a>              190 kernel/virtio_disk.c     int nxt = disk.desc[i].next;</span>
-<span class='curline'><a href='../S/141.html#L247'>desc</a>              247 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) buf0;</span>
-<span class='curline'><a href='../S/141.html#L248'>desc</a>              248 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(struct virtio_blk_req);</span>
-<span class='curline'><a href='../S/141.html#L249'>desc</a>              249 kernel/virtio_disk.c   disk.desc[idx[0]].flags = VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/141.html#L250'>desc</a>              250 kernel/virtio_disk.c   disk.desc[idx[0]].next = idx[1];</span>
-<span class='curline'><a href='../S/141.html#L252'>desc</a>              252 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
-<span class='curline'><a href='../S/141.html#L253'>desc</a>              253 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
-<span class='curline'><a href='../S/141.html#L255'>desc</a>              255 kernel/virtio_disk.c     disk.desc[idx[1]].flags = 0; // device reads b-&gt;data</span>
-<span class='curline'><a href='../S/141.html#L257'>desc</a>              257 kernel/virtio_disk.c     disk.desc[idx[1]].flags = VRING_DESC_F_WRITE; // device writes b-&gt;data</span>
-<span class='curline'><a href='../S/141.html#L258'>desc</a>              258 kernel/virtio_disk.c   disk.desc[idx[1]].flags |= VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/141.html#L259'>desc</a>              259 kernel/virtio_disk.c   disk.desc[idx[1]].next = idx[2];</span>
-<span class='curline'><a href='../S/141.html#L262'>desc</a>              262 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64) &amp;disk.info[idx[0]].status;</span>
-<span class='curline'><a href='../S/141.html#L263'>desc</a>              263 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
-<span class='curline'><a href='../S/141.html#L264'>desc</a>              264 kernel/virtio_disk.c   disk.desc[idx[2]].flags = VRING_DESC_F_WRITE; // device writes the status</span>
-<span class='curline'><a href='../S/141.html#L265'>desc</a>              265 kernel/virtio_disk.c   disk.desc[idx[2]].next = 0;</span>
+<span class='curline'><a href='../S/47.html#L555'>de</a>                555 kernel/fs.c      struct dirent de;</span>
+<span class='curline'><a href='../S/47.html#L560'>de</a>                560 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/47.html#L561'>de</a>                561 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/47.html#L563'>de</a>                563 kernel/fs.c        if(de.inum == 0)</span>
+<span class='curline'><a href='../S/47.html#L565'>de</a>                565 kernel/fs.c        if(namecmp(name, de.name) == 0){</span>
+<span class='curline'><a href='../S/47.html#L569'>de</a>                569 kernel/fs.c          inum = de.inum;</span>
+<span class='curline'><a href='../S/47.html#L583'>de</a>                583 kernel/fs.c      struct dirent de;</span>
+<span class='curline'><a href='../S/47.html#L593'>de</a>                593 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/47.html#L594'>de</a>                594 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/47.html#L596'>de</a>                596 kernel/fs.c        if(de.inum == 0)</span>
+<span class='curline'><a href='../S/47.html#L600'>de</a>                600 kernel/fs.c      strncpy(de.name, name, DIRSIZ);</span>
+<span class='curline'><a href='../S/47.html#L601'>de</a>                601 kernel/fs.c      de.inum = inum;</span>
+<span class='curline'><a href='../S/47.html#L602'>de</a>                602 kernel/fs.c      if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/43.html#L177'>de</a>                177 kernel/sysfile.c   struct dirent de;</span>
+<span class='curline'><a href='../S/43.html#L179'>de</a>                179 kernel/sysfile.c   for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
+<span class='curline'><a href='../S/43.html#L180'>de</a>                180 kernel/sysfile.c     if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/43.html#L182'>de</a>                182 kernel/sysfile.c     if(de.inum != 0)</span>
+<span class='curline'><a href='../S/43.html#L192'>de</a>                192 kernel/sysfile.c   struct dirent de;</span>
+<span class='curline'><a href='../S/43.html#L222'>de</a>                222 kernel/sysfile.c   memset(&amp;de, 0, sizeof(de));</span>
+<span class='curline'><a href='../S/43.html#L223'>de</a>                223 kernel/sysfile.c   if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/3.html#L73'>de</a>                 73 mkfs/mkfs.c      struct dirent de;</span>
+<span class='curline'><a href='../S/3.html#L120'>de</a>                120 mkfs/mkfs.c      bzero(&amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/3.html#L121'>de</a>                121 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
+<span class='curline'><a href='../S/3.html#L122'>de</a>                122 mkfs/mkfs.c      strcpy(de.name, ".");</span>
+<span class='curline'><a href='../S/3.html#L123'>de</a>                123 mkfs/mkfs.c      iappend(rootino, &amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/3.html#L125'>de</a>                125 mkfs/mkfs.c      bzero(&amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/3.html#L126'>de</a>                126 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
+<span class='curline'><a href='../S/3.html#L127'>de</a>                127 mkfs/mkfs.c      strcpy(de.name, "..");</span>
+<span class='curline'><a href='../S/3.html#L128'>de</a>                128 mkfs/mkfs.c      iappend(rootino, &amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/3.html#L154'>de</a>                154 mkfs/mkfs.c        bzero(&amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/3.html#L155'>de</a>                155 mkfs/mkfs.c        de.inum = xshort(inum);</span>
+<span class='curline'><a href='../S/3.html#L156'>de</a>                156 mkfs/mkfs.c        strncpy(de.name, shortname, DIRSIZ);</span>
+<span class='curline'><a href='../S/3.html#L157'>de</a>                157 mkfs/mkfs.c        iappend(rootino, &amp;de, sizeof(de));</span>
+<span class='curline'><a href='../S/6.html#L31'>de</a>                 31 user/ls.c        struct dirent de;</span>
+<span class='curline'><a href='../S/6.html#L59'>de</a>                 59 user/ls.c          while(read(fd, &amp;de, sizeof(de)) == sizeof(de)){</span>
+<span class='curline'><a href='../S/6.html#L60'>de</a>                 60 user/ls.c            if(de.inum == 0)</span>
+<span class='curline'><a href='../S/6.html#L62'>de</a>                 62 user/ls.c            memmove(p, de.name, DIRSIZ);</span>
+<span class='curline'><a href='../S/25.html#L1405'>de</a>               1405 user/usertests.c   } de;</span>
+<span class='curline'><a href='../S/25.html#L1438'>de</a>               1438 user/usertests.c   while(read(fd, &amp;de, sizeof(de)) &gt; 0){</span>
+<span class='curline'><a href='../S/25.html#L1439'>de</a>               1439 user/usertests.c     if(de.inum == 0)</span>
+<span class='curline'><a href='../S/25.html#L1441'>de</a>               1441 user/usertests.c     if(de.name[0] == 'C' &amp;&amp; de.name[2] == '\0'){</span>
+<span class='curline'><a href='../S/25.html#L1442'>de</a>               1442 user/usertests.c       i = de.name[1] - '0';</span>
+<span class='curline'><a href='../S/25.html#L1444'>de</a>               1444 user/usertests.c         printf("%s: concreate weird file %s\n", s, de.name);</span>
+<span class='curline'><a href='../S/25.html#L1448'>de</a>               1448 user/usertests.c         printf("%s: concreate duplicate file %s\n", s, de.name);</span>
 </pre>
 </body>
 </html>

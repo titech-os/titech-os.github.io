@@ -1,17 +1,28 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>oldpagetable</title>
+<title>oldsz</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/97.html#L31'>oldpagetable</a>       31 kernel/exec.c    pagetable_t pagetable = 0, oldpagetable;</span>
-<span class='curline'><a href='../S/97.html#L124'>oldpagetable</a>      124 kernel/exec.c    oldpagetable = p-&gt;pagetable;</span>
-<span class='curline'><a href='../S/97.html#L129'>oldpagetable</a>      129 kernel/exec.c    proc_freepagetable(oldpagetable, oldsz);</span>
+<span class='curline'><a href='../S/36.html#L76'>oldsz</a>              76 kernel/exec.c    uint64 oldsz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/36.html#L129'>oldsz</a>             129 kernel/exec.c    proc_freepagetable(oldpagetable, oldsz);</span>
+<span class='curline'><a href='../S/38.html#L233'>oldsz</a>             233 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz, int xperm)</span>
+<span class='curline'><a href='../S/38.html#L238'>oldsz</a>             238 kernel/vm.c      if(newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/38.html#L239'>oldsz</a>             239 kernel/vm.c        return oldsz;</span>
+<span class='curline'><a href='../S/38.html#L241'>oldsz</a>             241 kernel/vm.c      oldsz = PGROUNDUP(oldsz);</span>
+<span class='curline'><a href='../S/38.html#L242'>oldsz</a>             242 kernel/vm.c      for(a = oldsz; a &lt; newsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/38.html#L245'>oldsz</a>             245 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
+<span class='curline'><a href='../S/38.html#L251'>oldsz</a>             251 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
+<span class='curline'><a href='../S/38.html#L263'>oldsz</a>             263 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
+<span class='curline'><a href='../S/38.html#L265'>oldsz</a>             265 kernel/vm.c      if(newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/38.html#L266'>oldsz</a>             266 kernel/vm.c        return oldsz;</span>
+<span class='curline'><a href='../S/38.html#L268'>oldsz</a>             268 kernel/vm.c      if(PGROUNDUP(newsz) &lt; PGROUNDUP(oldsz)){</span>
+<span class='curline'><a href='../S/38.html#L269'>oldsz</a>             269 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
 </pre>
 </body>
 </html>

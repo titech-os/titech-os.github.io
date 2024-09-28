@@ -1,21 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uart_tx_lock</title>
+<title>uart_tx_r</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/151.html#L42'>uart_tx_lock</a>       42 kernel/uart.c  struct spinlock uart_tx_lock;</span>
-<span class='curline'><a href='../S/151.html#L77'>uart_tx_lock</a>       77 kernel/uart.c    initlock(&amp;uart_tx_lock, "uart");</span>
-<span class='curline'><a href='../S/151.html#L89'>uart_tx_lock</a>       89 kernel/uart.c    acquire(&amp;uart_tx_lock);</span>
-<span class='curline'><a href='../S/151.html#L98'>uart_tx_lock</a>       98 kernel/uart.c      sleep(&amp;uart_tx_r, &amp;uart_tx_lock);</span>
-<span class='curline'><a href='../S/151.html#L103'>uart_tx_lock</a>      103 kernel/uart.c    release(&amp;uart_tx_lock);</span>
-<span class='curline'><a href='../S/151.html#L187'>uart_tx_lock</a>      187 kernel/uart.c    acquire(&amp;uart_tx_lock);</span>
-<span class='curline'><a href='../S/151.html#L189'>uart_tx_lock</a>      189 kernel/uart.c    release(&amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/71.html#L46'>uart_tx_r</a>          46 kernel/uart.c  uint64 uart_tx_r; // read next from uart_tx_buf[uart_tx_r % UART_TX_BUF_SIZE]</span>
+<span class='curline'><a href='../S/71.html#L95'>uart_tx_r</a>          95 kernel/uart.c    while(uart_tx_w == uart_tx_r + UART_TX_BUF_SIZE){</span>
+<span class='curline'><a href='../S/71.html#L98'>uart_tx_r</a>          98 kernel/uart.c      sleep(&amp;uart_tx_r, &amp;uart_tx_lock);</span>
+<span class='curline'><a href='../S/71.html#L137'>uart_tx_r</a>         137 kernel/uart.c      if(uart_tx_w == uart_tx_r){</span>
+<span class='curline'><a href='../S/71.html#L150'>uart_tx_r</a>         150 kernel/uart.c      int c = uart_tx_buf[uart_tx_r % UART_TX_BUF_SIZE];</span>
+<span class='curline'><a href='../S/71.html#L151'>uart_tx_r</a>         151 kernel/uart.c      uart_tx_r += 1;</span>
+<span class='curline'><a href='../S/71.html#L154'>uart_tx_r</a>         154 kernel/uart.c      wakeup(&amp;uart_tx_r);</span>
 </pre>
 </body>
 </html>

@@ -1,22 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pfds</title>
+<title>ph</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/78.html#L823'>pfds</a>              823 user/usertests.c   int pfds[2];</span>
-<span class='curline'><a href='../S/78.html#L843'>pfds</a>              843 user/usertests.c   pipe(pfds);</span>
-<span class='curline'><a href='../S/78.html#L850'>pfds</a>              850 user/usertests.c     close(pfds[0]);</span>
-<span class='curline'><a href='../S/78.html#L851'>pfds</a>              851 user/usertests.c     if(write(pfds[1], "x", 1) != 1)</span>
-<span class='curline'><a href='../S/78.html#L853'>pfds</a>              853 user/usertests.c     close(pfds[1]);</span>
-<span class='curline'><a href='../S/78.html#L858'>pfds</a>              858 user/usertests.c   close(pfds[1]);</span>
-<span class='curline'><a href='../S/78.html#L859'>pfds</a>              859 user/usertests.c   if(read(pfds[0], buf, sizeof(buf)) != 1){</span>
-<span class='curline'><a href='../S/78.html#L863'>pfds</a>              863 user/usertests.c   close(pfds[0]);</span>
+<span class='curline'><a href='../S/36.html#L30'>ph</a>                 30 kernel/exec.c    struct proghdr ph;</span>
+<span class='curline'><a href='../S/36.html#L53'>ph</a>                 53 kernel/exec.c    for(i=0, off=elf.phoff; i&lt;elf.phnum; i++, off+=sizeof(ph)){</span>
+<span class='curline'><a href='../S/36.html#L54'>ph</a>                 54 kernel/exec.c      if(readi(ip, 0, (uint64)&amp;ph, off, sizeof(ph)) != sizeof(ph))</span>
+<span class='curline'><a href='../S/36.html#L56'>ph</a>                 56 kernel/exec.c      if(ph.type != ELF_PROG_LOAD)</span>
+<span class='curline'><a href='../S/36.html#L58'>ph</a>                 58 kernel/exec.c      if(ph.memsz &lt; ph.filesz)</span>
+<span class='curline'><a href='../S/36.html#L60'>ph</a>                 60 kernel/exec.c      if(ph.vaddr + ph.memsz &lt; ph.vaddr)</span>
+<span class='curline'><a href='../S/36.html#L62'>ph</a>                 62 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
+<span class='curline'><a href='../S/36.html#L65'>ph</a>                 65 kernel/exec.c      if((sz1 = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz, flags2perm(ph.flags))) == 0)</span>
+<span class='curline'><a href='../S/36.html#L68'>ph</a>                 68 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
 </pre>
 </body>
 </html>

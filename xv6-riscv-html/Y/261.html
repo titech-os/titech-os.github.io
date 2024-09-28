@@ -1,22 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pcmd</title>
+<title>perm</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/51.html#L65'>pcmd</a>               65 user/sh.c        struct pipecmd *pcmd;</span>
-<span class='curline'><a href='../S/51.html#L102'>pcmd</a>              102 user/sh.c          pcmd = (struct pipecmd*)cmd;</span>
-<span class='curline'><a href='../S/51.html#L110'>pcmd</a>              110 user/sh.c            runcmd(pcmd-&gt;left);</span>
-<span class='curline'><a href='../S/51.html#L117'>pcmd</a>              117 user/sh.c            runcmd(pcmd-&gt;right);</span>
-<span class='curline'><a href='../S/51.html#L457'>pcmd</a>              457 user/sh.c        struct pipecmd *pcmd;</span>
-<span class='curline'><a href='../S/51.html#L477'>pcmd</a>              477 user/sh.c          pcmd = (struct pipecmd*)cmd;</span>
-<span class='curline'><a href='../S/51.html#L478'>pcmd</a>              478 user/sh.c          nulterminate(pcmd-&gt;left);</span>
-<span class='curline'><a href='../S/51.html#L479'>pcmd</a>              479 user/sh.c          nulterminate(pcmd-&gt;right);</span>
+<span class='curline'><a href='../S/36.html#L14'>perm</a>               14 kernel/exec.c      int perm = 0;</span>
+<span class='curline'><a href='../S/36.html#L16'>perm</a>               16 kernel/exec.c        perm = PTE_X;</span>
+<span class='curline'><a href='../S/36.html#L18'>perm</a>               18 kernel/exec.c        perm |= PTE_W;</span>
+<span class='curline'><a href='../S/36.html#L19'>perm</a>               19 kernel/exec.c      return perm;</span>
+<span class='curline'><a href='../S/38.html#L132'>perm</a>              132 kernel/vm.c    kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)</span>
+<span class='curline'><a href='../S/38.html#L134'>perm</a>              134 kernel/vm.c      if(mappages(kpgtbl, va, sz, pa, perm) != 0)</span>
+<span class='curline'><a href='../S/38.html#L144'>perm</a>              144 kernel/vm.c    mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)</span>
+<span class='curline'><a href='../S/38.html#L165'>perm</a>              165 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
 </pre>
 </body>
 </html>

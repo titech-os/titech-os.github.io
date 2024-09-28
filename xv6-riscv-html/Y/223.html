@@ -1,22 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nlog</title>
+<title>nmeta</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.8' />
+<meta name='generator' content='GLOBAL-6.6.13' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/150.html#L19'>nlog</a>               19 kernel/fs.h      uint nlog;         // Number of log blocks</span>
-<span class='curline'><a href='../S/85.html#L62'>nlog</a>               62 kernel/log.c     log.size = sb-&gt;nlog;</span>
-<span class='curline'><a href='../S/3.html#L25'>nlog</a>               25 mkfs/mkfs.c    int nlog = LOGSIZE;</span>
-<span class='curline'><a href='../S/3.html#L93'>nlog</a>               93 mkfs/mkfs.c      nmeta = 2 + nlog + ninodeblocks + nbitmap;</span>
-<span class='curline'><a href='../S/3.html#L100'>nlog</a>              100 mkfs/mkfs.c      sb.nlog = xint(nlog);</span>
-<span class='curline'><a href='../S/3.html#L102'>nlog</a>              102 mkfs/mkfs.c      sb.inodestart = xint(2+nlog);</span>
-<span class='curline'><a href='../S/3.html#L103'>nlog</a>              103 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
-<span class='curline'><a href='../S/3.html#L106'>nlog</a>              106 mkfs/mkfs.c             nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);</span>
+<span class='curline'><a href='../S/3.html#L26'>nmeta</a>              26 mkfs/mkfs.c    int nmeta;    // Number of meta blocks (boot, sb, nlog, inode, bitmap)</span>
+<span class='curline'><a href='../S/3.html#L93'>nmeta</a>              93 mkfs/mkfs.c      nmeta = 2 + nlog + ninodeblocks + nbitmap;</span>
+<span class='curline'><a href='../S/3.html#L94'>nmeta</a>              94 mkfs/mkfs.c      nblocks = FSSIZE - nmeta;</span>
+<span class='curline'><a href='../S/3.html#L106'>nmeta</a>             106 mkfs/mkfs.c             nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);</span>
+<span class='curline'><a href='../S/3.html#L108'>nmeta</a>             108 mkfs/mkfs.c      freeblock = nmeta;     // the first free block that we can allocate</span>
 </pre>
 </body>
 </html>
