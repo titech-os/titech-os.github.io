@@ -1,18 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>noreturn</title>
+<title>nmeta</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L81'>noreturn</a>           81 kernel/defs.h  void            panic(char*) __attribute__((noreturn));</span>
-<span class='curline'><a href='../S/32.html#L99'>noreturn</a>           99 kernel/defs.h  void            scheduler(void) __attribute__((noreturn));</span>
-<span class='curline'><a href='../S/18.html#L55'>noreturn</a>           55 user/sh.c      void runcmd(struct cmd*) __attribute__((noreturn));</span>
-<span class='curline'><a href='../S/16.html#L5'>noreturn</a>            5 user/user.h    int exit(int) __attribute__((noreturn));</span>
+<span class='curline'><a href='../S/3.html#L26'>nmeta</a>              26 mkfs/mkfs.c    int nmeta;    // Number of meta blocks (boot, sb, nlog, inode, bitmap)</span>
+<span class='curline'><a href='../S/3.html#L93'>nmeta</a>              93 mkfs/mkfs.c      nmeta = 2 + nlog + ninodeblocks + nbitmap;</span>
+<span class='curline'><a href='../S/3.html#L94'>nmeta</a>              94 mkfs/mkfs.c      nblocks = FSSIZE - nmeta;</span>
+<span class='curline'><a href='../S/3.html#L106'>nmeta</a>             106 mkfs/mkfs.c             nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);</span>
+<span class='curline'><a href='../S/3.html#L108'>nmeta</a>             108 mkfs/mkfs.c      freeblock = nmeta;     // the first free block that we can allocate</span>
 </pre>
 </body>
 </html>

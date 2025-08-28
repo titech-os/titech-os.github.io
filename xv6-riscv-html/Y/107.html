@@ -1,22 +1,26 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>fd0</title>
+<title>fbn</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/43.html#L482'>fd0</a>               482 kernel/sysfile.c   int fd0, fd1;</span>
-<span class='curline'><a href='../S/43.html#L488'>fd0</a>               488 kernel/sysfile.c   fd0 = -1;</span>
-<span class='curline'><a href='../S/43.html#L489'>fd0</a>               489 kernel/sysfile.c   if((fd0 = fdalloc(rf)) &lt; 0 || (fd1 = fdalloc(wf)) &lt; 0){</span>
-<span class='curline'><a href='../S/43.html#L490'>fd0</a>               490 kernel/sysfile.c     if(fd0 &gt;= 0)</span>
-<span class='curline'><a href='../S/43.html#L491'>fd0</a>               491 kernel/sysfile.c       p-&gt;ofile[fd0] = 0;</span>
-<span class='curline'><a href='../S/43.html#L496'>fd0</a>               496 kernel/sysfile.c   if(copyout(p-&gt;pagetable, fdarray, (char*)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
-<span class='curline'><a href='../S/43.html#L497'>fd0</a>               497 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
-<span class='curline'><a href='../S/43.html#L498'>fd0</a>               498 kernel/sysfile.c     p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/3.html#L258'>fbn</a>               258 mkfs/mkfs.c      uint fbn, off, n1;</span>
+<span class='curline'><a href='../S/3.html#L268'>fbn</a>               268 mkfs/mkfs.c        fbn = off / BSIZE;</span>
+<span class='curline'><a href='../S/3.html#L269'>fbn</a>               269 mkfs/mkfs.c        assert(fbn &lt; MAXFILE);</span>
+<span class='curline'><a href='../S/3.html#L270'>fbn</a>               270 mkfs/mkfs.c        if(fbn &lt; NDIRECT){</span>
+<span class='curline'><a href='../S/3.html#L271'>fbn</a>               271 mkfs/mkfs.c          if(xint(din.addrs[fbn]) == 0){</span>
+<span class='curline'><a href='../S/3.html#L272'>fbn</a>               272 mkfs/mkfs.c            din.addrs[fbn] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L274'>fbn</a>               274 mkfs/mkfs.c          x = xint(din.addrs[fbn]);</span>
+<span class='curline'><a href='../S/3.html#L280'>fbn</a>               280 mkfs/mkfs.c          if(indirect[fbn - NDIRECT] == 0){</span>
+<span class='curline'><a href='../S/3.html#L281'>fbn</a>               281 mkfs/mkfs.c            indirect[fbn - NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L284'>fbn</a>               284 mkfs/mkfs.c          x = xint(indirect[fbn-NDIRECT]);</span>
+<span class='curline'><a href='../S/3.html#L286'>fbn</a>               286 mkfs/mkfs.c        n1 = min(n, (fbn + 1) * BSIZE - off);</span>
+<span class='curline'><a href='../S/3.html#L288'>fbn</a>               288 mkfs/mkfs.c        bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
 </pre>
 </body>
 </html>

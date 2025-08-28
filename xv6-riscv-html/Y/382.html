@@ -1,21 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>trampoline</title>
+<title>top</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/62.html#L21'>trampoline</a>         21 kernel/proc.c  extern char trampoline[]; // trampoline.S</span>
-<span class='curline'><a href='../S/62.html#L191'>trampoline</a>        191 kernel/proc.c                (uint64)trampoline, PTE_R | PTE_X) &lt; 0){</span>
-<span class='curline'><a href='../S/55.html#L12'>trampoline</a>         12 kernel/trap.c  extern char trampoline[], uservec[], userret[];</span>
-<span class='curline'><a href='../S/55.html#L100'>trampoline</a>        100 kernel/trap.c    uint64 trampoline_uservec = TRAMPOLINE + (uservec - trampoline);</span>
-<span class='curline'><a href='../S/55.html#L128'>trampoline</a>        128 kernel/trap.c    uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);</span>
-<span class='curline'><a href='../S/38.html#L16'>trampoline</a>         16 kernel/vm.c    extern char trampoline[]; // trampoline.S</span>
-<span class='curline'><a href='../S/38.html#L44'>trampoline</a>         44 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/27.html#L205'>top</a>               205 user/usertests.c   uint64 top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L206'>top</a>               206 user/usertests.c   if((top % PGSIZE) != 0){</span>
+<span class='curline'><a href='../S/27.html#L207'>top</a>               207 user/usertests.c     sbrk(PGSIZE - (top % PGSIZE));</span>
+<span class='curline'><a href='../S/27.html#L209'>top</a>               209 user/usertests.c   top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L210'>top</a>               210 user/usertests.c   if(top % PGSIZE){</span>
+<span class='curline'><a href='../S/27.html#L215'>top</a>               215 user/usertests.c   char *b = (char *) (top - 1);</span>
+<span class='curline'><a href='../S/27.html#L2540'>top</a>              2540 user/usertests.c   uint64 top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L2541'>top</a>              2541 user/usertests.c   if((top % PGSIZE) != 0)</span>
+<span class='curline'><a href='../S/27.html#L2542'>top</a>              2542 user/usertests.c     sbrk(PGSIZE - (top % PGSIZE));</span>
+<span class='curline'><a href='../S/27.html#L2546'>top</a>              2546 user/usertests.c   top = (uint64) sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L2547'>top</a>              2547 user/usertests.c   char *p = (char *) (top - 64);</span>
+<span class='curline'><a href='../S/27.html#L2567'>top</a>              2567 user/usertests.c   volatile char *top = sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L2568'>top</a>              2568 user/usertests.c   *(top-1) = *(top-1) + 1;</span>
 </pre>
 </body>
 </html>

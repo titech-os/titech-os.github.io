@@ -1,20 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>prevp</title>
+<title>pid_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/12.html#L66'>prevp</a>              66 user/umalloc.c   Header *p, *prevp;</span>
-<span class='curline'><a href='../S/12.html#L70'>prevp</a>              70 user/umalloc.c   if((prevp = freep) == 0){</span>
-<span class='curline'><a href='../S/12.html#L71'>prevp</a>              71 user/umalloc.c     base.s.ptr = freep = prevp = &amp;base;</span>
-<span class='curline'><a href='../S/12.html#L74'>prevp</a>              74 user/umalloc.c   for(p = prevp-&gt;s.ptr; ; prevp = p, p = p-&gt;s.ptr){</span>
-<span class='curline'><a href='../S/12.html#L77'>prevp</a>              77 user/umalloc.c         prevp-&gt;s.ptr = p-&gt;s.ptr;</span>
-<span class='curline'><a href='../S/12.html#L83'>prevp</a>              83 user/umalloc.c       freep = prevp;</span>
+<span class='curline'><a href='../S/65.html#L16'>pid_lock</a>           16 kernel/proc.c  struct spinlock pid_lock;</span>
+<span class='curline'><a href='../S/65.html#L52'>pid_lock</a>           52 kernel/proc.c    initlock(&amp;pid_lock, "nextpid");</span>
+<span class='curline'><a href='../S/65.html#L97'>pid_lock</a>           97 kernel/proc.c    acquire(&amp;pid_lock);</span>
+<span class='curline'><a href='../S/65.html#L100'>pid_lock</a>          100 kernel/proc.c    release(&amp;pid_lock);</span>
 </pre>
 </body>
 </html>

@@ -3,33 +3,33 @@
 <head>
 <title>cons</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L53'>cons</a>               53 kernel/console.c } cons;</span>
-<span class='curline'><a href='../S/56.html#L87'>cons</a>               87 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/56.html#L91'>cons</a>               91 kernel/console.c     while(cons.r == cons.w){</span>
-<span class='curline'><a href='../S/56.html#L93'>cons</a>               93 kernel/console.c         release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/56.html#L96'>cons</a>               96 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
-<span class='curline'><a href='../S/56.html#L99'>cons</a>               99 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF_SIZE];</span>
-<span class='curline'><a href='../S/56.html#L105'>cons</a>              105 kernel/console.c         cons.r--;</span>
-<span class='curline'><a href='../S/56.html#L124'>cons</a>              124 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/56.html#L138'>cons</a>              138 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/56.html#L145'>cons</a>              145 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
-<span class='curline'><a href='../S/56.html#L146'>cons</a>              146 kernel/console.c           cons.buf[(cons.e-1) % INPUT_BUF_SIZE] != '\n'){</span>
-<span class='curline'><a href='../S/56.html#L147'>cons</a>              147 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/56.html#L153'>cons</a>              153 kernel/console.c     if(cons.e != cons.w){</span>
-<span class='curline'><a href='../S/56.html#L154'>cons</a>              154 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/56.html#L159'>cons</a>              159 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF_SIZE){</span>
-<span class='curline'><a href='../S/56.html#L166'>cons</a>              166 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF_SIZE] = c;</span>
-<span class='curline'><a href='../S/56.html#L168'>cons</a>              168 kernel/console.c       if(c == '\n' || c == C('D') || cons.e-cons.r == INPUT_BUF_SIZE){</span>
-<span class='curline'><a href='../S/56.html#L171'>cons</a>              171 kernel/console.c         cons.w = cons.e;</span>
-<span class='curline'><a href='../S/56.html#L172'>cons</a>              172 kernel/console.c         wakeup(&amp;cons.r);</span>
-<span class='curline'><a href='../S/56.html#L178'>cons</a>              178 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/56.html#L184'>cons</a>              184 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
+<span class='curline'><a href='../S/59.html#L53'>cons</a>               53 kernel/console.c } cons;</span>
+<span class='curline'><a href='../S/59.html#L91'>cons</a>               91 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L95'>cons</a>               95 kernel/console.c     while(cons.r == cons.w){</span>
+<span class='curline'><a href='../S/59.html#L97'>cons</a>               97 kernel/console.c         release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L100'>cons</a>              100 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L103'>cons</a>              103 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF_SIZE];</span>
+<span class='curline'><a href='../S/59.html#L109'>cons</a>              109 kernel/console.c         cons.r--;</span>
+<span class='curline'><a href='../S/59.html#L128'>cons</a>              128 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L142'>cons</a>              142 kernel/console.c   acquire(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L149'>cons</a>              149 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
+<span class='curline'><a href='../S/59.html#L150'>cons</a>              150 kernel/console.c           cons.buf[(cons.e-1) % INPUT_BUF_SIZE] != '\n'){</span>
+<span class='curline'><a href='../S/59.html#L151'>cons</a>              151 kernel/console.c       cons.e--;</span>
+<span class='curline'><a href='../S/59.html#L157'>cons</a>              157 kernel/console.c     if(cons.e != cons.w){</span>
+<span class='curline'><a href='../S/59.html#L158'>cons</a>              158 kernel/console.c       cons.e--;</span>
+<span class='curline'><a href='../S/59.html#L163'>cons</a>              163 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF_SIZE){</span>
+<span class='curline'><a href='../S/59.html#L170'>cons</a>              170 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF_SIZE] = c;</span>
+<span class='curline'><a href='../S/59.html#L172'>cons</a>              172 kernel/console.c       if(c == '\n' || c == C('D') || cons.e-cons.r == INPUT_BUF_SIZE){</span>
+<span class='curline'><a href='../S/59.html#L175'>cons</a>              175 kernel/console.c         cons.w = cons.e;</span>
+<span class='curline'><a href='../S/59.html#L176'>cons</a>              176 kernel/console.c         wakeup(&amp;cons.r);</span>
+<span class='curline'><a href='../S/59.html#L182'>cons</a>              182 kernel/console.c   release(&amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L188'>cons</a>              188 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
 </pre>
 </body>
 </html>

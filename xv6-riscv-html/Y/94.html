@@ -1,16 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>entry</title>
+<title>epc</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/51.html#L12'>entry</a>              12 kernel/elf.h     uint64 entry;</span>
-<span class='curline'><a href='../S/36.html#L127'>entry</a>             127 kernel/exec.c    p-&gt;trapframe-&gt;epc = elf.entry;  // initial program counter = main</span>
+<span class='curline'><a href='../S/39.html#L134'>epc</a>               134 kernel/exec.c    p-&gt;trapframe-&gt;epc = elf.entry;  // initial program counter = main</span>
+<span class='curline'><a href='../S/38.html#L47'>epc</a>                47 kernel/proc.h    /*  24 */ uint64 epc;           // saved user program counter</span>
+<span class='curline'><a href='../S/58.html#L52'>epc</a>                52 kernel/trap.c    p-&gt;trapframe-&gt;epc = r_sepc();</span>
+<span class='curline'><a href='../S/58.html#L62'>epc</a>                62 kernel/trap.c      p-&gt;trapframe-&gt;epc += 4;</span>
+<span class='curline'><a href='../S/58.html#L130'>epc</a>               130 kernel/trap.c    w_sepc(p-&gt;trapframe-&gt;epc);</span>
 </pre>
 </body>
 </html>

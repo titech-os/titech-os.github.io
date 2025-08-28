@@ -1,22 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>cpuid</title>
+<title>copyout</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L85'>cpuid</a>              85 kernel/defs.h  int             cpuid(void);</span>
-<span class='curline'><a href='../S/59.html#L13'>cpuid</a>              13 kernel/main.c    if(cpuid() == 0){</span>
-<span class='curline'><a href='../S/59.html#L38'>cpuid</a>              38 kernel/main.c      printf("hart %d starting\n", cpuid());</span>
-<span class='curline'><a href='../S/61.html#L22'>cpuid</a>              22 kernel/plic.c    int hart = cpuid();</span>
-<span class='curline'><a href='../S/61.html#L36'>cpuid</a>              36 kernel/plic.c    int hart = cpuid();</span>
-<span class='curline'><a href='../S/61.html#L45'>cpuid</a>              45 kernel/plic.c    int hart = cpuid();</span>
-<span class='curline'><a href='../S/62.html#L76'>cpuid</a>              76 kernel/proc.c    int id = cpuid();</span>
-<span class='curline'><a href='../S/55.html#L166'>cpuid</a>             166 kernel/trap.c    if(cpuid() == 0){</span>
+<span class='curline'><a href='../S/35.html#L167'>copyout</a>           167 kernel/defs.h  int             copyout(pagetable_t, uint64, char *, uint64);</span>
+<span class='curline'><a href='../S/39.html#L105'>copyout</a>           105 kernel/exec.c      if(copyout(pagetable, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
+<span class='curline'><a href='../S/39.html#L116'>copyout</a>           116 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
+<span class='curline'><a href='../S/69.html#L97'>copyout</a>            97 kernel/file.c      if(copyout(p-&gt;pagetable, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
+<span class='curline'><a href='../S/37.html#L124'>copyout</a>           124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
+<span class='curline'><a href='../S/65.html#L388'>copyout</a>           388 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;pp-&gt;xstate,</span>
+<span class='curline'><a href='../S/65.html#L637'>copyout</a>           637 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/46.html#L496'>copyout</a>           496 kernel/sysfile.c   if(copyout(p-&gt;pagetable, fdarray, (char*)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
+<span class='curline'><a href='../S/46.html#L497'>copyout</a>           497 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
+<span class='curline'><a href='../S/27.html#L2706'>copyout</a>          2706 user/usertests.c   {copyout, "copyout"},</span>
 </pre>
 </body>
 </html>

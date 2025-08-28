@@ -1,21 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>last</title>
+<title>kstack</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L25'>last</a>               25 kernel/exec.c    char *s, *last;</span>
-<span class='curline'><a href='../S/36.html#L118'>last</a>              118 kernel/exec.c    for(last=s=path; *s; s++)</span>
-<span class='curline'><a href='../S/36.html#L120'>last</a>              120 kernel/exec.c        last = s+1;</span>
-<span class='curline'><a href='../S/36.html#L121'>last</a>              121 kernel/exec.c    safestrcpy(p-&gt;name, last, sizeof(p-&gt;name));</span>
-<span class='curline'><a href='../S/38.html#L146'>last</a>              146 kernel/vm.c      uint64 a, last;</span>
-<span class='curline'><a href='../S/38.html#L159'>last</a>              159 kernel/vm.c      last = va + size - PGSIZE;</span>
-<span class='curline'><a href='../S/38.html#L166'>last</a>              166 kernel/vm.c        if(a == last)</span>
+<span class='curline'><a href='../S/65.html#L57'>kstack</a>             57 kernel/proc.c        p-&gt;kstack = KSTACK((int) (p - proc));</span>
+<span class='curline'><a href='../S/65.html#L147'>kstack</a>            147 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L99'>kstack</a>             99 kernel/proc.h    uint64 kstack;               // Virtual address of kernel stack</span>
+<span class='curline'><a href='../S/58.html#L116'>kstack</a>            116 kernel/trap.c    p-&gt;trapframe-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
 </pre>
 </body>
 </html>

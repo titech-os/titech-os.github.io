@@ -1,27 +1,54 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>re</title>
+<title>r</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/22.html#L73'>re</a>                 73 user/grep.c    match(char *re, char *text)</span>
-<span class='curline'><a href='../S/22.html#L75'>re</a>                 75 user/grep.c      if(re[0] == '^')</span>
-<span class='curline'><a href='../S/22.html#L76'>re</a>                 76 user/grep.c        return matchhere(re+1, text);</span>
-<span class='curline'><a href='../S/22.html#L78'>re</a>                 78 user/grep.c        if(matchhere(re, text))</span>
-<span class='curline'><a href='../S/22.html#L85'>re</a>                 85 user/grep.c    int matchhere(char *re, char *text)</span>
-<span class='curline'><a href='../S/22.html#L87'>re</a>                 87 user/grep.c      if(re[0] == '\0')</span>
-<span class='curline'><a href='../S/22.html#L89'>re</a>                 89 user/grep.c      if(re[1] == '*')</span>
-<span class='curline'><a href='../S/22.html#L90'>re</a>                 90 user/grep.c        return matchstar(re[0], re+2, text);</span>
-<span class='curline'><a href='../S/22.html#L91'>re</a>                 91 user/grep.c      if(re[0] == '$' &amp;&amp; re[1] == '\0')</span>
-<span class='curline'><a href='../S/22.html#L93'>re</a>                 93 user/grep.c      if(*text!='\0' &amp;&amp; (re[0]=='.' || re[0]==*text))</span>
-<span class='curline'><a href='../S/22.html#L94'>re</a>                 94 user/grep.c        return matchhere(re+1, text+1);</span>
-<span class='curline'><a href='../S/22.html#L99'>re</a>                 99 user/grep.c    int matchstar(int c, char *re, char *text)</span>
-<span class='curline'><a href='../S/22.html#L102'>re</a>                102 user/grep.c        if(matchhere(re, text))</span>
+<span class='curline'><a href='../S/59.html#L50'>r</a>                  50 kernel/console.c   uint r;  // Read index</span>
+<span class='curline'><a href='../S/59.html#L95'>r</a>                  95 kernel/console.c     while(cons.r == cons.w){</span>
+<span class='curline'><a href='../S/59.html#L100'>r</a>                 100 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
+<span class='curline'><a href='../S/59.html#L103'>r</a>                 103 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF_SIZE];</span>
+<span class='curline'><a href='../S/59.html#L109'>r</a>                 109 kernel/console.c         cons.r--;</span>
+<span class='curline'><a href='../S/59.html#L163'>r</a>                 163 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF_SIZE){</span>
+<span class='curline'><a href='../S/59.html#L172'>r</a>                 172 kernel/console.c       if(c == '\n' || c == C('D') || cons.e-cons.r == INPUT_BUF_SIZE){</span>
+<span class='curline'><a href='../S/59.html#L176'>r</a>                 176 kernel/console.c         wakeup(&amp;cons.r);</span>
+<span class='curline'><a href='../S/69.html#L109'>r</a>                 109 kernel/file.c    int r = 0;</span>
+<span class='curline'><a href='../S/69.html#L115'>r</a>                 115 kernel/file.c      r = piperead(f-&gt;pipe, addr, n);</span>
+<span class='curline'><a href='../S/69.html#L119'>r</a>                 119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
+<span class='curline'><a href='../S/69.html#L122'>r</a>                 122 kernel/file.c      if((r = readi(f-&gt;ip, 1, addr, f-&gt;off, n)) &gt; 0)</span>
+<span class='curline'><a href='../S/69.html#L123'>r</a>                 123 kernel/file.c        f-&gt;off += r;</span>
+<span class='curline'><a href='../S/69.html#L129'>r</a>                 129 kernel/file.c    return r;</span>
+<span class='curline'><a href='../S/69.html#L137'>r</a>                 137 kernel/file.c    int r, ret = 0;</span>
+<span class='curline'><a href='../S/69.html#L162'>r</a>                 162 kernel/file.c        if ((r = writei(f-&gt;ip, 1, addr + i, f-&gt;off, n1)) &gt; 0)</span>
+<span class='curline'><a href='../S/69.html#L163'>r</a>                 163 kernel/file.c          f-&gt;off += r;</span>
+<span class='curline'><a href='../S/69.html#L167'>r</a>                 167 kernel/file.c        if(r != n1){</span>
+<span class='curline'><a href='../S/69.html#L171'>r</a>                 171 kernel/file.c        i += r;</span>
+<span class='curline'><a href='../S/72.html#L49'>r</a>                  49 kernel/kalloc.c   struct run *r;</span>
+<span class='curline'><a href='../S/72.html#L57'>r</a>                  57 kernel/kalloc.c   r = (struct run*)pa;</span>
+<span class='curline'><a href='../S/72.html#L60'>r</a>                  60 kernel/kalloc.c   r-&gt;next = kmem.freelist;</span>
+<span class='curline'><a href='../S/72.html#L61'>r</a>                  61 kernel/kalloc.c   kmem.freelist = r;</span>
+<span class='curline'><a href='../S/72.html#L71'>r</a>                  71 kernel/kalloc.c   struct run *r;</span>
+<span class='curline'><a href='../S/72.html#L74'>r</a>                  74 kernel/kalloc.c   r = kmem.freelist;</span>
+<span class='curline'><a href='../S/72.html#L75'>r</a>                  75 kernel/kalloc.c   if(r)</span>
+<span class='curline'><a href='../S/72.html#L76'>r</a>                  76 kernel/kalloc.c     kmem.freelist = r-&gt;next;</span>
+<span class='curline'><a href='../S/72.html#L79'>r</a>                  79 kernel/kalloc.c   if(r)</span>
+<span class='curline'><a href='../S/72.html#L80'>r</a>                  80 kernel/kalloc.c     memset((char*)r, 5, PGSIZE); // fill with junk</span>
+<span class='curline'><a href='../S/72.html#L81'>r</a>                  81 kernel/kalloc.c   return (void*)r;</span>
+<span class='curline'><a href='../S/47.html#L46'>r</a>                  46 kernel/sleeplock.c   int r;</span>
+<span class='curline'><a href='../S/47.html#L49'>r</a>                  49 kernel/sleeplock.c   r = lk-&gt;locked &amp;&amp; (lk-&gt;pid == myproc()-&gt;pid);</span>
+<span class='curline'><a href='../S/47.html#L51'>r</a>                  51 kernel/sleeplock.c   return r;</span>
+<span class='curline'><a href='../S/61.html#L79'>r</a>                  79 kernel/spinlock.c   int r;</span>
+<span class='curline'><a href='../S/61.html#L80'>r</a>                  80 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
+<span class='curline'><a href='../S/61.html#L81'>r</a>                  81 kernel/spinlock.c   return r;</span>
+<span class='curline'><a href='../S/67.html#L20'>r</a>                  20 kernel/virtio_disk.c #define R(r) ((volatile uint32 *)(VIRTIO0 + (r)))</span>
+<span class='curline'><a href='../S/20.html#L90'>r</a>                  90 user/ulib.c      int r;</span>
+<span class='curline'><a href='../S/20.html#L95'>r</a>                  95 user/ulib.c      r = fstat(fd, st);</span>
+<span class='curline'><a href='../S/20.html#L97'>r</a>                  97 user/ulib.c      return r;</span>
 </pre>
 </body>
 </html>

@@ -1,19 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uart_tx_w</title>
+<title>tx_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/71.html#L45'>uart_tx_w</a>          45 kernel/uart.c  uint64 uart_tx_w; // write next to uart_tx_buf[uart_tx_w % UART_TX_BUF_SIZE]</span>
-<span class='curline'><a href='../S/71.html#L95'>uart_tx_w</a>          95 kernel/uart.c    while(uart_tx_w == uart_tx_r + UART_TX_BUF_SIZE){</span>
-<span class='curline'><a href='../S/71.html#L100'>uart_tx_w</a>         100 kernel/uart.c    uart_tx_buf[uart_tx_w % UART_TX_BUF_SIZE] = c;</span>
-<span class='curline'><a href='../S/71.html#L101'>uart_tx_w</a>         101 kernel/uart.c    uart_tx_w += 1;</span>
-<span class='curline'><a href='../S/71.html#L137'>uart_tx_w</a>         137 kernel/uart.c      if(uart_tx_w == uart_tx_r){</span>
+<span class='curline'><a href='../S/75.html#L42'>tx_lock</a>            42 kernel/uart.c  static struct spinlock tx_lock;</span>
+<span class='curline'><a href='../S/75.html#L74'>tx_lock</a>            74 kernel/uart.c    initlock(&amp;tx_lock, "uart");</span>
+<span class='curline'><a href='../S/75.html#L83'>tx_lock</a>            83 kernel/uart.c    acquire(&amp;tx_lock);</span>
+<span class='curline'><a href='../S/75.html#L90'>tx_lock</a>            90 kernel/uart.c        sleep(&amp;tx_chan, &amp;tx_lock);</span>
+<span class='curline'><a href='../S/75.html#L98'>tx_lock</a>            98 kernel/uart.c    release(&amp;tx_lock);</span>
+<span class='curline'><a href='../S/75.html#L147'>tx_lock</a>           147 kernel/uart.c    acquire(&amp;tx_lock);</span>
+<span class='curline'><a href='../S/75.html#L153'>tx_lock</a>           153 kernel/uart.c    release(&amp;tx_lock);</span>
 </pre>
 </body>
 </html>

@@ -1,19 +1,31 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nmeta</title>
+<title>nlink</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/3.html#L26'>nmeta</a>              26 mkfs/mkfs.c    int nmeta;    // Number of meta blocks (boot, sb, nlog, inode, bitmap)</span>
-<span class='curline'><a href='../S/3.html#L93'>nmeta</a>              93 mkfs/mkfs.c      nmeta = 2 + nlog + ninodeblocks + nbitmap;</span>
-<span class='curline'><a href='../S/3.html#L94'>nmeta</a>              94 mkfs/mkfs.c      nblocks = FSSIZE - nmeta;</span>
-<span class='curline'><a href='../S/3.html#L106'>nmeta</a>             106 mkfs/mkfs.c             nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);</span>
-<span class='curline'><a href='../S/3.html#L108'>nmeta</a>             108 mkfs/mkfs.c      freeblock = nmeta;     // the first free block that we can allocate</span>
+<span class='curline'><a href='../S/44.html#L27'>nlink</a>              27 kernel/file.h    short nlink;</span>
+<span class='curline'><a href='../S/50.html#L237'>nlink</a>             237 kernel/fs.c      dip-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/50.html#L310'>nlink</a>             310 kernel/fs.c        ip-&gt;nlink = dip-&gt;nlink;</span>
+<span class='curline'><a href='../S/50.html#L342'>nlink</a>             342 kernel/fs.c      if(ip-&gt;ref == 1 &amp;&amp; ip-&gt;valid &amp;&amp; ip-&gt;nlink == 0){</span>
+<span class='curline'><a href='../S/50.html#L380'>nlink</a>             380 kernel/fs.c        if (dip-&gt;type != 0 &amp;&amp; dip-&gt;nlink == 0) {  // is an orphaned inode</span>
+<span class='curline'><a href='../S/50.html#L486'>nlink</a>             486 kernel/fs.c      st-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/74.html#L36'>nlink</a>              36 kernel/fs.h      short nlink;          // Number of links to inode in file system</span>
+<span class='curline'><a href='../S/45.html#L9'>nlink</a>               9 kernel/stat.h    short nlink; // Number of links to file</span>
+<span class='curline'><a href='../S/46.html#L145'>nlink</a>             145 kernel/sysfile.c   ip-&gt;nlink++;</span>
+<span class='curline'><a href='../S/46.html#L165'>nlink</a>             165 kernel/sysfile.c   ip-&gt;nlink--;</span>
+<span class='curline'><a href='../S/46.html#L215'>nlink</a>             215 kernel/sysfile.c   if(ip-&gt;nlink &lt; 1)</span>
+<span class='curline'><a href='../S/46.html#L226'>nlink</a>             226 kernel/sysfile.c     dp-&gt;nlink--;</span>
+<span class='curline'><a href='../S/46.html#L231'>nlink</a>             231 kernel/sysfile.c   ip-&gt;nlink--;</span>
+<span class='curline'><a href='../S/46.html#L273'>nlink</a>             273 kernel/sysfile.c   ip-&gt;nlink = 1;</span>
+<span class='curline'><a href='../S/46.html#L287'>nlink</a>             287 kernel/sysfile.c     dp-&gt;nlink++;  // for ".."</span>
+<span class='curline'><a href='../S/46.html#L297'>nlink</a>             297 kernel/sysfile.c   ip-&gt;nlink = 0;</span>
+<span class='curline'><a href='../S/3.html#L230'>nlink</a>             230 mkfs/mkfs.c      din.nlink = xshort(1);</span>
 </pre>
 </body>
 </html>

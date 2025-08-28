@@ -1,23 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nwrite</title>
+<title>ntests</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/34.html#L17'>nwrite</a>             17 kernel/pipe.c    uint nwrite;    // number of bytes written</span>
-<span class='curline'><a href='../S/34.html#L35'>nwrite</a>             35 kernel/pipe.c    pi-&gt;nwrite = 0;</span>
-<span class='curline'><a href='../S/34.html#L67'>nwrite</a>             67 kernel/pipe.c      wakeup(&amp;pi-&gt;nwrite);</span>
-<span class='curline'><a href='../S/34.html#L88'>nwrite</a>             88 kernel/pipe.c      if(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){ //DOC: pipewrite-full</span>
-<span class='curline'><a href='../S/34.html#L90'>nwrite</a>             90 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/34.html#L95'>nwrite</a>             95 kernel/pipe.c        pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
-<span class='curline'><a href='../S/34.html#L113'>nwrite</a>            113 kernel/pipe.c    while(pi-&gt;nread == pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  //DOC: pipe-empty</span>
-<span class='curline'><a href='../S/34.html#L121'>nwrite</a>            121 kernel/pipe.c      if(pi-&gt;nread == pi-&gt;nwrite)</span>
-<span class='curline'><a href='../S/34.html#L127'>nwrite</a>            127 kernel/pipe.c    wakeup(&amp;pi-&gt;nwrite);  //DOC: piperead-wakeup</span>
+<span class='curline'><a href='../S/27.html#L3098'>ntests</a>           3098 user/usertests.c   int ntests = 0;</span>
+<span class='curline'><a href='../S/27.html#L3101'>ntests</a>           3101 user/usertests.c       ntests++;</span>
+<span class='curline'><a href='../S/27.html#L3110'>ntests</a>           3110 user/usertests.c   return ntests;</span>
+<span class='curline'><a href='../S/27.html#L3137'>ntests</a>           3137 user/usertests.c     int ntests = 0;</span>
+<span class='curline'><a href='../S/27.html#L3145'>ntests</a>           3145 user/usertests.c       ntests += n;</span>
+<span class='curline'><a href='../S/27.html#L3156'>ntests</a>           3156 user/usertests.c         ntests += n;</span>
+<span class='curline'><a href='../S/27.html#L3165'>ntests</a>           3165 user/usertests.c     if (justone != 0 &amp;&amp; ntests == 0) {</span>
 </pre>
 </body>
 </html>

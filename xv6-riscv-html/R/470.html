@@ -1,17 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>strncpy</title>
+<title>sleeplock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L134'>strncpy</a>           134 kernel/defs.h  char*           strncpy(char*, const char*, int);</span>
-<span class='curline'><a href='../S/47.html#L600'>strncpy</a>           600 kernel/fs.c      strncpy(de.name, name, DIRSIZ);</span>
-<span class='curline'><a href='../S/3.html#L156'>strncpy</a>           156 mkfs/mkfs.c        strncpy(de.name, shortname, DIRSIZ);</span>
+<span class='curline'><a href='../S/49.html#L6'>sleeplock</a>           6 kernel/buf.h     struct sleeplock lock;</span>
+<span class='curline'><a href='../S/35.html#L8'>sleeplock</a>           8 kernel/defs.h  struct sleeplock;</span>
+<span class='curline'><a href='../S/35.html#L117'>sleeplock</a>         117 kernel/defs.h  void            acquiresleep(struct sleeplock*);</span>
+<span class='curline'><a href='../S/35.html#L118'>sleeplock</a>         118 kernel/defs.h  void            releasesleep(struct sleeplock*);</span>
+<span class='curline'><a href='../S/35.html#L119'>sleeplock</a>         119 kernel/defs.h  int             holdingsleep(struct sleeplock*);</span>
+<span class='curline'><a href='../S/35.html#L120'>sleeplock</a>         120 kernel/defs.h  void            initsleeplock(struct sleeplock*, char*);</span>
+<span class='curline'><a href='../S/44.html#L21'>sleeplock</a>          21 kernel/file.h    struct sleeplock lock; // protects everything below here</span>
+<span class='curline'><a href='../S/47.html#L13'>sleeplock</a>          13 kernel/sleeplock.c initsleeplock(struct sleeplock *lk, char *name)</span>
+<span class='curline'><a href='../S/47.html#L22'>sleeplock</a>          22 kernel/sleeplock.c acquiresleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/47.html#L34'>sleeplock</a>          34 kernel/sleeplock.c releasesleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/47.html#L44'>sleeplock</a>          44 kernel/sleeplock.c holdingsleep(struct sleeplock *lk)</span>
 </pre>
 </body>
 </html>

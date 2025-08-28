@@ -1,16 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>initcode</title>
+<title>indirect</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/62.html#L221'>initcode</a>          221 kernel/proc.c  uchar initcode[] = {</span>
-<span class='curline'><a href='../S/62.html#L242'>initcode</a>          242 kernel/proc.c    uvmfirst(p-&gt;pagetable, initcode, sizeof(initcode));</span>
+<span class='curline'><a href='../S/3.html#L261'>indirect</a>          261 mkfs/mkfs.c      uint indirect[NINDIRECT];</span>
+<span class='curline'><a href='../S/3.html#L279'>indirect</a>          279 mkfs/mkfs.c          rsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/3.html#L280'>indirect</a>          280 mkfs/mkfs.c          if(indirect[fbn - NDIRECT] == 0){</span>
+<span class='curline'><a href='../S/3.html#L281'>indirect</a>          281 mkfs/mkfs.c            indirect[fbn - NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L282'>indirect</a>          282 mkfs/mkfs.c            wsect(xint(din.addrs[NDIRECT]), (char*)indirect);</span>
+<span class='curline'><a href='../S/3.html#L284'>indirect</a>          284 mkfs/mkfs.c          x = xint(indirect[fbn-NDIRECT]);</span>
 </pre>
 </body>
 </html>

@@ -1,22 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ticks</title>
+<title>tail</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L145'>ticks</a>             145 kernel/defs.h  extern uint     ticks;</span>
-<span class='curline'><a href='../S/33.html#L61'>ticks</a>              61 kernel/sysproc.c   ticks0 = ticks;</span>
-<span class='curline'><a href='../S/33.html#L62'>ticks</a>              62 kernel/sysproc.c   while(ticks - ticks0 &lt; n){</span>
-<span class='curline'><a href='../S/33.html#L67'>ticks</a>              67 kernel/sysproc.c     sleep(&amp;ticks, &amp;tickslock);</span>
-<span class='curline'><a href='../S/33.html#L90'>ticks</a>              90 kernel/sysproc.c   xticks = ticks;</span>
-<span class='curline'><a href='../S/55.html#L10'>ticks</a>              10 kernel/trap.c  uint ticks;</span>
-<span class='curline'><a href='../S/55.html#L168'>ticks</a>             168 kernel/trap.c      ticks++;</span>
-<span class='curline'><a href='../S/55.html#L169'>ticks</a>             169 kernel/trap.c      wakeup(&amp;ticks);</span>
+<span class='curline'><a href='../S/32.html#L69'>tail</a>               69 kernel/log.c     int tail;</span>
+<span class='curline'><a href='../S/32.html#L71'>tail</a>               71 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/32.html#L73'>tail</a>               73 kernel/log.c         printf("recovering tail %d dst %d\n", tail, log.lh.block[tail]);</span>
+<span class='curline'><a href='../S/32.html#L75'>tail</a>               75 kernel/log.c       struct buf *lbuf = bread(log.dev, log.start+tail+1); // read log block</span>
+<span class='curline'><a href='../S/32.html#L76'>tail</a>               76 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/32.html#L182'>tail</a>              182 kernel/log.c     int tail;</span>
+<span class='curline'><a href='../S/32.html#L184'>tail</a>              184 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/32.html#L185'>tail</a>              185 kernel/log.c       struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
+<span class='curline'><a href='../S/32.html#L186'>tail</a>              186 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
 </pre>
 </body>
 </html>

@@ -1,17 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>filesz</title>
+<title>ff</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/51.html#L31'>filesz</a>             31 kernel/elf.h     uint64 filesz;</span>
-<span class='curline'><a href='../S/36.html#L58'>filesz</a>             58 kernel/exec.c      if(ph.memsz &lt; ph.filesz)</span>
-<span class='curline'><a href='../S/36.html#L68'>filesz</a>             68 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/69.html#L62'>ff</a>                 62 kernel/file.c    struct file ff;</span>
+<span class='curline'><a href='../S/69.html#L71'>ff</a>                 71 kernel/file.c    ff = *f;</span>
+<span class='curline'><a href='../S/69.html#L76'>ff</a>                 76 kernel/file.c    if(ff.type == FD_PIPE){</span>
+<span class='curline'><a href='../S/69.html#L77'>ff</a>                 77 kernel/file.c      pipeclose(ff.pipe, ff.writable);</span>
+<span class='curline'><a href='../S/69.html#L78'>ff</a>                 78 kernel/file.c    } else if(ff.type == FD_INODE || ff.type == FD_DEVICE){</span>
+<span class='curline'><a href='../S/69.html#L80'>ff</a>                 80 kernel/file.c      iput(ff.ip);</span>
+<span class='curline'><a href='../S/19.html#L18'>ff</a>                 18 user/forphan.c   char *ff = "file0";</span>
+<span class='curline'><a href='../S/19.html#L20'>ff</a>                 20 user/forphan.c   if ((fd = open(ff, O_CREATE|O_WRONLY)) &lt; 0) {</span>
+<span class='curline'><a href='../S/19.html#L28'>ff</a>                 28 user/forphan.c   if (unlink(ff) &lt; 0) {</span>
+<span class='curline'><a href='../S/19.html#L32'>ff</a>                 32 user/forphan.c   if (open(ff, O_RDONLY) != -1) {</span>
 </pre>
 </body>
 </html>

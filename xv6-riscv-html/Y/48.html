@@ -3,101 +3,81 @@
 <head>
 <title>c</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/56.html#L34'>c</a>                  34 kernel/console.c consputc(int c)</span>
-<span class='curline'><a href='../S/56.html#L36'>c</a>                  36 kernel/console.c   if(c == BACKSPACE){</span>
-<span class='curline'><a href='../S/56.html#L40'>c</a>                  40 kernel/console.c     uartputc_sync(c);</span>
-<span class='curline'><a href='../S/56.html#L64'>c</a>                  64 kernel/console.c     char c;</span>
-<span class='curline'><a href='../S/56.html#L65'>c</a>                  65 kernel/console.c     if(either_copyin(&amp;c, user_src, src+i, 1) == -1)</span>
-<span class='curline'><a href='../S/56.html#L67'>c</a>                  67 kernel/console.c     uartputc(c);</span>
-<span class='curline'><a href='../S/56.html#L83'>c</a>                  83 kernel/console.c   int c;</span>
-<span class='curline'><a href='../S/56.html#L99'>c</a>                  99 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF_SIZE];</span>
-<span class='curline'><a href='../S/56.html#L101'>c</a>                 101 kernel/console.c     if(c == C('D')){  // end-of-file</span>
-<span class='curline'><a href='../S/56.html#L111'>c</a>                 111 kernel/console.c     cbuf = c;</span>
-<span class='curline'><a href='../S/56.html#L118'>c</a>                 118 kernel/console.c     if(c == '\n'){</span>
-<span class='curline'><a href='../S/56.html#L136'>c</a>                 136 kernel/console.c consoleintr(int c)</span>
-<span class='curline'><a href='../S/56.html#L140'>c</a>                 140 kernel/console.c   switch(c){</span>
-<span class='curline'><a href='../S/56.html#L159'>c</a>                 159 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF_SIZE){</span>
-<span class='curline'><a href='../S/56.html#L160'>c</a>                 160 kernel/console.c       c = (c == '\r') ? '\n' : c;</span>
-<span class='curline'><a href='../S/56.html#L163'>c</a>                 163 kernel/console.c       consputc(c);</span>
-<span class='curline'><a href='../S/56.html#L166'>c</a>                 166 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF_SIZE] = c;</span>
-<span class='curline'><a href='../S/56.html#L168'>c</a>                 168 kernel/console.c       if(c == '\n' || c == C('D') || cons.e-cons.r == INPUT_BUF_SIZE){</span>
-<span class='curline'><a href='../S/30.html#L127'>c</a>                 127 kernel/printf.c     switch(c){</span>
-<span class='curline'><a href='../S/30.html#L149'>c</a>                 149 kernel/printf.c       consputc(c);</span>
-<span class='curline'><a href='../S/62.html#L77'>c</a>                  77 kernel/proc.c    struct cpu *c = &amp;cpus[id];</span>
-<span class='curline'><a href='../S/62.html#L78'>c</a>                  78 kernel/proc.c    return c;</span>
-<span class='curline'><a href='../S/62.html#L86'>c</a>                  86 kernel/proc.c    struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/62.html#L87'>c</a>                  87 kernel/proc.c    struct proc *p = c-&gt;proc;</span>
-<span class='curline'><a href='../S/62.html#L448'>c</a>                 448 kernel/proc.c    struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/62.html#L450'>c</a>                 450 kernel/proc.c    c-&gt;proc = 0;</span>
-<span class='curline'><a href='../S/62.html#L465'>c</a>                 465 kernel/proc.c          c-&gt;proc = p;</span>
-<span class='curline'><a href='../S/62.html#L466'>c</a>                 466 kernel/proc.c          swtch(&amp;c-&gt;context, &amp;p-&gt;context);</span>
-<span class='curline'><a href='../S/62.html#L470'>c</a>                 470 kernel/proc.c          c-&gt;proc = 0;</span>
-<span class='curline'><a href='../S/58.html#L102'>c</a>                 102 kernel/spinlock.c   struct cpu *c = mycpu();</span>
-<span class='curline'><a href='../S/58.html#L105'>c</a>                 105 kernel/spinlock.c   if(c-&gt;noff &lt; 1)</span>
-<span class='curline'><a href='../S/58.html#L107'>c</a>                 107 kernel/spinlock.c   c-&gt;noff -= 1;</span>
-<span class='curline'><a href='../S/58.html#L108'>c</a>                 108 kernel/spinlock.c   if(c-&gt;noff == 0 &amp;&amp; c-&gt;intena)</span>
-<span class='curline'><a href='../S/45.html#L4'>c</a>                   4 kernel/string.c memset(void *dst, int c, uint n)</span>
-<span class='curline'><a href='../S/45.html#L9'>c</a>                   9 kernel/string.c     cdst[i] = c;</span>
-<span class='curline'><a href='../S/71.html#L87'>c</a>                  87 kernel/uart.c  uartputc(int c)</span>
-<span class='curline'><a href='../S/71.html#L100'>c</a>                 100 kernel/uart.c    uart_tx_buf[uart_tx_w % UART_TX_BUF_SIZE] = c;</span>
-<span class='curline'><a href='../S/71.html#L112'>c</a>                 112 kernel/uart.c  uartputc_sync(int c)</span>
-<span class='curline'><a href='../S/71.html#L124'>c</a>                 124 kernel/uart.c    WriteReg(THR, c);</span>
-<span class='curline'><a href='../S/71.html#L150'>c</a>                 150 kernel/uart.c      int c = uart_tx_buf[uart_tx_r % UART_TX_BUF_SIZE];</span>
-<span class='curline'><a href='../S/71.html#L156'>c</a>                 156 kernel/uart.c      WriteReg(THR, c);</span>
-<span class='curline'><a href='../S/71.html#L181'>c</a>                 181 kernel/uart.c      int c = uartgetc();</span>
-<span class='curline'><a href='../S/71.html#L182'>c</a>                 182 kernel/uart.c      if(c == -1)</span>
-<span class='curline'><a href='../S/71.html#L184'>c</a>                 184 kernel/uart.c      consoleintr(c);</span>
-<span class='curline'><a href='../S/22.html#L99'>c</a>                  99 user/grep.c    int matchstar(int c, char *re, char *text)</span>
-<span class='curline'><a href='../S/22.html#L104'>c</a>                 104 user/grep.c      }while(*text!='\0' &amp;&amp; (*text++==c || c=='.'));</span>
+<span class='curline'><a href='../S/59.html#L34'>c</a>                  34 kernel/console.c consputc(int c)</span>
+<span class='curline'><a href='../S/59.html#L36'>c</a>                  36 kernel/console.c   if(c == BACKSPACE){</span>
+<span class='curline'><a href='../S/59.html#L40'>c</a>                  40 kernel/console.c     uartputc_sync(c);</span>
+<span class='curline'><a href='../S/59.html#L87'>c</a>                  87 kernel/console.c   int c;</span>
+<span class='curline'><a href='../S/59.html#L103'>c</a>                 103 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF_SIZE];</span>
+<span class='curline'><a href='../S/59.html#L105'>c</a>                 105 kernel/console.c     if(c == C('D')){  // end-of-file</span>
+<span class='curline'><a href='../S/59.html#L115'>c</a>                 115 kernel/console.c     cbuf = c;</span>
+<span class='curline'><a href='../S/59.html#L122'>c</a>                 122 kernel/console.c     if(c == '\n'){</span>
+<span class='curline'><a href='../S/59.html#L140'>c</a>                 140 kernel/console.c consoleintr(int c)</span>
+<span class='curline'><a href='../S/59.html#L144'>c</a>                 144 kernel/console.c   switch(c){</span>
+<span class='curline'><a href='../S/59.html#L163'>c</a>                 163 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF_SIZE){</span>
+<span class='curline'><a href='../S/59.html#L164'>c</a>                 164 kernel/console.c       c = (c == '\r') ? '\n' : c;</span>
+<span class='curline'><a href='../S/59.html#L167'>c</a>                 167 kernel/console.c       consputc(c);</span>
+<span class='curline'><a href='../S/59.html#L170'>c</a>                 170 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF_SIZE] = c;</span>
+<span class='curline'><a href='../S/59.html#L172'>c</a>                 172 kernel/console.c       if(c == '\n' || c == C('D') || cons.e-cons.r == INPUT_BUF_SIZE){</span>
+<span class='curline'><a href='../S/65.html#L77'>c</a>                  77 kernel/proc.c    struct cpu *c = &amp;cpus[id];</span>
+<span class='curline'><a href='../S/65.html#L78'>c</a>                  78 kernel/proc.c    return c;</span>
+<span class='curline'><a href='../S/65.html#L86'>c</a>                  86 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/65.html#L87'>c</a>                  87 kernel/proc.c    struct proc *p = c-&gt;proc;</span>
+<span class='curline'><a href='../S/65.html#L425'>c</a>                 425 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/65.html#L427'>c</a>                 427 kernel/proc.c    c-&gt;proc = 0;</span>
+<span class='curline'><a href='../S/65.html#L445'>c</a>                 445 kernel/proc.c          c-&gt;proc = p;</span>
+<span class='curline'><a href='../S/65.html#L446'>c</a>                 446 kernel/proc.c          swtch(&amp;c-&gt;context, &amp;p-&gt;context);</span>
+<span class='curline'><a href='../S/65.html#L450'>c</a>                 450 kernel/proc.c          c-&gt;proc = 0;</span>
+<span class='curline'><a href='../S/61.html#L105'>c</a>                 105 kernel/spinlock.c   struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/61.html#L108'>c</a>                 108 kernel/spinlock.c   if(c-&gt;noff &lt; 1)</span>
+<span class='curline'><a href='../S/61.html#L110'>c</a>                 110 kernel/spinlock.c   c-&gt;noff -= 1;</span>
+<span class='curline'><a href='../S/61.html#L111'>c</a>                 111 kernel/spinlock.c   if(c-&gt;noff == 0 &amp;&amp; c-&gt;intena)</span>
+<span class='curline'><a href='../S/48.html#L4'>c</a>                   4 kernel/string.c memset(void *dst, int c, uint n)</span>
+<span class='curline'><a href='../S/48.html#L9'>c</a>                   9 kernel/string.c     cdst[i] = c;</span>
+<span class='curline'><a href='../S/75.html#L107'>c</a>                 107 kernel/uart.c  uartputc_sync(int c)</span>
+<span class='curline'><a href='../S/75.html#L120'>c</a>                 120 kernel/uart.c    WriteReg(THR, c);</span>
+<span class='curline'><a href='../S/75.html#L157'>c</a>                 157 kernel/uart.c      int c = uartgetc();</span>
+<span class='curline'><a href='../S/75.html#L158'>c</a>                 158 kernel/uart.c      if(c == -1)</span>
+<span class='curline'><a href='../S/75.html#L160'>c</a>                 160 kernel/uart.c      consoleintr(c);</span>
+<span class='curline'><a href='../S/23.html#L99'>c</a>                  99 user/grep.c    int matchstar(int c, char *re, char *text)</span>
+<span class='curline'><a href='../S/23.html#L104'>c</a>                 104 user/grep.c      }while(*text!='\0' &amp;&amp; (*text++==c || c=='.'));</span>
 <span class='curline'><a href='../S/13.html#L169'>c</a>                 169 user/grind.c           char c;</span>
 <span class='curline'><a href='../S/13.html#L170'>c</a>                 170 user/grind.c           if(read(fds[0], &amp;c, 1) != 1)</span>
 <span class='curline'><a href='../S/4.html#L10'>c</a>                  10 user/printf.c  putc(int fd, char c)</span>
 <span class='curline'><a href='../S/4.html#L12'>c</a>                  12 user/printf.c    write(fd, &amp;c, 1);</span>
-<span class='curline'><a href='../S/4.html#L110'>c</a>                 110 user/printf.c        if(c == 'd'){</span>
-<span class='curline'><a href='../S/4.html#L112'>c</a>                 112 user/printf.c        } else if(c == 'l') {</span>
-<span class='curline'><a href='../S/4.html#L114'>c</a>                 114 user/printf.c        } else if(c == 'x') {</span>
-<span class='curline'><a href='../S/4.html#L116'>c</a>                 116 user/printf.c        } else if(c == 'p') {</span>
-<span class='curline'><a href='../S/4.html#L118'>c</a>                 118 user/printf.c        } else if(c == 's'){</span>
-<span class='curline'><a href='../S/4.html#L126'>c</a>                 126 user/printf.c        } else if(c == 'c'){</span>
-<span class='curline'><a href='../S/4.html#L128'>c</a>                 128 user/printf.c        } else if(c == '%'){</span>
-<span class='curline'><a href='../S/4.html#L129'>c</a>                 129 user/printf.c          putc(fd, c);</span>
-<span class='curline'><a href='../S/4.html#L133'>c</a>                 133 user/printf.c          putc(fd, c);</span>
-<span class='curline'><a href='../S/20.html#L47'>c</a>                  47 user/ulib.c    memset(void *dst, int c, uint n)</span>
-<span class='curline'><a href='../S/20.html#L52'>c</a>                  52 user/ulib.c        cdst[i] = c;</span>
-<span class='curline'><a href='../S/20.html#L58'>c</a>                  58 user/ulib.c    strchr(const char *s, char c)</span>
-<span class='curline'><a href='../S/20.html#L61'>c</a>                  61 user/ulib.c        if(*s == c)</span>
-<span class='curline'><a href='../S/20.html#L70'>c</a>                  70 user/ulib.c      char c;</span>
-<span class='curline'><a href='../S/20.html#L73'>c</a>                  73 user/ulib.c        cc = read(0, &amp;c, 1);</span>
-<span class='curline'><a href='../S/20.html#L76'>c</a>                  76 user/ulib.c        buf[i++] = c;</span>
-<span class='curline'><a href='../S/20.html#L77'>c</a>                  77 user/ulib.c        if(c == '\n' || c == '\r')</span>
-<span class='curline'><a href='../S/16.html#L30'>c</a>                  30 user/user.h    char* strchr(const char*, char c);</span>
-<span class='curline'><a href='../S/25.html#L2004'>c</a>                2004 user/usertests.c   char *c, *a, *b;</span>
-<span class='curline'><a href='../S/25.html#L2051'>c</a>                2051 user/usertests.c   c = sbrk(1);</span>
-<span class='curline'><a href='../S/25.html#L2052'>c</a>                2052 user/usertests.c   c = sbrk(1);</span>
-<span class='curline'><a href='../S/25.html#L2053'>c</a>                2053 user/usertests.c   if(c != a + 1){</span>
-<span class='curline'><a href='../S/25.html#L2067'>c</a>                2067 user/usertests.c   char *c, *oldbrk, *a, *lastaddr, *p;</span>
-<span class='curline'><a href='../S/25.html#L2091'>c</a>                2091 user/usertests.c   c = sbrk(-PGSIZE);</span>
-<span class='curline'><a href='../S/25.html#L2092'>c</a>                2092 user/usertests.c   if(c == (char*)0xffffffffffffffffL){</span>
-<span class='curline'><a href='../S/25.html#L2096'>c</a>                2096 user/usertests.c   c = sbrk(0);</span>
-<span class='curline'><a href='../S/25.html#L2097'>c</a>                2097 user/usertests.c   if(c != a - PGSIZE){</span>
-<span class='curline'><a href='../S/25.html#L2098'>c</a>                2098 user/usertests.c     printf("%s: sbrk deallocation produced wrong address, a %p c %p\n", s, a, c);</span>
-<span class='curline'><a href='../S/25.html#L2104'>c</a>                2104 user/usertests.c   c = sbrk(PGSIZE);</span>
-<span class='curline'><a href='../S/25.html#L2105'>c</a>                2105 user/usertests.c   if(c != a || sbrk(0) != a + PGSIZE){</span>
-<span class='curline'><a href='../S/25.html#L2106'>c</a>                2106 user/usertests.c     printf("%s: sbrk re-allocation failed, a %p c %p\n", s, a, c);</span>
-<span class='curline'><a href='../S/25.html#L2116'>c</a>                2116 user/usertests.c   c = sbrk(-(sbrk(0) - oldbrk));</span>
-<span class='curline'><a href='../S/25.html#L2117'>c</a>                2117 user/usertests.c   if(c != a){</span>
-<span class='curline'><a href='../S/25.html#L2118'>c</a>                2118 user/usertests.c     printf("%s: sbrk downsize failed, a %p c %p\n", s, a, c);</span>
-<span class='curline'><a href='../S/25.html#L2180'>c</a>                2180 user/usertests.c   char *c, *a;</span>
-<span class='curline'><a href='../S/25.html#L2202'>c</a>                2202 user/usertests.c   c = sbrk(PGSIZE);</span>
-<span class='curline'><a href='../S/25.html#L2209'>c</a>                2209 user/usertests.c   if(c == (char*)0xffffffffffffffffL){</span>
-<span class='curline'><a href='../S/25.html#L3047'>c</a>                3047 user/usertests.c     char c;</span>
-<span class='curline'><a href='../S/25.html#L3048'>c</a>                3048 user/usertests.c     int cc = read(fds[0], &amp;c, 1);</span>
+<span class='curline'><a href='../S/20.html#L49'>c</a>                  49 user/ulib.c    memset(void *dst, int c, uint n)</span>
+<span class='curline'><a href='../S/20.html#L54'>c</a>                  54 user/ulib.c        cdst[i] = c;</span>
+<span class='curline'><a href='../S/20.html#L60'>c</a>                  60 user/ulib.c    strchr(const char *s, char c)</span>
+<span class='curline'><a href='../S/20.html#L63'>c</a>                  63 user/ulib.c        if(*s == c)</span>
+<span class='curline'><a href='../S/20.html#L72'>c</a>                  72 user/ulib.c      char c;</span>
+<span class='curline'><a href='../S/20.html#L75'>c</a>                  75 user/ulib.c        cc = read(0, &amp;c, 1);</span>
+<span class='curline'><a href='../S/20.html#L78'>c</a>                  78 user/ulib.c        buf[i++] = c;</span>
+<span class='curline'><a href='../S/20.html#L79'>c</a>                  79 user/ulib.c        if(c == '\n' || c == '\r')</span>
+<span class='curline'><a href='../S/16.html#L32'>c</a>                  32 user/user.h    char* strchr(const char*, char c);</span>
+<span class='curline'><a href='../S/27.html#L2004'>c</a>                2004 user/usertests.c   char *c, *a, *b;</span>
+<span class='curline'><a href='../S/27.html#L2051'>c</a>                2051 user/usertests.c   c = sbrk(1);</span>
+<span class='curline'><a href='../S/27.html#L2052'>c</a>                2052 user/usertests.c   c = sbrk(1);</span>
+<span class='curline'><a href='../S/27.html#L2053'>c</a>                2053 user/usertests.c   if(c != a + 1){</span>
+<span class='curline'><a href='../S/27.html#L2067'>c</a>                2067 user/usertests.c   char *c, *oldbrk, *a, *lastaddr, *p;</span>
+<span class='curline'><a href='../S/27.html#L2086'>c</a>                2086 user/usertests.c   c = sbrk(-PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L2087'>c</a>                2087 user/usertests.c   if(c == (char*)SBRK_ERROR){</span>
+<span class='curline'><a href='../S/27.html#L2091'>c</a>                2091 user/usertests.c   c = sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L2092'>c</a>                2092 user/usertests.c   if(c != a - PGSIZE){</span>
+<span class='curline'><a href='../S/27.html#L2093'>c</a>                2093 user/usertests.c     printf("%s: sbrk deallocation produced wrong address, a %p c %p\n", s, a, c);</span>
+<span class='curline'><a href='../S/27.html#L2099'>c</a>                2099 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L2100'>c</a>                2100 user/usertests.c   if(c != a || sbrk(0) != a + PGSIZE){</span>
+<span class='curline'><a href='../S/27.html#L2101'>c</a>                2101 user/usertests.c     printf("%s: sbrk re-allocation failed, a %p c %p\n", s, a, c);</span>
+<span class='curline'><a href='../S/27.html#L2111'>c</a>                2111 user/usertests.c   c = sbrk(-(sbrk(0) - oldbrk));</span>
+<span class='curline'><a href='../S/27.html#L2112'>c</a>                2112 user/usertests.c   if(c != a){</span>
+<span class='curline'><a href='../S/27.html#L2113'>c</a>                2113 user/usertests.c     printf("%s: sbrk downsize failed, a %p c %p\n", s, a, c);</span>
+<span class='curline'><a href='../S/27.html#L2175'>c</a>                2175 user/usertests.c   char *c, *a;</span>
+<span class='curline'><a href='../S/27.html#L2207'>c</a>                2207 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L2214'>c</a>                2214 user/usertests.c   if(c == (char*)SBRK_ERROR){</span>
 <span class='curline'><a href='../S/11.html#L12'>c</a>                  12 user/wc.c        int l, w, c, inword;</span>
 <span class='curline'><a href='../S/11.html#L14'>c</a>                  14 user/wc.c        l = w = c = 0;</span>
 <span class='curline'><a href='../S/11.html#L18'>c</a>                  18 user/wc.c            c++;</span>

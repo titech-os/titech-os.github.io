@@ -3,66 +3,70 @@
 <head>
 <title>dev</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/60.html#L59'>dev</a>                59 kernel/bio.c   bget(uint dev, uint blockno)</span>
-<span class='curline'><a href='../S/60.html#L67'>dev</a>                67 kernel/bio.c       if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
-<span class='curline'><a href='../S/60.html#L79'>dev</a>                79 kernel/bio.c         b-&gt;dev = dev;</span>
-<span class='curline'><a href='../S/60.html#L93'>dev</a>                93 kernel/bio.c   bread(uint dev, uint blockno)</span>
-<span class='curline'><a href='../S/60.html#L97'>dev</a>                97 kernel/bio.c     b = bget(dev, blockno);</span>
-<span class='curline'><a href='../S/46.html#L4'>dev</a>                 4 kernel/buf.h     uint dev;</span>
-<span class='curline'><a href='../S/41.html#L12'>dev</a>                12 kernel/file.h  #define major(dev)  ((dev) &gt;&gt; 16 &amp; 0xFFFF)</span>
-<span class='curline'><a href='../S/41.html#L13'>dev</a>                13 kernel/file.h  #define minor(dev)  ((dev) &amp; 0xFFFF)</span>
-<span class='curline'><a href='../S/41.html#L18'>dev</a>                18 kernel/file.h    uint dev;           // Device number</span>
-<span class='curline'><a href='../S/47.html#L31'>dev</a>                31 kernel/fs.c    readsb(int dev, struct superblock *sb)</span>
-<span class='curline'><a href='../S/47.html#L35'>dev</a>                35 kernel/fs.c      bp = bread(dev, 1);</span>
-<span class='curline'><a href='../S/47.html#L42'>dev</a>                42 kernel/fs.c    fsinit(int dev) {</span>
-<span class='curline'><a href='../S/47.html#L43'>dev</a>                43 kernel/fs.c      readsb(dev, &amp;sb);</span>
-<span class='curline'><a href='../S/47.html#L46'>dev</a>                46 kernel/fs.c      initlog(dev, &amp;sb);</span>
-<span class='curline'><a href='../S/47.html#L51'>dev</a>                51 kernel/fs.c    bzero(int dev, int bno)</span>
-<span class='curline'><a href='../S/47.html#L55'>dev</a>                55 kernel/fs.c      bp = bread(dev, bno);</span>
-<span class='curline'><a href='../S/47.html#L66'>dev</a>                66 kernel/fs.c    balloc(uint dev)</span>
-<span class='curline'><a href='../S/47.html#L73'>dev</a>                73 kernel/fs.c        bp = bread(dev, BBLOCK(b, sb));</span>
-<span class='curline'><a href='../S/47.html#L80'>dev</a>                80 kernel/fs.c            bzero(dev, b + bi);</span>
-<span class='curline'><a href='../S/47.html#L92'>dev</a>                92 kernel/fs.c    bfree(int dev, uint b)</span>
-<span class='curline'><a href='../S/47.html#L97'>dev</a>                97 kernel/fs.c      bp = bread(dev, BBLOCK(b, sb));</span>
-<span class='curline'><a href='../S/47.html#L192'>dev</a>               192 kernel/fs.c    static struct inode* iget(uint dev, uint inum);</span>
-<span class='curline'><a href='../S/47.html#L199'>dev</a>               199 kernel/fs.c    ialloc(uint dev, short type)</span>
-<span class='curline'><a href='../S/47.html#L206'>dev</a>               206 kernel/fs.c        bp = bread(dev, IBLOCK(inum, sb));</span>
-<span class='curline'><a href='../S/47.html#L213'>dev</a>               213 kernel/fs.c          return iget(dev, inum);</span>
-<span class='curline'><a href='../S/47.html#L231'>dev</a>               231 kernel/fs.c      bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
-<span class='curline'><a href='../S/47.html#L247'>dev</a>               247 kernel/fs.c    iget(uint dev, uint inum)</span>
-<span class='curline'><a href='../S/47.html#L256'>dev</a>               256 kernel/fs.c        if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum){</span>
-<span class='curline'><a href='../S/47.html#L270'>dev</a>               270 kernel/fs.c      ip-&gt;dev = dev;</span>
-<span class='curline'><a href='../S/47.html#L304'>dev</a>               304 kernel/fs.c        bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
-<span class='curline'><a href='../S/47.html#L390'>dev</a>               390 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
-<span class='curline'><a href='../S/47.html#L402'>dev</a>               402 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
-<span class='curline'><a href='../S/47.html#L407'>dev</a>               407 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
-<span class='curline'><a href='../S/47.html#L410'>dev</a>               410 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
-<span class='curline'><a href='../S/47.html#L434'>dev</a>               434 kernel/fs.c          bfree(ip-&gt;dev, ip-&gt;addrs[i]);</span>
-<span class='curline'><a href='../S/47.html#L440'>dev</a>               440 kernel/fs.c        bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
-<span class='curline'><a href='../S/47.html#L444'>dev</a>               444 kernel/fs.c            bfree(ip-&gt;dev, a[j]);</span>
-<span class='curline'><a href='../S/47.html#L447'>dev</a>               447 kernel/fs.c        bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
-<span class='curline'><a href='../S/47.html#L460'>dev</a>               460 kernel/fs.c      st-&gt;dev = ip-&gt;dev;</span>
-<span class='curline'><a href='../S/47.html#L486'>dev</a>               486 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
-<span class='curline'><a href='../S/47.html#L520'>dev</a>               520 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
-<span class='curline'><a href='../S/47.html#L570'>dev</a>               570 kernel/fs.c          return iget(dp-&gt;dev, inum);</span>
-<span class='curline'><a href='../S/29.html#L46'>dev</a>                46 kernel/log.c     int dev;</span>
-<span class='curline'><a href='../S/29.html#L55'>dev</a>                55 kernel/log.c   initlog(int dev, struct superblock *sb)</span>
-<span class='curline'><a href='../S/29.html#L63'>dev</a>                63 kernel/log.c     log.dev = dev;</span>
-<span class='curline'><a href='../S/29.html#L74'>dev</a>                74 kernel/log.c       struct buf *lbuf = bread(log.dev, log.start+tail+1); // read log block</span>
-<span class='curline'><a href='../S/29.html#L75'>dev</a>                75 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
-<span class='curline'><a href='../S/29.html#L89'>dev</a>                89 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
-<span class='curline'><a href='../S/29.html#L105'>dev</a>               105 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
-<span class='curline'><a href='../S/29.html#L184'>dev</a>               184 kernel/log.c       struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
-<span class='curline'><a href='../S/29.html#L185'>dev</a>               185 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
-<span class='curline'><a href='../S/42.html#L6'>dev</a>                 6 kernel/stat.h    int dev;     // File system's disk device</span>
-<span class='curline'><a href='../S/43.html#L152'>dev</a>               152 kernel/sysfile.c   if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
-<span class='curline'><a href='../S/43.html#L265'>dev</a>               265 kernel/sysfile.c   if((ip = ialloc(dp-&gt;dev, type)) == 0){</span>
+<span class='curline'><a href='../S/63.html#L59'>dev</a>                59 kernel/bio.c   bget(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/63.html#L67'>dev</a>                67 kernel/bio.c       if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){</span>
+<span class='curline'><a href='../S/63.html#L79'>dev</a>                79 kernel/bio.c         b-&gt;dev = dev;</span>
+<span class='curline'><a href='../S/63.html#L93'>dev</a>                93 kernel/bio.c   bread(uint dev, uint blockno)</span>
+<span class='curline'><a href='../S/63.html#L97'>dev</a>                97 kernel/bio.c     b = bget(dev, blockno);</span>
+<span class='curline'><a href='../S/49.html#L4'>dev</a>                 4 kernel/buf.h     uint dev;</span>
+<span class='curline'><a href='../S/44.html#L12'>dev</a>                12 kernel/file.h  #define major(dev)  ((dev) &gt;&gt; 16 &amp; 0xFFFF)</span>
+<span class='curline'><a href='../S/44.html#L13'>dev</a>                13 kernel/file.h  #define minor(dev)  ((dev) &amp; 0xFFFF)</span>
+<span class='curline'><a href='../S/44.html#L18'>dev</a>                18 kernel/file.h    uint dev;           // Device number</span>
+<span class='curline'><a href='../S/50.html#L31'>dev</a>                31 kernel/fs.c    readsb(int dev, struct superblock *sb)</span>
+<span class='curline'><a href='../S/50.html#L35'>dev</a>                35 kernel/fs.c      bp = bread(dev, 1);</span>
+<span class='curline'><a href='../S/50.html#L42'>dev</a>                42 kernel/fs.c    fsinit(int dev) {</span>
+<span class='curline'><a href='../S/50.html#L43'>dev</a>                43 kernel/fs.c      readsb(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/50.html#L46'>dev</a>                46 kernel/fs.c      initlog(dev, &amp;sb);</span>
+<span class='curline'><a href='../S/50.html#L47'>dev</a>                47 kernel/fs.c      ireclaim(dev);</span>
+<span class='curline'><a href='../S/50.html#L52'>dev</a>                52 kernel/fs.c    bzero(int dev, int bno)</span>
+<span class='curline'><a href='../S/50.html#L56'>dev</a>                56 kernel/fs.c      bp = bread(dev, bno);</span>
+<span class='curline'><a href='../S/50.html#L67'>dev</a>                67 kernel/fs.c    balloc(uint dev)</span>
+<span class='curline'><a href='../S/50.html#L74'>dev</a>                74 kernel/fs.c        bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/50.html#L81'>dev</a>                81 kernel/fs.c            bzero(dev, b + bi);</span>
+<span class='curline'><a href='../S/50.html#L93'>dev</a>                93 kernel/fs.c    bfree(int dev, uint b)</span>
+<span class='curline'><a href='../S/50.html#L98'>dev</a>                98 kernel/fs.c      bp = bread(dev, BBLOCK(b, sb));</span>
+<span class='curline'><a href='../S/50.html#L193'>dev</a>               193 kernel/fs.c    static struct inode* iget(uint dev, uint inum);</span>
+<span class='curline'><a href='../S/50.html#L200'>dev</a>               200 kernel/fs.c    ialloc(uint dev, short type)</span>
+<span class='curline'><a href='../S/50.html#L207'>dev</a>               207 kernel/fs.c        bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/50.html#L214'>dev</a>               214 kernel/fs.c          return iget(dev, inum);</span>
+<span class='curline'><a href='../S/50.html#L232'>dev</a>               232 kernel/fs.c      bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/50.html#L248'>dev</a>               248 kernel/fs.c    iget(uint dev, uint inum)</span>
+<span class='curline'><a href='../S/50.html#L257'>dev</a>               257 kernel/fs.c        if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum){</span>
+<span class='curline'><a href='../S/50.html#L271'>dev</a>               271 kernel/fs.c      ip-&gt;dev = dev;</span>
+<span class='curline'><a href='../S/50.html#L305'>dev</a>               305 kernel/fs.c        bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/50.html#L374'>dev</a>               374 kernel/fs.c    ireclaim(int dev)</span>
+<span class='curline'><a href='../S/50.html#L378'>dev</a>               378 kernel/fs.c        struct buf *bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/50.html#L382'>dev</a>               382 kernel/fs.c          ip = iget(dev, inum);</span>
+<span class='curline'><a href='../S/50.html#L413'>dev</a>               413 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/50.html#L425'>dev</a>               425 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/50.html#L430'>dev</a>               430 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/50.html#L433'>dev</a>               433 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/50.html#L457'>dev</a>               457 kernel/fs.c          bfree(ip-&gt;dev, ip-&gt;addrs[i]);</span>
+<span class='curline'><a href='../S/50.html#L463'>dev</a>               463 kernel/fs.c        bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/50.html#L467'>dev</a>               467 kernel/fs.c            bfree(ip-&gt;dev, a[j]);</span>
+<span class='curline'><a href='../S/50.html#L470'>dev</a>               470 kernel/fs.c        bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/50.html#L483'>dev</a>               483 kernel/fs.c      st-&gt;dev = ip-&gt;dev;</span>
+<span class='curline'><a href='../S/50.html#L509'>dev</a>               509 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/50.html#L543'>dev</a>               543 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/50.html#L593'>dev</a>               593 kernel/fs.c          return iget(dp-&gt;dev, inum);</span>
+<span class='curline'><a href='../S/32.html#L45'>dev</a>                45 kernel/log.c     int dev;</span>
+<span class='curline'><a href='../S/32.html#L54'>dev</a>                54 kernel/log.c   initlog(int dev, struct superblock *sb)</span>
+<span class='curline'><a href='../S/32.html#L61'>dev</a>                61 kernel/log.c     log.dev = dev;</span>
+<span class='curline'><a href='../S/32.html#L75'>dev</a>                75 kernel/log.c       struct buf *lbuf = bread(log.dev, log.start+tail+1); // read log block</span>
+<span class='curline'><a href='../S/32.html#L76'>dev</a>                76 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
+<span class='curline'><a href='../S/32.html#L90'>dev</a>                90 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/32.html#L106'>dev</a>               106 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/32.html#L185'>dev</a>               185 kernel/log.c       struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
+<span class='curline'><a href='../S/32.html#L186'>dev</a>               186 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/45.html#L6'>dev</a>                 6 kernel/stat.h    int dev;     // File system's disk device</span>
+<span class='curline'><a href='../S/46.html#L152'>dev</a>               152 kernel/sysfile.c   if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
+<span class='curline'><a href='../S/46.html#L265'>dev</a>               265 kernel/sysfile.c   if((ip = ialloc(dp-&gt;dev, type)) == 0){</span>
 </pre>
 </body>
 </html>

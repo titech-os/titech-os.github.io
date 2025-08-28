@@ -1,25 +1,17 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>t</title>
+<title>syscalls</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L544'>t</a>                 544 kernel/fs.c    namecmp(const char *s, const char *t)</span>
-<span class='curline'><a href='../S/47.html#L546'>t</a>                 546 kernel/fs.c      return strncmp(s, t, DIRSIZ);</span>
-<span class='curline'><a href='../S/45.html#L71'>t</a>                  71 kernel/string.c strncpy(char *s, const char *t, int n)</span>
-<span class='curline'><a href='../S/45.html#L76'>t</a>                  76 kernel/string.c   while(n-- &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
-<span class='curline'><a href='../S/45.html#L85'>t</a>                  85 kernel/string.c safestrcpy(char *s, const char *t, int n)</span>
-<span class='curline'><a href='../S/45.html#L92'>t</a>                  92 kernel/string.c   while(--n &gt; 0 &amp;&amp; (*s++ = *t++) != 0)</span>
-<span class='curline'><a href='../S/20.html#L18'>t</a>                  18 user/ulib.c    strcpy(char *s, const char *t)</span>
-<span class='curline'><a href='../S/20.html#L23'>t</a>                  23 user/ulib.c      while((*s++ = *t++) != 0)</span>
-<span class='curline'><a href='../S/25.html#L2984'>t</a>                2984 user/usertests.c   for (struct test *t = tests; t-&gt;s != 0; t++) {</span>
-<span class='curline'><a href='../S/25.html#L2985'>t</a>                2985 user/usertests.c     if((justone == 0) || strcmp(t-&gt;s, justone) == 0) {</span>
-<span class='curline'><a href='../S/25.html#L2986'>t</a>                2986 user/usertests.c       if(!run(t-&gt;f, t-&gt;s)){</span>
+<span class='curline'><a href='../S/53.html#L107'>syscalls</a>          107 kernel/syscall.c static uint64 (*syscalls[])(void) = {</span>
+<span class='curline'><a href='../S/53.html#L138'>syscalls</a>          138 kernel/syscall.c   if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {</span>
+<span class='curline'><a href='../S/53.html#L141'>syscalls</a>          141 kernel/syscall.c     p-&gt;trapframe-&gt;a0 = syscalls[num]();</span>
 </pre>
 </body>
 </html>

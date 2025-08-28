@@ -1,61 +1,78 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel/elf.h</title>
+<title>kernel/memlayout.h</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/72.html'>kernel</a>/elf.h</h2>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/76.html'>kernel</a>/memlayout.h</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'><a href='../J/5.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<h2 class='header'><a href='../J/17.html' title='Multiple included from 19 places.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='comment'>// Format of an ELF executable file</em>
+<a id='L1' name='L1'></a>   1 <em class='comment'>// Physical memory layout</em>
 <a id='L2' name='L2'></a>   2 
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#define</em> <a href='../S/36.html#L46' title='Referred from 46 in kernel/exec.c.'>ELF_MAGIC</a> 0x464C457FU  <em class='comment'>// "\x7FELF" in little endian</em>
-<a id='L4' name='L4'></a>   4 
-<a id='L5' name='L5'></a>   5 <em class='comment'>// File header</em>
-<a id='L6' name='L6'></a>   6 <strong class='reserved'>struct</strong> <a href='../S/36.html#L28' title='Referred from 28 in kernel/exec.c.'>elfhdr</a> <em class='brace'>{</em>
-<a id='L7' name='L7'></a>   7   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/196.html' title='Multiple used in 5 places.'>magic</a>;  <em class='comment'>// must equal ELF_MAGIC</em>
-<a id='L8' name='L8'></a>   8   <a href='../S/37.html#L3' title='Defined at 3 in kernel/types.h.'>uchar</a> <a href='../Y/91.html' title='Multiple used in 6 places.'>elf</a>[12];
-<a id='L9' name='L9'></a>   9   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> <a href='../Y/385.html' title='Multiple used in 66 places.'>type</a>;
-<a id='L10' name='L10'></a>  10   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> machine;
-<a id='L11' name='L11'></a>  11   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> version;
-<a id='L12' name='L12'></a>  12   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/94.html' title='Multiple used in 2 places.'>entry</a>;
-<a id='L13' name='L13'></a>  13   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/269.html' title='Multiple used in 2 places.'>phoff</a>;
-<a id='L14' name='L14'></a>  14   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> shoff;
-<a id='L15' name='L15'></a>  15   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/119.html' title='Multiple used in 19 places.'>flags</a>;
-<a id='L16' name='L16'></a>  16   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> ehsize;
-<a id='L17' name='L17'></a>  17   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> phentsize;
-<a id='L18' name='L18'></a>  18   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> <a href='../Y/268.html' title='Multiple used in 2 places.'>phnum</a>;
-<a id='L19' name='L19'></a>  19   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> shentsize;
-<a id='L20' name='L20'></a>  20   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> shnum;
-<a id='L21' name='L21'></a>  21   <a href='../S/37.html#L2' title='Defined at 2 in kernel/types.h.'>ushort</a> shstrndx;
-<a id='L22' name='L22'></a>  22 <em class='brace'>}</em>;
+<a id='L3' name='L3'></a>   3 <em class='comment'>// qemu -machine virt is set up like this,</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>// based on qemu's hw/riscv/virt.c:</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>//</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>// 00001000 -- boot ROM, provided by qemu</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>// 02000000 -- CLINT</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>// 0C000000 -- PLIC</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>// 10000000 -- uart0 </em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>// 10001000 -- virtio disk </em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>// 80000000 -- qemu's boot ROM loads the kernel here,</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>//             then jumps here.</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>// unused RAM after 80000000.</em>
+<a id='L14' name='L14'></a>  14 
+<a id='L15' name='L15'></a>  15 <em class='comment'>// the kernel uses physical memory thus:</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>// 80000000 -- entry.S, then kernel text and data</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>// end -- start of kernel page allocation area</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'>// PHYSTOP -- end RAM used by the kernel</em>
+<a id='L19' name='L19'></a>  19 
+<a id='L20' name='L20'></a>  20 <em class='comment'>// qemu puts UART registers here in physical memory.</em>
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#define</em> <a href='../R/143.html' title='Multiple referred from 2 places.'>UART0</a> 0x10000000L
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../R/144.html' title='Multiple referred from 3 places.'>UART0_IRQ</a> 10
 <a id='L23' name='L23'></a>  23 
-<a id='L24' name='L24'></a>  24 <em class='comment'>// Program section header</em>
-<a id='L25' name='L25'></a>  25 <strong class='reserved'>struct</strong> <a href='../S/36.html#L30' title='Referred from 30 in kernel/exec.c.'>proghdr</a> <em class='brace'>{</em>
-<a id='L26' name='L26'></a>  26   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/385.html' title='Multiple used in 66 places.'>type</a>;
-<a id='L27' name='L27'></a>  27   <a href='../S/37.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/119.html' title='Multiple used in 19 places.'>flags</a>;
-<a id='L28' name='L28'></a>  28   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/235.html' title='Multiple used in 53 places.'>off</a>;
-<a id='L29' name='L29'></a>  29   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/412.html' title='Multiple used in 5 places.'>vaddr</a>;
-<a id='L30' name='L30'></a>  30   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> paddr;
-<a id='L31' name='L31'></a>  31   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/116.html' title='Multiple used in 3 places.'>filesz</a>;
-<a id='L32' name='L32'></a>  32   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/199.html' title='Multiple used in 4 places.'>memsz</a>;
-<a id='L33' name='L33'></a>  33   <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> align;
-<a id='L34' name='L34'></a>  34 <em class='brace'>}</em>;
+<a id='L24' name='L24'></a>  24 <em class='comment'>// virtio mmio interface</em>
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/148.html' title='Multiple referred from 2 places.'>VIRTIO0</a> 0x10001000
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#define</em> <a href='../R/149.html' title='Multiple referred from 3 places.'>VIRTIO0_IRQ</a> 1
+<a id='L27' name='L27'></a>  27 
+<a id='L28' name='L28'></a>  28 <em class='comment'>// qemu puts platform-level interrupt controller (PLIC) here.</em>
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/80.html' title='Multiple referred from 8 places.'>PLIC</a> 0x0c000000L
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#define</em> PLIC_PRIORITY (<a href='../S/51.html#L29' title='Defined at 29 in kernel/memlayout.h.'>PLIC</a> + 0x0)
+<a id='L31' name='L31'></a>  31 <em class='sharp'>#define</em> PLIC_PENDING (<a href='../S/51.html#L29' title='Defined at 29 in kernel/memlayout.h.'>PLIC</a> + 0x1000)
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#define</em> <a href='../S/64.html#L26' title='Referred from 26 in kernel/plic.c.'>PLIC_SENABLE</a>(<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>) (<a href='../S/51.html#L29' title='Defined at 29 in kernel/memlayout.h.'>PLIC</a> + 0x2080 + (<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>)*0x100)
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#define</em> <a href='../S/64.html#L29' title='Referred from 29 in kernel/plic.c.'>PLIC_SPRIORITY</a>(<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>) (<a href='../S/51.html#L29' title='Defined at 29 in kernel/memlayout.h.'>PLIC</a> + 0x201000 + (<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>)*0x2000)
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#define</em> <a href='../R/81.html' title='Multiple referred from 2 places.'>PLIC_SCLAIM</a>(<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>) (<a href='../S/51.html#L29' title='Defined at 29 in kernel/memlayout.h.'>PLIC</a> + 0x201004 + (<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>)*0x2000)
 <a id='L35' name='L35'></a>  35 
-<a id='L36' name='L36'></a>  36 <em class='comment'>// Values for Proghdr type</em>
-<a id='L37' name='L37'></a>  37 <em class='sharp'>#define</em> <a href='../S/36.html#L56' title='Referred from 56 in kernel/exec.c.'>ELF_PROG_LOAD</a>           1
-<a id='L38' name='L38'></a>  38 
-<a id='L39' name='L39'></a>  39 <em class='comment'>// Flag bits for Proghdr flags</em>
-<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> ELF_PROG_FLAG_EXEC      1
-<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> ELF_PROG_FLAG_WRITE     2
-<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> ELF_PROG_FLAG_READ      4
+<a id='L36' name='L36'></a>  36 <em class='comment'>// the kernel expects there to be RAM</em>
+<a id='L37' name='L37'></a>  37 <em class='comment'>// for use by the kernel and user pages</em>
+<a id='L38' name='L38'></a>  38 <em class='comment'>// from physical address 0x80000000 to PHYSTOP.</em>
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#define</em> <a href='../R/32.html' title='Multiple referred from 3 places.'>KERNBASE</a> 0x80000000L
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> <a href='../R/77.html' title='Multiple referred from 3 places.'>PHYSTOP</a> (<a href='../S/51.html#L39' title='Defined at 39 in kernel/memlayout.h.'>KERNBASE</a> + 128*1024*1024)
+<a id='L41' name='L41'></a>  41 
+<a id='L42' name='L42'></a>  42 <em class='comment'>// map the trampoline page to the highest address,</em>
+<a id='L43' name='L43'></a>  43 <em class='comment'>// in both user and kernel space.</em>
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#define</em> <a href='../R/138.html' title='Multiple referred from 8 places.'>TRAMPOLINE</a> (<a href='../S/66.html#L380' title='Defined at 380 in kernel/riscv.h.'>MAXVA</a> - <a href='../S/66.html#L352' title='Defined at 352 in kernel/riscv.h.'>PGSIZE</a>)
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46 <em class='comment'>// map kernel stacks beneath the trampoline,</em>
+<a id='L47' name='L47'></a>  47 <em class='comment'>// each surrounded by invalid guard pages.</em>
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/33.html' title='Multiple referred from 2 places.'>KSTACK</a>(<a href='../Y/251.html' title='Multiple used in 310 places.'>p</a>) (<a href='../S/51.html#L44' title='Defined at 44 in kernel/memlayout.h.'>TRAMPOLINE</a> - ((<a href='../Y/251.html' title='Multiple used in 310 places.'>p</a>)+1)* 2*<a href='../S/66.html#L352' title='Defined at 352 in kernel/riscv.h.'>PGSIZE</a>)
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50 <em class='comment'>// User memory layout.</em>
+<a id='L51' name='L51'></a>  51 <em class='comment'>// Address zero first:</em>
+<a id='L52' name='L52'></a>  52 <em class='comment'>//   text</em>
+<a id='L53' name='L53'></a>  53 <em class='comment'>//   original data and bss</em>
+<a id='L54' name='L54'></a>  54 <em class='comment'>//   fixed-size stack</em>
+<a id='L55' name='L55'></a>  55 <em class='comment'>//   expandable heap</em>
+<a id='L56' name='L56'></a>  56 <em class='comment'>//   ...</em>
+<a id='L57' name='L57'></a>  57 <em class='comment'>//   TRAPFRAME (p-&gt;trapframe, used by the trampoline)</em>
+<a id='L58' name='L58'></a>  58 <em class='comment'>//   TRAMPOLINE (the same page as in the kernel)</em>
+<a id='L59' name='L59'></a>  59 <em class='sharp'>#define</em> <a href='../R/139.html' title='Multiple referred from 2 places.'>TRAPFRAME</a> (<a href='../S/51.html#L44' title='Defined at 44 in kernel/memlayout.h.'>TRAMPOLINE</a> - <a href='../S/66.html#L352' title='Defined at 352 in kernel/riscv.h.'>PGSIZE</a>)
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

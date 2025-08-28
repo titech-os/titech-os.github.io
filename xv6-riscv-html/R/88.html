@@ -1,26 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PTE_W</title>
+<title>PTE_V</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L18'>PTE_W</a>              18 kernel/exec.c        perm |= PTE_W;</span>
-<span class='curline'><a href='../S/36.html#L83'>PTE_W</a>              83 kernel/exec.c    if((sz1 = uvmalloc(pagetable, sz, sz + (USERSTACK+1)*PGSIZE, PTE_W)) == 0)</span>
-<span class='curline'><a href='../S/62.html#L42'>PTE_W</a>              42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/62.html#L199'>PTE_W</a>             199 kernel/proc.c                (uint64)(p-&gt;trapframe), PTE_R | PTE_W) &lt; 0){</span>
-<span class='curline'><a href='../S/62.html#L267'>PTE_W</a>             267 kernel/proc.c      if((sz = uvmalloc(p-&gt;pagetable, sz, sz + n, PTE_W)) == 0) {</span>
-<span class='curline'><a href='../S/38.html#L28'>PTE_W</a>              28 kernel/vm.c      kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L31'>PTE_W</a>              31 kernel/vm.c      kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L34'>PTE_W</a>              34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x4000000, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L40'>PTE_W</a>              40 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
-<span class='curline'><a href='../S/38.html#L226'>PTE_W</a>             226 kernel/vm.c      mappages(pagetable, 0, PGSIZE, (uint64)mem, PTE_W|PTE_R|PTE_X|PTE_U);</span>
-<span class='curline'><a href='../S/38.html#L284'>PTE_W</a>             284 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
-<span class='curline'><a href='../S/38.html#L370'>PTE_W</a>             370 kernel/vm.c           (*pte &amp; PTE_W) == 0)</span>
+<span class='curline'><a href='../S/41.html#L105'>PTE_V</a>             105 kernel/vm.c        if(*pte &amp; PTE_V) {</span>
+<span class='curline'><a href='../S/41.html#L111'>PTE_V</a>             111 kernel/vm.c          *pte = PA2PTE(pagetable) | PTE_V;</span>
+<span class='curline'><a href='../S/41.html#L132'>PTE_V</a>             132 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/41.html#L165'>PTE_V</a>             165 kernel/vm.c        if(*pte &amp; PTE_V)</span>
+<span class='curline'><a href='../S/41.html#L167'>PTE_V</a>             167 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
+<span class='curline'><a href='../S/41.html#L204'>PTE_V</a>             204 kernel/vm.c        if((*pte &amp; PTE_V) == 0)  // has physical page been allocated?</span>
+<span class='curline'><a href='../S/41.html#L268'>PTE_V</a>             268 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
+<span class='curline'><a href='../S/41.html#L273'>PTE_V</a>             273 kernel/vm.c        } else if(pte &amp; PTE_V){</span>
+<span class='curline'><a href='../S/41.html#L307'>PTE_V</a>             307 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
+<span class='curline'><a href='../S/41.html#L482'>PTE_V</a>             482 kernel/vm.c      if (*pte &amp; PTE_V){</span>
 </pre>
 </body>
 </html>

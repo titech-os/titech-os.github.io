@@ -1,19 +1,35 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nu</title>
+<title>np</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/12.html#L47'>nu</a>                 47 user/umalloc.c morecore(uint nu)</span>
-<span class='curline'><a href='../S/12.html#L52'>nu</a>                 52 user/umalloc.c   if(nu &lt; 4096)</span>
-<span class='curline'><a href='../S/12.html#L53'>nu</a>                 53 user/umalloc.c     nu = 4096;</span>
-<span class='curline'><a href='../S/12.html#L54'>nu</a>                 54 user/umalloc.c   p = sbrk(nu * sizeof(Header));</span>
-<span class='curline'><a href='../S/12.html#L58'>nu</a>                 58 user/umalloc.c   hp-&gt;s.size = nu;</span>
+<span class='curline'><a href='../S/65.html#L260'>np</a>                260 kernel/proc.c    struct proc *np;</span>
+<span class='curline'><a href='../S/65.html#L264'>np</a>                264 kernel/proc.c    if((np = allocproc()) == 0){</span>
+<span class='curline'><a href='../S/65.html#L269'>np</a>                269 kernel/proc.c    if(uvmcopy(p-&gt;pagetable, np-&gt;pagetable, p-&gt;sz) &lt; 0){</span>
+<span class='curline'><a href='../S/65.html#L270'>np</a>                270 kernel/proc.c      freeproc(np);</span>
+<span class='curline'><a href='../S/65.html#L271'>np</a>                271 kernel/proc.c      release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L274'>np</a>                274 kernel/proc.c    np-&gt;sz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/65.html#L277'>np</a>                277 kernel/proc.c    *(np-&gt;trapframe) = *(p-&gt;trapframe);</span>
+<span class='curline'><a href='../S/65.html#L280'>np</a>                280 kernel/proc.c    np-&gt;trapframe-&gt;a0 = 0;</span>
+<span class='curline'><a href='../S/65.html#L285'>np</a>                285 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/65.html#L286'>np</a>                286 kernel/proc.c    np-&gt;cwd = idup(p-&gt;cwd);</span>
+<span class='curline'><a href='../S/65.html#L288'>np</a>                288 kernel/proc.c    safestrcpy(np-&gt;name, p-&gt;name, sizeof(p-&gt;name));</span>
+<span class='curline'><a href='../S/65.html#L290'>np</a>                290 kernel/proc.c    pid = np-&gt;pid;</span>
+<span class='curline'><a href='../S/65.html#L292'>np</a>                292 kernel/proc.c    release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L295'>np</a>                295 kernel/proc.c    np-&gt;parent = p;</span>
+<span class='curline'><a href='../S/65.html#L298'>np</a>                298 kernel/proc.c    acquire(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L299'>np</a>                299 kernel/proc.c    np-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L300'>np</a>                300 kernel/proc.c    release(&amp;np-&gt;lock);</span>
+<span class='curline'><a href='../S/27.html#L1099'>np</a>               1099 user/usertests.c   int fd, pid, i, n, nc, np;</span>
+<span class='curline'><a href='../S/27.html#L1132'>np</a>               1132 user/usertests.c   nc = np = 0;</span>
+<span class='curline'><a href='../S/27.html#L1138'>np</a>               1138 user/usertests.c         np++;</span>
+<span class='curline'><a href='../S/27.html#L1143'>np</a>               1143 user/usertests.c   if(nc == N*SZ &amp;&amp; np == N*SZ){</span>
 </pre>
 </body>
 </html>

@@ -1,17 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nextpid</title>
+<title>newsz</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/62.html#L15'>nextpid</a>            15 kernel/proc.c  int nextpid = 1;</span>
-<span class='curline'><a href='../S/62.html#L98'>nextpid</a>            98 kernel/proc.c    pid = nextpid;</span>
-<span class='curline'><a href='../S/62.html#L99'>nextpid</a>            99 kernel/proc.c    nextpid = nextpid + 1;</span>
+<span class='curline'><a href='../S/41.html#L217'>newsz</a>             217 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz, int xperm)</span>
+<span class='curline'><a href='../S/41.html#L222'>newsz</a>             222 kernel/vm.c      if(newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/41.html#L226'>newsz</a>             226 kernel/vm.c      for(a = oldsz; a &lt; newsz; a += PGSIZE){</span>
+<span class='curline'><a href='../S/41.html#L239'>newsz</a>             239 kernel/vm.c      return newsz;</span>
+<span class='curline'><a href='../S/41.html#L247'>newsz</a>             247 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
+<span class='curline'><a href='../S/41.html#L249'>newsz</a>             249 kernel/vm.c      if(newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/41.html#L252'>newsz</a>             252 kernel/vm.c      if(PGROUNDUP(newsz) &lt; PGROUNDUP(oldsz)){</span>
+<span class='curline'><a href='../S/41.html#L253'>newsz</a>             253 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
+<span class='curline'><a href='../S/41.html#L254'>newsz</a>             254 kernel/vm.c        uvmunmap(pagetable, PGROUNDUP(newsz), npages, 1);</span>
+<span class='curline'><a href='../S/41.html#L257'>newsz</a>             257 kernel/vm.c      return newsz;</span>
 </pre>
 </body>
 </html>

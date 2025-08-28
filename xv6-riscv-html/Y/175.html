@@ -1,18 +1,29 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>l</title>
+<title>kpgtbl</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/11.html#L12'>l</a>                  12 user/wc.c        int l, w, c, inword;</span>
-<span class='curline'><a href='../S/11.html#L14'>l</a>                  14 user/wc.c        l = w = c = 0;</span>
-<span class='curline'><a href='../S/11.html#L20'>l</a>                  20 user/wc.c              l++;</span>
-<span class='curline'><a href='../S/11.html#L33'>l</a>                  33 user/wc.c        printf("%d %d %d %s\n", l, w, c, name);</span>
+<span class='curline'><a href='../S/65.html#L33'>kpgtbl</a>             33 kernel/proc.c  proc_mapstacks(pagetable_t kpgtbl)</span>
+<span class='curline'><a href='../S/65.html#L42'>kpgtbl</a>             42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L24'>kpgtbl</a>             24 kernel/vm.c      pagetable_t kpgtbl;</span>
+<span class='curline'><a href='../S/41.html#L26'>kpgtbl</a>             26 kernel/vm.c      kpgtbl = (pagetable_t) kalloc();</span>
+<span class='curline'><a href='../S/41.html#L27'>kpgtbl</a>             27 kernel/vm.c      memset(kpgtbl, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/41.html#L30'>kpgtbl</a>             30 kernel/vm.c      kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L33'>kpgtbl</a>             33 kernel/vm.c      kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L36'>kpgtbl</a>             36 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x4000000, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L39'>kpgtbl</a>             39 kernel/vm.c      kvmmap(kpgtbl, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/41.html#L42'>kpgtbl</a>             42 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L46'>kpgtbl</a>             46 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/41.html#L49'>kpgtbl</a>             49 kernel/vm.c      proc_mapstacks(kpgtbl);</span>
+<span class='curline'><a href='../S/41.html#L51'>kpgtbl</a>             51 kernel/vm.c      return kpgtbl;</span>
+<span class='curline'><a href='../S/41.html#L58'>kpgtbl</a>             58 kernel/vm.c    kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)</span>
+<span class='curline'><a href='../S/41.html#L60'>kpgtbl</a>             60 kernel/vm.c      if(mappages(kpgtbl, va, sz, pa, perm) != 0)</span>
 </pre>
 </body>
 </html>

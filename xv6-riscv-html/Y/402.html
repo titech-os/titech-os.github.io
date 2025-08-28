@@ -1,18 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ustack</title>
+<title>user_src</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L27'>ustack</a>             27 kernel/exec.c    uint64 argc, sz = 0, sp, ustack[MAXARG], stackbase;</span>
-<span class='curline'><a href='../S/36.html#L100'>ustack</a>            100 kernel/exec.c      ustack[argc] = sp;</span>
-<span class='curline'><a href='../S/36.html#L102'>ustack</a>            102 kernel/exec.c    ustack[argc] = 0;</span>
-<span class='curline'><a href='../S/36.html#L109'>ustack</a>            109 kernel/exec.c    if(copyout(pagetable, sp, (char *)ustack, (argc+1)*sizeof(uint64)) &lt; 0)</span>
+<span class='curline'><a href='../S/59.html#L59'>user_src</a>           59 kernel/console.c consolewrite(int user_src, uint64 src, int n)</span>
+<span class='curline'><a href='../S/59.html#L68'>user_src</a>           68 kernel/console.c     if(either_copyin(buf, user_src, src+i, nn) == -1)</span>
+<span class='curline'><a href='../S/35.html#L102'>user_src</a>          102 kernel/defs.h  int             either_copyin(void *dst, int user_src, uint64 src, uint64 len);</span>
+<span class='curline'><a href='../S/50.html#L529'>user_src</a>          529 kernel/fs.c    writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)</span>
+<span class='curline'><a href='../S/50.html#L545'>user_src</a>          545 kernel/fs.c        if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) == -1) {</span>
+<span class='curline'><a href='../S/65.html#L648'>user_src</a>          648 kernel/proc.c  either_copyin(void *dst, int user_src, uint64 src, uint64 len)</span>
+<span class='curline'><a href='../S/65.html#L651'>user_src</a>          651 kernel/proc.c    if(user_src){</span>
 </pre>
 </body>
 </html>

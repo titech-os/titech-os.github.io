@@ -1,41 +1,60 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>user/ln.c</title>
+<title>user/dorphan.c</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/74.html'>user</a>/ln.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L6'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/78.html'>user</a>/dorphan.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L13'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <h2 class='header'>DEFINITIONS</h2>
 This source file includes following definitions.
 <ol>
-<li><a href='#L6' title='Defined at 6.'>main</a></li>
+<li><a href='#L13' title='Defined at 13.'>main</a></li>
 </ol>
 <hr />
 <pre>
-<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='37.html'>kernel/types.h</a>"
-<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='42.html'>kernel/stat.h</a>"
-<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='16.html'>user/user.h</a>"
-<a id='L4' name='L4'></a>   4 
-<a id='L5' name='L5'></a>   5 <strong class='reserved'>int</strong>
-<a id='L6' name='L6'></a>   6 <a href='../R/345.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>int</strong> <a href='../Y/24.html' title='Multiple used in 55 places.'>argc</a>, <strong class='reserved'>char</strong> *<a href='../Y/27.html' title='Multiple used in 73 places.'>argv</a>[])
-<a id='L7' name='L7'></a>   7 <em class='brace'>{</em>
-<a id='L8' name='L8'></a>   8   <strong class='reserved'>if</strong>(<a href='../Y/24.html' title='Multiple used in 55 places.'>argc</a> != 3)<em class='brace'>{</em>
-<a id='L9' name='L9'></a>   9     <a href='../S/4.html#L142' title='Defined at 142 in user/printf.c.'>fprintf</a>(2, "Usage: ln old new\n");
-<a id='L10' name='L10'></a>  10     <a href='../S/62.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(1);
-<a id='L11' name='L11'></a>  11   <em class='brace'>}</em>
-<a id='L12' name='L12'></a>  12   <strong class='reserved'>if</strong>(<a href='../Y/184.html' title='Multiple used in 21 places.'>link</a>(<a href='../Y/27.html' title='Multiple used in 73 places.'>argv</a>[1], <a href='../Y/27.html' title='Multiple used in 73 places.'>argv</a>[2]) &lt; 0)
-<a id='L13' name='L13'></a>  13     <a href='../S/4.html#L142' title='Defined at 142 in user/printf.c.'>fprintf</a>(2, "link %s %s: failed\n", <a href='../Y/27.html' title='Multiple used in 73 places.'>argv</a>[1], <a href='../Y/27.html' title='Multiple used in 73 places.'>argv</a>[2]);
-<a id='L14' name='L14'></a>  14   <a href='../S/62.html#L347' title='Defined at 347 in kernel/proc.c.'>exit</a>(0);
-<a id='L15' name='L15'></a>  15 <em class='brace'>}</em>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> "<a href='40.html'>kernel/types.h</a>"
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> "<a href='45.html'>kernel/stat.h</a>"
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> "<a href='43.html'>kernel/fcntl.h</a>"
+<a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='16.html'>user/user.h</a>"
+<a id='L5' name='L5'></a>   5 
+<a id='L6' name='L6'></a>   6 <em class='comment'>// Create an orphaned directory and check if test-xv6.py recovers it.</em>
+<a id='L7' name='L7'></a>   7 
+<a id='L8' name='L8'></a>   8 <em class='sharp'>#define</em> <a href='../R/8.html' title='Multiple referred from 4 places.'>BUFSZ</a> 500
+<a id='L9' name='L9'></a>   9 
+<a id='L10' name='L10'></a>  10 <strong class='reserved'>char</strong> <a href='../S/49.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../D/8.html' title='Multiple defined in 4 places.'>BUFSZ</a>];
+<a id='L11' name='L11'></a>  11 
+<a id='L12' name='L12'></a>  12 <strong class='reserved'>int</strong>
+<a id='L13' name='L13'></a>  13 <a href='../R/354.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>int</strong> <a href='../Y/24.html' title='Multiple used in 60 places.'>argc</a>, <strong class='reserved'>char</strong> **<a href='../Y/27.html' title='Multiple used in 81 places.'>argv</a>)
+<a id='L14' name='L14'></a>  14 <em class='brace'>{</em>
+<a id='L15' name='L15'></a>  15   <strong class='reserved'>char</strong> *<a href='../Y/313.html' title='Multiple used in 411 places.'>s</a> = <a href='../Y/27.html' title='Multiple used in 81 places.'>argv</a>[0];
+<a id='L16' name='L16'></a>  16 
+<a id='L17' name='L17'></a>  17   <strong class='reserved'>if</strong>(<a href='../Y/201.html' title='Multiple used in 25 places.'>mkdir</a>("dd") != 0)<em class='brace'>{</em>
+<a id='L18' name='L18'></a>  18     <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("%s: mkdir dd failed\n", <a href='../Y/313.html' title='Multiple used in 411 places.'>s</a>);
+<a id='L19' name='L19'></a>  19     <a href='../Y/100.html' title='Multiple used in 436 places.'>exit</a>(1);
+<a id='L20' name='L20'></a>  20   <em class='brace'>}</em>
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22   <strong class='reserved'>if</strong>(<a href='../Y/57.html' title='Multiple used in 26 places.'>chdir</a>("dd") != 0)<em class='brace'>{</em>
+<a id='L23' name='L23'></a>  23     <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("%s: chdir dd failed\n", <a href='../Y/313.html' title='Multiple used in 411 places.'>s</a>);
+<a id='L24' name='L24'></a>  24     <a href='../Y/100.html' title='Multiple used in 436 places.'>exit</a>(1);
+<a id='L25' name='L25'></a>  25   <em class='brace'>}</em>
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27   <strong class='reserved'>if</strong> (<a href='../Y/396.html' title='Multiple used in 106 places.'>unlink</a>("../dd") &lt; 0) <em class='brace'>{</em>
+<a id='L28' name='L28'></a>  28     <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("%s: unlink failed\n", <a href='../Y/313.html' title='Multiple used in 411 places.'>s</a>);
+<a id='L29' name='L29'></a>  29     <a href='../Y/100.html' title='Multiple used in 436 places.'>exit</a>(1);
+<a id='L30' name='L30'></a>  30   <em class='brace'>}</em>
+<a id='L31' name='L31'></a>  31   <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("wait for kill and reclaim\n");
+<a id='L32' name='L32'></a>  32   <em class='comment'>// sit around until killed</em>
+<a id='L33' name='L33'></a>  33   <strong class='reserved'>for</strong>(;;) <a href='../Y/265.html' title='Multiple used in 10 places.'>pause</a>(1000);
+<a id='L34' name='L34'></a>  34 <em class='brace'>}</em>
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;][^]<a href='#L6'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;][^]<a href='#L13'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

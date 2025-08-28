@@ -1,36 +1,43 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>lh</title>
+<title>len</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/29.html#L47'>lh</a>                 47 kernel/log.c     struct logheader lh;</span>
-<span class='curline'><a href='../S/29.html#L73'>lh</a>                 73 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
-<span class='curline'><a href='../S/29.html#L75'>lh</a>                 75 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
-<span class='curline'><a href='../S/29.html#L90'>lh</a>                 90 kernel/log.c     struct logheader *lh = (struct logheader *) (buf-&gt;data);</span>
-<span class='curline'><a href='../S/29.html#L92'>lh</a>                 92 kernel/log.c     log.lh.n = lh-&gt;n;</span>
-<span class='curline'><a href='../S/29.html#L93'>lh</a>                 93 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
-<span class='curline'><a href='../S/29.html#L94'>lh</a>                 94 kernel/log.c       log.lh.block[i] = lh-&gt;block[i];</span>
-<span class='curline'><a href='../S/29.html#L108'>lh</a>                108 kernel/log.c     hb-&gt;n = log.lh.n;</span>
-<span class='curline'><a href='../S/29.html#L109'>lh</a>                109 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
-<span class='curline'><a href='../S/29.html#L110'>lh</a>                110 kernel/log.c       hb-&gt;block[i] = log.lh.block[i];</span>
-<span class='curline'><a href='../S/29.html#L121'>lh</a>                121 kernel/log.c     log.lh.n = 0;</span>
-<span class='curline'><a href='../S/29.html#L133'>lh</a>                133 kernel/log.c       } else if(log.lh.n + (log.outstanding+1)*MAXOPBLOCKS &gt; LOGSIZE){</span>
-<span class='curline'><a href='../S/29.html#L183'>lh</a>                183 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
-<span class='curline'><a href='../S/29.html#L185'>lh</a>                185 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
-<span class='curline'><a href='../S/29.html#L196'>lh</a>                196 kernel/log.c     if (log.lh.n &gt; 0) {</span>
-<span class='curline'><a href='../S/29.html#L200'>lh</a>                200 kernel/log.c       log.lh.n = 0;</span>
-<span class='curline'><a href='../S/29.html#L220'>lh</a>                220 kernel/log.c     if (log.lh.n &gt;= LOGSIZE || log.lh.n &gt;= log.size - 1)</span>
-<span class='curline'><a href='../S/29.html#L225'>lh</a>                225 kernel/log.c     for (i = 0; i &lt; log.lh.n; i++) {</span>
-<span class='curline'><a href='../S/29.html#L226'>lh</a>                226 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorption</span>
-<span class='curline'><a href='../S/29.html#L229'>lh</a>                229 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
-<span class='curline'><a href='../S/29.html#L230'>lh</a>                230 kernel/log.c     if (i == log.lh.n) {  // Add new block to log?</span>
-<span class='curline'><a href='../S/29.html#L232'>lh</a>                232 kernel/log.c       log.lh.n++;</span>
+<span class='curline'><a href='../S/35.html#L101'>len</a>               101 kernel/defs.h  int             either_copyout(int user_dst, uint64 dst, void *src, uint64 len);</span>
+<span class='curline'><a href='../S/35.html#L102'>len</a>               102 kernel/defs.h  int             either_copyin(void *dst, int user_src, uint64 src, uint64 len);</span>
+<span class='curline'><a href='../S/50.html#L649'>len</a>               649 kernel/fs.c      int len;</span>
+<span class='curline'><a href='../S/50.html#L658'>len</a>               658 kernel/fs.c      len = path - s;</span>
+<span class='curline'><a href='../S/50.html#L659'>len</a>               659 kernel/fs.c      if(len &gt;= DIRSIZ)</span>
+<span class='curline'><a href='../S/50.html#L662'>len</a>               662 kernel/fs.c        memmove(name, s, len);</span>
+<span class='curline'><a href='../S/50.html#L663'>len</a>               663 kernel/fs.c        name[len] = 0;</span>
+<span class='curline'><a href='../S/65.html#L633'>len</a>               633 kernel/proc.c  either_copyout(int user_dst, uint64 dst, void *src, uint64 len)</span>
+<span class='curline'><a href='../S/65.html#L637'>len</a>               637 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/65.html#L639'>len</a>               639 kernel/proc.c      memmove((char *)dst, src, len);</span>
+<span class='curline'><a href='../S/65.html#L648'>len</a>               648 kernel/proc.c  either_copyin(void *dst, int user_src, uint64 src, uint64 len)</span>
+<span class='curline'><a href='../S/65.html#L652'>len</a>               652 kernel/proc.c      return copyin(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/65.html#L654'>len</a>               654 kernel/proc.c      memmove(dst, (char*)src, len);</span>
+<span class='curline'><a href='../S/56.html#L55'>len</a>                55 kernel/virtio.h   uint32 len;</span>
+<span class='curline'><a href='../S/56.html#L74'>len</a>                74 kernel/virtio.h   uint32 len;</span>
+<span class='curline'><a href='../S/67.html#L177'>len</a>               177 kernel/virtio_disk.c   disk.desc[i].len = 0;</span>
+<span class='curline'><a href='../S/67.html#L248'>len</a>               248 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(struct virtio_blk_req);</span>
+<span class='curline'><a href='../S/67.html#L253'>len</a>               253 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
+<span class='curline'><a href='../S/67.html#L263'>len</a>               263 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
+<span class='curline'><a href='../S/41.html#L343'>len</a>               343 kernel/vm.c    copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)</span>
+<span class='curline'><a href='../S/41.html#L348'>len</a>               348 kernel/vm.c      while(len &gt; 0){</span>
+<span class='curline'><a href='../S/41.html#L366'>len</a>               366 kernel/vm.c        if(n &gt; len)</span>
+<span class='curline'><a href='../S/41.html#L367'>len</a>               367 kernel/vm.c          n = len;</span>
+<span class='curline'><a href='../S/41.html#L370'>len</a>               370 kernel/vm.c        len -= n;</span>
+<span class='curline'><a href='../S/41.html#L381'>len</a>               381 kernel/vm.c    copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)</span>
+<span class='curline'><a href='../S/41.html#L385'>len</a>               385 kernel/vm.c      while(len &gt; 0){</span>
+<span class='curline'><a href='../S/41.html#L394'>len</a>               394 kernel/vm.c        if(n &gt; len)</span>
+<span class='curline'><a href='../S/41.html#L395'>len</a>               395 kernel/vm.c          n = len;</span>
+<span class='curline'><a href='../S/41.html#L398'>len</a>               398 kernel/vm.c        len -= n;</span>
 </pre>
 </body>
 </html>

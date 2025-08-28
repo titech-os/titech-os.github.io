@@ -1,26 +1,61 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>O_TRUNC</title>
+<title>O_RDWR</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/43.html#L363'>O_TRUNC</a>           363 kernel/sysfile.c   if((omode &amp; O_TRUNC) &amp;&amp; ip-&gt;type == T_FILE){</span>
-<span class='curline'><a href='../S/3.html#L88'>O_TRUNC</a>            88 mkfs/mkfs.c      fsfd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);</span>
-<span class='curline'><a href='../S/18.html#L390'>O_TRUNC</a>           390 user/sh.c            cmd = redircmd(cmd, q, eq, O_WRONLY|O_CREATE|O_TRUNC, 1);</span>
-<span class='curline'><a href='../S/25.html#L298'>O_TRUNC</a>           298 user/usertests.c   int fd1 = open("truncfile", O_CREATE|O_WRONLY|O_TRUNC);</span>
-<span class='curline'><a href='../S/25.html#L309'>O_TRUNC</a>           309 user/usertests.c   fd1 = open("truncfile", O_WRONLY|O_TRUNC);</span>
-<span class='curline'><a href='../S/25.html#L356'>O_TRUNC</a>           356 user/usertests.c   int fd1 = open("truncfile", O_CREATE|O_TRUNC|O_WRONLY);</span>
-<span class='curline'><a href='../S/25.html#L359'>O_TRUNC</a>           359 user/usertests.c   int fd2 = open("truncfile", O_TRUNC|O_WRONLY);</span>
-<span class='curline'><a href='../S/25.html#L377'>O_TRUNC</a>           377 user/usertests.c   close(open("truncfile", O_CREATE|O_TRUNC|O_WRONLY));</span>
-<span class='curline'><a href='../S/25.html#L407'>O_TRUNC</a>           407 user/usertests.c     int fd = open("truncfile", O_CREATE|O_WRONLY|O_TRUNC);</span>
-<span class='curline'><a href='../S/25.html#L2847'>O_TRUNC</a>          2847 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR|O_TRUNC);</span>
-<span class='curline'><a href='../S/25.html#L2878'>O_TRUNC</a>          2878 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR|O_TRUNC);</span>
-<span class='curline'><a href='../S/25.html#L2923'>O_TRUNC</a>          2923 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR|O_TRUNC);</span>
+<span class='curline'><a href='../S/46.html#L361'>O_RDWR</a>            361 kernel/sysfile.c   f-&gt;writable = (omode &amp; O_WRONLY) || (omode &amp; O_RDWR);</span>
+<span class='curline'><a href='../S/3.html#L88'>O_RDWR</a>             88 mkfs/mkfs.c      fsfd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);</span>
+<span class='curline'><a href='../S/13.html#L71'>O_RDWR</a>             71 user/grind.c         close(open("grindir/../a", O_CREATE|O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L73'>O_RDWR</a>             73 user/grind.c         close(open("grindir/../grindir/../b", O_CREATE|O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L85'>O_RDWR</a>             85 user/grind.c         fd = open("/grindir/../a", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/13.html#L88'>O_RDWR</a>             88 user/grind.c         fd = open("/./grindir/./../b", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/13.html#L95'>O_RDWR</a>             95 user/grind.c         close(open("a/../a/./a", O_CREATE|O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L99'>O_RDWR</a>             99 user/grind.c         close(open("grindir/../b/b", O_CREATE|O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L135'>O_RDWR</a>            135 user/grind.c           close(open("a", O_CREATE|O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L187'>O_RDWR</a>            187 user/grind.c           fd = open("x", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/13.html#L199'>O_RDWR</a>            199 user/grind.c         int fd1 = open("c", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/7.html#L19'>O_RDWR</a>             19 user/init.c      if(open("console", O_RDWR) &lt; 0){</span>
+<span class='curline'><a href='../S/7.html#L21'>O_RDWR</a>             21 user/init.c        open("console", O_RDWR);</span>
+<span class='curline'><a href='../S/24.html#L26'>O_RDWR</a>             26 user/logstress.c       fd = open(argv[i], O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/18.html#L152'>O_RDWR</a>            152 user/sh.c        while((fd = open("console", O_RDWR)) &gt;= 0){</span>
+<span class='curline'><a href='../S/25.html#L33'>O_RDWR</a>             33 user/stressfs.c   fd = open(path, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L504'>O_RDWR</a>            504 user/usertests.c     int fd = open("oidir", O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L547'>O_RDWR</a>            547 user/usertests.c   fd = open("small", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L586'>O_RDWR</a>            586 user/usertests.c   fd = open("big", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L647'>O_RDWR</a>            647 user/usertests.c     fd = open(name, O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1017'>O_RDWR</a>           1017 user/usertests.c         close(open("stopforking", O_CREATE|O_RDWR));</span>
+<span class='curline'><a href='../S/27.html#L1025'>O_RDWR</a>           1025 user/usertests.c   close(open("stopforking", O_CREATE|O_RDWR));</span>
+<span class='curline'><a href='../S/27.html#L1104'>O_RDWR</a>           1104 user/usertests.c   fd = open("sharedfd", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1172'>O_RDWR</a>           1172 user/usertests.c       fd = open(fname, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1238'>O_RDWR</a>           1238 user/usertests.c         fd = open(name, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1297'>O_RDWR</a>           1297 user/usertests.c   fd = open("unlinkread", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1305'>O_RDWR</a>           1305 user/usertests.c   fd = open("unlinkread", O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1315'>O_RDWR</a>           1315 user/usertests.c   fd1 = open("unlinkread", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1344'>O_RDWR</a>           1344 user/usertests.c   fd = open("lf1", O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1418'>O_RDWR</a>           1418 user/usertests.c       fd = open(file, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1510'>O_RDWR</a>           1510 user/usertests.c       close(open("x", O_RDWR | O_CREATE));</span>
+<span class='curline'><a href='../S/27.html#L1536'>O_RDWR</a>           1536 user/usertests.c   fd = open("dd/ff", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1554'>O_RDWR</a>           1554 user/usertests.c   fd = open("dd/dd/ff", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1621'>O_RDWR</a>           1621 user/usertests.c   if(open("dd/ff/ff", O_CREATE|O_RDWR) &gt;= 0){</span>
+<span class='curline'><a href='../S/27.html#L1625'>O_RDWR</a>           1625 user/usertests.c   if(open("dd/xx/ff", O_CREATE|O_RDWR) &gt;= 0){</span>
+<span class='curline'><a href='../S/27.html#L1633'>O_RDWR</a>           1633 user/usertests.c   if(open("dd", O_RDWR) &gt;= 0){</span>
+<span class='curline'><a href='../S/27.html#L1712'>O_RDWR</a>           1712 user/usertests.c     fd = open("bigwrite", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1738'>O_RDWR</a>           1738 user/usertests.c   fd = open("bigfile.dat", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L1909'>O_RDWR</a>           1909 user/usertests.c   fd = open(".", O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L2359'>O_RDWR</a>           2359 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L2550'>O_RDWR</a>           2550 user/usertests.c   int fd = open(p, O_RDWR|O_CREATE);</span>
+<span class='curline'><a href='../S/27.html#L2553'>O_RDWR</a>           2553 user/usertests.c   fd = open(p, O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L2692'>O_RDWR</a>           2692 user/usertests.c     fd = open("junk", O_CREATE|O_RDWR|O_TRUNC);</span>
+<span class='curline'><a href='../S/27.html#L2840'>O_RDWR</a>           2840 user/usertests.c           int fd = open(name, O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L2961'>O_RDWR</a>           2961 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR|O_TRUNC);</span>
+<span class='curline'><a href='../S/27.html#L2992'>O_RDWR</a>           2992 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR|O_TRUNC);</span>
+<span class='curline'><a href='../S/27.html#L3037'>O_RDWR</a>           3037 user/usertests.c     int fd = open(name, O_CREATE|O_RDWR|O_TRUNC);</span>
 </pre>
 </body>
 </html>

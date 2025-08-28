@@ -3,53 +3,53 @@
 <head>
 <title>dp</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/47.html#L552'>dp</a>                552 kernel/fs.c    dirlookup(struct inode *dp, char *name, uint *poff)</span>
-<span class='curline'><a href='../S/47.html#L557'>dp</a>                557 kernel/fs.c      if(dp-&gt;type != T_DIR)</span>
-<span class='curline'><a href='../S/47.html#L560'>dp</a>                560 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
-<span class='curline'><a href='../S/47.html#L561'>dp</a>                561 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/47.html#L570'>dp</a>                570 kernel/fs.c          return iget(dp-&gt;dev, inum);</span>
-<span class='curline'><a href='../S/47.html#L580'>dp</a>                580 kernel/fs.c    dirlink(struct inode *dp, char *name, uint inum)</span>
-<span class='curline'><a href='../S/47.html#L587'>dp</a>                587 kernel/fs.c      if((ip = dirlookup(dp, name, 0)) != 0){</span>
-<span class='curline'><a href='../S/47.html#L593'>dp</a>                593 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
-<span class='curline'><a href='../S/47.html#L594'>dp</a>                594 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/47.html#L602'>dp</a>                602 kernel/fs.c      if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/43.html#L127'>dp</a>                127 kernel/sysfile.c   struct inode *dp, *ip;</span>
-<span class='curline'><a href='../S/43.html#L149'>dp</a>                149 kernel/sysfile.c   if((dp = nameiparent(new, name)) == 0)</span>
-<span class='curline'><a href='../S/43.html#L151'>dp</a>                151 kernel/sysfile.c   ilock(dp);</span>
-<span class='curline'><a href='../S/43.html#L152'>dp</a>                152 kernel/sysfile.c   if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
-<span class='curline'><a href='../S/43.html#L153'>dp</a>                153 kernel/sysfile.c     iunlockput(dp);</span>
-<span class='curline'><a href='../S/43.html#L156'>dp</a>                156 kernel/sysfile.c   iunlockput(dp);</span>
-<span class='curline'><a href='../S/43.html#L174'>dp</a>                174 kernel/sysfile.c isdirempty(struct inode *dp)</span>
-<span class='curline'><a href='../S/43.html#L179'>dp</a>                179 kernel/sysfile.c   for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
-<span class='curline'><a href='../S/43.html#L180'>dp</a>                180 kernel/sysfile.c     if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/43.html#L191'>dp</a>                191 kernel/sysfile.c   struct inode *ip, *dp;</span>
-<span class='curline'><a href='../S/43.html#L200'>dp</a>                200 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0){</span>
-<span class='curline'><a href='../S/43.html#L205'>dp</a>                205 kernel/sysfile.c   ilock(dp);</span>
-<span class='curline'><a href='../S/43.html#L211'>dp</a>                211 kernel/sysfile.c   if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
-<span class='curline'><a href='../S/43.html#L223'>dp</a>                223 kernel/sysfile.c   if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
-<span class='curline'><a href='../S/43.html#L226'>dp</a>                226 kernel/sysfile.c     dp-&gt;nlink--;</span>
-<span class='curline'><a href='../S/43.html#L227'>dp</a>                227 kernel/sysfile.c     iupdate(dp);</span>
-<span class='curline'><a href='../S/43.html#L229'>dp</a>                229 kernel/sysfile.c   iunlockput(dp);</span>
-<span class='curline'><a href='../S/43.html#L240'>dp</a>                240 kernel/sysfile.c   iunlockput(dp);</span>
-<span class='curline'><a href='../S/43.html#L248'>dp</a>                248 kernel/sysfile.c   struct inode *ip, *dp;</span>
-<span class='curline'><a href='../S/43.html#L251'>dp</a>                251 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0)</span>
-<span class='curline'><a href='../S/43.html#L254'>dp</a>                254 kernel/sysfile.c   ilock(dp);</span>
-<span class='curline'><a href='../S/43.html#L256'>dp</a>                256 kernel/sysfile.c   if((ip = dirlookup(dp, name, 0)) != 0){</span>
-<span class='curline'><a href='../S/43.html#L257'>dp</a>                257 kernel/sysfile.c     iunlockput(dp);</span>
-<span class='curline'><a href='../S/43.html#L265'>dp</a>                265 kernel/sysfile.c   if((ip = ialloc(dp-&gt;dev, type)) == 0){</span>
-<span class='curline'><a href='../S/43.html#L266'>dp</a>                266 kernel/sysfile.c     iunlockput(dp);</span>
-<span class='curline'><a href='../S/43.html#L278'>dp</a>                278 kernel/sysfile.c     if(dirlink(ip, ".", ip-&gt;inum) &lt; 0 || dirlink(ip, "..", dp-&gt;inum) &lt; 0)</span>
-<span class='curline'><a href='../S/43.html#L282'>dp</a>                282 kernel/sysfile.c   if(dirlink(dp, name, ip-&gt;inum) &lt; 0)</span>
-<span class='curline'><a href='../S/43.html#L287'>dp</a>                287 kernel/sysfile.c     dp-&gt;nlink++;  // for ".."</span>
-<span class='curline'><a href='../S/43.html#L288'>dp</a>                288 kernel/sysfile.c     iupdate(dp);</span>
-<span class='curline'><a href='../S/43.html#L291'>dp</a>                291 kernel/sysfile.c   iunlockput(dp);</span>
-<span class='curline'><a href='../S/43.html#L300'>dp</a>                300 kernel/sysfile.c   iunlockput(dp);</span>
+<span class='curline'><a href='../S/50.html#L575'>dp</a>                575 kernel/fs.c    dirlookup(struct inode *dp, char *name, uint *poff)</span>
+<span class='curline'><a href='../S/50.html#L580'>dp</a>                580 kernel/fs.c      if(dp-&gt;type != T_DIR)</span>
+<span class='curline'><a href='../S/50.html#L583'>dp</a>                583 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/50.html#L584'>dp</a>                584 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/50.html#L593'>dp</a>                593 kernel/fs.c          return iget(dp-&gt;dev, inum);</span>
+<span class='curline'><a href='../S/50.html#L603'>dp</a>                603 kernel/fs.c    dirlink(struct inode *dp, char *name, uint inum)</span>
+<span class='curline'><a href='../S/50.html#L610'>dp</a>                610 kernel/fs.c      if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/50.html#L616'>dp</a>                616 kernel/fs.c      for(off = 0; off &lt; dp-&gt;size; off += sizeof(de)){</span>
+<span class='curline'><a href='../S/50.html#L617'>dp</a>                617 kernel/fs.c        if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/50.html#L625'>dp</a>                625 kernel/fs.c      if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/46.html#L127'>dp</a>                127 kernel/sysfile.c   struct inode *dp, *ip;</span>
+<span class='curline'><a href='../S/46.html#L149'>dp</a>                149 kernel/sysfile.c   if((dp = nameiparent(new, name)) == 0)</span>
+<span class='curline'><a href='../S/46.html#L151'>dp</a>                151 kernel/sysfile.c   ilock(dp);</span>
+<span class='curline'><a href='../S/46.html#L152'>dp</a>                152 kernel/sysfile.c   if(dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0){</span>
+<span class='curline'><a href='../S/46.html#L153'>dp</a>                153 kernel/sysfile.c     iunlockput(dp);</span>
+<span class='curline'><a href='../S/46.html#L156'>dp</a>                156 kernel/sysfile.c   iunlockput(dp);</span>
+<span class='curline'><a href='../S/46.html#L174'>dp</a>                174 kernel/sysfile.c isdirempty(struct inode *dp)</span>
+<span class='curline'><a href='../S/46.html#L179'>dp</a>                179 kernel/sysfile.c   for(off=2*sizeof(de); off&lt;dp-&gt;size; off+=sizeof(de)){</span>
+<span class='curline'><a href='../S/46.html#L180'>dp</a>                180 kernel/sysfile.c     if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/46.html#L191'>dp</a>                191 kernel/sysfile.c   struct inode *ip, *dp;</span>
+<span class='curline'><a href='../S/46.html#L200'>dp</a>                200 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0){</span>
+<span class='curline'><a href='../S/46.html#L205'>dp</a>                205 kernel/sysfile.c   ilock(dp);</span>
+<span class='curline'><a href='../S/46.html#L211'>dp</a>                211 kernel/sysfile.c   if((ip = dirlookup(dp, name, &amp;off)) == 0)</span>
+<span class='curline'><a href='../S/46.html#L223'>dp</a>                223 kernel/sysfile.c   if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) != sizeof(de))</span>
+<span class='curline'><a href='../S/46.html#L226'>dp</a>                226 kernel/sysfile.c     dp-&gt;nlink--;</span>
+<span class='curline'><a href='../S/46.html#L227'>dp</a>                227 kernel/sysfile.c     iupdate(dp);</span>
+<span class='curline'><a href='../S/46.html#L229'>dp</a>                229 kernel/sysfile.c   iunlockput(dp);</span>
+<span class='curline'><a href='../S/46.html#L240'>dp</a>                240 kernel/sysfile.c   iunlockput(dp);</span>
+<span class='curline'><a href='../S/46.html#L248'>dp</a>                248 kernel/sysfile.c   struct inode *ip, *dp;</span>
+<span class='curline'><a href='../S/46.html#L251'>dp</a>                251 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0)</span>
+<span class='curline'><a href='../S/46.html#L254'>dp</a>                254 kernel/sysfile.c   ilock(dp);</span>
+<span class='curline'><a href='../S/46.html#L256'>dp</a>                256 kernel/sysfile.c   if((ip = dirlookup(dp, name, 0)) != 0){</span>
+<span class='curline'><a href='../S/46.html#L257'>dp</a>                257 kernel/sysfile.c     iunlockput(dp);</span>
+<span class='curline'><a href='../S/46.html#L265'>dp</a>                265 kernel/sysfile.c   if((ip = ialloc(dp-&gt;dev, type)) == 0){</span>
+<span class='curline'><a href='../S/46.html#L266'>dp</a>                266 kernel/sysfile.c     iunlockput(dp);</span>
+<span class='curline'><a href='../S/46.html#L278'>dp</a>                278 kernel/sysfile.c     if(dirlink(ip, ".", ip-&gt;inum) &lt; 0 || dirlink(ip, "..", dp-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/46.html#L282'>dp</a>                282 kernel/sysfile.c   if(dirlink(dp, name, ip-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/46.html#L287'>dp</a>                287 kernel/sysfile.c     dp-&gt;nlink++;  // for ".."</span>
+<span class='curline'><a href='../S/46.html#L288'>dp</a>                288 kernel/sysfile.c     iupdate(dp);</span>
+<span class='curline'><a href='../S/46.html#L291'>dp</a>                291 kernel/sysfile.c   iunlockput(dp);</span>
+<span class='curline'><a href='../S/46.html#L300'>dp</a>                300 kernel/sysfile.c   iunlockput(dp);</span>
 </pre>
 </body>
 </html>

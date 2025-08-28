@@ -1,18 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>fdarray</title>
+<title>fd2</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/43.html#L480'>fdarray</a>           480 kernel/sysfile.c   uint64 fdarray; // user pointer to array of two integers</span>
-<span class='curline'><a href='../S/43.html#L485'>fdarray</a>           485 kernel/sysfile.c   argaddr(0, &amp;fdarray);</span>
-<span class='curline'><a href='../S/43.html#L496'>fdarray</a>           496 kernel/sysfile.c   if(copyout(p-&gt;pagetable, fdarray, (char*)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
-<span class='curline'><a href='../S/43.html#L497'>fdarray</a>           497 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
+<span class='curline'><a href='../S/27.html#L302'>fd2</a>               302 user/usertests.c   int fd2 = open("truncfile", O_RDONLY);</span>
+<span class='curline'><a href='../S/27.html#L303'>fd2</a>               303 user/usertests.c   int n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L319'>fd2</a>               319 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L321'>fd2</a>               321 user/usertests.c     printf("bbb fd2=%d\n", fd2);</span>
+<span class='curline'><a href='../S/27.html#L334'>fd2</a>               334 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L343'>fd2</a>               343 user/usertests.c   close(fd2);</span>
+<span class='curline'><a href='../S/27.html#L359'>fd2</a>               359 user/usertests.c   int fd2 = open("truncfile", O_TRUNC|O_WRONLY);</span>
+<span class='curline'><a href='../S/27.html#L369'>fd2</a>               369 user/usertests.c   close(fd2);</span>
 </pre>
 </body>
 </html>

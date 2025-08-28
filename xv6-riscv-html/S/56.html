@@ -1,222 +1,118 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel/console.c</title>
+<title>kernel/virtio.h</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/72.html'>kernel</a>/console.c</h2>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L34'>[^]</a><a href='#L182'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/76.html'>kernel</a>/virtio.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
-<h2 class='header'>DEFINITIONS</h2>
-This source file includes following definitions.
-<ol>
-<li><a href='#L34' title='Defined at 34.'>consputc</a></li>
-<li><a href='#L59' title='Defined at 59.'>consolewrite</a></li>
-<li><a href='#L80' title='Defined at 80.'>consoleread</a></li>
-<li><a href='#L136' title='Defined at 136.'>consoleintr</a></li>
-<li><a href='#L182' title='Defined at 182.'>consoleinit</a></li>
-</ol>
+<h2 class='header'><a href='67.html#L17' title='Included from 17 in kernel/virtio_disk.c.'>INCLUDED FROM</a></h2>
 <hr />
 <pre>
 <a id='L1' name='L1'></a>   1 <em class='comment'>//</em>
-<a id='L2' name='L2'></a>   2 <em class='comment'>// Console input and output, to the uart.</em>
-<a id='L3' name='L3'></a>   3 <em class='comment'>// Reads are line at a time.</em>
-<a id='L4' name='L4'></a>   4 <em class='comment'>// Implements special input characters:</em>
-<a id='L5' name='L5'></a>   5 <em class='comment'>//   newline -- end of line</em>
-<a id='L6' name='L6'></a>   6 <em class='comment'>//   control-h -- backspace</em>
-<a id='L7' name='L7'></a>   7 <em class='comment'>//   control-u -- kill line</em>
-<a id='L8' name='L8'></a>   8 <em class='comment'>//   control-d -- end of file</em>
-<a id='L9' name='L9'></a>   9 <em class='comment'>//   control-p -- print process list</em>
-<a id='L10' name='L10'></a>  10 <em class='comment'>//</em>
-<a id='L11' name='L11'></a>  11 
-<a id='L12' name='L12'></a>  12 <em class='sharp'>#include</em> &lt;stdarg.h&gt;
-<a id='L13' name='L13'></a>  13 
-<a id='L14' name='L14'></a>  14 <em class='sharp'>#include</em> "<a href='37.html'>types.h</a>"
-<a id='L15' name='L15'></a>  15 <em class='sharp'>#include</em> "<a href='57.html'>param.h</a>"
-<a id='L16' name='L16'></a>  16 <em class='sharp'>#include</em> "<a href='31.html'>spinlock.h</a>"
-<a id='L17' name='L17'></a>  17 <em class='sharp'>#include</em> "<a href='65.html'>sleeplock.h</a>"
-<a id='L18' name='L18'></a>  18 <em class='sharp'>#include</em> "<a href='70.html'>fs.h</a>"
-<a id='L19' name='L19'></a>  19 <em class='sharp'>#include</em> "<a href='41.html'>file.h</a>"
-<a id='L20' name='L20'></a>  20 <em class='sharp'>#include</em> "<a href='48.html'>memlayout.h</a>"
-<a id='L21' name='L21'></a>  21 <em class='sharp'>#include</em> "<a href='63.html'>riscv.h</a>"
-<a id='L22' name='L22'></a>  22 <em class='sharp'>#include</em> "<a href='32.html'>defs.h</a>"
-<a id='L23' name='L23'></a>  23 <em class='sharp'>#include</em> "<a href='35.html'>proc.h</a>"
-<a id='L24' name='L24'></a>  24 
-<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/3.html' title='Multiple referred from 3 places.'>BACKSPACE</a> 0x100
-<a id='L26' name='L26'></a>  26 <em class='sharp'>#define</em> <a href='../R/9.html' title='Multiple referred from 5 places.'>C</a>(<a href='../Y/429.html' title='Multiple used in 150 places.'>x</a>)  ((<a href='../Y/429.html' title='Multiple used in 150 places.'>x</a>)-'@')  <em class='comment'>// Control-x</em>
-<a id='L27' name='L27'></a>  27 
-<a id='L28' name='L28'></a>  28 <em class='comment'>//</em>
-<a id='L29' name='L29'></a>  29 <em class='comment'>// send one character to the uart.</em>
-<a id='L30' name='L30'></a>  30 <em class='comment'>// called by printf(), and to echo input characters,</em>
-<a id='L31' name='L31'></a>  31 <em class='comment'>// but not from write().</em>
-<a id='L32' name='L32'></a>  32 <em class='comment'>//</em>
-<a id='L33' name='L33'></a>  33 <strong class='reserved'>void</strong>
-<a id='L34' name='L34'></a>  34 <a href='../R/227.html' title='Multiple referred from 17 places.'>consputc</a>(<strong class='reserved'>int</strong> <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>)
-<a id='L35' name='L35'></a>  35 <em class='brace'>{</em>
-<a id='L36' name='L36'></a>  36   <strong class='reserved'>if</strong>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> == <a href='../S/56.html#L25' title='Defined at 25 in kernel/console.c.'>BACKSPACE</a>)<em class='brace'>{</em>
-<a id='L37' name='L37'></a>  37     <em class='comment'>// if the user typed backspace, overwrite with a space.</em>
-<a id='L38' name='L38'></a>  38     <a href='../S/71.html#L112' title='Defined at 112 in kernel/uart.c.'>uartputc_sync</a>('\b'); <a href='../S/71.html#L112' title='Defined at 112 in kernel/uart.c.'>uartputc_sync</a>(' '); <a href='../S/71.html#L112' title='Defined at 112 in kernel/uart.c.'>uartputc_sync</a>('\b');
-<a id='L39' name='L39'></a>  39   <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
-<a id='L40' name='L40'></a>  40     <a href='../S/71.html#L112' title='Defined at 112 in kernel/uart.c.'>uartputc_sync</a>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>);
-<a id='L41' name='L41'></a>  41   <em class='brace'>}</em>
-<a id='L42' name='L42'></a>  42 <em class='brace'>}</em>
-<a id='L43' name='L43'></a>  43 
-<a id='L44' name='L44'></a>  44 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
-<a id='L45' name='L45'></a>  45   <strong class='reserved'>struct</strong> <a href='../S/31.html#L2' title='Defined at 2 in kernel/spinlock.h.'>spinlock</a> <a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>;
-<a id='L46' name='L46'></a>  46   
-<a id='L47' name='L47'></a>  47   <em class='comment'>// input</em>
-<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/29.html' title='Multiple referred from 6 places.'>INPUT_BUF_SIZE</a> 128
-<a id='L49' name='L49'></a>  49   <strong class='reserved'>char</strong> <a href='../S/46.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../S/56.html#L48' title='Defined at 48 in kernel/console.c.'>INPUT_BUF_SIZE</a>];
-<a id='L50' name='L50'></a>  50   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/288.html' title='Multiple used in 40 places.'>r</a>;  <em class='comment'>// Read index</em>
-<a id='L51' name='L51'></a>  51   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/418.html' title='Multiple used in 9 places.'>w</a>;  <em class='comment'>// Write index</em>
-<a id='L52' name='L52'></a>  52   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>;  <em class='comment'>// Edit index</em>
-<a id='L53' name='L53'></a>  53 <em class='brace'>}</em> <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>;
-<a id='L54' name='L54'></a>  54 
-<a id='L55' name='L55'></a>  55 <em class='comment'>//</em>
-<a id='L56' name='L56'></a>  56 <em class='comment'>// user write()s to the console go here.</em>
-<a id='L57' name='L57'></a>  57 <em class='comment'>//</em>
-<a id='L58' name='L58'></a>  58 <strong class='reserved'>int</strong>
-<a id='L59' name='L59'></a>  59 <a href='../S/56.html#L191' title='Referred from 191 in kernel/console.c.'>consolewrite</a>(<strong class='reserved'>int</strong> <a href='../Y/399.html' title='Multiple used in 7 places.'>user_src</a>, <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/341.html' title='Multiple used in 30 places.'>src</a>, <strong class='reserved'>int</strong> <a href='../Y/203.html' title='Multiple used in 260 places.'>n</a>)
-<a id='L60' name='L60'></a>  60 <em class='brace'>{</em>
-<a id='L61' name='L61'></a>  61   <strong class='reserved'>int</strong> <a href='../Y/146.html' title='Multiple used in 330 places.'>i</a>;
-<a id='L62' name='L62'></a>  62 
-<a id='L63' name='L63'></a>  63   <strong class='reserved'>for</strong>(<a href='../Y/146.html' title='Multiple used in 330 places.'>i</a> = 0; <a href='../Y/146.html' title='Multiple used in 330 places.'>i</a> &lt; <a href='../Y/203.html' title='Multiple used in 260 places.'>n</a>; <a href='../Y/146.html' title='Multiple used in 330 places.'>i</a>++)<em class='brace'>{</em>
-<a id='L64' name='L64'></a>  64     <strong class='reserved'>char</strong> <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>;
-<a id='L65' name='L65'></a>  65     <strong class='reserved'>if</strong>(<a href='../S/62.html#L656' title='Defined at 656 in kernel/proc.c.'>either_copyin</a>(&amp;<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>, <a href='../Y/399.html' title='Multiple used in 7 places.'>user_src</a>, <a href='../Y/341.html' title='Multiple used in 30 places.'>src</a>+<a href='../Y/146.html' title='Multiple used in 330 places.'>i</a>, 1) == -1)
-<a id='L66' name='L66'></a>  66       <strong class='reserved'>break</strong>;
-<a id='L67' name='L67'></a>  67     <a href='../S/71.html#L87' title='Defined at 87 in kernel/uart.c.'>uartputc</a>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>);
-<a id='L68' name='L68'></a>  68   <em class='brace'>}</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>// virtio device definitions.</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>// for both the mmio interface, and virtio descriptors.</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>// only tested with qemu.</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>//</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>// the virtio spec:</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>// https://docs.oasis-open.org/virtio/virtio/v1.1/virtio-v1.1.pdf</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>//</em>
+<a id='L9' name='L9'></a>   9 
+<a id='L10' name='L10'></a>  10 <em class='comment'>// virtio mmio control registers, mapped starting at 0x10001000.</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>// from qemu virtio_mmio.h</em>
+<a id='L12' name='L12'></a>  12 <em class='sharp'>#define</em> <a href='../S/67.html#L68' title='Referred from 68 in kernel/virtio_disk.c.'>VIRTIO_MMIO_MAGIC_VALUE</a>     0x000 <em class='comment'>// 0x74726976</em>
+<a id='L13' name='L13'></a>  13 <em class='sharp'>#define</em> <a href='../S/67.html#L69' title='Referred from 69 in kernel/virtio_disk.c.'>VIRTIO_MMIO_VERSION</a>     0x004 <em class='comment'>// version; should be 2</em>
+<a id='L14' name='L14'></a>  14 <em class='sharp'>#define</em> <a href='../S/67.html#L70' title='Referred from 70 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DEVICE_ID</a>       0x008 <em class='comment'>// device type; 1 is net, 2 is disk</em>
+<a id='L15' name='L15'></a>  15 <em class='sharp'>#define</em> <a href='../S/67.html#L71' title='Referred from 71 in kernel/virtio_disk.c.'>VIRTIO_MMIO_VENDOR_ID</a>       0x00c <em class='comment'>// 0x554d4551</em>
+<a id='L16' name='L16'></a>  16 <em class='sharp'>#define</em> <a href='../S/67.html#L87' title='Referred from 87 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DEVICE_FEATURES</a> 0x010
+<a id='L17' name='L17'></a>  17 <em class='sharp'>#define</em> <a href='../S/67.html#L95' title='Referred from 95 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DRIVER_FEATURES</a> 0x020
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#define</em> <a href='../S/67.html#L107' title='Referred from 107 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_SEL</a>       0x030 <em class='comment'>// select queue, write-only</em>
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#define</em> <a href='../S/67.html#L114' title='Referred from 114 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_NUM_MAX</a>   0x034 <em class='comment'>// max size of current queue, read-only</em>
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#define</em> <a href='../S/67.html#L131' title='Referred from 131 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_NUM</a>       0x038 <em class='comment'>// size of current queue, write-only</em>
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#define</em> <a href='../R/176.html' title='Multiple referred from 2 places.'>VIRTIO_MMIO_QUEUE_READY</a>     0x044 <em class='comment'>// ready bit</em>
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/67.html#L281' title='Referred from 281 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_NOTIFY</a>    0x050 <em class='comment'>// write-only</em>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> <a href='../S/67.html#L305' title='Referred from 305 in kernel/virtio_disk.c.'>VIRTIO_MMIO_INTERRUPT_STATUS</a>    0x060 <em class='comment'>// read-only</em>
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#define</em> <a href='../S/67.html#L305' title='Referred from 305 in kernel/virtio_disk.c.'>VIRTIO_MMIO_INTERRUPT_ACK</a>   0x064 <em class='comment'>// write-only</em>
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/178.html' title='Multiple referred from 6 places.'>VIRTIO_MMIO_STATUS</a>      0x070 <em class='comment'>// read/write</em>
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#define</em> <a href='../S/67.html#L134' title='Referred from 134 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_DESC_LOW</a>  0x080 <em class='comment'>// physical address for descriptor table, write-only</em>
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> <a href='../S/67.html#L135' title='Referred from 135 in kernel/virtio_disk.c.'>VIRTIO_MMIO_QUEUE_DESC_HIGH</a> 0x084
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> <a href='../S/67.html#L136' title='Referred from 136 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DRIVER_DESC_LOW</a> 0x090 <em class='comment'>// physical address for available ring, write-only</em>
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../S/67.html#L137' title='Referred from 137 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DRIVER_DESC_HIGH</a>    0x094
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#define</em> <a href='../S/67.html#L138' title='Referred from 138 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DEVICE_DESC_LOW</a> 0x0a0 <em class='comment'>// physical address for used ring, write-only</em>
+<a id='L31' name='L31'></a>  31 <em class='sharp'>#define</em> <a href='../S/67.html#L139' title='Referred from 139 in kernel/virtio_disk.c.'>VIRTIO_MMIO_DEVICE_DESC_HIGH</a>    0x0a4
+<a id='L32' name='L32'></a>  32 
+<a id='L33' name='L33'></a>  33 <em class='comment'>// status register bits, from qemu virtio_config.h</em>
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#define</em> <a href='../S/67.html#L79' title='Referred from 79 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_ACKNOWLEDGE</a> 1
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#define</em> <a href='../S/67.html#L83' title='Referred from 83 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_DRIVER</a>      2
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#define</em> <a href='../S/67.html#L149' title='Referred from 149 in kernel/virtio_disk.c.'>VIRTIO_CONFIG_S_DRIVER_OK</a>   4
+<a id='L37' name='L37'></a>  37 <em class='sharp'>#define</em> <a href='../R/159.html' title='Multiple referred from 2 places.'>VIRTIO_CONFIG_S_FEATURES_OK</a> 8
+<a id='L38' name='L38'></a>  38 
+<a id='L39' name='L39'></a>  39 <em class='comment'>// device feature bits</em>
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> <a href='../S/67.html#L88' title='Referred from 88 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_RO</a>              5  <em class='comment'>/* Disk is read-only */</em>
+<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> <a href='../S/67.html#L89' title='Referred from 89 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_SCSI</a>            7  <em class='comment'>/* Supports scsi command passthru */</em>
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../S/67.html#L90' title='Referred from 90 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_CONFIG_WCE</a>     11  <em class='comment'>/* Writeback mode available in config */</em>
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../S/67.html#L91' title='Referred from 91 in kernel/virtio_disk.c.'>VIRTIO_BLK_F_MQ</a>             12  <em class='comment'>/* support more than one vq */</em>
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#define</em> <a href='../S/67.html#L92' title='Referred from 92 in kernel/virtio_disk.c.'>VIRTIO_F_ANY_LAYOUT</a>         27
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#define</em> <a href='../S/67.html#L94' title='Referred from 94 in kernel/virtio_disk.c.'>VIRTIO_RING_F_INDIRECT_DESC</a> 28
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#define</em> <a href='../S/67.html#L93' title='Referred from 93 in kernel/virtio_disk.c.'>VIRTIO_RING_F_EVENT_IDX</a>     29
+<a id='L47' name='L47'></a>  47 
+<a id='L48' name='L48'></a>  48 <em class='comment'>// this many virtio descriptors.</em>
+<a id='L49' name='L49'></a>  49 <em class='comment'>// must be a power of two.</em>
+<a id='L50' name='L50'></a>  50 <em class='sharp'>#define</em> <a href='../R/66.html' title='Multiple referred from 12 places.'>NUM</a> 8
+<a id='L51' name='L51'></a>  51 
+<a id='L52' name='L52'></a>  52 <em class='comment'>// a single descriptor, from the spec.</em>
+<a id='L53' name='L53'></a>  53 <strong class='reserved'>struct</strong> <a href='../S/67.html#L28' title='Referred from 28 in kernel/virtio_disk.c.'>virtq_desc</a> <em class='brace'>{</em>
+<a id='L54' name='L54'></a>  54   <a href='../S/40.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/16.html' title='Multiple used in 74 places.'>addr</a>;
+<a id='L55' name='L55'></a>  55   <a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/183.html' title='Multiple used in 29 places.'>len</a>;
+<a id='L56' name='L56'></a>  56   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/121.html' title='Multiple used in 19 places.'>flags</a>;
+<a id='L57' name='L57'></a>  57   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/218.html' title='Multiple used in 23 places.'>next</a>;
+<a id='L58' name='L58'></a>  58 <em class='brace'>}</em>;
+<a id='L59' name='L59'></a>  59 <em class='sharp'>#define</em> <a href='../R/183.html' title='Multiple referred from 3 places.'>VRING_DESC_F_NEXT</a>  1 <em class='comment'>// chained with another descriptor</em>
+<a id='L60' name='L60'></a>  60 <em class='sharp'>#define</em> <a href='../R/184.html' title='Multiple referred from 2 places.'>VRING_DESC_F_WRITE</a> 2 <em class='comment'>// device writes (vs read)</em>
+<a id='L61' name='L61'></a>  61 
+<a id='L62' name='L62'></a>  62 <em class='comment'>// the (entire) avail ring, from the spec.</em>
+<a id='L63' name='L63'></a>  63 <strong class='reserved'>struct</strong> <a href='../S/67.html#L34' title='Referred from 34 in kernel/virtio_disk.c.'>virtq_avail</a> <em class='brace'>{</em>
+<a id='L64' name='L64'></a>  64   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/121.html' title='Multiple used in 19 places.'>flags</a>; <em class='comment'>// always zero</em>
+<a id='L65' name='L65'></a>  65   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/150.html' title='Multiple used in 30 places.'>idx</a>;   <em class='comment'>// driver will write ring[idx] next</em>
+<a id='L66' name='L66'></a>  66   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/311.html' title='Multiple used in 4 places.'>ring</a>[<a href='../S/56.html#L50' title='Defined at 50 in kernel/virtio.h.'>NUM</a>]; <em class='comment'>// descriptor numbers of chain heads</em>
+<a id='L67' name='L67'></a>  67   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> unused;
+<a id='L68' name='L68'></a>  68 <em class='brace'>}</em>;
 <a id='L69' name='L69'></a>  69 
-<a id='L70' name='L70'></a>  70   <strong class='reserved'>return</strong> <a href='../Y/146.html' title='Multiple used in 330 places.'>i</a>;
-<a id='L71' name='L71'></a>  71 <em class='brace'>}</em>
-<a id='L72' name='L72'></a>  72 
-<a id='L73' name='L73'></a>  73 <em class='comment'>//</em>
-<a id='L74' name='L74'></a>  74 <em class='comment'>// user read()s from the console go here.</em>
-<a id='L75' name='L75'></a>  75 <em class='comment'>// copy (up to) a whole input line to dst.</em>
-<a id='L76' name='L76'></a>  76 <em class='comment'>// user_dist indicates whether dst is a user</em>
-<a id='L77' name='L77'></a>  77 <em class='comment'>// or kernel address.</em>
-<a id='L78' name='L78'></a>  78 <em class='comment'>//</em>
-<a id='L79' name='L79'></a>  79 <strong class='reserved'>int</strong>
-<a id='L80' name='L80'></a>  80 <a href='../S/56.html#L190' title='Referred from 190 in kernel/console.c.'>consoleread</a>(<strong class='reserved'>int</strong> <a href='../Y/398.html' title='Multiple used in 7 places.'>user_dst</a>, <a href='../S/37.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/81.html' title='Multiple used in 41 places.'>dst</a>, <strong class='reserved'>int</strong> <a href='../Y/203.html' title='Multiple used in 260 places.'>n</a>)
-<a id='L81' name='L81'></a>  81 <em class='brace'>{</em>
-<a id='L82' name='L82'></a>  82   <a href='../S/37.html#L1' title='Defined at 1 in kernel/types.h.'>uint</a> <a href='../Y/369.html' title='Multiple used in 4 places.'>target</a>;
-<a id='L83' name='L83'></a>  83   <strong class='reserved'>int</strong> <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>;
-<a id='L84' name='L84'></a>  84   <strong class='reserved'>char</strong> <a href='../Y/52.html' title='Multiple used in 3 places.'>cbuf</a>;
+<a id='L70' name='L70'></a>  70 <em class='comment'>// one entry in the "used" ring, with which the</em>
+<a id='L71' name='L71'></a>  71 <em class='comment'>// device tells the driver about completed requests.</em>
+<a id='L72' name='L72'></a>  72 <strong class='reserved'>struct</strong> <a href='../S/56.html#L80' title='Referred from 80 in kernel/virtio.h.'>virtq_used_elem</a> <em class='brace'>{</em>
+<a id='L73' name='L73'></a>  73   <a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/149.html' title='Multiple used in 10 places.'>id</a>;   <em class='comment'>// index of start of completed descriptor chain</em>
+<a id='L74' name='L74'></a>  74   <a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/183.html' title='Multiple used in 29 places.'>len</a>;
+<a id='L75' name='L75'></a>  75 <em class='brace'>}</em>;
+<a id='L76' name='L76'></a>  76 
+<a id='L77' name='L77'></a>  77 <strong class='reserved'>struct</strong> <a href='../S/67.html#L39' title='Referred from 39 in kernel/virtio_disk.c.'>virtq_used</a> <em class='brace'>{</em>
+<a id='L78' name='L78'></a>  78   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/121.html' title='Multiple used in 19 places.'>flags</a>; <em class='comment'>// always zero</em>
+<a id='L79' name='L79'></a>  79   <a href='../S/40.html#L6' title='Defined at 6 in kernel/types.h.'>uint16</a> <a href='../Y/150.html' title='Multiple used in 30 places.'>idx</a>;   <em class='comment'>// device increments when it adds a ring[] entry</em>
+<a id='L80' name='L80'></a>  80   <strong class='reserved'>struct</strong> <a href='../S/56.html#L72' title='Defined at 72 in kernel/virtio.h.'>virtq_used_elem</a> <a href='../Y/311.html' title='Multiple used in 4 places.'>ring</a>[<a href='../S/56.html#L50' title='Defined at 50 in kernel/virtio.h.'>NUM</a>];
+<a id='L81' name='L81'></a>  81 <em class='brace'>}</em>;
+<a id='L82' name='L82'></a>  82 
+<a id='L83' name='L83'></a>  83 <em class='comment'>// these are specific to virtio block devices, e.g. disks,</em>
+<a id='L84' name='L84'></a>  84 <em class='comment'>// described in Section 5.2 of the spec.</em>
 <a id='L85' name='L85'></a>  85 
-<a id='L86' name='L86'></a>  86   <a href='../Y/369.html' title='Multiple used in 4 places.'>target</a> = <a href='../Y/203.html' title='Multiple used in 260 places.'>n</a>;
-<a id='L87' name='L87'></a>  87   <a href='../S/58.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>);
-<a id='L88' name='L88'></a>  88   <strong class='reserved'>while</strong>(<a href='../Y/203.html' title='Multiple used in 260 places.'>n</a> &gt; 0)<em class='brace'>{</em>
-<a id='L89' name='L89'></a>  89     <em class='comment'>// wait until interrupt handler has put some</em>
-<a id='L90' name='L90'></a>  90     <em class='comment'>// input into cons.buffer.</em>
-<a id='L91' name='L91'></a>  91     <strong class='reserved'>while</strong>(<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/288.html' title='Multiple used in 40 places.'>r</a> == <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/418.html' title='Multiple used in 9 places.'>w</a>)<em class='brace'>{</em>
-<a id='L92' name='L92'></a>  92       <strong class='reserved'>if</strong>(<a href='../S/62.html#L627' title='Defined at 627 in kernel/proc.c.'>killed</a>(<a href='../S/62.html#L83' title='Defined at 83 in kernel/proc.c.'>myproc</a>()))<em class='brace'>{</em>
-<a id='L93' name='L93'></a>  93         <a href='../S/58.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>);
-<a id='L94' name='L94'></a>  94         <strong class='reserved'>return</strong> -1;
-<a id='L95' name='L95'></a>  95       <em class='brace'>}</em>
-<a id='L96' name='L96'></a>  96       <a href='../S/62.html#L548' title='Defined at 548 in kernel/proc.c.'>sleep</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/288.html' title='Multiple used in 40 places.'>r</a>, &amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>);
-<a id='L97' name='L97'></a>  97     <em class='brace'>}</em>
-<a id='L98' name='L98'></a>  98 
-<a id='L99' name='L99'></a>  99     <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> = <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../S/46.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/288.html' title='Multiple used in 40 places.'>r</a>++ % <a href='../S/56.html#L48' title='Defined at 48 in kernel/console.c.'>INPUT_BUF_SIZE</a>];
-<a id='L100' name='L100'></a> 100 
-<a id='L101' name='L101'></a> 101     <strong class='reserved'>if</strong>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> == <a href='../S/56.html#L26' title='Defined at 26 in kernel/console.c.'>C</a>('D'))<em class='brace'>{</em>  <em class='comment'>// end-of-file</em>
-<a id='L102' name='L102'></a> 102       <strong class='reserved'>if</strong>(<a href='../Y/203.html' title='Multiple used in 260 places.'>n</a> &lt; <a href='../Y/369.html' title='Multiple used in 4 places.'>target</a>)<em class='brace'>{</em>
-<a id='L103' name='L103'></a> 103         <em class='comment'>// Save ^D for next time, to make sure</em>
-<a id='L104' name='L104'></a> 104         <em class='comment'>// caller gets a 0-byte result.</em>
-<a id='L105' name='L105'></a> 105         <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/288.html' title='Multiple used in 40 places.'>r</a>--;
-<a id='L106' name='L106'></a> 106       <em class='brace'>}</em>
-<a id='L107' name='L107'></a> 107       <strong class='reserved'>break</strong>;
-<a id='L108' name='L108'></a> 108     <em class='brace'>}</em>
-<a id='L109' name='L109'></a> 109 
-<a id='L110' name='L110'></a> 110     <em class='comment'>// copy the input byte to the user-space buffer.</em>
-<a id='L111' name='L111'></a> 111     <a href='../Y/52.html' title='Multiple used in 3 places.'>cbuf</a> = <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>;
-<a id='L112' name='L112'></a> 112     <strong class='reserved'>if</strong>(<a href='../S/62.html#L641' title='Defined at 641 in kernel/proc.c.'>either_copyout</a>(<a href='../Y/398.html' title='Multiple used in 7 places.'>user_dst</a>, <a href='../Y/81.html' title='Multiple used in 41 places.'>dst</a>, &amp;<a href='../Y/52.html' title='Multiple used in 3 places.'>cbuf</a>, 1) == -1)
-<a id='L113' name='L113'></a> 113       <strong class='reserved'>break</strong>;
-<a id='L114' name='L114'></a> 114 
-<a id='L115' name='L115'></a> 115     <a href='../Y/81.html' title='Multiple used in 41 places.'>dst</a>++;
-<a id='L116' name='L116'></a> 116     --<a href='../Y/203.html' title='Multiple used in 260 places.'>n</a>;
-<a id='L117' name='L117'></a> 117 
-<a id='L118' name='L118'></a> 118     <strong class='reserved'>if</strong>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> == '\n')<em class='brace'>{</em>
-<a id='L119' name='L119'></a> 119       <em class='comment'>// a whole line has arrived, return to</em>
-<a id='L120' name='L120'></a> 120       <em class='comment'>// the user-level read().</em>
-<a id='L121' name='L121'></a> 121       <strong class='reserved'>break</strong>;
-<a id='L122' name='L122'></a> 122     <em class='brace'>}</em>
-<a id='L123' name='L123'></a> 123   <em class='brace'>}</em>
-<a id='L124' name='L124'></a> 124   <a href='../S/58.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>);
-<a id='L125' name='L125'></a> 125 
-<a id='L126' name='L126'></a> 126   <strong class='reserved'>return</strong> <a href='../Y/369.html' title='Multiple used in 4 places.'>target</a> - <a href='../Y/203.html' title='Multiple used in 260 places.'>n</a>;
-<a id='L127' name='L127'></a> 127 <em class='brace'>}</em>
-<a id='L128' name='L128'></a> 128 
-<a id='L129' name='L129'></a> 129 <em class='comment'>//</em>
-<a id='L130' name='L130'></a> 130 <em class='comment'>// the console input interrupt handler.</em>
-<a id='L131' name='L131'></a> 131 <em class='comment'>// uartintr() calls this for input character.</em>
-<a id='L132' name='L132'></a> 132 <em class='comment'>// do erase/kill processing, append to cons.buf,</em>
-<a id='L133' name='L133'></a> 133 <em class='comment'>// wake up consoleread() if a whole line has arrived.</em>
-<a id='L134' name='L134'></a> 134 <em class='comment'>//</em>
-<a id='L135' name='L135'></a> 135 <strong class='reserved'>void</strong>
-<a id='L136' name='L136'></a> 136 <a href='../R/224.html' title='Multiple referred from 2 places.'>consoleintr</a>(<strong class='reserved'>int</strong> <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>)
-<a id='L137' name='L137'></a> 137 <em class='brace'>{</em>
-<a id='L138' name='L138'></a> 138   <a href='../S/58.html#L22' title='Defined at 22 in kernel/spinlock.c.'>acquire</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>);
-<a id='L139' name='L139'></a> 139 
-<a id='L140' name='L140'></a> 140   <strong class='reserved'>switch</strong>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>)<em class='brace'>{</em>
-<a id='L141' name='L141'></a> 141   <strong class='reserved'>case</strong> <a href='../S/56.html#L26' title='Defined at 26 in kernel/console.c.'>C</a>('P'):  <em class='comment'>// Print process list.</em>
-<a id='L142' name='L142'></a> 142     <a href='../S/62.html#L671' title='Defined at 671 in kernel/proc.c.'>procdump</a>();
-<a id='L143' name='L143'></a> 143     <strong class='reserved'>break</strong>;
-<a id='L144' name='L144'></a> 144   <strong class='reserved'>case</strong> <a href='../S/56.html#L26' title='Defined at 26 in kernel/console.c.'>C</a>('U'):  <em class='comment'>// Kill line.</em>
-<a id='L145' name='L145'></a> 145     <strong class='reserved'>while</strong>(<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a> != <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/418.html' title='Multiple used in 9 places.'>w</a> &amp;&amp;
-<a id='L146' name='L146'></a> 146           <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../S/46.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[(<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>-1) % <a href='../S/56.html#L48' title='Defined at 48 in kernel/console.c.'>INPUT_BUF_SIZE</a>] != '\n')<em class='brace'>{</em>
-<a id='L147' name='L147'></a> 147       <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>--;
-<a id='L148' name='L148'></a> 148       <a href='../S/56.html#L34' title='Defined at 34 in kernel/console.c.'>consputc</a>(<a href='../S/56.html#L25' title='Defined at 25 in kernel/console.c.'>BACKSPACE</a>);
-<a id='L149' name='L149'></a> 149     <em class='brace'>}</em>
-<a id='L150' name='L150'></a> 150     <strong class='reserved'>break</strong>;
-<a id='L151' name='L151'></a> 151   <strong class='reserved'>case</strong> <a href='../S/56.html#L26' title='Defined at 26 in kernel/console.c.'>C</a>('H'): <em class='comment'>// Backspace</em>
-<a id='L152' name='L152'></a> 152   <strong class='reserved'>case</strong> '\x7f': <em class='comment'>// Delete key</em>
-<a id='L153' name='L153'></a> 153     <strong class='reserved'>if</strong>(<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a> != <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/418.html' title='Multiple used in 9 places.'>w</a>)<em class='brace'>{</em>
-<a id='L154' name='L154'></a> 154       <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>--;
-<a id='L155' name='L155'></a> 155       <a href='../S/56.html#L34' title='Defined at 34 in kernel/console.c.'>consputc</a>(<a href='../S/56.html#L25' title='Defined at 25 in kernel/console.c.'>BACKSPACE</a>);
-<a id='L156' name='L156'></a> 156     <em class='brace'>}</em>
-<a id='L157' name='L157'></a> 157     <strong class='reserved'>break</strong>;
-<a id='L158' name='L158'></a> 158   <strong class='reserved'>default</strong>:
-<a id='L159' name='L159'></a> 159     <strong class='reserved'>if</strong>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> != 0 &amp;&amp; <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>-<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/288.html' title='Multiple used in 40 places.'>r</a> &lt; <a href='../S/56.html#L48' title='Defined at 48 in kernel/console.c.'>INPUT_BUF_SIZE</a>)<em class='brace'>{</em>
-<a id='L160' name='L160'></a> 160       <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> = (<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> == '\r') ? '\n' : <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>;
-<a id='L161' name='L161'></a> 161 
-<a id='L162' name='L162'></a> 162       <em class='comment'>// echo back to the user.</em>
-<a id='L163' name='L163'></a> 163       <a href='../S/56.html#L34' title='Defined at 34 in kernel/console.c.'>consputc</a>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>);
-<a id='L164' name='L164'></a> 164 
-<a id='L165' name='L165'></a> 165       <em class='comment'>// store for consumption by consoleread().</em>
-<a id='L166' name='L166'></a> 166       <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../S/46.html#L1' title='Defined at 1 in kernel/buf.h.'>buf</a>[<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>++ % <a href='../S/56.html#L48' title='Defined at 48 in kernel/console.c.'>INPUT_BUF_SIZE</a>] = <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a>;
-<a id='L167' name='L167'></a> 167 
-<a id='L168' name='L168'></a> 168       <strong class='reserved'>if</strong>(<a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> == '\n' || <a href='../Y/48.html' title='Multiple used in 93 places.'>c</a> == <a href='../S/56.html#L26' title='Defined at 26 in kernel/console.c.'>C</a>('D') || <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>-<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/288.html' title='Multiple used in 40 places.'>r</a> == <a href='../S/56.html#L48' title='Defined at 48 in kernel/console.c.'>INPUT_BUF_SIZE</a>)<em class='brace'>{</em>
-<a id='L169' name='L169'></a> 169         <em class='comment'>// wake up consoleread() if a whole line (or end-of-file)</em>
-<a id='L170' name='L170'></a> 170         <em class='comment'>// has arrived.</em>
-<a id='L171' name='L171'></a> 171         <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/418.html' title='Multiple used in 9 places.'>w</a> = <a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/84.html' title='Multiple used in 10 places.'>e</a>;
-<a id='L172' name='L172'></a> 172         <a href='../S/62.html#L579' title='Defined at 579 in kernel/proc.c.'>wakeup</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/288.html' title='Multiple used in 40 places.'>r</a>);
-<a id='L173' name='L173'></a> 173       <em class='brace'>}</em>
-<a id='L174' name='L174'></a> 174     <em class='brace'>}</em>
-<a id='L175' name='L175'></a> 175     <strong class='reserved'>break</strong>;
-<a id='L176' name='L176'></a> 176   <em class='brace'>}</em>
-<a id='L177' name='L177'></a> 177   
-<a id='L178' name='L178'></a> 178   <a href='../S/58.html#L47' title='Defined at 47 in kernel/spinlock.c.'>release</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>);
-<a id='L179' name='L179'></a> 179 <em class='brace'>}</em>
-<a id='L180' name='L180'></a> 180 
-<a id='L181' name='L181'></a> 181 <strong class='reserved'>void</strong>
-<a id='L182' name='L182'></a> 182 <a href='../R/223.html' title='Multiple referred from 2 places.'>consoleinit</a>(<strong class='reserved'>void</strong>)
-<a id='L183' name='L183'></a> 183 <em class='brace'>{</em>
-<a id='L184' name='L184'></a> 184   <a href='../S/58.html#L12' title='Defined at 12 in kernel/spinlock.c.'>initlock</a>(&amp;<a href='../Y/62.html' title='Multiple used in 21 places.'>cons</a>.<a href='../Y/187.html' title='Multiple used in 122 places.'>lock</a>, "cons");
-<a id='L185' name='L185'></a> 185 
-<a id='L186' name='L186'></a> 186   <a href='../S/71.html#L53' title='Defined at 53 in kernel/uart.c.'>uartinit</a>();
-<a id='L187' name='L187'></a> 187 
-<a id='L188' name='L188'></a> 188   <em class='comment'>// connect read and write system calls</em>
-<a id='L189' name='L189'></a> 189   <em class='comment'>// to consoleread and consolewrite.</em>
-<a id='L190' name='L190'></a> 190   <a href='../S/41.html#L33' title='Defined at 33 in kernel/file.h.'>devsw</a>[<a href='../S/41.html#L40' title='Defined at 40 in kernel/file.h.'>CONSOLE</a>].<a href='../Y/296.html' title='Multiple used in 44 places.'>read</a> = <a href='../S/56.html#L80' title='Defined at 80 in kernel/console.c.'>consoleread</a>;
-<a id='L191' name='L191'></a> 191   <a href='../S/41.html#L33' title='Defined at 33 in kernel/file.h.'>devsw</a>[<a href='../S/41.html#L40' title='Defined at 40 in kernel/file.h.'>CONSOLE</a>].<a href='../Y/427.html' title='Multiple used in 58 places.'>write</a> = <a href='../S/56.html#L59' title='Defined at 59 in kernel/console.c.'>consolewrite</a>;
-<a id='L192' name='L192'></a> 192 <em class='brace'>}</em>
+<a id='L86' name='L86'></a>  86 <em class='sharp'>#define</em> <a href='../S/67.html#L243' title='Referred from 243 in kernel/virtio_disk.c.'>VIRTIO_BLK_T_IN</a>  0 <em class='comment'>// read the disk</em>
+<a id='L87' name='L87'></a>  87 <em class='sharp'>#define</em> <a href='../S/67.html#L241' title='Referred from 241 in kernel/virtio_disk.c.'>VIRTIO_BLK_T_OUT</a> 1 <em class='comment'>// write the disk</em>
+<a id='L88' name='L88'></a>  88 
+<a id='L89' name='L89'></a>  89 <em class='comment'>// the format of the first descriptor in a disk request.</em>
+<a id='L90' name='L90'></a>  90 <em class='comment'>// to be followed by two more descriptors containing</em>
+<a id='L91' name='L91'></a>  91 <em class='comment'>// the block, and a one-byte status.</em>
+<a id='L92' name='L92'></a>  92 <strong class='reserved'>struct</strong> <a href='../R/538.html' title='Multiple referred from 3 places.'>virtio_blk_req</a> <em class='brace'>{</em>
+<a id='L93' name='L93'></a>  93   <a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/392.html' title='Multiple used in 67 places.'>type</a>; <em class='comment'>// VIRTIO_BLK_T_IN or ..._OUT</em>
+<a id='L94' name='L94'></a>  94   <a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a> <a href='../Y/307.html' title='Multiple used in 2 places.'>reserved</a>;
+<a id='L95' name='L95'></a>  95   <a href='../S/40.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a> <a href='../Y/331.html' title='Multiple used in 3 places.'>sector</a>;
+<a id='L96' name='L96'></a>  96 <em class='brace'>}</em>;
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>
-<em class='comment'>/* [&lt;][&gt;]<a href='#L34'>[^]</a><a href='#L182'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 </body>
 </html>

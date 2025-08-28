@@ -1,32 +1,59 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ref</title>
+<title>read</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/66.html#L36'>ref</a>                36 kernel/file.c      if(f-&gt;ref == 0){</span>
-<span class='curline'><a href='../S/66.html#L37'>ref</a>                37 kernel/file.c        f-&gt;ref = 1;</span>
-<span class='curline'><a href='../S/66.html#L51'>ref</a>                51 kernel/file.c    if(f-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/66.html#L53'>ref</a>                53 kernel/file.c    f-&gt;ref++;</span>
-<span class='curline'><a href='../S/66.html#L65'>ref</a>                65 kernel/file.c    if(f-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/66.html#L67'>ref</a>                67 kernel/file.c    if(--f-&gt;ref &gt; 0){</span>
-<span class='curline'><a href='../S/66.html#L72'>ref</a>                72 kernel/file.c    f-&gt;ref = 0;</span>
-<span class='curline'><a href='../S/41.html#L3'>ref</a>                 3 kernel/file.h    int ref; // reference count</span>
-<span class='curline'><a href='../S/41.html#L20'>ref</a>                20 kernel/file.h    int ref;            // Reference count</span>
-<span class='curline'><a href='../S/47.html#L256'>ref</a>               256 kernel/fs.c        if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum){</span>
-<span class='curline'><a href='../S/47.html#L257'>ref</a>               257 kernel/fs.c          ip-&gt;ref++;</span>
-<span class='curline'><a href='../S/47.html#L261'>ref</a>               261 kernel/fs.c        if(empty == 0 &amp;&amp; ip-&gt;ref == 0)    // Remember empty slot.</span>
-<span class='curline'><a href='../S/47.html#L272'>ref</a>               272 kernel/fs.c      ip-&gt;ref = 1;</span>
-<span class='curline'><a href='../S/47.html#L285'>ref</a>               285 kernel/fs.c      ip-&gt;ref++;</span>
-<span class='curline'><a href='../S/47.html#L298'>ref</a>               298 kernel/fs.c      if(ip == 0 || ip-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/47.html#L323'>ref</a>               323 kernel/fs.c      if(ip == 0 || !holdingsleep(&amp;ip-&gt;lock) || ip-&gt;ref &lt; 1)</span>
-<span class='curline'><a href='../S/47.html#L341'>ref</a>               341 kernel/fs.c      if(ip-&gt;ref == 1 &amp;&amp; ip-&gt;valid &amp;&amp; ip-&gt;nlink == 0){</span>
-<span class='curline'><a href='../S/47.html#L360'>ref</a>               360 kernel/fs.c      ip-&gt;ref--;</span>
+<span class='curline'><a href='../S/59.html#L194'>read</a>              194 kernel/console.c   devsw[CONSOLE].read = consoleread;</span>
+<span class='curline'><a href='../S/69.html#L117'>read</a>              117 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].read)</span>
+<span class='curline'><a href='../S/69.html#L119'>read</a>              119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
+<span class='curline'><a href='../S/44.html#L34'>read</a>               34 kernel/file.h    int (*read)(int, uint64, int);</span>
+<span class='curline'><a href='../S/41.html#L453'>read</a>              453 kernel/vm.c    vmfault(pagetable_t pagetable, uint64 va, int read)</span>
+<span class='curline'><a href='../S/3.html#L159'>read</a>              159 mkfs/mkfs.c        while((cc = read(fd, buf, sizeof(buf))) &gt; 0)</span>
+<span class='curline'><a href='../S/3.html#L218'>read</a>              218 mkfs/mkfs.c      if(read(fsfd, buf, BSIZE) != BSIZE)</span>
+<span class='curline'><a href='../S/10.html#L12'>read</a>               12 user/cat.c       while((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
+<span class='curline'><a href='../S/23.html#L18'>read</a>               18 user/grep.c      while((n = read(fd, buf+m, sizeof(buf)-m-1)) &gt; 0){</span>
+<span class='curline'><a href='../S/13.html#L92'>read</a>               92 user/grind.c         read(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/13.html#L170'>read</a>              170 user/grind.c           if(read(fds[0], &amp;c, 1) != 1)</span>
+<span class='curline'><a href='../S/13.html#L281'>read</a>              281 user/grind.c         read(bb[0], buf+0, 1);</span>
+<span class='curline'><a href='../S/13.html#L282'>read</a>              282 user/grind.c         read(bb[0], buf+1, 1);</span>
+<span class='curline'><a href='../S/13.html#L283'>read</a>              283 user/grind.c         read(bb[0], buf+2, 1);</span>
+<span class='curline'><a href='../S/6.html#L60'>read</a>               60 user/ls.c          while(read(fd, &amp;de, sizeof(de)) == sizeof(de)){</span>
+<span class='curline'><a href='../S/25.html#L43'>read</a>               43 user/stressfs.c     read(fd, data, sizeof(data));</span>
+<span class='curline'><a href='../S/20.html#L75'>read</a>               75 user/ulib.c        cc = read(0, &amp;c, 1);</span>
+<span class='curline'><a href='../S/16.html#L11'>read</a>               11 user/user.h    int read(int, void*, int);</span>
+<span class='curline'><a href='../S/27.html#L91'>read</a>               91 user/usertests.c     int n = read(fd, (void*)addr, 8192);</span>
+<span class='curline'><a href='../S/27.html#L108'>read</a>              108 user/usertests.c     n = read(fds[0], (void*)addr, 8192);</span>
+<span class='curline'><a href='../S/27.html#L281'>read</a>              281 user/usertests.c   n = read(fd, (void*)(a+PGSIZE), 10);</span>
+<span class='curline'><a href='../S/27.html#L303'>read</a>              303 user/usertests.c   int n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L312'>read</a>              312 user/usertests.c   n = read(fd3, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L319'>read</a>              319 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L328'>read</a>              328 user/usertests.c   n = read(fd3, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L334'>read</a>              334 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L400'>read</a>              400 user/usertests.c       read(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L568'>read</a>              568 user/usertests.c   i = read(fd, buf, N*SZ*2);</span>
+<span class='curline'><a href='../S/27.html#L610'>read</a>              610 user/usertests.c     i = read(fd, buf, BSIZE);</span>
+<span class='curline'><a href='../S/27.html#L722'>read</a>              722 user/usertests.c   if (read(fd, buf, 2) != 2) {</span>
+<span class='curline'><a href='../S/27.html#L766'>read</a>              766 user/usertests.c     while((n = read(fds[0], buf, cc)) &gt; 0){</span>
+<span class='curline'><a href='../S/27.html#L862'>read</a>              862 user/usertests.c   if(read(pfds[0], buf, sizeof(buf)) != 1){</span>
+<span class='curline'><a href='../S/27.html#L1133'>read</a>             1133 user/usertests.c   while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
+<span class='curline'><a href='../S/27.html#L1200'>read</a>             1200 user/usertests.c     while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
+<span class='curline'><a href='../S/27.html#L1319'>read</a>             1319 user/usertests.c   if(read(fd, buf, sizeof(buf)) != SZ){</span>
+<span class='curline'><a href='../S/27.html#L1371'>read</a>             1371 user/usertests.c   if(read(fd, buf, sizeof(buf)) != SZ){</span>
+<span class='curline'><a href='../S/27.html#L1438'>read</a>             1438 user/usertests.c   while(read(fd, &amp;de, sizeof(de)) &gt; 0){</span>
+<span class='curline'><a href='../S/27.html#L1567'>read</a>             1567 user/usertests.c   cc = read(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/27.html#L1610'>read</a>             1610 user/usertests.c   if(read(fd, buf, sizeof(buf)) != 2){</span>
+<span class='curline'><a href='../S/27.html#L1759'>read</a>             1759 user/usertests.c     cc = read(fd, buf, SZ/2);</span>
+<span class='curline'><a href='../S/27.html#L2196'>read</a>             2196 user/usertests.c       read(fds[0], &amp;scratch, 1);</span>
+<span class='curline'><a href='../S/27.html#L2401'>read</a>             2401 user/usertests.c   read(fd, sbrk(0) - 1, -1);</span>
+<span class='curline'><a href='../S/27.html#L2555'>read</a>             2555 user/usertests.c   read(fd, p, 1);</span>
+<span class='curline'><a href='../S/27.html#L2690'>read</a>             2690 user/usertests.c     if(read(fd, (char*)bad[i], 512) &gt;= 0) { printf("read succeeded\n");  exit(1); }</span>
+<span class='curline'><a href='../S/11.html#L16'>read</a>               16 user/wc.c        while((n = read(fd, buf, sizeof(buf))) &gt; 0){</span>
 </pre>
 </body>
 </html>

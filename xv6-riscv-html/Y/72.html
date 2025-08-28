@@ -3,38 +3,38 @@
 <head>
 <title>desc</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/64.html#L28'>desc</a>               28 kernel/virtio_disk.c   struct virtq_desc *desc;</span>
-<span class='curline'><a href='../S/64.html#L121'>desc</a>              121 kernel/virtio_disk.c   disk.desc = kalloc();</span>
-<span class='curline'><a href='../S/64.html#L124'>desc</a>              124 kernel/virtio_disk.c   if(!disk.desc || !disk.avail || !disk.used)</span>
-<span class='curline'><a href='../S/64.html#L126'>desc</a>              126 kernel/virtio_disk.c   memset(disk.desc, 0, PGSIZE);</span>
-<span class='curline'><a href='../S/64.html#L134'>desc</a>              134 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_DESC_LOW) = (uint64)disk.desc;</span>
-<span class='curline'><a href='../S/64.html#L135'>desc</a>              135 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_DESC_HIGH) = (uint64)disk.desc &gt;&gt; 32;</span>
-<span class='curline'><a href='../S/64.html#L176'>desc</a>              176 kernel/virtio_disk.c   disk.desc[i].addr = 0;</span>
-<span class='curline'><a href='../S/64.html#L177'>desc</a>              177 kernel/virtio_disk.c   disk.desc[i].len = 0;</span>
-<span class='curline'><a href='../S/64.html#L178'>desc</a>              178 kernel/virtio_disk.c   disk.desc[i].flags = 0;</span>
-<span class='curline'><a href='../S/64.html#L179'>desc</a>              179 kernel/virtio_disk.c   disk.desc[i].next = 0;</span>
-<span class='curline'><a href='../S/64.html#L189'>desc</a>              189 kernel/virtio_disk.c     int flag = disk.desc[i].flags;</span>
-<span class='curline'><a href='../S/64.html#L190'>desc</a>              190 kernel/virtio_disk.c     int nxt = disk.desc[i].next;</span>
-<span class='curline'><a href='../S/64.html#L247'>desc</a>              247 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) buf0;</span>
-<span class='curline'><a href='../S/64.html#L248'>desc</a>              248 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(struct virtio_blk_req);</span>
-<span class='curline'><a href='../S/64.html#L249'>desc</a>              249 kernel/virtio_disk.c   disk.desc[idx[0]].flags = VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/64.html#L250'>desc</a>              250 kernel/virtio_disk.c   disk.desc[idx[0]].next = idx[1];</span>
-<span class='curline'><a href='../S/64.html#L252'>desc</a>              252 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
-<span class='curline'><a href='../S/64.html#L253'>desc</a>              253 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
-<span class='curline'><a href='../S/64.html#L255'>desc</a>              255 kernel/virtio_disk.c     disk.desc[idx[1]].flags = 0; // device reads b-&gt;data</span>
-<span class='curline'><a href='../S/64.html#L257'>desc</a>              257 kernel/virtio_disk.c     disk.desc[idx[1]].flags = VRING_DESC_F_WRITE; // device writes b-&gt;data</span>
-<span class='curline'><a href='../S/64.html#L258'>desc</a>              258 kernel/virtio_disk.c   disk.desc[idx[1]].flags |= VRING_DESC_F_NEXT;</span>
-<span class='curline'><a href='../S/64.html#L259'>desc</a>              259 kernel/virtio_disk.c   disk.desc[idx[1]].next = idx[2];</span>
-<span class='curline'><a href='../S/64.html#L262'>desc</a>              262 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64) &amp;disk.info[idx[0]].status;</span>
-<span class='curline'><a href='../S/64.html#L263'>desc</a>              263 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
-<span class='curline'><a href='../S/64.html#L264'>desc</a>              264 kernel/virtio_disk.c   disk.desc[idx[2]].flags = VRING_DESC_F_WRITE; // device writes the status</span>
-<span class='curline'><a href='../S/64.html#L265'>desc</a>              265 kernel/virtio_disk.c   disk.desc[idx[2]].next = 0;</span>
+<span class='curline'><a href='../S/67.html#L28'>desc</a>               28 kernel/virtio_disk.c   struct virtq_desc *desc;</span>
+<span class='curline'><a href='../S/67.html#L121'>desc</a>              121 kernel/virtio_disk.c   disk.desc = kalloc();</span>
+<span class='curline'><a href='../S/67.html#L124'>desc</a>              124 kernel/virtio_disk.c   if(!disk.desc || !disk.avail || !disk.used)</span>
+<span class='curline'><a href='../S/67.html#L126'>desc</a>              126 kernel/virtio_disk.c   memset(disk.desc, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/67.html#L134'>desc</a>              134 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_DESC_LOW) = (uint64)disk.desc;</span>
+<span class='curline'><a href='../S/67.html#L135'>desc</a>              135 kernel/virtio_disk.c   *R(VIRTIO_MMIO_QUEUE_DESC_HIGH) = (uint64)disk.desc &gt;&gt; 32;</span>
+<span class='curline'><a href='../S/67.html#L176'>desc</a>              176 kernel/virtio_disk.c   disk.desc[i].addr = 0;</span>
+<span class='curline'><a href='../S/67.html#L177'>desc</a>              177 kernel/virtio_disk.c   disk.desc[i].len = 0;</span>
+<span class='curline'><a href='../S/67.html#L178'>desc</a>              178 kernel/virtio_disk.c   disk.desc[i].flags = 0;</span>
+<span class='curline'><a href='../S/67.html#L179'>desc</a>              179 kernel/virtio_disk.c   disk.desc[i].next = 0;</span>
+<span class='curline'><a href='../S/67.html#L189'>desc</a>              189 kernel/virtio_disk.c     int flag = disk.desc[i].flags;</span>
+<span class='curline'><a href='../S/67.html#L190'>desc</a>              190 kernel/virtio_disk.c     int nxt = disk.desc[i].next;</span>
+<span class='curline'><a href='../S/67.html#L247'>desc</a>              247 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) buf0;</span>
+<span class='curline'><a href='../S/67.html#L248'>desc</a>              248 kernel/virtio_disk.c   disk.desc[idx[0]].len = sizeof(struct virtio_blk_req);</span>
+<span class='curline'><a href='../S/67.html#L249'>desc</a>              249 kernel/virtio_disk.c   disk.desc[idx[0]].flags = VRING_DESC_F_NEXT;</span>
+<span class='curline'><a href='../S/67.html#L250'>desc</a>              250 kernel/virtio_disk.c   disk.desc[idx[0]].next = idx[1];</span>
+<span class='curline'><a href='../S/67.html#L252'>desc</a>              252 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64) b-&gt;data;</span>
+<span class='curline'><a href='../S/67.html#L253'>desc</a>              253 kernel/virtio_disk.c   disk.desc[idx[1]].len = BSIZE;</span>
+<span class='curline'><a href='../S/67.html#L255'>desc</a>              255 kernel/virtio_disk.c     disk.desc[idx[1]].flags = 0; // device reads b-&gt;data</span>
+<span class='curline'><a href='../S/67.html#L257'>desc</a>              257 kernel/virtio_disk.c     disk.desc[idx[1]].flags = VRING_DESC_F_WRITE; // device writes b-&gt;data</span>
+<span class='curline'><a href='../S/67.html#L258'>desc</a>              258 kernel/virtio_disk.c   disk.desc[idx[1]].flags |= VRING_DESC_F_NEXT;</span>
+<span class='curline'><a href='../S/67.html#L259'>desc</a>              259 kernel/virtio_disk.c   disk.desc[idx[1]].next = idx[2];</span>
+<span class='curline'><a href='../S/67.html#L262'>desc</a>              262 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64) &amp;disk.info[idx[0]].status;</span>
+<span class='curline'><a href='../S/67.html#L263'>desc</a>              263 kernel/virtio_disk.c   disk.desc[idx[2]].len = 1;</span>
+<span class='curline'><a href='../S/67.html#L264'>desc</a>              264 kernel/virtio_disk.c   disk.desc[idx[2]].flags = VRING_DESC_F_WRITE; // device writes the status</span>
+<span class='curline'><a href='../S/67.html#L265'>desc</a>              265 kernel/virtio_disk.c   disk.desc[idx[2]].next = 0;</span>
 </pre>
 </body>
 </html>

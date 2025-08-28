@@ -1,39 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pid1</title>
+<title>ph</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/13.html#L234'>pid1</a>              234 user/grind.c         int pid1 = fork();</span>
-<span class='curline'><a href='../S/13.html#L235'>pid1</a>              235 user/grind.c         if(pid1 == 0){</span>
-<span class='curline'><a href='../S/13.html#L249'>pid1</a>              249 user/grind.c         } else if(pid1 &lt; 0){</span>
-<span class='curline'><a href='../S/13.html#L302'>pid1</a>              302 user/grind.c     int pid1 = fork();</span>
-<span class='curline'><a href='../S/13.html#L303'>pid1</a>              303 user/grind.c     if(pid1 &lt; 0){</span>
-<span class='curline'><a href='../S/13.html#L307'>pid1</a>              307 user/grind.c     if(pid1 == 0){</span>
-<span class='curline'><a href='../S/13.html#L327'>pid1</a>              327 user/grind.c       kill(pid1);</span>
-<span class='curline'><a href='../S/25.html#L799'>pid1</a>              799 user/usertests.c     int pid1 = fork();</span>
-<span class='curline'><a href='../S/25.html#L800'>pid1</a>              800 user/usertests.c     if(pid1 &lt; 0){</span>
-<span class='curline'><a href='../S/25.html#L804'>pid1</a>              804 user/usertests.c     if(pid1 == 0){</span>
-<span class='curline'><a href='../S/25.html#L811'>pid1</a>              811 user/usertests.c     kill(pid1);</span>
-<span class='curline'><a href='../S/25.html#L825'>pid1</a>              825 user/usertests.c   int pid1, pid2, pid3;</span>
-<span class='curline'><a href='../S/25.html#L828'>pid1</a>              828 user/usertests.c   pid1 = fork();</span>
-<span class='curline'><a href='../S/25.html#L829'>pid1</a>              829 user/usertests.c   if(pid1 &lt; 0) {</span>
-<span class='curline'><a href='../S/25.html#L833'>pid1</a>              833 user/usertests.c   if(pid1 == 0)</span>
-<span class='curline'><a href='../S/25.html#L868'>pid1</a>              868 user/usertests.c   kill(pid1);</span>
-<span class='curline'><a href='../S/25.html#L940'>pid1</a>              940 user/usertests.c     int pid1 = fork();</span>
-<span class='curline'><a href='../S/25.html#L941'>pid1</a>              941 user/usertests.c     if(pid1 &lt; 0){</span>
-<span class='curline'><a href='../S/25.html#L945'>pid1</a>              945 user/usertests.c     if(pid1 == 0){</span>
-<span class='curline'><a href='../S/25.html#L977'>pid1</a>              977 user/usertests.c         int pid1 = fork();</span>
-<span class='curline'><a href='../S/25.html#L978'>pid1</a>              978 user/usertests.c         if(pid1 &lt; 0){</span>
-<span class='curline'><a href='../S/25.html#L981'>pid1</a>              981 user/usertests.c         if(pid1 == 0){</span>
-<span class='curline'><a href='../S/25.html#L1039'>pid1</a>             1039 user/usertests.c     int pid1 = fork();</span>
-<span class='curline'><a href='../S/25.html#L1040'>pid1</a>             1040 user/usertests.c     if(pid1 &lt; 0){</span>
-<span class='curline'><a href='../S/25.html#L1044'>pid1</a>             1044 user/usertests.c     if(pid1 == 0){</span>
+<span class='curline'><a href='../S/39.html#L34'>ph</a>                 34 kernel/exec.c    struct proghdr ph;</span>
+<span class='curline'><a href='../S/39.html#L59'>ph</a>                 59 kernel/exec.c    for(i=0, off=elf.phoff; i&lt;elf.phnum; i++, off+=sizeof(ph)){</span>
+<span class='curline'><a href='../S/39.html#L60'>ph</a>                 60 kernel/exec.c      if(readi(ip, 0, (uint64)&amp;ph, off, sizeof(ph)) != sizeof(ph))</span>
+<span class='curline'><a href='../S/39.html#L62'>ph</a>                 62 kernel/exec.c      if(ph.type != ELF_PROG_LOAD)</span>
+<span class='curline'><a href='../S/39.html#L64'>ph</a>                 64 kernel/exec.c      if(ph.memsz &lt; ph.filesz)</span>
+<span class='curline'><a href='../S/39.html#L66'>ph</a>                 66 kernel/exec.c      if(ph.vaddr + ph.memsz &lt; ph.vaddr)</span>
+<span class='curline'><a href='../S/39.html#L68'>ph</a>                 68 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
+<span class='curline'><a href='../S/39.html#L71'>ph</a>                 71 kernel/exec.c      if((sz1 = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz, flags2perm(ph.flags))) == 0)</span>
+<span class='curline'><a href='../S/39.html#L74'>ph</a>                 74 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
 </pre>
 </body>
 </html>

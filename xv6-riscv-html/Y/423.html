@@ -1,20 +1,25 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>which_dev</title>
+<title>wait_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/55.html#L39'>which_dev</a>          39 kernel/trap.c    int which_dev = 0;</span>
-<span class='curline'><a href='../S/55.html#L68'>which_dev</a>          68 kernel/trap.c    } else if((which_dev = devintr()) != 0){</span>
-<span class='curline'><a href='../S/55.html#L80'>which_dev</a>          80 kernel/trap.c    if(which_dev == 2)</span>
-<span class='curline'><a href='../S/55.html#L137'>which_dev</a>         137 kernel/trap.c    int which_dev = 0;</span>
-<span class='curline'><a href='../S/55.html#L147'>which_dev</a>         147 kernel/trap.c    if((which_dev = devintr()) == 0){</span>
-<span class='curline'><a href='../S/55.html#L154'>which_dev</a>         154 kernel/trap.c    if(which_dev == 2 &amp;&amp; myproc() != 0)</span>
+<span class='curline'><a href='../S/65.html#L27'>wait_lock</a>          27 kernel/proc.c  struct spinlock wait_lock;</span>
+<span class='curline'><a href='../S/65.html#L53'>wait_lock</a>          53 kernel/proc.c    initlock(&amp;wait_lock, "wait_lock");</span>
+<span class='curline'><a href='../S/65.html#L294'>wait_lock</a>         294 kernel/proc.c    acquire(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L296'>wait_lock</a>         296 kernel/proc.c    release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L345'>wait_lock</a>         345 kernel/proc.c    acquire(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L358'>wait_lock</a>         358 kernel/proc.c    release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L374'>wait_lock</a>         374 kernel/proc.c    acquire(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L391'>wait_lock</a>         391 kernel/proc.c              release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L396'>wait_lock</a>         396 kernel/proc.c            release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L405'>wait_lock</a>         405 kernel/proc.c        release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L410'>wait_lock</a>         410 kernel/proc.c      sleep(p, &amp;wait_lock);  //DOC: wait-sleep</span>
 </pre>
 </body>
 </html>

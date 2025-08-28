@@ -1,22 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PLIC</title>
+<title>PIPESIZE</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/48.html#L30'>PLIC</a>               30 kernel/memlayout.h #define PLIC_PRIORITY (PLIC + 0x0)</span>
-<span class='curline'><a href='../S/48.html#L31'>PLIC</a>               31 kernel/memlayout.h #define PLIC_PENDING (PLIC + 0x1000)</span>
-<span class='curline'><a href='../S/48.html#L32'>PLIC</a>               32 kernel/memlayout.h #define PLIC_SENABLE(hart) (PLIC + 0x2080 + (hart)*0x100)</span>
-<span class='curline'><a href='../S/48.html#L33'>PLIC</a>               33 kernel/memlayout.h #define PLIC_SPRIORITY(hart) (PLIC + 0x201000 + (hart)*0x2000)</span>
-<span class='curline'><a href='../S/48.html#L34'>PLIC</a>               34 kernel/memlayout.h #define PLIC_SCLAIM(hart) (PLIC + 0x201004 + (hart)*0x2000)</span>
-<span class='curline'><a href='../S/61.html#L15'>PLIC</a>               15 kernel/plic.c    *(uint32*)(PLIC + UART0_IRQ*4) = 1;</span>
-<span class='curline'><a href='../S/61.html#L16'>PLIC</a>               16 kernel/plic.c    *(uint32*)(PLIC + VIRTIO0_IRQ*4) = 1;</span>
-<span class='curline'><a href='../S/38.html#L34'>PLIC</a>               34 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x4000000, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/37.html#L15'>PIPESIZE</a>           15 kernel/pipe.c    char data[PIPESIZE];</span>
+<span class='curline'><a href='../S/37.html#L88'>PIPESIZE</a>           88 kernel/pipe.c      if(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){ //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/37.html#L95'>PIPESIZE</a>           95 kernel/pipe.c        pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
+<span class='curline'><a href='../S/37.html#L123'>PIPESIZE</a>          123 kernel/pipe.c      ch = pi-&gt;data[pi-&gt;nread++ % PIPESIZE];</span>
 </pre>
 </body>
 </html>

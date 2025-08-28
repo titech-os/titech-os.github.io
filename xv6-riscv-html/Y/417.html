@@ -1,16 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vsrc</title>
+<title>vdisk_lock</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/20.html#L110'>vsrc</a>              110 user/ulib.c    memmove(void *vdst, const void *vsrc, int n)</span>
-<span class='curline'><a href='../S/20.html#L116'>vsrc</a>              116 user/ulib.c      src = vsrc;</span>
+<span class='curline'><a href='../S/67.html#L57'>vdisk_lock</a>         57 kernel/virtio_disk.c   struct spinlock vdisk_lock;</span>
+<span class='curline'><a href='../S/67.html#L66'>vdisk_lock</a>         66 kernel/virtio_disk.c   initlock(&amp;disk.vdisk_lock, "virtio_disk");</span>
+<span class='curline'><a href='../S/67.html#L220'>vdisk_lock</a>        220 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L232'>vdisk_lock</a>        232 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L285'>vdisk_lock</a>        285 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L291'>vdisk_lock</a>        291 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L297'>vdisk_lock</a>        297 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/67.html#L326'>vdisk_lock</a>        326 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
 </pre>
 </body>
 </html>

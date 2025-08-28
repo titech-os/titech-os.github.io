@@ -1,18 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>npages</title>
+<title>noff</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L178'>npages</a>            178 kernel/vm.c    uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free)</span>
-<span class='curline'><a href='../S/38.html#L186'>npages</a>            186 kernel/vm.c      for(a = va; a &lt; va + npages*PGSIZE; a += PGSIZE){</span>
-<span class='curline'><a href='../S/38.html#L269'>npages</a>            269 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
-<span class='curline'><a href='../S/38.html#L270'>npages</a>            270 kernel/vm.c        uvmunmap(pagetable, PGROUNDUP(newsz), npages, 1);</span>
+<span class='curline'><a href='../S/65.html#L477'>noff</a>              477 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
+<span class='curline'><a href='../S/38.html#L25'>noff</a>               25 kernel/proc.h    int noff;                   // Depth of push_off() nesting.</span>
+<span class='curline'><a href='../S/61.html#L97'>noff</a>               97 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
+<span class='curline'><a href='../S/61.html#L99'>noff</a>               99 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
+<span class='curline'><a href='../S/61.html#L108'>noff</a>              108 kernel/spinlock.c   if(c-&gt;noff &lt; 1)</span>
+<span class='curline'><a href='../S/61.html#L110'>noff</a>              110 kernel/spinlock.c   c-&gt;noff -= 1;</span>
+<span class='curline'><a href='../S/61.html#L111'>noff</a>              111 kernel/spinlock.c   if(c-&gt;noff == 0 &amp;&amp; c-&gt;intena)</span>
 </pre>
 </body>
 </html>

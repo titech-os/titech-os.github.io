@@ -1,21 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nunits</title>
+<title>nread</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.13' />
+<meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/12.html#L67'>nunits</a>             67 user/umalloc.c   uint nunits;</span>
-<span class='curline'><a href='../S/12.html#L69'>nunits</a>             69 user/umalloc.c   nunits = (nbytes + sizeof(Header) - 1)/sizeof(Header) + 1;</span>
-<span class='curline'><a href='../S/12.html#L75'>nunits</a>             75 user/umalloc.c     if(p-&gt;s.size &gt;= nunits){</span>
-<span class='curline'><a href='../S/12.html#L76'>nunits</a>             76 user/umalloc.c       if(p-&gt;s.size == nunits)</span>
-<span class='curline'><a href='../S/12.html#L79'>nunits</a>             79 user/umalloc.c         p-&gt;s.size -= nunits;</span>
-<span class='curline'><a href='../S/12.html#L81'>nunits</a>             81 user/umalloc.c         p-&gt;s.size = nunits;</span>
-<span class='curline'><a href='../S/12.html#L87'>nunits</a>             87 user/umalloc.c       if((p = morecore(nunits)) == 0)</span>
+<span class='curline'><a href='../S/37.html#L16'>nread</a>              16 kernel/pipe.c    uint nread;     // number of bytes read</span>
+<span class='curline'><a href='../S/37.html#L36'>nread</a>              36 kernel/pipe.c    pi-&gt;nread = 0;</span>
+<span class='curline'><a href='../S/37.html#L64'>nread</a>              64 kernel/pipe.c      wakeup(&amp;pi-&gt;nread);</span>
+<span class='curline'><a href='../S/37.html#L88'>nread</a>              88 kernel/pipe.c      if(pi-&gt;nwrite == pi-&gt;nread + PIPESIZE){ //DOC: pipewrite-full</span>
+<span class='curline'><a href='../S/37.html#L89'>nread</a>              89 kernel/pipe.c        wakeup(&amp;pi-&gt;nread);</span>
+<span class='curline'><a href='../S/37.html#L99'>nread</a>              99 kernel/pipe.c    wakeup(&amp;pi-&gt;nread);</span>
+<span class='curline'><a href='../S/37.html#L113'>nread</a>             113 kernel/pipe.c    while(pi-&gt;nread == pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  //DOC: pipe-empty</span>
+<span class='curline'><a href='../S/37.html#L118'>nread</a>             118 kernel/pipe.c      sleep(&amp;pi-&gt;nread, &amp;pi-&gt;lock); //DOC: piperead-sleep</span>
+<span class='curline'><a href='../S/37.html#L121'>nread</a>             121 kernel/pipe.c      if(pi-&gt;nread == pi-&gt;nwrite)</span>
+<span class='curline'><a href='../S/37.html#L123'>nread</a>             123 kernel/pipe.c      ch = pi-&gt;data[pi-&gt;nread++ % PIPESIZE];</span>
 </pre>
 </body>
 </html>
