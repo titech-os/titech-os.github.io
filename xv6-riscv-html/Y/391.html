@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>tx_lock</title>
+<title>tx_chan</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,13 +9,9 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/75.html#L42'>tx_lock</a>            42 kernel/uart.c  static struct spinlock tx_lock;</span>
-<span class='curline'><a href='../S/75.html#L74'>tx_lock</a>            74 kernel/uart.c    initlock(&amp;tx_lock, "uart");</span>
-<span class='curline'><a href='../S/75.html#L83'>tx_lock</a>            83 kernel/uart.c    acquire(&amp;tx_lock);</span>
-<span class='curline'><a href='../S/75.html#L90'>tx_lock</a>            90 kernel/uart.c        sleep(&amp;tx_chan, &amp;tx_lock);</span>
-<span class='curline'><a href='../S/75.html#L98'>tx_lock</a>            98 kernel/uart.c    release(&amp;tx_lock);</span>
-<span class='curline'><a href='../S/75.html#L147'>tx_lock</a>           147 kernel/uart.c    acquire(&amp;tx_lock);</span>
-<span class='curline'><a href='../S/75.html#L153'>tx_lock</a>           153 kernel/uart.c    release(&amp;tx_lock);</span>
+<span class='curline'><a href='../S/75.html#L44'>tx_chan</a>            44 kernel/uart.c  static int tx_chan;           // &amp;tx_chan is the "wait channel"</span>
+<span class='curline'><a href='../S/75.html#L90'>tx_chan</a>            90 kernel/uart.c        sleep(&amp;tx_chan, &amp;tx_lock);</span>
+<span class='curline'><a href='../S/75.html#L151'>tx_chan</a>           151 kernel/uart.c      wakeup(&amp;tx_chan);</span>
 </pre>
 </body>
 </html>

@@ -29,43 +29,43 @@ This source file includes following definitions.
 <a id='L9' name='L9'></a>   9 <em class='sharp'>#include</em> "<a href='16.html'>user/user.h</a>"
 <a id='L10' name='L10'></a>  10 <em class='sharp'>#include</em> "<a href='43.html'>kernel/fcntl.h</a>"
 <a id='L11' name='L11'></a>  11 
-<a id='L12' name='L12'></a>  12 <strong class='reserved'>char</strong> *<a href='../Y/27.html' title='Multiple used in 81 places.'>argv</a>[] = <em class='brace'>{</em> "sh", 0 <em class='brace'>}</em>;
+<a id='L12' name='L12'></a>  12 <strong class='reserved'>char</strong> *<a href='../Y/27.html' title='Multiple used in 84 places.'>argv</a>[] = <em class='brace'>{</em> "sh", 0 <em class='brace'>}</em>;
 <a id='L13' name='L13'></a>  13 
 <a id='L14' name='L14'></a>  14 <strong class='reserved'>int</strong>
-<a id='L15' name='L15'></a>  15 <a href='../R/354.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>void</strong>)
+<a id='L15' name='L15'></a>  15 <a href='../R/355.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>void</strong>)
 <a id='L16' name='L16'></a>  16 <em class='brace'>{</em>
-<a id='L17' name='L17'></a>  17   <strong class='reserved'>int</strong> <a href='../Y/277.html' title='Multiple used in 186 places.'>pid</a>, <a href='../Y/429.html' title='Multiple used in 4 places.'>wpid</a>;
+<a id='L17' name='L17'></a>  17   <strong class='reserved'>int</strong> <a href='../Y/278.html' title='Multiple used in 186 places.'>pid</a>, <a href='../Y/430.html' title='Multiple used in 4 places.'>wpid</a>;
 <a id='L18' name='L18'></a>  18 
-<a id='L19' name='L19'></a>  19   <strong class='reserved'>if</strong>(<a href='../Y/247.html' title='Multiple used in 117 places.'>open</a>("console", <a href='../S/43.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>) &lt; 0)<em class='brace'>{</em>
+<a id='L19' name='L19'></a>  19   <strong class='reserved'>if</strong>(<a href='../Y/248.html' title='Multiple used in 117 places.'>open</a>("console", <a href='../S/43.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>) &lt; 0)<em class='brace'>{</em>
 <a id='L20' name='L20'></a>  20     <a href='../Y/202.html' title='Multiple used in 2 places.'>mknod</a>("console", <a href='../S/44.html#L40' title='Defined at 40 in kernel/file.h.'>CONSOLE</a>, 0);
-<a id='L21' name='L21'></a>  21     <a href='../Y/247.html' title='Multiple used in 117 places.'>open</a>("console", <a href='../S/43.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>);
+<a id='L21' name='L21'></a>  21     <a href='../Y/248.html' title='Multiple used in 117 places.'>open</a>("console", <a href='../S/43.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>);
 <a id='L22' name='L22'></a>  22   <em class='brace'>}</em>
 <a id='L23' name='L23'></a>  23   <a href='../Y/83.html' title='Multiple used in 8 places.'>dup</a>(0);  <em class='comment'>// stdout</em>
 <a id='L24' name='L24'></a>  24   <a href='../Y/83.html' title='Multiple used in 8 places.'>dup</a>(0);  <em class='comment'>// stderr</em>
 <a id='L25' name='L25'></a>  25 
 <a id='L26' name='L26'></a>  26   <strong class='reserved'>for</strong>(;;)<em class='brace'>{</em>
-<a id='L27' name='L27'></a>  27     <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("init: starting sh\n");
-<a id='L28' name='L28'></a>  28     <a href='../Y/277.html' title='Multiple used in 186 places.'>pid</a> = <a href='../Y/124.html' title='Multiple used in 68 places.'>fork</a>();
-<a id='L29' name='L29'></a>  29     <strong class='reserved'>if</strong>(<a href='../Y/277.html' title='Multiple used in 186 places.'>pid</a> &lt; 0)<em class='brace'>{</em>
-<a id='L30' name='L30'></a>  30       <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("init: fork failed\n");
-<a id='L31' name='L31'></a>  31       <a href='../Y/100.html' title='Multiple used in 436 places.'>exit</a>(1);
+<a id='L27' name='L27'></a>  27     <a href='../D/420.html' title='Multiple defined in 2 places.'>printf</a>("init: starting sh\n");
+<a id='L28' name='L28'></a>  28     <a href='../Y/278.html' title='Multiple used in 186 places.'>pid</a> = <a href='../Y/124.html' title='Multiple used in 68 places.'>fork</a>();
+<a id='L29' name='L29'></a>  29     <strong class='reserved'>if</strong>(<a href='../Y/278.html' title='Multiple used in 186 places.'>pid</a> &lt; 0)<em class='brace'>{</em>
+<a id='L30' name='L30'></a>  30       <a href='../D/420.html' title='Multiple defined in 2 places.'>printf</a>("init: fork failed\n");
+<a id='L31' name='L31'></a>  31       <a href='../Y/100.html' title='Multiple used in 443 places.'>exit</a>(1);
 <a id='L32' name='L32'></a>  32     <em class='brace'>}</em>
-<a id='L33' name='L33'></a>  33     <strong class='reserved'>if</strong>(<a href='../Y/277.html' title='Multiple used in 186 places.'>pid</a> == 0)<em class='brace'>{</em>
-<a id='L34' name='L34'></a>  34       <a href='../Y/99.html' title='Multiple used in 13 places.'>exec</a>("sh", <a href='../Y/27.html' title='Multiple used in 81 places.'>argv</a>);
-<a id='L35' name='L35'></a>  35       <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("init: exec sh failed\n");
-<a id='L36' name='L36'></a>  36       <a href='../Y/100.html' title='Multiple used in 436 places.'>exit</a>(1);
+<a id='L33' name='L33'></a>  33     <strong class='reserved'>if</strong>(<a href='../Y/278.html' title='Multiple used in 186 places.'>pid</a> == 0)<em class='brace'>{</em>
+<a id='L34' name='L34'></a>  34       <a href='../Y/99.html' title='Multiple used in 13 places.'>exec</a>("sh", <a href='../Y/27.html' title='Multiple used in 84 places.'>argv</a>);
+<a id='L35' name='L35'></a>  35       <a href='../D/420.html' title='Multiple defined in 2 places.'>printf</a>("init: exec sh failed\n");
+<a id='L36' name='L36'></a>  36       <a href='../Y/100.html' title='Multiple used in 443 places.'>exit</a>(1);
 <a id='L37' name='L37'></a>  37     <em class='brace'>}</em>
 <a id='L38' name='L38'></a>  38 
 <a id='L39' name='L39'></a>  39     <strong class='reserved'>for</strong>(;;)<em class='brace'>{</em>
 <a id='L40' name='L40'></a>  40       <em class='comment'>// this call to wait() returns if the shell exits,</em>
 <a id='L41' name='L41'></a>  41       <em class='comment'>// or if a parentless process exits.</em>
-<a id='L42' name='L42'></a>  42       <a href='../Y/429.html' title='Multiple used in 4 places.'>wpid</a> = <a href='../Y/422.html' title='Multiple used in 64 places.'>wait</a>((<strong class='reserved'>int</strong> *) 0);
-<a id='L43' name='L43'></a>  43       <strong class='reserved'>if</strong>(<a href='../Y/429.html' title='Multiple used in 4 places.'>wpid</a> == <a href='../Y/277.html' title='Multiple used in 186 places.'>pid</a>)<em class='brace'>{</em>
+<a id='L42' name='L42'></a>  42       <a href='../Y/430.html' title='Multiple used in 4 places.'>wpid</a> = <a href='../Y/423.html' title='Multiple used in 64 places.'>wait</a>((<strong class='reserved'>int</strong> *) 0);
+<a id='L43' name='L43'></a>  43       <strong class='reserved'>if</strong>(<a href='../Y/430.html' title='Multiple used in 4 places.'>wpid</a> == <a href='../Y/278.html' title='Multiple used in 186 places.'>pid</a>)<em class='brace'>{</em>
 <a id='L44' name='L44'></a>  44         <em class='comment'>// the shell exited; restart it.</em>
 <a id='L45' name='L45'></a>  45         <strong class='reserved'>break</strong>;
-<a id='L46' name='L46'></a>  46       <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/429.html' title='Multiple used in 4 places.'>wpid</a> &lt; 0)<em class='brace'>{</em>
-<a id='L47' name='L47'></a>  47         <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("init: wait returned an error\n");
-<a id='L48' name='L48'></a>  48         <a href='../Y/100.html' title='Multiple used in 436 places.'>exit</a>(1);
+<a id='L46' name='L46'></a>  46       <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/430.html' title='Multiple used in 4 places.'>wpid</a> &lt; 0)<em class='brace'>{</em>
+<a id='L47' name='L47'></a>  47         <a href='../D/420.html' title='Multiple defined in 2 places.'>printf</a>("init: wait returned an error\n");
+<a id='L48' name='L48'></a>  48         <a href='../Y/100.html' title='Multiple used in 443 places.'>exit</a>(1);
 <a id='L49' name='L49'></a>  49       <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
 <a id='L50' name='L50'></a>  50         <em class='comment'>// it was a parentless process; do nothing.</em>
 <a id='L51' name='L51'></a>  51       <em class='brace'>}</em>

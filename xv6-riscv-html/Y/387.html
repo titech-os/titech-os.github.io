@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>trampoline_userret</title>
+<title>trampoline</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,8 +9,13 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L533'>trampoline_userret</a>  533 kernel/proc.c    uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);</span>
-<span class='curline'><a href='../S/65.html#L534'>trampoline_userret</a>  534 kernel/proc.c    ((void (*)(uint64))trampoline_userret)(satp);</span>
+<span class='curline'><a href='../S/65.html#L21'>trampoline</a>         21 kernel/proc.c  extern char trampoline[]; // trampoline.S</span>
+<span class='curline'><a href='../S/65.html#L191'>trampoline</a>        191 kernel/proc.c                (uint64)trampoline, PTE_R | PTE_X) &lt; 0){</span>
+<span class='curline'><a href='../S/65.html#L536'>trampoline</a>        536 kernel/proc.c    uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);</span>
+<span class='curline'><a href='../S/58.html#L12'>trampoline</a>         12 kernel/trap.c  extern char trampoline[], uservec[];</span>
+<span class='curline'><a href='../S/58.html#L110'>trampoline</a>        110 kernel/trap.c    uint64 trampoline_uservec = TRAMPOLINE + (uservec - trampoline);</span>
+<span class='curline'><a href='../S/41.html#L18'>trampoline</a>         18 kernel/vm.c    extern char trampoline[]; // trampoline.S</span>
+<span class='curline'><a href='../S/41.html#L46'>trampoline</a>         46 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
 </pre>
 </body>
 </html>

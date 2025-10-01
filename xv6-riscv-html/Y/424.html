@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>wf</title>
+<title>wait_lock</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,11 +9,17 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L481'>wf</a>                481 kernel/sysfile.c   struct file *rf, *wf;</span>
-<span class='curline'><a href='../S/46.html#L486'>wf</a>                486 kernel/sysfile.c   if(pipealloc(&amp;rf, &amp;wf) &lt; 0)</span>
-<span class='curline'><a href='../S/46.html#L489'>wf</a>                489 kernel/sysfile.c   if((fd0 = fdalloc(rf)) &lt; 0 || (fd1 = fdalloc(wf)) &lt; 0){</span>
-<span class='curline'><a href='../S/46.html#L493'>wf</a>                493 kernel/sysfile.c     fileclose(wf);</span>
-<span class='curline'><a href='../S/46.html#L501'>wf</a>                501 kernel/sysfile.c     fileclose(wf);</span>
+<span class='curline'><a href='../S/65.html#L27'>wait_lock</a>          27 kernel/proc.c  struct spinlock wait_lock;</span>
+<span class='curline'><a href='../S/65.html#L53'>wait_lock</a>          53 kernel/proc.c    initlock(&amp;wait_lock, "wait_lock");</span>
+<span class='curline'><a href='../S/65.html#L297'>wait_lock</a>         297 kernel/proc.c    acquire(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L299'>wait_lock</a>         299 kernel/proc.c    release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L348'>wait_lock</a>         348 kernel/proc.c    acquire(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L361'>wait_lock</a>         361 kernel/proc.c    release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L377'>wait_lock</a>         377 kernel/proc.c    acquire(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L394'>wait_lock</a>         394 kernel/proc.c              release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L399'>wait_lock</a>         399 kernel/proc.c            release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L408'>wait_lock</a>         408 kernel/proc.c        release(&amp;wait_lock);</span>
+<span class='curline'><a href='../S/65.html#L413'>wait_lock</a>         413 kernel/proc.c      sleep(p, &amp;wait_lock);  //DOC: wait-sleep</span>
 </pre>
 </body>
 </html>

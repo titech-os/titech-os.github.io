@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>wait_lock</title>
+<title>wait</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,17 +9,70 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L27'>wait_lock</a>          27 kernel/proc.c  struct spinlock wait_lock;</span>
-<span class='curline'><a href='../S/65.html#L53'>wait_lock</a>          53 kernel/proc.c    initlock(&amp;wait_lock, "wait_lock");</span>
-<span class='curline'><a href='../S/65.html#L294'>wait_lock</a>         294 kernel/proc.c    acquire(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L296'>wait_lock</a>         296 kernel/proc.c    release(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L345'>wait_lock</a>         345 kernel/proc.c    acquire(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L358'>wait_lock</a>         358 kernel/proc.c    release(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L374'>wait_lock</a>         374 kernel/proc.c    acquire(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L391'>wait_lock</a>         391 kernel/proc.c              release(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L396'>wait_lock</a>         396 kernel/proc.c            release(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L405'>wait_lock</a>         405 kernel/proc.c        release(&amp;wait_lock);</span>
-<span class='curline'><a href='../S/65.html#L410'>wait_lock</a>         410 kernel/proc.c      sleep(p, &amp;wait_lock);  //DOC: wait-sleep</span>
+<span class='curline'><a href='../S/5.html#L37'>wait</a>               37 user/forktest.c     if(wait(0) &lt; 0){</span>
+<span class='curline'><a href='../S/5.html#L43'>wait</a>               43 user/forktest.c   if(wait(0) != -1){</span>
+<span class='curline'><a href='../S/13.html#L115'>wait</a>              115 user/grind.c         wait(0);</span>
+<span class='curline'><a href='../S/13.html#L126'>wait</a>              126 user/grind.c         wait(0);</span>
+<span class='curline'><a href='../S/13.html#L146'>wait</a>              146 user/grind.c         wait(0);</span>
+<span class='curline'><a href='../S/13.html#L156'>wait</a>              156 user/grind.c         wait(0);</span>
+<span class='curline'><a href='../S/13.html#L179'>wait</a>              179 user/grind.c         wait(0);</span>
+<span class='curline'><a href='../S/13.html#L194'>wait</a>              194 user/grind.c         wait(0);</span>
+<span class='curline'><a href='../S/13.html#L286'>wait</a>              286 user/grind.c         wait(&amp;st1);</span>
+<span class='curline'><a href='../S/13.html#L287'>wait</a>              287 user/grind.c         wait(&amp;st2);</span>
+<span class='curline'><a href='../S/13.html#L325'>wait</a>              325 user/grind.c     wait(&amp;st1);</span>
+<span class='curline'><a href='../S/13.html#L331'>wait</a>              331 user/grind.c     wait(&amp;st2);</span>
+<span class='curline'><a href='../S/13.html#L346'>wait</a>              346 user/grind.c         wait(0);</span>
+<span class='curline'><a href='../S/7.html#L42'>wait</a>               42 user/init.c          wpid = wait((int *) 0);</span>
+<span class='curline'><a href='../S/24.html#L43'>wait</a>               43 user/logstress.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/18.html#L97'>wait</a>               97 user/sh.c          wait(0);</span>
+<span class='curline'><a href='../S/18.html#L121'>wait</a>              121 user/sh.c          wait(0);</span>
+<span class='curline'><a href='../S/18.html#L122'>wait</a>              122 user/sh.c          wait(0);</span>
+<span class='curline'><a href='../S/18.html#L174'>wait</a>              174 user/sh.c            wait(0);</span>
+<span class='curline'><a href='../S/25.html#L46'>wait</a>               46 user/stressfs.c   wait(0);</span>
+<span class='curline'><a href='../S/16.html#L8'>wait</a>                8 user/user.h    int wait(int*);</span>
+<span class='curline'><a href='../S/27.html#L193'>wait</a>              193 user/usertests.c   wait(&amp;st);</span>
+<span class='curline'><a href='../S/27.html#L420'>wait</a>              420 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L474'>wait</a>              474 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L516'>wait</a>              516 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L711'>wait</a>              711 user/usertests.c   if (wait(&amp;xstatus) != pid) {</span>
+<span class='curline'><a href='../S/27.html#L783'>wait</a>              783 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L812'>wait</a>              812 user/usertests.c     wait(&amp;xst);</span>
+<span class='curline'><a href='../S/27.html#L872'>wait</a>              872 user/usertests.c   wait(0);</span>
+<span class='curline'><a href='../S/27.html#L873'>wait</a>              873 user/usertests.c   wait(0);</span>
+<span class='curline'><a href='../S/27.html#L874'>wait</a>              874 user/usertests.c   wait(0);</span>
+<span class='curline'><a href='../S/27.html#L891'>wait</a>              891 user/usertests.c       if(wait(&amp;xstate) != pid){</span>
+<span class='curline'><a href='../S/27.html#L919'>wait</a>              919 user/usertests.c       if(wait(0) != pid){</span>
+<span class='curline'><a href='../S/27.html#L956'>wait</a>              956 user/usertests.c         wait(0);</span>
+<span class='curline'><a href='../S/27.html#L957'>wait</a>              957 user/usertests.c         wait(0);</span>
+<span class='curline'><a href='../S/27.html#L984'>wait</a>              984 user/usertests.c         wait(0);</span>
+<span class='curline'><a href='../S/27.html#L992'>wait</a>              992 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L1026'>wait</a>             1026 user/usertests.c   wait(0);</span>
+<span class='curline'><a href='../S/27.html#L1049'>wait</a>             1049 user/usertests.c     wait(0);</span>
+<span class='curline'><a href='../S/27.html#L1082'>wait</a>             1082 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L1121'>wait</a>             1121 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L1191'>wait</a>             1191 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L1258'>wait</a>             1258 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L1429'>wait</a>             1429 user/usertests.c       wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L1488'>wait</a>             1488 user/usertests.c       wait(0);</span>
+<span class='curline'><a href='../S/27.html#L1519'>wait</a>             1519 user/usertests.c     wait(0);</span>
+<span class='curline'><a href='../S/27.html#L1987'>wait</a>             1987 user/usertests.c     if(wait(0) &lt; 0){</span>
+<span class='curline'><a href='../S/27.html#L1993'>wait</a>             1993 user/usertests.c   if(wait(0) != -1){</span>
+<span class='curline'><a href='../S/27.html#L2029'>wait</a>             2029 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2059'>wait</a>             2059 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2136'>wait</a>             2136 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2160'>wait</a>             2160 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2212'>wait</a>             2212 user/usertests.c     wait(0);</span>
+<span class='curline'><a href='../S/27.html#L2234'>wait</a>             2234 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2329'>wait</a>             2329 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2424'>wait</a>             2424 user/usertests.c   wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2452'>wait</a>             2452 user/usertests.c     wait(&amp;xstatus);</span>
+<span class='curline'><a href='../S/27.html#L2496'>wait</a>             2496 user/usertests.c   wait(0);</span>
+<span class='curline'><a href='../S/27.html#L2511'>wait</a>             2511 user/usertests.c   wait(0);</span>
+<span class='curline'><a href='../S/27.html#L2529'>wait</a>             2529 user/usertests.c   wait(0);</span>
+<span class='curline'><a href='../S/27.html#L2647'>wait</a>             2647 user/usertests.c       wait(&amp;status);</span>
+<span class='curline'><a href='../S/27.html#L2914'>wait</a>             2914 user/usertests.c     wait(&amp;st);</span>
+<span class='curline'><a href='../S/27.html#L2988'>wait</a>             2988 user/usertests.c       wait((int*)0);</span>
+<span class='curline'><a href='../S/27.html#L3138'>wait</a>             3138 user/usertests.c     wait(&amp;xstatus);</span>
 </pre>
 </body>
 </html>

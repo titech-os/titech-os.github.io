@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>p1</title>
+<title>p</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,10 +9,336 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/20.html#L134'>p1</a>                134 user/ulib.c      const char *p1 = s1, *p2 = s2;</span>
-<span class='curline'><a href='../S/20.html#L136'>p1</a>                136 user/ulib.c        if (*p1 != *p2) {</span>
-<span class='curline'><a href='../S/20.html#L137'>p1</a>                137 user/ulib.c          return *p1 - *p2;</span>
-<span class='curline'><a href='../S/20.html#L139'>p1</a>                139 user/ulib.c        p1++;</span>
+<span class='curline'><a href='../S/39.html#L36'>p</a>                  36 kernel/exec.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/39.html#L55'>p</a>                  55 kernel/exec.c    if((pagetable = proc_pagetable(p)) == 0)</span>
+<span class='curline'><a href='../S/39.html#L81'>p</a>                  81 kernel/exec.c    p = myproc();</span>
+<span class='curline'><a href='../S/39.html#L82'>p</a>                  82 kernel/exec.c    uint64 oldsz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/39.html#L122'>p</a>                 122 kernel/exec.c    p-&gt;trapframe-&gt;a1 = sp;</span>
+<span class='curline'><a href='../S/39.html#L128'>p</a>                 128 kernel/exec.c    safestrcpy(p-&gt;name, last, sizeof(p-&gt;name));</span>
+<span class='curline'><a href='../S/39.html#L131'>p</a>                 131 kernel/exec.c    oldpagetable = p-&gt;pagetable;</span>
+<span class='curline'><a href='../S/39.html#L132'>p</a>                 132 kernel/exec.c    p-&gt;pagetable = pagetable;</span>
+<span class='curline'><a href='../S/39.html#L133'>p</a>                 133 kernel/exec.c    p-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/39.html#L134'>p</a>                 134 kernel/exec.c    p-&gt;trapframe-&gt;epc = elf.entry;  // initial program counter = ulib.c:start()</span>
+<span class='curline'><a href='../S/39.html#L135'>p</a>                 135 kernel/exec.c    p-&gt;trapframe-&gt;sp = sp; // initial stack pointer</span>
+<span class='curline'><a href='../S/69.html#L90'>p</a>                  90 kernel/file.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/69.html#L97'>p</a>                  97 kernel/file.c      if(copyout(p-&gt;pagetable, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
+<span class='curline'><a href='../S/72.html#L36'>p</a>                  36 kernel/kalloc.c   char *p;</span>
+<span class='curline'><a href='../S/72.html#L37'>p</a>                  37 kernel/kalloc.c   p = (char*)PGROUNDUP((uint64)pa_start);</span>
+<span class='curline'><a href='../S/72.html#L38'>p</a>                  38 kernel/kalloc.c   for(; p + PGSIZE &lt;= (char*)pa_end; p += PGSIZE)</span>
+<span class='curline'><a href='../S/72.html#L39'>p</a>                  39 kernel/kalloc.c     kfree(p);</span>
+<span class='curline'><a href='../S/51.html#L48'>p</a>                  48 kernel/memlayout.h #define KSTACK(p) (TRAMPOLINE - ((p)+1)* 2*PGSIZE)</span>
+<span class='curline'><a href='../S/65.html#L19'>p</a>                  19 kernel/proc.c  static void freeproc(struct proc *p);</span>
+<span class='curline'><a href='../S/65.html#L35'>p</a>                  35 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L37'>p</a>                  37 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/65.html#L41'>p</a>                  41 kernel/proc.c      uint64 va = KSTACK((int) (p - proc));</span>
+<span class='curline'><a href='../S/65.html#L50'>p</a>                  50 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L54'>p</a>                  54 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/65.html#L55'>p</a>                  55 kernel/proc.c        initlock(&amp;p-&gt;lock, "proc");</span>
+<span class='curline'><a href='../S/65.html#L56'>p</a>                  56 kernel/proc.c        p-&gt;state = UNUSED;</span>
+<span class='curline'><a href='../S/65.html#L57'>p</a>                  57 kernel/proc.c        p-&gt;kstack = KSTACK((int) (p - proc));</span>
+<span class='curline'><a href='../S/65.html#L87'>p</a>                  87 kernel/proc.c    struct proc *p = c-&gt;proc;</span>
+<span class='curline'><a href='../S/65.html#L89'>p</a>                  89 kernel/proc.c    return p;</span>
+<span class='curline'><a href='../S/65.html#L112'>p</a>                 112 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L114'>p</a>                 114 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/65.html#L115'>p</a>                 115 kernel/proc.c      acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L116'>p</a>                 116 kernel/proc.c      if(p-&gt;state == UNUSED) {</span>
+<span class='curline'><a href='../S/65.html#L119'>p</a>                 119 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L125'>p</a>                 125 kernel/proc.c    p-&gt;pid = allocpid();</span>
+<span class='curline'><a href='../S/65.html#L126'>p</a>                 126 kernel/proc.c    p-&gt;state = USED;</span>
+<span class='curline'><a href='../S/65.html#L129'>p</a>                 129 kernel/proc.c    if((p-&gt;trapframe = (struct trapframe *)kalloc()) == 0){</span>
+<span class='curline'><a href='../S/65.html#L130'>p</a>                 130 kernel/proc.c      freeproc(p);</span>
+<span class='curline'><a href='../S/65.html#L131'>p</a>                 131 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L136'>p</a>                 136 kernel/proc.c    p-&gt;pagetable = proc_pagetable(p);</span>
+<span class='curline'><a href='../S/65.html#L137'>p</a>                 137 kernel/proc.c    if(p-&gt;pagetable == 0){</span>
+<span class='curline'><a href='../S/65.html#L138'>p</a>                 138 kernel/proc.c      freeproc(p);</span>
+<span class='curline'><a href='../S/65.html#L139'>p</a>                 139 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L145'>p</a>                 145 kernel/proc.c    memset(&amp;p-&gt;context, 0, sizeof(p-&gt;context));</span>
+<span class='curline'><a href='../S/65.html#L146'>p</a>                 146 kernel/proc.c    p-&gt;context.ra = (uint64)forkret;</span>
+<span class='curline'><a href='../S/65.html#L147'>p</a>                 147 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
+<span class='curline'><a href='../S/65.html#L149'>p</a>                 149 kernel/proc.c    return p;</span>
+<span class='curline'><a href='../S/65.html#L156'>p</a>                 156 kernel/proc.c  freeproc(struct proc *p)</span>
+<span class='curline'><a href='../S/65.html#L158'>p</a>                 158 kernel/proc.c    if(p-&gt;trapframe)</span>
+<span class='curline'><a href='../S/65.html#L159'>p</a>                 159 kernel/proc.c      kfree((void*)p-&gt;trapframe);</span>
+<span class='curline'><a href='../S/65.html#L160'>p</a>                 160 kernel/proc.c    p-&gt;trapframe = 0;</span>
+<span class='curline'><a href='../S/65.html#L161'>p</a>                 161 kernel/proc.c    if(p-&gt;pagetable)</span>
+<span class='curline'><a href='../S/65.html#L162'>p</a>                 162 kernel/proc.c      proc_freepagetable(p-&gt;pagetable, p-&gt;sz);</span>
+<span class='curline'><a href='../S/65.html#L163'>p</a>                 163 kernel/proc.c    p-&gt;pagetable = 0;</span>
+<span class='curline'><a href='../S/65.html#L164'>p</a>                 164 kernel/proc.c    p-&gt;sz = 0;</span>
+<span class='curline'><a href='../S/65.html#L165'>p</a>                 165 kernel/proc.c    p-&gt;pid = 0;</span>
+<span class='curline'><a href='../S/65.html#L166'>p</a>                 166 kernel/proc.c    p-&gt;parent = 0;</span>
+<span class='curline'><a href='../S/65.html#L167'>p</a>                 167 kernel/proc.c    p-&gt;name[0] = 0;</span>
+<span class='curline'><a href='../S/65.html#L168'>p</a>                 168 kernel/proc.c    p-&gt;chan = 0;</span>
+<span class='curline'><a href='../S/65.html#L169'>p</a>                 169 kernel/proc.c    p-&gt;killed = 0;</span>
+<span class='curline'><a href='../S/65.html#L170'>p</a>                 170 kernel/proc.c    p-&gt;xstate = 0;</span>
+<span class='curline'><a href='../S/65.html#L171'>p</a>                 171 kernel/proc.c    p-&gt;state = UNUSED;</span>
+<span class='curline'><a href='../S/65.html#L177'>p</a>                 177 kernel/proc.c  proc_pagetable(struct proc *p)</span>
+<span class='curline'><a href='../S/65.html#L199'>p</a>                 199 kernel/proc.c                (uint64)(p-&gt;trapframe), PTE_R | PTE_W) &lt; 0){</span>
+<span class='curline'><a href='../S/65.html#L222'>p</a>                 222 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L224'>p</a>                 224 kernel/proc.c    p = allocproc();</span>
+<span class='curline'><a href='../S/65.html#L225'>p</a>                 225 kernel/proc.c    initproc = p;</span>
+<span class='curline'><a href='../S/65.html#L227'>p</a>                 227 kernel/proc.c    p-&gt;cwd = namei("/");</span>
+<span class='curline'><a href='../S/65.html#L229'>p</a>                 229 kernel/proc.c    p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L231'>p</a>                 231 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L240'>p</a>                 240 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L242'>p</a>                 242 kernel/proc.c    sz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/65.html#L247'>p</a>                 247 kernel/proc.c      if((sz = uvmalloc(p-&gt;pagetable, sz, sz + n, PTE_W)) == 0) {</span>
+<span class='curline'><a href='../S/65.html#L251'>p</a>                 251 kernel/proc.c      sz = uvmdealloc(p-&gt;pagetable, sz, sz + n);</span>
+<span class='curline'><a href='../S/65.html#L253'>p</a>                 253 kernel/proc.c    p-&gt;sz = sz;</span>
+<span class='curline'><a href='../S/65.html#L264'>p</a>                 264 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L272'>p</a>                 272 kernel/proc.c    if(uvmcopy(p-&gt;pagetable, np-&gt;pagetable, p-&gt;sz) &lt; 0){</span>
+<span class='curline'><a href='../S/65.html#L277'>p</a>                 277 kernel/proc.c    np-&gt;sz = p-&gt;sz;</span>
+<span class='curline'><a href='../S/65.html#L280'>p</a>                 280 kernel/proc.c    *(np-&gt;trapframe) = *(p-&gt;trapframe);</span>
+<span class='curline'><a href='../S/65.html#L287'>p</a>                 287 kernel/proc.c      if(p-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/65.html#L288'>p</a>                 288 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/65.html#L289'>p</a>                 289 kernel/proc.c    np-&gt;cwd = idup(p-&gt;cwd);</span>
+<span class='curline'><a href='../S/65.html#L291'>p</a>                 291 kernel/proc.c    safestrcpy(np-&gt;name, p-&gt;name, sizeof(p-&gt;name));</span>
+<span class='curline'><a href='../S/65.html#L298'>p</a>                 298 kernel/proc.c    np-&gt;parent = p;</span>
+<span class='curline'><a href='../S/65.html#L311'>p</a>                 311 kernel/proc.c  reparent(struct proc *p)</span>
+<span class='curline'><a href='../S/65.html#L316'>p</a>                 316 kernel/proc.c      if(pp-&gt;parent == p){</span>
+<span class='curline'><a href='../S/65.html#L329'>p</a>                 329 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L331'>p</a>                 331 kernel/proc.c    if(p == initproc)</span>
+<span class='curline'><a href='../S/65.html#L336'>p</a>                 336 kernel/proc.c      if(p-&gt;ofile[fd]){</span>
+<span class='curline'><a href='../S/65.html#L337'>p</a>                 337 kernel/proc.c        struct file *f = p-&gt;ofile[fd];</span>
+<span class='curline'><a href='../S/65.html#L339'>p</a>                 339 kernel/proc.c        p-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/65.html#L344'>p</a>                 344 kernel/proc.c    iput(p-&gt;cwd);</span>
+<span class='curline'><a href='../S/65.html#L346'>p</a>                 346 kernel/proc.c    p-&gt;cwd = 0;</span>
+<span class='curline'><a href='../S/65.html#L351'>p</a>                 351 kernel/proc.c    reparent(p);</span>
+<span class='curline'><a href='../S/65.html#L354'>p</a>                 354 kernel/proc.c    wakeup(p-&gt;parent);</span>
+<span class='curline'><a href='../S/65.html#L356'>p</a>                 356 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L358'>p</a>                 358 kernel/proc.c    p-&gt;xstate = status;</span>
+<span class='curline'><a href='../S/65.html#L359'>p</a>                 359 kernel/proc.c    p-&gt;state = ZOMBIE;</span>
+<span class='curline'><a href='../S/65.html#L375'>p</a>                 375 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L383'>p</a>                 383 kernel/proc.c        if(pp-&gt;parent == p){</span>
+<span class='curline'><a href='../S/65.html#L391'>p</a>                 391 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;pp-&gt;xstate,</span>
+<span class='curline'><a href='../S/65.html#L407'>p</a>                 407 kernel/proc.c      if(!havekids || killed(p)){</span>
+<span class='curline'><a href='../S/65.html#L413'>p</a>                 413 kernel/proc.c      sleep(p, &amp;wait_lock);  //DOC: wait-sleep</span>
+<span class='curline'><a href='../S/65.html#L427'>p</a>                 427 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L441'>p</a>                 441 kernel/proc.c      for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/65.html#L442'>p</a>                 442 kernel/proc.c        acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L443'>p</a>                 443 kernel/proc.c        if(p-&gt;state == RUNNABLE) {</span>
+<span class='curline'><a href='../S/65.html#L447'>p</a>                 447 kernel/proc.c          p-&gt;state = RUNNING;</span>
+<span class='curline'><a href='../S/65.html#L448'>p</a>                 448 kernel/proc.c          c-&gt;proc = p;</span>
+<span class='curline'><a href='../S/65.html#L449'>p</a>                 449 kernel/proc.c          swtch(&amp;c-&gt;context, &amp;p-&gt;context);</span>
+<span class='curline'><a href='../S/65.html#L456'>p</a>                 456 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L476'>p</a>                 476 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L478'>p</a>                 478 kernel/proc.c    if(!holding(&amp;p-&gt;lock))</span>
+<span class='curline'><a href='../S/65.html#L482'>p</a>                 482 kernel/proc.c    if(p-&gt;state == RUNNING)</span>
+<span class='curline'><a href='../S/65.html#L488'>p</a>                 488 kernel/proc.c    swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;context);</span>
+<span class='curline'><a href='../S/65.html#L496'>p</a>                 496 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L497'>p</a>                 497 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L498'>p</a>                 498 kernel/proc.c    p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L500'>p</a>                 500 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L510'>p</a>                 510 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L513'>p</a>                 513 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L527'>p</a>                 527 kernel/proc.c      p-&gt;trapframe-&gt;a0 = kexec("/init", (char *[]){ "/init", 0 });</span>
+<span class='curline'><a href='../S/65.html#L528'>p</a>                 528 kernel/proc.c      if (p-&gt;trapframe-&gt;a0 == -1) {</span>
+<span class='curline'><a href='../S/65.html#L535'>p</a>                 535 kernel/proc.c    uint64 satp = MAKE_SATP(p-&gt;pagetable);</span>
+<span class='curline'><a href='../S/65.html#L545'>p</a>                 545 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L554'>p</a>                 554 kernel/proc.c    acquire(&amp;p-&gt;lock);  //DOC: sleeplock1</span>
+<span class='curline'><a href='../S/65.html#L558'>p</a>                 558 kernel/proc.c    p-&gt;chan = chan;</span>
+<span class='curline'><a href='../S/65.html#L559'>p</a>                 559 kernel/proc.c    p-&gt;state = SLEEPING;</span>
+<span class='curline'><a href='../S/65.html#L564'>p</a>                 564 kernel/proc.c    p-&gt;chan = 0;</span>
+<span class='curline'><a href='../S/65.html#L567'>p</a>                 567 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L576'>p</a>                 576 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L578'>p</a>                 578 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++) {</span>
+<span class='curline'><a href='../S/65.html#L579'>p</a>                 579 kernel/proc.c      if(p != myproc()){</span>
+<span class='curline'><a href='../S/65.html#L580'>p</a>                 580 kernel/proc.c        acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L581'>p</a>                 581 kernel/proc.c        if(p-&gt;state == SLEEPING &amp;&amp; p-&gt;chan == chan) {</span>
+<span class='curline'><a href='../S/65.html#L582'>p</a>                 582 kernel/proc.c          p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L584'>p</a>                 584 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L595'>p</a>                 595 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L597'>p</a>                 597 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/65.html#L598'>p</a>                 598 kernel/proc.c      acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L599'>p</a>                 599 kernel/proc.c      if(p-&gt;pid == pid){</span>
+<span class='curline'><a href='../S/65.html#L600'>p</a>                 600 kernel/proc.c        p-&gt;killed = 1;</span>
+<span class='curline'><a href='../S/65.html#L601'>p</a>                 601 kernel/proc.c        if(p-&gt;state == SLEEPING){</span>
+<span class='curline'><a href='../S/65.html#L603'>p</a>                 603 kernel/proc.c          p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L605'>p</a>                 605 kernel/proc.c        release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L608'>p</a>                 608 kernel/proc.c      release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L614'>p</a>                 614 kernel/proc.c  setkilled(struct proc *p)</span>
+<span class='curline'><a href='../S/65.html#L616'>p</a>                 616 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L617'>p</a>                 617 kernel/proc.c    p-&gt;killed = 1;</span>
+<span class='curline'><a href='../S/65.html#L618'>p</a>                 618 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L622'>p</a>                 622 kernel/proc.c  killed(struct proc *p)</span>
+<span class='curline'><a href='../S/65.html#L626'>p</a>                 626 kernel/proc.c    acquire(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L627'>p</a>                 627 kernel/proc.c    k = p-&gt;killed;</span>
+<span class='curline'><a href='../S/65.html#L628'>p</a>                 628 kernel/proc.c    release(&amp;p-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L638'>p</a>                 638 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L640'>p</a>                 640 kernel/proc.c      return copyout(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/65.html#L653'>p</a>                 653 kernel/proc.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/65.html#L655'>p</a>                 655 kernel/proc.c      return copyin(p-&gt;pagetable, dst, src, len);</span>
+<span class='curline'><a href='../S/65.html#L676'>p</a>                 676 kernel/proc.c    struct proc *p;</span>
+<span class='curline'><a href='../S/65.html#L680'>p</a>                 680 kernel/proc.c    for(p = proc; p &lt; &amp;proc[NPROC]; p++){</span>
+<span class='curline'><a href='../S/65.html#L681'>p</a>                 681 kernel/proc.c      if(p-&gt;state == UNUSED)</span>
+<span class='curline'><a href='../S/65.html#L683'>p</a>                 683 kernel/proc.c      if(p-&gt;state &gt;= 0 &amp;&amp; p-&gt;state &lt; NELEM(states) &amp;&amp; states[p-&gt;state])</span>
+<span class='curline'><a href='../S/65.html#L684'>p</a>                 684 kernel/proc.c        state = states[p-&gt;state];</span>
+<span class='curline'><a href='../S/65.html#L687'>p</a>                 687 kernel/proc.c      printf("%d %s %s", p-&gt;pid, state, p-&gt;name);</span>
+<span class='curline'><a href='../S/48.html#L61'>p</a>                  61 kernel/string.c strncmp(const char *p, const char *q, uint n)</span>
+<span class='curline'><a href='../S/48.html#L63'>p</a>                  63 kernel/string.c   while(n &gt; 0 &amp;&amp; *p &amp;&amp; *p == *q)</span>
+<span class='curline'><a href='../S/48.html#L64'>p</a>                  64 kernel/string.c     n--, p++, q++;</span>
+<span class='curline'><a href='../S/48.html#L67'>p</a>                  67 kernel/string.c   return (uchar)*p - (uchar)*q;</span>
+<span class='curline'><a href='../S/53.html#L14'>p</a>                  14 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/53.html#L15'>p</a>                  15 kernel/syscall.c   if(addr &gt;= p-&gt;sz || addr+sizeof(uint64) &gt; p-&gt;sz) // both tests needed, in case of overflow</span>
+<span class='curline'><a href='../S/53.html#L17'>p</a>                  17 kernel/syscall.c   if(copyin(p-&gt;pagetable, (char *)ip, addr, sizeof(*ip)) != 0)</span>
+<span class='curline'><a href='../S/53.html#L27'>p</a>                  27 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/53.html#L28'>p</a>                  28 kernel/syscall.c   if(copyinstr(p-&gt;pagetable, buf, addr, max) &lt; 0)</span>
+<span class='curline'><a href='../S/53.html#L36'>p</a>                  36 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/53.html#L39'>p</a>                  39 kernel/syscall.c     return p-&gt;trapframe-&gt;a0;</span>
+<span class='curline'><a href='../S/53.html#L41'>p</a>                  41 kernel/syscall.c     return p-&gt;trapframe-&gt;a1;</span>
+<span class='curline'><a href='../S/53.html#L43'>p</a>                  43 kernel/syscall.c     return p-&gt;trapframe-&gt;a2;</span>
+<span class='curline'><a href='../S/53.html#L45'>p</a>                  45 kernel/syscall.c     return p-&gt;trapframe-&gt;a3;</span>
+<span class='curline'><a href='../S/53.html#L47'>p</a>                  47 kernel/syscall.c     return p-&gt;trapframe-&gt;a4;</span>
+<span class='curline'><a href='../S/53.html#L49'>p</a>                  49 kernel/syscall.c     return p-&gt;trapframe-&gt;a5;</span>
+<span class='curline'><a href='../S/53.html#L135'>p</a>                 135 kernel/syscall.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/53.html#L137'>p</a>                 137 kernel/syscall.c   num = p-&gt;trapframe-&gt;a7;</span>
+<span class='curline'><a href='../S/53.html#L141'>p</a>                 141 kernel/syscall.c     p-&gt;trapframe-&gt;a0 = syscalls[num]();</span>
+<span class='curline'><a href='../S/53.html#L144'>p</a>                 144 kernel/syscall.c             p-&gt;pid, p-&gt;name, num);</span>
+<span class='curline'><a href='../S/53.html#L145'>p</a>                 145 kernel/syscall.c     p-&gt;trapframe-&gt;a0 = -1;</span>
+<span class='curline'><a href='../S/46.html#L43'>p</a>                  43 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/46.html#L46'>p</a>                  46 kernel/sysfile.c     if(p-&gt;ofile[fd] == 0){</span>
+<span class='curline'><a href='../S/46.html#L47'>p</a>                  47 kernel/sysfile.c       p-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/46.html#L73'>p</a>                  73 kernel/sysfile.c   uint64 p;</span>
+<span class='curline'><a href='../S/46.html#L75'>p</a>                  75 kernel/sysfile.c   argaddr(1, &amp;p);</span>
+<span class='curline'><a href='../S/46.html#L79'>p</a>                  79 kernel/sysfile.c   return fileread(f, p, n);</span>
+<span class='curline'><a href='../S/46.html#L87'>p</a>                  87 kernel/sysfile.c   uint64 p;</span>
+<span class='curline'><a href='../S/46.html#L89'>p</a>                  89 kernel/sysfile.c   argaddr(1, &amp;p);</span>
+<span class='curline'><a href='../S/46.html#L94'>p</a>                  94 kernel/sysfile.c   return filewrite(f, p, n);</span>
+<span class='curline'><a href='../S/46.html#L414'>p</a>                 414 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/46.html#L428'>p</a>                 428 kernel/sysfile.c   iput(p-&gt;cwd);</span>
+<span class='curline'><a href='../S/46.html#L430'>p</a>                 430 kernel/sysfile.c   p-&gt;cwd = ip;</span>
+<span class='curline'><a href='../S/46.html#L483'>p</a>                 483 kernel/sysfile.c   struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/46.html#L491'>p</a>                 491 kernel/sysfile.c       p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/46.html#L496'>p</a>                 496 kernel/sysfile.c   if(copyout(p-&gt;pagetable, fdarray, (char*)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
+<span class='curline'><a href='../S/46.html#L497'>p</a>                 497 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
+<span class='curline'><a href='../S/46.html#L498'>p</a>                 498 kernel/sysfile.c     p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/46.html#L499'>p</a>                 499 kernel/sysfile.c     p-&gt;ofile[fd1] = 0;</span>
+<span class='curline'><a href='../S/36.html#L34'>p</a>                  34 kernel/sysproc.c   uint64 p;</span>
+<span class='curline'><a href='../S/36.html#L35'>p</a>                  35 kernel/sysproc.c   argaddr(0, &amp;p);</span>
+<span class='curline'><a href='../S/36.html#L36'>p</a>                  36 kernel/sysproc.c   return kwait(p);</span>
+<span class='curline'><a href='../S/58.html#L49'>p</a>                  49 kernel/trap.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/58.html#L52'>p</a>                  52 kernel/trap.c    p-&gt;trapframe-&gt;epc = r_sepc();</span>
+<span class='curline'><a href='../S/58.html#L57'>p</a>                  57 kernel/trap.c      if(killed(p))</span>
+<span class='curline'><a href='../S/58.html#L62'>p</a>                  62 kernel/trap.c      p-&gt;trapframe-&gt;epc += 4;</span>
+<span class='curline'><a href='../S/58.html#L72'>p</a>                  72 kernel/trap.c              vmfault(p-&gt;pagetable, r_stval(), (r_scause() == 13)? 1 : 0) != 0) {</span>
+<span class='curline'><a href='../S/58.html#L75'>p</a>                  75 kernel/trap.c      printf("usertrap(): unexpected scause 0x%lx pid=%d\n", r_scause(), p-&gt;pid);</span>
+<span class='curline'><a href='../S/58.html#L77'>p</a>                  77 kernel/trap.c      setkilled(p);</span>
+<span class='curline'><a href='../S/58.html#L80'>p</a>                  80 kernel/trap.c    if(killed(p))</span>
+<span class='curline'><a href='../S/58.html#L90'>p</a>                  90 kernel/trap.c    uint64 satp = MAKE_SATP(p-&gt;pagetable);</span>
+<span class='curline'><a href='../S/58.html#L102'>p</a>                 102 kernel/trap.c    struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/58.html#L115'>p</a>                 115 kernel/trap.c    p-&gt;trapframe-&gt;kernel_satp = r_satp();         // kernel page table</span>
+<span class='curline'><a href='../S/58.html#L116'>p</a>                 116 kernel/trap.c    p-&gt;trapframe-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
+<span class='curline'><a href='../S/58.html#L117'>p</a>                 117 kernel/trap.c    p-&gt;trapframe-&gt;kernel_trap = (uint64)usertrap;</span>
+<span class='curline'><a href='../S/58.html#L118'>p</a>                 118 kernel/trap.c    p-&gt;trapframe-&gt;kernel_hartid = r_tp();         // hartid for cpuid()</span>
+<span class='curline'><a href='../S/58.html#L130'>p</a>                 130 kernel/trap.c    w_sepc(p-&gt;trapframe-&gt;epc);</span>
+<span class='curline'><a href='../S/41.html#L424'>p</a>                 424 kernel/vm.c        char *p = (char *) (pa0 + (srcva - va0));</span>
+<span class='curline'><a href='../S/41.html#L426'>p</a>                 426 kernel/vm.c          if(*p == '\0'){</span>
+<span class='curline'><a href='../S/41.html#L431'>p</a>                 431 kernel/vm.c            *dst = *p;</span>
+<span class='curline'><a href='../S/41.html#L435'>p</a>                 435 kernel/vm.c          p++;</span>
+<span class='curline'><a href='../S/41.html#L456'>p</a>                 456 kernel/vm.c      struct proc *p = myproc();</span>
+<span class='curline'><a href='../S/41.html#L458'>p</a>                 458 kernel/vm.c      if (va &gt;= p-&gt;sz)</span>
+<span class='curline'><a href='../S/41.html#L468'>p</a>                 468 kernel/vm.c      if (mappages(p-&gt;pagetable, va, PGSIZE, mem, PTE_W|PTE_U|PTE_R) != 0) {</span>
+<span class='curline'><a href='../S/3.html#L42'>p</a>                  42 mkfs/mkfs.c    void iappend(uint inum, void *p, int n);</span>
+<span class='curline'><a href='../S/3.html#L257'>p</a>                 257 mkfs/mkfs.c      char *p = (char*)xp;</span>
+<span class='curline'><a href='../S/3.html#L288'>p</a>                 288 mkfs/mkfs.c        bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
+<span class='curline'><a href='../S/3.html#L292'>p</a>                 292 mkfs/mkfs.c        p += n1;</span>
+<span class='curline'><a href='../S/23.html#L15'>p</a>                  15 user/grep.c      char *p, *q;</span>
+<span class='curline'><a href='../S/23.html#L21'>p</a>                  21 user/grep.c        p = buf;</span>
+<span class='curline'><a href='../S/23.html#L22'>p</a>                  22 user/grep.c        while((q = strchr(p, '\n')) != 0){</span>
+<span class='curline'><a href='../S/23.html#L24'>p</a>                  24 user/grep.c          if(match(pattern, p)){</span>
+<span class='curline'><a href='../S/23.html#L26'>p</a>                  26 user/grep.c            write(1, p, q+1 - p);</span>
+<span class='curline'><a href='../S/23.html#L28'>p</a>                  28 user/grep.c          p = q+1;</span>
+<span class='curline'><a href='../S/23.html#L31'>p</a>                  31 user/grep.c          m -= p - buf;</span>
+<span class='curline'><a href='../S/23.html#L32'>p</a>                  32 user/grep.c          memmove(buf, p, m);</span>
+<span class='curline'><a href='../S/6.html#L11'>p</a>                  11 user/ls.c        char *p;</span>
+<span class='curline'><a href='../S/6.html#L14'>p</a>                  14 user/ls.c        for(p=path+strlen(path); p &gt;= path &amp;&amp; *p != '/'; p--)</span>
+<span class='curline'><a href='../S/6.html#L16'>p</a>                  16 user/ls.c        p++;</span>
+<span class='curline'><a href='../S/6.html#L19'>p</a>                  19 user/ls.c        if(strlen(p) &gt;= DIRSIZ)</span>
+<span class='curline'><a href='../S/6.html#L20'>p</a>                  20 user/ls.c          return p;</span>
+<span class='curline'><a href='../S/6.html#L21'>p</a>                  21 user/ls.c        memmove(buf, p, strlen(p));</span>
+<span class='curline'><a href='../S/6.html#L22'>p</a>                  22 user/ls.c        memset(buf+strlen(p), ' ', DIRSIZ-strlen(p));</span>
+<span class='curline'><a href='../S/6.html#L30'>p</a>                  30 user/ls.c        char buf[512], *p;</span>
+<span class='curline'><a href='../S/6.html#L58'>p</a>                  58 user/ls.c          p = buf+strlen(buf);</span>
+<span class='curline'><a href='../S/6.html#L59'>p</a>                  59 user/ls.c          *p++ = '/';</span>
+<span class='curline'><a href='../S/6.html#L63'>p</a>                  63 user/ls.c            memmove(p, de.name, DIRSIZ);</span>
+<span class='curline'><a href='../S/6.html#L64'>p</a>                  64 user/ls.c            p[DIRSIZ] = 0;</span>
+<span class='curline'><a href='../S/18.html#L61'>p</a>                  61 user/sh.c        int p[2];</span>
+<span class='curline'><a href='../S/18.html#L103'>p</a>                 103 user/sh.c          if(pipe(p) &lt; 0)</span>
+<span class='curline'><a href='../S/18.html#L107'>p</a>                 107 user/sh.c            dup(p[1]);</span>
+<span class='curline'><a href='../S/18.html#L108'>p</a>                 108 user/sh.c            close(p[0]);</span>
+<span class='curline'><a href='../S/18.html#L109'>p</a>                 109 user/sh.c            close(p[1]);</span>
+<span class='curline'><a href='../S/18.html#L114'>p</a>                 114 user/sh.c            dup(p[0]);</span>
+<span class='curline'><a href='../S/18.html#L115'>p</a>                 115 user/sh.c            close(p[0]);</span>
+<span class='curline'><a href='../S/18.html#L116'>p</a>                 116 user/sh.c            close(p[1]);</span>
+<span class='curline'><a href='../S/18.html#L119'>p</a>                 119 user/sh.c          close(p[0]);</span>
+<span class='curline'><a href='../S/18.html#L120'>p</a>                 120 user/sh.c          close(p[1]);</span>
+<span class='curline'><a href='../S/20.html#L32'>p</a>                  32 user/ulib.c    strcmp(const char *p, const char *q)</span>
+<span class='curline'><a href='../S/20.html#L34'>p</a>                  34 user/ulib.c      while(*p &amp;&amp; *p == *q)</span>
+<span class='curline'><a href='../S/20.html#L35'>p</a>                  35 user/ulib.c        p++, q++;</span>
+<span class='curline'><a href='../S/20.html#L36'>p</a>                  36 user/ulib.c      return (uchar)*p - (uchar)*q;</span>
+<span class='curline'><a href='../S/12.html#L27'>p</a>                  27 user/umalloc.c   Header *bp, *p;</span>
+<span class='curline'><a href='../S/12.html#L30'>p</a>                  30 user/umalloc.c   for(p = freep; !(bp &gt; p &amp;&amp; bp &lt; p-&gt;s.ptr); p = p-&gt;s.ptr)</span>
+<span class='curline'><a href='../S/12.html#L31'>p</a>                  31 user/umalloc.c     if(p &gt;= p-&gt;s.ptr &amp;&amp; (bp &gt; p || bp &lt; p-&gt;s.ptr))</span>
+<span class='curline'><a href='../S/12.html#L33'>p</a>                  33 user/umalloc.c   if(bp + bp-&gt;s.size == p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/12.html#L34'>p</a>                  34 user/umalloc.c     bp-&gt;s.size += p-&gt;s.ptr-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L35'>p</a>                  35 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L37'>p</a>                  37 user/umalloc.c     bp-&gt;s.ptr = p-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L38'>p</a>                  38 user/umalloc.c   if(p + p-&gt;s.size == bp){</span>
+<span class='curline'><a href='../S/12.html#L39'>p</a>                  39 user/umalloc.c     p-&gt;s.size += bp-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L40'>p</a>                  40 user/umalloc.c     p-&gt;s.ptr = bp-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L42'>p</a>                  42 user/umalloc.c     p-&gt;s.ptr = bp;</span>
+<span class='curline'><a href='../S/12.html#L43'>p</a>                  43 user/umalloc.c   freep = p;</span>
+<span class='curline'><a href='../S/12.html#L49'>p</a>                  49 user/umalloc.c   char *p;</span>
+<span class='curline'><a href='../S/12.html#L54'>p</a>                  54 user/umalloc.c   p = sbrk(nu * sizeof(Header));</span>
+<span class='curline'><a href='../S/12.html#L55'>p</a>                  55 user/umalloc.c   if(p == SBRK_ERROR)</span>
+<span class='curline'><a href='../S/12.html#L57'>p</a>                  57 user/umalloc.c   hp = (Header*)p;</span>
+<span class='curline'><a href='../S/12.html#L66'>p</a>                  66 user/umalloc.c   Header *p, *prevp;</span>
+<span class='curline'><a href='../S/12.html#L74'>p</a>                  74 user/umalloc.c   for(p = prevp-&gt;s.ptr; ; prevp = p, p = p-&gt;s.ptr){</span>
+<span class='curline'><a href='../S/12.html#L75'>p</a>                  75 user/umalloc.c     if(p-&gt;s.size &gt;= nunits){</span>
+<span class='curline'><a href='../S/12.html#L76'>p</a>                  76 user/umalloc.c       if(p-&gt;s.size == nunits)</span>
+<span class='curline'><a href='../S/12.html#L77'>p</a>                  77 user/umalloc.c         prevp-&gt;s.ptr = p-&gt;s.ptr;</span>
+<span class='curline'><a href='../S/12.html#L79'>p</a>                  79 user/umalloc.c         p-&gt;s.size -= nunits;</span>
+<span class='curline'><a href='../S/12.html#L80'>p</a>                  80 user/umalloc.c         p += p-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L81'>p</a>                  81 user/umalloc.c         p-&gt;s.size = nunits;</span>
+<span class='curline'><a href='../S/12.html#L84'>p</a>                  84 user/umalloc.c       return (void*)(p + 1);</span>
+<span class='curline'><a href='../S/12.html#L86'>p</a>                  86 user/umalloc.c     if(p == freep)</span>
+<span class='curline'><a href='../S/12.html#L87'>p</a>                  87 user/umalloc.c       if((p = morecore(nunits)) == 0)</span>
+<span class='curline'><a href='../S/27.html#L2067'>p</a>                2067 user/usertests.c   char *c, *oldbrk, *a, *lastaddr, *p;</span>
+<span class='curline'><a href='../S/27.html#L2075'>p</a>                2075 user/usertests.c   p = sbrk(amt);</span>
+<span class='curline'><a href='../S/27.html#L2076'>p</a>                2076 user/usertests.c   if (p != a) {</span>
+<span class='curline'><a href='../S/27.html#L2272'>p</a>                2272 user/usertests.c   uint64 p;</span>
+<span class='curline'><a href='../S/27.html#L2275'>p</a>                2275 user/usertests.c   for(p = 0; p &lt;= (uint)hi; p += PGSIZE){</span>
+<span class='curline'><a href='../S/27.html#L2277'>p</a>                2277 user/usertests.c     if(link("nosuchfile", (char*)p) != -1){</span>
+<span class='curline'><a href='../S/27.html#L2547'>p</a>                2547 user/usertests.c   char *p = (char *) (top - 64);</span>
+<span class='curline'><a href='../S/27.html#L2548'>p</a>                2548 user/usertests.c   p[0] = 'x';</span>
+<span class='curline'><a href='../S/27.html#L2549'>p</a>                2549 user/usertests.c   p[1] = '\0';</span>
+<span class='curline'><a href='../S/27.html#L2550'>p</a>                2550 user/usertests.c   int fd = open(p, O_RDWR|O_CREATE);</span>
+<span class='curline'><a href='../S/27.html#L2551'>p</a>                2551 user/usertests.c   write(fd, p, 1);</span>
+<span class='curline'><a href='../S/27.html#L2553'>p</a>                2553 user/usertests.c   fd = open(p, O_RDWR);</span>
+<span class='curline'><a href='../S/27.html#L2554'>p</a>                2554 user/usertests.c   p[0] = '\0';</span>
+<span class='curline'><a href='../S/27.html#L2555'>p</a>                2555 user/usertests.c   read(fd, p, 1);</span>
+<span class='curline'><a href='../S/27.html#L2556'>p</a>                2556 user/usertests.c   if(p[0] != 'x')</span>
+<span class='curline'><a href='../S/27.html#L2663'>p</a>                2663 user/usertests.c     char *p = sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L2665'>p</a>                2665 user/usertests.c     open(p + 8192, 0);</span>
+<span class='curline'><a href='../S/27.html#L2705'>p</a>                2705 user/usertests.c   char *p = sbrk(0);</span>
+<span class='curline'><a href='../S/27.html#L2706'>p</a>                2706 user/usertests.c   while ((uint64)p &lt; MAXVA-(1&lt;&lt;30)) {</span>
+<span class='curline'><a href='../S/27.html#L2707'>p</a>                2707 user/usertests.c     p = sbrklazy(1&lt;&lt;30);</span>
+<span class='curline'><a href='../S/27.html#L2708'>p</a>                2708 user/usertests.c     if (p &lt; 0) {</span>
+<span class='curline'><a href='../S/27.html#L2709'>p</a>                2709 user/usertests.c       printf("sbrklazy(%d) returned %p\n", 1&lt;&lt;30, p);</span>
+<span class='curline'><a href='../S/27.html#L2713'>p</a>                2713 user/usertests.c     p = sbrklazy(0);</span>
+<span class='curline'><a href='../S/27.html#L2716'>p</a>                2716 user/usertests.c   int n = TRAPFRAME-PGSIZE-(uint64)p;</span>
+<span class='curline'><a href='../S/27.html#L2719'>p</a>                2719 user/usertests.c   if (p1 &lt; 0 || p1 != p) {</span>
+<span class='curline'><a href='../S/27.html#L2720'>p</a>                2720 user/usertests.c     printf("sbrklazy(%d) returned %p, not expected %p\n", n, p1, p);</span>
+<span class='curline'><a href='../S/27.html#L2724'>p</a>                2724 user/usertests.c   p = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L2725'>p</a>                2725 user/usertests.c   if (p &lt; 0 || (uint64)p != TRAPFRAME-PGSIZE) {</span>
+<span class='curline'><a href='../S/27.html#L2726'>p</a>                2726 user/usertests.c     printf("sbrk(%d) returned %p, not expected TRAPFRAME-PGSIZE\n", PGSIZE, p);</span>
+<span class='curline'><a href='../S/27.html#L2730'>p</a>                2730 user/usertests.c   p[0] = 1;</span>
+<span class='curline'><a href='../S/27.html#L2731'>p</a>                2731 user/usertests.c   if (p[1] != 0) {</span>
+<span class='curline'><a href='../S/27.html#L2736'>p</a>                2736 user/usertests.c   p = sbrk(1);</span>
+<span class='curline'><a href='../S/27.html#L2737'>p</a>                2737 user/usertests.c   if ((uint64)p != -1) {</span>
+<span class='curline'><a href='../S/27.html#L2738'>p</a>                2738 user/usertests.c     printf("sbrk(1) returned %p, expected error\n", p);</span>
+<span class='curline'><a href='../S/27.html#L2742'>p</a>                2742 user/usertests.c   p = sbrklazy(1);</span>
+<span class='curline'><a href='../S/27.html#L2743'>p</a>                2743 user/usertests.c   if ((uint64)p != -1) {</span>
+<span class='curline'><a href='../S/27.html#L2744'>p</a>                2744 user/usertests.c     printf("sbrklazy(1) returned %p, expected error\n", p);</span>
 </pre>
 </body>
 </html>

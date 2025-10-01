@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>to</title>
+<title>tickslock</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,10 +9,17 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L185'>to</a>                185 kernel/log.c       struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
-<span class='curline'><a href='../S/32.html#L187'>to</a>                187 kernel/log.c       memmove(to-&gt;data, from-&gt;data, BSIZE);</span>
-<span class='curline'><a href='../S/32.html#L188'>to</a>                188 kernel/log.c       bwrite(to);  // write the log</span>
-<span class='curline'><a href='../S/32.html#L190'>to</a>                190 kernel/log.c       brelse(to);</span>
+<span class='curline'><a href='../S/35.html#L143'>tickslock</a>         143 kernel/defs.h  extern struct spinlock tickslock;</span>
+<span class='curline'><a href='../S/36.html#L76'>tickslock</a>          76 kernel/sysproc.c   acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/36.html#L80'>tickslock</a>          80 kernel/sysproc.c       release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/36.html#L83'>tickslock</a>          83 kernel/sysproc.c     sleep(&amp;ticks, &amp;tickslock);</span>
+<span class='curline'><a href='../S/36.html#L85'>tickslock</a>          85 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/36.html#L105'>tickslock</a>         105 kernel/sysproc.c   acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/36.html#L107'>tickslock</a>         107 kernel/sysproc.c   release(&amp;tickslock);</span>
+<span class='curline'><a href='../S/58.html#L9'>tickslock</a>           9 kernel/trap.c  struct spinlock tickslock;</span>
+<span class='curline'><a href='../S/58.html#L22'>tickslock</a>          22 kernel/trap.c    initlock(&amp;tickslock, "time");</span>
+<span class='curline'><a href='../S/58.html#L168'>tickslock</a>         168 kernel/trap.c      acquire(&amp;tickslock);</span>
+<span class='curline'><a href='../S/58.html#L171'>tickslock</a>         171 kernel/trap.c      release(&amp;tickslock);</span>
 </pre>
 </body>
 </html>

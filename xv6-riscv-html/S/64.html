@@ -32,7 +32,7 @@ This source file includes following definitions.
 <a id='L9' name='L9'></a>   9 <em class='comment'>//</em>
 <a id='L10' name='L10'></a>  10 
 <a id='L11' name='L11'></a>  11 <strong class='reserved'>void</strong>
-<a id='L12' name='L12'></a>  12 <a href='../R/401.html' title='Multiple referred from 2 places.'>plicinit</a>(<strong class='reserved'>void</strong>)
+<a id='L12' name='L12'></a>  12 <a href='../R/402.html' title='Multiple referred from 2 places.'>plicinit</a>(<strong class='reserved'>void</strong>)
 <a id='L13' name='L13'></a>  13 <em class='brace'>{</em>
 <a id='L14' name='L14'></a>  14   <em class='comment'>// set desired IRQ priorities non-zero (otherwise disabled).</em>
 <a id='L15' name='L15'></a>  15   *(<a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a>*)(<a href='../S/51.html#L29' title='Defined at 29 in kernel/memlayout.h.'>PLIC</a> + <a href='../S/51.html#L22' title='Defined at 22 in kernel/memlayout.h.'>UART0_IRQ</a>*4) = 1;
@@ -40,7 +40,7 @@ This source file includes following definitions.
 <a id='L17' name='L17'></a>  17 <em class='brace'>}</em>
 <a id='L18' name='L18'></a>  18 
 <a id='L19' name='L19'></a>  19 <strong class='reserved'>void</strong>
-<a id='L20' name='L20'></a>  20 <a href='../R/402.html' title='Multiple referred from 3 places.'>plicinithart</a>(<strong class='reserved'>void</strong>)
+<a id='L20' name='L20'></a>  20 <a href='../R/403.html' title='Multiple referred from 3 places.'>plicinithart</a>(<strong class='reserved'>void</strong>)
 <a id='L21' name='L21'></a>  21 <em class='brace'>{</em>
 <a id='L22' name='L22'></a>  22   <strong class='reserved'>int</strong> <a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a> = <a href='../S/65.html#L65' title='Defined at 65 in kernel/proc.c.'>cpuid</a>();
 <a id='L23' name='L23'></a>  23   
@@ -54,7 +54,7 @@ This source file includes following definitions.
 <a id='L31' name='L31'></a>  31 
 <a id='L32' name='L32'></a>  32 <em class='comment'>// ask the PLIC what interrupt we should serve.</em>
 <a id='L33' name='L33'></a>  33 <strong class='reserved'>int</strong>
-<a id='L34' name='L34'></a>  34 <a href='../R/399.html' title='Multiple referred from 2 places.'>plic_claim</a>(<strong class='reserved'>void</strong>)
+<a id='L34' name='L34'></a>  34 <a href='../R/400.html' title='Multiple referred from 2 places.'>plic_claim</a>(<strong class='reserved'>void</strong>)
 <a id='L35' name='L35'></a>  35 <em class='brace'>{</em>
 <a id='L36' name='L36'></a>  36   <strong class='reserved'>int</strong> <a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a> = <a href='../S/65.html#L65' title='Defined at 65 in kernel/proc.c.'>cpuid</a>();
 <a id='L37' name='L37'></a>  37   <strong class='reserved'>int</strong> <a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a> = *(<a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a>*)<a href='../S/51.html#L34' title='Defined at 34 in kernel/memlayout.h.'>PLIC_SCLAIM</a>(<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>);
@@ -63,7 +63,7 @@ This source file includes following definitions.
 <a id='L40' name='L40'></a>  40 
 <a id='L41' name='L41'></a>  41 <em class='comment'>// tell the PLIC we've served this IRQ.</em>
 <a id='L42' name='L42'></a>  42 <strong class='reserved'>void</strong>
-<a id='L43' name='L43'></a>  43 <a href='../R/400.html' title='Multiple referred from 2 places.'>plic_complete</a>(<strong class='reserved'>int</strong> <a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a>)
+<a id='L43' name='L43'></a>  43 <a href='../R/401.html' title='Multiple referred from 2 places.'>plic_complete</a>(<strong class='reserved'>int</strong> <a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a>)
 <a id='L44' name='L44'></a>  44 <em class='brace'>{</em>
 <a id='L45' name='L45'></a>  45   <strong class='reserved'>int</strong> <a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a> = <a href='../S/65.html#L65' title='Defined at 65 in kernel/proc.c.'>cpuid</a>();
 <a id='L46' name='L46'></a>  46   *(<a href='../S/40.html#L7' title='Defined at 7 in kernel/types.h.'>uint32</a>*)<a href='../S/51.html#L34' title='Defined at 34 in kernel/memlayout.h.'>PLIC_SCLAIM</a>(<a href='../Y/141.html' title='Multiple used in 10 places.'>hart</a>) = <a href='../Y/161.html' title='Multiple used in 11 places.'>irq</a>;

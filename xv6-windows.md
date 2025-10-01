@@ -17,7 +17,7 @@ xv6のビルドに必要な
 
 [WSL (Windows Subsystem for Linux)](https://docs.microsoft.com/ja-jp/windows/wsl/install-win10)をインストールします．
 そしてUbuntu等のLinuxディクトリビューションをインストールして，[開発用ツールをインストール](xv6-linux.html)します．
-現在，WSL2上のUbuntu 20.04に開発用ツールをインストールし，問題なくxv6をビルド・実行できることは確認しています．
+現在，WSL2上のUbuntu に開発用ツールをインストールし，問題なくxv6をビルド・実行できることは確認しています．
 
 ## 仮想機械アプリケーションを使う方法
 

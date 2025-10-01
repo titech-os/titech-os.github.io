@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>old</title>
+<title>ofile</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,13 +9,19 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/61.html#L91'>old</a>                91 kernel/spinlock.c   int old = intr_get();</span>
-<span class='curline'><a href='../S/61.html#L98'>old</a>                98 kernel/spinlock.c     mycpu()-&gt;intena = old;</span>
-<span class='curline'><a href='../S/46.html#L126'>old</a>               126 kernel/sysfile.c   char name[DIRSIZ], new[MAXPATH], old[MAXPATH];</span>
-<span class='curline'><a href='../S/46.html#L129'>old</a>               129 kernel/sysfile.c   if(argstr(0, old, MAXPATH) &lt; 0 || argstr(1, new, MAXPATH) &lt; 0)</span>
-<span class='curline'><a href='../S/46.html#L133'>old</a>               133 kernel/sysfile.c   if((ip = namei(old)) == 0){</span>
-<span class='curline'><a href='../S/41.html#L297'>old</a>               297 kernel/vm.c    uvmcopy(pagetable_t old, pagetable_t new, uint64 sz)</span>
-<span class='curline'><a href='../S/41.html#L305'>old</a>               305 kernel/vm.c        if((pte = walk(old, i, 0)) == 0)</span>
+<span class='curline'><a href='../S/65.html#L287'>ofile</a>             287 kernel/proc.c      if(p-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/65.html#L288'>ofile</a>             288 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/65.html#L336'>ofile</a>             336 kernel/proc.c      if(p-&gt;ofile[fd]){</span>
+<span class='curline'><a href='../S/65.html#L337'>ofile</a>             337 kernel/proc.c        struct file *f = p-&gt;ofile[fd];</span>
+<span class='curline'><a href='../S/65.html#L339'>ofile</a>             339 kernel/proc.c        p-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/38.html#L104'>ofile</a>             104 kernel/proc.h    struct file *ofile[NOFILE];  // Open files</span>
+<span class='curline'><a href='../S/46.html#L28'>ofile</a>              28 kernel/sysfile.c   if(fd &lt; 0 || fd &gt;= NOFILE || (f=myproc()-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/46.html#L46'>ofile</a>              46 kernel/sysfile.c     if(p-&gt;ofile[fd] == 0){</span>
+<span class='curline'><a href='../S/46.html#L47'>ofile</a>              47 kernel/sysfile.c       p-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/46.html#L105'>ofile</a>             105 kernel/sysfile.c   myproc()-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/46.html#L491'>ofile</a>             491 kernel/sysfile.c       p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/46.html#L498'>ofile</a>             498 kernel/sysfile.c     p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/46.html#L499'>ofile</a>             499 kernel/sysfile.c     p-&gt;ofile[fd1] = 0;</span>
 </pre>
 </body>
 </html>

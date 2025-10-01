@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>trapframe</title>
+<title>timerinit</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,35 +9,8 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/39.html#L122'>trapframe</a>         122 kernel/exec.c    p-&gt;trapframe-&gt;a1 = sp;</span>
-<span class='curline'><a href='../S/39.html#L134'>trapframe</a>         134 kernel/exec.c    p-&gt;trapframe-&gt;epc = elf.entry;  // initial program counter = main</span>
-<span class='curline'><a href='../S/39.html#L135'>trapframe</a>         135 kernel/exec.c    p-&gt;trapframe-&gt;sp = sp; // initial stack pointer</span>
-<span class='curline'><a href='../S/65.html#L129'>trapframe</a>         129 kernel/proc.c    if((p-&gt;trapframe = (struct trapframe *)kalloc()) == 0){</span>
-<span class='curline'><a href='../S/65.html#L158'>trapframe</a>         158 kernel/proc.c    if(p-&gt;trapframe)</span>
-<span class='curline'><a href='../S/65.html#L159'>trapframe</a>         159 kernel/proc.c      kfree((void*)p-&gt;trapframe);</span>
-<span class='curline'><a href='../S/65.html#L160'>trapframe</a>         160 kernel/proc.c    p-&gt;trapframe = 0;</span>
-<span class='curline'><a href='../S/65.html#L199'>trapframe</a>         199 kernel/proc.c                (uint64)(p-&gt;trapframe), PTE_R | PTE_W) &lt; 0){</span>
-<span class='curline'><a href='../S/65.html#L277'>trapframe</a>         277 kernel/proc.c    *(np-&gt;trapframe) = *(p-&gt;trapframe);</span>
-<span class='curline'><a href='../S/65.html#L280'>trapframe</a>         280 kernel/proc.c    np-&gt;trapframe-&gt;a0 = 0;</span>
-<span class='curline'><a href='../S/65.html#L524'>trapframe</a>         524 kernel/proc.c      p-&gt;trapframe-&gt;a0 = kexec("/init", (char *[]){ "/init", 0 });</span>
-<span class='curline'><a href='../S/65.html#L525'>trapframe</a>         525 kernel/proc.c      if (p-&gt;trapframe-&gt;a0 == -1) {</span>
-<span class='curline'><a href='../S/38.html#L102'>trapframe</a>         102 kernel/proc.h    struct trapframe *trapframe; // data page for trampoline.S</span>
-<span class='curline'><a href='../S/53.html#L39'>trapframe</a>          39 kernel/syscall.c     return p-&gt;trapframe-&gt;a0;</span>
-<span class='curline'><a href='../S/53.html#L41'>trapframe</a>          41 kernel/syscall.c     return p-&gt;trapframe-&gt;a1;</span>
-<span class='curline'><a href='../S/53.html#L43'>trapframe</a>          43 kernel/syscall.c     return p-&gt;trapframe-&gt;a2;</span>
-<span class='curline'><a href='../S/53.html#L45'>trapframe</a>          45 kernel/syscall.c     return p-&gt;trapframe-&gt;a3;</span>
-<span class='curline'><a href='../S/53.html#L47'>trapframe</a>          47 kernel/syscall.c     return p-&gt;trapframe-&gt;a4;</span>
-<span class='curline'><a href='../S/53.html#L49'>trapframe</a>          49 kernel/syscall.c     return p-&gt;trapframe-&gt;a5;</span>
-<span class='curline'><a href='../S/53.html#L137'>trapframe</a>         137 kernel/syscall.c   num = p-&gt;trapframe-&gt;a7;</span>
-<span class='curline'><a href='../S/53.html#L141'>trapframe</a>         141 kernel/syscall.c     p-&gt;trapframe-&gt;a0 = syscalls[num]();</span>
-<span class='curline'><a href='../S/53.html#L145'>trapframe</a>         145 kernel/syscall.c     p-&gt;trapframe-&gt;a0 = -1;</span>
-<span class='curline'><a href='../S/58.html#L52'>trapframe</a>          52 kernel/trap.c    p-&gt;trapframe-&gt;epc = r_sepc();</span>
-<span class='curline'><a href='../S/58.html#L62'>trapframe</a>          62 kernel/trap.c      p-&gt;trapframe-&gt;epc += 4;</span>
-<span class='curline'><a href='../S/58.html#L115'>trapframe</a>         115 kernel/trap.c    p-&gt;trapframe-&gt;kernel_satp = r_satp();         // kernel page table</span>
-<span class='curline'><a href='../S/58.html#L116'>trapframe</a>         116 kernel/trap.c    p-&gt;trapframe-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
-<span class='curline'><a href='../S/58.html#L117'>trapframe</a>         117 kernel/trap.c    p-&gt;trapframe-&gt;kernel_trap = (uint64)usertrap;</span>
-<span class='curline'><a href='../S/58.html#L118'>trapframe</a>         118 kernel/trap.c    p-&gt;trapframe-&gt;kernel_hartid = r_tp();         // hartid for cpuid()</span>
-<span class='curline'><a href='../S/58.html#L130'>trapframe</a>         130 kernel/trap.c    w_sepc(p-&gt;trapframe-&gt;epc);</span>
+<span class='curline'><a href='../S/73.html#L8'>timerinit</a>           8 kernel/start.c void timerinit();</span>
+<span class='curline'><a href='../S/73.html#L41'>timerinit</a>          41 kernel/start.c   timerinit();</span>
 </pre>
 </body>
 </html>

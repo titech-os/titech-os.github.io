@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pa0</title>
+<title>pa</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,20 +9,31 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/41.html#L345'>pa0</a>               345 kernel/vm.c      uint64 n, va0, pa0;</span>
-<span class='curline'><a href='../S/41.html#L353'>pa0</a>               353 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
-<span class='curline'><a href='../S/41.html#L354'>pa0</a>               354 kernel/vm.c        if(pa0 == 0) {</span>
-<span class='curline'><a href='../S/41.html#L355'>pa0</a>               355 kernel/vm.c          if((pa0 = vmfault(pagetable, va0, 0)) == 0) {</span>
-<span class='curline'><a href='../S/41.html#L368'>pa0</a>               368 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
-<span class='curline'><a href='../S/41.html#L383'>pa0</a>               383 kernel/vm.c      uint64 n, va0, pa0;</span>
-<span class='curline'><a href='../S/41.html#L387'>pa0</a>               387 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
-<span class='curline'><a href='../S/41.html#L388'>pa0</a>               388 kernel/vm.c        if(pa0 == 0) {</span>
-<span class='curline'><a href='../S/41.html#L389'>pa0</a>               389 kernel/vm.c          if((pa0 = vmfault(pagetable, va0, 0)) == 0) {</span>
-<span class='curline'><a href='../S/41.html#L396'>pa0</a>               396 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
-<span class='curline'><a href='../S/41.html#L412'>pa0</a>               412 kernel/vm.c      uint64 n, va0, pa0;</span>
-<span class='curline'><a href='../S/41.html#L417'>pa0</a>               417 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
-<span class='curline'><a href='../S/41.html#L418'>pa0</a>               418 kernel/vm.c        if(pa0 == 0)</span>
-<span class='curline'><a href='../S/41.html#L424'>pa0</a>               424 kernel/vm.c        char *p = (char *) (pa0 + (srcva - va0));</span>
+<span class='curline'><a href='../S/39.html#L158'>pa</a>                158 kernel/exec.c    uint64 pa;</span>
+<span class='curline'><a href='../S/39.html#L161'>pa</a>                161 kernel/exec.c      pa = walkaddr(pagetable, va + i);</span>
+<span class='curline'><a href='../S/39.html#L162'>pa</a>                162 kernel/exec.c      if(pa == 0)</span>
+<span class='curline'><a href='../S/39.html#L168'>pa</a>                168 kernel/exec.c      if(readi(ip, 0, (uint64)pa, offset+i, n) != n)</span>
+<span class='curline'><a href='../S/72.html#L47'>pa</a>                 47 kernel/kalloc.c kfree(void *pa)</span>
+<span class='curline'><a href='../S/72.html#L51'>pa</a>                 51 kernel/kalloc.c   if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)</span>
+<span class='curline'><a href='../S/72.html#L55'>pa</a>                 55 kernel/kalloc.c   memset(pa, 1, PGSIZE);</span>
+<span class='curline'><a href='../S/72.html#L57'>pa</a>                 57 kernel/kalloc.c   r = (struct run*)pa;</span>
+<span class='curline'><a href='../S/65.html#L38'>pa</a>                 38 kernel/proc.c      char *pa = kalloc();</span>
+<span class='curline'><a href='../S/65.html#L39'>pa</a>                 39 kernel/proc.c      if(pa == 0)</span>
+<span class='curline'><a href='../S/65.html#L42'>pa</a>                 42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/66.html#L365'>pa</a>                365 kernel/riscv.h #define PA2PTE(pa) ((((uint64)pa) &gt;&gt; 12) &lt;&lt; 10)</span>
+<span class='curline'><a href='../S/41.html#L58'>pa</a>                 58 kernel/vm.c    kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)</span>
+<span class='curline'><a href='../S/41.html#L60'>pa</a>                 60 kernel/vm.c      if(mappages(kpgtbl, va, sz, pa, perm) != 0)</span>
+<span class='curline'><a href='../S/41.html#L124'>pa</a>                124 kernel/vm.c      uint64 pa;</span>
+<span class='curline'><a href='../S/41.html#L136'>pa</a>                136 kernel/vm.c      pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/41.html#L137'>pa</a>                137 kernel/vm.c      return pa;</span>
+<span class='curline'><a href='../S/41.html#L146'>pa</a>                146 kernel/vm.c    mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)</span>
+<span class='curline'><a href='../S/41.html#L167'>pa</a>                167 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
+<span class='curline'><a href='../S/41.html#L171'>pa</a>                171 kernel/vm.c        pa += PGSIZE;</span>
+<span class='curline'><a href='../S/41.html#L207'>pa</a>                207 kernel/vm.c          uint64 pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/41.html#L208'>pa</a>                208 kernel/vm.c          kfree((void*)pa);</span>
+<span class='curline'><a href='../S/41.html#L300'>pa</a>                300 kernel/vm.c      uint64 pa, i;</span>
+<span class='curline'><a href='../S/41.html#L309'>pa</a>                309 kernel/vm.c        pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/41.html#L313'>pa</a>                313 kernel/vm.c        memmove(mem, (char*)pa, PGSIZE);</span>
 </pre>
 </body>
 </html>

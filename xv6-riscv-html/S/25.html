@@ -34,38 +34,38 @@ This source file includes following definitions.
 <a id='L14' name='L14'></a>  14 <em class='sharp'>#include</em> "<a href='43.html'>kernel/fcntl.h</a>"
 <a id='L15' name='L15'></a>  15 
 <a id='L16' name='L16'></a>  16 <strong class='reserved'>int</strong>
-<a id='L17' name='L17'></a>  17 <a href='../R/354.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>int</strong> <a href='../Y/24.html' title='Multiple used in 60 places.'>argc</a>, <strong class='reserved'>char</strong> *<a href='../Y/27.html' title='Multiple used in 81 places.'>argv</a>[])
+<a id='L17' name='L17'></a>  17 <a href='../R/355.html' title='Multiple referred from 4 places.'>main</a>(<strong class='reserved'>int</strong> <a href='../Y/24.html' title='Multiple used in 63 places.'>argc</a>, <strong class='reserved'>char</strong> *<a href='../Y/27.html' title='Multiple used in 84 places.'>argv</a>[])
 <a id='L18' name='L18'></a>  18 <em class='brace'>{</em>
-<a id='L19' name='L19'></a>  19   <strong class='reserved'>int</strong> <a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>, <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a>;
-<a id='L20' name='L20'></a>  20   <strong class='reserved'>char</strong> <a href='../Y/263.html' title='Multiple used in 54 places.'>path</a>[] = "stressfs0";
+<a id='L19' name='L19'></a>  19   <strong class='reserved'>int</strong> <a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>, <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a>;
+<a id='L20' name='L20'></a>  20   <strong class='reserved'>char</strong> <a href='../Y/264.html' title='Multiple used in 54 places.'>path</a>[] = "stressfs0";
 <a id='L21' name='L21'></a>  21   <strong class='reserved'>char</strong> <a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>[512];
 <a id='L22' name='L22'></a>  22 
-<a id='L23' name='L23'></a>  23   <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("stressfs starting\n");
-<a id='L24' name='L24'></a>  24   <a href='../D/377.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>, 'a', <strong class='reserved'>sizeof</strong>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>));
+<a id='L23' name='L23'></a>  23   <a href='../D/420.html' title='Multiple defined in 2 places.'>printf</a>("stressfs starting\n");
+<a id='L24' name='L24'></a>  24   <a href='../D/378.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>, 'a', <strong class='reserved'>sizeof</strong>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>));
 <a id='L25' name='L25'></a>  25 
-<a id='L26' name='L26'></a>  26   <strong class='reserved'>for</strong>(<a href='../Y/148.html' title='Multiple used in 354 places.'>i</a> = 0; <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a> &lt; 4; <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a>++)
+<a id='L26' name='L26'></a>  26   <strong class='reserved'>for</strong>(<a href='../Y/148.html' title='Multiple used in 356 places.'>i</a> = 0; <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a> &lt; 4; <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a>++)
 <a id='L27' name='L27'></a>  27     <strong class='reserved'>if</strong>(<a href='../Y/124.html' title='Multiple used in 68 places.'>fork</a>() &gt; 0)
 <a id='L28' name='L28'></a>  28       <strong class='reserved'>break</strong>;
 <a id='L29' name='L29'></a>  29 
-<a id='L30' name='L30'></a>  30   <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("write %d\n", <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a>);
+<a id='L30' name='L30'></a>  30   <a href='../D/420.html' title='Multiple defined in 2 places.'>printf</a>("write %d\n", <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a>);
 <a id='L31' name='L31'></a>  31 
-<a id='L32' name='L32'></a>  32   <a href='../Y/263.html' title='Multiple used in 54 places.'>path</a>[8] += <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a>;
-<a id='L33' name='L33'></a>  33   <a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a> = <a href='../Y/247.html' title='Multiple used in 117 places.'>open</a>(<a href='../Y/263.html' title='Multiple used in 54 places.'>path</a>, <a href='../S/43.html#L4' title='Defined at 4 in kernel/fcntl.h.'>O_CREATE</a> | <a href='../S/43.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>);
-<a id='L34' name='L34'></a>  34   <strong class='reserved'>for</strong>(<a href='../Y/148.html' title='Multiple used in 354 places.'>i</a> = 0; <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a> &lt; 20; <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a>++)
+<a id='L32' name='L32'></a>  32   <a href='../Y/264.html' title='Multiple used in 54 places.'>path</a>[8] += <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a>;
+<a id='L33' name='L33'></a>  33   <a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a> = <a href='../Y/248.html' title='Multiple used in 117 places.'>open</a>(<a href='../Y/264.html' title='Multiple used in 54 places.'>path</a>, <a href='../S/43.html#L4' title='Defined at 4 in kernel/fcntl.h.'>O_CREATE</a> | <a href='../S/43.html#L3' title='Defined at 3 in kernel/fcntl.h.'>O_RDWR</a>);
+<a id='L34' name='L34'></a>  34   <strong class='reserved'>for</strong>(<a href='../Y/148.html' title='Multiple used in 356 places.'>i</a> = 0; <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a> &lt; 20; <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a>++)
 <a id='L35' name='L35'></a>  35 <em class='comment'>//    printf(fd, "%d\n", i);</em>
-<a id='L36' name='L36'></a>  36     <a href='../Y/431.html' title='Multiple used in 60 places.'>write</a>(<a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>, <a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>));
+<a id='L36' name='L36'></a>  36     <a href='../Y/432.html' title='Multiple used in 60 places.'>write</a>(<a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>, <a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>));
 <a id='L37' name='L37'></a>  37   <a href='../Y/60.html' title='Multiple used in 128 places.'>close</a>(<a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>);
 <a id='L38' name='L38'></a>  38 
-<a id='L39' name='L39'></a>  39   <a href='../D/419.html' title='Multiple defined in 2 places.'>printf</a>("read\n");
+<a id='L39' name='L39'></a>  39   <a href='../D/420.html' title='Multiple defined in 2 places.'>printf</a>("read\n");
 <a id='L40' name='L40'></a>  40 
-<a id='L41' name='L41'></a>  41   <a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a> = <a href='../Y/247.html' title='Multiple used in 117 places.'>open</a>(<a href='../Y/263.html' title='Multiple used in 54 places.'>path</a>, <a href='../S/43.html#L1' title='Defined at 1 in kernel/fcntl.h.'>O_RDONLY</a>);
-<a id='L42' name='L42'></a>  42   <strong class='reserved'>for</strong> (<a href='../Y/148.html' title='Multiple used in 354 places.'>i</a> = 0; <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a> &lt; 20; <a href='../Y/148.html' title='Multiple used in 354 places.'>i</a>++)
-<a id='L43' name='L43'></a>  43     <a href='../Y/300.html' title='Multiple used in 45 places.'>read</a>(<a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>, <a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>));
+<a id='L41' name='L41'></a>  41   <a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a> = <a href='../Y/248.html' title='Multiple used in 117 places.'>open</a>(<a href='../Y/264.html' title='Multiple used in 54 places.'>path</a>, <a href='../S/43.html#L1' title='Defined at 1 in kernel/fcntl.h.'>O_RDONLY</a>);
+<a id='L42' name='L42'></a>  42   <strong class='reserved'>for</strong> (<a href='../Y/148.html' title='Multiple used in 356 places.'>i</a> = 0; <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a> &lt; 20; <a href='../Y/148.html' title='Multiple used in 356 places.'>i</a>++)
+<a id='L43' name='L43'></a>  43     <a href='../Y/301.html' title='Multiple used in 45 places.'>read</a>(<a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>, <a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/69.html' title='Multiple used in 27 places.'>data</a>));
 <a id='L44' name='L44'></a>  44   <a href='../Y/60.html' title='Multiple used in 128 places.'>close</a>(<a href='../Y/108.html' title='Multiple used in 361 places.'>fd</a>);
 <a id='L45' name='L45'></a>  45 
-<a id='L46' name='L46'></a>  46   <a href='../Y/422.html' title='Multiple used in 64 places.'>wait</a>(0);
+<a id='L46' name='L46'></a>  46   <a href='../Y/423.html' title='Multiple used in 64 places.'>wait</a>(0);
 <a id='L47' name='L47'></a>  47 
-<a id='L48' name='L48'></a>  48   <a href='../Y/100.html' title='Multiple used in 436 places.'>exit</a>(0);
+<a id='L48' name='L48'></a>  48   <a href='../Y/100.html' title='Multiple used in 443 places.'>exit</a>(0);
 <a id='L49' name='L49'></a>  49 <em class='brace'>}</em>
 </pre>
 <hr />

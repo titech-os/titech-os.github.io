@@ -45,9 +45,9 @@
 <span class='curline'><a href='../S/37.html#L77'>addr</a>               77 kernel/pipe.c  pipewrite(struct pipe *pi, uint64 addr, int n)</span>
 <span class='curline'><a href='../S/37.html#L93'>addr</a>               93 kernel/pipe.c        if(copyin(pr-&gt;pagetable, &amp;ch, addr + i, 1) == -1)</span>
 <span class='curline'><a href='../S/37.html#L106'>addr</a>              106 kernel/pipe.c  piperead(struct pipe *pi, uint64 addr, int n)</span>
-<span class='curline'><a href='../S/37.html#L124'>addr</a>              124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
-<span class='curline'><a href='../S/65.html#L368'>addr</a>              368 kernel/proc.c  kwait(uint64 addr)</span>
-<span class='curline'><a href='../S/65.html#L388'>addr</a>              388 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;pp-&gt;xstate,</span>
+<span class='curline'><a href='../S/37.html#L124'>addr</a>              124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1) {</span>
+<span class='curline'><a href='../S/65.html#L371'>addr</a>              371 kernel/proc.c  kwait(uint64 addr)</span>
+<span class='curline'><a href='../S/65.html#L391'>addr</a>              391 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;pp-&gt;xstate,</span>
 <span class='curline'><a href='../S/53.html#L12'>addr</a>               12 kernel/syscall.c fetchaddr(uint64 addr, uint64 *ip)</span>
 <span class='curline'><a href='../S/53.html#L15'>addr</a>               15 kernel/syscall.c   if(addr &gt;= p-&gt;sz || addr+sizeof(uint64) &gt; p-&gt;sz) // both tests needed, in case of overflow</span>
 <span class='curline'><a href='../S/53.html#L17'>addr</a>               17 kernel/syscall.c   if(copyin(p-&gt;pagetable, (char *)ip, addr, sizeof(*ip)) != 0)</span>
@@ -59,7 +59,8 @@
 <span class='curline'><a href='../S/36.html#L42'>addr</a>               42 kernel/sysproc.c   uint64 addr;</span>
 <span class='curline'><a href='../S/36.html#L48'>addr</a>               48 kernel/sysproc.c   addr = myproc()-&gt;sz;</span>
 <span class='curline'><a href='../S/36.html#L58'>addr</a>               58 kernel/sysproc.c     if(addr + n &lt; addr)</span>
-<span class='curline'><a href='../S/36.html#L62'>addr</a>               62 kernel/sysproc.c   return addr;</span>
+<span class='curline'><a href='../S/36.html#L60'>addr</a>               60 kernel/sysproc.c     if(addr + n &gt; TRAPFRAME)</span>
+<span class='curline'><a href='../S/36.html#L64'>addr</a>               64 kernel/sysproc.c   return addr;</span>
 <span class='curline'><a href='../S/56.html#L54'>addr</a>               54 kernel/virtio.h   uint64 addr;</span>
 <span class='curline'><a href='../S/67.html#L176'>addr</a>              176 kernel/virtio_disk.c   disk.desc[i].addr = 0;</span>
 <span class='curline'><a href='../S/67.html#L247'>addr</a>              247 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64) buf0;</span>

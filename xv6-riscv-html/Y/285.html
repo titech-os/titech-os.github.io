@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pr</title>
+<title>pp</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,16 +9,22 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/37.html#L80'>pr</a>                 80 kernel/pipe.c    struct proc *pr = myproc();</span>
-<span class='curline'><a href='../S/37.html#L84'>pr</a>                 84 kernel/pipe.c      if(pi-&gt;readopen == 0 || killed(pr)){</span>
-<span class='curline'><a href='../S/37.html#L93'>pr</a>                 93 kernel/pipe.c        if(copyin(pr-&gt;pagetable, &amp;ch, addr + i, 1) == -1)</span>
-<span class='curline'><a href='../S/37.html#L109'>pr</a>                109 kernel/pipe.c    struct proc *pr = myproc();</span>
-<span class='curline'><a href='../S/37.html#L114'>pr</a>                114 kernel/pipe.c      if(killed(pr)){</span>
-<span class='curline'><a href='../S/37.html#L124'>pr</a>                124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
-<span class='curline'><a href='../S/33.html#L24'>pr</a>                 24 kernel/printf.c } pr;</span>
-<span class='curline'><a href='../S/33.html#L71'>pr</a>                 71 kernel/printf.c     acquire(&amp;pr.lock);</span>
-<span class='curline'><a href='../S/33.html#L131'>pr</a>                131 kernel/printf.c     release(&amp;pr.lock);</span>
-<span class='curline'><a href='../S/33.html#L150'>pr</a>                150 kernel/printf.c   initlock(&amp;pr.lock, "pr");</span>
+<span class='curline'><a href='../S/65.html#L313'>pp</a>                313 kernel/proc.c    struct proc *pp;</span>
+<span class='curline'><a href='../S/65.html#L315'>pp</a>                315 kernel/proc.c    for(pp = proc; pp &lt; &amp;proc[NPROC]; pp++){</span>
+<span class='curline'><a href='../S/65.html#L316'>pp</a>                316 kernel/proc.c      if(pp-&gt;parent == p){</span>
+<span class='curline'><a href='../S/65.html#L317'>pp</a>                317 kernel/proc.c        pp-&gt;parent = initproc;</span>
+<span class='curline'><a href='../S/65.html#L373'>pp</a>                373 kernel/proc.c    struct proc *pp;</span>
+<span class='curline'><a href='../S/65.html#L382'>pp</a>                382 kernel/proc.c      for(pp = proc; pp &lt; &amp;proc[NPROC]; pp++){</span>
+<span class='curline'><a href='../S/65.html#L383'>pp</a>                383 kernel/proc.c        if(pp-&gt;parent == p){</span>
+<span class='curline'><a href='../S/65.html#L385'>pp</a>                385 kernel/proc.c          acquire(&amp;pp-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L388'>pp</a>                388 kernel/proc.c          if(pp-&gt;state == ZOMBIE){</span>
+<span class='curline'><a href='../S/65.html#L390'>pp</a>                390 kernel/proc.c            pid = pp-&gt;pid;</span>
+<span class='curline'><a href='../S/65.html#L391'>pp</a>                391 kernel/proc.c            if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char *)&amp;pp-&gt;xstate,</span>
+<span class='curline'><a href='../S/65.html#L392'>pp</a>                392 kernel/proc.c                                    sizeof(pp-&gt;xstate)) &lt; 0) {</span>
+<span class='curline'><a href='../S/65.html#L393'>pp</a>                393 kernel/proc.c              release(&amp;pp-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L397'>pp</a>                397 kernel/proc.c            freeproc(pp);</span>
+<span class='curline'><a href='../S/65.html#L398'>pp</a>                398 kernel/proc.c            release(&amp;pp-&gt;lock);</span>
+<span class='curline'><a href='../S/65.html#L402'>pp</a>                402 kernel/proc.c          release(&amp;pp-&gt;lock);</span>
 </pre>
 </body>
 </html>

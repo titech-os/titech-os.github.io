@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>tx_chan</title>
+<title>tx_busy</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,9 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/75.html#L44'>tx_chan</a>            44 kernel/uart.c  static int tx_chan;           // &amp;tx_chan is the "wait channel"</span>
-<span class='curline'><a href='../S/75.html#L90'>tx_chan</a>            90 kernel/uart.c        sleep(&amp;tx_chan, &amp;tx_lock);</span>
-<span class='curline'><a href='../S/75.html#L151'>tx_chan</a>           151 kernel/uart.c      wakeup(&amp;tx_chan);</span>
+<span class='curline'><a href='../S/75.html#L43'>tx_busy</a>            43 kernel/uart.c  static int tx_busy;           // is the UART busy sending?</span>
+<span class='curline'><a href='../S/75.html#L87'>tx_busy</a>            87 kernel/uart.c      while(tx_busy != 0){</span>
+<span class='curline'><a href='../S/75.html#L95'>tx_busy</a>            95 kernel/uart.c      tx_busy = 1;</span>
+<span class='curline'><a href='../S/75.html#L150'>tx_busy</a>           150 kernel/uart.c      tx_busy = 0;</span>
 </pre>
 </body>
 </html>

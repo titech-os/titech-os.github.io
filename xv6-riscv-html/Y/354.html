@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>states</title>
+<title>state</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,9 +9,36 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L665'>states</a>            665 kernel/proc.c    static char *states[] = {</span>
-<span class='curline'><a href='../S/65.html#L680'>states</a>            680 kernel/proc.c      if(p-&gt;state &gt;= 0 &amp;&amp; p-&gt;state &lt; NELEM(states) &amp;&amp; states[p-&gt;state])</span>
-<span class='curline'><a href='../S/65.html#L681'>states</a>            681 kernel/proc.c        state = states[p-&gt;state];</span>
+<span class='curline'><a href='../S/65.html#L56'>state</a>              56 kernel/proc.c        p-&gt;state = UNUSED;</span>
+<span class='curline'><a href='../S/65.html#L116'>state</a>             116 kernel/proc.c      if(p-&gt;state == UNUSED) {</span>
+<span class='curline'><a href='../S/65.html#L126'>state</a>             126 kernel/proc.c    p-&gt;state = USED;</span>
+<span class='curline'><a href='../S/65.html#L171'>state</a>             171 kernel/proc.c    p-&gt;state = UNUSED;</span>
+<span class='curline'><a href='../S/65.html#L229'>state</a>             229 kernel/proc.c    p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L302'>state</a>             302 kernel/proc.c    np-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L359'>state</a>             359 kernel/proc.c    p-&gt;state = ZOMBIE;</span>
+<span class='curline'><a href='../S/65.html#L388'>state</a>             388 kernel/proc.c          if(pp-&gt;state == ZOMBIE){</span>
+<span class='curline'><a href='../S/65.html#L443'>state</a>             443 kernel/proc.c        if(p-&gt;state == RUNNABLE) {</span>
+<span class='curline'><a href='../S/65.html#L447'>state</a>             447 kernel/proc.c          p-&gt;state = RUNNING;</span>
+<span class='curline'><a href='../S/65.html#L482'>state</a>             482 kernel/proc.c    if(p-&gt;state == RUNNING)</span>
+<span class='curline'><a href='../S/65.html#L498'>state</a>             498 kernel/proc.c    p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L559'>state</a>             559 kernel/proc.c    p-&gt;state = SLEEPING;</span>
+<span class='curline'><a href='../S/65.html#L581'>state</a>             581 kernel/proc.c        if(p-&gt;state == SLEEPING &amp;&amp; p-&gt;chan == chan) {</span>
+<span class='curline'><a href='../S/65.html#L582'>state</a>             582 kernel/proc.c          p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L601'>state</a>             601 kernel/proc.c        if(p-&gt;state == SLEEPING){</span>
+<span class='curline'><a href='../S/65.html#L603'>state</a>             603 kernel/proc.c          p-&gt;state = RUNNABLE;</span>
+<span class='curline'><a href='../S/65.html#L677'>state</a>             677 kernel/proc.c    char *state;</span>
+<span class='curline'><a href='../S/65.html#L681'>state</a>             681 kernel/proc.c      if(p-&gt;state == UNUSED)</span>
+<span class='curline'><a href='../S/65.html#L683'>state</a>             683 kernel/proc.c      if(p-&gt;state &gt;= 0 &amp;&amp; p-&gt;state &lt; NELEM(states) &amp;&amp; states[p-&gt;state])</span>
+<span class='curline'><a href='../S/65.html#L684'>state</a>             684 kernel/proc.c        state = states[p-&gt;state];</span>
+<span class='curline'><a href='../S/65.html#L686'>state</a>             686 kernel/proc.c        state = "???";</span>
+<span class='curline'><a href='../S/65.html#L687'>state</a>             687 kernel/proc.c      printf("%d %s %s", p-&gt;pid, state, p-&gt;name);</span>
+<span class='curline'><a href='../S/38.html#L89'>state</a>              89 kernel/proc.h    enum procstate state;        // Process state</span>
+<span class='curline'><a href='../S/4.html#L55'>state</a>              55 user/printf.c    int c0, c1, c2, i, state;</span>
+<span class='curline'><a href='../S/4.html#L57'>state</a>              57 user/printf.c    state = 0;</span>
+<span class='curline'><a href='../S/4.html#L60'>state</a>              60 user/printf.c      if(state == 0){</span>
+<span class='curline'><a href='../S/4.html#L62'>state</a>              62 user/printf.c          state = '%';</span>
+<span class='curline'><a href='../S/4.html#L66'>state</a>              66 user/printf.c      } else if(state == '%'){</span>
+<span class='curline'><a href='../S/4.html#L111'>state</a>             111 user/printf.c        state = 0;</span>
 </pre>
 </body>
 </html>

@@ -13,8 +13,8 @@
 <span class='curline'><a href='../S/37.html#L93'>ch</a>                 93 kernel/pipe.c        if(copyin(pr-&gt;pagetable, &amp;ch, addr + i, 1) == -1)</span>
 <span class='curline'><a href='../S/37.html#L95'>ch</a>                 95 kernel/pipe.c        pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] = ch;</span>
 <span class='curline'><a href='../S/37.html#L110'>ch</a>                110 kernel/pipe.c    char ch;</span>
-<span class='curline'><a href='../S/37.html#L123'>ch</a>                123 kernel/pipe.c      ch = pi-&gt;data[pi-&gt;nread++ % PIPESIZE];</span>
-<span class='curline'><a href='../S/37.html#L124'>ch</a>                124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
+<span class='curline'><a href='../S/37.html#L123'>ch</a>                123 kernel/pipe.c      ch = pi-&gt;data[pi-&gt;nread % PIPESIZE];</span>
+<span class='curline'><a href='../S/37.html#L124'>ch</a>                124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1) {</span>
 </pre>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>malloc</title>
+<title>major</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,14 +9,22 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/18.html#L206'>malloc</a>            206 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
-<span class='curline'><a href='../S/18.html#L217'>malloc</a>            217 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
-<span class='curline'><a href='../S/18.html#L233'>malloc</a>            233 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
-<span class='curline'><a href='../S/18.html#L246'>malloc</a>            246 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
-<span class='curline'><a href='../S/18.html#L259'>malloc</a>            259 user/sh.c        cmd = malloc(sizeof(*cmd));</span>
-<span class='curline'><a href='../S/16.html#L48'>malloc</a>             48 user/user.h    void* malloc(uint);</span>
-<span class='curline'><a href='../S/27.html#L1064'>malloc</a>           1064 user/usertests.c     while((m2 = malloc(10001)) != 0){</span>
-<span class='curline'><a href='../S/27.html#L1073'>malloc</a>           1073 user/usertests.c     m1 = malloc(1024*20);</span>
+<span class='curline'><a href='../S/69.html#L117'>major</a>             117 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].read)</span>
+<span class='curline'><a href='../S/69.html#L119'>major</a>             119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
+<span class='curline'><a href='../S/69.html#L145'>major</a>             145 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].write)</span>
+<span class='curline'><a href='../S/69.html#L147'>major</a>             147 kernel/file.c      ret = devsw[f-&gt;major].write(1, addr, n);</span>
+<span class='curline'><a href='../S/44.html#L9'>major</a>               9 kernel/file.h    short major;       // FD_DEVICE</span>
+<span class='curline'><a href='../S/44.html#L25'>major</a>              25 kernel/file.h    short major;</span>
+<span class='curline'><a href='../S/50.html#L235'>major</a>             235 kernel/fs.c      dip-&gt;major = ip-&gt;major;</span>
+<span class='curline'><a href='../S/50.html#L308'>major</a>             308 kernel/fs.c        ip-&gt;major = dip-&gt;major;</span>
+<span class='curline'><a href='../S/74.html#L34'>major</a>              34 kernel/fs.h      short major;          // Major device number (T_DEVICE only)</span>
+<span class='curline'><a href='../S/46.html#L246'>major</a>             246 kernel/sysfile.c create(char *path, short type, short major, short minor)</span>
+<span class='curline'><a href='../S/46.html#L271'>major</a>             271 kernel/sysfile.c   ip-&gt;major = major;</span>
+<span class='curline'><a href='../S/46.html#L338'>major</a>             338 kernel/sysfile.c   if(ip-&gt;type == T_DEVICE &amp;&amp; (ip-&gt;major &lt; 0 || ip-&gt;major &gt;= NDEV)){</span>
+<span class='curline'><a href='../S/46.html#L354'>major</a>             354 kernel/sysfile.c     f-&gt;major = ip-&gt;major;</span>
+<span class='curline'><a href='../S/46.html#L394'>major</a>             394 kernel/sysfile.c   int major, minor;</span>
+<span class='curline'><a href='../S/46.html#L397'>major</a>             397 kernel/sysfile.c   argint(1, &amp;major);</span>
+<span class='curline'><a href='../S/46.html#L400'>major</a>             400 kernel/sysfile.c      (ip = create(path, T_DEVICE, major, minor)) == 0){</span>
 </pre>
 </body>
 </html>

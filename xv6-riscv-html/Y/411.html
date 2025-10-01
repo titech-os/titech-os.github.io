@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>va_arg</title>
+<title>va0</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,30 +9,28 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/33.html#L85'>va_arg</a>             85 kernel/printf.c       printint(va_arg(ap, int), 10, 1);</span>
-<span class='curline'><a href='../S/33.html#L87'>va_arg</a>             87 kernel/printf.c       printint(va_arg(ap, uint64), 10, 1);</span>
-<span class='curline'><a href='../S/33.html#L90'>va_arg</a>             90 kernel/printf.c       printint(va_arg(ap, uint64), 10, 1);</span>
-<span class='curline'><a href='../S/33.html#L93'>va_arg</a>             93 kernel/printf.c       printint(va_arg(ap, uint32), 10, 0);</span>
-<span class='curline'><a href='../S/33.html#L95'>va_arg</a>             95 kernel/printf.c       printint(va_arg(ap, uint64), 10, 0);</span>
-<span class='curline'><a href='../S/33.html#L98'>va_arg</a>             98 kernel/printf.c       printint(va_arg(ap, uint64), 10, 0);</span>
-<span class='curline'><a href='../S/33.html#L101'>va_arg</a>            101 kernel/printf.c       printint(va_arg(ap, uint32), 16, 0);</span>
-<span class='curline'><a href='../S/33.html#L103'>va_arg</a>            103 kernel/printf.c       printint(va_arg(ap, uint64), 16, 0);</span>
-<span class='curline'><a href='../S/33.html#L106'>va_arg</a>            106 kernel/printf.c       printint(va_arg(ap, uint64), 16, 0);</span>
-<span class='curline'><a href='../S/33.html#L109'>va_arg</a>            109 kernel/printf.c       printptr(va_arg(ap, uint64));</span>
-<span class='curline'><a href='../S/33.html#L111'>va_arg</a>            111 kernel/printf.c       consputc(va_arg(ap, uint));</span>
-<span class='curline'><a href='../S/33.html#L113'>va_arg</a>            113 kernel/printf.c       if((s = va_arg(ap, char*)) == 0)</span>
-<span class='curline'><a href='../S/4.html#L71'>va_arg</a>             71 user/printf.c          printint(fd, va_arg(ap, int), 10, 1);</span>
-<span class='curline'><a href='../S/4.html#L73'>va_arg</a>             73 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 1);</span>
-<span class='curline'><a href='../S/4.html#L76'>va_arg</a>             76 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 1);</span>
-<span class='curline'><a href='../S/4.html#L79'>va_arg</a>             79 user/printf.c          printint(fd, va_arg(ap, uint32), 10, 0);</span>
-<span class='curline'><a href='../S/4.html#L81'>va_arg</a>             81 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
-<span class='curline'><a href='../S/4.html#L84'>va_arg</a>             84 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
-<span class='curline'><a href='../S/4.html#L87'>va_arg</a>             87 user/printf.c          printint(fd, va_arg(ap, uint32), 16, 0);</span>
-<span class='curline'><a href='../S/4.html#L89'>va_arg</a>             89 user/printf.c          printint(fd, va_arg(ap, uint64), 16, 0);</span>
-<span class='curline'><a href='../S/4.html#L92'>va_arg</a>             92 user/printf.c          printint(fd, va_arg(ap, uint64), 16, 0);</span>
-<span class='curline'><a href='../S/4.html#L95'>va_arg</a>             95 user/printf.c          printptr(fd, va_arg(ap, uint64));</span>
-<span class='curline'><a href='../S/4.html#L97'>va_arg</a>             97 user/printf.c          putc(fd, va_arg(ap, uint32));</span>
-<span class='curline'><a href='../S/4.html#L99'>va_arg</a>             99 user/printf.c          if((s = va_arg(ap, char*)) == 0)</span>
+<span class='curline'><a href='../S/41.html#L345'>va0</a>               345 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/41.html#L349'>va0</a>               349 kernel/vm.c        va0 = PGROUNDDOWN(dstva);</span>
+<span class='curline'><a href='../S/41.html#L350'>va0</a>               350 kernel/vm.c        if(va0 &gt;= MAXVA)</span>
+<span class='curline'><a href='../S/41.html#L353'>va0</a>               353 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/41.html#L355'>va0</a>               355 kernel/vm.c          if((pa0 = vmfault(pagetable, va0, 0)) == 0) {</span>
+<span class='curline'><a href='../S/41.html#L360'>va0</a>               360 kernel/vm.c        pte = walk(pagetable, va0, 0);</span>
+<span class='curline'><a href='../S/41.html#L365'>va0</a>               365 kernel/vm.c        n = PGSIZE - (dstva - va0);</span>
+<span class='curline'><a href='../S/41.html#L368'>va0</a>               368 kernel/vm.c        memmove((void *)(pa0 + (dstva - va0)), src, n);</span>
+<span class='curline'><a href='../S/41.html#L372'>va0</a>               372 kernel/vm.c        dstva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/41.html#L383'>va0</a>               383 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/41.html#L386'>va0</a>               386 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/41.html#L387'>va0</a>               387 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/41.html#L389'>va0</a>               389 kernel/vm.c          if((pa0 = vmfault(pagetable, va0, 0)) == 0) {</span>
+<span class='curline'><a href='../S/41.html#L393'>va0</a>               393 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/41.html#L396'>va0</a>               396 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
+<span class='curline'><a href='../S/41.html#L400'>va0</a>               400 kernel/vm.c        srcva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/41.html#L412'>va0</a>               412 kernel/vm.c      uint64 n, va0, pa0;</span>
+<span class='curline'><a href='../S/41.html#L416'>va0</a>               416 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/41.html#L417'>va0</a>               417 kernel/vm.c        pa0 = walkaddr(pagetable, va0);</span>
+<span class='curline'><a href='../S/41.html#L420'>va0</a>               420 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/41.html#L424'>va0</a>               424 kernel/vm.c        char *p = (char *) (pa0 + (srcva - va0));</span>
+<span class='curline'><a href='../S/41.html#L439'>va0</a>               439 kernel/vm.c        srcva = va0 + PGSIZE;</span>
 </pre>
 </body>
 </html>

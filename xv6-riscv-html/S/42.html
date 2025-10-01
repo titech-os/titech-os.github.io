@@ -34,7 +34,7 @@
 <a id='L20' name='L20'></a>  20 .align 4
 <a id='L21' name='L21'></a>  21 .globl uservec
 <a id='L22' name='L22'></a>  22 uservec:    
-<a id='L23' name='L23'></a>  23 <em class='sharp'>    #</em>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>        #</em>
 <a id='L24' name='L24'></a>  24 <em class='comment'>        # trap.c sets stvec to point here, so</em>
 <a id='L25' name='L25'></a>  25 <em class='comment'>        # traps from user space start here,</em>
 <a id='L26' name='L26'></a>  26 <em class='comment'>        # in supervisor mode, but with a</em>
@@ -82,7 +82,7 @@
 <a id='L68' name='L68'></a>  68         sd t5, 272(a0)
 <a id='L69' name='L69'></a>  69         sd t6, 280(a0)
 <a id='L70' name='L70'></a>  70 
-<a id='L71' name='L71'></a>  71 <em class='comment'>    # save the user a0 in p-&gt;trapframe-&gt;a0</em>
+<a id='L71' name='L71'></a>  71 <em class='comment'>        # save the user a0 in p-&gt;trapframe-&gt;a0</em>
 <a id='L72' name='L72'></a>  72         csrr t0, sscratch
 <a id='L73' name='L73'></a>  73         sd t0, 112(a0)
 <a id='L74' name='L74'></a>  74 
@@ -155,7 +155,7 @@
 <a id='L141' name='L141'></a> 141         ld t5, 272(a0)
 <a id='L142' name='L142'></a> 142         ld t6, 280(a0)
 <a id='L143' name='L143'></a> 143 
-<a id='L144' name='L144'></a> 144 <em class='comment'>    # restore user a0</em>
+<a id='L144' name='L144'></a> 144 <em class='comment'>        # restore user a0</em>
 <a id='L145' name='L145'></a> 145         ld a0, 112(a0)
 <a id='L146' name='L146'></a> 146         
 <a id='L147' name='L147'></a> 147 <em class='comment'>        # return to user mode and user pc.</em>

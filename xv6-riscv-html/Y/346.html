@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sstatus</title>
+<title>srcva</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,9 +9,16 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/58.html#L140'>sstatus</a>           140 kernel/trap.c    uint64 sstatus = r_sstatus();</span>
-<span class='curline'><a href='../S/58.html#L143'>sstatus</a>           143 kernel/trap.c    if((sstatus &amp; SSTATUS_SPP) == 0)</span>
-<span class='curline'><a href='../S/58.html#L161'>sstatus</a>           161 kernel/trap.c    w_sstatus(sstatus);</span>
+<span class='curline'><a href='../S/41.html#L381'>srcva</a>             381 kernel/vm.c    copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)</span>
+<span class='curline'><a href='../S/41.html#L386'>srcva</a>             386 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/41.html#L393'>srcva</a>             393 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/41.html#L396'>srcva</a>             396 kernel/vm.c        memmove(dst, (void *)(pa0 + (srcva - va0)), n);</span>
+<span class='curline'><a href='../S/41.html#L400'>srcva</a>             400 kernel/vm.c        srcva = va0 + PGSIZE;</span>
+<span class='curline'><a href='../S/41.html#L410'>srcva</a>             410 kernel/vm.c    copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)</span>
+<span class='curline'><a href='../S/41.html#L416'>srcva</a>             416 kernel/vm.c        va0 = PGROUNDDOWN(srcva);</span>
+<span class='curline'><a href='../S/41.html#L420'>srcva</a>             420 kernel/vm.c        n = PGSIZE - (srcva - va0);</span>
+<span class='curline'><a href='../S/41.html#L424'>srcva</a>             424 kernel/vm.c        char *p = (char *) (pa0 + (srcva - va0));</span>
+<span class='curline'><a href='../S/41.html#L439'>srcva</a>             439 kernel/vm.c        srcva = va0 + PGSIZE;</span>
 </pre>
 </body>
 </html>

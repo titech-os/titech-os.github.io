@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>r_stval</title>
+<title>r_sstatus</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,9 +9,12 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/58.html#L72'>r_stval</a>            72 kernel/trap.c              vmfault(p-&gt;pagetable, r_stval(), (r_scause() == 13)? 1 : 0) != 0) {</span>
-<span class='curline'><a href='../S/58.html#L76'>r_stval</a>            76 kernel/trap.c      printf("            sepc=0x%lx stval=0x%lx\n", r_sepc(), r_stval());</span>
-<span class='curline'><a href='../S/58.html#L150'>r_stval</a>           150 kernel/trap.c      printf("scause=0x%lx sepc=0x%lx stval=0x%lx\n", scause, r_sepc(), r_stval());</span>
+<span class='curline'><a href='../S/66.html#L289'>r_sstatus</a>         289 kernel/riscv.h   w_sstatus(r_sstatus() | SSTATUS_SIE);</span>
+<span class='curline'><a href='../S/66.html#L296'>r_sstatus</a>         296 kernel/riscv.h   w_sstatus(r_sstatus() &amp; ~SSTATUS_SIE);</span>
+<span class='curline'><a href='../S/66.html#L303'>r_sstatus</a>         303 kernel/riscv.h   uint64 x = r_sstatus();</span>
+<span class='curline'><a href='../S/58.html#L42'>r_sstatus</a>          42 kernel/trap.c    if((r_sstatus() &amp; SSTATUS_SPP) != 0)</span>
+<span class='curline'><a href='../S/58.html#L124'>r_sstatus</a>         124 kernel/trap.c    unsigned long x = r_sstatus();</span>
+<span class='curline'><a href='../S/58.html#L140'>r_sstatus</a>         140 kernel/trap.c    uint64 sstatus = r_sstatus();</span>
 </pre>
 </body>
 </html>

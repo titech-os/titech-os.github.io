@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>spinlock</title>
+<title>sleeplock</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,33 +9,17 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/63.html#L27'>spinlock</a>           27 kernel/bio.c     struct spinlock lock;</span>
-<span class='curline'><a href='../S/59.html#L45'>spinlock</a>           45 kernel/console.c   struct spinlock lock;</span>
-<span class='curline'><a href='../S/35.html#L7'>spinlock</a>            7 kernel/defs.h  struct spinlock;</span>
-<span class='curline'><a href='../S/35.html#L96'>spinlock</a>           96 kernel/defs.h  void            sleep(void*, struct spinlock*);</span>
-<span class='curline'><a href='../S/35.html#L109'>spinlock</a>          109 kernel/defs.h  void            acquire(struct spinlock*);</span>
-<span class='curline'><a href='../S/35.html#L110'>spinlock</a>          110 kernel/defs.h  int             holding(struct spinlock*);</span>
-<span class='curline'><a href='../S/35.html#L111'>spinlock</a>          111 kernel/defs.h  void            initlock(struct spinlock*, char*);</span>
-<span class='curline'><a href='../S/35.html#L112'>spinlock</a>          112 kernel/defs.h  void            release(struct spinlock*);</span>
-<span class='curline'><a href='../S/35.html#L143'>spinlock</a>          143 kernel/defs.h  extern struct spinlock tickslock;</span>
-<span class='curline'><a href='../S/69.html#L18'>spinlock</a>           18 kernel/file.c    struct spinlock lock;</span>
-<span class='curline'><a href='../S/50.html#L178'>spinlock</a>          178 kernel/fs.c      struct spinlock lock;</span>
-<span class='curline'><a href='../S/72.html#L22'>spinlock</a>           22 kernel/kalloc.c   struct spinlock lock;</span>
-<span class='curline'><a href='../S/32.html#L41'>spinlock</a>           41 kernel/log.c     struct spinlock lock;</span>
-<span class='curline'><a href='../S/37.html#L14'>spinlock</a>           14 kernel/pipe.c    struct spinlock lock;</span>
-<span class='curline'><a href='../S/33.html#L23'>spinlock</a>           23 kernel/printf.c   struct spinlock lock;</span>
-<span class='curline'><a href='../S/65.html#L16'>spinlock</a>           16 kernel/proc.c  struct spinlock pid_lock;</span>
-<span class='curline'><a href='../S/65.html#L27'>spinlock</a>           27 kernel/proc.c  struct spinlock wait_lock;</span>
-<span class='curline'><a href='../S/65.html#L540'>spinlock</a>          540 kernel/proc.c  sleep(void *chan, struct spinlock *lk)</span>
-<span class='curline'><a href='../S/38.html#L86'>spinlock</a>           86 kernel/proc.h    struct spinlock lock;</span>
-<span class='curline'><a href='../S/68.html#L4'>spinlock</a>            4 kernel/sleeplock.h   struct spinlock lk; // spinlock protecting this sleep lock</span>
-<span class='curline'><a href='../S/61.html#L12'>spinlock</a>           12 kernel/spinlock.c initlock(struct spinlock *lk, char *name)</span>
-<span class='curline'><a href='../S/61.html#L22'>spinlock</a>           22 kernel/spinlock.c acquire(struct spinlock *lk)</span>
-<span class='curline'><a href='../S/61.html#L47'>spinlock</a>           47 kernel/spinlock.c release(struct spinlock *lk)</span>
-<span class='curline'><a href='../S/61.html#L77'>spinlock</a>           77 kernel/spinlock.c holding(struct spinlock *lk)</span>
-<span class='curline'><a href='../S/58.html#L9'>spinlock</a>            9 kernel/trap.c  struct spinlock tickslock;</span>
-<span class='curline'><a href='../S/75.html#L42'>spinlock</a>           42 kernel/uart.c  static struct spinlock tx_lock;</span>
-<span class='curline'><a href='../S/67.html#L57'>spinlock</a>           57 kernel/virtio_disk.c   struct spinlock vdisk_lock;</span>
+<span class='curline'><a href='../S/49.html#L6'>sleeplock</a>           6 kernel/buf.h     struct sleeplock lock;</span>
+<span class='curline'><a href='../S/35.html#L8'>sleeplock</a>           8 kernel/defs.h  struct sleeplock;</span>
+<span class='curline'><a href='../S/35.html#L117'>sleeplock</a>         117 kernel/defs.h  void            acquiresleep(struct sleeplock*);</span>
+<span class='curline'><a href='../S/35.html#L118'>sleeplock</a>         118 kernel/defs.h  void            releasesleep(struct sleeplock*);</span>
+<span class='curline'><a href='../S/35.html#L119'>sleeplock</a>         119 kernel/defs.h  int             holdingsleep(struct sleeplock*);</span>
+<span class='curline'><a href='../S/35.html#L120'>sleeplock</a>         120 kernel/defs.h  void            initsleeplock(struct sleeplock*, char*);</span>
+<span class='curline'><a href='../S/44.html#L21'>sleeplock</a>          21 kernel/file.h    struct sleeplock lock; // protects everything below here</span>
+<span class='curline'><a href='../S/47.html#L13'>sleeplock</a>          13 kernel/sleeplock.c initsleeplock(struct sleeplock *lk, char *name)</span>
+<span class='curline'><a href='../S/47.html#L22'>sleeplock</a>          22 kernel/sleeplock.c acquiresleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/47.html#L34'>sleeplock</a>          34 kernel/sleeplock.c releasesleep(struct sleeplock *lk)</span>
+<span class='curline'><a href='../S/47.html#L44'>sleeplock</a>          44 kernel/sleeplock.c holdingsleep(struct sleeplock *lk)</span>
 </pre>
 </body>
 </html>

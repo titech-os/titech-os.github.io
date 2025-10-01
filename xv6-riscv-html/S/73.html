@@ -25,7 +25,7 @@ This source file includes following definitions.
 <a id='L4' name='L4'></a>   4 <em class='sharp'>#include</em> "<a href='66.html'>riscv.h</a>"
 <a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='35.html'>defs.h</a>"
 <a id='L6' name='L6'></a>   6 
-<a id='L7' name='L7'></a>   7 <strong class='reserved'>void</strong> <a href='../D/365.html' title='Multiple defined in 21 places.'>main</a>();
+<a id='L7' name='L7'></a>   7 <strong class='reserved'>void</strong> <a href='../D/366.html' title='Multiple defined in 21 places.'>main</a>();
 <a id='L8' name='L8'></a>   8 <strong class='reserved'>void</strong> <a href='../S/73.html#L53' title='Defined at 53 in kernel/start.c.'>timerinit</a>();
 <a id='L9' name='L9'></a>   9 
 <a id='L10' name='L10'></a>  10 <em class='comment'>// entry.S needs one stack per CPU.</em>
@@ -33,17 +33,17 @@ This source file includes following definitions.
 <a id='L12' name='L12'></a>  12 
 <a id='L13' name='L13'></a>  13 <em class='comment'>// entry.S jumps here in machine mode on stack0.</em>
 <a id='L14' name='L14'></a>  14 <strong class='reserved'>void</strong>
-<a id='L15' name='L15'></a>  15 <a href='../R/473.html' title='Multiple referred from 6 places.'>start</a>()
+<a id='L15' name='L15'></a>  15 <a href='../R/474.html' title='Multiple referred from 6 places.'>start</a>()
 <a id='L16' name='L16'></a>  16 <em class='brace'>{</em>
 <a id='L17' name='L17'></a>  17   <em class='comment'>// set M Previous Privilege mode to Supervisor, for mret.</em>
-<a id='L18' name='L18'></a>  18   <strong class='reserved'>unsigned</strong> <strong class='reserved'>long</strong> <a href='../Y/433.html' title='Multiple used in 150 places.'>x</a> = <a href='../S/66.html#L20' title='Defined at 20 in kernel/riscv.h.'>r_mstatus</a>();
-<a id='L19' name='L19'></a>  19   <a href='../Y/433.html' title='Multiple used in 150 places.'>x</a> &amp;= ~<a href='../S/66.html#L14' title='Defined at 14 in kernel/riscv.h.'>MSTATUS_MPP_MASK</a>;
-<a id='L20' name='L20'></a>  20   <a href='../Y/433.html' title='Multiple used in 150 places.'>x</a> |= <a href='../S/66.html#L16' title='Defined at 16 in kernel/riscv.h.'>MSTATUS_MPP_S</a>;
-<a id='L21' name='L21'></a>  21   <a href='../S/66.html#L28' title='Defined at 28 in kernel/riscv.h.'>w_mstatus</a>(<a href='../Y/433.html' title='Multiple used in 150 places.'>x</a>);
+<a id='L18' name='L18'></a>  18   <strong class='reserved'>unsigned</strong> <strong class='reserved'>long</strong> <a href='../Y/434.html' title='Multiple used in 150 places.'>x</a> = <a href='../S/66.html#L20' title='Defined at 20 in kernel/riscv.h.'>r_mstatus</a>();
+<a id='L19' name='L19'></a>  19   <a href='../Y/434.html' title='Multiple used in 150 places.'>x</a> &amp;= ~<a href='../S/66.html#L14' title='Defined at 14 in kernel/riscv.h.'>MSTATUS_MPP_MASK</a>;
+<a id='L20' name='L20'></a>  20   <a href='../Y/434.html' title='Multiple used in 150 places.'>x</a> |= <a href='../S/66.html#L16' title='Defined at 16 in kernel/riscv.h.'>MSTATUS_MPP_S</a>;
+<a id='L21' name='L21'></a>  21   <a href='../S/66.html#L28' title='Defined at 28 in kernel/riscv.h.'>w_mstatus</a>(<a href='../Y/434.html' title='Multiple used in 150 places.'>x</a>);
 <a id='L22' name='L22'></a>  22 
 <a id='L23' name='L23'></a>  23   <em class='comment'>// set M Exception Program Counter to main, for mret.</em>
 <a id='L24' name='L24'></a>  24   <em class='comment'>// requires gcc -mcmodel=medany</em>
-<a id='L25' name='L25'></a>  25   <a href='../S/66.html#L37' title='Defined at 37 in kernel/riscv.h.'>w_mepc</a>((<a href='../S/40.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../D/365.html' title='Multiple defined in 21 places.'>main</a>);
+<a id='L25' name='L25'></a>  25   <a href='../S/66.html#L37' title='Defined at 37 in kernel/riscv.h.'>w_mepc</a>((<a href='../S/40.html#L8' title='Defined at 8 in kernel/types.h.'>uint64</a>)<a href='../D/366.html' title='Multiple defined in 21 places.'>main</a>);
 <a id='L26' name='L26'></a>  26 
 <a id='L27' name='L27'></a>  27   <em class='comment'>// disable paging for now.</em>
 <a id='L28' name='L28'></a>  28   <a href='../S/66.html#L230' title='Defined at 230 in kernel/riscv.h.'>w_satp</a>(0);
@@ -71,7 +71,7 @@ This source file includes following definitions.
 <a id='L50' name='L50'></a>  50 
 <a id='L51' name='L51'></a>  51 <em class='comment'>// ask each hart to generate timer interrupts.</em>
 <a id='L52' name='L52'></a>  52 <strong class='reserved'>void</strong>
-<a id='L53' name='L53'></a>  53 <a href='../R/508.html' title='Multiple referred from 2 places.'>timerinit</a>()
+<a id='L53' name='L53'></a>  53 <a href='../R/509.html' title='Multiple referred from 2 places.'>timerinit</a>()
 <a id='L54' name='L54'></a>  54 <em class='brace'>{</em>
 <a id='L55' name='L55'></a>  55   <em class='comment'>// enable supervisor-mode timer interrupts.</em>
 <a id='L56' name='L56'></a>  56   <a href='../S/66.html#L107' title='Defined at 107 in kernel/riscv.h.'>w_mie</a>(<a href='../S/66.html#L99' title='Defined at 99 in kernel/riscv.h.'>r_mie</a>() | <a href='../S/66.html#L97' title='Defined at 97 in kernel/riscv.h.'>MIE_STIE</a>);

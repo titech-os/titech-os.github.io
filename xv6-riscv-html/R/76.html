@@ -94,10 +94,14 @@
 <span class='curline'><a href='../S/27.html#L2633'>PGSIZE</a>           2633 user/usertests.c   for (i = prev_end + PGSIZE; i &lt; new_end; i += PGSIZE * PGSIZE)</span>
 <span class='curline'><a href='../S/27.html#L2636'>PGSIZE</a>           2636 user/usertests.c   for (i = prev_end + PGSIZE; i &lt; new_end; i += PGSIZE * PGSIZE) {</span>
 <span class='curline'><a href='../S/27.html#L2664'>PGSIZE</a>           2664 user/usertests.c     sbrklazy(4*PGSIZE);</span>
-<span class='curline'><a href='../S/27.html#L2921'>PGSIZE</a>           2921 user/usertests.c         char *a = sbrk(PGSIZE);</span>
-<span class='curline'><a href='../S/27.html#L2924'>PGSIZE</a>           2924 user/usertests.c         *(a + PGSIZE - 1) = 1;</span>
-<span class='curline'><a href='../S/27.html#L2930'>PGSIZE</a>           2930 user/usertests.c         sbrk(-PGSIZE);</span>
-<span class='curline'><a href='../S/27.html#L3121'>PGSIZE</a>           3121 user/usertests.c     char *a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L2716'>PGSIZE</a>           2716 user/usertests.c   int n = TRAPFRAME-PGSIZE-(uint64)p;</span>
+<span class='curline'><a href='../S/27.html#L2724'>PGSIZE</a>           2724 user/usertests.c   p = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L2725'>PGSIZE</a>           2725 user/usertests.c   if (p &lt; 0 || (uint64)p != TRAPFRAME-PGSIZE) {</span>
+<span class='curline'><a href='../S/27.html#L2726'>PGSIZE</a>           2726 user/usertests.c     printf("sbrk(%d) returned %p, not expected TRAPFRAME-PGSIZE\n", PGSIZE, p);</span>
+<span class='curline'><a href='../S/27.html#L2972'>PGSIZE</a>           2972 user/usertests.c         char *a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L2975'>PGSIZE</a>           2975 user/usertests.c         *(a + PGSIZE - 1) = 1;</span>
+<span class='curline'><a href='../S/27.html#L2981'>PGSIZE</a>           2981 user/usertests.c         sbrk(-PGSIZE);</span>
+<span class='curline'><a href='../S/27.html#L3172'>PGSIZE</a>           3172 user/usertests.c     char *a = sbrk(PGSIZE);</span>
 </pre>
 </body>
 </html>

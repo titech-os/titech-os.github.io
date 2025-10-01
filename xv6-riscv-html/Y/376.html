@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ticks</title>
+<title>text</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,14 +9,18 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/35.html#L140'>ticks</a>             140 kernel/defs.h  extern uint     ticks;</span>
-<span class='curline'><a href='../S/36.html#L75'>ticks</a>              75 kernel/sysproc.c   ticks0 = ticks;</span>
-<span class='curline'><a href='../S/36.html#L76'>ticks</a>              76 kernel/sysproc.c   while(ticks - ticks0 &lt; n){</span>
-<span class='curline'><a href='../S/36.html#L81'>ticks</a>              81 kernel/sysproc.c     sleep(&amp;ticks, &amp;tickslock);</span>
-<span class='curline'><a href='../S/36.html#L104'>ticks</a>             104 kernel/sysproc.c   xticks = ticks;</span>
-<span class='curline'><a href='../S/58.html#L10'>ticks</a>              10 kernel/trap.c  uint ticks;</span>
-<span class='curline'><a href='../S/58.html#L169'>ticks</a>             169 kernel/trap.c      ticks++;</span>
-<span class='curline'><a href='../S/58.html#L170'>ticks</a>             170 kernel/trap.c      wakeup(&amp;ticks);</span>
+<span class='curline'><a href='../S/23.html#L73'>text</a>               73 user/grep.c    match(char *re, char *text)</span>
+<span class='curline'><a href='../S/23.html#L76'>text</a>               76 user/grep.c        return matchhere(re+1, text);</span>
+<span class='curline'><a href='../S/23.html#L78'>text</a>               78 user/grep.c        if(matchhere(re, text))</span>
+<span class='curline'><a href='../S/23.html#L80'>text</a>               80 user/grep.c      }while(*text++ != '\0');</span>
+<span class='curline'><a href='../S/23.html#L85'>text</a>               85 user/grep.c    int matchhere(char *re, char *text)</span>
+<span class='curline'><a href='../S/23.html#L90'>text</a>               90 user/grep.c        return matchstar(re[0], re+2, text);</span>
+<span class='curline'><a href='../S/23.html#L92'>text</a>               92 user/grep.c        return *text == '\0';</span>
+<span class='curline'><a href='../S/23.html#L93'>text</a>               93 user/grep.c      if(*text!='\0' &amp;&amp; (re[0]=='.' || re[0]==*text))</span>
+<span class='curline'><a href='../S/23.html#L94'>text</a>               94 user/grep.c        return matchhere(re+1, text+1);</span>
+<span class='curline'><a href='../S/23.html#L99'>text</a>               99 user/grep.c    int matchstar(int c, char *re, char *text)</span>
+<span class='curline'><a href='../S/23.html#L102'>text</a>              102 user/grep.c        if(matchhere(re, text))</span>
+<span class='curline'><a href='../S/23.html#L104'>text</a>              104 user/grep.c      }while(*text!='\0' &amp;&amp; (*text++==c || c=='.'));</span>
 </pre>
 </body>
 </html>

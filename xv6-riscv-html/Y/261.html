@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>panicking</title>
+<title>panicked</title>
 <meta name='robots' content='noindex,nofollow' />
 <meta name='generator' content='GLOBAL-6.6.14' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
@@ -9,13 +9,10 @@
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/33.html#L18'>panicking</a>          18 kernel/printf.c volatile int panicking = 0; // printing a panic message</span>
-<span class='curline'><a href='../S/33.html#L70'>panicking</a>          70 kernel/printf.c   if(panicking == 0)</span>
-<span class='curline'><a href='../S/33.html#L130'>panicking</a>         130 kernel/printf.c   if(panicking == 0)</span>
-<span class='curline'><a href='../S/33.html#L139'>panicking</a>         139 kernel/printf.c   panicking = 1;</span>
-<span class='curline'><a href='../S/75.html#L46'>panicking</a>          46 kernel/uart.c  extern volatile int panicking; // from printf.c</span>
-<span class='curline'><a href='../S/75.html#L109'>panicking</a>         109 kernel/uart.c    if(panicking == 0)</span>
-<span class='curline'><a href='../S/75.html#L122'>panicking</a>         122 kernel/uart.c    if(panicking == 0)</span>
+<span class='curline'><a href='../S/33.html#L19'>panicked</a>           19 kernel/printf.c volatile int panicked = 0; // spinning forever at end of a panic</span>
+<span class='curline'><a href='../S/33.html#L142'>panicked</a>          142 kernel/printf.c   panicked = 1; // freeze uart output from other CPUs</span>
+<span class='curline'><a href='../S/75.html#L47'>panicked</a>           47 kernel/uart.c  extern volatile int panicked; // from printf.c</span>
+<span class='curline'><a href='../S/75.html#L112'>panicked</a>          112 kernel/uart.c    if(panicked){</span>
 </pre>
 </body>
 </html>

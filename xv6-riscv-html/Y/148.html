@@ -57,8 +57,10 @@
 <span class='curline'><a href='../S/37.html#L102'>i</a>                 102 kernel/pipe.c    return i;</span>
 <span class='curline'><a href='../S/37.html#L108'>i</a>                 108 kernel/pipe.c    int i;</span>
 <span class='curline'><a href='../S/37.html#L120'>i</a>                 120 kernel/pipe.c    for(i = 0; i &lt; n; i++){  //DOC: piperead-copy</span>
-<span class='curline'><a href='../S/37.html#L124'>i</a>                 124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1)</span>
-<span class='curline'><a href='../S/37.html#L129'>i</a>                 129 kernel/pipe.c    return i;</span>
+<span class='curline'><a href='../S/37.html#L124'>i</a>                 124 kernel/pipe.c      if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) == -1) {</span>
+<span class='curline'><a href='../S/37.html#L125'>i</a>                 125 kernel/pipe.c        if(i == 0)</span>
+<span class='curline'><a href='../S/37.html#L126'>i</a>                 126 kernel/pipe.c          i = -1;</span>
+<span class='curline'><a href='../S/37.html#L133'>i</a>                 133 kernel/pipe.c    return i;</span>
 <span class='curline'><a href='../S/33.html#L32'>i</a>                  32 kernel/printf.c   int i;</span>
 <span class='curline'><a href='../S/33.html#L40'>i</a>                  40 kernel/printf.c   i = 0;</span>
 <span class='curline'><a href='../S/33.html#L42'>i</a>                  42 kernel/printf.c     buf[i++] = digits[x % base];</span>
@@ -79,10 +81,10 @@
 <span class='curline'><a href='../S/33.html#L99'>i</a>                  99 kernel/printf.c       i += 2;</span>
 <span class='curline'><a href='../S/33.html#L104'>i</a>                 104 kernel/printf.c       i += 1;</span>
 <span class='curline'><a href='../S/33.html#L107'>i</a>                 107 kernel/printf.c       i += 2;</span>
-<span class='curline'><a href='../S/65.html#L259'>i</a>                 259 kernel/proc.c    int i, pid;</span>
-<span class='curline'><a href='../S/65.html#L283'>i</a>                 283 kernel/proc.c    for(i = 0; i &lt; NOFILE; i++)</span>
-<span class='curline'><a href='../S/65.html#L284'>i</a>                 284 kernel/proc.c      if(p-&gt;ofile[i])</span>
-<span class='curline'><a href='../S/65.html#L285'>i</a>                 285 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/65.html#L262'>i</a>                 262 kernel/proc.c    int i, pid;</span>
+<span class='curline'><a href='../S/65.html#L286'>i</a>                 286 kernel/proc.c    for(i = 0; i &lt; NOFILE; i++)</span>
+<span class='curline'><a href='../S/65.html#L287'>i</a>                 287 kernel/proc.c      if(p-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/65.html#L288'>i</a>                 288 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
 <span class='curline'><a href='../S/48.html#L7'>i</a>                   7 kernel/string.c   int i;</span>
 <span class='curline'><a href='../S/48.html#L8'>i</a>                   8 kernel/string.c   for(i = 0; i &lt; n; i++){</span>
 <span class='curline'><a href='../S/48.html#L9'>i</a>                   9 kernel/string.c     cdst[i] = c;</span>
@@ -205,13 +207,13 @@
 <span class='curline'><a href='../S/25.html#L32'>i</a>                  32 user/stressfs.c   path[8] += i;</span>
 <span class='curline'><a href='../S/25.html#L34'>i</a>                  34 user/stressfs.c   for(i = 0; i &lt; 20; i++)</span>
 <span class='curline'><a href='../S/25.html#L42'>i</a>                  42 user/stressfs.c   for (i = 0; i &lt; 20; i++)</span>
-<span class='curline'><a href='../S/20.html#L52'>i</a>                  52 user/ulib.c      int i;</span>
-<span class='curline'><a href='../S/20.html#L53'>i</a>                  53 user/ulib.c      for(i = 0; i &lt; n; i++){</span>
-<span class='curline'><a href='../S/20.html#L54'>i</a>                  54 user/ulib.c        cdst[i] = c;</span>
-<span class='curline'><a href='../S/20.html#L71'>i</a>                  71 user/ulib.c      int i, cc;</span>
-<span class='curline'><a href='../S/20.html#L74'>i</a>                  74 user/ulib.c      for(i=0; i+1 &lt; max; ){</span>
-<span class='curline'><a href='../S/20.html#L78'>i</a>                  78 user/ulib.c        buf[i++] = c;</span>
-<span class='curline'><a href='../S/20.html#L82'>i</a>                  82 user/ulib.c      buf[i] = '\0';</span>
+<span class='curline'><a href='../S/20.html#L53'>i</a>                  53 user/ulib.c      int i;</span>
+<span class='curline'><a href='../S/20.html#L54'>i</a>                  54 user/ulib.c      for(i = 0; i &lt; n; i++){</span>
+<span class='curline'><a href='../S/20.html#L55'>i</a>                  55 user/ulib.c        cdst[i] = c;</span>
+<span class='curline'><a href='../S/20.html#L72'>i</a>                  72 user/ulib.c      int i, cc;</span>
+<span class='curline'><a href='../S/20.html#L75'>i</a>                  75 user/ulib.c      for(i=0; i+1 &lt; max; ){</span>
+<span class='curline'><a href='../S/20.html#L79'>i</a>                  79 user/ulib.c        buf[i++] = c;</span>
+<span class='curline'><a href='../S/20.html#L83'>i</a>                  83 user/ulib.c      buf[i] = '\0';</span>
 <span class='curline'><a href='../S/27.html#L144'>i</a>                 144 user/usertests.c   for(int i = 0; i &lt; MAXPATH; i++)</span>
 <span class='curline'><a href='../S/27.html#L145'>i</a>                 145 user/usertests.c     b[i] = 'x';</span>
 <span class='curline'><a href='../S/27.html#L180'>i</a>                 180 user/usertests.c     for(int i = 0; i &lt; PGSIZE; i++)</span>
@@ -328,32 +330,32 @@
 <span class='curline'><a href='../S/27.html#L2687'>i</a>                2687 user/usertests.c   for(int i = 0; i &lt; sizeof(bad)/sizeof(bad[0]); i++){</span>
 <span class='curline'><a href='../S/27.html#L2690'>i</a>                2690 user/usertests.c     if(read(fd, (char*)bad[i], 512) &gt;= 0) { printf("read succeeded\n");  exit(1); }</span>
 <span class='curline'><a href='../S/27.html#L2694'>i</a>                2694 user/usertests.c     if(write(fd, (char*)bad[i], 512) &gt;= 0) { printf("write succeeded\n"); exit(1); }</span>
-<span class='curline'><a href='../S/27.html#L2780'>i</a>                2780 user/usertests.c   int i, fd;</span>
-<span class='curline'><a href='../S/27.html#L2792'>i</a>                2792 user/usertests.c   for(i = 0; i &lt; N; i++){</span>
-<span class='curline'><a href='../S/27.html#L2794'>i</a>                2794 user/usertests.c     name[1] = '0' + (i / 64);</span>
-<span class='curline'><a href='../S/27.html#L2795'>i</a>                2795 user/usertests.c     name[2] = '0' + (i % 64);</span>
-<span class='curline'><a href='../S/27.html#L2798'>i</a>                2798 user/usertests.c       printf("%s: bigdir i=%d link(bd, %s) failed\n", s, i, name);</span>
-<span class='curline'><a href='../S/27.html#L2804'>i</a>                2804 user/usertests.c   for(i = 0; i &lt; N; i++){</span>
-<span class='curline'><a href='../S/27.html#L2806'>i</a>                2806 user/usertests.c     name[1] = '0' + (i / 64);</span>
-<span class='curline'><a href='../S/27.html#L2807'>i</a>                2807 user/usertests.c     name[2] = '0' + (i % 64);</span>
-<span class='curline'><a href='../S/27.html#L2839'>i</a>                2839 user/usertests.c         for(int i = 0; i &lt; ci+1; i++){</span>
-<span class='curline'><a href='../S/27.html#L2881'>i</a>                2881 user/usertests.c   for(int i = 0; i &lt; assumed_free; i++){</span>
-<span class='curline'><a href='../S/27.html#L2929'>i</a>                2929 user/usertests.c       for(int i = 0; i &lt; avail; i++)</span>
-<span class='curline'><a href='../S/27.html#L2968'>i</a>                2968 user/usertests.c     for(int i = 0; i &lt; MAXFILE; i++){</span>
-<span class='curline'><a href='../S/27.html#L2984'>i</a>                2984 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
-<span class='curline'><a href='../S/27.html#L2988'>i</a>                2988 user/usertests.c     name[2] = '0' + (i / 32);</span>
-<span class='curline'><a href='../S/27.html#L2989'>i</a>                2989 user/usertests.c     name[3] = '0' + (i % 32);</span>
-<span class='curline'><a href='../S/27.html#L3004'>i</a>                3004 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
-<span class='curline'><a href='../S/27.html#L3008'>i</a>                3008 user/usertests.c     name[2] = '0' + (i / 32);</span>
-<span class='curline'><a href='../S/27.html#L3009'>i</a>                3009 user/usertests.c     name[3] = '0' + (i % 32);</span>
-<span class='curline'><a href='../S/27.html#L3014'>i</a>                3014 user/usertests.c   for(int i = 0; '0' + i &lt; 0177; i++){</span>
-<span class='curline'><a href='../S/27.html#L3019'>i</a>                3019 user/usertests.c     name[3] = '0' + i;</span>
-<span class='curline'><a href='../S/27.html#L3029'>i</a>                3029 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
-<span class='curline'><a href='../S/27.html#L3033'>i</a>                3033 user/usertests.c     name[2] = '0' + (i / 32);</span>
-<span class='curline'><a href='../S/27.html#L3034'>i</a>                3034 user/usertests.c     name[3] = '0' + (i % 32);</span>
-<span class='curline'><a href='../S/27.html#L3045'>i</a>                3045 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
-<span class='curline'><a href='../S/27.html#L3049'>i</a>                3049 user/usertests.c     name[2] = '0' + (i / 32);</span>
-<span class='curline'><a href='../S/27.html#L3050'>i</a>                3050 user/usertests.c     name[3] = '0' + (i % 32);</span>
+<span class='curline'><a href='../S/27.html#L2831'>i</a>                2831 user/usertests.c   int i, fd;</span>
+<span class='curline'><a href='../S/27.html#L2843'>i</a>                2843 user/usertests.c   for(i = 0; i &lt; N; i++){</span>
+<span class='curline'><a href='../S/27.html#L2845'>i</a>                2845 user/usertests.c     name[1] = '0' + (i / 64);</span>
+<span class='curline'><a href='../S/27.html#L2846'>i</a>                2846 user/usertests.c     name[2] = '0' + (i % 64);</span>
+<span class='curline'><a href='../S/27.html#L2849'>i</a>                2849 user/usertests.c       printf("%s: bigdir i=%d link(bd, %s) failed\n", s, i, name);</span>
+<span class='curline'><a href='../S/27.html#L2855'>i</a>                2855 user/usertests.c   for(i = 0; i &lt; N; i++){</span>
+<span class='curline'><a href='../S/27.html#L2857'>i</a>                2857 user/usertests.c     name[1] = '0' + (i / 64);</span>
+<span class='curline'><a href='../S/27.html#L2858'>i</a>                2858 user/usertests.c     name[2] = '0' + (i % 64);</span>
+<span class='curline'><a href='../S/27.html#L2890'>i</a>                2890 user/usertests.c         for(int i = 0; i &lt; ci+1; i++){</span>
+<span class='curline'><a href='../S/27.html#L2932'>i</a>                2932 user/usertests.c   for(int i = 0; i &lt; assumed_free; i++){</span>
+<span class='curline'><a href='../S/27.html#L2980'>i</a>                2980 user/usertests.c       for(int i = 0; i &lt; avail; i++)</span>
+<span class='curline'><a href='../S/27.html#L3019'>i</a>                3019 user/usertests.c     for(int i = 0; i &lt; MAXFILE; i++){</span>
+<span class='curline'><a href='../S/27.html#L3035'>i</a>                3035 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
+<span class='curline'><a href='../S/27.html#L3039'>i</a>                3039 user/usertests.c     name[2] = '0' + (i / 32);</span>
+<span class='curline'><a href='../S/27.html#L3040'>i</a>                3040 user/usertests.c     name[3] = '0' + (i % 32);</span>
+<span class='curline'><a href='../S/27.html#L3055'>i</a>                3055 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
+<span class='curline'><a href='../S/27.html#L3059'>i</a>                3059 user/usertests.c     name[2] = '0' + (i / 32);</span>
+<span class='curline'><a href='../S/27.html#L3060'>i</a>                3060 user/usertests.c     name[3] = '0' + (i % 32);</span>
+<span class='curline'><a href='../S/27.html#L3065'>i</a>                3065 user/usertests.c   for(int i = 0; '0' + i &lt; 0177; i++){</span>
+<span class='curline'><a href='../S/27.html#L3070'>i</a>                3070 user/usertests.c     name[3] = '0' + i;</span>
+<span class='curline'><a href='../S/27.html#L3080'>i</a>                3080 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
+<span class='curline'><a href='../S/27.html#L3084'>i</a>                3084 user/usertests.c     name[2] = '0' + (i / 32);</span>
+<span class='curline'><a href='../S/27.html#L3085'>i</a>                3085 user/usertests.c     name[3] = '0' + (i % 32);</span>
+<span class='curline'><a href='../S/27.html#L3096'>i</a>                3096 user/usertests.c   for(int i = 0; i &lt; nzz; i++){</span>
+<span class='curline'><a href='../S/27.html#L3100'>i</a>                3100 user/usertests.c     name[2] = '0' + (i / 32);</span>
+<span class='curline'><a href='../S/27.html#L3101'>i</a>                3101 user/usertests.c     name[3] = '0' + (i % 32);</span>
 <span class='curline'><a href='../S/11.html#L11'>i</a>                  11 user/wc.c        int i, n;</span>
 <span class='curline'><a href='../S/11.html#L17'>i</a>                  17 user/wc.c          for(i=0; i&lt;n; i++){</span>
 <span class='curline'><a href='../S/11.html#L19'>i</a>                  19 user/wc.c            if(buf[i] == '\n')</span>
