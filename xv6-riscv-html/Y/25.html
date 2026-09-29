@@ -1,28 +1,50 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>args</title>
+<title>ap</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/13.html#L245'>args</a>              245 user/grind.c           char *args[3] = { "echo", "hi", 0 };</span>
-<span class='curline'><a href='../S/13.html#L246'>args</a>              246 user/grind.c           exec("grindir/../echo", args);</span>
-<span class='curline'><a href='../S/13.html#L269'>args</a>              269 user/grind.c           char *args[2] = { "cat", 0 };</span>
-<span class='curline'><a href='../S/13.html#L270'>args</a>              270 user/grind.c           exec("/cat", args);</span>
-<span class='curline'><a href='../S/27.html#L166'>args</a>              166 user/usertests.c   char *args[] = { "xx", 0 };</span>
-<span class='curline'><a href='../S/27.html#L167'>args</a>              167 user/usertests.c   ret = exec(b, args);</span>
-<span class='curline'><a href='../S/27.html#L236'>args</a>              236 user/usertests.c   char *args[] = { "xx", 0 };</span>
-<span class='curline'><a href='../S/27.html#L237'>args</a>              237 user/usertests.c   ret = exec(b, args);</span>
-<span class='curline'><a href='../S/27.html#L2310'>args</a>             2310 user/usertests.c     static char *args[MAXARG];</span>
-<span class='curline'><a href='../S/27.html#L2316'>args</a>             2316 user/usertests.c       args[i] = big;</span>
-<span class='curline'><a href='../S/27.html#L2317'>args</a>             2317 user/usertests.c     args[MAXARG-1] = 0;</span>
-<span class='curline'><a href='../S/27.html#L2320'>args</a>             2320 user/usertests.c     exec("echo", args);</span>
-<span class='curline'><a href='../S/27.html#L2984'>args</a>             2984 user/usertests.c       char *args[] = { "echo", "x", 0 };</span>
-<span class='curline'><a href='../S/27.html#L2985'>args</a>             2985 user/usertests.c       exec("echo", args);</span>
+<span class='curline'><a href='../S/47.html#L66'>ap</a>                 66 kernel/printk.c   va_list ap;</span>
+<span class='curline'><a href='../S/47.html#L73'>ap</a>                 73 kernel/printk.c   va_start(ap, fmt);</span>
+<span class='curline'><a href='../S/47.html#L87'>ap</a>                 87 kernel/printk.c       printint(va_arg(ap, int), 10, 1);</span>
+<span class='curline'><a href='../S/47.html#L89'>ap</a>                 89 kernel/printk.c       printint(va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/47.html#L92'>ap</a>                 92 kernel/printk.c       printint(va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/47.html#L95'>ap</a>                 95 kernel/printk.c       printint(va_arg(ap, uint32), 10, 0);</span>
+<span class='curline'><a href='../S/47.html#L97'>ap</a>                 97 kernel/printk.c       printint(va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/47.html#L100'>ap</a>                100 kernel/printk.c       printint(va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/47.html#L103'>ap</a>                103 kernel/printk.c       printint(va_arg(ap, uint32), 16, 0);</span>
+<span class='curline'><a href='../S/47.html#L105'>ap</a>                105 kernel/printk.c       printint(va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/47.html#L108'>ap</a>                108 kernel/printk.c       printint(va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/47.html#L111'>ap</a>                111 kernel/printk.c       printptr(va_arg(ap, uint64));</span>
+<span class='curline'><a href='../S/47.html#L113'>ap</a>                113 kernel/printk.c       consputc(va_arg(ap, uint));</span>
+<span class='curline'><a href='../S/47.html#L115'>ap</a>                115 kernel/printk.c       if ((s = va_arg(ap, char *)) == 0)</span>
+<span class='curline'><a href='../S/47.html#L129'>ap</a>                129 kernel/printk.c   va_end(ap);</span>
+<span class='curline'><a href='../S/4.html#L53'>ap</a>                 53 user/printf.c  vprintf(int fd, const char *fmt, va_list ap)</span>
+<span class='curline'><a href='../S/4.html#L74'>ap</a>                 74 user/printf.c          printint(fd, va_arg(ap, int), 10, 1);</span>
+<span class='curline'><a href='../S/4.html#L76'>ap</a>                 76 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/4.html#L79'>ap</a>                 79 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/4.html#L82'>ap</a>                 82 user/printf.c          printint(fd, va_arg(ap, uint32), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L84'>ap</a>                 84 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L87'>ap</a>                 87 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L90'>ap</a>                 90 user/printf.c          printint(fd, va_arg(ap, uint32), 16, 0);</span>
+<span class='curline'><a href='../S/4.html#L92'>ap</a>                 92 user/printf.c          printint(fd, va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/4.html#L95'>ap</a>                 95 user/printf.c          printint(fd, va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/4.html#L98'>ap</a>                 98 user/printf.c          printptr(fd, va_arg(ap, uint64));</span>
+<span class='curline'><a href='../S/4.html#L100'>ap</a>                100 user/printf.c          putc(fd, va_arg(ap, uint32));</span>
+<span class='curline'><a href='../S/4.html#L102'>ap</a>                102 user/printf.c          if ((s = va_arg(ap, char *)) == 0)</span>
+<span class='curline'><a href='../S/4.html#L122'>ap</a>                122 user/printf.c    va_list ap;</span>
+<span class='curline'><a href='../S/4.html#L124'>ap</a>                124 user/printf.c    va_start(ap, fmt);</span>
+<span class='curline'><a href='../S/4.html#L125'>ap</a>                125 user/printf.c    vprintf(fd, fmt, ap);</span>
+<span class='curline'><a href='../S/4.html#L131'>ap</a>                131 user/printf.c    va_list ap;</span>
+<span class='curline'><a href='../S/4.html#L133'>ap</a>                133 user/printf.c    va_start(ap, fmt);</span>
+<span class='curline'><a href='../S/4.html#L134'>ap</a>                134 user/printf.c    vprintf(1, fmt, ap);</span>
+<span class='curline'><a href='../S/12.html#L25'>ap</a>                 25 user/umalloc.c free(void *ap)</span>
+<span class='curline'><a href='../S/12.html#L29'>ap</a>                 29 user/umalloc.c   bp = (Header *)ap - 1;</span>
 </pre>
 </body>
 </html>

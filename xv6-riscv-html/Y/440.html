@@ -1,17 +1,171 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>xticks</title>
+<title>x</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/36.html#L103'>xticks</a>            103 kernel/sysproc.c   uint xticks;</span>
-<span class='curline'><a href='../S/36.html#L106'>xticks</a>            106 kernel/sysproc.c   xticks = ticks;</span>
-<span class='curline'><a href='../S/36.html#L108'>xticks</a>            108 kernel/sysproc.c   return xticks;</span>
+<span class='curline'><a href='../S/60.html#L26'>x</a>                  26 kernel/console.c #define C(x)      ((x) - '@') // Control-x</span>
+<span class='curline'><a href='../S/35.html#L186'>x</a>                 186 kernel/defs.h  #define NELEM(x) (sizeof(x) / sizeof((x)[0]))</span>
+<span class='curline'><a href='../S/47.html#L33'>x</a>                  33 kernel/printk.c   unsigned long long x;</span>
+<span class='curline'><a href='../S/47.html#L36'>x</a>                  36 kernel/printk.c     x = -xx;</span>
+<span class='curline'><a href='../S/47.html#L38'>x</a>                  38 kernel/printk.c     x = xx;</span>
+<span class='curline'><a href='../S/47.html#L42'>x</a>                  42 kernel/printk.c     buf[i++] = digits[x % base];</span>
+<span class='curline'><a href='../S/47.html#L43'>x</a>                  43 kernel/printk.c   } while ((x /= base) != 0);</span>
+<span class='curline'><a href='../S/47.html#L53'>x</a>                  53 kernel/printk.c printptr(uint64 x)</span>
+<span class='curline'><a href='../S/47.html#L58'>x</a>                  58 kernel/printk.c   for (i = 0; i &lt; (sizeof(uint64) * 2); i++, x &lt;&lt;= 4)</span>
+<span class='curline'><a href='../S/47.html#L59'>x</a>                  59 kernel/printk.c     consputc(digits[x &gt;&gt; (sizeof(uint64) * 8 - 4)]);</span>
+<span class='curline'><a href='../S/67.html#L7'>x</a>                   7 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L8'>x</a>                   8 kernel/riscv.h   asm volatile("csrr %0, mhartid" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L9'>x</a>                   9 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L22'>x</a>                  22 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L23'>x</a>                  23 kernel/riscv.h   asm volatile("csrr %0, mstatus" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L24'>x</a>                  24 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L28'>x</a>                  28 kernel/riscv.h w_mstatus(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L30'>x</a>                  30 kernel/riscv.h   asm volatile("csrw mstatus, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L37'>x</a>                  37 kernel/riscv.h w_mepc(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L39'>x</a>                  39 kernel/riscv.h   asm volatile("csrw mepc, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L53'>x</a>                  53 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L54'>x</a>                  54 kernel/riscv.h   asm volatile("csrr %0, sstatus" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L55'>x</a>                  55 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L59'>x</a>                  59 kernel/riscv.h w_sstatus(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L61'>x</a>                  61 kernel/riscv.h   asm volatile("csrw sstatus, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L65'>x</a>                  65 kernel/riscv.h s_sstatus(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L67'>x</a>                  67 kernel/riscv.h   __asm__ __volatile__("csrs sstatus, %0" ::"rK"(x) : "memory");</span>
+<span class='curline'><a href='../S/67.html#L71'>x</a>                  71 kernel/riscv.h c_sstatus(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L73'>x</a>                  73 kernel/riscv.h   __asm__ __volatile__("csrc sstatus, %0" ::"rK"(x) : "memory");</span>
+<span class='curline'><a href='../S/67.html#L77'>x</a>                  77 kernel/riscv.h rc_sstatus(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L79'>x</a>                  79 kernel/riscv.h   __asm__ __volatile__("csrrc %0, sstatus, %1" : "=r"(x) : "rK"(x) : "memory");</span>
+<span class='curline'><a href='../S/67.html#L80'>x</a>                  80 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L87'>x</a>                  87 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L88'>x</a>                  88 kernel/riscv.h   asm volatile("csrr %0, sip" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L89'>x</a>                  89 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L93'>x</a>                  93 kernel/riscv.h w_sip(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L95'>x</a>                  95 kernel/riscv.h   asm volatile("csrw sip, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L104'>x</a>                 104 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L105'>x</a>                 105 kernel/riscv.h   asm volatile("csrr %0, sie" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L106'>x</a>                 106 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L110'>x</a>                 110 kernel/riscv.h w_sie(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L112'>x</a>                 112 kernel/riscv.h   asm volatile("csrw sie, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L120'>x</a>                 120 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L121'>x</a>                 121 kernel/riscv.h   asm volatile("csrr %0, mie" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L122'>x</a>                 122 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L126'>x</a>                 126 kernel/riscv.h w_mie(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L128'>x</a>                 128 kernel/riscv.h   asm volatile("csrw mie, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L135'>x</a>                 135 kernel/riscv.h w_sepc(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L137'>x</a>                 137 kernel/riscv.h   asm volatile("csrw sepc, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L143'>x</a>                 143 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L144'>x</a>                 144 kernel/riscv.h   asm volatile("csrr %0, sepc" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L145'>x</a>                 145 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L152'>x</a>                 152 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L153'>x</a>                 153 kernel/riscv.h   asm volatile("csrr %0, medeleg" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L154'>x</a>                 154 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L158'>x</a>                 158 kernel/riscv.h w_medeleg(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L160'>x</a>                 160 kernel/riscv.h   asm volatile("csrw medeleg, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L167'>x</a>                 167 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L168'>x</a>                 168 kernel/riscv.h   asm volatile("csrr %0, mideleg" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L169'>x</a>                 169 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L173'>x</a>                 173 kernel/riscv.h w_mideleg(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L175'>x</a>                 175 kernel/riscv.h   asm volatile("csrw mideleg, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L181'>x</a>                 181 kernel/riscv.h w_stvec(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L183'>x</a>                 183 kernel/riscv.h   asm volatile("csrw stvec, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L189'>x</a>                 189 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L190'>x</a>                 190 kernel/riscv.h   asm volatile("csrr %0, stvec" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L191'>x</a>                 191 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L198'>x</a>                 198 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L200'>x</a>                 200 kernel/riscv.h   asm volatile("csrr %0, 0x14d" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L201'>x</a>                 201 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L205'>x</a>                 205 kernel/riscv.h w_stimecmp(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L208'>x</a>                 208 kernel/riscv.h   asm volatile("csrw 0x14d, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L219'>x</a>                 219 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L221'>x</a>                 221 kernel/riscv.h   asm volatile("csrr %0, 0x30a" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L222'>x</a>                 222 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L226'>x</a>                 226 kernel/riscv.h w_menvcfg(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L229'>x</a>                 229 kernel/riscv.h   asm volatile("csrw 0x30a, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L234'>x</a>                 234 kernel/riscv.h w_pmpcfg0(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L236'>x</a>                 236 kernel/riscv.h   asm volatile("csrw pmpcfg0, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L240'>x</a>                 240 kernel/riscv.h w_pmpaddr0(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L242'>x</a>                 242 kernel/riscv.h   asm volatile("csrw pmpaddr0, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L253'>x</a>                 253 kernel/riscv.h w_satp(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L255'>x</a>                 255 kernel/riscv.h   asm volatile("csrw satp, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L261'>x</a>                 261 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L262'>x</a>                 262 kernel/riscv.h   asm volatile("csrr %0, satp" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L263'>x</a>                 263 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L270'>x</a>                 270 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L271'>x</a>                 271 kernel/riscv.h   asm volatile("csrr %0, scause" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L272'>x</a>                 272 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L279'>x</a>                 279 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L280'>x</a>                 280 kernel/riscv.h   asm volatile("csrr %0, stval" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L281'>x</a>                 281 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L286'>x</a>                 286 kernel/riscv.h w_mcounteren(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L288'>x</a>                 288 kernel/riscv.h   asm volatile("csrw mcounteren, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L294'>x</a>                 294 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L295'>x</a>                 295 kernel/riscv.h   asm volatile("csrr %0, mcounteren" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L296'>x</a>                 296 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L303'>x</a>                 303 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L304'>x</a>                 304 kernel/riscv.h   asm volatile("csrr %0, time" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L305'>x</a>                 305 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L326'>x</a>                 326 kernel/riscv.h   uint64 x = r_sstatus();</span>
+<span class='curline'><a href='../S/67.html#L327'>x</a>                 327 kernel/riscv.h   return (x &amp; SSTATUS_SIE) != 0;</span>
+<span class='curline'><a href='../S/67.html#L333'>x</a>                 333 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L334'>x</a>                 334 kernel/riscv.h   asm volatile("mv %0, sp" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L335'>x</a>                 335 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L343'>x</a>                 343 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L344'>x</a>                 344 kernel/riscv.h   asm volatile("mv %0, tp" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L345'>x</a>                 345 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/67.html#L349'>x</a>                 349 kernel/riscv.h w_tp(uint64 x)</span>
+<span class='curline'><a href='../S/67.html#L351'>x</a>                 351 kernel/riscv.h   asm volatile("mv tp, %0" : : "r"(x));</span>
+<span class='curline'><a href='../S/67.html#L357'>x</a>                 357 kernel/riscv.h   uint64 x;</span>
+<span class='curline'><a href='../S/67.html#L358'>x</a>                 358 kernel/riscv.h   asm volatile("mv %0, ra" : "=r"(x));</span>
+<span class='curline'><a href='../S/67.html#L359'>x</a>                 359 kernel/riscv.h   return x;</span>
+<span class='curline'><a href='../S/74.html#L18'>x</a>                  18 kernel/start.c   unsigned long x = r_mstatus();</span>
+<span class='curline'><a href='../S/74.html#L19'>x</a>                  19 kernel/start.c   x &amp;= ~MSTATUS_MPP_MASK;</span>
+<span class='curline'><a href='../S/74.html#L20'>x</a>                  20 kernel/start.c   x |= MSTATUS_MPP_S;</span>
+<span class='curline'><a href='../S/74.html#L21'>x</a>                  21 kernel/start.c   w_mstatus(x);</span>
+<span class='curline'><a href='../S/59.html#L125'>x</a>                 125 kernel/trap.c    unsigned long x = r_sstatus();</span>
+<span class='curline'><a href='../S/59.html#L126'>x</a>                 126 kernel/trap.c    x &amp;= ~SSTATUS_SPP; // clear SPP to 0 for user mode</span>
+<span class='curline'><a href='../S/59.html#L127'>x</a>                 127 kernel/trap.c    x |= SSTATUS_SPIE; // enable interrupts in user mode</span>
+<span class='curline'><a href='../S/59.html#L128'>x</a>                 128 kernel/trap.c    w_sstatus(x);</span>
+<span class='curline'><a href='../S/3.html#L51'>x</a>                  51 mkfs/mkfs.c    xshort(ushort x)</span>
+<span class='curline'><a href='../S/3.html#L55'>x</a>                  55 mkfs/mkfs.c      a[0] = x;</span>
+<span class='curline'><a href='../S/3.html#L56'>x</a>                  56 mkfs/mkfs.c      a[1] = x &gt;&gt; 8;</span>
+<span class='curline'><a href='../S/3.html#L61'>x</a>                  61 mkfs/mkfs.c    xint(uint x)</span>
+<span class='curline'><a href='../S/3.html#L65'>x</a>                  65 mkfs/mkfs.c      a[0] = x;</span>
+<span class='curline'><a href='../S/3.html#L66'>x</a>                  66 mkfs/mkfs.c      a[1] = x &gt;&gt; 8;</span>
+<span class='curline'><a href='../S/3.html#L67'>x</a>                  67 mkfs/mkfs.c      a[2] = x &gt;&gt; 16;</span>
+<span class='curline'><a href='../S/3.html#L68'>x</a>                  68 mkfs/mkfs.c      a[3] = x &gt;&gt; 24;</span>
+<span class='curline'><a href='../S/3.html#L266'>x</a>                 266 mkfs/mkfs.c      uint x;</span>
+<span class='curline'><a href='../S/3.html#L278'>x</a>                 278 mkfs/mkfs.c          x = xint(din.addrs[fbn]);</span>
+<span class='curline'><a href='../S/3.html#L288'>x</a>                 288 mkfs/mkfs.c          x = xint(indirect[fbn - NDIRECT]);</span>
+<span class='curline'><a href='../S/3.html#L291'>x</a>                 291 mkfs/mkfs.c        rsect(x, buf);</span>
+<span class='curline'><a href='../S/3.html#L293'>x</a>                 293 mkfs/mkfs.c        wsect(x, buf);</span>
+<span class='curline'><a href='../S/13.html#L27'>x</a>                  27 user/grind.c     long hi, lo, x;</span>
+<span class='curline'><a href='../S/13.html#L30'>x</a>                  30 user/grind.c     x = (*ctx % 0x7ffffffe) + 1;</span>
+<span class='curline'><a href='../S/13.html#L31'>x</a>                  31 user/grind.c     hi = x / 127773;</span>
+<span class='curline'><a href='../S/13.html#L32'>x</a>                  32 user/grind.c     lo = x % 127773;</span>
+<span class='curline'><a href='../S/13.html#L33'>x</a>                  33 user/grind.c     x = 16807 * lo - 2836 * hi;</span>
+<span class='curline'><a href='../S/13.html#L34'>x</a>                  34 user/grind.c     if (x &lt; 0)</span>
+<span class='curline'><a href='../S/13.html#L35'>x</a>                  35 user/grind.c       x += 0x7fffffff;</span>
+<span class='curline'><a href='../S/13.html#L37'>x</a>                  37 user/grind.c     x--;</span>
+<span class='curline'><a href='../S/13.html#L38'>x</a>                  38 user/grind.c     *ctx = x;</span>
+<span class='curline'><a href='../S/13.html#L39'>x</a>                  39 user/grind.c     return (x);</span>
+<span class='curline'><a href='../S/4.html#L20'>x</a>                  20 user/printf.c    unsigned long long x;</span>
+<span class='curline'><a href='../S/4.html#L25'>x</a>                  25 user/printf.c      x = -xx;</span>
+<span class='curline'><a href='../S/4.html#L27'>x</a>                  27 user/printf.c      x = xx;</span>
+<span class='curline'><a href='../S/4.html#L32'>x</a>                  32 user/printf.c      buf[i++] = digits[x % base];</span>
+<span class='curline'><a href='../S/4.html#L33'>x</a>                  33 user/printf.c    } while ((x /= base) != 0);</span>
+<span class='curline'><a href='../S/4.html#L42'>x</a>                  42 user/printf.c  printptr(int fd, uint64 x)</span>
+<span class='curline'><a href='../S/4.html#L47'>x</a>                  47 user/printf.c    for (i = 0; i &lt; (sizeof(uint64) * 2); i++, x &lt;&lt;= 4)</span>
+<span class='curline'><a href='../S/4.html#L48'>x</a>                  48 user/printf.c      putc(fd, digits[x &gt;&gt; (sizeof(uint64) * 8 - 4)]);</span>
+<span class='curline'><a href='../S/12.html#L16'>x</a>                  16 user/umalloc.c   Align x;</span>
+<span class='curline'><a href='../S/28.html#L1538'>x</a>                1538 user/usertests.c   unsigned int x = (pid ? 1 : 97);</span>
+<span class='curline'><a href='../S/28.html#L1540'>x</a>                1540 user/usertests.c     x = x * 1103515245 + 12345;</span>
+<span class='curline'><a href='../S/28.html#L1541'>x</a>                1541 user/usertests.c     if ((x % 3) == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1543'>x</a>                1543 user/usertests.c     } else if ((x % 3) == 1) {</span>
 </pre>
 </body>
 </html>

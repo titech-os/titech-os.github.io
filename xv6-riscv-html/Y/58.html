@@ -1,16 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>child</title>
+<title>chan</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/41.html#L270'>child</a>             270 kernel/vm.c          uint64 child = PTE2PA(pte);</span>
-<span class='curline'><a href='../S/41.html#L271'>child</a>             271 kernel/vm.c          freewalk((pagetable_t)child);</span>
+<span class='curline'><a href='../S/66.html#L167'>chan</a>              167 kernel/proc.c    p-&gt;chan = 0;</span>
+<span class='curline'><a href='../S/66.html#L547'>chan</a>              547 kernel/proc.c  sleep_prepare(void *chan)</span>
+<span class='curline'><a href='../S/66.html#L552'>chan</a>              552 kernel/proc.c    if (chan == 0)</span>
+<span class='curline'><a href='../S/66.html#L554'>chan</a>              554 kernel/proc.c    p-&gt;chan = chan;</span>
+<span class='curline'><a href='../S/66.html#L567'>chan</a>              567 kernel/proc.c    if (p-&gt;chan != 0) {</span>
+<span class='curline'><a href='../S/66.html#L576'>chan</a>              576 kernel/proc.c  wakeup(void *chan)</span>
+<span class='curline'><a href='../S/66.html#L582'>chan</a>              582 kernel/proc.c      if (p-&gt;chan == chan) {</span>
+<span class='curline'><a href='../S/66.html#L585'>chan</a>              585 kernel/proc.c        p-&gt;chan = 0;</span>
+<span class='curline'><a href='../S/38.html#L87'>chan</a>               87 kernel/proc.h    void *chan;           // If non-zero, sleeping on chan</span>
 </pre>
 </body>
 </html>

@@ -1,17 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>UART0_IRQ</title>
+<title>TRAMPOLINE</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/64.html#L15'>UART0_IRQ</a>          15 kernel/plic.c    *(uint32*)(PLIC + UART0_IRQ*4) = 1;</span>
-<span class='curline'><a href='../S/64.html#L26'>UART0_IRQ</a>          26 kernel/plic.c    *(uint32*)PLIC_SENABLE(hart) = (1 &lt;&lt; UART0_IRQ) | (1 &lt;&lt; VIRTIO0_IRQ);</span>
-<span class='curline'><a href='../S/58.html#L196'>UART0_IRQ</a>         196 kernel/trap.c      if(irq == UART0_IRQ){</span>
+<span class='curline'><a href='../S/52.html#L52'>TRAMPOLINE</a>         52 kernel/memlayout.h #define KSTACK(p) (TRAMPOLINE - ((p) + 1) * 2 * PGSIZE)</span>
+<span class='curline'><a href='../S/52.html#L63'>TRAMPOLINE</a>         63 kernel/memlayout.h #define TRAPFRAME (TRAMPOLINE - PGSIZE)</span>
+<span class='curline'><a href='../S/66.html#L189'>TRAMPOLINE</a>        189 kernel/proc.c    if (mappages(pagetable, TRAMPOLINE, PGSIZE, (uint64)trampoline,</span>
+<span class='curline'><a href='../S/66.html#L199'>TRAMPOLINE</a>        199 kernel/proc.c      uvmunmap(pagetable, TRAMPOLINE, 1, 0);</span>
+<span class='curline'><a href='../S/66.html#L212'>TRAMPOLINE</a>        212 kernel/proc.c    uvmunmap(pagetable, TRAMPOLINE, 1, 0);</span>
+<span class='curline'><a href='../S/66.html#L541'>TRAMPOLINE</a>        541 kernel/proc.c    uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);</span>
+<span class='curline'><a href='../S/59.html#L111'>TRAMPOLINE</a>        111 kernel/trap.c    uint64 trampoline_uservec = TRAMPOLINE + (uservec - trampoline);</span>
+<span class='curline'><a href='../S/41.html#L47'>TRAMPOLINE</a>         47 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
 </pre>
 </body>
 </html>

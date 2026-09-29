@@ -1,21 +1,40 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>noff</title>
+<title>nlink</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L480'>noff</a>              480 kernel/proc.c    if(mycpu()-&gt;noff != 1)</span>
-<span class='curline'><a href='../S/38.html#L25'>noff</a>               25 kernel/proc.h    int noff;                   // Depth of push_off() nesting.</span>
-<span class='curline'><a href='../S/61.html#L97'>noff</a>               97 kernel/spinlock.c   if(mycpu()-&gt;noff == 0)</span>
-<span class='curline'><a href='../S/61.html#L99'>noff</a>               99 kernel/spinlock.c   mycpu()-&gt;noff += 1;</span>
-<span class='curline'><a href='../S/61.html#L108'>noff</a>              108 kernel/spinlock.c   if(c-&gt;noff &lt; 1)</span>
-<span class='curline'><a href='../S/61.html#L110'>noff</a>              110 kernel/spinlock.c   c-&gt;noff -= 1;</span>
-<span class='curline'><a href='../S/61.html#L111'>noff</a>              111 kernel/spinlock.c   if(c-&gt;noff == 0 &amp;&amp; c-&gt;intena)</span>
+<span class='curline'><a href='../S/44.html#L27'>nlink</a>              27 kernel/file.h    short nlink;</span>
+<span class='curline'><a href='../S/51.html#L238'>nlink</a>             238 kernel/fs.c      dip-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/51.html#L311'>nlink</a>             311 kernel/fs.c        ip-&gt;nlink = dip-&gt;nlink;</span>
+<span class='curline'><a href='../S/51.html#L357'>nlink</a>             357 kernel/fs.c      int last = (ip-&gt;ref == 1 &amp;&amp; ip-&gt;valid &amp;&amp; ip-&gt;nlink == 0);</span>
+<span class='curline'><a href='../S/51.html#L395'>nlink</a>             395 kernel/fs.c        if (dip-&gt;type != 0 &amp;&amp; dip-&gt;nlink == 0) { // is an orphaned inode</span>
+<span class='curline'><a href='../S/51.html#L501'>nlink</a>             501 kernel/fs.c      st-&gt;nlink = ip-&gt;nlink;</span>
+<span class='curline'><a href='../S/51.html#L707'>nlink</a>             707 kernel/fs.c        if (ip-&gt;nlink == 0) {</span>
+<span class='curline'><a href='../S/75.html#L36'>nlink</a>              36 kernel/fs.h      short nlink;             // Number of links to inode in file system</span>
+<span class='curline'><a href='../S/45.html#L9'>nlink</a>               9 kernel/stat.h    short nlink; // Number of links to file</span>
+<span class='curline'><a href='../S/46.html#L145'>nlink</a>             145 kernel/sysfile.c   if (ip-&gt;nlink &gt;= NLINK_MAX) {</span>
+<span class='curline'><a href='../S/46.html#L151'>nlink</a>             151 kernel/sysfile.c   ip-&gt;nlink++;</span>
+<span class='curline'><a href='../S/46.html#L161'>nlink</a>             161 kernel/sysfile.c   if (dp-&gt;nlink == 0) {</span>
+<span class='curline'><a href='../S/46.html#L178'>nlink</a>             178 kernel/sysfile.c   ip-&gt;nlink--;</span>
+<span class='curline'><a href='../S/46.html#L228'>nlink</a>             228 kernel/sysfile.c   if (ip-&gt;nlink &lt; 1)</span>
+<span class='curline'><a href='../S/46.html#L239'>nlink</a>             239 kernel/sysfile.c     dp-&gt;nlink--;</span>
+<span class='curline'><a href='../S/46.html#L244'>nlink</a>             244 kernel/sysfile.c   ip-&gt;nlink--;</span>
+<span class='curline'><a href='../S/46.html#L269'>nlink</a>             269 kernel/sysfile.c   if (dp-&gt;nlink == 0) {</span>
+<span class='curline'><a href='../S/46.html#L275'>nlink</a>             275 kernel/sysfile.c   if (type == T_DIR &amp;&amp; dp-&gt;nlink &gt;= NLINK_MAX) {</span>
+<span class='curline'><a href='../S/46.html#L297'>nlink</a>             297 kernel/sysfile.c   ip-&gt;nlink = 1;</span>
+<span class='curline'><a href='../S/46.html#L311'>nlink</a>             311 kernel/sysfile.c     dp-&gt;nlink++; // for ".."</span>
+<span class='curline'><a href='../S/46.html#L321'>nlink</a>             321 kernel/sysfile.c   ip-&gt;nlink = 0;</span>
+<span class='curline'><a href='../S/3.html#L234'>nlink</a>             234 mkfs/mkfs.c      din.nlink = xshort(1);</span>
+<span class='curline'><a href='../S/28.html#L3368'>nlink</a>            3368 user/usertests.c       if (st.nlink &gt;= 32767) {</span>
+<span class='curline'><a href='../S/28.html#L3372'>nlink</a>            3372 user/usertests.c       printf("%s: link failed after %d links (nlink=%d)\n", s, i, st.nlink);</span>
+<span class='curline'><a href='../S/28.html#L3388'>nlink</a>            3388 user/usertests.c   if (st.nlink &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L3389'>nlink</a>            3389 user/usertests.c     printf("%s: negative link count: %d\n", s, st.nlink);</span>
 </pre>
 </body>
 </html>

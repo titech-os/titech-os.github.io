@@ -1,17 +1,31 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>format</title>
+<title>fmt</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/35.html#L76'>format</a>             76 kernel/defs.h  int             printf(char*, ...) __attribute__ ((format (printf, 1, 2)));</span>
-<span class='curline'><a href='../S/16.html#L44'>format</a>             44 user/user.h    void fprintf(int, const char*, ...) __attribute__ ((format (printf, 2, 3)));</span>
-<span class='curline'><a href='../S/16.html#L45'>format</a>             45 user/user.h    void printf(const char*, ...) __attribute__ ((format (printf, 1, 2)));</span>
+<span class='curline'><a href='../S/47.html#L64'>fmt</a>                64 kernel/printk.c printk(char *fmt, ...)</span>
+<span class='curline'><a href='../S/47.html#L73'>fmt</a>                73 kernel/printk.c   va_start(ap, fmt);</span>
+<span class='curline'><a href='../S/47.html#L74'>fmt</a>                74 kernel/printk.c   for (i = 0; (cx = fmt[i] &amp; 0xff) != 0; i++) {</span>
+<span class='curline'><a href='../S/47.html#L80'>fmt</a>                80 kernel/printk.c     c0 = fmt[i + 0] &amp; 0xff;</span>
+<span class='curline'><a href='../S/47.html#L83'>fmt</a>                83 kernel/printk.c       c1 = fmt[i + 1] &amp; 0xff;</span>
+<span class='curline'><a href='../S/47.html#L85'>fmt</a>                85 kernel/printk.c       c2 = fmt[i + 2] &amp; 0xff;</span>
+<span class='curline'><a href='../S/4.html#L53'>fmt</a>                53 user/printf.c  vprintf(int fd, const char *fmt, va_list ap)</span>
+<span class='curline'><a href='../S/4.html#L59'>fmt</a>                59 user/printf.c    for (i = 0; fmt[i]; i++) {</span>
+<span class='curline'><a href='../S/4.html#L60'>fmt</a>                60 user/printf.c      c0 = fmt[i] &amp; 0xff;</span>
+<span class='curline'><a href='../S/4.html#L70'>fmt</a>                70 user/printf.c          c1 = fmt[i + 1] &amp; 0xff;</span>
+<span class='curline'><a href='../S/4.html#L72'>fmt</a>                72 user/printf.c          c2 = fmt[i + 2] &amp; 0xff;</span>
+<span class='curline'><a href='../S/4.html#L120'>fmt</a>               120 user/printf.c  fprintf(int fd, const char *fmt, ...)</span>
+<span class='curline'><a href='../S/4.html#L124'>fmt</a>               124 user/printf.c    va_start(ap, fmt);</span>
+<span class='curline'><a href='../S/4.html#L125'>fmt</a>               125 user/printf.c    vprintf(fd, fmt, ap);</span>
+<span class='curline'><a href='../S/4.html#L129'>fmt</a>               129 user/printf.c  printf(const char *fmt, ...)</span>
+<span class='curline'><a href='../S/4.html#L133'>fmt</a>               133 user/printf.c    va_start(ap, fmt);</span>
+<span class='curline'><a href='../S/4.html#L134'>fmt</a>               134 user/printf.c    vprintf(1, fmt, ap);</span>
 </pre>
 </body>
 </html>

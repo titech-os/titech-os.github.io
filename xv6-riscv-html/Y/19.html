@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>addrs</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='Global-6.7' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/44.html#L29'>addrs</a>              29 kernel/file.h    uint addrs[NDIRECT + 1];</span>
+<span class='curline'><a href='../S/51.html#L240'>addrs</a>             240 kernel/fs.c      memmove(dip-&gt;addrs, ip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/51.html#L313'>addrs</a>             313 kernel/fs.c        memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));</span>
+<span class='curline'><a href='../S/51.html#L427'>addrs</a>             427 kernel/fs.c        if ((addr = ip-&gt;addrs[bn]) == 0) {</span>
+<span class='curline'><a href='../S/51.html#L431'>addrs</a>             431 kernel/fs.c          ip-&gt;addrs[bn] = addr;</span>
+<span class='curline'><a href='../S/51.html#L439'>addrs</a>             439 kernel/fs.c        if ((addr = ip-&gt;addrs[NDIRECT]) == 0) {</span>
+<span class='curline'><a href='../S/51.html#L443'>addrs</a>             443 kernel/fs.c          ip-&gt;addrs[NDIRECT] = addr;</span>
+<span class='curline'><a href='../S/51.html#L471'>addrs</a>             471 kernel/fs.c        if (ip-&gt;addrs[i]) {</span>
+<span class='curline'><a href='../S/51.html#L472'>addrs</a>             472 kernel/fs.c          bfree(ip-&gt;dev, ip-&gt;addrs[i]);</span>
+<span class='curline'><a href='../S/51.html#L473'>addrs</a>             473 kernel/fs.c          ip-&gt;addrs[i] = 0;</span>
+<span class='curline'><a href='../S/51.html#L477'>addrs</a>             477 kernel/fs.c      if (ip-&gt;addrs[NDIRECT]) {</span>
+<span class='curline'><a href='../S/51.html#L478'>addrs</a>             478 kernel/fs.c        bp = bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/51.html#L485'>addrs</a>             485 kernel/fs.c        bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);</span>
+<span class='curline'><a href='../S/51.html#L486'>addrs</a>             486 kernel/fs.c        ip-&gt;addrs[NDIRECT] = 0;</span>
+<span class='curline'><a href='../S/75.html#L38'>addrs</a>              38 kernel/fs.h      uint addrs[NDIRECT + 1]; // Data block addresses</span>
+<span class='curline'><a href='../S/3.html#L275'>addrs</a>             275 mkfs/mkfs.c          if (xint(din.addrs[fbn]) == 0) {</span>
+<span class='curline'><a href='../S/3.html#L276'>addrs</a>             276 mkfs/mkfs.c            din.addrs[fbn] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L278'>addrs</a>             278 mkfs/mkfs.c          x = xint(din.addrs[fbn]);</span>
+<span class='curline'><a href='../S/3.html#L280'>addrs</a>             280 mkfs/mkfs.c          if (xint(din.addrs[NDIRECT]) == 0) {</span>
+<span class='curline'><a href='../S/3.html#L281'>addrs</a>             281 mkfs/mkfs.c            din.addrs[NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L283'>addrs</a>             283 mkfs/mkfs.c          rsect(xint(din.addrs[NDIRECT]), (char *)indirect);</span>
+<span class='curline'><a href='../S/3.html#L286'>addrs</a>             286 mkfs/mkfs.c            wsect(xint(din.addrs[NDIRECT]), (char *)indirect);</span>
+<span class='curline'><a href='../S/28.html#L35'>addrs</a>              35 user/usertests.c   uint64 addrs[] = {0x80000000LL, 0x3fffffe000, 0x3ffffff000, 0x4000000000,</span>
+<span class='curline'><a href='../S/28.html#L38'>addrs</a>              38 user/usertests.c   for (int ai = 0; ai &lt; sizeof(addrs) / sizeof(addrs[0]); ai++) {</span>
+<span class='curline'><a href='../S/28.html#L39'>addrs</a>              39 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/28.html#L81'>addrs</a>              81 user/usertests.c   uint64 addrs[] = {0LL,          0x80000000LL, 0x3fffffe000,</span>
+<span class='curline'><a href='../S/28.html#L84'>addrs</a>              84 user/usertests.c   for (int ai = 0; ai &lt; sizeof(addrs) / sizeof(addrs[0]); ai++) {</span>
+<span class='curline'><a href='../S/28.html#L85'>addrs</a>              85 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/28.html#L124'>addrs</a>             124 user/usertests.c   uint64 addrs[] = {0x80000000LL, 0x3fffffe000, 0x3ffffff000, 0x4000000000,</span>
+<span class='curline'><a href='../S/28.html#L127'>addrs</a>             127 user/usertests.c   for (int ai = 0; ai &lt; sizeof(addrs) / sizeof(addrs[0]); ai++) {</span>
+<span class='curline'><a href='../S/28.html#L128'>addrs</a>             128 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/28.html#L2472'>addrs</a>            2472 user/usertests.c   uint64 addrs[] = {0,</span>
+<span class='curline'><a href='../S/28.html#L2479'>addrs</a>            2479 user/usertests.c   for (int ai = 0; ai &lt; sizeof(addrs) / sizeof(addrs[0]); ai++) {</span>
+<span class='curline'><a href='../S/28.html#L2482'>addrs</a>            2482 user/usertests.c       volatile int *addr = (int *)addrs[ai];</span>
+</pre>
+</body>
+</html>

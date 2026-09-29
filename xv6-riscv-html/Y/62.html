@@ -1,35 +1,149 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>cons</title>
+<title>close</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/59.html#L53'>cons</a>               53 kernel/console.c } cons;</span>
-<span class='curline'><a href='../S/59.html#L91'>cons</a>               91 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L95'>cons</a>               95 kernel/console.c     while(cons.r == cons.w){</span>
-<span class='curline'><a href='../S/59.html#L97'>cons</a>               97 kernel/console.c         release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L100'>cons</a>              100 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L103'>cons</a>              103 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF_SIZE];</span>
-<span class='curline'><a href='../S/59.html#L109'>cons</a>              109 kernel/console.c         cons.r--;</span>
-<span class='curline'><a href='../S/59.html#L128'>cons</a>              128 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L142'>cons</a>              142 kernel/console.c   acquire(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L149'>cons</a>              149 kernel/console.c     while(cons.e != cons.w &amp;&amp;</span>
-<span class='curline'><a href='../S/59.html#L150'>cons</a>              150 kernel/console.c           cons.buf[(cons.e-1) % INPUT_BUF_SIZE] != '\n'){</span>
-<span class='curline'><a href='../S/59.html#L151'>cons</a>              151 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/59.html#L157'>cons</a>              157 kernel/console.c     if(cons.e != cons.w){</span>
-<span class='curline'><a href='../S/59.html#L158'>cons</a>              158 kernel/console.c       cons.e--;</span>
-<span class='curline'><a href='../S/59.html#L163'>cons</a>              163 kernel/console.c     if(c != 0 &amp;&amp; cons.e-cons.r &lt; INPUT_BUF_SIZE){</span>
-<span class='curline'><a href='../S/59.html#L170'>cons</a>              170 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF_SIZE] = c;</span>
-<span class='curline'><a href='../S/59.html#L172'>cons</a>              172 kernel/console.c       if(c == '\n' || c == C('D') || cons.e-cons.r == INPUT_BUF_SIZE){</span>
-<span class='curline'><a href='../S/59.html#L175'>cons</a>              175 kernel/console.c         cons.w = cons.e;</span>
-<span class='curline'><a href='../S/59.html#L176'>cons</a>              176 kernel/console.c         wakeup(&amp;cons.r);</span>
-<span class='curline'><a href='../S/59.html#L182'>cons</a>              182 kernel/console.c   release(&amp;cons.lock);</span>
-<span class='curline'><a href='../S/59.html#L188'>cons</a>              188 kernel/console.c   initlock(&amp;cons.lock, "cons");</span>
+<span class='curline'><a href='../S/3.html#L166'>close</a>             166 mkfs/mkfs.c        close(fd);</span>
+<span class='curline'><a href='../S/10.html#L40'>close</a>              40 user/cat.c         close(fd);</span>
+<span class='curline'><a href='../S/24.html#L60'>close</a>              60 user/grep.c        close(fd);</span>
+<span class='curline'><a href='../S/13.html#L71'>close</a>              71 user/grind.c         close(open("grindir/../a", O_CREATE | O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L73'>close</a>              73 user/grind.c         close(open("grindir/../grindir/../b", O_CREATE | O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L84'>close</a>              84 user/grind.c         close(fd);</span>
+<span class='curline'><a href='../S/13.html#L87'>close</a>              87 user/grind.c         close(fd);</span>
+<span class='curline'><a href='../S/13.html#L95'>close</a>              95 user/grind.c         close(open("a/../a/./a", O_CREATE | O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L99'>close</a>              99 user/grind.c         close(open("grindir/../b/b", O_CREATE | O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L135'>close</a>             135 user/grind.c           close(open("a", O_CREATE | O_RDWR));</span>
+<span class='curline'><a href='../S/13.html#L177'>close</a>             177 user/grind.c         close(fds[0]);</span>
+<span class='curline'><a href='../S/13.html#L178'>close</a>             178 user/grind.c         close(fds[1]);</span>
+<span class='curline'><a href='../S/13.html#L221'>close</a>             221 user/grind.c         close(fd1);</span>
+<span class='curline'><a href='../S/13.html#L236'>close</a>             236 user/grind.c           close(bb[0]);</span>
+<span class='curline'><a href='../S/13.html#L237'>close</a>             237 user/grind.c           close(bb[1]);</span>
+<span class='curline'><a href='../S/13.html#L238'>close</a>             238 user/grind.c           close(aa[0]);</span>
+<span class='curline'><a href='../S/13.html#L239'>close</a>             239 user/grind.c           close(1);</span>
+<span class='curline'><a href='../S/13.html#L244'>close</a>             244 user/grind.c           close(aa[1]);</span>
+<span class='curline'><a href='../S/13.html#L255'>close</a>             255 user/grind.c           close(aa[1]);</span>
+<span class='curline'><a href='../S/13.html#L256'>close</a>             256 user/grind.c           close(bb[0]);</span>
+<span class='curline'><a href='../S/13.html#L257'>close</a>             257 user/grind.c           close(0);</span>
+<span class='curline'><a href='../S/13.html#L262'>close</a>             262 user/grind.c           close(aa[0]);</span>
+<span class='curline'><a href='../S/13.html#L263'>close</a>             263 user/grind.c           close(1);</span>
+<span class='curline'><a href='../S/13.html#L268'>close</a>             268 user/grind.c           close(bb[1]);</span>
+<span class='curline'><a href='../S/13.html#L277'>close</a>             277 user/grind.c         close(aa[0]);</span>
+<span class='curline'><a href='../S/13.html#L278'>close</a>             278 user/grind.c         close(aa[1]);</span>
+<span class='curline'><a href='../S/13.html#L279'>close</a>             279 user/grind.c         close(bb[1]);</span>
+<span class='curline'><a href='../S/13.html#L284'>close</a>             284 user/grind.c         close(bb[0]);</span>
+<span class='curline'><a href='../S/6.html#L42'>close</a>              42 user/ls.c          close(fd);</span>
+<span class='curline'><a href='../S/6.html#L73'>close</a>              73 user/ls.c        close(fd);</span>
+<span class='curline'><a href='../S/19.html#L85'>close</a>              85 user/sh.c          close(rcmd-&gt;fd);</span>
+<span class='curline'><a href='../S/19.html#L106'>close</a>             106 user/sh.c            close(1);</span>
+<span class='curline'><a href='../S/19.html#L108'>close</a>             108 user/sh.c            close(p[0]);</span>
+<span class='curline'><a href='../S/19.html#L109'>close</a>             109 user/sh.c            close(p[1]);</span>
+<span class='curline'><a href='../S/19.html#L113'>close</a>             113 user/sh.c            close(0);</span>
+<span class='curline'><a href='../S/19.html#L115'>close</a>             115 user/sh.c            close(p[0]);</span>
+<span class='curline'><a href='../S/19.html#L116'>close</a>             116 user/sh.c            close(p[1]);</span>
+<span class='curline'><a href='../S/19.html#L119'>close</a>             119 user/sh.c          close(p[0]);</span>
+<span class='curline'><a href='../S/19.html#L120'>close</a>             120 user/sh.c          close(p[1]);</span>
+<span class='curline'><a href='../S/19.html#L154'>close</a>             154 user/sh.c            close(fd);</span>
+<span class='curline'><a href='../S/26.html#L38'>close</a>              38 user/stressfs.c   close(fd);</span>
+<span class='curline'><a href='../S/26.html#L45'>close</a>              45 user/stressfs.c   close(fd);</span>
+<span class='curline'><a href='../S/21.html#L97'>close</a>              97 user/ulib.c      close(fd);</span>
+<span class='curline'><a href='../S/16.html#L12'>close</a>              12 user/user.h    int close(int);</span>
+<span class='curline'><a href='../S/28.html#L51'>close</a>              51 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L71'>close</a>              71 user/usertests.c     close(fds[0]);</span>
+<span class='curline'><a href='../S/28.html#L72'>close</a>              72 user/usertests.c     close(fds[1]);</span>
+<span class='curline'><a href='../S/28.html#L97'>close</a>              97 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L115'>close</a>             115 user/usertests.c     close(fds[0]);</span>
+<span class='curline'><a href='../S/28.html#L116'>close</a>             116 user/usertests.c     close(fds[1]);</span>
+<span class='curline'><a href='../S/28.html#L275'>close</a>             275 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L288'>close</a>             288 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L302'>close</a>             302 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L344'>close</a>             344 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L345'>close</a>             345 user/usertests.c   close(fd2);</span>
+<span class='curline'><a href='../S/28.html#L346'>close</a>             346 user/usertests.c   close(fd3);</span>
+<span class='curline'><a href='../S/28.html#L370'>close</a>             370 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L371'>close</a>             371 user/usertests.c   close(fd2);</span>
+<span class='curline'><a href='../S/28.html#L379'>close</a>             379 user/usertests.c   close(open("truncfile", O_CREATE | O_TRUNC | O_WRONLY));</span>
+<span class='curline'><a href='../S/28.html#L400'>close</a>             400 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/28.html#L403'>close</a>             403 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/28.html#L419'>close</a>             419 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L533'>close</a>             533 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L563'>close</a>             563 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L574'>close</a>             574 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L601'>close</a>             601 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L628'>close</a>             628 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L648'>close</a>             648 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L701'>close</a>             701 user/usertests.c     close(1);</span>
+<span class='curline'><a href='../S/28.html#L759'>close</a>             759 user/usertests.c     close(fds[0]);</span>
+<span class='curline'><a href='../S/28.html#L770'>close</a>             770 user/usertests.c     close(fds[1]);</span>
+<span class='curline'><a href='../S/28.html#L789'>close</a>             789 user/usertests.c     close(fds[0]);</span>
+<span class='curline'><a href='../S/28.html#L886'>close</a>             886 user/usertests.c     close(pfds[0]);</span>
+<span class='curline'><a href='../S/28.html#L889'>close</a>             889 user/usertests.c     close(pfds[1]);</span>
+<span class='curline'><a href='../S/28.html#L894'>close</a>             894 user/usertests.c   close(pfds[1]);</span>
+<span class='curline'><a href='../S/28.html#L899'>close</a>             899 user/usertests.c   close(pfds[0]);</span>
+<span class='curline'><a href='../S/28.html#L1050'>close</a>            1050 user/usertests.c         close(open("stopforking", O_CREATE | O_RDWR));</span>
+<span class='curline'><a href='../S/28.html#L1058'>close</a>            1058 user/usertests.c   close(open("stopforking", O_CREATE | O_RDWR));</span>
+<span class='curline'><a href='../S/28.html#L1159'>close</a>            1159 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1174'>close</a>            1174 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1242'>close</a>            1242 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1276'>close</a>            1276 user/usertests.c         close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1310'>close</a>            1310 user/usertests.c         close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1336'>close</a>            1336 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1350'>close</a>            1350 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L1364'>close</a>            1364 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1386'>close</a>            1386 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1408'>close</a>            1408 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1456'>close</a>            1456 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1488'>close</a>            1488 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1503'>close</a>            1503 user/usertests.c       close(open(file, 0));</span>
+<span class='curline'><a href='../S/28.html#L1504'>close</a>            1504 user/usertests.c       close(open(file, 0));</span>
+<span class='curline'><a href='../S/28.html#L1505'>close</a>            1505 user/usertests.c       close(open(file, 0));</span>
+<span class='curline'><a href='../S/28.html#L1506'>close</a>            1506 user/usertests.c       close(open(file, 0));</span>
+<span class='curline'><a href='../S/28.html#L1507'>close</a>            1507 user/usertests.c       close(open(file, 0));</span>
+<span class='curline'><a href='../S/28.html#L1508'>close</a>            1508 user/usertests.c       close(open(file, 0));</span>
+<span class='curline'><a href='../S/28.html#L1542'>close</a>            1542 user/usertests.c       close(open("x", O_RDWR | O_CREATE));</span>
+<span class='curline'><a href='../S/28.html#L1573'>close</a>            1573 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1591'>close</a>            1591 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1603'>close</a>            1603 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1645'>close</a>            1645 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1756'>close</a>            1756 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1780'>close</a>            1780 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1806'>close</a>            1806 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1835'>close</a>            1835 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1841'>close</a>            1841 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1908'>close</a>            1908 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1950'>close</a>            1950 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1974'>close</a>            1974 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/28.html#L1977'>close</a>            1977 user/usertests.c       close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2291'>close</a>            2291 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2355'>close</a>            2355 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2370'>close</a>            2370 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2406'>close</a>            2406 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2436'>close</a>            2436 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2590'>close</a>            2590 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2727'>close</a>            2727 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2737'>close</a>            2737 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2775'>close</a>            2775 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2851'>close</a>            2851 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2875'>close</a>            2875 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2890'>close</a>            2890 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2907'>close</a>            2907 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L2923'>close</a>            2923 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3058'>close</a>            3058 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3119'>close</a>            3119 user/usertests.c           close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3156'>close</a>            3156 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3169'>close</a>            3169 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3200'>close</a>            3200 user/usertests.c       close(1);</span>
+<span class='curline'><a href='../S/28.html#L3240'>close</a>            3240 user/usertests.c         close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3244'>close</a>            3244 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3263'>close</a>            3263 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3310'>close</a>            3310 user/usertests.c     close(fd);</span>
+<span class='curline'><a href='../S/28.html#L3338'>close</a>            3338 user/usertests.c   close(fd);</span>
+<span class='curline'><a href='../S/11.html#L52'>close</a>              52 user/wc.c          close(fd);</span>
 </pre>
 </body>
 </html>

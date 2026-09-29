@@ -1,43 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>fds</title>
+<title>fd2</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/13.html#L158'>fds</a>               158 user/grind.c         int fds[2];</span>
-<span class='curline'><a href='../S/13.html#L159'>fds</a>               159 user/grind.c         if(pipe(fds) &lt; 0){</span>
-<span class='curline'><a href='../S/13.html#L167'>fds</a>               167 user/grind.c           if(write(fds[1], "x", 1) != 1)</span>
-<span class='curline'><a href='../S/13.html#L170'>fds</a>               170 user/grind.c           if(read(fds[0], &amp;c, 1) != 1)</span>
-<span class='curline'><a href='../S/13.html#L177'>fds</a>               177 user/grind.c         close(fds[0]);</span>
-<span class='curline'><a href='../S/13.html#L178'>fds</a>               178 user/grind.c         close(fds[1]);</span>
-<span class='curline'><a href='../S/27.html#L60'>fds</a>                60 user/usertests.c     int fds[2];</span>
-<span class='curline'><a href='../S/27.html#L61'>fds</a>                61 user/usertests.c     if(pipe(fds) &lt; 0){</span>
-<span class='curline'><a href='../S/27.html#L65'>fds</a>                65 user/usertests.c     n = write(fds[1], (char*)addr, 8192);</span>
-<span class='curline'><a href='../S/27.html#L70'>fds</a>                70 user/usertests.c     close(fds[0]);</span>
-<span class='curline'><a href='../S/27.html#L71'>fds</a>                71 user/usertests.c     close(fds[1]);</span>
-<span class='curline'><a href='../S/27.html#L98'>fds</a>                98 user/usertests.c     int fds[2];</span>
-<span class='curline'><a href='../S/27.html#L99'>fds</a>                99 user/usertests.c     if(pipe(fds) &lt; 0){</span>
-<span class='curline'><a href='../S/27.html#L103'>fds</a>               103 user/usertests.c     n = write(fds[1], "x", 1);</span>
-<span class='curline'><a href='../S/27.html#L108'>fds</a>               108 user/usertests.c     n = read(fds[0], (void*)addr, 8192);</span>
-<span class='curline'><a href='../S/27.html#L113'>fds</a>               113 user/usertests.c     close(fds[0]);</span>
-<span class='curline'><a href='../S/27.html#L114'>fds</a>               114 user/usertests.c     close(fds[1]);</span>
-<span class='curline'><a href='../S/27.html#L741'>fds</a>               741 user/usertests.c   int fds[2], pid, xstatus;</span>
-<span class='curline'><a href='../S/27.html#L745'>fds</a>               745 user/usertests.c   if(pipe(fds) != 0){</span>
-<span class='curline'><a href='../S/27.html#L752'>fds</a>               752 user/usertests.c     close(fds[0]);</span>
-<span class='curline'><a href='../S/27.html#L756'>fds</a>               756 user/usertests.c       if(write(fds[1], buf, SZ) != SZ){</span>
-<span class='curline'><a href='../S/27.html#L763'>fds</a>               763 user/usertests.c     close(fds[1]);</span>
-<span class='curline'><a href='../S/27.html#L766'>fds</a>               766 user/usertests.c     while((n = read(fds[0], buf, cc)) &gt; 0){</span>
-<span class='curline'><a href='../S/27.html#L782'>fds</a>               782 user/usertests.c     close(fds[0]);</span>
-<span class='curline'><a href='../S/27.html#L2173'>fds</a>              2173 user/usertests.c   int fds[2];</span>
-<span class='curline'><a href='../S/27.html#L2181'>fds</a>              2181 user/usertests.c   if(pipe(fds) != 0){</span>
-<span class='curline'><a href='../S/27.html#L2189'>fds</a>              2189 user/usertests.c         write(fds[1], "0", 1);</span>
-<span class='curline'><a href='../S/27.html#L2191'>fds</a>              2191 user/usertests.c         write(fds[1], "1", 1);</span>
-<span class='curline'><a href='../S/27.html#L2196'>fds</a>              2196 user/usertests.c       read(fds[0], &amp;scratch, 1);</span>
+<span class='curline'><a href='../S/28.html#L304'>fd2</a>               304 user/usertests.c   int fd2 = open("truncfile", O_RDONLY);</span>
+<span class='curline'><a href='../S/28.html#L305'>fd2</a>               305 user/usertests.c   int n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L321'>fd2</a>               321 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L323'>fd2</a>               323 user/usertests.c     printf("bbb fd2=%d\n", fd2);</span>
+<span class='curline'><a href='../S/28.html#L336'>fd2</a>               336 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L345'>fd2</a>               345 user/usertests.c   close(fd2);</span>
+<span class='curline'><a href='../S/28.html#L361'>fd2</a>               361 user/usertests.c   int fd2 = open("truncfile", O_TRUNC | O_WRONLY);</span>
+<span class='curline'><a href='../S/28.html#L371'>fd2</a>               371 user/usertests.c   close(fd2);</span>
 </pre>
 </body>
 </html>

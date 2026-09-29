@@ -1,18 +1,205 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>pid_lock</title>
+<title>pid</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/65.html#L16'>pid_lock</a>           16 kernel/proc.c  struct spinlock pid_lock;</span>
-<span class='curline'><a href='../S/65.html#L52'>pid_lock</a>           52 kernel/proc.c    initlock(&amp;pid_lock, "nextpid");</span>
-<span class='curline'><a href='../S/65.html#L97'>pid_lock</a>           97 kernel/proc.c    acquire(&amp;pid_lock);</span>
-<span class='curline'><a href='../S/65.html#L100'>pid_lock</a>          100 kernel/proc.c    release(&amp;pid_lock);</span>
+<span class='curline'><a href='../S/66.html#L95'>pid</a>                95 kernel/proc.c    int pid;</span>
+<span class='curline'><a href='../S/66.html#L98'>pid</a>                98 kernel/proc.c    pid = nextpid;</span>
+<span class='curline'><a href='../S/66.html#L102'>pid</a>               102 kernel/proc.c    return pid;</span>
+<span class='curline'><a href='../S/66.html#L125'>pid</a>               125 kernel/proc.c    p-&gt;pid = allocpid();</span>
+<span class='curline'><a href='../S/66.html#L165'>pid</a>               165 kernel/proc.c    p-&gt;pid = 0;</span>
+<span class='curline'><a href='../S/66.html#L261'>pid</a>               261 kernel/proc.c    int i, pid;</span>
+<span class='curline'><a href='../S/66.html#L292'>pid</a>               292 kernel/proc.c    pid = np-&gt;pid;</span>
+<span class='curline'><a href='../S/66.html#L304'>pid</a>               304 kernel/proc.c    return pid;</span>
+<span class='curline'><a href='../S/66.html#L373'>pid</a>               373 kernel/proc.c    int havekids, pid;</span>
+<span class='curline'><a href='../S/66.html#L389'>pid</a>               389 kernel/proc.c            pid = pp-&gt;pid;</span>
+<span class='curline'><a href='../S/66.html#L401'>pid</a>               401 kernel/proc.c            return pid;</span>
+<span class='curline'><a href='../S/66.html#L601'>pid</a>               601 kernel/proc.c  kkill(int pid)</span>
+<span class='curline'><a href='../S/66.html#L605'>pid</a>               605 kernel/proc.c    if (pid == 0)</span>
+<span class='curline'><a href='../S/66.html#L610'>pid</a>               610 kernel/proc.c      if (p-&gt;pid == pid) {</span>
+<span class='curline'><a href='../S/66.html#L700'>pid</a>               700 kernel/proc.c      printk("%d %s %s", p-&gt;pid, state, p-&gt;name);</span>
+<span class='curline'><a href='../S/38.html#L90'>pid</a>                90 kernel/proc.h    int pid;              // Process ID</span>
+<span class='curline'><a href='../S/48.html#L18'>pid</a>                18 kernel/sleeplock.c   lk-&gt;pid = 0;</span>
+<span class='curline'><a href='../S/48.html#L32'>pid</a>                32 kernel/sleeplock.c   lk-&gt;pid = myproc()-&gt;pid;</span>
+<span class='curline'><a href='../S/48.html#L41'>pid</a>                41 kernel/sleeplock.c   lk-&gt;pid = 0;</span>
+<span class='curline'><a href='../S/48.html#L52'>pid</a>                52 kernel/sleeplock.c   r = lk-&gt;locked &amp;&amp; (lk-&gt;pid == myproc()-&gt;pid);</span>
+<span class='curline'><a href='../S/69.html#L8'>pid</a>                 8 kernel/sleeplock.h   int pid;    // Process holding lock</span>
+<span class='curline'><a href='../S/54.html#L148'>pid</a>               148 kernel/syscall.c     printk("%d %s: unknown sys call %d\n", p-&gt;pid, p-&gt;name, num);</span>
+<span class='curline'><a href='../S/36.html#L22'>pid</a>                22 kernel/sysproc.c   return myproc()-&gt;pid;</span>
+<span class='curline'><a href='../S/36.html#L95'>pid</a>                95 kernel/sysproc.c   int pid;</span>
+<span class='curline'><a href='../S/36.html#L97'>pid</a>                97 kernel/sysproc.c   argint(0, &amp;pid);</span>
+<span class='curline'><a href='../S/36.html#L98'>pid</a>                98 kernel/sysproc.c   return kkill(pid);</span>
+<span class='curline'><a href='../S/59.html#L76'>pid</a>                76 kernel/trap.c      printk("usertrap(): unexpected scause 0x%lx pid=%d\n", r_scause(), p-&gt;pid);</span>
+<span class='curline'><a href='../S/5.html#L19'>pid</a>                19 user/forktest.c   int n, pid;</span>
+<span class='curline'><a href='../S/5.html#L24'>pid</a>                24 user/forktest.c     pid = fork();</span>
+<span class='curline'><a href='../S/5.html#L25'>pid</a>                25 user/forktest.c     if (pid &lt; 0)</span>
+<span class='curline'><a href='../S/5.html#L27'>pid</a>                27 user/forktest.c     if (pid == 0)</span>
+<span class='curline'><a href='../S/13.html#L108'>pid</a>               108 user/grind.c         int pid = fork();</span>
+<span class='curline'><a href='../S/13.html#L109'>pid</a>               109 user/grind.c         if (pid == 0) {</span>
+<span class='curline'><a href='../S/13.html#L111'>pid</a>               111 user/grind.c         } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/13.html#L117'>pid</a>               117 user/grind.c         int pid = fork();</span>
+<span class='curline'><a href='../S/13.html#L118'>pid</a>               118 user/grind.c         if (pid == 0) {</span>
+<span class='curline'><a href='../S/13.html#L122'>pid</a>               122 user/grind.c         } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/13.html#L133'>pid</a>               133 user/grind.c         int pid = fork();</span>
+<span class='curline'><a href='../S/13.html#L134'>pid</a>               134 user/grind.c         if (pid == 0) {</span>
+<span class='curline'><a href='../S/13.html#L137'>pid</a>               137 user/grind.c         } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/13.html#L145'>pid</a>               145 user/grind.c         kill(pid);</span>
+<span class='curline'><a href='../S/13.html#L148'>pid</a>               148 user/grind.c         int pid = fork();</span>
+<span class='curline'><a href='../S/13.html#L149'>pid</a>               149 user/grind.c         if (pid == 0) {</span>
+<span class='curline'><a href='../S/13.html#L152'>pid</a>               152 user/grind.c         } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/13.html#L163'>pid</a>               163 user/grind.c         int pid = fork();</span>
+<span class='curline'><a href='../S/13.html#L164'>pid</a>               164 user/grind.c         if (pid == 0) {</span>
+<span class='curline'><a href='../S/13.html#L173'>pid</a>               173 user/grind.c         } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/13.html#L181'>pid</a>               181 user/grind.c         int pid = fork();</span>
+<span class='curline'><a href='../S/13.html#L182'>pid</a>               182 user/grind.c         if (pid == 0) {</span>
+<span class='curline'><a href='../S/13.html#L190'>pid</a>               190 user/grind.c         } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/13.html#L340'>pid</a>               340 user/grind.c       int pid = fork();</span>
+<span class='curline'><a href='../S/13.html#L341'>pid</a>               341 user/grind.c       if (pid == 0) {</span>
+<span class='curline'><a href='../S/13.html#L345'>pid</a>               345 user/grind.c       if (pid &gt; 0) {</span>
+<span class='curline'><a href='../S/7.html#L17'>pid</a>                17 user/init.c      int pid, wpid;</span>
+<span class='curline'><a href='../S/7.html#L28'>pid</a>                28 user/init.c        pid = fork();</span>
+<span class='curline'><a href='../S/7.html#L29'>pid</a>                29 user/init.c        if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/7.html#L33'>pid</a>                33 user/init.c        if (pid == 0) {</span>
+<span class='curline'><a href='../S/7.html#L43'>pid</a>                43 user/init.c          if (wpid == pid) {</span>
+<span class='curline'><a href='../S/19.html#L190'>pid</a>               190 user/sh.c        int pid;</span>
+<span class='curline'><a href='../S/19.html#L192'>pid</a>               192 user/sh.c        pid = fork();</span>
+<span class='curline'><a href='../S/19.html#L193'>pid</a>               193 user/sh.c        if (pid == -1)</span>
+<span class='curline'><a href='../S/19.html#L195'>pid</a>               195 user/sh.c        return pid;</span>
+<span class='curline'><a href='../S/28.html#L175'>pid</a>               175 user/usertests.c   int pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L176'>pid</a>               176 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L180'>pid</a>               180 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L377'>pid</a>               377 user/usertests.c   int pid, xstatus;</span>
+<span class='curline'><a href='../S/28.html#L381'>pid</a>               381 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L382'>pid</a>               382 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L387'>pid</a>               387 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L453'>pid</a>               453 user/usertests.c   int pid, xstatus;</span>
+<span class='curline'><a href='../S/28.html#L455'>pid</a>               455 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L456'>pid</a>               456 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L460'>pid</a>               460 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L493'>pid</a>               493 user/usertests.c   int pid, xstatus;</span>
+<span class='curline'><a href='../S/28.html#L499'>pid</a>               499 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L500'>pid</a>               500 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L504'>pid</a>               504 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L685'>pid</a>               685 user/usertests.c   int fd, xstatus, pid;</span>
+<span class='curline'><a href='../S/28.html#L690'>pid</a>               690 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L691'>pid</a>               691 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L695'>pid</a>               695 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L717'>pid</a>               717 user/usertests.c   if (wait(&amp;xstatus) != pid) {</span>
+<span class='curline'><a href='../S/28.html#L748'>pid</a>               748 user/usertests.c   int fds[2], pid, xstatus;</span>
+<span class='curline'><a href='../S/28.html#L756'>pid</a>               756 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L758'>pid</a>               758 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L769'>pid</a>               769 user/usertests.c   } else if (pid &gt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L831'>pid</a>               831 user/usertests.c   int pid, xst;</span>
+<span class='curline'><a href='../S/28.html#L835'>pid</a>               835 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L836'>pid</a>               836 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L840'>pid</a>               840 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L843'>pid</a>               843 user/usertests.c   if (wait(&amp;xst) != pid) {</span>
+<span class='curline'><a href='../S/28.html#L914'>pid</a>               914 user/usertests.c   int i, pid;</span>
+<span class='curline'><a href='../S/28.html#L917'>pid</a>               917 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L918'>pid</a>               918 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L922'>pid</a>               922 user/usertests.c     if (pid) {</span>
+<span class='curline'><a href='../S/28.html#L924'>pid</a>               924 user/usertests.c       if (wait(&amp;xstate) != pid) {</span>
+<span class='curline'><a href='../S/28.html#L946'>pid</a>               946 user/usertests.c     int pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L947'>pid</a>               947 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L951'>pid</a>               951 user/usertests.c     if (pid) {</span>
+<span class='curline'><a href='../S/28.html#L952'>pid</a>               952 user/usertests.c       if (wait(0) != pid) {</span>
+<span class='curline'><a href='../S/28.html#L1003'>pid</a>              1003 user/usertests.c     int pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1004'>pid</a>              1004 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1008'>pid</a>              1008 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1038'>pid</a>              1038 user/usertests.c   int pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1039'>pid</a>              1039 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1043'>pid</a>              1043 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1093'>pid</a>              1093 user/usertests.c   int pid;</span>
+<span class='curline'><a href='../S/28.html#L1095'>pid</a>              1095 user/usertests.c   if ((pid = fork()) == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1132'>pid</a>              1132 user/usertests.c   int fd, pid, i, n, nc, np;</span>
+<span class='curline'><a href='../S/28.html#L1142'>pid</a>              1142 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1143'>pid</a>              1143 user/usertests.c   memset(buf, pid == 0 ? 'c' : 'p', sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L1150'>pid</a>              1150 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1189'>pid</a>              1189 user/usertests.c   int fd, pid, i, j, n, total, pi;</span>
+<span class='curline'><a href='../S/28.html#L1198'>pid</a>              1198 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1199'>pid</a>              1199 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1204'>pid</a>              1204 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1256'>pid</a>              1256 user/usertests.c   int pid, i, fd, pi;</span>
+<span class='curline'><a href='../S/28.html#L1260'>pid</a>              1260 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1261'>pid</a>              1261 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1266'>pid</a>              1266 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1433'>pid</a>              1433 user/usertests.c   int i, pid, n, fd;</span>
+<span class='curline'><a href='../S/28.html#L1445'>pid</a>              1445 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1446'>pid</a>              1446 user/usertests.c     if (pid &amp;&amp; (i % 3) == 1) {</span>
+<span class='curline'><a href='../S/28.html#L1448'>pid</a>              1448 user/usertests.c     } else if (pid == 0 &amp;&amp; (i % 5) == 1) {</span>
+<span class='curline'><a href='../S/28.html#L1458'>pid</a>              1458 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L1497'>pid</a>              1497 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1498'>pid</a>              1498 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1502'>pid</a>              1502 user/usertests.c     if (((i % 3) == 0 &amp;&amp; pid == 0) || ((i % 3) == 1 &amp;&amp; pid != 0)) {</span>
+<span class='curline'><a href='../S/28.html#L1517'>pid</a>              1517 user/usertests.c     if (pid == 0)</span>
+<span class='curline'><a href='../S/28.html#L1529'>pid</a>              1529 user/usertests.c   int pid, i;</span>
+<span class='curline'><a href='../S/28.html#L1532'>pid</a>              1532 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L1533'>pid</a>              1533 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1538'>pid</a>              1538 user/usertests.c   unsigned int x = (pid ? 1 : 97);</span>
+<span class='curline'><a href='../S/28.html#L1550'>pid</a>              1550 user/usertests.c   if (pid)</span>
+<span class='curline'><a href='../S/28.html#L1997'>pid</a>              1997 user/usertests.c   int n, pid;</span>
+<span class='curline'><a href='../S/28.html#L2000'>pid</a>              2000 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2001'>pid</a>              2001 user/usertests.c     if (pid &lt; 0)</span>
+<span class='curline'><a href='../S/28.html#L2003'>pid</a>              2003 user/usertests.c     if (pid == 0)</span>
+<span class='curline'><a href='../S/28.html#L2034'>pid</a>              2034 user/usertests.c   int i, pid, xstatus;</span>
+<span class='curline'><a href='../S/28.html#L2038'>pid</a>              2038 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2039'>pid</a>              2039 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2043'>pid</a>              2043 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2077'>pid</a>              2077 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2078'>pid</a>              2078 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2088'>pid</a>              2088 user/usertests.c   if (pid == 0)</span>
+<span class='curline'><a href='../S/28.html#L2156'>pid</a>              2156 user/usertests.c   int pid;</span>
+<span class='curline'><a href='../S/28.html#L2159'>pid</a>              2159 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2160'>pid</a>              2160 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2164'>pid</a>              2164 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2181'>pid</a>              2181 user/usertests.c     int pid;</span>
+<span class='curline'><a href='../S/28.html#L2182'>pid</a>              2182 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2183'>pid</a>              2183 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2187'>pid</a>              2187 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2210'>pid</a>              2210 user/usertests.c   int pid;</span>
+<span class='curline'><a href='../S/28.html#L2254'>pid</a>              2254 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2255'>pid</a>              2255 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2259'>pid</a>              2259 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2338'>pid</a>              2338 user/usertests.c   int pid, fd, xstatus;</span>
+<span class='curline'><a href='../S/28.html#L2341'>pid</a>              2341 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2342'>pid</a>              2342 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2357'>pid</a>              2357 user/usertests.c   } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2444'>pid</a>              2444 user/usertests.c   int pid;</span>
+<span class='curline'><a href='../S/28.html#L2447'>pid</a>              2447 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2448'>pid</a>              2448 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2454'>pid</a>              2454 user/usertests.c   } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2470'>pid</a>              2470 user/usertests.c   int pid;</span>
+<span class='curline'><a href='../S/28.html#L2480'>pid</a>              2480 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2481'>pid</a>              2481 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2486'>pid</a>              2486 user/usertests.c     } else if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2520'>pid</a>              2520 user/usertests.c   int pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2521'>pid</a>              2521 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2525'>pid</a>              2525 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2536'>pid</a>              2536 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2537'>pid</a>              2537 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2541'>pid</a>              2541 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2551'>pid</a>              2551 user/usertests.c   pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2552'>pid</a>              2552 user/usertests.c   if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2556'>pid</a>              2556 user/usertests.c   if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L2658'>pid</a>              2658 user/usertests.c   int pid;</span>
+<span class='curline'><a href='../S/28.html#L2672'>pid</a>              2672 user/usertests.c     pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L2673'>pid</a>              2673 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L2676'>pid</a>              2676 user/usertests.c     } else if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L3093'>pid</a>              3093 user/usertests.c     int pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L3094'>pid</a>              3094 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L3099'>pid</a>              3099 user/usertests.c     if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L3182'>pid</a>              3182 user/usertests.c     int pid = fork();</span>
+<span class='curline'><a href='../S/28.html#L3183'>pid</a>              3183 user/usertests.c     if (pid &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L3186'>pid</a>              3186 user/usertests.c     } else if (pid == 0) {</span>
+<span class='curline'><a href='../S/28.html#L3415'>pid</a>              3415 user/usertests.c   int pid;</span>
+<span class='curline'><a href='../S/28.html#L3419'>pid</a>              3419 user/usertests.c   if ((pid = fork()) &lt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L3423'>pid</a>              3423 user/usertests.c   if (pid == 0) {</span>
 </pre>
 </body>
 </html>

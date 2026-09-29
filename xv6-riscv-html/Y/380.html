@@ -1,18 +1,23 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>to</title>
+<title>tail</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L185'>to</a>                185 kernel/log.c       struct buf *to = bread(log.dev, log.start+tail+1); // log block</span>
-<span class='curline'><a href='../S/32.html#L187'>to</a>                187 kernel/log.c       memmove(to-&gt;data, from-&gt;data, BSIZE);</span>
-<span class='curline'><a href='../S/32.html#L188'>to</a>                188 kernel/log.c       bwrite(to);  // write the log</span>
-<span class='curline'><a href='../S/32.html#L190'>to</a>                190 kernel/log.c       brelse(to);</span>
+<span class='curline'><a href='../S/33.html#L70'>tail</a>               70 kernel/log.c     int tail;</span>
+<span class='curline'><a href='../S/33.html#L72'>tail</a>               72 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/33.html#L74'>tail</a>               74 kernel/log.c         printk("recovering tail %d dst %d\n", tail, log.lh.block[tail]);</span>
+<span class='curline'><a href='../S/33.html#L76'>tail</a>               76 kernel/log.c       struct buf *lbuf = bread(log.dev, log.start + tail + 1); // read log block</span>
+<span class='curline'><a href='../S/33.html#L77'>tail</a>               77 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]);   // read dst</span>
+<span class='curline'><a href='../S/33.html#L190'>tail</a>              190 kernel/log.c     int tail;</span>
+<span class='curline'><a href='../S/33.html#L192'>tail</a>              192 kernel/log.c     for (tail = 0; tail &lt; log.lh.n; tail++) {</span>
+<span class='curline'><a href='../S/33.html#L193'>tail</a>              193 kernel/log.c       struct buf *to = bread(log.dev, log.start + tail + 1); // log block</span>
+<span class='curline'><a href='../S/33.html#L194'>tail</a>              194 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
 </pre>
 </body>
 </html>

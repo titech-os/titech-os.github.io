@@ -1,24 +1,19 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>PTE_V</title>
+<title>PTE2PA</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/41.html#L105'>PTE_V</a>             105 kernel/vm.c        if(*pte &amp; PTE_V) {</span>
-<span class='curline'><a href='../S/41.html#L111'>PTE_V</a>             111 kernel/vm.c          *pte = PA2PTE(pagetable) | PTE_V;</span>
-<span class='curline'><a href='../S/41.html#L132'>PTE_V</a>             132 kernel/vm.c      if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/41.html#L165'>PTE_V</a>             165 kernel/vm.c        if(*pte &amp; PTE_V)</span>
-<span class='curline'><a href='../S/41.html#L167'>PTE_V</a>             167 kernel/vm.c        *pte = PA2PTE(pa) | perm | PTE_V;</span>
-<span class='curline'><a href='../S/41.html#L204'>PTE_V</a>             204 kernel/vm.c        if((*pte &amp; PTE_V) == 0)  // has physical page been allocated?</span>
-<span class='curline'><a href='../S/41.html#L268'>PTE_V</a>             268 kernel/vm.c        if((pte &amp; PTE_V) &amp;&amp; (pte &amp; (PTE_R|PTE_W|PTE_X)) == 0){</span>
-<span class='curline'><a href='../S/41.html#L273'>PTE_V</a>             273 kernel/vm.c        } else if(pte &amp; PTE_V){</span>
-<span class='curline'><a href='../S/41.html#L307'>PTE_V</a>             307 kernel/vm.c        if((*pte &amp; PTE_V) == 0)</span>
-<span class='curline'><a href='../S/41.html#L482'>PTE_V</a>             482 kernel/vm.c      if (*pte &amp; PTE_V){</span>
+<span class='curline'><a href='../S/41.html#L107'>PTE2PA</a>            107 kernel/vm.c          pagetable = (pagetable_t)PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/41.html#L137'>PTE2PA</a>            137 kernel/vm.c      pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/41.html#L208'>PTE2PA</a>            208 kernel/vm.c          uint64 pa = PTE2PA(*pte);</span>
+<span class='curline'><a href='../S/41.html#L272'>PTE2PA</a>            272 kernel/vm.c          uint64 child = PTE2PA(pte);</span>
+<span class='curline'><a href='../S/41.html#L311'>PTE2PA</a>            311 kernel/vm.c        pa = PTE2PA(*pte);</span>
 </pre>
 </body>
 </html>

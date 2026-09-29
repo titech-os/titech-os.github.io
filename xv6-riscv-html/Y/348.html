@@ -1,50 +1,59 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>st</title>
+<title>size</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/69.html#L91'>st</a>                 91 kernel/file.c    struct stat st;</span>
-<span class='curline'><a href='../S/69.html#L95'>st</a>                 95 kernel/file.c      stati(f-&gt;ip, &amp;st);</span>
-<span class='curline'><a href='../S/69.html#L97'>st</a>                 97 kernel/file.c      if(copyout(p-&gt;pagetable, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
-<span class='curline'><a href='../S/50.html#L481'>st</a>                481 kernel/fs.c    stati(struct inode *ip, struct stat *st)</span>
-<span class='curline'><a href='../S/50.html#L483'>st</a>                483 kernel/fs.c      st-&gt;dev = ip-&gt;dev;</span>
-<span class='curline'><a href='../S/50.html#L484'>st</a>                484 kernel/fs.c      st-&gt;ino = ip-&gt;inum;</span>
-<span class='curline'><a href='../S/50.html#L485'>st</a>                485 kernel/fs.c      st-&gt;type = ip-&gt;type;</span>
-<span class='curline'><a href='../S/50.html#L486'>st</a>                486 kernel/fs.c      st-&gt;nlink = ip-&gt;nlink;</span>
-<span class='curline'><a href='../S/50.html#L487'>st</a>                487 kernel/fs.c      st-&gt;size = ip-&gt;size;</span>
-<span class='curline'><a href='../S/46.html#L114'>st</a>                114 kernel/sysfile.c   uint64 st; // user pointer to struct stat</span>
-<span class='curline'><a href='../S/46.html#L116'>st</a>                116 kernel/sysfile.c   argaddr(1, &amp;st);</span>
-<span class='curline'><a href='../S/46.html#L119'>st</a>                119 kernel/sysfile.c   return filestat(f, st);</span>
-<span class='curline'><a href='../S/19.html#L17'>st</a>                 17 user/forphan.c   struct stat st;</span>
-<span class='curline'><a href='../S/19.html#L24'>st</a>                 24 user/forphan.c   if(fstat(fd, &amp;st) &lt; 0){</span>
-<span class='curline'><a href='../S/19.html#L36'>st</a>                 36 user/forphan.c   printf("wait for kill and reclaim %d\n", st.ino);</span>
-<span class='curline'><a href='../S/13.html#L208'>st</a>                208 user/grind.c         struct stat st;</span>
-<span class='curline'><a href='../S/13.html#L209'>st</a>                209 user/grind.c         if(fstat(fd1, &amp;st) != 0){</span>
-<span class='curline'><a href='../S/13.html#L213'>st</a>                213 user/grind.c         if(st.size != 1){</span>
-<span class='curline'><a href='../S/13.html#L214'>st</a>                214 user/grind.c           printf("grind: fstat reports wrong size %d\n", (int)st.size);</span>
-<span class='curline'><a href='../S/13.html#L217'>st</a>                217 user/grind.c         if(st.ino &gt; 200){</span>
-<span class='curline'><a href='../S/13.html#L218'>st</a>                218 user/grind.c           printf("grind: fstat reports crazy i-number %d\n", st.ino);</span>
-<span class='curline'><a href='../S/6.html#L33'>st</a>                 33 user/ls.c        struct stat st;</span>
-<span class='curline'><a href='../S/6.html#L40'>st</a>                 40 user/ls.c        if(fstat(fd, &amp;st) &lt; 0){</span>
-<span class='curline'><a href='../S/6.html#L46'>st</a>                 46 user/ls.c        switch(st.type){</span>
-<span class='curline'><a href='../S/6.html#L49'>st</a>                 49 user/ls.c          printf("%s %d %d %d\n", fmtname(path), st.type, st.ino, (int) st.size);</span>
-<span class='curline'><a href='../S/6.html#L65'>st</a>                 65 user/ls.c            if(stat(buf, &amp;st) &lt; 0){</span>
-<span class='curline'><a href='../S/6.html#L69'>st</a>                 69 user/ls.c            printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, (int) st.size);</span>
-<span class='curline'><a href='../S/20.html#L88'>st</a>                 88 user/ulib.c    stat(const char *n, struct stat *st)</span>
-<span class='curline'><a href='../S/20.html#L96'>st</a>                 96 user/ulib.c      r = fstat(fd, st);</span>
-<span class='curline'><a href='../S/27.html#L192'>st</a>                192 user/usertests.c   int st = 0;</span>
-<span class='curline'><a href='../S/27.html#L193'>st</a>                193 user/usertests.c   wait(&amp;st);</span>
-<span class='curline'><a href='../S/27.html#L194'>st</a>                194 user/usertests.c   if(st != 747){</span>
-<span class='curline'><a href='../S/27.html#L2913'>st</a>               2913 user/usertests.c     int st = 0;</span>
-<span class='curline'><a href='../S/27.html#L2914'>st</a>               2914 user/usertests.c     wait(&amp;st);</span>
-<span class='curline'><a href='../S/27.html#L2915'>st</a>               2915 user/usertests.c     if(st != 0)</span>
-<span class='curline'><a href='../S/27.html#L2916'>st</a>               2916 user/usertests.c       exit(st);</span>
+<span class='curline'><a href='../S/44.html#L28'>size</a>               28 kernel/file.h    uint size;</span>
+<span class='curline'><a href='../S/51.html#L74'>size</a>               74 kernel/fs.c      for (b = 0; b &lt; sb.size; b += BPB) {</span>
+<span class='curline'><a href='../S/51.html#L76'>size</a>               76 kernel/fs.c        for (bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++) {</span>
+<span class='curline'><a href='../S/51.html#L239'>size</a>              239 kernel/fs.c      dip-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/51.html#L312'>size</a>              312 kernel/fs.c        ip-&gt;size = dip-&gt;size;</span>
+<span class='curline'><a href='../S/51.html#L489'>size</a>              489 kernel/fs.c      ip-&gt;size = 0;</span>
+<span class='curline'><a href='../S/51.html#L502'>size</a>              502 kernel/fs.c      st-&gt;size = ip-&gt;size;</span>
+<span class='curline'><a href='../S/51.html#L515'>size</a>              515 kernel/fs.c      if (off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/51.html#L517'>size</a>              517 kernel/fs.c      if (off + n &gt; ip-&gt;size)</span>
+<span class='curline'><a href='../S/51.html#L518'>size</a>              518 kernel/fs.c        n = ip-&gt;size - off;</span>
+<span class='curline'><a href='../S/51.html#L549'>size</a>              549 kernel/fs.c      if (off &gt; ip-&gt;size || off + n &lt; off)</span>
+<span class='curline'><a href='../S/51.html#L570'>size</a>              570 kernel/fs.c      if (off &gt; ip-&gt;size)</span>
+<span class='curline'><a href='../S/51.html#L571'>size</a>              571 kernel/fs.c        ip-&gt;size = off;</span>
+<span class='curline'><a href='../S/51.html#L600'>size</a>              600 kernel/fs.c      for (off = 0; off &lt; dp-&gt;size; off += sizeof(de)) {</span>
+<span class='curline'><a href='../S/51.html#L633'>size</a>              633 kernel/fs.c      for (off = 0; off &lt; dp-&gt;size; off += sizeof(de)) {</span>
+<span class='curline'><a href='../S/75.html#L15'>size</a>               15 kernel/fs.h      uint size;       // Size of file system image (blocks)</span>
+<span class='curline'><a href='../S/75.html#L37'>size</a>               37 kernel/fs.h      uint size;               // Size of file (bytes)</span>
+<span class='curline'><a href='../S/45.html#L10'>size</a>               10 kernel/stat.h    uint64 size; // Size of file in bytes</span>
+<span class='curline'><a href='../S/46.html#L192'>size</a>              192 kernel/sysfile.c   for (off = 2 * sizeof(de); off &lt; dp-&gt;size; off += sizeof(de)) {</span>
+<span class='curline'><a href='../S/41.html#L147'>size</a>              147 kernel/vm.c    mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)</span>
+<span class='curline'><a href='../S/41.html#L155'>size</a>              155 kernel/vm.c      if ((size % PGSIZE) != 0)</span>
+<span class='curline'><a href='../S/41.html#L158'>size</a>              158 kernel/vm.c      if (size == 0)</span>
+<span class='curline'><a href='../S/41.html#L162'>size</a>              162 kernel/vm.c      last = va + size - PGSIZE;</span>
+<span class='curline'><a href='../S/3.html#L100'>size</a>              100 mkfs/mkfs.c      sb.size = xint(FSSIZE);</span>
+<span class='curline'><a href='../S/3.html#L171'>size</a>              171 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L173'>size</a>              173 mkfs/mkfs.c      din.size = xint(off);</span>
+<span class='curline'><a href='../S/3.html#L235'>size</a>              235 mkfs/mkfs.c      din.size = xint(0);</span>
+<span class='curline'><a href='../S/3.html#L269'>size</a>              269 mkfs/mkfs.c      off = xint(din.size);</span>
+<span class='curline'><a href='../S/3.html#L298'>size</a>              298 mkfs/mkfs.c      din.size = xint(off);</span>
+<span class='curline'><a href='../S/13.html#L213'>size</a>              213 user/grind.c         if (st.size != 1) {</span>
+<span class='curline'><a href='../S/13.html#L214'>size</a>              214 user/grind.c           printf("grind: fstat reports wrong size %d\n", (int)st.size);</span>
+<span class='curline'><a href='../S/6.html#L49'>size</a>               49 user/ls.c          printf("%s %d %d %d\n", fmtname(path), st.type, st.ino, (int)st.size);</span>
+<span class='curline'><a href='../S/6.html#L69'>size</a>               69 user/ls.c            printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, (int)st.size);</span>
+<span class='curline'><a href='../S/12.html#L14'>size</a>               14 user/umalloc.c     uint size;</span>
+<span class='curline'><a href='../S/12.html#L33'>size</a>               33 user/umalloc.c   if (bp + bp-&gt;s.size == p-&gt;s.ptr) {</span>
+<span class='curline'><a href='../S/12.html#L34'>size</a>               34 user/umalloc.c     bp-&gt;s.size += p-&gt;s.ptr-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L38'>size</a>               38 user/umalloc.c   if (p + p-&gt;s.size == bp) {</span>
+<span class='curline'><a href='../S/12.html#L39'>size</a>               39 user/umalloc.c     p-&gt;s.size += bp-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L58'>size</a>               58 user/umalloc.c   hp-&gt;s.size = nu;</span>
+<span class='curline'><a href='../S/12.html#L72'>size</a>               72 user/umalloc.c     base.s.size = 0;</span>
+<span class='curline'><a href='../S/12.html#L75'>size</a>               75 user/umalloc.c     if (p-&gt;s.size &gt;= nunits) {</span>
+<span class='curline'><a href='../S/12.html#L76'>size</a>               76 user/umalloc.c       if (p-&gt;s.size == nunits)</span>
+<span class='curline'><a href='../S/12.html#L79'>size</a>               79 user/umalloc.c         p-&gt;s.size -= nunits;</span>
+<span class='curline'><a href='../S/12.html#L80'>size</a>               80 user/umalloc.c         p += p-&gt;s.size;</span>
+<span class='curline'><a href='../S/12.html#L81'>size</a>               81 user/umalloc.c         p-&gt;s.size = nunits;</span>
 </pre>
 </body>
 </html>

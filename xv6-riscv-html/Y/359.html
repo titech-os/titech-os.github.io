@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>swtch</title>
+<title>started</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/35.html#L106'>swtch</a>             106 kernel/defs.h  void            swtch(struct context*, struct context*);</span>
-<span class='curline'><a href='../S/65.html#L449'>swtch</a>             449 kernel/proc.c          swtch(&amp;c-&gt;context, &amp;p-&gt;context);</span>
-<span class='curline'><a href='../S/65.html#L488'>swtch</a>             488 kernel/proc.c    swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;context);</span>
+<span class='curline'><a href='../S/63.html#L7'>started</a>             7 kernel/main.c  volatile static int started = 0;</span>
+<span class='curline'><a href='../S/63.html#L33'>started</a>            33 kernel/main.c      __atomic_store_n(&amp;started, 1, __ATOMIC_RELEASE);</span>
+<span class='curline'><a href='../S/63.html#L35'>started</a>            35 kernel/main.c      while (__atomic_load_n(&amp;started, __ATOMIC_ACQUIRE) == 0)</span>
 </pre>
 </body>
 </html>

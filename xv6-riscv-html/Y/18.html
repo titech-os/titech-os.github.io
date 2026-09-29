@@ -1,22 +1,91 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ai</title>
+<title>addr</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/27.html#L38'>ai</a>                 38 user/usertests.c   for(int ai = 0; ai &lt; sizeof(addrs)/sizeof(addrs[0]); ai++){</span>
-<span class='curline'><a href='../S/27.html#L39'>ai</a>                 39 user/usertests.c     uint64 addr = addrs[ai];</span>
-<span class='curline'><a href='../S/27.html#L83'>ai</a>                 83 user/usertests.c   for(int ai = 0; ai &lt; sizeof(addrs)/sizeof(addrs[0]); ai++){</span>
-<span class='curline'><a href='../S/27.html#L84'>ai</a>                 84 user/usertests.c     uint64 addr = addrs[ai];</span>
-<span class='curline'><a href='../S/27.html#L125'>ai</a>                125 user/usertests.c   for(int ai = 0; ai &lt; sizeof(addrs)/sizeof(addrs[0]); ai++){</span>
-<span class='curline'><a href='../S/27.html#L126'>ai</a>                126 user/usertests.c     uint64 addr = addrs[ai];</span>
-<span class='curline'><a href='../S/27.html#L2441'>ai</a>               2441 user/usertests.c   for(int ai = 0; ai &lt; sizeof(addrs)/sizeof(addrs[0]); ai++){</span>
-<span class='curline'><a href='../S/27.html#L2444'>ai</a>               2444 user/usertests.c       volatile int *addr = (int *) addrs[ai];</span>
+<span class='curline'><a href='../S/35.html#L35'>addr</a>               35 kernel/defs.h  int             filestat(struct file*, uint64 addr);</span>
+<span class='curline'><a href='../S/70.html#L88'>addr</a>               88 kernel/file.c  filestat(struct file *f, uint64 addr)</span>
+<span class='curline'><a href='../S/70.html#L97'>addr</a>               97 kernel/file.c      if (copyout(p-&gt;pagetable, p-&gt;sz, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
+<span class='curline'><a href='../S/70.html#L107'>addr</a>              107 kernel/file.c  fileread(struct file *f, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/70.html#L115'>addr</a>              115 kernel/file.c      r = piperead(f-&gt;pipe, addr, n);</span>
+<span class='curline'><a href='../S/70.html#L119'>addr</a>              119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
+<span class='curline'><a href='../S/70.html#L122'>addr</a>              122 kernel/file.c      if ((r = readi(f-&gt;ip, 1, addr, f-&gt;off, n)) &gt; 0)</span>
+<span class='curline'><a href='../S/70.html#L135'>addr</a>              135 kernel/file.c  filewrite(struct file *f, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/70.html#L143'>addr</a>              143 kernel/file.c      ret = pipewrite(f-&gt;pipe, addr, n);</span>
+<span class='curline'><a href='../S/70.html#L147'>addr</a>              147 kernel/file.c      ret = devsw[f-&gt;major].write(1, addr, n);</span>
+<span class='curline'><a href='../S/70.html#L162'>addr</a>              162 kernel/file.c        if ((r = writei(f-&gt;ip, 1, addr + i, f-&gt;off, n1)) &gt; 0)</span>
+<span class='curline'><a href='../S/51.html#L423'>addr</a>              423 kernel/fs.c      uint addr, *a;</span>
+<span class='curline'><a href='../S/51.html#L427'>addr</a>              427 kernel/fs.c        if ((addr = ip-&gt;addrs[bn]) == 0) {</span>
+<span class='curline'><a href='../S/51.html#L428'>addr</a>              428 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/51.html#L429'>addr</a>              429 kernel/fs.c          if (addr == 0)</span>
+<span class='curline'><a href='../S/51.html#L431'>addr</a>              431 kernel/fs.c          ip-&gt;addrs[bn] = addr;</span>
+<span class='curline'><a href='../S/51.html#L433'>addr</a>              433 kernel/fs.c        return addr;</span>
+<span class='curline'><a href='../S/51.html#L439'>addr</a>              439 kernel/fs.c        if ((addr = ip-&gt;addrs[NDIRECT]) == 0) {</span>
+<span class='curline'><a href='../S/51.html#L440'>addr</a>              440 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/51.html#L441'>addr</a>              441 kernel/fs.c          if (addr == 0)</span>
+<span class='curline'><a href='../S/51.html#L443'>addr</a>              443 kernel/fs.c          ip-&gt;addrs[NDIRECT] = addr;</span>
+<span class='curline'><a href='../S/51.html#L445'>addr</a>              445 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/51.html#L447'>addr</a>              447 kernel/fs.c        if ((addr = a[bn]) == 0) {</span>
+<span class='curline'><a href='../S/51.html#L448'>addr</a>              448 kernel/fs.c          addr = balloc(ip-&gt;dev);</span>
+<span class='curline'><a href='../S/51.html#L449'>addr</a>              449 kernel/fs.c          if (addr) {</span>
+<span class='curline'><a href='../S/51.html#L450'>addr</a>              450 kernel/fs.c            a[bn] = addr;</span>
+<span class='curline'><a href='../S/51.html#L455'>addr</a>              455 kernel/fs.c        return addr;</span>
+<span class='curline'><a href='../S/51.html#L521'>addr</a>              521 kernel/fs.c        uint addr = bmap(ip, off / BSIZE);</span>
+<span class='curline'><a href='../S/51.html#L522'>addr</a>              522 kernel/fs.c        if (addr == 0)</span>
+<span class='curline'><a href='../S/51.html#L524'>addr</a>              524 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/51.html#L555'>addr</a>              555 kernel/fs.c        uint addr = bmap(ip, off / BSIZE);</span>
+<span class='curline'><a href='../S/51.html#L556'>addr</a>              556 kernel/fs.c        if (addr == 0)</span>
+<span class='curline'><a href='../S/51.html#L558'>addr</a>              558 kernel/fs.c        bp = bread(ip-&gt;dev, addr);</span>
+<span class='curline'><a href='../S/37.html#L77'>addr</a>               77 kernel/pipe.c  pipewrite(struct pipe *pi, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/37.html#L96'>addr</a>               96 kernel/pipe.c        if (copyin(pr-&gt;pagetable, pr-&gt;sz, &amp;ch, addr + i, 1) == -1) {</span>
+<span class='curline'><a href='../S/37.html#L112'>addr</a>              112 kernel/pipe.c  piperead(struct pipe *pi, uint64 addr, int n)</span>
+<span class='curline'><a href='../S/37.html#L133'>addr</a>              133 kernel/pipe.c      if (copyout(pr-&gt;pagetable, pr-&gt;sz, addr + i, &amp;ch, 1) == -1) {</span>
+<span class='curline'><a href='../S/66.html#L370'>addr</a>              370 kernel/proc.c  kwait(uint64 addr)</span>
+<span class='curline'><a href='../S/66.html#L390'>addr</a>              390 kernel/proc.c            if (addr != 0 &amp;&amp;</span>
+<span class='curline'><a href='../S/66.html#L391'>addr</a>              391 kernel/proc.c                copyout(p-&gt;pagetable, p-&gt;sz, addr, (char *)&amp;pp-&gt;xstate,</span>
+<span class='curline'><a href='../S/54.html#L12'>addr</a>               12 kernel/syscall.c fetchaddr(uint64 addr, uint64 *ip)</span>
+<span class='curline'><a href='../S/54.html#L15'>addr</a>               15 kernel/syscall.c   if (addr &gt;= p-&gt;sz ||</span>
+<span class='curline'><a href='../S/54.html#L16'>addr</a>               16 kernel/syscall.c       addr + sizeof(uint64) &gt; p-&gt;sz) // both tests needed, in case of overflow</span>
+<span class='curline'><a href='../S/54.html#L18'>addr</a>               18 kernel/syscall.c   if (copyin(p-&gt;pagetable, p-&gt;sz, (char *)ip, addr, sizeof(*ip)) != 0)</span>
+<span class='curline'><a href='../S/54.html#L26'>addr</a>               26 kernel/syscall.c fetchstr(uint64 addr, char *buf, int max)</span>
+<span class='curline'><a href='../S/54.html#L29'>addr</a>               29 kernel/syscall.c   if (copyinstr(p-&gt;pagetable, p-&gt;sz, buf, addr, max) &lt; 0)</span>
+<span class='curline'><a href='../S/54.html#L78'>addr</a>               78 kernel/syscall.c   uint64 addr;</span>
+<span class='curline'><a href='../S/54.html#L79'>addr</a>               79 kernel/syscall.c   argaddr(n, &amp;addr);</span>
+<span class='curline'><a href='../S/54.html#L80'>addr</a>               80 kernel/syscall.c   return fetchstr(addr, buf, max);</span>
+<span class='curline'><a href='../S/36.html#L42'>addr</a>               42 kernel/sysproc.c   uint64 addr;</span>
+<span class='curline'><a href='../S/36.html#L48'>addr</a>               48 kernel/sysproc.c   addr = myproc()-&gt;sz;</span>
+<span class='curline'><a href='../S/36.html#L58'>addr</a>               58 kernel/sysproc.c     if (addr + n &lt; addr)</span>
+<span class='curline'><a href='../S/36.html#L60'>addr</a>               60 kernel/sysproc.c     if (addr + n &gt; TRAPFRAME)</span>
+<span class='curline'><a href='../S/36.html#L64'>addr</a>               64 kernel/sysproc.c   return addr;</span>
+<span class='curline'><a href='../S/57.html#L57'>addr</a>               57 kernel/virtio.h   uint64 addr;</span>
+<span class='curline'><a href='../S/68.html#L176'>addr</a>              176 kernel/virtio_disk.c   disk.desc[i].addr = 0;</span>
+<span class='curline'><a href='../S/68.html#L250'>addr</a>              250 kernel/virtio_disk.c   disk.desc[idx[0]].addr = (uint64)buf0;</span>
+<span class='curline'><a href='../S/68.html#L255'>addr</a>              255 kernel/virtio_disk.c   disk.desc[idx[1]].addr = (uint64)b-&gt;data;</span>
+<span class='curline'><a href='../S/68.html#L265'>addr</a>              265 kernel/virtio_disk.c   disk.desc[idx[2]].addr = (uint64)&amp;disk.info[idx[0]].status;</span>
+<span class='curline'><a href='../S/28.html#L39'>addr</a>               39 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/28.html#L46'>addr</a>               46 user/usertests.c     int n = write(fd, (void *)addr, 8192);</span>
+<span class='curline'><a href='../S/28.html#L48'>addr</a>               48 user/usertests.c       printf("write(fd, %p, 8192) returned %d, not -1\n", (void *)addr, n);</span>
+<span class='curline'><a href='../S/28.html#L54'>addr</a>               54 user/usertests.c     n = write(1, (char *)addr, 8192);</span>
+<span class='curline'><a href='../S/28.html#L56'>addr</a>               56 user/usertests.c       printf("write(1, %p, 8192) returned %d, not -1 or 0\n", (void *)addr, n);</span>
+<span class='curline'><a href='../S/28.html#L65'>addr</a>               65 user/usertests.c     n = write(fds[1], (char *)addr, 8192);</span>
+<span class='curline'><a href='../S/28.html#L67'>addr</a>               67 user/usertests.c       printf("write(pipe, %p, 8192) returned %d, not -1 or 0\n", (void *)addr,</span>
+<span class='curline'><a href='../S/28.html#L85'>addr</a>               85 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/28.html#L92'>addr</a>               92 user/usertests.c     int n = read(fd, (void *)addr, 8192);</span>
+<span class='curline'><a href='../S/28.html#L94'>addr</a>               94 user/usertests.c       printf("read(fd, %p, 8192) returned %d, not -1 or 0\n", (void *)addr, n);</span>
+<span class='curline'><a href='../S/28.html#L109'>addr</a>              109 user/usertests.c     n = read(fds[0], (void *)addr, 8192);</span>
+<span class='curline'><a href='../S/28.html#L111'>addr</a>              111 user/usertests.c       printf("read(pipe, %p, 8192) returned %d, not -1 or 0\n", (void *)addr,</span>
+<span class='curline'><a href='../S/28.html#L128'>addr</a>              128 user/usertests.c     uint64 addr = addrs[ai];</span>
+<span class='curline'><a href='../S/28.html#L130'>addr</a>              130 user/usertests.c     int fd = open((char *)addr, O_CREATE | O_WRONLY);</span>
+<span class='curline'><a href='../S/28.html#L132'>addr</a>              132 user/usertests.c       printf("open(%p) returned %d, not -1\n", (void *)addr, fd);</span>
+<span class='curline'><a href='../S/28.html#L2482'>addr</a>             2482 user/usertests.c       volatile int *addr = (int *)addrs[ai];</span>
+<span class='curline'><a href='../S/28.html#L2483'>addr</a>             2483 user/usertests.c       *addr = 10;</span>
+<span class='curline'><a href='../S/28.html#L2484'>addr</a>             2484 user/usertests.c       printf("%s: write to %p did not fail!\n", s, addr);</span>
 </pre>
 </body>
 </html>

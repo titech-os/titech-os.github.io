@@ -1,22 +1,38 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vdisk_lock</title>
+<title>va_arg</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/67.html#L57'>vdisk_lock</a>         57 kernel/virtio_disk.c   struct spinlock vdisk_lock;</span>
-<span class='curline'><a href='../S/67.html#L66'>vdisk_lock</a>         66 kernel/virtio_disk.c   initlock(&amp;disk.vdisk_lock, "virtio_disk");</span>
-<span class='curline'><a href='../S/67.html#L220'>vdisk_lock</a>        220 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/67.html#L232'>vdisk_lock</a>        232 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/67.html#L285'>vdisk_lock</a>        285 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/67.html#L291'>vdisk_lock</a>        291 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/67.html#L297'>vdisk_lock</a>        297 kernel/virtio_disk.c   acquire(&amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/67.html#L326'>vdisk_lock</a>        326 kernel/virtio_disk.c   release(&amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/47.html#L87'>va_arg</a>             87 kernel/printk.c       printint(va_arg(ap, int), 10, 1);</span>
+<span class='curline'><a href='../S/47.html#L89'>va_arg</a>             89 kernel/printk.c       printint(va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/47.html#L92'>va_arg</a>             92 kernel/printk.c       printint(va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/47.html#L95'>va_arg</a>             95 kernel/printk.c       printint(va_arg(ap, uint32), 10, 0);</span>
+<span class='curline'><a href='../S/47.html#L97'>va_arg</a>             97 kernel/printk.c       printint(va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/47.html#L100'>va_arg</a>            100 kernel/printk.c       printint(va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/47.html#L103'>va_arg</a>            103 kernel/printk.c       printint(va_arg(ap, uint32), 16, 0);</span>
+<span class='curline'><a href='../S/47.html#L105'>va_arg</a>            105 kernel/printk.c       printint(va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/47.html#L108'>va_arg</a>            108 kernel/printk.c       printint(va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/47.html#L111'>va_arg</a>            111 kernel/printk.c       printptr(va_arg(ap, uint64));</span>
+<span class='curline'><a href='../S/47.html#L113'>va_arg</a>            113 kernel/printk.c       consputc(va_arg(ap, uint));</span>
+<span class='curline'><a href='../S/47.html#L115'>va_arg</a>            115 kernel/printk.c       if ((s = va_arg(ap, char *)) == 0)</span>
+<span class='curline'><a href='../S/4.html#L74'>va_arg</a>             74 user/printf.c          printint(fd, va_arg(ap, int), 10, 1);</span>
+<span class='curline'><a href='../S/4.html#L76'>va_arg</a>             76 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/4.html#L79'>va_arg</a>             79 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 1);</span>
+<span class='curline'><a href='../S/4.html#L82'>va_arg</a>             82 user/printf.c          printint(fd, va_arg(ap, uint32), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L84'>va_arg</a>             84 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L87'>va_arg</a>             87 user/printf.c          printint(fd, va_arg(ap, uint64), 10, 0);</span>
+<span class='curline'><a href='../S/4.html#L90'>va_arg</a>             90 user/printf.c          printint(fd, va_arg(ap, uint32), 16, 0);</span>
+<span class='curline'><a href='../S/4.html#L92'>va_arg</a>             92 user/printf.c          printint(fd, va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/4.html#L95'>va_arg</a>             95 user/printf.c          printint(fd, va_arg(ap, uint64), 16, 0);</span>
+<span class='curline'><a href='../S/4.html#L98'>va_arg</a>             98 user/printf.c          printptr(fd, va_arg(ap, uint64));</span>
+<span class='curline'><a href='../S/4.html#L100'>va_arg</a>            100 user/printf.c          putc(fd, va_arg(ap, uint32));</span>
+<span class='curline'><a href='../S/4.html#L102'>va_arg</a>            102 user/printf.c          if ((s = va_arg(ap, char *)) == 0)</span>
 </pre>
 </body>
 </html>

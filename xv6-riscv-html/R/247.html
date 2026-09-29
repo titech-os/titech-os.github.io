@@ -1,34 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>dinode</title>
+<title>cpu</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/50.html#L204'>dinode</a>            204 kernel/fs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/50.html#L208'>dinode</a>            208 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + inum%IPB;</span>
-<span class='curline'><a href='../S/50.html#L230'>dinode</a>            230 kernel/fs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/50.html#L233'>dinode</a>            233 kernel/fs.c      dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
-<span class='curline'><a href='../S/50.html#L297'>dinode</a>            297 kernel/fs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/50.html#L306'>dinode</a>            306 kernel/fs.c        dip = (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;</span>
-<span class='curline'><a href='../S/50.html#L379'>dinode</a>            379 kernel/fs.c        struct dinode *dip = (struct dinode *)bp-&gt;data + inum % IPB;</span>
-<span class='curline'><a href='../S/74.html#L42'>dinode</a>             42 kernel/fs.h    #define IPB           (BSIZE / sizeof(struct dinode))</span>
-<span class='curline'><a href='../S/3.html#L38'>dinode</a>             38 mkfs/mkfs.c    void winode(uint, struct dinode*);</span>
-<span class='curline'><a href='../S/3.html#L39'>dinode</a>             39 mkfs/mkfs.c    void rinode(uint inum, struct dinode *ip);</span>
-<span class='curline'><a href='../S/3.html#L75'>dinode</a>             75 mkfs/mkfs.c      struct dinode din;</span>
-<span class='curline'><a href='../S/3.html#L85'>dinode</a>             85 mkfs/mkfs.c      assert((BSIZE % sizeof(struct dinode)) == 0);</span>
-<span class='curline'><a href='../S/3.html#L187'>dinode</a>            187 mkfs/mkfs.c    winode(uint inum, struct dinode *ip)</span>
-<span class='curline'><a href='../S/3.html#L191'>dinode</a>            191 mkfs/mkfs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/3.html#L195'>dinode</a>            195 mkfs/mkfs.c      dip = ((struct dinode*)buf) + (inum % IPB);</span>
-<span class='curline'><a href='../S/3.html#L201'>dinode</a>            201 mkfs/mkfs.c    rinode(uint inum, struct dinode *ip)</span>
-<span class='curline'><a href='../S/3.html#L205'>dinode</a>            205 mkfs/mkfs.c      struct dinode *dip;</span>
-<span class='curline'><a href='../S/3.html#L209'>dinode</a>            209 mkfs/mkfs.c      dip = ((struct dinode*)buf) + (inum % IPB);</span>
-<span class='curline'><a href='../S/3.html#L226'>dinode</a>            226 mkfs/mkfs.c      struct dinode din;</span>
-<span class='curline'><a href='../S/3.html#L259'>dinode</a>            259 mkfs/mkfs.c      struct dinode din;</span>
+<span class='curline'><a href='../S/35.html#L92'>cpu</a>                92 kernel/defs.h  struct cpu*     mycpu(void);</span>
+<span class='curline'><a href='../S/66.html#L9'>cpu</a>                 9 kernel/proc.c  struct cpu cpus[NCPU];</span>
+<span class='curline'><a href='../S/66.html#L73'>cpu</a>                73 kernel/proc.c  struct cpu *</span>
+<span class='curline'><a href='../S/66.html#L77'>cpu</a>                77 kernel/proc.c    struct cpu *c = &amp;cpus[id];</span>
+<span class='curline'><a href='../S/66.html#L86'>cpu</a>                86 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/66.html#L432'>cpu</a>               432 kernel/proc.c    struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/38.html#L29'>cpu</a>                29 kernel/proc.h  extern struct cpu cpus[NCPU];</span>
+<span class='curline'><a href='../S/62.html#L16'>cpu</a>                16 kernel/spinlock.c   lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/62.html#L41'>cpu</a>                41 kernel/spinlock.c   lk-&gt;cpu = mycpu();</span>
+<span class='curline'><a href='../S/62.html#L51'>cpu</a>                51 kernel/spinlock.c   lk-&gt;cpu = 0;</span>
+<span class='curline'><a href='../S/62.html#L84'>cpu</a>                84 kernel/spinlock.c   r = (lk-&gt;locked &amp;&amp; lk-&gt;cpu == mycpu());</span>
+<span class='curline'><a href='../S/62.html#L108'>cpu</a>               108 kernel/spinlock.c   struct cpu *c = mycpu();</span>
+<span class='curline'><a href='../S/34.html#L7'>cpu</a>                 7 kernel/spinlock.h   struct cpu *cpu; // The cpu holding the lock.</span>
 </pre>
 </body>
 </html>

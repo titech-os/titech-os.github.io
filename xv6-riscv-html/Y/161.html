@@ -1,25 +1,74 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>irq</title>
+<title>inum</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/64.html#L37'>irq</a>                37 kernel/plic.c    int irq = *(uint32*)PLIC_SCLAIM(hart);</span>
-<span class='curline'><a href='../S/64.html#L38'>irq</a>                38 kernel/plic.c    return irq;</span>
-<span class='curline'><a href='../S/64.html#L43'>irq</a>                43 kernel/plic.c  plic_complete(int irq)</span>
-<span class='curline'><a href='../S/64.html#L46'>irq</a>                46 kernel/plic.c    *(uint32*)PLIC_SCLAIM(hart) = irq;</span>
-<span class='curline'><a href='../S/58.html#L194'>irq</a>               194 kernel/trap.c      int irq = plic_claim();</span>
-<span class='curline'><a href='../S/58.html#L196'>irq</a>               196 kernel/trap.c      if(irq == UART0_IRQ){</span>
-<span class='curline'><a href='../S/58.html#L198'>irq</a>               198 kernel/trap.c      } else if(irq == VIRTIO0_IRQ){</span>
-<span class='curline'><a href='../S/58.html#L200'>irq</a>               200 kernel/trap.c      } else if(irq){</span>
-<span class='curline'><a href='../S/58.html#L201'>irq</a>               201 kernel/trap.c        printf("unexpected interrupt irq=%d\n", irq);</span>
-<span class='curline'><a href='../S/58.html#L207'>irq</a>               207 kernel/trap.c      if(irq)</span>
-<span class='curline'><a href='../S/58.html#L208'>irq</a>               208 kernel/trap.c        plic_complete(irq);</span>
+<span class='curline'><a href='../S/44.html#L19'>inum</a>               19 kernel/file.h    uint inum;             // Inode number</span>
+<span class='curline'><a href='../S/51.html#L194'>inum</a>              194 kernel/fs.c    static struct inode *iget(uint dev, uint inum);</span>
+<span class='curline'><a href='../S/51.html#L203'>inum</a>              203 kernel/fs.c      int inum;</span>
+<span class='curline'><a href='../S/51.html#L207'>inum</a>              207 kernel/fs.c      for (inum = 1; inum &lt; sb.ninodes; inum++) {</span>
+<span class='curline'><a href='../S/51.html#L208'>inum</a>              208 kernel/fs.c        bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/51.html#L209'>inum</a>              209 kernel/fs.c        dip = (struct dinode *)bp-&gt;data + inum % IPB;</span>
+<span class='curline'><a href='../S/51.html#L215'>inum</a>              215 kernel/fs.c          return iget(dev, inum);</span>
+<span class='curline'><a href='../S/51.html#L233'>inum</a>              233 kernel/fs.c      bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/51.html#L234'>inum</a>              234 kernel/fs.c      dip = (struct dinode *)bp-&gt;data + ip-&gt;inum % IPB;</span>
+<span class='curline'><a href='../S/51.html#L249'>inum</a>              249 kernel/fs.c    iget(uint dev, uint inum)</span>
+<span class='curline'><a href='../S/51.html#L258'>inum</a>              258 kernel/fs.c        if (ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev == dev &amp;&amp; ip-&gt;inum == inum) {</span>
+<span class='curline'><a href='../S/51.html#L273'>inum</a>              273 kernel/fs.c      ip-&gt;inum = inum;</span>
+<span class='curline'><a href='../S/51.html#L306'>inum</a>              306 kernel/fs.c        bp = bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));</span>
+<span class='curline'><a href='../S/51.html#L307'>inum</a>              307 kernel/fs.c        dip = (struct dinode *)bp-&gt;data + ip-&gt;inum % IPB;</span>
+<span class='curline'><a href='../S/51.html#L333'>inum</a>              333 kernel/fs.c    ifree(uint dev, uint inum)</span>
+<span class='curline'><a href='../S/51.html#L335'>inum</a>              335 kernel/fs.c      struct buf *bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/51.html#L336'>inum</a>              336 kernel/fs.c      struct dinode *dip = (struct dinode *)bp-&gt;data + inum % IPB;</span>
+<span class='curline'><a href='../S/51.html#L358'>inum</a>              358 kernel/fs.c      uint dev = ip-&gt;dev, inum = ip-&gt;inum;</span>
+<span class='curline'><a href='../S/51.html#L377'>inum</a>              377 kernel/fs.c        ifree(dev, inum); // now clear type on disk: inum becomes allocatable</span>
+<span class='curline'><a href='../S/51.html#L391'>inum</a>              391 kernel/fs.c      for (int inum = 1; inum &lt; sb.ninodes; inum++) {</span>
+<span class='curline'><a href='../S/51.html#L393'>inum</a>              393 kernel/fs.c        struct buf *bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/51.html#L394'>inum</a>              394 kernel/fs.c        struct dinode *dip = (struct dinode *)bp-&gt;data + inum % IPB;</span>
+<span class='curline'><a href='../S/51.html#L396'>inum</a>              396 kernel/fs.c          printk("ireclaim: orphaned inode %d\n", inum);</span>
+<span class='curline'><a href='../S/51.html#L397'>inum</a>              397 kernel/fs.c          ip = iget(dev, inum);</span>
+<span class='curline'><a href='../S/51.html#L499'>inum</a>              499 kernel/fs.c      st-&gt;ino = ip-&gt;inum;</span>
+<span class='curline'><a href='../S/51.html#L594'>inum</a>              594 kernel/fs.c      uint off, inum;</span>
+<span class='curline'><a href='../S/51.html#L603'>inum</a>              603 kernel/fs.c        if (de.inum == 0)</span>
+<span class='curline'><a href='../S/51.html#L609'>inum</a>              609 kernel/fs.c          inum = de.inum;</span>
+<span class='curline'><a href='../S/51.html#L610'>inum</a>              610 kernel/fs.c          return iget(dp-&gt;dev, inum);</span>
+<span class='curline'><a href='../S/51.html#L620'>inum</a>              620 kernel/fs.c    dirlink(struct inode *dp, char *name, uint inum)</span>
+<span class='curline'><a href='../S/51.html#L636'>inum</a>              636 kernel/fs.c        if (de.inum == 0)</span>
+<span class='curline'><a href='../S/51.html#L641'>inum</a>              641 kernel/fs.c      de.inum = inum;</span>
+<span class='curline'><a href='../S/75.html#L59'>inum</a>               59 kernel/fs.h      ushort inum;</span>
+<span class='curline'><a href='../S/46.html#L165'>inum</a>              165 kernel/sysfile.c   if (dp-&gt;dev != ip-&gt;dev || dirlink(dp, name, ip-&gt;inum) &lt; 0) {</span>
+<span class='curline'><a href='../S/46.html#L195'>inum</a>              195 kernel/sysfile.c     if (de.inum != 0)</span>
+<span class='curline'><a href='../S/46.html#L302'>inum</a>              302 kernel/sysfile.c     if (dirlink(ip, ".", ip-&gt;inum) &lt; 0 || dirlink(ip, "..", dp-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/46.html#L306'>inum</a>              306 kernel/sysfile.c   if (dirlink(dp, name, ip-&gt;inum) &lt; 0)</span>
+<span class='curline'><a href='../S/3.html#L43'>inum</a>               43 mkfs/mkfs.c    void rinode(uint inum, struct dinode *ip);</span>
+<span class='curline'><a href='../S/3.html#L46'>inum</a>               46 mkfs/mkfs.c    void iappend(uint inum, void *p, int n);</span>
+<span class='curline'><a href='../S/3.html#L76'>inum</a>               76 mkfs/mkfs.c      uint rootino, inum, off;</span>
+<span class='curline'><a href='../S/3.html#L125'>inum</a>              125 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
+<span class='curline'><a href='../S/3.html#L130'>inum</a>              130 mkfs/mkfs.c      de.inum = xshort(rootino);</span>
+<span class='curline'><a href='../S/3.html#L156'>inum</a>              156 mkfs/mkfs.c        inum = ialloc(T_FILE);</span>
+<span class='curline'><a href='../S/3.html#L159'>inum</a>              159 mkfs/mkfs.c        de.inum = xshort(inum);</span>
+<span class='curline'><a href='../S/3.html#L164'>inum</a>              164 mkfs/mkfs.c          iappend(inum, buf, cc);</span>
+<span class='curline'><a href='../S/3.html#L191'>inum</a>              191 mkfs/mkfs.c    winode(uint inum, struct dinode *ip)</span>
+<span class='curline'><a href='../S/3.html#L197'>inum</a>              197 mkfs/mkfs.c      bn = IBLOCK(inum, sb);</span>
+<span class='curline'><a href='../S/3.html#L199'>inum</a>              199 mkfs/mkfs.c      dip = ((struct dinode *)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/3.html#L205'>inum</a>              205 mkfs/mkfs.c    rinode(uint inum, struct dinode *ip)</span>
+<span class='curline'><a href='../S/3.html#L211'>inum</a>              211 mkfs/mkfs.c      bn = IBLOCK(inum, sb);</span>
+<span class='curline'><a href='../S/3.html#L213'>inum</a>              213 mkfs/mkfs.c      dip = ((struct dinode *)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/3.html#L229'>inum</a>              229 mkfs/mkfs.c      uint inum = freeinode++;</span>
+<span class='curline'><a href='../S/3.html#L236'>inum</a>              236 mkfs/mkfs.c      winode(inum, &amp;din);</span>
+<span class='curline'><a href='../S/3.html#L237'>inum</a>              237 mkfs/mkfs.c      return inum;</span>
+<span class='curline'><a href='../S/3.html#L259'>inum</a>              259 mkfs/mkfs.c    iappend(uint inum, void *xp, int n)</span>
+<span class='curline'><a href='../S/3.html#L268'>inum</a>              268 mkfs/mkfs.c      rinode(inum, &amp;din);</span>
+<span class='curline'><a href='../S/3.html#L299'>inum</a>              299 mkfs/mkfs.c      winode(inum, &amp;din);</span>
+<span class='curline'><a href='../S/6.html#L61'>inum</a>               61 user/ls.c            if (de.inum == 0)</span>
+<span class='curline'><a href='../S/28.html#L1436'>inum</a>             1436 user/usertests.c     ushort inum;</span>
+<span class='curline'><a href='../S/28.html#L1472'>inum</a>             1472 user/usertests.c     if (de.inum == 0)</span>
 </pre>
 </body>
 </html>

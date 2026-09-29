@@ -1,26 +1,79 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>sleep</title>
+<title>sbrk</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/59.html#L100'>sleep</a>             100 kernel/console.c       sleep(&amp;cons.r, &amp;cons.lock);</span>
-<span class='curline'><a href='../S/35.html#L96'>sleep</a>              96 kernel/defs.h  void            sleep(void*, struct spinlock*);</span>
-<span class='curline'><a href='../S/32.html#L133'>sleep</a>             133 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
-<span class='curline'><a href='../S/32.html#L136'>sleep</a>             136 kernel/log.c         sleep(&amp;log, &amp;log.lock);</span>
-<span class='curline'><a href='../S/37.html#L90'>sleep</a>              90 kernel/pipe.c        sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);</span>
-<span class='curline'><a href='../S/37.html#L118'>sleep</a>             118 kernel/pipe.c      sleep(&amp;pi-&gt;nread, &amp;pi-&gt;lock); //DOC: piperead-sleep</span>
-<span class='curline'><a href='../S/65.html#L413'>sleep</a>             413 kernel/proc.c      sleep(p, &amp;wait_lock);  //DOC: wait-sleep</span>
-<span class='curline'><a href='../S/47.html#L26'>sleep</a>              26 kernel/sleeplock.c     sleep(lk, &amp;lk-&gt;lk);</span>
-<span class='curline'><a href='../S/36.html#L83'>sleep</a>              83 kernel/sysproc.c     sleep(&amp;ticks, &amp;tickslock);</span>
-<span class='curline'><a href='../S/75.html#L90'>sleep</a>              90 kernel/uart.c        sleep(&amp;tx_chan, &amp;tx_lock);</span>
-<span class='curline'><a href='../S/67.html#L232'>sleep</a>             232 kernel/virtio_disk.c     sleep(&amp;disk.free[0], &amp;disk.vdisk_lock);</span>
-<span class='curline'><a href='../S/67.html#L285'>sleep</a>             285 kernel/virtio_disk.c     sleep(b, &amp;disk.vdisk_lock);</span>
+<span class='curline'><a href='../S/13.html#L55'>sbrk</a>               55 user/grind.c     char *break0 = sbrk(0);</span>
+<span class='curline'><a href='../S/13.html#L128'>sbrk</a>              128 user/grind.c         sbrk(6011);</span>
+<span class='curline'><a href='../S/13.html#L130'>sbrk</a>              130 user/grind.c         if (sbrk(0) &gt; break0)</span>
+<span class='curline'><a href='../S/13.html#L131'>sbrk</a>              131 user/grind.c           sbrk(-(sbrk(0) - break0));</span>
+<span class='curline'><a href='../S/12.html#L54'>sbrk</a>               54 user/umalloc.c   p = sbrk(nu * sizeof(Header));</span>
+<span class='curline'><a href='../S/16.html#L41'>sbrk</a>               41 user/user.h    char *sbrk(int);</span>
+<span class='curline'><a href='../S/28.html#L206'>sbrk</a>              206 user/usertests.c   sbrk(8192);</span>
+<span class='curline'><a href='../S/28.html#L207'>sbrk</a>              207 user/usertests.c   uint64 top = (uint64)sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L209'>sbrk</a>              209 user/usertests.c     sbrk(PGSIZE - (top % PGSIZE));</span>
+<span class='curline'><a href='../S/28.html#L211'>sbrk</a>              211 user/usertests.c   top = (uint64)sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L253'>sbrk</a>              253 user/usertests.c   uint64 a = (uint64)sbrk(8192);</span>
+<span class='curline'><a href='../S/28.html#L260'>sbrk</a>              260 user/usertests.c   if (sbrk(-8192) == SBRK_ERROR) {</span>
+<span class='curline'><a href='../S/28.html#L2044'>sbrk</a>             2044 user/usertests.c     a = sbrk(TOOMUCH);</span>
+<span class='curline'><a href='../S/28.html#L2067'>sbrk</a>             2067 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2069'>sbrk</a>             2069 user/usertests.c     b = sbrk(1);</span>
+<span class='curline'><a href='../S/28.html#L2082'>sbrk</a>             2082 user/usertests.c   c = sbrk(1);</span>
+<span class='curline'><a href='../S/28.html#L2083'>sbrk</a>             2083 user/usertests.c   c = sbrk(1);</span>
+<span class='curline'><a href='../S/28.html#L2101'>sbrk</a>             2101 user/usertests.c   oldbrk = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2104'>sbrk</a>             2104 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2106'>sbrk</a>             2106 user/usertests.c   p = sbrk(amt);</span>
+<span class='curline'><a href='../S/28.html#L2117'>sbrk</a>             2117 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2118'>sbrk</a>             2118 user/usertests.c   c = sbrk(-PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2123'>sbrk</a>             2123 user/usertests.c   c = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2131'>sbrk</a>             2131 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2132'>sbrk</a>             2132 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2133'>sbrk</a>             2133 user/usertests.c   if (c != a || sbrk(0) != a + PGSIZE) {</span>
+<span class='curline'><a href='../S/28.html#L2143'>sbrk</a>             2143 user/usertests.c   a = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2144'>sbrk</a>             2144 user/usertests.c   c = sbrk(-(sbrk(0) - oldbrk));</span>
+<span class='curline'><a href='../S/28.html#L2221'>sbrk</a>             2221 user/usertests.c       if (sbrk(BIG - (uint64)sbrk(0)) == (char *)SBRK_ERROR)</span>
+<span class='curline'><a href='../S/28.html#L2241'>sbrk</a>             2241 user/usertests.c   c = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2261'>sbrk</a>             2261 user/usertests.c     a = sbrk(10 * BIG);</span>
+<span class='curline'><a href='../S/28.html#L2280'>sbrk</a>             2280 user/usertests.c   a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2294'>sbrk</a>             2294 user/usertests.c   a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2435'>sbrk</a>             2435 user/usertests.c   read(fd, sbrk(0) - 1, -1);</span>
+<span class='curline'><a href='../S/28.html#L2526'>sbrk</a>             2526 user/usertests.c     int sz = (uint64)sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2530'>sbrk</a>             2530 user/usertests.c     sbrk(-sz);</span>
+<span class='curline'><a href='../S/28.html#L2542'>sbrk</a>             2542 user/usertests.c     int sz = (uint64)sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2546'>sbrk</a>             2546 user/usertests.c     sbrk(-(sz - 3500));</span>
+<span class='curline'><a href='../S/28.html#L2558'>sbrk</a>             2558 user/usertests.c     sbrk((10 * PGSIZE + 2048) - (uint64)sbrk(0));</span>
+<span class='curline'><a href='../S/28.html#L2563'>sbrk</a>             2563 user/usertests.c     sbrk(-10);</span>
+<span class='curline'><a href='../S/28.html#L2578'>sbrk</a>             2578 user/usertests.c   uint64 top = (uint64)sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2580'>sbrk</a>             2580 user/usertests.c     sbrk(PGSIZE - (top % PGSIZE));</span>
+<span class='curline'><a href='../S/28.html#L2581'>sbrk</a>             2581 user/usertests.c   sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2582'>sbrk</a>             2582 user/usertests.c   sbrk(10);</span>
+<span class='curline'><a href='../S/28.html#L2583'>sbrk</a>             2583 user/usertests.c   sbrk(-20);</span>
+<span class='curline'><a href='../S/28.html#L2584'>sbrk</a>             2584 user/usertests.c   top = (uint64)sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2603'>sbrk</a>             2603 user/usertests.c   sbrk(0x80000004);</span>
+<span class='curline'><a href='../S/28.html#L2604'>sbrk</a>             2604 user/usertests.c   volatile char *top = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2698'>sbrk</a>             2698 user/usertests.c     char *p = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2704'>sbrk</a>             2704 user/usertests.c     void *xx = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2705'>sbrk</a>             2705 user/usertests.c     void *ret = sbrk(-(((uint64)xx) + 1));</span>
+<span class='curline'><a href='../S/28.html#L2746'>sbrk</a>             2746 user/usertests.c   char *p = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2747'>sbrk</a>             2747 user/usertests.c   sbrk(PGSIZE - ((uint64)p % PGSIZE));</span>
+<span class='curline'><a href='../S/28.html#L2749'>sbrk</a>             2749 user/usertests.c   p = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2782'>sbrk</a>             2782 user/usertests.c   char *p = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2801'>sbrk</a>             2801 user/usertests.c   p = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2813'>sbrk</a>             2813 user/usertests.c   p = sbrk(1);</span>
+<span class='curline'><a href='../S/28.html#L2858'>sbrk</a>             2858 user/usertests.c   char *p = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L2859'>sbrk</a>             2859 user/usertests.c   sbrk(PGSIZE - ((uint64)p % PGSIZE));</span>
+<span class='curline'><a href='../S/28.html#L2861'>sbrk</a>             2861 user/usertests.c   p = sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L3189'>sbrk</a>             3189 user/usertests.c         char *a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L3198'>sbrk</a>             3198 user/usertests.c         sbrk(-PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L3459'>sbrk</a>             3459 user/usertests.c   uint64 sz0 = (uint64)sbrk(0);</span>
+<span class='curline'><a href='../S/28.html#L3461'>sbrk</a>             3461 user/usertests.c     char *a = sbrk(PGSIZE);</span>
+<span class='curline'><a href='../S/28.html#L3467'>sbrk</a>             3467 user/usertests.c   sbrk(-((uint64)sbrk(0) - sz0));</span>
 </pre>
 </body>
 </html>

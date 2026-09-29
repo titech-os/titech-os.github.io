@@ -1,19 +1,44 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>vaddr</title>
+<title>va</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/54.html#L29'>vaddr</a>              29 kernel/elf.h     uint64 vaddr;</span>
-<span class='curline'><a href='../S/39.html#L66'>vaddr</a>              66 kernel/exec.c      if(ph.vaddr + ph.memsz &lt; ph.vaddr)</span>
-<span class='curline'><a href='../S/39.html#L68'>vaddr</a>              68 kernel/exec.c      if(ph.vaddr % PGSIZE != 0)</span>
-<span class='curline'><a href='../S/39.html#L71'>vaddr</a>              71 kernel/exec.c      if((sz1 = uvmalloc(pagetable, sz, ph.vaddr + ph.memsz, flags2perm(ph.flags))) == 0)</span>
-<span class='curline'><a href='../S/39.html#L74'>vaddr</a>              74 kernel/exec.c      if(loadseg(pagetable, ph.vaddr, ip, ph.off, ph.filesz) &lt; 0)</span>
+<span class='curline'><a href='../S/39.html#L157'>va</a>                157 kernel/exec.c  loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset,</span>
+<span class='curline'><a href='../S/39.html#L164'>va</a>                164 kernel/exec.c      pa = walkaddr(pagetable, va + i);</span>
+<span class='curline'><a href='../S/66.html#L41'>va</a>                 41 kernel/proc.c      uint64 va = KSTACK((int)(p - proc));</span>
+<span class='curline'><a href='../S/66.html#L42'>va</a>                 42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/67.html#L411'>va</a>                411 kernel/riscv.h #define PX(level, va)  ((((uint64)(va)) &gt;&gt; PXSHIFT(level)) &amp; PXMASK)</span>
+<span class='curline'><a href='../S/41.html#L59'>va</a>                 59 kernel/vm.c    kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)</span>
+<span class='curline'><a href='../S/41.html#L61'>va</a>                 61 kernel/vm.c      if (mappages(kpgtbl, va, sz, pa, perm) != 0)</span>
+<span class='curline'><a href='../S/41.html#L99'>va</a>                 99 kernel/vm.c    walk(pagetable_t pagetable, uint64 va, int alloc)</span>
+<span class='curline'><a href='../S/41.html#L101'>va</a>                101 kernel/vm.c      if (va &gt;= MAXVA)</span>
+<span class='curline'><a href='../S/41.html#L105'>va</a>                105 kernel/vm.c        pte_t *pte = &amp;pagetable[PX(level, va)];</span>
+<span class='curline'><a href='../S/41.html#L115'>va</a>                115 kernel/vm.c      return &amp;pagetable[PX(0, va)];</span>
+<span class='curline'><a href='../S/41.html#L122'>va</a>                122 kernel/vm.c    walkaddr(pagetable_t pagetable, uint64 va)</span>
+<span class='curline'><a href='../S/41.html#L127'>va</a>                127 kernel/vm.c      if (va &gt;= MAXVA)</span>
+<span class='curline'><a href='../S/41.html#L130'>va</a>                130 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
+<span class='curline'><a href='../S/41.html#L147'>va</a>                147 kernel/vm.c    mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)</span>
+<span class='curline'><a href='../S/41.html#L152'>va</a>                152 kernel/vm.c      if ((va % PGSIZE) != 0)</span>
+<span class='curline'><a href='../S/41.html#L161'>va</a>                161 kernel/vm.c      a = va;</span>
+<span class='curline'><a href='../S/41.html#L162'>va</a>                162 kernel/vm.c      last = va + size - PGSIZE;</span>
+<span class='curline'><a href='../S/41.html#L194'>va</a>                194 kernel/vm.c    uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free)</span>
+<span class='curline'><a href='../S/41.html#L199'>va</a>                199 kernel/vm.c      if ((va % PGSIZE) != 0)</span>
+<span class='curline'><a href='../S/41.html#L202'>va</a>                202 kernel/vm.c      for (a = va; a &lt; va + npages * PGSIZE; a += PGSIZE) {</span>
+<span class='curline'><a href='../S/41.html#L331'>va</a>                331 kernel/vm.c    uvmclear(pagetable_t pagetable, uint64 va)</span>
+<span class='curline'><a href='../S/41.html#L335'>va</a>                335 kernel/vm.c      pte = walk(pagetable, va, 0);</span>
+<span class='curline'><a href='../S/41.html#L459'>va</a>                459 kernel/vm.c    vmfault(pagetable_t pagetable, uint64 psz, uint64 va, int read)</span>
+<span class='curline'><a href='../S/41.html#L463'>va</a>                463 kernel/vm.c      if (va &gt;= psz)</span>
+<span class='curline'><a href='../S/41.html#L465'>va</a>                465 kernel/vm.c      va = PGROUNDDOWN(va);</span>
+<span class='curline'><a href='../S/41.html#L466'>va</a>                466 kernel/vm.c      if (ismapped(pagetable, va)) {</span>
+<span class='curline'><a href='../S/41.html#L473'>va</a>                473 kernel/vm.c      if (mappages(pagetable, va, PGSIZE, mem, PTE_W | PTE_U | PTE_R) != 0) {</span>
+<span class='curline'><a href='../S/41.html#L481'>va</a>                481 kernel/vm.c    ismapped(pagetable_t pagetable, uint64 va)</span>
+<span class='curline'><a href='../S/41.html#L483'>va</a>                483 kernel/vm.c      pte_t *pte = walk(pagetable, va, 0);</span>
 </pre>
 </body>
 </html>

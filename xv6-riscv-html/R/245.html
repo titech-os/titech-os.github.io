@@ -1,22 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>devsw</title>
+<title>copyout</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/59.html#L194'>devsw</a>             194 kernel/console.c   devsw[CONSOLE].read = consoleread;</span>
-<span class='curline'><a href='../S/59.html#L195'>devsw</a>             195 kernel/console.c   devsw[CONSOLE].write = consolewrite;</span>
-<span class='curline'><a href='../S/69.html#L16'>devsw</a>              16 kernel/file.c  struct devsw devsw[NDEV];</span>
-<span class='curline'><a href='../S/69.html#L117'>devsw</a>             117 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].read)</span>
-<span class='curline'><a href='../S/69.html#L119'>devsw</a>             119 kernel/file.c      r = devsw[f-&gt;major].read(1, addr, n);</span>
-<span class='curline'><a href='../S/69.html#L145'>devsw</a>             145 kernel/file.c      if(f-&gt;major &lt; 0 || f-&gt;major &gt;= NDEV || !devsw[f-&gt;major].write)</span>
-<span class='curline'><a href='../S/69.html#L147'>devsw</a>             147 kernel/file.c      ret = devsw[f-&gt;major].write(1, addr, n);</span>
-<span class='curline'><a href='../S/44.html#L38'>devsw</a>              38 kernel/file.h  extern struct devsw devsw[];</span>
+<span class='curline'><a href='../S/35.html#L168'>copyout</a>           168 kernel/defs.h  int             copyout(pagetable_t, uint64, uint64, char *, uint64);</span>
+<span class='curline'><a href='../S/39.html#L106'>copyout</a>           106 kernel/exec.c      if (copyout(pagetable, sz, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)</span>
+<span class='curline'><a href='../S/39.html#L117'>copyout</a>           117 kernel/exec.c    if (copyout(pagetable, sz, sp, (char *)ustack, (argc + 1) * sizeof(uint64)) &lt;</span>
+<span class='curline'><a href='../S/70.html#L97'>copyout</a>            97 kernel/file.c      if (copyout(p-&gt;pagetable, p-&gt;sz, addr, (char *)&amp;st, sizeof(st)) &lt; 0)</span>
+<span class='curline'><a href='../S/37.html#L133'>copyout</a>           133 kernel/pipe.c      if (copyout(pr-&gt;pagetable, pr-&gt;sz, addr + i, &amp;ch, 1) == -1) {</span>
+<span class='curline'><a href='../S/66.html#L391'>copyout</a>           391 kernel/proc.c                copyout(p-&gt;pagetable, p-&gt;sz, addr, (char *)&amp;pp-&gt;xstate,</span>
+<span class='curline'><a href='../S/66.html#L651'>copyout</a>           651 kernel/proc.c      return copyout(p-&gt;pagetable, p-&gt;sz, dst, src, len);</span>
+<span class='curline'><a href='../S/46.html#L520'>copyout</a>           520 kernel/sysfile.c   if (copyout(p-&gt;pagetable, p-&gt;sz, fdarray, (char *)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
+<span class='curline'><a href='../S/46.html#L521'>copyout</a>           521 kernel/sysfile.c       copyout(p-&gt;pagetable, p-&gt;sz, fdarray + sizeof(fd0), (char *)&amp;fd1,</span>
+<span class='curline'><a href='../S/28.html#L2969'>copyout</a>          2969 user/usertests.c   {copyout, "copyout"},</span>
 </pre>
 </body>
 </html>

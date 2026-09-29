@@ -1,22 +1,26 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>block</title>
+<title>bi</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L37'>block</a>              37 kernel/log.c     int block[LOGBLOCKS];</span>
-<span class='curline'><a href='../S/32.html#L73'>block</a>              73 kernel/log.c         printf("recovering tail %d dst %d\n", tail, log.lh.block[tail]);</span>
-<span class='curline'><a href='../S/32.html#L76'>block</a>              76 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]); // read dst</span>
-<span class='curline'><a href='../S/32.html#L95'>block</a>              95 kernel/log.c       log.lh.block[i] = lh-&gt;block[i];</span>
-<span class='curline'><a href='../S/32.html#L111'>block</a>             111 kernel/log.c       hb-&gt;block[i] = log.lh.block[i];</span>
-<span class='curline'><a href='../S/32.html#L186'>block</a>             186 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
-<span class='curline'><a href='../S/32.html#L227'>block</a>             227 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno)   // log absorption</span>
-<span class='curline'><a href='../S/32.html#L230'>block</a>             230 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
+<span class='curline'><a href='../S/51.html#L70'>bi</a>                 70 kernel/fs.c      int b, bi, m;</span>
+<span class='curline'><a href='../S/51.html#L76'>bi</a>                 76 kernel/fs.c        for (bi = 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++) {</span>
+<span class='curline'><a href='../S/51.html#L77'>bi</a>                 77 kernel/fs.c          m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/51.html#L78'>bi</a>                 78 kernel/fs.c          if ((bp-&gt;data[bi / 8] &amp; m) == 0) { // Is block free?</span>
+<span class='curline'><a href='../S/51.html#L79'>bi</a>                 79 kernel/fs.c            bp-&gt;data[bi / 8] |= m;           // Mark block in use.</span>
+<span class='curline'><a href='../S/51.html#L82'>bi</a>                 82 kernel/fs.c            bzero(dev, b + bi);</span>
+<span class='curline'><a href='../S/51.html#L83'>bi</a>                 83 kernel/fs.c            return b + bi;</span>
+<span class='curline'><a href='../S/51.html#L97'>bi</a>                 97 kernel/fs.c      int bi, m;</span>
+<span class='curline'><a href='../S/51.html#L100'>bi</a>                100 kernel/fs.c      bi = b % BPB;</span>
+<span class='curline'><a href='../S/51.html#L101'>bi</a>                101 kernel/fs.c      m = 1 &lt;&lt; (bi % 8);</span>
+<span class='curline'><a href='../S/51.html#L102'>bi</a>                102 kernel/fs.c      if ((bp-&gt;data[bi / 8] &amp; m) == 0)</span>
+<span class='curline'><a href='../S/51.html#L104'>bi</a>                104 kernel/fs.c      bp-&gt;data[bi / 8] &amp;= ~m;</span>
 </pre>
 </body>
 </html>

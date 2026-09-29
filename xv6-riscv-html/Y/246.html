@@ -1,28 +1,27 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>oldsz</title>
+<title>ofile</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/39.html#L82'>oldsz</a>              82 kernel/exec.c    uint64 oldsz = p-&gt;sz;</span>
-<span class='curline'><a href='../S/39.html#L136'>oldsz</a>             136 kernel/exec.c    proc_freepagetable(oldpagetable, oldsz);</span>
-<span class='curline'><a href='../S/41.html#L217'>oldsz</a>             217 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz, int xperm)</span>
-<span class='curline'><a href='../S/41.html#L222'>oldsz</a>             222 kernel/vm.c      if(newsz &lt; oldsz)</span>
-<span class='curline'><a href='../S/41.html#L223'>oldsz</a>             223 kernel/vm.c        return oldsz;</span>
-<span class='curline'><a href='../S/41.html#L225'>oldsz</a>             225 kernel/vm.c      oldsz = PGROUNDUP(oldsz);</span>
-<span class='curline'><a href='../S/41.html#L226'>oldsz</a>             226 kernel/vm.c      for(a = oldsz; a &lt; newsz; a += PGSIZE){</span>
-<span class='curline'><a href='../S/41.html#L229'>oldsz</a>             229 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
-<span class='curline'><a href='../S/41.html#L235'>oldsz</a>             235 kernel/vm.c          uvmdealloc(pagetable, a, oldsz);</span>
-<span class='curline'><a href='../S/41.html#L247'>oldsz</a>             247 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
-<span class='curline'><a href='../S/41.html#L249'>oldsz</a>             249 kernel/vm.c      if(newsz &gt;= oldsz)</span>
-<span class='curline'><a href='../S/41.html#L250'>oldsz</a>             250 kernel/vm.c        return oldsz;</span>
-<span class='curline'><a href='../S/41.html#L252'>oldsz</a>             252 kernel/vm.c      if(PGROUNDUP(newsz) &lt; PGROUNDUP(oldsz)){</span>
-<span class='curline'><a href='../S/41.html#L253'>oldsz</a>             253 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
+<span class='curline'><a href='../S/66.html#L286'>ofile</a>             286 kernel/proc.c      if (p-&gt;ofile[i])</span>
+<span class='curline'><a href='../S/66.html#L287'>ofile</a>             287 kernel/proc.c        np-&gt;ofile[i] = filedup(p-&gt;ofile[i]);</span>
+<span class='curline'><a href='../S/66.html#L335'>ofile</a>             335 kernel/proc.c      if (p-&gt;ofile[fd]) {</span>
+<span class='curline'><a href='../S/66.html#L336'>ofile</a>             336 kernel/proc.c        struct file *f = p-&gt;ofile[fd];</span>
+<span class='curline'><a href='../S/66.html#L338'>ofile</a>             338 kernel/proc.c        p-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/38.html#L101'>ofile</a>             101 kernel/proc.h    struct file *ofile[NOFILE];  // Open files</span>
+<span class='curline'><a href='../S/46.html#L28'>ofile</a>              28 kernel/sysfile.c   if (fd &lt; 0 || fd &gt;= NOFILE || (f = myproc()-&gt;ofile[fd]) == 0)</span>
+<span class='curline'><a href='../S/46.html#L46'>ofile</a>              46 kernel/sysfile.c     if (p-&gt;ofile[fd] == 0) {</span>
+<span class='curline'><a href='../S/46.html#L47'>ofile</a>              47 kernel/sysfile.c       p-&gt;ofile[fd] = f;</span>
+<span class='curline'><a href='../S/46.html#L105'>ofile</a>             105 kernel/sysfile.c   myproc()-&gt;ofile[fd] = 0;</span>
+<span class='curline'><a href='../S/46.html#L515'>ofile</a>             515 kernel/sysfile.c       p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/46.html#L523'>ofile</a>             523 kernel/sysfile.c     p-&gt;ofile[fd0] = 0;</span>
+<span class='curline'><a href='../S/46.html#L524'>ofile</a>             524 kernel/sysfile.c     p-&gt;ofile[fd1] = 0;</span>
 </pre>
 </body>
 </html>

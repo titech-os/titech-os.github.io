@@ -1,18 +1,21 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>uarg</title>
+<title>trampoline</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L439'>uarg</a>              439 kernel/sysfile.c   uint64 uargv, uarg;</span>
-<span class='curline'><a href='../S/46.html#L450'>uarg</a>              450 kernel/sysfile.c     if(fetchaddr(uargv+sizeof(uint64)*i, (uint64*)&amp;uarg) &lt; 0){</span>
-<span class='curline'><a href='../S/46.html#L453'>uarg</a>              453 kernel/sysfile.c     if(uarg == 0){</span>
-<span class='curline'><a href='../S/46.html#L460'>uarg</a>              460 kernel/sysfile.c     if(fetchstr(uarg, argv[i], PGSIZE) &lt; 0)</span>
+<span class='curline'><a href='../S/66.html#L21'>trampoline</a>         21 kernel/proc.c  extern char trampoline[]; // trampoline.S</span>
+<span class='curline'><a href='../S/66.html#L189'>trampoline</a>        189 kernel/proc.c    if (mappages(pagetable, TRAMPOLINE, PGSIZE, (uint64)trampoline,</span>
+<span class='curline'><a href='../S/66.html#L541'>trampoline</a>        541 kernel/proc.c    uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);</span>
+<span class='curline'><a href='../S/59.html#L12'>trampoline</a>         12 kernel/trap.c  extern char trampoline[], uservec[];</span>
+<span class='curline'><a href='../S/59.html#L111'>trampoline</a>        111 kernel/trap.c    uint64 trampoline_uservec = TRAMPOLINE + (uservec - trampoline);</span>
+<span class='curline'><a href='../S/41.html#L18'>trampoline</a>         18 kernel/vm.c    extern char trampoline[]; // trampoline.S</span>
+<span class='curline'><a href='../S/41.html#L47'>trampoline</a>         47 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
 </pre>
 </body>
 </html>

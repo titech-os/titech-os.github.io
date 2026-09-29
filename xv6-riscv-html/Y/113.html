@@ -1,18 +1,38 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>fdarray</title>
+<title>fd1</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/46.html#L480'>fdarray</a>           480 kernel/sysfile.c   uint64 fdarray; // user pointer to array of two integers</span>
-<span class='curline'><a href='../S/46.html#L485'>fdarray</a>           485 kernel/sysfile.c   argaddr(0, &amp;fdarray);</span>
-<span class='curline'><a href='../S/46.html#L496'>fdarray</a>           496 kernel/sysfile.c   if(copyout(p-&gt;pagetable, fdarray, (char*)&amp;fd0, sizeof(fd0)) &lt; 0 ||</span>
-<span class='curline'><a href='../S/46.html#L497'>fdarray</a>           497 kernel/sysfile.c      copyout(p-&gt;pagetable, fdarray+sizeof(fd0), (char *)&amp;fd1, sizeof(fd1)) &lt; 0){</span>
+<span class='curline'><a href='../S/46.html#L506'>fd1</a>               506 kernel/sysfile.c   int fd0, fd1;</span>
+<span class='curline'><a href='../S/46.html#L513'>fd1</a>               513 kernel/sysfile.c   if ((fd0 = fdalloc(rf)) &lt; 0 || (fd1 = fdalloc(wf)) &lt; 0) {</span>
+<span class='curline'><a href='../S/46.html#L521'>fd1</a>               521 kernel/sysfile.c       copyout(p-&gt;pagetable, p-&gt;sz, fdarray + sizeof(fd0), (char *)&amp;fd1,</span>
+<span class='curline'><a href='../S/46.html#L522'>fd1</a>               522 kernel/sysfile.c               sizeof(fd1)) &lt; 0) {</span>
+<span class='curline'><a href='../S/46.html#L524'>fd1</a>               524 kernel/sysfile.c     p-&gt;ofile[fd1] = 0;</span>
+<span class='curline'><a href='../S/13.html#L199'>fd1</a>               199 user/grind.c         int fd1 = open("c", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/13.html#L200'>fd1</a>               200 user/grind.c         if (fd1 &lt; 0) {</span>
+<span class='curline'><a href='../S/13.html#L204'>fd1</a>               204 user/grind.c         if (write(fd1, "x", 1) != 1) {</span>
+<span class='curline'><a href='../S/13.html#L209'>fd1</a>               209 user/grind.c         if (fstat(fd1, &amp;st) != 0) {</span>
+<span class='curline'><a href='../S/13.html#L221'>fd1</a>               221 user/grind.c         close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L300'>fd1</a>               300 user/usertests.c   int fd1 = open("truncfile", O_CREATE | O_WRONLY | O_TRUNC);</span>
+<span class='curline'><a href='../S/28.html#L301'>fd1</a>               301 user/usertests.c   write(fd1, "abcd", 4);</span>
+<span class='curline'><a href='../S/28.html#L302'>fd1</a>               302 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L311'>fd1</a>               311 user/usertests.c   fd1 = open("truncfile", O_WRONLY | O_TRUNC);</span>
+<span class='curline'><a href='../S/28.html#L328'>fd1</a>               328 user/usertests.c   write(fd1, "abcdef", 6);</span>
+<span class='curline'><a href='../S/28.html#L344'>fd1</a>               344 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L358'>fd1</a>               358 user/usertests.c   int fd1 = open("truncfile", O_CREATE | O_TRUNC | O_WRONLY);</span>
+<span class='curline'><a href='../S/28.html#L359'>fd1</a>               359 user/usertests.c   write(fd1, "abcd", 4);</span>
+<span class='curline'><a href='../S/28.html#L363'>fd1</a>               363 user/usertests.c   int n = write(fd1, "x", 1);</span>
+<span class='curline'><a href='../S/28.html#L370'>fd1</a>               370 user/usertests.c   close(fd1);</span>
+<span class='curline'><a href='../S/28.html#L1328'>fd1</a>              1328 user/usertests.c   int fd, fd1;</span>
+<span class='curline'><a href='../S/28.html#L1348'>fd1</a>              1348 user/usertests.c   fd1 = open("unlinkread", O_CREATE | O_RDWR);</span>
+<span class='curline'><a href='../S/28.html#L1349'>fd1</a>              1349 user/usertests.c   write(fd1, "yyy", 3);</span>
+<span class='curline'><a href='../S/28.html#L1350'>fd1</a>              1350 user/usertests.c   close(fd1);</span>
 </pre>
 </body>
 </html>

@@ -1,16 +1,220 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>commit</title>
+<title>buf</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/32.html#L51'>commit</a>             51 kernel/log.c   static void commit();</span>
-<span class='curline'><a href='../S/32.html#L170'>commit</a>            170 kernel/log.c       commit();</span>
+<span class='curline'><a href='../S/64.html#L27'>buf</a>                27 kernel/bio.c     struct buf buf[NBUF];</span>
+<span class='curline'><a href='../S/64.html#L32'>buf</a>                32 kernel/bio.c     struct buf head;</span>
+<span class='curline'><a href='../S/64.html#L38'>buf</a>                38 kernel/bio.c     struct buf *b;</span>
+<span class='curline'><a href='../S/64.html#L45'>buf</a>                45 kernel/bio.c     for (b = bcache.buf; b &lt; bcache.buf + NBUF; b++) {</span>
+<span class='curline'><a href='../S/64.html#L57'>buf</a>                57 kernel/bio.c   static struct buf *</span>
+<span class='curline'><a href='../S/64.html#L60'>buf</a>                60 kernel/bio.c     struct buf *b;</span>
+<span class='curline'><a href='../S/64.html#L91'>buf</a>                91 kernel/bio.c   struct buf *</span>
+<span class='curline'><a href='../S/64.html#L94'>buf</a>                94 kernel/bio.c     struct buf *b;</span>
+<span class='curline'><a href='../S/64.html#L107'>buf</a>               107 kernel/bio.c   bwrite(struct buf *b)</span>
+<span class='curline'><a href='../S/64.html#L117'>buf</a>               117 kernel/bio.c   brelse(struct buf *b)</span>
+<span class='curline'><a href='../S/64.html#L140'>buf</a>               140 kernel/bio.c   bpin(struct buf *b)</span>
+<span class='curline'><a href='../S/64.html#L148'>buf</a>               148 kernel/bio.c   bunpin(struct buf *b)</span>
+<span class='curline'><a href='../S/50.html#L8'>buf</a>                 8 kernel/buf.h     struct buf *prev; // LRU cache list</span>
+<span class='curline'><a href='../S/50.html#L9'>buf</a>                 9 kernel/buf.h     struct buf *next;</span>
+<span class='curline'><a href='../S/60.html#L52'>buf</a>                52 kernel/console.c   char buf[INPUT_BUF_SIZE];</span>
+<span class='curline'><a href='../S/60.html#L65'>buf</a>                65 kernel/console.c   char buf[32]; // move batches from user space to uart.</span>
+<span class='curline'><a href='../S/60.html#L69'>buf</a>                69 kernel/console.c     int nn = sizeof(buf);</span>
+<span class='curline'><a href='../S/60.html#L72'>buf</a>                72 kernel/console.c     if (either_copyin(buf, user_src, src + i, nn) == -1)</span>
+<span class='curline'><a href='../S/60.html#L74'>buf</a>                74 kernel/console.c     uartwrite(buf, nn);</span>
+<span class='curline'><a href='../S/60.html#L110'>buf</a>               110 kernel/console.c     c = cons.buf[cons.r++ % INPUT_BUF_SIZE];</span>
+<span class='curline'><a href='../S/60.html#L157'>buf</a>               157 kernel/console.c            cons.buf[(cons.e - 1) % INPUT_BUF_SIZE] != '\n') {</span>
+<span class='curline'><a href='../S/60.html#L177'>buf</a>               177 kernel/console.c       cons.buf[cons.e++ % INPUT_BUF_SIZE] = c;</span>
+<span class='curline'><a href='../S/35.html#L2'>buf</a>                 2 kernel/defs.h  struct buf;</span>
+<span class='curline'><a href='../S/35.html#L15'>buf</a>                15 kernel/defs.h  struct buf*     bread(uint, uint);</span>
+<span class='curline'><a href='../S/35.html#L16'>buf</a>                16 kernel/defs.h  void            brelse(struct buf*);</span>
+<span class='curline'><a href='../S/35.html#L17'>buf</a>                17 kernel/defs.h  void            bwrite(struct buf*);</span>
+<span class='curline'><a href='../S/35.html#L18'>buf</a>                18 kernel/defs.h  void            bpin(struct buf*);</span>
+<span class='curline'><a href='../S/35.html#L19'>buf</a>                19 kernel/defs.h  void            bunpin(struct buf*);</span>
+<span class='curline'><a href='../S/35.html#L66'>buf</a>                66 kernel/defs.h  void            log_write(struct buf*);</span>
+<span class='curline'><a href='../S/35.html#L182'>buf</a>               182 kernel/defs.h  void            virtio_disk_rw(struct buf *, int);</span>
+<span class='curline'><a href='../S/51.html#L33'>buf</a>                33 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L55'>buf</a>                55 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L71'>buf</a>                71 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L96'>buf</a>                96 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L204'>buf</a>               204 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L230'>buf</a>               230 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L297'>buf</a>               297 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L335'>buf</a>               335 kernel/fs.c      struct buf *bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/51.html#L393'>buf</a>               393 kernel/fs.c        struct buf *bp = bread(dev, IBLOCK(inum, sb));</span>
+<span class='curline'><a href='../S/51.html#L424'>buf</a>               424 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L467'>buf</a>               467 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L513'>buf</a>               513 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/51.html#L547'>buf</a>               547 kernel/fs.c      struct buf *bp;</span>
+<span class='curline'><a href='../S/33.html#L76'>buf</a>                76 kernel/log.c       struct buf *lbuf = bread(log.dev, log.start + tail + 1); // read log block</span>
+<span class='curline'><a href='../S/33.html#L77'>buf</a>                77 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]);   // read dst</span>
+<span class='curline'><a href='../S/33.html#L91'>buf</a>                91 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/33.html#L92'>buf</a>                92 kernel/log.c     struct logheader *lh = (struct logheader *)(buf-&gt;data);</span>
+<span class='curline'><a href='../S/33.html#L98'>buf</a>                98 kernel/log.c     brelse(buf);</span>
+<span class='curline'><a href='../S/33.html#L107'>buf</a>               107 kernel/log.c     struct buf *buf = bread(log.dev, log.start);</span>
+<span class='curline'><a href='../S/33.html#L108'>buf</a>               108 kernel/log.c     struct logheader *hb = (struct logheader *)(buf-&gt;data);</span>
+<span class='curline'><a href='../S/33.html#L114'>buf</a>               114 kernel/log.c     bwrite(buf);</span>
+<span class='curline'><a href='../S/33.html#L115'>buf</a>               115 kernel/log.c     brelse(buf);</span>
+<span class='curline'><a href='../S/33.html#L193'>buf</a>               193 kernel/log.c       struct buf *to = bread(log.dev, log.start + tail + 1); // log block</span>
+<span class='curline'><a href='../S/33.html#L194'>buf</a>               194 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/33.html#L224'>buf</a>               224 kernel/log.c   log_write(struct buf *b)</span>
+<span class='curline'><a href='../S/47.html#L31'>buf</a>                31 kernel/printk.c   char buf[20];</span>
+<span class='curline'><a href='../S/47.html#L42'>buf</a>                42 kernel/printk.c     buf[i++] = digits[x % base];</span>
+<span class='curline'><a href='../S/47.html#L46'>buf</a>                46 kernel/printk.c     buf[i++] = '-';</span>
+<span class='curline'><a href='../S/47.html#L49'>buf</a>                49 kernel/printk.c     consputc(buf[i]);</span>
+<span class='curline'><a href='../S/54.html#L26'>buf</a>                26 kernel/syscall.c fetchstr(uint64 addr, char *buf, int max)</span>
+<span class='curline'><a href='../S/54.html#L29'>buf</a>                29 kernel/syscall.c   if (copyinstr(p-&gt;pagetable, p-&gt;sz, buf, addr, max) &lt; 0)</span>
+<span class='curline'><a href='../S/54.html#L31'>buf</a>                31 kernel/syscall.c   return strlen(buf);</span>
+<span class='curline'><a href='../S/54.html#L76'>buf</a>                76 kernel/syscall.c argstr(int n, char *buf, int max)</span>
+<span class='curline'><a href='../S/54.html#L80'>buf</a>                80 kernel/syscall.c   return fetchstr(addr, buf, max);</span>
+<span class='curline'><a href='../S/76.html#L80'>buf</a>                80 kernel/uart.c  uartwrite(char buf[], int n)</span>
+<span class='curline'><a href='../S/76.html#L88'>buf</a>                88 kernel/uart.c        WriteReg(THR, buf[i]);</span>
+<span class='curline'><a href='../S/68.html#L49'>buf</a>                49 kernel/virtio_disk.c     struct buf *b;</span>
+<span class='curline'><a href='../S/68.html#L216'>buf</a>               216 kernel/virtio_disk.c virtio_disk_rw(struct buf *b, int write)</span>
+<span class='curline'><a href='../S/68.html#L325'>buf</a>               325 kernel/virtio_disk.c     struct buf *b = disk.info[id].b;</span>
+<span class='curline'><a href='../S/3.html#L44'>buf</a>                44 mkfs/mkfs.c    void rsect(uint sec, void *buf);</span>
+<span class='curline'><a href='../S/3.html#L78'>buf</a>                78 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L117'>buf</a>               117 mkfs/mkfs.c      memset(buf, 0, sizeof(buf));</span>
+<span class='curline'><a href='../S/3.html#L118'>buf</a>               118 mkfs/mkfs.c      memmove(buf, &amp;sb, sizeof(sb));</span>
+<span class='curline'><a href='../S/3.html#L119'>buf</a>               119 mkfs/mkfs.c      wsect(1, buf);</span>
+<span class='curline'><a href='../S/3.html#L163'>buf</a>               163 mkfs/mkfs.c        while ((cc = read(fd, buf, sizeof(buf))) &gt; 0)</span>
+<span class='curline'><a href='../S/3.html#L164'>buf</a>               164 mkfs/mkfs.c          iappend(inum, buf, cc);</span>
+<span class='curline'><a href='../S/3.html#L182'>buf</a>               182 mkfs/mkfs.c    wsect(uint sec, void *buf)</span>
+<span class='curline'><a href='../S/3.html#L186'>buf</a>               186 mkfs/mkfs.c      if (write(fsfd, buf, BSIZE) != BSIZE)</span>
+<span class='curline'><a href='../S/3.html#L193'>buf</a>               193 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L198'>buf</a>               198 mkfs/mkfs.c      rsect(bn, buf);</span>
+<span class='curline'><a href='../S/3.html#L199'>buf</a>               199 mkfs/mkfs.c      dip = ((struct dinode *)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/3.html#L201'>buf</a>               201 mkfs/mkfs.c      wsect(bn, buf);</span>
+<span class='curline'><a href='../S/3.html#L207'>buf</a>               207 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L212'>buf</a>               212 mkfs/mkfs.c      rsect(bn, buf);</span>
+<span class='curline'><a href='../S/3.html#L213'>buf</a>               213 mkfs/mkfs.c      dip = ((struct dinode *)buf) + (inum % IPB);</span>
+<span class='curline'><a href='../S/3.html#L218'>buf</a>               218 mkfs/mkfs.c    rsect(uint sec, void *buf)</span>
+<span class='curline'><a href='../S/3.html#L222'>buf</a>               222 mkfs/mkfs.c      if (read(fsfd, buf, BSIZE) != BSIZE)</span>
+<span class='curline'><a href='../S/3.html#L243'>buf</a>               243 mkfs/mkfs.c      uchar buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L248'>buf</a>               248 mkfs/mkfs.c      bzero(buf, BSIZE);</span>
+<span class='curline'><a href='../S/3.html#L250'>buf</a>               250 mkfs/mkfs.c        buf[i / 8] = buf[i / 8] | (0x1 &lt;&lt; (i % 8));</span>
+<span class='curline'><a href='../S/3.html#L253'>buf</a>               253 mkfs/mkfs.c      wsect(sb.bmapstart, buf);</span>
+<span class='curline'><a href='../S/3.html#L264'>buf</a>               264 mkfs/mkfs.c      char buf[BSIZE];</span>
+<span class='curline'><a href='../S/3.html#L291'>buf</a>               291 mkfs/mkfs.c        rsect(x, buf);</span>
+<span class='curline'><a href='../S/3.html#L292'>buf</a>               292 mkfs/mkfs.c        bcopy(p, buf + off - (fbn * BSIZE), n1);</span>
+<span class='curline'><a href='../S/3.html#L293'>buf</a>               293 mkfs/mkfs.c        wsect(x, buf);</span>
+<span class='curline'><a href='../S/10.html#L5'>buf</a>                 5 user/cat.c     char buf[512];</span>
+<span class='curline'><a href='../S/10.html#L12'>buf</a>                12 user/cat.c       while ((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
+<span class='curline'><a href='../S/10.html#L13'>buf</a>                13 user/cat.c         if (write(1, buf, n) != n) {</span>
+<span class='curline'><a href='../S/22.html#L10'>buf</a>                10 user/dorphan.c char buf[BUFSZ];</span>
+<span class='curline'><a href='../S/20.html#L10'>buf</a>                10 user/forphan.c char buf[BUFSZ];</span>
+<span class='curline'><a href='../S/24.html#L8'>buf</a>                 8 user/grep.c    char buf[1024];</span>
+<span class='curline'><a href='../S/24.html#L18'>buf</a>                18 user/grep.c      while ((n = read(fd, buf + m, sizeof(buf) - m - 1)) &gt; 0) {</span>
+<span class='curline'><a href='../S/24.html#L20'>buf</a>                20 user/grep.c        buf[m] = '\0';</span>
+<span class='curline'><a href='../S/24.html#L21'>buf</a>                21 user/grep.c        p = buf;</span>
+<span class='curline'><a href='../S/24.html#L31'>buf</a>                31 user/grep.c          m -= p - buf;</span>
+<span class='curline'><a href='../S/24.html#L32'>buf</a>                32 user/grep.c          memmove(buf, p, m);</span>
+<span class='curline'><a href='../S/13.html#L54'>buf</a>                54 user/grind.c     static char buf[999];</span>
+<span class='curline'><a href='../S/13.html#L90'>buf</a>                90 user/grind.c         write(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/13.html#L92'>buf</a>                92 user/grind.c         read(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/13.html#L280'>buf</a>               280 user/grind.c         char buf[4] = {0, 0, 0, 0};</span>
+<span class='curline'><a href='../S/13.html#L281'>buf</a>               281 user/grind.c         read(bb[0], buf + 0, 1);</span>
+<span class='curline'><a href='../S/13.html#L282'>buf</a>               282 user/grind.c         read(bb[0], buf + 1, 1);</span>
+<span class='curline'><a href='../S/13.html#L283'>buf</a>               283 user/grind.c         read(bb[0], buf + 2, 1);</span>
+<span class='curline'><a href='../S/13.html#L288'>buf</a>               288 user/grind.c         if (st1 != 0 || st2 != 0 || strcmp(buf, "hi\n") != 0) {</span>
+<span class='curline'><a href='../S/13.html#L289'>buf</a>               289 user/grind.c           printf("grind: exec pipeline failed %d %d \"%s\"\n", st1, st2, buf);</span>
+<span class='curline'><a href='../S/25.html#L11'>buf</a>                11 user/logstress.c char buf[BUFSZ];</span>
+<span class='curline'><a href='../S/25.html#L31'>buf</a>                31 user/logstress.c       memset(buf, '0' + i, SZ);</span>
+<span class='curline'><a href='../S/25.html#L33'>buf</a>                33 user/logstress.c         if ((n = write(fd, buf, SZ)) != SZ) {</span>
+<span class='curline'><a href='../S/6.html#L10'>buf</a>                10 user/ls.c        static char buf[DIRSIZ + 1];</span>
+<span class='curline'><a href='../S/6.html#L21'>buf</a>                21 user/ls.c        memmove(buf, p, strlen(p));</span>
+<span class='curline'><a href='../S/6.html#L22'>buf</a>                22 user/ls.c        memset(buf + strlen(p), ' ', DIRSIZ - strlen(p));</span>
+<span class='curline'><a href='../S/6.html#L23'>buf</a>                23 user/ls.c        buf[sizeof(buf) - 1] = '\0';</span>
+<span class='curline'><a href='../S/6.html#L24'>buf</a>                24 user/ls.c        return buf;</span>
+<span class='curline'><a href='../S/6.html#L30'>buf</a>                30 user/ls.c        char buf[512], *p;</span>
+<span class='curline'><a href='../S/6.html#L53'>buf</a>                53 user/ls.c          if (strlen(path) + 1 + DIRSIZ + 1 &gt; sizeof buf) {</span>
+<span class='curline'><a href='../S/6.html#L57'>buf</a>                57 user/ls.c          strcpy(buf, path);</span>
+<span class='curline'><a href='../S/6.html#L58'>buf</a>                58 user/ls.c          p = buf + strlen(buf);</span>
+<span class='curline'><a href='../S/6.html#L65'>buf</a>                65 user/ls.c            if (stat(buf, &amp;st) &lt; 0) {</span>
+<span class='curline'><a href='../S/6.html#L66'>buf</a>                66 user/ls.c              printf("ls: cannot stat %s\n", buf);</span>
+<span class='curline'><a href='../S/6.html#L69'>buf</a>                69 user/ls.c            printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, (int)st.size);</span>
+<span class='curline'><a href='../S/4.html#L18'>buf</a>                18 user/printf.c    char buf[20];</span>
+<span class='curline'><a href='../S/4.html#L32'>buf</a>                32 user/printf.c      buf[i++] = digits[x % base];</span>
+<span class='curline'><a href='../S/4.html#L35'>buf</a>                35 user/printf.c      buf[i++] = '-';</span>
+<span class='curline'><a href='../S/4.html#L38'>buf</a>                38 user/printf.c      putc(fd, buf[i]);</span>
+<span class='curline'><a href='../S/19.html#L135'>buf</a>               135 user/sh.c      getcmd(char *buf, int nbuf)</span>
+<span class='curline'><a href='../S/19.html#L138'>buf</a>               138 user/sh.c        memset(buf, 0, nbuf);</span>
+<span class='curline'><a href='../S/19.html#L139'>buf</a>               139 user/sh.c        gets(buf, nbuf);</span>
+<span class='curline'><a href='../S/19.html#L140'>buf</a>               140 user/sh.c        if (buf[0] == 0) // EOF</span>
+<span class='curline'><a href='../S/19.html#L148'>buf</a>               148 user/sh.c        static char buf[100];</span>
+<span class='curline'><a href='../S/19.html#L160'>buf</a>               160 user/sh.c        while (getcmd(buf, sizeof(buf)) &gt;= 0) {</span>
+<span class='curline'><a href='../S/19.html#L161'>buf</a>               161 user/sh.c          char *cmd = buf;</span>
+<span class='curline'><a href='../S/21.html#L70'>buf</a>                70 user/ulib.c    gets(char *buf, int max)</span>
+<span class='curline'><a href='../S/21.html#L79'>buf</a>                79 user/ulib.c        buf[i++] = c;</span>
+<span class='curline'><a href='../S/21.html#L83'>buf</a>                83 user/ulib.c      buf[i] = '\0';</span>
+<span class='curline'><a href='../S/21.html#L84'>buf</a>                84 user/ulib.c      return buf;</span>
+<span class='curline'><a href='../S/28.html#L22'>buf</a>                22 user/usertests.c char buf[BUFSZ];</span>
+<span class='curline'><a href='../S/28.html#L297'>buf</a>               297 user/usertests.c   char buf[32];</span>
+<span class='curline'><a href='../S/28.html#L305'>buf</a>               305 user/usertests.c   int n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L314'>buf</a>               314 user/usertests.c   n = read(fd3, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L321'>buf</a>               321 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L330'>buf</a>               330 user/usertests.c   n = read(fd3, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L336'>buf</a>               336 user/usertests.c   n = read(fd2, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L389'>buf</a>               389 user/usertests.c       char buf[32];</span>
+<span class='curline'><a href='../S/28.html#L402'>buf</a>               402 user/usertests.c       read(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L569'>buf</a>               569 user/usertests.c   i = read(fd, buf, N * SZ * 2);</span>
+<span class='curline'><a href='../S/28.html#L594'>buf</a>               594 user/usertests.c     ((int *)buf)[0] = i;</span>
+<span class='curline'><a href='../S/28.html#L595'>buf</a>               595 user/usertests.c     if (write(fd, buf, BSIZE) != BSIZE) {</span>
+<span class='curline'><a href='../S/28.html#L611'>buf</a>               611 user/usertests.c     i = read(fd, buf, BSIZE);</span>
+<span class='curline'><a href='../S/28.html#L622'>buf</a>               622 user/usertests.c     if (((int *)buf)[0] != n) {</span>
+<span class='curline'><a href='../S/28.html#L623'>buf</a>               623 user/usertests.c       printf("%s: read content of block %d is %d\n", s, n, ((int *)buf)[0]);</span>
+<span class='curline'><a href='../S/28.html#L687'>buf</a>               687 user/usertests.c   char buf[3];</span>
+<span class='curline'><a href='../S/28.html#L730'>buf</a>               730 user/usertests.c   if (read(fd, buf, 2) != 2) {</span>
+<span class='curline'><a href='../S/28.html#L735'>buf</a>               735 user/usertests.c   if (buf[0] == 'O' &amp;&amp; buf[1] == 'K')</span>
+<span class='curline'><a href='../S/28.html#L762'>buf</a>               762 user/usertests.c         buf[i] = seq++;</span>
+<span class='curline'><a href='../S/28.html#L763'>buf</a>               763 user/usertests.c       if (write(fds[1], buf, SZ) != SZ) {</span>
+<span class='curline'><a href='../S/28.html#L773'>buf</a>               773 user/usertests.c     while ((n = read(fds[0], buf, cc)) &gt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L775'>buf</a>               775 user/usertests.c         if ((buf[i] &amp; 0xff) != (seq++ &amp; 0xff)) {</span>
+<span class='curline'><a href='../S/28.html#L782'>buf</a>               782 user/usertests.c       if (cc &gt; sizeof(buf))</span>
+<span class='curline'><a href='../S/28.html#L783'>buf</a>               783 user/usertests.c         cc = sizeof(buf);</span>
+<span class='curline'><a href='../S/28.html#L895'>buf</a>               895 user/usertests.c   if (read(pfds[0], buf, sizeof(buf)) != 1) {</span>
+<span class='curline'><a href='../S/28.html#L1134'>buf</a>              1134 user/usertests.c   char buf[SZ];</span>
+<span class='curline'><a href='../S/28.html#L1143'>buf</a>              1143 user/usertests.c   memset(buf, pid == 0 ? 'c' : 'p', sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L1145'>buf</a>              1145 user/usertests.c     if (write(fd, buf, sizeof(buf)) != sizeof(buf)) {</span>
+<span class='curline'><a href='../S/28.html#L1166'>buf</a>              1166 user/usertests.c   while ((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1167'>buf</a>              1167 user/usertests.c     for (i = 0; i &lt; sizeof(buf); i++) {</span>
+<span class='curline'><a href='../S/28.html#L1168'>buf</a>              1168 user/usertests.c       if (buf[i] == 'c')</span>
+<span class='curline'><a href='../S/28.html#L1170'>buf</a>              1170 user/usertests.c       if (buf[i] == 'p')</span>
+<span class='curline'><a href='../S/28.html#L1211'>buf</a>              1211 user/usertests.c       memset(buf, '0' + pi, SZ);</span>
+<span class='curline'><a href='../S/28.html#L1213'>buf</a>              1213 user/usertests.c         if ((n = write(fd, buf, SZ)) != SZ) {</span>
+<span class='curline'><a href='../S/28.html#L1233'>buf</a>              1233 user/usertests.c     while ((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
+<span class='curline'><a href='../S/28.html#L1235'>buf</a>              1235 user/usertests.c         if (buf[j] != '0' + i) {</span>
+<span class='curline'><a href='../S/28.html#L1352'>buf</a>              1352 user/usertests.c   if (read(fd, buf, sizeof(buf)) != SZ) {</span>
+<span class='curline'><a href='../S/28.html#L1356'>buf</a>              1356 user/usertests.c   if (buf[0] != 'h') {</span>
+<span class='curline'><a href='../S/28.html#L1360'>buf</a>              1360 user/usertests.c   if (write(fd, buf, 10) != 10) {</span>
+<span class='curline'><a href='../S/28.html#L1404'>buf</a>              1404 user/usertests.c   if (read(fd, buf, sizeof(buf)) != SZ) {</span>
+<span class='curline'><a href='../S/28.html#L1598'>buf</a>              1598 user/usertests.c   cc = read(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L1599'>buf</a>              1599 user/usertests.c   if (cc != 2 || buf[0] != 'f') {</span>
+<span class='curline'><a href='../S/28.html#L1641'>buf</a>              1641 user/usertests.c   if (read(fd, buf, sizeof(buf)) != 2) {</span>
+<span class='curline'><a href='../S/28.html#L1750'>buf</a>              1750 user/usertests.c       int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/28.html#L1774'>buf</a>              1774 user/usertests.c     memset(buf, i, SZ);</span>
+<span class='curline'><a href='../S/28.html#L1775'>buf</a>              1775 user/usertests.c     if (write(fd, buf, SZ) != SZ) {</span>
+<span class='curline'><a href='../S/28.html#L1789'>buf</a>              1789 user/usertests.c     cc = read(fd, buf, SZ / 2);</span>
+<span class='curline'><a href='../S/28.html#L1800'>buf</a>              1800 user/usertests.c     if (buf[0] != i / 2 || buf[SZ / 2 - 1] != i / 2) {</span>
+<span class='curline'><a href='../S/28.html#L2399'>buf</a>              2399 user/usertests.c       int cc = write(fd, buf, BSIZE);</span>
+<span class='curline'><a href='../S/28.html#L2899'>buf</a>              2899 user/usertests.c     char buf[1024];</span>
+<span class='curline'><a href='../S/28.html#L2900'>buf</a>              2900 user/usertests.c     memset(buf, 0, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L2901'>buf</a>              2901 user/usertests.c     cc = write(fd, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/28.html#L2902'>buf</a>              2902 user/usertests.c     if (cc != sizeof(buf)) {</span>
+<span class='curline'><a href='../S/28.html#L3113'>buf</a>              3113 user/usertests.c           int sz = sizeof(buf);</span>
+<span class='curline'><a href='../S/28.html#L3114'>buf</a>              3114 user/usertests.c           int cc = write(fd, buf, sz);</span>
+<span class='curline'><a href='../S/28.html#L3237'>buf</a>              3237 user/usertests.c       char buf[BSIZE];</span>
+<span class='curline'><a href='../S/28.html#L3238'>buf</a>              3238 user/usertests.c       if (write(fd, buf, BSIZE) != BSIZE) {</span>
+<span class='curline'><a href='../S/11.html#L6'>buf</a>                 6 user/wc.c      char buf[512];</span>
+<span class='curline'><a href='../S/11.html#L16'>buf</a>                16 user/wc.c        while ((n = read(fd, buf, sizeof(buf))) &gt; 0) {</span>
+<span class='curline'><a href='../S/11.html#L19'>buf</a>                19 user/wc.c            if (buf[i] == '\n')</span>
+<span class='curline'><a href='../S/11.html#L21'>buf</a>                21 user/wc.c            if (strchr(" \r\t\n\v", buf[i]))</span>
 </pre>
 </body>
 </html>

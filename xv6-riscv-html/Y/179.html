@@ -1,18 +1,18 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>lastaddr</title>
+<title>kstack</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/27.html#L2067'>lastaddr</a>         2067 user/usertests.c   char *c, *oldbrk, *a, *lastaddr, *p;</span>
-<span class='curline'><a href='../S/27.html#L2081'>lastaddr</a>         2081 user/usertests.c   lastaddr = (char*) (BIG-1);</span>
-<span class='curline'><a href='../S/27.html#L2082'>lastaddr</a>         2082 user/usertests.c   *lastaddr = 99;</span>
-<span class='curline'><a href='../S/27.html#L2104'>lastaddr</a>         2104 user/usertests.c   if(*lastaddr == 99){</span>
+<span class='curline'><a href='../S/66.html#L57'>kstack</a>             57 kernel/proc.c      p-&gt;kstack = KSTACK((int)(p - proc));</span>
+<span class='curline'><a href='../S/66.html#L147'>kstack</a>            147 kernel/proc.c    p-&gt;context.sp = p-&gt;kstack + PGSIZE;</span>
+<span class='curline'><a href='../S/38.html#L96'>kstack</a>             96 kernel/proc.h    uint64 kstack;               // Virtual address of kernel stack</span>
+<span class='curline'><a href='../S/59.html#L117'>kstack</a>            117 kernel/trap.c    p-&gt;trapframe-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
 </pre>
 </body>
 </html>

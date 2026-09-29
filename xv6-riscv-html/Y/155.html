@@ -1,21 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ino</title>
+<title>indirect</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/50.html#L484'>ino</a>               484 kernel/fs.c      st-&gt;ino = ip-&gt;inum;</span>
-<span class='curline'><a href='../S/45.html#L7'>ino</a>                 7 kernel/stat.h    uint ino;    // Inode number</span>
-<span class='curline'><a href='../S/19.html#L36'>ino</a>                36 user/forphan.c   printf("wait for kill and reclaim %d\n", st.ino);</span>
-<span class='curline'><a href='../S/13.html#L217'>ino</a>               217 user/grind.c         if(st.ino &gt; 200){</span>
-<span class='curline'><a href='../S/13.html#L218'>ino</a>               218 user/grind.c           printf("grind: fstat reports crazy i-number %d\n", st.ino);</span>
-<span class='curline'><a href='../S/6.html#L49'>ino</a>                49 user/ls.c          printf("%s %d %d %d\n", fmtname(path), st.type, st.ino, (int) st.size);</span>
-<span class='curline'><a href='../S/6.html#L69'>ino</a>                69 user/ls.c            printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, (int) st.size);</span>
+<span class='curline'><a href='../S/3.html#L265'>indirect</a>          265 mkfs/mkfs.c      uint indirect[NINDIRECT];</span>
+<span class='curline'><a href='../S/3.html#L283'>indirect</a>          283 mkfs/mkfs.c          rsect(xint(din.addrs[NDIRECT]), (char *)indirect);</span>
+<span class='curline'><a href='../S/3.html#L284'>indirect</a>          284 mkfs/mkfs.c          if (indirect[fbn - NDIRECT] == 0) {</span>
+<span class='curline'><a href='../S/3.html#L285'>indirect</a>          285 mkfs/mkfs.c            indirect[fbn - NDIRECT] = xint(freeblock++);</span>
+<span class='curline'><a href='../S/3.html#L286'>indirect</a>          286 mkfs/mkfs.c            wsect(xint(din.addrs[NDIRECT]), (char *)indirect);</span>
+<span class='curline'><a href='../S/3.html#L288'>indirect</a>          288 mkfs/mkfs.c          x = xint(indirect[fbn - NDIRECT]);</span>
 </pre>
 </body>
 </html>

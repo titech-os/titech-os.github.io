@@ -3,12 +3,12 @@
 <head>
 <title>kernel/trampoline.S</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
-<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/76.html'>kernel</a>/trampoline.S</h2>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/77.html'>kernel</a>/trampoline.S</h2>
 <em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
 <hr />
 <pre>
@@ -24,8 +24,8 @@
 <a id='L10' name='L10'></a>  10 <em class='comment'>        # a page boundary.</em>
 <a id='L11' name='L11'></a>  11 <em class='sharp'>        #</em>
 <a id='L12' name='L12'></a>  12 
-<a id='L13' name='L13'></a>  13 <em class='sharp'>#include</em> "<a href='66.html'>riscv.h</a>"
-<a id='L14' name='L14'></a>  14 <em class='sharp'>#include</em> "<a href='51.html'>memlayout.h</a>"
+<a id='L13' name='L13'></a>  13 <em class='sharp'>#include</em> "<a href='67.html'>riscv.h</a>"
+<a id='L14' name='L14'></a>  14 <em class='sharp'>#include</em> "<a href='52.html'>memlayout.h</a>"
 <a id='L15' name='L15'></a>  15 
 <a id='L16' name='L16'></a>  16 .section trampsec
 <a id='L17' name='L17'></a>  17 .globl trampoline
@@ -34,7 +34,7 @@
 <a id='L20' name='L20'></a>  20 .align 4
 <a id='L21' name='L21'></a>  21 .globl uservec
 <a id='L22' name='L22'></a>  22 uservec:    
-<a id='L23' name='L23'></a>  23 <em class='sharp'>        #</em>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>    #</em>
 <a id='L24' name='L24'></a>  24 <em class='comment'>        # trap.c sets stvec to point here, so</em>
 <a id='L25' name='L25'></a>  25 <em class='comment'>        # traps from user space start here,</em>
 <a id='L26' name='L26'></a>  26 <em class='comment'>        # in supervisor mode, but with a</em>
@@ -82,7 +82,7 @@
 <a id='L68' name='L68'></a>  68         sd t5, 272(a0)
 <a id='L69' name='L69'></a>  69         sd t6, 280(a0)
 <a id='L70' name='L70'></a>  70 
-<a id='L71' name='L71'></a>  71 <em class='comment'>        # save the user a0 in p-&gt;trapframe-&gt;a0</em>
+<a id='L71' name='L71'></a>  71 <em class='comment'>    # save the user a0 in p-&gt;trapframe-&gt;a0</em>
 <a id='L72' name='L72'></a>  72         csrr t0, sscratch
 <a id='L73' name='L73'></a>  73         sd t0, 112(a0)
 <a id='L74' name='L74'></a>  74 
@@ -116,51 +116,55 @@
 <a id='L102' name='L102'></a> 102 <em class='comment'>        # usertrap() returns here, with user satp in a0.</em>
 <a id='L103' name='L103'></a> 103 <em class='comment'>        # return from kernel to user.</em>
 <a id='L104' name='L104'></a> 104 
-<a id='L105' name='L105'></a> 105 <em class='comment'>        # switch to the user page table.</em>
-<a id='L106' name='L106'></a> 106         sfence.vma zero, zero
-<a id='L107' name='L107'></a> 107         csrw satp, a0
-<a id='L108' name='L108'></a> 108         sfence.vma zero, zero
-<a id='L109' name='L109'></a> 109 
-<a id='L110' name='L110'></a> 110         li a0, TRAPFRAME
-<a id='L111' name='L111'></a> 111 
-<a id='L112' name='L112'></a> 112 <em class='comment'>        # restore all but a0 from TRAPFRAME</em>
-<a id='L113' name='L113'></a> 113         ld ra, 40(a0)
-<a id='L114' name='L114'></a> 114         ld sp, 48(a0)
-<a id='L115' name='L115'></a> 115         ld gp, 56(a0)
-<a id='L116' name='L116'></a> 116         ld tp, 64(a0)
-<a id='L117' name='L117'></a> 117         ld t0, 72(a0)
-<a id='L118' name='L118'></a> 118         ld t1, 80(a0)
-<a id='L119' name='L119'></a> 119         ld t2, 88(a0)
-<a id='L120' name='L120'></a> 120         ld s0, 96(a0)
-<a id='L121' name='L121'></a> 121         ld s1, 104(a0)
-<a id='L122' name='L122'></a> 122         ld a1, 120(a0)
-<a id='L123' name='L123'></a> 123         ld a2, 128(a0)
-<a id='L124' name='L124'></a> 124         ld a3, 136(a0)
-<a id='L125' name='L125'></a> 125         ld a4, 144(a0)
-<a id='L126' name='L126'></a> 126         ld a5, 152(a0)
-<a id='L127' name='L127'></a> 127         ld a6, 160(a0)
-<a id='L128' name='L128'></a> 128         ld a7, 168(a0)
-<a id='L129' name='L129'></a> 129         ld s2, 176(a0)
-<a id='L130' name='L130'></a> 130         ld s3, 184(a0)
-<a id='L131' name='L131'></a> 131         ld s4, 192(a0)
-<a id='L132' name='L132'></a> 132         ld s5, 200(a0)
-<a id='L133' name='L133'></a> 133         ld s6, 208(a0)
-<a id='L134' name='L134'></a> 134         ld s7, 216(a0)
-<a id='L135' name='L135'></a> 135         ld s8, 224(a0)
-<a id='L136' name='L136'></a> 136         ld s9, 232(a0)
-<a id='L137' name='L137'></a> 137         ld s10, 240(a0)
-<a id='L138' name='L138'></a> 138         ld s11, 248(a0)
-<a id='L139' name='L139'></a> 139         ld t3, 256(a0)
-<a id='L140' name='L140'></a> 140         ld t4, 264(a0)
-<a id='L141' name='L141'></a> 141         ld t5, 272(a0)
-<a id='L142' name='L142'></a> 142         ld t6, 280(a0)
-<a id='L143' name='L143'></a> 143 
-<a id='L144' name='L144'></a> 144 <em class='comment'>        # restore user a0</em>
-<a id='L145' name='L145'></a> 145         ld a0, 112(a0)
-<a id='L146' name='L146'></a> 146         
-<a id='L147' name='L147'></a> 147 <em class='comment'>        # return to user mode and user pc.</em>
-<a id='L148' name='L148'></a> 148 <em class='comment'>        # usertrapret() set up sstatus and sepc.</em>
-<a id='L149' name='L149'></a> 149         sret
+<a id='L105' name='L105'></a> 105 <em class='comment'>        # flush icache, in case this is the first time</em>
+<a id='L106' name='L106'></a> 106 <em class='comment'>        # we're running this proc on this hart.</em>
+<a id='L107' name='L107'></a> 107         fence.i
+<a id='L108' name='L108'></a> 108 
+<a id='L109' name='L109'></a> 109 <em class='comment'>        # switch to the user page table.</em>
+<a id='L110' name='L110'></a> 110         sfence.vma zero, zero
+<a id='L111' name='L111'></a> 111         csrw satp, a0
+<a id='L112' name='L112'></a> 112         sfence.vma zero, zero
+<a id='L113' name='L113'></a> 113 
+<a id='L114' name='L114'></a> 114         li a0, TRAPFRAME
+<a id='L115' name='L115'></a> 115 
+<a id='L116' name='L116'></a> 116 <em class='comment'>        # restore all but a0 from TRAPFRAME</em>
+<a id='L117' name='L117'></a> 117         ld ra, 40(a0)
+<a id='L118' name='L118'></a> 118         ld sp, 48(a0)
+<a id='L119' name='L119'></a> 119         ld gp, 56(a0)
+<a id='L120' name='L120'></a> 120         ld tp, 64(a0)
+<a id='L121' name='L121'></a> 121         ld t0, 72(a0)
+<a id='L122' name='L122'></a> 122         ld t1, 80(a0)
+<a id='L123' name='L123'></a> 123         ld t2, 88(a0)
+<a id='L124' name='L124'></a> 124         ld s0, 96(a0)
+<a id='L125' name='L125'></a> 125         ld s1, 104(a0)
+<a id='L126' name='L126'></a> 126         ld a1, 120(a0)
+<a id='L127' name='L127'></a> 127         ld a2, 128(a0)
+<a id='L128' name='L128'></a> 128         ld a3, 136(a0)
+<a id='L129' name='L129'></a> 129         ld a4, 144(a0)
+<a id='L130' name='L130'></a> 130         ld a5, 152(a0)
+<a id='L131' name='L131'></a> 131         ld a6, 160(a0)
+<a id='L132' name='L132'></a> 132         ld a7, 168(a0)
+<a id='L133' name='L133'></a> 133         ld s2, 176(a0)
+<a id='L134' name='L134'></a> 134         ld s3, 184(a0)
+<a id='L135' name='L135'></a> 135         ld s4, 192(a0)
+<a id='L136' name='L136'></a> 136         ld s5, 200(a0)
+<a id='L137' name='L137'></a> 137         ld s6, 208(a0)
+<a id='L138' name='L138'></a> 138         ld s7, 216(a0)
+<a id='L139' name='L139'></a> 139         ld s8, 224(a0)
+<a id='L140' name='L140'></a> 140         ld s9, 232(a0)
+<a id='L141' name='L141'></a> 141         ld s10, 240(a0)
+<a id='L142' name='L142'></a> 142         ld s11, 248(a0)
+<a id='L143' name='L143'></a> 143         ld t3, 256(a0)
+<a id='L144' name='L144'></a> 144         ld t4, 264(a0)
+<a id='L145' name='L145'></a> 145         ld t5, 272(a0)
+<a id='L146' name='L146'></a> 146         ld t6, 280(a0)
+<a id='L147' name='L147'></a> 147 
+<a id='L148' name='L148'></a> 148 <em class='comment'>    # restore user a0</em>
+<a id='L149' name='L149'></a> 149         ld a0, 112(a0)
+<a id='L150' name='L150'></a> 150         
+<a id='L151' name='L151'></a> 151 <em class='comment'>        # return to user mode and user pc.</em>
+<a id='L152' name='L152'></a> 152 <em class='comment'>        # prepare_return() sets up sstatus and sepc.</em>
+<a id='L153' name='L153'></a> 153         sret
 </pre>
 <hr />
 <a id='BOTTOM' name='BOTTOM'></a>

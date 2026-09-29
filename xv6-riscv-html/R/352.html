@@ -1,22 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>log_write</title>
+<title>kvmmap</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/35.html#L65'>log_write</a>          65 kernel/defs.h  void            log_write(struct buf*);</span>
-<span class='curline'><a href='../S/50.html#L58'>log_write</a>          58 kernel/fs.c      log_write(bp);</span>
-<span class='curline'><a href='../S/50.html#L79'>log_write</a>          79 kernel/fs.c            log_write(bp);</span>
-<span class='curline'><a href='../S/50.html#L104'>log_write</a>         104 kernel/fs.c      log_write(bp);</span>
-<span class='curline'><a href='../S/50.html#L212'>log_write</a>         212 kernel/fs.c          log_write(bp);   // mark it allocated on the disk</span>
-<span class='curline'><a href='../S/50.html#L240'>log_write</a>         240 kernel/fs.c      log_write(bp);</span>
-<span class='curline'><a href='../S/50.html#L436'>log_write</a>         436 kernel/fs.c            log_write(bp);</span>
-<span class='curline'><a href='../S/50.html#L549'>log_write</a>         549 kernel/fs.c        log_write(bp);</span>
+<span class='curline'><a href='../S/35.html#L157'>kvmmap</a>            157 kernel/defs.h  void            kvmmap(pagetable_t, uint64, uint64, uint64, int);</span>
+<span class='curline'><a href='../S/66.html#L42'>kvmmap</a>             42 kernel/proc.c      kvmmap(kpgtbl, va, (uint64)pa, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L30'>kvmmap</a>             30 kernel/vm.c      kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L33'>kvmmap</a>             33 kernel/vm.c      kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L36'>kvmmap</a>             36 kernel/vm.c      kvmmap(kpgtbl, PLIC, PLIC, 0x4000000, PTE_R | PTE_W);</span>
+<span class='curline'><a href='../S/41.html#L39'>kvmmap</a>             39 kernel/vm.c      kvmmap(kpgtbl, KERNBASE, KERNBASE, (uint64)etext - KERNBASE, PTE_R | PTE_X);</span>
+<span class='curline'><a href='../S/41.html#L42'>kvmmap</a>             42 kernel/vm.c      kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP - (uint64)etext,</span>
+<span class='curline'><a href='../S/41.html#L47'>kvmmap</a>             47 kernel/vm.c      kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);</span>
 </pre>
 </body>
 </html>

@@ -1,21 +1,33 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>nameiparent</title>
+<title>mem</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/35.html#L51'>nameiparent</a>        51 kernel/defs.h  struct inode*   nameiparent(char*, char*);</span>
-<span class='curline'><a href='../S/50.html#L675'>nameiparent</a>       675 kernel/fs.c    namex(char *path, int nameiparent, char *name)</span>
-<span class='curline'><a href='../S/50.html#L690'>nameiparent</a>       690 kernel/fs.c        if(nameiparent &amp;&amp; *path == '\0'){</span>
-<span class='curline'><a href='../S/50.html#L702'>nameiparent</a>       702 kernel/fs.c      if(nameiparent){</span>
-<span class='curline'><a href='../S/46.html#L149'>nameiparent</a>       149 kernel/sysfile.c   if((dp = nameiparent(new, name)) == 0)</span>
-<span class='curline'><a href='../S/46.html#L200'>nameiparent</a>       200 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0){</span>
-<span class='curline'><a href='../S/46.html#L251'>nameiparent</a>       251 kernel/sysfile.c   if((dp = nameiparent(path, name)) == 0)</span>
+<span class='curline'><a href='../S/41.html#L220'>mem</a>               220 kernel/vm.c      char *mem;</span>
+<span class='curline'><a href='../S/41.html#L228'>mem</a>               228 kernel/vm.c        mem = kalloc();</span>
+<span class='curline'><a href='../S/41.html#L229'>mem</a>               229 kernel/vm.c        if (mem == 0) {</span>
+<span class='curline'><a href='../S/41.html#L233'>mem</a>               233 kernel/vm.c        memset(mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/41.html#L234'>mem</a>               234 kernel/vm.c        if (mappages(pagetable, a, PGSIZE, (uint64)mem, PTE_R | PTE_U | xperm) !=</span>
+<span class='curline'><a href='../S/41.html#L236'>mem</a>               236 kernel/vm.c          kfree(mem);</span>
+<span class='curline'><a href='../S/41.html#L304'>mem</a>               304 kernel/vm.c      char *mem;</span>
+<span class='curline'><a href='../S/41.html#L313'>mem</a>               313 kernel/vm.c        if ((mem = kalloc()) == 0)</span>
+<span class='curline'><a href='../S/41.html#L315'>mem</a>               315 kernel/vm.c        memmove(mem, (char *)pa, PGSIZE);</span>
+<span class='curline'><a href='../S/41.html#L316'>mem</a>               316 kernel/vm.c        if (mappages(new, i, PGSIZE, (uint64)mem, flags) != 0) {</span>
+<span class='curline'><a href='../S/41.html#L317'>mem</a>               317 kernel/vm.c          kfree(mem);</span>
+<span class='curline'><a href='../S/41.html#L461'>mem</a>               461 kernel/vm.c      uint64 mem;</span>
+<span class='curline'><a href='../S/41.html#L469'>mem</a>               469 kernel/vm.c      mem = (uint64)kalloc();</span>
+<span class='curline'><a href='../S/41.html#L470'>mem</a>               470 kernel/vm.c      if (mem == 0)</span>
+<span class='curline'><a href='../S/41.html#L472'>mem</a>               472 kernel/vm.c      memset((void *)mem, 0, PGSIZE);</span>
+<span class='curline'><a href='../S/41.html#L473'>mem</a>               473 kernel/vm.c      if (mappages(pagetable, va, PGSIZE, mem, PTE_W | PTE_U | PTE_R) != 0) {</span>
+<span class='curline'><a href='../S/41.html#L474'>mem</a>               474 kernel/vm.c        kfree((void *)mem);</span>
+<span class='curline'><a href='../S/41.html#L477'>mem</a>               477 kernel/vm.c      return mem;</span>
+<span class='curline'><a href='../S/28.html#L2996'>mem</a>              2996 user/usertests.c   {mem, "mem"},</span>
 </pre>
 </body>
 </html>

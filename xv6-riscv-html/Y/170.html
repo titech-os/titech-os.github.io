@@ -1,16 +1,16 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>kernel_sp</title>
+<title>kernel_hartid</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/38.html#L45'>kernel_sp</a>          45 kernel/proc.h    /*   8 */ uint64 kernel_sp;     // top of process's kernel stack</span>
-<span class='curline'><a href='../S/58.html#L116'>kernel_sp</a>         116 kernel/trap.c    p-&gt;trapframe-&gt;kernel_sp = p-&gt;kstack + PGSIZE; // process's kernel stack</span>
+<span class='curline'><a href='../S/38.html#L45'>kernel_hartid</a>      45 kernel/proc.h    /*  32 */ uint64 kernel_hartid; // saved kernel tp</span>
+<span class='curline'><a href='../S/59.html#L119'>kernel_hartid</a>     119 kernel/trap.c    p-&gt;trapframe-&gt;kernel_hartid = r_tp(); // hartid for cpuid()</span>
 </pre>
 </body>
 </html>

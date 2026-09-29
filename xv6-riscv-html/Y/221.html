@@ -1,18 +1,24 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>ninodeblocks</title>
+<title>newsz</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/3.html#L24'>ninodeblocks</a>       24 mkfs/mkfs.c    int ninodeblocks = NINODES / IPB + 1;</span>
-<span class='curline'><a href='../S/3.html#L93'>ninodeblocks</a>       93 mkfs/mkfs.c      nmeta = 2 + nlog + ninodeblocks + nbitmap;</span>
-<span class='curline'><a href='../S/3.html#L103'>ninodeblocks</a>      103 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
-<span class='curline'><a href='../S/3.html#L106'>ninodeblocks</a>      106 mkfs/mkfs.c             nmeta, nlog, ninodeblocks, nbitmap, nblocks, FSSIZE);</span>
+<span class='curline'><a href='../S/41.html#L218'>newsz</a>             218 kernel/vm.c    uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz, int xperm)</span>
+<span class='curline'><a href='../S/41.html#L223'>newsz</a>             223 kernel/vm.c      if (newsz &lt; oldsz)</span>
+<span class='curline'><a href='../S/41.html#L227'>newsz</a>             227 kernel/vm.c      for (a = oldsz; a &lt; newsz; a += PGSIZE) {</span>
+<span class='curline'><a href='../S/41.html#L241'>newsz</a>             241 kernel/vm.c      return newsz;</span>
+<span class='curline'><a href='../S/41.html#L249'>newsz</a>             249 kernel/vm.c    uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)</span>
+<span class='curline'><a href='../S/41.html#L251'>newsz</a>             251 kernel/vm.c      if (newsz &gt;= oldsz)</span>
+<span class='curline'><a href='../S/41.html#L254'>newsz</a>             254 kernel/vm.c      if (PGROUNDUP(newsz) &lt; PGROUNDUP(oldsz)) {</span>
+<span class='curline'><a href='../S/41.html#L255'>newsz</a>             255 kernel/vm.c        int npages = (PGROUNDUP(oldsz) - PGROUNDUP(newsz)) / PGSIZE;</span>
+<span class='curline'><a href='../S/41.html#L256'>newsz</a>             256 kernel/vm.c        uvmunmap(pagetable, PGROUNDUP(newsz), npages, 1);</span>
+<span class='curline'><a href='../S/41.html#L259'>newsz</a>             259 kernel/vm.c      return newsz;</span>
 </pre>
 </body>
 </html>

@@ -1,19 +1,22 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>bmapstart</title>
+<title>block</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/74.html#L22'>bmapstart</a>          22 kernel/fs.h      uint bmapstart;    // Block number of first free map block</span>
-<span class='curline'><a href='../S/74.html#L51'>bmapstart</a>          51 kernel/fs.h    #define BBLOCK(b, sb) ((b)/BPB + sb.bmapstart)</span>
-<span class='curline'><a href='../S/3.html#L103'>bmapstart</a>         103 mkfs/mkfs.c      sb.bmapstart = xint(2+nlog+ninodeblocks);</span>
-<span class='curline'><a href='../S/3.html#L248'>bmapstart</a>         248 mkfs/mkfs.c      printf("balloc: write bitmap block at sector %d\n", sb.bmapstart);</span>
-<span class='curline'><a href='../S/3.html#L249'>bmapstart</a>         249 mkfs/mkfs.c      wsect(sb.bmapstart, buf);</span>
+<span class='curline'><a href='../S/33.html#L37'>block</a>              37 kernel/log.c     int block[LOGBLOCKS];</span>
+<span class='curline'><a href='../S/33.html#L74'>block</a>              74 kernel/log.c         printk("recovering tail %d dst %d\n", tail, log.lh.block[tail]);</span>
+<span class='curline'><a href='../S/33.html#L77'>block</a>              77 kernel/log.c       struct buf *dbuf = bread(log.dev, log.lh.block[tail]);   // read dst</span>
+<span class='curline'><a href='../S/33.html#L96'>block</a>              96 kernel/log.c       log.lh.block[i] = lh-&gt;block[i];</span>
+<span class='curline'><a href='../S/33.html#L112'>block</a>             112 kernel/log.c       hb-&gt;block[i] = log.lh.block[i];</span>
+<span class='curline'><a href='../S/33.html#L194'>block</a>             194 kernel/log.c       struct buf *from = bread(log.dev, log.lh.block[tail]); // cache block</span>
+<span class='curline'><a href='../S/33.html#L235'>block</a>             235 kernel/log.c       if (log.lh.block[i] == b-&gt;blockno) // log absorption</span>
+<span class='curline'><a href='../S/33.html#L238'>block</a>             238 kernel/log.c     log.lh.block[i] = b-&gt;blockno;</span>
 </pre>
 </body>
 </html>

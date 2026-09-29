@@ -1,17 +1,20 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-<title>end</title>
+<title>elf</title>
 <meta name='robots' content='noindex,nofollow' />
-<meta name='generator' content='GLOBAL-6.6.14' />
+<meta name='generator' content='Global-6.7' />
 <meta http-equiv='Content-Style-Type' content='text/css' />
 <link rel='stylesheet' type='text/css' href='../style.css' />
 </head>
 <body>
 <pre>
-<span class='curline'><a href='../S/72.html#L14'>end</a>                14 kernel/kalloc.c extern char end[]; // first address after kernel.</span>
-<span class='curline'><a href='../S/72.html#L30'>end</a>                30 kernel/kalloc.c   freerange(end, (void*)PHYSTOP);</span>
-<span class='curline'><a href='../S/72.html#L51'>end</a>                51 kernel/kalloc.c   if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)</span>
+<span class='curline'><a href='../S/55.html#L8'>elf</a>                 8 kernel/elf.h     uchar elf[12];</span>
+<span class='curline'><a href='../S/39.html#L33'>elf</a>                33 kernel/exec.c    struct elfhdr elf;</span>
+<span class='curline'><a href='../S/39.html#L49'>elf</a>                49 kernel/exec.c    if (readi(ip, 0, (uint64)&amp;elf, 0, sizeof(elf)) != sizeof(elf))</span>
+<span class='curline'><a href='../S/39.html#L53'>elf</a>                53 kernel/exec.c    if (elf.magic != ELF_MAGIC)</span>
+<span class='curline'><a href='../S/39.html#L60'>elf</a>                60 kernel/exec.c    for (i = 0, off = elf.phoff; i &lt; elf.phnum; i++, off += sizeof(ph)) {</span>
+<span class='curline'><a href='../S/39.html#L136'>elf</a>               136 kernel/exec.c    p-&gt;trapframe-&gt;epc = elf.entry; // initial program counter = ulib.c:start()</span>
 </pre>
 </body>
 </html>
